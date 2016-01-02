@@ -35,14 +35,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         preferenceUtils=PreferenceUtils.getInstance(this);
         initTheme();
         super.onCreate(savedInstanceState);
-        initWindow(isopen());
+        initWindow(Open());
         setContentView(getLayoutView());
     }
 
     /**
      * 设置是否打开沉浸式
      */
-    protected abstract boolean isopen();
+    protected abstract boolean Open();
 
     /**
      * 设置程序的布局文件
@@ -121,10 +121,10 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 检测网络
      */
     protected void checkNetWork() {
-        if (!NetWorkUtils.isConnected(this)) {
+        if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)) {
             Toast.makeText(BaseActivity.this,"当前无网络",Toast.LENGTH_SHORT).show();
         }
-        if (NetWorkUtils.isMobileType(this)) {
+        if (NetWorkUtils.isWifiConnected(BaseActivity.this)) {
             //是移动网络做一些事情。
         }
     }
