@@ -22,9 +22,6 @@ import android.widget.FrameLayout.LayoutParams;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-/**
- * Created by Administrator on 2015/11/2.
- */
 public class SystemBarTintManager {
     /**
      * The default system bar tint color value.

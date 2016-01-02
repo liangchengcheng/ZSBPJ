@@ -2,13 +2,20 @@ package com.lcc.base;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
+
 import com.lcc.activity.R;
+import com.lcc.utils.NetWorkUtils;
 import com.lcc.utils.PreferenceUtils;
 import com.lcc.utils.SystemBarTintManager;
 import com.lcc.utils.ThemeUtils;
@@ -79,6 +86,46 @@ public abstract class BaseActivity extends AppCompatActivity {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintColor(getStatusBarColor());
             tintManager.setStatusBarTintEnabled(true);
+        }
+    }
+
+    /**
+     * 设置toolbar的基本属性
+     */
+    protected void setUpCommonBackTooblBar(int toolbarId, String title) {
+        Toolbar mToolbar = (Toolbar) findViewById(toolbarId);
+        mToolbar.setTitle(title);
+        setSupportActionBar(mToolbar);
+        toobarAsBackButton(mToolbar);
+    }
+
+    /**
+     * toolbar点击返回，模拟系统返回
+     * 设置toolbar 为箭头按钮
+     */
+    public void toobarAsBackButton(Toolbar toolbar) {
+        ActionBar actionBar=getSupportActionBar();
+        if (actionBar!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+    }
+
+    /**
+     * 检测网络
+     */
+    protected void checkNetWork() {
+        if (!NetWorkUtils.isConnected(this)) {
+            Toast.makeText(BaseActivity.this,"当前无网络",Toast.LENGTH_SHORT).show();
+        }
+        if (NetWorkUtils.isMobileType(this)) {
+            //是移动网络做一些事情。
         }
     }
 
