@@ -9,22 +9,27 @@
     android:paddingBottom="10dp"
     android:paddingTop="50dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/headview"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_above="@+id/id_username"
-        android:layout_marginBottom="16dp"
-        android:src="@mipmap/ic_account_circle_gray_48dp"/>
-    <TextView
-        android:id="@+id/textView_nickName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="欢迎"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="16sp" />
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <de.hdodenhof.circleimageview.CircleImageView
+
+           android:layout_marginLeft="30dp"
+           android:id="@+id/headview"
+           android:layout_width="72dp"
+           android:layout_height="72dp"
+           android:src="@mipmap/ic_account_circle_gray_48dp"/>
+       <TextView
+           android:layout_marginLeft="30dp"
+           android:id="@+id/textView_nickName"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:text="虽然我走的很慢但是不会停"
+           android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+           android:textSize="16sp" />
+   </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relative_layout1"
@@ -79,7 +84,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:lineSpacingExtra="3dp"
-            android:text="4\n视频"
+            android:text="4\n签到"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -89,7 +94,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:lineSpacingExtra="3dp"
-            android:text="5\n转发"
+            android:text="5\n积分"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -102,15 +107,6 @@
             android:text="5\n关注"
             android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/textView_followers_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:lineSpacingExtra="3dp"
-            android:text="5\n粉丝"
-            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </LinearLayout>
