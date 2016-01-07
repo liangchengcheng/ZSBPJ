@@ -1,5 +1,6 @@
 package com.lcc.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -20,26 +21,29 @@ import android.widget.Toast;
 import com.lcc.activity.main.fragment.AllKnowFragment;
 import com.lcc.activity.main.fragment.HomeFragment;
 import com.lcc.activity.main.fragment.OnlineClassFragment;
+import com.lcc.activity.setting.SettingActivity;
 import com.lcc.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout mDrawerLayout;
-    private Toolbar mToolbar;
+public class MainActivity extends BaseActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // checkNetWork();[此处在5.0+you bug]
-        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+    }
+
+    @Override
+    protected void initView() {
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         mToolbar.setTitle(R.string.app_name);
         setSupportActionBar(mToolbar);
         intNavigationView();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
         setViewPager();
@@ -47,11 +51,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void setViewPager(){
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         if (viewPager != null) {
             setupViewPager(viewPager);
+            tabLayout.setupWithViewPager(viewPager);
         }
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -90,7 +94,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_slideshow) {
             Toast.makeText(MainActivity.this,"nav_slideshow",Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_manage) {
-            Toast.makeText(MainActivity.this,"nav_manage",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(MainActivity.this, SettingActivity.class));
         } else if (id == R.id.nav_share) {
             Toast.makeText(MainActivity.this,"nav_share",Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_send) {
@@ -153,6 +157,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
+        }
+    }
+
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x02:
+                this.recreate();
+                break;
         }
     }
 }

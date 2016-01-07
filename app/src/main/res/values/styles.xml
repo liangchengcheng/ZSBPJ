@@ -19,10 +19,13 @@
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="queryBackground">@android:color/transparent</item>
     </style>
+
     <style name="popupMenuStyle" parent="Base.Widget.AppCompat.PopupMenu.Overflow"></style>
+
     <style name="popupTheme" parent="AppBaseTheme.Dark">
         <item name="android:textColor">@android:color/black</item>
     </style>
+
     <style name="AppBaseTheme.Dark" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:fitsSystemWindows">true</item>
         <item name="windowActionBar">false</item>
@@ -36,6 +39,7 @@
         <item name="android:activatedBackgroundIndicator">@drawable/activated_background</item>
         <item name="selectableItemBackground">@drawable/selectable_background</item>
     </style>
+
     <style name="RedTheme" parent="AppBaseTheme.Dark">
         <item name="colorPrimary">@color/red</item>
         <item name="colorPrimaryDark">@color/dark_red</item>
@@ -47,6 +51,7 @@
         <item name="colorPrimaryDark">@color/dark_brown</item>
         <item name="colorAccent">@color/accent_brown</item>
     </style>
+
     <style name="BlueTheme" parent="AppBaseTheme.Dark">
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
@@ -70,11 +75,13 @@
         <item name="colorPrimaryDark">@color/dark_green</item>
         <item name="colorAccent">@color/accent_green</item>
     </style>
+
     <style name="BlueGreyTheme" parent="AppBaseTheme.Dark">
         <item name="colorPrimary">@color/blue_grey</item>
         <item name="colorPrimaryDark">@color/dark_blue_grey</item>
         <item name="colorAccent">@color/accent_blue_grey</item>
     </style>
+
     <style name="YellowTheme" parent="AppBaseTheme.Dark">
         <item name="colorPrimary">@color/yellow</item>
         <item name="colorPrimaryDark">@color/dark_yellow</item>
@@ -111,6 +118,7 @@
         <item name="colorPrimaryDark">@color/dark_blue_grey</item>
         <item name="colorAccent">@color/accent_blue_grey</item>
     </style>
+
     <style name="YellowDialogTheme" parent="BaseDialogTheme">
         <item name="colorPrimary">@color/yellow</item>
         <item name="colorPrimaryDark">@color/dark_yellow</item>
@@ -134,4 +142,29 @@
         <item name="colorPrimaryDark">@color/dark_green</item>
         <item name="colorAccent">@color/accent_green</item>
     </style>
+    <style name="AppBaseTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_second_color_primary</item>
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+        <item name="popupTheme">@style/popupTheme</item>
+        <item name="popupMenuStyle">@style/popupMenuStyle</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/activated_background</item>
+        <item name="selectableItemBackground">@drawable/selectable_background</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="AppBaseTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
+    <style name="Color1SwitchStyle">
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+    </style>
+
 </resources>

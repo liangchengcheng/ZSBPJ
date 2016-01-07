@@ -37,7 +37,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initWindow(Open());
         setContentView(getLayoutView());
+        initView();
     }
+
+    protected abstract void  initView();
 
     /**
      * 设置是否打开沉浸式
