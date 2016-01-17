@@ -1,13 +1,10 @@
 package com.lcc.activity.login;
 
 import android.view.View;
-
 import com.lcc.bean.News;
 import com.lcc.service.ApiService;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit.Call;
 import zsbpj.lccpj.app.activity.StartNetActivity;
 
