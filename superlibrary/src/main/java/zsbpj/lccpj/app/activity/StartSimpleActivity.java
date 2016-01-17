@@ -2,14 +2,14 @@ package zsbpj.lccpj.app.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
 import butterknife.ButterKnife;
+import zsbpj.lccpj.app.StarterActivity;
 
 /**
  * Author:  梁铖城
  * Email:   1038127753@qq.com
  * Date:    2015年12月15日10:47:52
- * Description: StartSimpleActivity
+ * Description:  StartSimpleActivity
  */
 public abstract class StartSimpleActivity extends AppCompatActivity {
 

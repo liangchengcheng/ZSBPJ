@@ -1,4 +1,4 @@
-package zsbpj.lccpj.app.activity;
+package zsbpj.lccpj.app;
 
 import android.app.Activity;
 import android.content.DialogInterface;
