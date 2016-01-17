@@ -32,6 +32,10 @@ public abstract class StartNetActivity<T> extends StartSimpleActivity implements
         networkQueue=null;
     }
 
+    public RetrofitQueue<T> networkQueue() {
+        return networkQueue;
+    }
+
     public boolean showMessage() {
         return true;
     }
