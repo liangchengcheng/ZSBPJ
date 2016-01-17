@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
  * Date:    2015年12月15日10:47:52
  * Description:
  */
-public class SimpleActivity extends AppCompatActivity {
+public abstract class StartSimpleActivity extends AppCompatActivity {
 
     private StarterActivity starterActivity;
 
