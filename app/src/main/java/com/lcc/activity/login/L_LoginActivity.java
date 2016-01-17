@@ -2,6 +2,7 @@ package com.lcc.activity.login;
 
 import android.view.View;
 import com.lcc.bean.News;
+import com.lcc.rx.RxService;
 import com.lcc.service.ApiService;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class L_LoginActivity extends StartNetActivity <ArrayList<News>>{
         super.onResume();
         Call<ArrayList<News>> listCall = ApiService.createNewsService().loadMoreNews("","");
         networkQueue().enqueue(listCall);
+
+        RxService.getInstance().initNews(getTaskId(), "");
     }
 
     @Override

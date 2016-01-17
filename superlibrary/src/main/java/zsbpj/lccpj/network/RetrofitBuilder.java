@@ -66,7 +66,7 @@ public class RetrofitBuilder {
     public static class Builder{
         private String baseUrl;
         private Interceptor interceptor;
-        private OkHttpClient client;
+        private OkHttpClient client=new OkHttpClient();
         private final List<Interceptor> interceptors = new ArrayList<>();
 
         /**
