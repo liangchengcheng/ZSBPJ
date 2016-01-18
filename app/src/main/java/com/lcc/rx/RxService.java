@@ -1,6 +1,5 @@
 package com.lcc.rx;
 
-
 import com.google.gson.Gson;
 import com.lcc.service.LoginService;
 import java.util.HashMap;
@@ -34,7 +33,6 @@ public class RxService {
                 sNbaplus = RxFactory.getLoginService();
             }
         });
-
     }
 
     public void addCompositeSub(int taskId) {
@@ -59,8 +57,6 @@ public class RxService {
     public void initNews(int taskId,String type) {
         getCompositeSubscription(taskId).add(RxLogin.getTeams(type));
     }
-
-
 
     private CompositeSubscription getCompositeSubscription(int taskId) {
         CompositeSubscription compositeSubscription ;
