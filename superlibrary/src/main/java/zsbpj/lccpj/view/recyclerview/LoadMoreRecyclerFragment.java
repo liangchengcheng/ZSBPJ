@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import zsbpj.lccpj.R;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -55,8 +56,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends Fragment {
                     mRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
                     onFragmentLoadMore();
                 } else {
-                    // TODO: 2016/1/18 此处显示错误Toast在activity
-                    //getHolder().showMsgInBottom(R.string.msg_waitting_loding);
+                    FrameManager.getInstance().toastPrompt("-----");
                 }
             }
         });
