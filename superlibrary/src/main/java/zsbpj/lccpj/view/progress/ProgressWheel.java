@@ -1,142 +1,152 @@
 package zsbpj.lccpj.view.progress;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.graphics.Shader;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 
 import zsbpj.lccpj.R;
 
-
 /**
- * An indicator of progress, similar to Android's ProgressBar.
- *
- * @author Todd Davies
- *         <p/>
- *         See MIT-LICENSE.txt for licence details
+ * Created by sunger on 2015/10/30.
  */
 public class ProgressWheel extends View {
-
-    //Sizes (with defaults)
-    private int layoutHeight = 0;
-    private int layoutWidth = 0;
-    private int fullRadius = 100;
-    private int circleRadius = 80;
-    private int barLength = 60;
-    private int barWidth = 20;
-    private int rimWidth = 20;
-    private int textSize = 20;
-    private float contourSize = 0;
-
-    //Padding (with defaults)
-    private int paddingTop = 5;
-    private int paddingBottom = 5;
-    private int paddingLeft = 5;
-    private int paddingRight = 5;
-
+    private static final String TAG = ProgressWheel.class.getSimpleName();
+    private final int barLength = 16;
+    private final int barMaxLength = 270;
+    private final long pauseGrowingTime = 200;
+    /**
+     * *********
+     * DEFAULTS *
+     * **********
+     */
+    //Sizes (with defaults in DP)
+    private int circleRadius = 28;
+    private int barWidth = 4;
+    private int rimWidth = 4;
+    private boolean fillRadius = false;
+    private double timeStartGrowing = 0;
+    private double barSpinCycleTime = 460;
+    private float barExtraLength = 0;
+    private boolean barGrowingFromFront = true;
+    private long pausedTimeWithoutGrowing = 0;
     //Colors (with defaults)
     private int barColor = 0xAA000000;
-    private int contourColor = 0xAA000000;
-    private int circleColor = 0x00000000;
-    private int rimColor = 0xAADDDDDD;
-    private int textColor = 0xFF000000;
+    private int rimColor = 0x00FFFFFF;
 
     //Paints
     private Paint barPaint = new Paint();
-    private Paint circlePaint = new Paint();
     private Paint rimPaint = new Paint();
-    private Paint textPaint = new Paint();
-    private Paint contourPaint = new Paint();
 
     //Rectangles
-    private RectF innerCircleBounds = new RectF();
     private RectF circleBounds = new RectF();
-    private RectF circleOuterContour = new RectF();
-    private RectF circleInnerContour = new RectF();
 
     //Animation
-    //The amount of pixels to move the bar by on each draw
-    private float spinSpeed = 2f;
-    //The number of milliseconds to wait in between each draw
-    private int delayMillis = 10;
-    private float progress = 0;
-    boolean isSpinning = false;
+    //The amount of degrees per second
+    private float spinSpeed = 230.0f;
+    //private float spinSpeed = 120.0f;
+    // The last time the spinner was animated
+    private long lastTimeAnimated = 0;
 
-    //Other
-    private String text = "";
-    private String[] splitText = {};
+    private boolean linearProgress;
+
+    private float mProgress = 0.0f;
+    private float mTargetProgress = 0.0f;
+    private boolean isSpinning = false;
+
+    private ProgressCallback callback;
+
+    private boolean shouldAnimate;
 
     /**
      * The constructor for the ProgressWheel
-     *
-     * @param context
-     * @param attrs
      */
     public ProgressWheel(Context context, AttributeSet attrs) {
         super(context, attrs);
-        parseAttributes(context.obtainStyledAttributes(attrs,
-                R.styleable.ProgressWheel));
+
+        parseAttributes(context.obtainStyledAttributes(attrs, R.styleable.ProgressWheel));
+
+        setAnimationEnabled();
     }
 
-    /*
-     * When this is called, make the view square.
-     * From: http://www.jayway.com/2012/12/12/creating-custom-android-views-part-4-measuring-and-how-to-force-a-view-to-be-square/
-     *
+    /**
+     * The constructor for the ProgressWheel
      */
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // The first thing that happen is that we call the superclass
-        // implementation of onMeasure. The reason for that is that measuring
-        // can be quite a complex process and calling the super method is a
-        // convenient way to get most of this complexity handled.
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    public ProgressWheel(Context context) {
+        super(context);
+        setAnimationEnabled();
+    }
 
-        // We can’t use getWidth() or getHight() here. During the measuring
-        // pass the view has not gotten its final size yet (this happens first
-        // at the start of the layout pass) so we have to use getMeasuredWidth()
-        // and getMeasuredHeight().
-        int size = 0;
-        int width = getMeasuredWidth();
-        int height = getMeasuredHeight();
-        int widthWithoutPadding = width - getPaddingLeft() - getPaddingRight();
-        int heightWithoutPadding = height - getPaddingTop() - getPaddingBottom();
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1) private void setAnimationEnabled() {
+        int currentApiVersion = Build.VERSION.SDK_INT;
 
-        // Finally we have some simple logic that calculates the size of the view
-        // and calls setMeasuredDimension() to set that size.
-        // Before we compare the width and height of the view, we remove the padding,
-        // and when we set the dimension we add it back again. Now the actual content
-        // of the view will be square, but, depending on the padding, the total dimensions
-        // of the view might not be.
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        if (heightMode != MeasureSpec.UNSPECIFIED && widthMode != MeasureSpec.UNSPECIFIED) {
-            if (widthWithoutPadding > heightWithoutPadding) {
-                size = heightWithoutPadding;
-            } else {
-                size = widthWithoutPadding;
-            }
+        float animationValue;
+        if (currentApiVersion >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            animationValue = Settings.Global.getFloat(getContext().getContentResolver(),
+                    Settings.Global.ANIMATOR_DURATION_SCALE, 1);
         } else {
-            size = Math.max(heightWithoutPadding, widthWithoutPadding);
+            animationValue = Settings.System.getFloat(getContext().getContentResolver(),
+                    Settings.System.ANIMATOR_DURATION_SCALE, 1);
         }
 
+        shouldAnimate = animationValue != 0;
+    }
 
-        // If you override onMeasure() you have to call setMeasuredDimension().
-        // This is how you report back the measured size.  If you don’t call
-        // setMeasuredDimension() the parent will throw an exception and your
-        // application will crash.
-        // We are calling the onMeasure() method of the superclass so we don’t
-        // actually need to call setMeasuredDimension() since that takes care
-        // of that. However, the purpose with overriding onMeasure() was to
-        // change the default behaviour and to do that we need to call
-        // setMeasuredDimension() with our own values.
-        setMeasuredDimension(
-                size + getPaddingLeft() + getPaddingRight(),
-                size + getPaddingTop() + getPaddingBottom());
+    //----------------------------------
+    //Setting up stuff
+    //----------------------------------
+
+    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int viewWidth = circleRadius + this.getPaddingLeft() + this.getPaddingRight();
+        int viewHeight = circleRadius + this.getPaddingTop() + this.getPaddingBottom();
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int width;
+        int height;
+
+        //Measure Width
+        if (widthMode == MeasureSpec.EXACTLY) {
+            //Must be this size
+            width = widthSize;
+        } else if (widthMode == MeasureSpec.AT_MOST) {
+            //Can't be bigger than...
+            width = Math.min(viewWidth, widthSize);
+        } else {
+            //Be whatever you want
+            width = viewWidth;
+        }
+
+        //Measure Height
+        if (heightMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.EXACTLY) {
+            //Must be this size
+            height = heightSize;
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            //Can't be bigger than...
+            height = Math.min(viewHeight, heightSize);
+        } else {
+            //Be whatever you want
+            height = viewHeight;
+        }
+
+        setMeasuredDimension(width, height);
     }
 
     /**
@@ -144,12 +154,10 @@ public class ProgressWheel extends View {
      * because this method is called after measuring the dimensions of MATCH_PARENT & WRAP_CONTENT.
      * Use this dimensions to setup the bounds and paints.
      */
-    @Override
-    protected void onSizeChanged(int newWidth, int newHeight, int oldWidth, int oldHeight) {
-        super.onSizeChanged(newWidth, newHeight, oldWidth, oldHeight);
-        layoutWidth = newWidth;
-        layoutHeight = newHeight;
-        setupBounds();
+    @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        setupBounds(w, h);
         setupPaints();
         invalidate();
     }
@@ -168,65 +176,35 @@ public class ProgressWheel extends View {
         rimPaint.setAntiAlias(true);
         rimPaint.setStyle(Style.STROKE);
         rimPaint.setStrokeWidth(rimWidth);
-
-        circlePaint.setColor(circleColor);
-        circlePaint.setAntiAlias(true);
-        circlePaint.setStyle(Style.FILL);
-
-        textPaint.setColor(textColor);
-        textPaint.setStyle(Style.FILL);
-        textPaint.setAntiAlias(true);
-        textPaint.setTextSize(textSize);
-
-        contourPaint.setColor(contourColor);
-        contourPaint.setAntiAlias(true);
-        contourPaint.setStyle(Style.STROKE);
-        contourPaint.setStrokeWidth(contourSize);
     }
 
     /**
      * Set the bounds of the component
      */
-    private void setupBounds() {
-        // Width should equal to Height, find the min value to setup the circle
-        int minValue = Math.min(layoutWidth, layoutHeight);
+    private void setupBounds(int layout_width, int layout_height) {
+        int paddingTop = getPaddingTop();
+        int paddingBottom = getPaddingBottom();
+        int paddingLeft = getPaddingLeft();
+        int paddingRight = getPaddingRight();
 
-        // Calc the Offset if needed
-        int xOffset = layoutWidth - minValue;
-        int yOffset = layoutHeight - minValue;
+        if (!fillRadius) {
+            // Width should equal to Height, find the min value to setup the circle
+            int minValue = Math.min(layout_width - paddingLeft - paddingRight,
+                    layout_height - paddingBottom - paddingTop);
 
-        // Add the offset
-        paddingTop = this.getPaddingTop() + (yOffset / 2);
-        paddingBottom = this.getPaddingBottom() + (yOffset / 2);
-        paddingLeft = this.getPaddingLeft() + (xOffset / 2);
-        paddingRight = this.getPaddingRight() + (xOffset / 2);
+            int circleDiameter = Math.min(minValue, circleRadius * 2 - barWidth * 2);
 
-        int width = getWidth();
-        int height = getHeight();
+            // Calc the Offset if needed for centering the wheel in the available space
+            int xOffset = (layout_width - paddingLeft - paddingRight - circleDiameter) / 2 + paddingLeft;
+            int yOffset = (layout_height - paddingTop - paddingBottom - circleDiameter) / 2 + paddingTop;
 
-        innerCircleBounds = new RectF(
-                paddingLeft + (1.5f * barWidth),
-                paddingTop + (1.5f * barWidth),
-                width - paddingRight - (1.5f * barWidth),
-                height - paddingBottom - (1.5f * barWidth));
-        circleBounds = new RectF(
-                paddingLeft + barWidth,
-                paddingTop + barWidth,
-                width - paddingRight - barWidth,
-                height - paddingBottom - barWidth);
-        circleInnerContour = new RectF(
-                circleBounds.left + (rimWidth / 2.0f) + (contourSize / 2.0f),
-                circleBounds.top + (rimWidth / 2.0f) + (contourSize / 2.0f),
-                circleBounds.right - (rimWidth / 2.0f) - (contourSize / 2.0f),
-                circleBounds.bottom - (rimWidth / 2.0f) - (contourSize / 2.0f));
-        circleOuterContour = new RectF(
-                circleBounds.left - (rimWidth / 2.0f) - (contourSize / 2.0f),
-                circleBounds.top - (rimWidth / 2.0f) - (contourSize / 2.0f),
-                circleBounds.right + (rimWidth / 2.0f) + (contourSize / 2.0f),
-                circleBounds.bottom + (rimWidth / 2.0f) + (contourSize / 2.0f));
-
-        fullRadius = (width - paddingRight - barWidth) / 2;
-        circleRadius = (fullRadius - barWidth) + 1;
+            circleBounds =
+                    new RectF(xOffset + barWidth, yOffset + barWidth, xOffset + circleDiameter - barWidth,
+                            yOffset + circleDiameter - barWidth);
+        } else {
+            circleBounds = new RectF(paddingLeft + barWidth, paddingTop + barWidth,
+                    layout_width - paddingRight - barWidth, layout_height - paddingBottom - barWidth);
+        }
     }
 
     /**
@@ -235,29 +213,49 @@ public class ProgressWheel extends View {
      * @param a the attributes to parse
      */
     private void parseAttributes(TypedArray a) {
-        barWidth = (int) a.getDimension(R.styleable.ProgressWheel_pwBarWidth, barWidth);
-        rimWidth = (int) a.getDimension(R.styleable.ProgressWheel_pwRimWidth, rimWidth);
-        spinSpeed = (int) a.getDimension(R.styleable.ProgressWheel_pwSpinSpeed, spinSpeed);
-        barLength = (int) a.getDimension(R.styleable.ProgressWheel_pwBarLength, barLength);
+        // We transform the default values from DIP to pixels
+        DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+        barWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, barWidth, metrics);
+        rimWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rimWidth, metrics);
+        circleRadius =
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, circleRadius, metrics);
 
-        delayMillis = a.getInteger(R.styleable.ProgressWheel_pwDelayMillis, delayMillis);
-        if (delayMillis < 0) { delayMillis = 10; }
+        circleRadius =
+                (int) a.getDimension(R.styleable.ProgressWheel_matProg_circleRadius, circleRadius);
 
-        // Only set the text if it is explicitly defined
-        if (a.hasValue(R.styleable.ProgressWheel_pwText)) {
-            setText(a.getString(R.styleable.ProgressWheel_pwText));
+        fillRadius = a.getBoolean(R.styleable.ProgressWheel_matProg_fillRadius, false);
+
+        barWidth = (int) a.getDimension(R.styleable.ProgressWheel_matProg_barWidth, barWidth);
+
+        rimWidth = (int) a.getDimension(R.styleable.ProgressWheel_matProg_rimWidth, rimWidth);
+
+        float baseSpinSpeed =
+                a.getFloat(R.styleable.ProgressWheel_matProg_spinSpeed, spinSpeed / 360.0f);
+        spinSpeed = baseSpinSpeed * 360;
+
+        barSpinCycleTime =
+                a.getInt(R.styleable.ProgressWheel_matProg_barSpinCycleTime, (int) barSpinCycleTime);
+
+        barColor = a.getColor(R.styleable.ProgressWheel_matProg_barColor, barColor);
+
+        rimColor = a.getColor(R.styleable.ProgressWheel_matProg_rimColor, rimColor);
+
+        linearProgress = a.getBoolean(R.styleable.ProgressWheel_matProg_linearProgress, false);
+
+        if (a.getBoolean(R.styleable.ProgressWheel_matProg_progressIndeterminate, false)) {
+            spin();
         }
 
-        barColor = a.getColor(R.styleable.ProgressWheel_pwBarColor, barColor);
-        textColor = a.getColor(R.styleable.ProgressWheel_pwTextColor, textColor);
-        rimColor = a.getColor(R.styleable.ProgressWheel_pwRimColor, rimColor);
-        circleColor = a.getColor(R.styleable.ProgressWheel_pwCircleColor, circleColor);
-        contourColor = a.getColor(R.styleable.ProgressWheel_pwContourColor, contourColor);
-
-        textSize = (int) a.getDimension(R.styleable.ProgressWheel_pwTextSize, textSize);
-        contourSize = a.getDimension(R.styleable.ProgressWheel_pwContourSize, contourSize);
-
+        // Recycle
         a.recycle();
+    }
+
+    public void setCallback(ProgressCallback progressCallback) {
+        callback = progressCallback;
+
+        if (!isSpinning) {
+            runCallback();
+        }
     }
 
     //----------------------------------
@@ -266,46 +264,124 @@ public class ProgressWheel extends View {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //Draw the inner circle
-        canvas.drawArc(innerCircleBounds, 360, 360, false, circlePaint);
-        //Draw the rim
-        canvas.drawArc(circleBounds, 360, 360, false, rimPaint);
-        canvas.drawArc(circleOuterContour, 360, 360, false, contourPaint);
-        //canvas.drawArc(circleInnerContour, 360, 360, false, contourPaint);
-        //Draw the bar
-        if (isSpinning) {
-            canvas.drawArc(circleBounds, progress - 90, barLength, false, barPaint);
-        } else {
-            canvas.drawArc(circleBounds, -90, progress, false, barPaint);
-        }
-        //Draw the text (attempts to center it horizontally and vertically)
-        float textHeight = textPaint.descent() - textPaint.ascent();
-        float verticalTextOffset = (textHeight / 2) - textPaint.descent();
 
-        for (String line : splitText) {
-            float horizontalTextOffset = textPaint.measureText(line) / 2;
-            canvas.drawText(
-                    line,
-                    this.getWidth() / 2 - horizontalTextOffset,
-                    this.getHeight() / 2 + verticalTextOffset,
-                    textPaint);
+        canvas.drawArc(circleBounds, 360, 360, false, rimPaint);
+
+        boolean mustInvalidate = false;
+
+        if (!shouldAnimate) {
+            return;
         }
+
         if (isSpinning) {
-            scheduleRedraw();
+            //Draw the spinning bar
+            mustInvalidate = true;
+
+            long deltaTime = (SystemClock.uptimeMillis() - lastTimeAnimated);
+            float deltaNormalized = deltaTime * spinSpeed / 1000.0f;
+
+            updateBarLength(deltaTime);
+
+            mProgress += deltaNormalized;
+            if (mProgress > 360) {
+                mProgress -= 360f;
+
+                // A full turn has been completed
+                // we run the callback with -1 in case we want to
+                // do something, like changing the color
+                runCallback(-1.0f);
+            }
+            lastTimeAnimated = SystemClock.uptimeMillis();
+
+            float from = mProgress - 90;
+            float length = barLength + barExtraLength;
+
+            if (isInEditMode()) {
+                from = 0;
+                length = 135;
+            }
+
+            canvas.drawArc(circleBounds, from, length, false, barPaint);
+        } else {
+            float oldProgress = mProgress;
+
+            if (mProgress != mTargetProgress) {
+                //We smoothly increase the progress bar
+                mustInvalidate = true;
+
+                float deltaTime = (float) (SystemClock.uptimeMillis() - lastTimeAnimated) / 1000;
+                float deltaNormalized = deltaTime * spinSpeed;
+
+                mProgress = Math.min(mProgress + deltaNormalized, mTargetProgress);
+                lastTimeAnimated = SystemClock.uptimeMillis();
+            }
+
+            if (oldProgress != mProgress) {
+                runCallback();
+            }
+
+            float offset = 0.0f;
+            float progress = mProgress;
+            if (!linearProgress) {
+                float factor = 2.0f;
+                offset = (float) (1.0f - Math.pow(1.0f - mProgress / 360.0f, 2.0f * factor)) * 360.0f;
+                progress = (float) (1.0f - Math.pow(1.0f - mProgress / 360.0f, factor)) * 360.0f;
+            }
+
+            if (isInEditMode()) {
+                progress = 360;
+            }
+
+            canvas.drawArc(circleBounds, offset - 90, progress, false, barPaint);
+        }
+
+        if (mustInvalidate) {
+            invalidate();
         }
     }
 
-    private void scheduleRedraw() {
-        progress += spinSpeed;
-        if (progress > 360) {
-            progress = 0;
+    @Override protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+
+        if (visibility == VISIBLE) {
+            lastTimeAnimated = SystemClock.uptimeMillis();
         }
-        postInvalidateDelayed(delayMillis);
+    }
+
+    private void updateBarLength(long deltaTimeInMilliSeconds) {
+        if (pausedTimeWithoutGrowing >= pauseGrowingTime) {
+            timeStartGrowing += deltaTimeInMilliSeconds;
+
+            if (timeStartGrowing > barSpinCycleTime) {
+                // We completed a size change cycle
+                // (growing or shrinking)
+                timeStartGrowing -= barSpinCycleTime;
+                //if(barGrowingFromFront) {
+                pausedTimeWithoutGrowing = 0;
+                //}
+                barGrowingFromFront = !barGrowingFromFront;
+            }
+
+            float distance =
+                    (float) Math.cos((timeStartGrowing / barSpinCycleTime + 1) * Math.PI) / 2 + 0.5f;
+            float destLength = (barMaxLength - barLength);
+
+            if (barGrowingFromFront) {
+                barExtraLength = distance * destLength;
+            } else {
+                float newLength = destLength * (1 - distance);
+                mProgress += (barExtraLength - newLength);
+                barExtraLength = newLength;
+            }
+        } else {
+            pausedTimeWithoutGrowing += deltaTimeInMilliSeconds;
+        }
     }
 
     /**
-     *   Check if the wheel is currently spinning
+     * Check if the wheel is currently spinning
      */
+
     public boolean isSpinning() {
         return isSpinning;
     }
@@ -314,52 +390,123 @@ public class ProgressWheel extends View {
      * Reset the count (in increment mode)
      */
     public void resetCount() {
-        progress = 0;
-        setText("0%");
+        mProgress = 0.0f;
+        mTargetProgress = 0.0f;
         invalidate();
     }
 
     /**
-     * Turn off startSpinning mode
+     * Turn off spin mode
      */
     public void stopSpinning() {
         isSpinning = false;
-        progress = 0;
-        postInvalidate();
+        mProgress = 0.0f;
+        mTargetProgress = 0.0f;
+        invalidate();
     }
-
 
     /**
      * Puts the view on spin mode
      */
-    public void startSpinning() {
+    public void spin() {
+        lastTimeAnimated = SystemClock.uptimeMillis();
         isSpinning = true;
-        postInvalidate();
+        invalidate();
+    }
+
+    private void runCallback(float value) {
+        if (callback != null) {
+            callback.onProgressUpdate(value);
+        }
+    }
+
+    private void runCallback() {
+        if (callback != null) {
+            float normalizedProgress = (float) Math.round(mProgress * 100 / 360.0f) / 100;
+            callback.onProgressUpdate(normalizedProgress);
+        }
     }
 
     /**
-     * Increment the progress by 1 (of 360)
+     * Set the progress to a specific value,
+     * the bar will be set instantly to that value
+     *
+     * @param progress the progress between 0 and 1
      */
-    public void incrementProgress() {
-        incrementProgress(1);
+    public void setInstantProgress(float progress) {
+        if (isSpinning) {
+            mProgress = 0.0f;
+            isSpinning = false;
+        }
+
+        if (progress > 1.0f) {
+            progress -= 1.0f;
+        } else if (progress < 0) {
+            progress = 0;
+        }
+
+        if (progress == mTargetProgress) {
+            return;
+        }
+
+        mTargetProgress = Math.min(progress * 360.0f, 360.0f);
+        mProgress = mTargetProgress;
+        lastTimeAnimated = SystemClock.uptimeMillis();
+        invalidate();
     }
 
-    public void incrementProgress(int amount) {
-        isSpinning = false;
-        progress += amount;
-        if (progress > 360)
-            progress %= 360;
-        postInvalidate();
+    // Great way to save a view's state http://stackoverflow.com/a/7089687/1991053
+    @Override public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+
+        WheelSavedState ss = new WheelSavedState(superState);
+
+        // We save everything that can be changed at runtime
+        ss.mProgress = this.mProgress;
+        ss.mTargetProgress = this.mTargetProgress;
+        ss.isSpinning = this.isSpinning;
+        ss.spinSpeed = this.spinSpeed;
+        ss.barWidth = this.barWidth;
+        ss.barColor = this.barColor;
+        ss.rimWidth = this.rimWidth;
+        ss.rimColor = this.rimColor;
+        ss.circleRadius = this.circleRadius;
+        ss.linearProgress = this.linearProgress;
+        ss.fillRadius = this.fillRadius;
+
+        return ss;
     }
 
+    @Override public void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof WheelSavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        WheelSavedState ss = (WheelSavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+
+        this.mProgress = ss.mProgress;
+        this.mTargetProgress = ss.mTargetProgress;
+        this.isSpinning = ss.isSpinning;
+        this.spinSpeed = ss.spinSpeed;
+        this.barWidth = ss.barWidth;
+        this.barColor = ss.barColor;
+        this.rimWidth = ss.rimWidth;
+        this.rimColor = ss.rimColor;
+        this.circleRadius = ss.circleRadius;
+        this.linearProgress = ss.linearProgress;
+        this.fillRadius = ss.fillRadius;
+
+        this.lastTimeAnimated = SystemClock.uptimeMillis();
+    }
 
     /**
-     * Set the progress to a specific value
+     * @return the current progress between 0.0 and 1.0,
+     * if the wheel is indeterminate, then the result is -1
      */
-    public void setProgress(int i) {
-        isSpinning = false;
-        progress = i;
-        postInvalidate();
+    public float getProgress() {
+        return isSpinning ? -1 : mProgress / 360.0f;
     }
 
     //----------------------------------
@@ -367,195 +514,240 @@ public class ProgressWheel extends View {
     //----------------------------------
 
     /**
-     * Set the text in the progress bar
-     * Doesn't invalidate the view
+     * Set the progress to a specific value,
+     * the bar will smoothly animate until that value
      *
-     * @param text the text to show ('\n' constitutes a new line)
+     * @param progress the progress between 0 and 1
      */
-    public void setText(String text) {
-        this.text = text;
-        splitText = this.text.split("\n");
+    public void setProgress(float progress) {
+        if (isSpinning) {
+            mProgress = 0.0f;
+            isSpinning = false;
+
+            runCallback();
+        }
+
+        if (progress > 1.0f) {
+            progress -= 1.0f;
+        } else if (progress < 0) {
+            progress = 0;
+        }
+
+        if (progress == mTargetProgress) {
+            return;
+        }
+
+        // If we are currently in the right position
+        // we set again the last time animated so the
+        // animation starts smooth from here
+        if (mProgress == mTargetProgress) {
+            lastTimeAnimated = SystemClock.uptimeMillis();
+        }
+
+        mTargetProgress = Math.min(progress * 360.0f, 360.0f);
+
+        invalidate();
     }
 
+    /**
+     * Sets the determinate progress mode
+     *
+     * @param isLinear if the progress should increase linearly
+     */
+    public void setLinearProgress(boolean isLinear) {
+        linearProgress = isLinear;
+        if (!isSpinning) {
+            invalidate();
+        }
+    }
+
+    /**
+     * @return the radius of the wheel in pixels
+     */
     public int getCircleRadius() {
         return circleRadius;
     }
 
+    /**
+     * Sets the radius of the wheel
+     *
+     * @param circleRadius the expected radius, in pixels
+     */
     public void setCircleRadius(int circleRadius) {
         this.circleRadius = circleRadius;
+        if (!isSpinning) {
+            invalidate();
+        }
     }
 
-    public int getBarLength() {
-        return barLength;
-    }
-
-    public void setBarLength(int barLength) {
-        this.barLength = barLength;
-    }
-
+    /**
+     * @return the width of the spinning bar
+     */
     public int getBarWidth() {
         return barWidth;
     }
 
+    /**
+     * Sets the width of the spinning bar
+     *
+     * @param barWidth the spinning bar width in pixels
+     */
     public void setBarWidth(int barWidth) {
         this.barWidth = barWidth;
-
-        if ( this.barPaint != null ) {
-            this.barPaint.setStrokeWidth( this.barWidth );
+        if (!isSpinning) {
+            invalidate();
         }
     }
 
-    public int getTextSize() {
-        return textSize;
-    }
-
-    public void setTextSize(int textSize) {
-        this.textSize = textSize;
-
-        if ( this.textPaint != null ) {
-            this.textPaint.setTextSize( this.textSize );
-        }
-    }
-
-    public int getPaddingTop() {
-        return paddingTop;
-    }
-
-    public void setPaddingTop(int paddingTop) {
-        this.paddingTop = paddingTop;
-    }
-
-    public int getPaddingBottom() {
-        return paddingBottom;
-    }
-
-    public void setPaddingBottom(int paddingBottom) {
-        this.paddingBottom = paddingBottom;
-    }
-
-    public int getPaddingLeft() {
-        return paddingLeft;
-    }
-
-    public void setPaddingLeft(int paddingLeft) {
-        this.paddingLeft = paddingLeft;
-    }
-
-    public int getPaddingRight() {
-        return paddingRight;
-    }
-
-    public void setPaddingRight(int paddingRight) {
-        this.paddingRight = paddingRight;
-    }
-
+    /**
+     * @return the color of the spinning bar
+     */
     public int getBarColor() {
         return barColor;
     }
 
+    /**
+     * Sets the color of the spinning bar
+     *
+     * @param barColor The spinning bar color
+     */
     public void setBarColor(int barColor) {
         this.barColor = barColor;
-
-        if ( this.barPaint != null ) {
-            this.barPaint.setColor( this.barColor );
+        setupPaints();
+        if (!isSpinning) {
+            invalidate();
         }
     }
 
-    public int getCircleColor() {
-        return circleColor;
-    }
-
-    public void setCircleColor(int circleColor) {
-        this.circleColor = circleColor;
-
-        if ( this.circlePaint != null ) {
-            this.circlePaint.setColor( this.circleColor);
-        }
-    }
-
+    /**
+     * @return the color of the wheel's contour
+     */
     public int getRimColor() {
         return rimColor;
     }
 
+    /**
+     * Sets the color of the wheel's contour
+     *
+     * @param rimColor the color for the wheel
+     */
     public void setRimColor(int rimColor) {
         this.rimColor = rimColor;
-
-        if ( this.rimPaint != null ) {
-            this.rimPaint.setColor( this.rimColor );
+        setupPaints();
+        if (!isSpinning) {
+            invalidate();
         }
     }
 
-    public Shader getRimShader() {
-        return rimPaint.getShader();
-    }
-
-    public void setRimShader(Shader shader) {
-        this.rimPaint.setShader(shader);
-    }
-
-    public int getTextColor() {
-        return textColor;
-    }
-
-    public void setTextColor(int textColor) {
-        this.textColor = textColor;
-
-        if ( this.textPaint != null ) {
-            this.textPaint.setColor( this.textColor );
-        }
-    }
-
+    /**
+     * @return the base spinning speed, in full circle turns per second
+     * (1.0 equals on full turn in one second), this value also is applied for
+     * the smoothness when setting a progress
+     */
     public float getSpinSpeed() {
-        return spinSpeed;
+        return spinSpeed / 360.0f;
     }
 
+    /**
+     * Sets the base spinning speed, in full circle turns per second
+     * (1.0 equals on full turn in one second), this value also is applied for
+     * the smoothness when setting a progress
+     *
+     * @param spinSpeed the desired base speed in full turns per second
+     */
     public void setSpinSpeed(float spinSpeed) {
-        this.spinSpeed = spinSpeed;
+        this.spinSpeed = spinSpeed * 360.0f;
     }
 
+    /**
+     * @return the width of the wheel's contour in pixels
+     */
     public int getRimWidth() {
         return rimWidth;
     }
 
+    /**
+     * Sets the width of the wheel's contour
+     *
+     * @param rimWidth the width in pixels
+     */
     public void setRimWidth(int rimWidth) {
         this.rimWidth = rimWidth;
-
-        if ( this.rimPaint != null ) {
-            this.rimPaint.setStrokeWidth( this.rimWidth );
+        if (!isSpinning) {
+            invalidate();
         }
     }
 
-    public int getDelayMillis() {
-        return delayMillis;
+    public interface ProgressCallback {
+        /**
+         * Method to call when the progress reaches a value
+         * in order to avoid float precision issues, the progress
+         * is rounded to a float with two decimals.
+         *
+         * In indeterminate mode, the callback is called each time
+         * the wheel completes an animation cycle, with, the progress value is -1.0f
+         *
+         * @param progress a double value between 0.00 and 1.00 both included
+         */
+        public void onProgressUpdate(float progress);
     }
 
-    public void setDelayMillis(int delayMillis) {
-        this.delayMillis = delayMillis;
-    }
+    static class WheelSavedState extends BaseSavedState {
+        //required field that makes Parcelables from a Parcel
+        public static final Creator<WheelSavedState> CREATOR =
+                new Creator<WheelSavedState>() {
+                    public WheelSavedState createFromParcel(Parcel in) {
+                        return new WheelSavedState(in);
+                    }
 
-    public int getContourColor() {
-        return contourColor;
-    }
+                    public WheelSavedState[] newArray(int size) {
+                        return new WheelSavedState[size];
+                    }
+                };
+        float mProgress;
+        float mTargetProgress;
+        boolean isSpinning;
+        float spinSpeed;
+        int barWidth;
+        int barColor;
+        int rimWidth;
+        int rimColor;
+        int circleRadius;
+        boolean linearProgress;
+        boolean fillRadius;
 
-    public void setContourColor(int contourColor) {
-        this.contourColor = contourColor;
+        WheelSavedState(Parcelable superState) {
+            super(superState);
+        }
 
-        if ( contourPaint != null ) {
-            this.contourPaint.setColor( this.contourColor );
+        private WheelSavedState(Parcel in) {
+            super(in);
+            this.mProgress = in.readFloat();
+            this.mTargetProgress = in.readFloat();
+            this.isSpinning = in.readByte() != 0;
+            this.spinSpeed = in.readFloat();
+            this.barWidth = in.readInt();
+            this.barColor = in.readInt();
+            this.rimWidth = in.readInt();
+            this.rimColor = in.readInt();
+            this.circleRadius = in.readInt();
+            this.linearProgress = in.readByte() != 0;
+            this.fillRadius = in.readByte() != 0;
+        }
+
+        @Override public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeFloat(this.mProgress);
+            out.writeFloat(this.mTargetProgress);
+            out.writeByte((byte) (isSpinning ? 1 : 0));
+            out.writeFloat(this.spinSpeed);
+            out.writeInt(this.barWidth);
+            out.writeInt(this.barColor);
+            out.writeInt(this.rimWidth);
+            out.writeInt(this.rimColor);
+            out.writeInt(this.circleRadius);
+            out.writeByte((byte) (linearProgress ? 1 : 0));
+            out.writeByte((byte) (fillRadius ? 1 : 0));
         }
     }
-
-    public float getContourSize() {
-        return this.contourSize;
-    }
-
-    public void setContourSize(float contourSize) {
-        this.contourSize = contourSize;
-
-        if ( contourPaint != null ) {
-            this.contourPaint.setStrokeWidth( this.contourSize );
-        }
-    }
-
-    public int getProgress() { return (int) progress; }
 }
