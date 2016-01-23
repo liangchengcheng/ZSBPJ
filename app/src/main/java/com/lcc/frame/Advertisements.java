@@ -8,14 +8,15 @@ import org.json.JSONArray;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.bumptech.glide.Glide;
 import com.lcc.activity.R;
-import com.lcc.adapter.AdvertisementAdapter;
 import com.lcc.adapter.ZoomOutPageTransformer;
 
 
@@ -97,7 +98,7 @@ public class Advertisements implements OnPageChangeListener {
 				runHandler.sendMessage(msg);
 			}
 		};
-		timer.schedule(task, 0, timeDratioin);
+		timer.schedule(task, 0, 3000);
 		return view;
 	}
 	
@@ -108,7 +109,7 @@ public class Advertisements implements OnPageChangeListener {
 		// 循环取得小点图片
 		for (int i = 0; i < views.size(); i++) {
 			dots[i] = (ImageView) ll.getChildAt(i);
-			dots[i].setEnabled(true);// 都设为灰色
+			dots[i].setEnabled(true);
 		}
 
 		currentIndex = 0;
@@ -143,5 +144,76 @@ public class Advertisements implements OnPageChangeListener {
 		count = position;
 		setCurrentDot(position);
 	}
-	
+
+	public class AdvertisementAdapter extends PagerAdapter {
+
+		private Context context;
+		private List<View> views;
+		JSONArray advertiseArray;
+
+		public AdvertisementAdapter() {
+			super();
+		}
+
+		public AdvertisementAdapter(Context context, List<View> views, JSONArray advertiseArray) {
+			this.context = context;
+			this.views = views;
+			this.advertiseArray = advertiseArray;
+		}
+
+		@Override
+		public int getCount() {
+			return views.size();
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return (arg0 == arg1);
+		}
+
+		@Override
+		public void destroyItem(View container, int position, Object object) {
+			((ViewPager) container).removeView(views.get(position));
+		}
+
+		@Override
+		public Object instantiateItem(View container, int position) {
+			((ViewPager) container).addView(views.get(position), 0);
+			final int POSITION = position;
+			View view = views.get(position);
+			try {
+				//图片的下载地址在json里面
+				String head_img = advertiseArray.optJSONObject(position).optString("head_img");
+				ImageView ivAdvertise = (ImageView) view.findViewById(R.id.ivAdvertise);
+				Glide.with(ivAdvertise.getContext())
+						.load(head_img)
+						.centerCrop()
+						.placeholder(R.drawable.loading1)
+						.crossFade()
+						.into(ivAdvertise);
+				ivAdvertise.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener!=null){
+							listener.onClick(POSITION);
+						}
+					}
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return view;
+		}
+	}
+
+	public onPictrueClickListener listener;
+
+	public void setOnPictureClickListener(onPictrueClickListener listener){
+		this.listener=listener;
+	}
+
+	public interface  onPictrueClickListener{
+		void onClick(int position);
+	}
+
 }

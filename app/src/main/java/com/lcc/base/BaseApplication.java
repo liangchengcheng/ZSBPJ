@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.network.RetrofitBuilder;
 
 /**
@@ -17,6 +18,10 @@ public class BaseApplication  extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+
+        FrameManager.setAppContext(this);
+        FrameManager.getInstance().init();
+
         new RetrofitBuilder.Builder()
                 .baseUrl("")
                 .client(new OkHttpClient())

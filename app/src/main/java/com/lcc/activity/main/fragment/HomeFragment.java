@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import zsbpj.lccpj.frame.FrameManager;
+
 /**
  * Author:  梁铖城
  * Email:   1038127753@qq.com
@@ -54,6 +56,14 @@ public class HomeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        llAdvertiseBoard.addView(new Advertisements(getActivity(), true, inflaters, 3000).initView(advertiseArray));
+        Advertisements advertisements= new Advertisements(getActivity(), true, inflaters, 3000);
+        View view=advertisements.initView(advertiseArray);
+        advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
+            @Override
+            public void onClick(int position) {
+                FrameManager.getInstance().toastPrompt("点击的是"+position);
+            }
+        });
+        llAdvertiseBoard.addView(view);
     }
 }
