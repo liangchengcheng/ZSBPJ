@@ -63,6 +63,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends Fragment {
         onFragmentCreate();
     }
 
+    @SuppressWarnings("unchecked")
     public void showMoreData(final List<T> dataList) {
         int delay = 0;
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
@@ -74,8 +75,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends Fragment {
                 currentState = STATE_NORMAL;
                 if (dataList.isEmpty()) {
                     adapter.setHasMoreDataAndFooter(false, false);
-                    // TODO: 2016/1/18 此处显示错误Toast在activity
-                    //getHolder().showMsgInBottom(R.string.msg_waitting_loding);
+                  FrameManager.getInstance().toastPrompt("正在加载...");
                 } else {
                     adapter.appendToList(dataList);
                     currentPage++;
@@ -88,8 +88,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends Fragment {
 
     public void showLoadError(String errorMsg) {
         adapter.setHasFooter(false);
-        // TODO: 2016/1/18 此处显示错误Toast
-        //getHolder().showMsgInBottom(errorMsg);
+        FrameManager.getInstance().toastPrompt("加载失败");
     }
 
     public void showLoadError(int errorMsgId) {

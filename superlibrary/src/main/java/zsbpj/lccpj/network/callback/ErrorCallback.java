@@ -36,4 +36,5 @@ public interface ErrorCallback {
    * 此方法不能同时和其他 errorXXX() 方法使用
    */
   void error(ErrorModel errorModel);
+
 }

@@ -19,20 +19,13 @@ import android.view.View;
 
 import zsbpj.lccpj.R;
 
-/**
- * Created by sunger on 2015/10/30.
- */
+
 public class ProgressWheel extends View {
     private static final String TAG = ProgressWheel.class.getSimpleName();
     private final int barLength = 16;
     private final int barMaxLength = 270;
     private final long pauseGrowingTime = 200;
-    /**
-     * *********
-     * DEFAULTS *
-     * **********
-     */
-    //Sizes (with defaults in DP)
+
     private int circleRadius = 28;
     private int barWidth = 4;
     private int rimWidth = 4;

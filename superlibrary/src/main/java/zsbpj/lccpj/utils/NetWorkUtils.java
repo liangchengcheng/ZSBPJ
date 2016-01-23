@@ -20,7 +20,6 @@ import java.util.List;
  * Date:    2015年11月14日23:49:57
  * Description: 网络的工具类
  */
-
 public class NetWorkUtils {
 
 	/**

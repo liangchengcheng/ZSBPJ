@@ -1,6 +1,7 @@
 package zsbpj.lccpj.network.callback;
 
 public class ErrorModel {
+
     public int mStatusCode;
     public String mMessage;
 

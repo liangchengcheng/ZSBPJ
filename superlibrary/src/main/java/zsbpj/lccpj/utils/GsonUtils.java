@@ -8,10 +8,6 @@ import java.util.Map;
 
 public class GsonUtils {
 
-	public GsonUtils() {
-
-	}
-
 	public static String createGsonString(Object object) {
 		Gson gson = new Gson();
 		String gsonString = gson.toJson(object);

@@ -22,7 +22,8 @@ import zsbpj.lccpj.view.progress.ProgressWheel;
  * Description:    LoadMoreRecyclerAdapter
  */
 
-public abstract class LoadMoreRecyclerAdapter<T,VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
+public abstract class LoadMoreRecyclerAdapter<T,VH extends RecyclerView.ViewHolder>
+        extends RecyclerView.Adapter {
 
     public static final int TYPE_FOOTER=Integer.MIN_VALUE;
     public static final int TYPE_ITEM=0;
@@ -171,7 +172,6 @@ public abstract class LoadMoreRecyclerAdapter<T,VH extends RecyclerView.ViewHold
         }
     }
 
-
     public boolean hasMoreData() {
         return hasMoreData;
     }
@@ -182,6 +182,7 @@ public abstract class LoadMoreRecyclerAdapter<T,VH extends RecyclerView.ViewHold
             notifyDataSetChanged();
         }
     }
+
     public void setHasMoreDataAndFooter(boolean hasMoreData, boolean hasFooter) {
         if(this.hasMoreData != hasMoreData || this.hasFooter != hasFooter) {
             this.hasMoreData = hasMoreData;
