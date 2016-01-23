@@ -4,16 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.support.annotation.NonNull;
-
+import android.text.TextUtils;
 import java.util.Collection;
 import java.util.List;
-
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.query.Query;
 import de.greenrobot.dao.query.QueryBuilder;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.sql.DaoMaster;
 import zsbpj.lccpj.sql.DaoSession;
+import zsbpj.lccpj.sql.T_JC_LOGININFO;
 import zsbpj.lccpj.sql.dao.IDatabase;
 
 /**
@@ -48,11 +48,16 @@ public abstract   class DatabaseManager <M,K> implements IDatabase<M,K>{
         getOpenHelper(context,dbName);
     }
 
-    /**
-     * 打开数据库
-     */
-    protected void openReadableDB()throws SQLiteException{
+    protected void openReadableDb()throws SQLiteException{
+        getReadableDatabase();
+        getDaoMaster();
+        getDaoSession();
+    }
 
+    protected void openWritableDb()throws SQLiteException{
+        getWritableDatabase();
+        getDaoMaster();
+        getDaoSession();
     }
 
     /**
@@ -85,77 +90,204 @@ public abstract   class DatabaseManager <M,K> implements IDatabase<M,K>{
     }
     @Override
     public boolean insert(M m) {
-        return false;
+        try{
+            getWritableDatabase();
+            getAbstractDao().insert(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean delete(M m) {
-        return false;
+        try{
+            openWritableDb();
+            getAbstractDao().delete(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public boolean deleteByKey(M key) {
-        return false;
+    public boolean deleteByKey(K m) {
+        try{
+            if (TextUtils.isEmpty(m.toString()))
+                return false;
+            openWritableDb();
+            getAbstractDao().deleteByKey(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteByKeyInTex(K... key) {
-        return false;
+        try{
+            openWritableDb();
+            getAbstractDao().deleteByKeyInTx(key);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteList(List<M> list) {
+        try{
+            if (list==null||list.size()==0)return false;
+            openWritableDb();
+            getAbstractDao().deleteInTx(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteAll() {
+        try{
+            openWritableDb();
+            getAbstractDao().deleteAll();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean insertOrReplace(M m) {
+        try{
+            getWritableDatabase();
+            getAbstractDao().insertOrReplace(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
         return false;
     }
 
     @Override
-    public boolean insertOrReplace() {
-        return false;
-    }
-
-    @Override
-    public boolean update() {
-        return false;
+    public boolean update(M m) {
+        try{
+            openWritableDb();
+            getAbstractDao().update(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean updateInTx(M... m) {
-        return false;
+        try{
+            openWritableDb();
+            getAbstractDao().updateInTx(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean updateList(List<M> mList) {
-        return false;
+        try{
+            if (mList==null||mList.size()==0)return  false;
+            openWritableDb();
+            getAbstractDao().updateInTx(mList);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public M selectByPrimaryKey(K key) {
-        return null;
+        try{
+            openReadableDb();
+            return getAbstractDao().load(key);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public List<M> loadAll() {
-        return null;
+        List<M> list=null;
+        try{
+            openReadableDb();
+            list= getAbstractDao().loadAll();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return list;
     }
 
     @Override
     public boolean refresh(M m) {
-        return false;
+        try{
+            openWritableDb();
+            getAbstractDao().refresh(m);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void clearDaoSession() {
+        if (daoSession!=null){
+            daoSession.clear();
+            daoSession=null;
+        }
     }
 
     @Override
     public void closeDbConnections() {
-
+        if (mHelper!=null){
+            mHelper.close();
+            mHelper=null;
+        }
+        if (daoSession!=null){
+            daoSession.clear();
+            daoSession=null;
+        }
     }
 
     @Override
     public boolean dropDataBase() {
-        return false;
+        try{
+            openWritableDb();
+            daoSession.deleteAll(T_JC_LOGININFO.class);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void runInTx(Runnable runnable) {
-
+        try{
+            openWritableDb();
+            getDaoSession().runInTx(runnable);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -165,26 +297,68 @@ public abstract   class DatabaseManager <M,K> implements IDatabase<M,K>{
 
     @Override
     public boolean insertList(List<M> mList) {
-        return false;
+        try{
+            if (mList==null||mList.size()==0)
+                return false;
+            openWritableDb();
+            getAbstractDao().insertInTx(mList);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean insertOrReplaceList(List<M> mList) {
-        return false;
+        try{
+            if (mList==null||mList.size()==0)
+                return false;
+            openWritableDb();
+            getAbstractDao().insertOrReplaceInTx(mList);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public QueryBuilder<M> getQueryBuilder() {
-        return null;
+        openReadableDb();
+        return getAbstractDao().queryBuilder();
     }
 
     @Override
     public List<M> queryRaw(String where, String... selectionArg) {
-        return null;
+       openReadableDb();
+        return getAbstractDao().queryRaw(where,selectionArg);
+    }
+
+    @Override
+    public Query<M> queryRawCreate(String where, Object... selectionArg) {
+        openReadableDb();
+        return getAbstractDao().queryRawCreate(where,selectionArg);
     }
 
     @Override
     public Query<M> queryRawCreateListArgs(String where, Collection<Object> selectionArg) {
-        return null;
+       openReadableDb();
+        return getAbstractDao().queryRawCreateListArgs(where,selectionArg);
+    }
+
+    /**
+     * 获取DaoMaster
+     */
+    private DaoMaster getDaoMaster(){
+        daoMaster=new DaoMaster(database);
+        return daoMaster;
+    }
+
+    protected DaoSession getDaoSession(){
+        if (daoSession==null){
+            daoSession=daoMaster.newSession();
+        }
+        return daoSession;
     }
 }

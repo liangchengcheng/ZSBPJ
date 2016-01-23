@@ -28,12 +28,17 @@ public interface IDatabase <M,K> {
     /**
      * 删除通过key
      */
-    boolean deleteByKey(M key);
+    boolean deleteByKey(K key);
 
     /**
      * 删除通过intx
      */
     boolean deleteByKeyInTex(K... key);
+
+    /**
+     * 删除集合
+     */
+    boolean deleteList(List<M> list);
 
     /**
      * 删除全部
@@ -43,12 +48,12 @@ public interface IDatabase <M,K> {
     /**
      * 增加或者替换
      */
-    boolean insertOrReplace();
+    boolean insertOrReplace(M key);
 
     /**
      * 更新操作
      */
-    boolean update();
+    boolean update(M m);
 
     /**
      * 更新通过InText
@@ -78,6 +83,11 @@ public interface IDatabase <M,K> {
     void closeDbConnections();
 
     /**
+     * 清除缓存
+     */
+    void clearDaoSession();
+
+    /**
      * 删除掉数据库
      */
     boolean dropDataBase();
@@ -105,6 +115,8 @@ public interface IDatabase <M,K> {
     QueryBuilder<M> getQueryBuilder();
 
     List<M> queryRaw(String where,String... selectionArg);
+
+    Query<M> queryRawCreate(String where ,Object... selectionArg);
 
     Query<M> queryRawCreateListArgs(String where ,Collection<Object> selectionArg);
 
