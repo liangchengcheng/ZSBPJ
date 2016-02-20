@@ -26,7 +26,6 @@ import com.lcc.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MainActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 

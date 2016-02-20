@@ -9,12 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class MainNavigationHeader implements View.OnClickListener {
     private CircleImageView mImageViewAvatar;
     private TextView mTextViewNickName;
     private View mRelativeLayout1;
     private View mRelativeLayout2;
+
     private TextView mTextViewVideosCount;
     private TextView mTextViewRepostsCount;
     private TextView mTextViewFriendsCount;
@@ -36,7 +36,7 @@ public class MainNavigationHeader implements View.OnClickListener {
 
     public void bindData() {
         String oauthUserEntity=null;
-        if (oauthUserEntity != null) {
+        if (oauthUserEntity == null) {
             mImageViewAvatar.setImageResource(R.mipmap.head);
             mImageViewAvatar.setOnClickListener(this);
             mRelativeLayout1.setVisibility(View.GONE);
