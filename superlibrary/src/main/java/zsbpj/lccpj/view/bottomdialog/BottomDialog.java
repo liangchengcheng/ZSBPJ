@@ -30,7 +30,6 @@ import zsbpj.lccpj.R;
 
 public class BottomDialog {
 
-
     private CustomDialog customDialog;
 
     public BottomDialog(Context context) {
@@ -88,6 +87,7 @@ public class BottomDialog {
         private int padding;
         private int icon;
         private LinearLayout container;
+
         private OnItemSelectedListener onItemSelectedListener;
         private List<Item> items;
 

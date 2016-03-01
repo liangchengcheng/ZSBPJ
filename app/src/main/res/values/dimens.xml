@@ -6,4 +6,7 @@
     <dimen name="md_simplelist_icon">40dp</dimen>
     <dimen name="md_simplelist_icon_margin">18dp</dimen>
     <dimen name="md_dialog_frame_margin">24dp</dimen>
+    <dimen name="side_letter_bar_letter_size">12sp</dimen>
+    <dimen name="side_letter_bar_width">36dp</dimen>
+    <dimen name="city_text_size">16sp</dimen>
 </resources>
