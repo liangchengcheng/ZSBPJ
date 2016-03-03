@@ -173,7 +173,7 @@ public class AppUtils {
      * @param context 上下文对象
      * @return true if in backgroud
      */
-    public static boolean isAppInBackgroud(Context context) {
+    public static boolean isAppInBackground(Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningTaskInfo> tasks = am.getRunningTasks(1);
         if (!tasks.isEmpty()) {

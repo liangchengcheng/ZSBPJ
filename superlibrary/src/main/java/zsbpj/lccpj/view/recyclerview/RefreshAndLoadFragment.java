@@ -49,7 +49,7 @@ public abstract class RefreshAndLoadFragment<T> extends LoadMoreRecyclerFragment
         },delay);
     }
 
-    abstract void onRefreshData();
+    public abstract void onRefreshData();
 
     @Override
     protected void onFragmentLoadMore() {

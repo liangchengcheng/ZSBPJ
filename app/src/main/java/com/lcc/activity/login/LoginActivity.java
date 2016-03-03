@@ -15,7 +15,7 @@ import zsbpj.lccpj.app.activity.StartNetActivity;
  * Date:    2015年12月15日10:47:52
  * Description:    {  }
  */
-public class L_LoginActivity extends StartNetActivity <ArrayList<News>>{
+public class LoginActivity extends StartNetActivity <ArrayList<News>>{
 
     @Override
     public View provideSnackbarView() {
