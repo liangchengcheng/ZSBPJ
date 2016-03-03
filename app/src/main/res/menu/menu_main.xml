@@ -10,11 +10,12 @@
         android:icon="@mipmap/ic_search_white_24dp"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="关于我们"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="系统设置"
         app:showAsAction="never"

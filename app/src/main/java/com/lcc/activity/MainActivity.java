@@ -23,6 +23,8 @@ import com.lcc.activity.main.fragment.HomeFragment;
 import com.lcc.activity.main.fragment.OnlineClassFragment;
 import com.lcc.activity.setting.SettingActivity;
 import com.lcc.base.BaseActivity;
+import com.lcc.view.dialog.DialogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,9 +114,17 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_search:
+
+                break;
+            case R.id.action_about:
+                DialogUtil.showAbout(this);
+                break;
+
+            case R.id.action_settings:
+                DialogUtil.showAbout(this);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
