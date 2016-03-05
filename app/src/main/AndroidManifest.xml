@@ -29,9 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--设置界面-->
         <activity
             android:name=".setting.SettingActivity"
             android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme"></activity>
+        <!--视频播放界面-->
+        <activity
+            android:name=".video.VideoPlayActivity"
+            android:label="@string/title_activity_video"
             android:theme="@style/AppTheme"></activity>
     </application>
 

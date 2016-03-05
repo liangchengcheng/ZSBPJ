@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.lcc.activity.MainActivity;
 import com.lcc.activity.R;
+import com.lcc.activity.video.VideoPlayActivity;
 import com.lcc.adapter.MediasAdapter;
 import com.lcc.constants.Constant;
 import com.lcc.entity.MediaEntity;
@@ -28,7 +29,7 @@ import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
  * Date:    2015年12月15日10:47:52
  * Description:  在线课程
  */
-public class OnlineClassFragment extends RefreshAndLoadFragment implements MediasAdapter.OnItemClickListener  {
+public class OnlineClassFragment extends RefreshAndLoadFragment implements MediasAdapter.OnItemClickListener {
 
     private static final String KEY_VIDEO_ID = "id";
     private static final String KEY_VIDEO_TYPE = "type";
@@ -41,11 +42,11 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     private int id;
     private int type;
 
-    public static Fragment newInstance(int id,int type){
-        Bundle bundle=new Bundle();
-        bundle.putInt(KEY_VIDEO_ID,id);
-        bundle.putInt(KEY_VIDEO_TYPE,type);
-        Fragment fragment=new OnlineClassFragment();
+    public static Fragment newInstance(int id, int type) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_VIDEO_ID, id);
+        bundle.putInt(KEY_VIDEO_TYPE, type);
+        Fragment fragment = new OnlineClassFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -65,12 +66,12 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         super.onFragmentCreate();
         RxService.getInstance().getBus().register(this);
 
-        id=getArguments().getInt(KEY_VIDEO_ID);
-        type=getArguments().getInt(KEY_VIDEO_TYPE);
+        id = getArguments().getInt(KEY_VIDEO_ID);
+        type = getArguments().getInt(KEY_VIDEO_TYPE);
 
-        RecyclerView mRecyclerView=getRecyclerView();
+        RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
-        mAdapter=new MediasAdapter(getActivity());
+        mAdapter = new MediasAdapter(getActivity());
         setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setHasMoreData(true);
@@ -82,24 +83,24 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     /**
      * 刷新数据
      */
-    private void autoRefresh(){
+    private void autoRefresh() {
         getSwipeRefreshWidget().postDelayed(new Runnable() {
             @Override
             public void run() {
-                currentPage=STATE_REFRESH;
+                currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type,1, PAGER_SIZE);
+                RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, 1, PAGER_SIZE);
             }
-        },500);
+        }, 500);
     }
 
     @Override
     public void OnItemClick(MediaEntity entity) {
-
+        startActivity(VideoPlayActivity.createIntent(getActivity(), entity.getId()));
     }
 
     public void onEventMainThread(List<VideoItemEntity> response) {
-        if(response!=null) {
+        if (response != null) {
             //获取到数据
         }
     }
