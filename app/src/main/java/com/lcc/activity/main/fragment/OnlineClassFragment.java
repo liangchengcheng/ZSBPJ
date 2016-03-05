@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.lcc.activity.MainActivity;
 import com.lcc.activity.R;
 import com.lcc.adapter.MediasAdapter;
+import com.lcc.constants.Constant;
 import com.lcc.entity.MediaEntity;
 import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
@@ -84,7 +85,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new MGridLayoutManager(getActivity(), GRID_COLUMN, mAdapter));
-
+        autoRefresh();
     }
 
     private void autoRefresh(){
@@ -113,7 +114,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     }
 
     private void getNewData(){
-        RxService.getInstance().getVideoList(getActivity().getTaskId(), "");
+        RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, getCurrentPage(), PAGER_SIZE);
     }
 
     @Override
@@ -122,9 +123,9 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     }
 
     public void onEventMainThread(List<VideoItemEntity> response) {
-//        if(newsEvent!=null&&Constant.NEWSTYPE.BLOG.getNewsType().equals(newsEvent.getNewsType())) {
-//            updateView(newsEvent);
-//        }
+        if(response!=null) {
+            //获取到数据
+        }
     }
 
 

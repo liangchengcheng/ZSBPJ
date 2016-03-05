@@ -59,7 +59,9 @@ public class RxService {
         }
     }
 
-
+    /**
+     * 登录
+     */
     public void Login(int taskId,String type) {
         getCompositeSubscription(taskId).add(RxLogin.login(type));
     }
@@ -67,8 +69,8 @@ public class RxService {
     /**
      * 获取视频列表
      */
-    public void getVideoList(int taskId,String type) {
-        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(type));
+    public void getVideoList(int taskId,int id, int type, int page, int count) {
+        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(id, type, page, count));
     }
 
     private CompositeSubscription getCompositeSubscription(int taskId) {
