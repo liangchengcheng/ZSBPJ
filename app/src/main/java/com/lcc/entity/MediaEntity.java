@@ -11,7 +11,6 @@ public class MediaEntity extends SimpleMediaEntity {
 
     private boolean show_plays_count;
 
-
     public void setCaption(String caption) {
         this.caption = caption;
     }
@@ -19,7 +18,6 @@ public class MediaEntity extends SimpleMediaEntity {
     public String getCaption() {
         return this.caption;
     }
-
 
     public void setHas_watermark(int has_watermark) {
         this.has_watermark = has_watermark;

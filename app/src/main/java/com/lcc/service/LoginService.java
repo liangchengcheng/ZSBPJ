@@ -16,6 +16,7 @@ import rx.Observable;
  * Description:    {  }
  */
 public interface LoginService {
+
     @GET("api/v1.0/{type}/update")
     Observable<News> updateNews(@Path("type") String type);
     @GET("api/v1.0/{type}/loadmore/{newsId}")

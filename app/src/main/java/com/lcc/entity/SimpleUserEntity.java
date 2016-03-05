@@ -3,6 +3,7 @@ package com.lcc.entity;
 import java.io.Serializable;
 
 public class SimpleUserEntity implements Serializable {
+
     private int id;
 
     private String screen_name;

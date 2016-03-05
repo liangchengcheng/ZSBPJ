@@ -26,7 +26,7 @@ public class RxVideoList {
             }, new Action1<Throwable>() {
                 @Override
                 public void call(Throwable throwable) {
-                    //具体错误信息的封装请草靠nba项目
+                    //具体错误信息的封装请参考nba项目
                     RxService.getBus().post("错误信息");
                 }
             });

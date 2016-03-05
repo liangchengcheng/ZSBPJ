@@ -34,18 +34,13 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     private static final String KEY_VIDEO_TYPE = "type";
 
     private MediasAdapter mAdapter;
-    private MainActivity mainActivity;
-    private RecyclerView mRecyclerView;
-
     private static final int PAGER_SIZE = 20;
     private static final int GRID_COLUMN = 2;
+    static final int ACTION_NONE = 0;
 
     private int id;
     private int type;
 
-    /**
-     * 初始化这个fragment
-     */
     public static Fragment newInstance(int id,int type){
         Bundle bundle=new Bundle();
         bundle.putInt(KEY_VIDEO_ID,id);
@@ -56,28 +51,24 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity= (MainActivity) context;
-    }
-
-    @Override
     public void onRefreshData() {
-
+        RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, 1, PAGER_SIZE);
     }
 
     @Override
     protected void onFragmentLoadMore() {
-        super.onFragmentLoadMore();
+        RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, getCurrentPage(), PAGER_SIZE);
     }
 
     @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
         RxService.getInstance().getBus().register(this);
+
         id=getArguments().getInt(KEY_VIDEO_ID);
         type=getArguments().getInt(KEY_VIDEO_TYPE);
-        mRecyclerView=getRecyclerView();
+
+        RecyclerView mRecyclerView=getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
         mAdapter=new MediasAdapter(getActivity());
         setAdapter(mAdapter);
@@ -88,33 +79,18 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         autoRefresh();
     }
 
+    /**
+     * 刷新数据
+     */
     private void autoRefresh(){
         getSwipeRefreshWidget().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //设置当前的状态是刷新
                 currentPage=STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                // TODO: 16/3/3 在此处加载数据 
-                //mPresenter.refresh(id, type, PAGER_SIZE);
+                RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type,1, PAGER_SIZE);
             }
         },500);
-    }
-
-    void showError(){
-
-    }
-
-    void refreshView(List<MediaEntity> entities){
-
-    }
-
-    void loadMoreView(List<MediaEntity> entities){
-
-    }
-
-    private void getNewData(){
-        RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, getCurrentPage(), PAGER_SIZE);
     }
 
     @Override
@@ -128,11 +104,22 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         }
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         RxService.getInstance().getBus().unregister(this);
+    }
+
+
+    public void showError() {
+        currentState = ACTION_NONE;
+        if (getSwipeRefreshWidget().isRefreshing()) {
+            getSwipeRefreshWidget().setRefreshing(false);
+            //刷新失败toast
+        } else {
+            //加载更多失败
+            mAdapter.setHasFooter(false);
+        }
     }
 
 }

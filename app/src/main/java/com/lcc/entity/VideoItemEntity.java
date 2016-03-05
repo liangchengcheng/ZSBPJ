@@ -3,6 +3,7 @@ package com.lcc.entity;
 import java.io.Serializable;
 
 public class VideoItemEntity implements Serializable {
+
     private String recommend_caption;
 
     private String recommend_cover_pic;

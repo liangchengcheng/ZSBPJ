@@ -3,6 +3,7 @@ package com.lcc.entity;
 import java.io.Serializable;
 
 public class SimpleMediaEntity implements Serializable {
+
     private int id;
 
     private String video;
@@ -162,4 +163,5 @@ public class SimpleMediaEntity implements Serializable {
     public boolean getLocked() {
         return this.locked;
     }
+
 }

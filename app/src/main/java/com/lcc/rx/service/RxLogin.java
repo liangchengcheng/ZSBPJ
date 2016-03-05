@@ -11,7 +11,7 @@ import rx.schedulers.Schedulers;
 public class RxLogin {
     public static Subscription getTeams(String date) {
 
-        Subscription subscription = RxService.getNbaplus().updateNews(date)
+        Subscription subscription = RxService.getLoginService().updateNews(date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
@@ -31,7 +31,7 @@ public class RxLogin {
 
     public static Subscription login(String date) {
 
-        Subscription subscription = RxService.getNbaplus().updateNews(date)
+        Subscription subscription = RxService.getLoginService().updateNews(date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {

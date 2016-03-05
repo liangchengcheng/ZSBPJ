@@ -13,7 +13,7 @@ import zsbpj.lccpj.app.activity.StartNetActivity;
  * Author:  梁铖城
  * Email:   1038127753@qq.com
  * Date:    2015年12月15日10:47:52
- * Description:    {  }
+ * Description:  登录界面的简单的实现
  */
 public class LoginActivity extends StartNetActivity <ArrayList<News>>{
 
@@ -28,7 +28,7 @@ public class LoginActivity extends StartNetActivity <ArrayList<News>>{
         Call<ArrayList<News>> listCall = ApiService.createNewsService().loadMoreNews("","");
         networkQueue().enqueue(listCall);
 
-        RxService.getInstance().initNews(getTaskId(), "");
+        RxService.getInstance().Login(getTaskId(), "");
     }
 
     @Override
@@ -47,6 +47,6 @@ public class LoginActivity extends StartNetActivity <ArrayList<News>>{
 
 
     private boolean isNull(List list) {
-        return (null == list || list.size() == 0 || null == list.get(0));
+        return (null == list || list.size() == 0);
     }
 }
