@@ -1,7 +1,11 @@
 package com.lcc.rx;
 
 import com.google.gson.Gson;
+import com.lcc.rx.service.RxLogin;
+import com.lcc.rx.service.RxVideoList;
 import com.lcc.service.LoginService;
+import com.lcc.service.VideoListService;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -11,9 +15,11 @@ import rx.subscriptions.CompositeSubscription;
 
 public class RxService {
     private static final RxService NBAPLUS_SERVICE=new RxService();
+
     private static Gson sGson;
     private static EventBus sBus ;
-    private static LoginService sNbaplus;
+    private static LoginService loginService;
+    private static VideoListService videoListService;
     private static ExecutorService sSingleThreadExecutor;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private RxService(){}
@@ -30,7 +36,8 @@ public class RxService {
         sSingleThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                sNbaplus = RxFactory.getLoginService();
+                loginService = RxFactory.getLoginService();
+                videoListService = RxFactory.getVideoListService();
             }
         });
     }
@@ -53,9 +60,15 @@ public class RxService {
     }
 
 
+    public void Login(int taskId,String type) {
+        getCompositeSubscription(taskId).add(RxLogin.login(type));
+    }
 
-    public void initNews(int taskId,String type) {
-        getCompositeSubscription(taskId).add(RxLogin.getTeams(type));
+    /**
+     * 获取视频列表
+     */
+    public void getVideoList(int taskId,String type) {
+        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(type));
     }
 
     private CompositeSubscription getCompositeSubscription(int taskId) {
@@ -69,17 +82,12 @@ public class RxService {
         return compositeSubscription;
     }
 
-
     public static RxService getInstance() {
         return NBAPLUS_SERVICE;
     }
 
     public static EventBus getBus() {
         return sBus;
-    }
-
-    public static LoginService getNbaplus() {
-        return sNbaplus;
     }
 
     public static Gson getGson() {
@@ -89,5 +97,14 @@ public class RxService {
     public static ExecutorService getSingleThreadExecutor(){
         return sSingleThreadExecutor;
     }
+
+    public static LoginService getLoginService() {
+        return loginService;
+    }
+
+    public static VideoListService getVideoListService() {
+        return videoListService;
+    }
+
 
 }

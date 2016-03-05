@@ -13,6 +13,8 @@ import com.lcc.activity.MainActivity;
 import com.lcc.activity.R;
 import com.lcc.adapter.MediasAdapter;
 import com.lcc.entity.MediaEntity;
+import com.lcc.entity.VideoItemEntity;
+import com.lcc.rx.RxService;
 
 import java.util.List;
 
@@ -26,7 +28,6 @@ import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
  * Description:  在线课程
  */
 public class OnlineClassFragment extends RefreshAndLoadFragment implements MediasAdapter.OnItemClickListener  {
-
 
     private static final String KEY_VIDEO_ID = "id";
     private static final String KEY_VIDEO_TYPE = "type";
@@ -72,6 +73,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
+        RxService.getInstance().getBus().register(this);
         id=getArguments().getInt(KEY_VIDEO_ID);
         type=getArguments().getInt(KEY_VIDEO_TYPE);
         mRecyclerView=getRecyclerView();
@@ -110,8 +112,26 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
 
     }
 
+    private void getNewData(){
+        RxService.getInstance().getVideoList(getActivity().getTaskId(), "");
+    }
+
     @Override
     public void OnItemClick(MediaEntity entity) {
 
     }
+
+    public void onEventMainThread(List<VideoItemEntity> response) {
+//        if(newsEvent!=null&&Constant.NEWSTYPE.BLOG.getNewsType().equals(newsEvent.getNewsType())) {
+//            updateView(newsEvent);
+//        }
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxService.getInstance().getBus().unregister(this);
+    }
+
 }
