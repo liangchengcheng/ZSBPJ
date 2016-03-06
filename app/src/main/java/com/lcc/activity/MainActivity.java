@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity implements
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "快速导航");
         adapter.addFragment(new AllKnowFragment(), "专升本百科");
-        //// TODO: 16/3/5 此处需要修改 
+        //// TODO: 16/3/5 此处需要修改
         Fragment onlineClassFragment=OnlineClassFragment.newInstance(1,1);
         adapter.addFragment(onlineClassFragment, "在线课程");
         viewPager.setAdapter(adapter);
