@@ -34,4 +34,5 @@ dependencies {
     compile project(':vitamio')
     compile project(':superlibrary')
     compile files('libs/AMap_Location_v2.3.0_20160112.jar')
+    compile 'com.nineoldandroids:library:2.4.0+'
 }

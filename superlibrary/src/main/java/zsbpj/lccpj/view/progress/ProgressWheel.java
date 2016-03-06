@@ -21,6 +21,7 @@ import zsbpj.lccpj.R;
 
 
 public class ProgressWheel extends View {
+
     private static final String TAG = ProgressWheel.class.getSimpleName();
     private final int barLength = 16;
     private final int barMaxLength = 270;

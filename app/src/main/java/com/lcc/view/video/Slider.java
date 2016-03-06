@@ -72,8 +72,6 @@ public class Slider extends CustomView {
         this.onValueChangedListener = onValueChangedListener;
     }
 
-    // GETERS & SETTERS
-
     public int getValue() {
         return value;
     }
