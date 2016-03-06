@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/content_bg">
-    <!--直接toolbar-->
+
     <include layout="@layout/common_title_bar"/>
 
     <include layout="@layout/view_search"/>

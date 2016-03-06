@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.lcc.activity.R;
 
 public class SideLetterBar extends View {
-
     private static final String[] b = {"定位", "热门", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private int choose = -1;
     private Paint paint = new Paint();
@@ -33,23 +32,22 @@ public class SideLetterBar extends View {
     }
 
     /**
-     * 设置悬浮的overlay
-     *
-     * @param overlay overlay
+     * 设置悬浮的textview
      */
-    public void setOverlay(TextView overlay) {
+    public void setOverlay(TextView overlay){
         this.overlay = overlay;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (showBg) {
             canvas.drawColor(Color.TRANSPARENT);
         }
+
         int height = getHeight();
         int width = getWidth();
-        //单个条目的高度
         int singleHeight = height / b.length;
         for (int i = 0; i < b.length; i++) {
             paint.setTextSize(getResources().getDimension(R.dimen.side_letter_bar_letter_size));
@@ -57,12 +55,14 @@ public class SideLetterBar extends View {
             paint.setAntiAlias(true);
             if (i == choose) {
                 paint.setColor(getResources().getColor(R.color.gray_deep));
+//                paint.setFakeBoldText(true);  //加粗
             }
             float xPos = width / 2 - paint.measureText(b[i]) / 2;
             float yPos = singleHeight * i + singleHeight;
-            canvas.drawText(b[i],xPos,yPos,paint);
+            canvas.drawText(b[i], xPos, yPos, paint);
             paint.reset();
         }
+
     }
 
     @Override
@@ -119,15 +119,12 @@ public class SideLetterBar extends View {
         return super.onTouchEvent(event);
     }
 
-
     public void setOnLetterChangedListener(OnLetterChangedListener onLetterChangedListener) {
         this.onLetterChangedListener = onLetterChangedListener;
     }
 
-    /**
-     * 右侧的字母的点击事件
-     */
     public interface OnLetterChangedListener {
         void onLetterChanged(String letter);
     }
+
 }

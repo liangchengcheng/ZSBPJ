@@ -12,10 +12,10 @@ import com.lcc.activity.R;
 import com.lcc.bean.City;
 import com.lcc.bean.LocateState;
 import com.lcc.view.cityview.WrapHeightGridView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import zsbpj.lccpj.utils.PinyinUtils;
 
 public class CityListAdapter extends BaseAdapter {
@@ -65,6 +65,8 @@ public class CityListAdapter extends BaseAdapter {
 
     /**
      * 获取字母索引的位置
+     * @param letter
+     * @return
      */
     public int getLetterPosition(String letter){
         Integer integer = letterIndexes.get(letter);
@@ -101,8 +103,7 @@ public class CityListAdapter extends BaseAdapter {
         CityViewHolder holder;
         int viewType = getItemViewType(position);
         switch (viewType){
-            //定位
-            case 0:
+            case 0:     //定位
                 view = inflater.inflate(R.layout.view_locate_city, parent, false);
                 ViewGroup container = (ViewGroup) view.findViewById(R.id.layout_locate);
                 TextView state = (TextView) view.findViewById(R.id.tv_located_city);
@@ -134,8 +135,7 @@ public class CityListAdapter extends BaseAdapter {
                     }
                 });
                 break;
-            case 1:
-                //热门
+            case 1:     //热门
                 view = inflater.inflate(R.layout.view_hot_city, parent, false);
                 WrapHeightGridView gridView = (WrapHeightGridView) view.findViewById(R.id.gridview_hot_city);
                 final HotCityGridAdapter hotCityGridAdapter = new HotCityGridAdapter(mContext);
@@ -149,8 +149,7 @@ public class CityListAdapter extends BaseAdapter {
                     }
                 });
                 break;
-            case 2:
-                //所有
+            case 2:     //所有
                 if (view == null){
                     view = inflater.inflate(R.layout.item_city_listview, parent, false);
                     holder = new CityViewHolder();
@@ -198,5 +197,4 @@ public class CityListAdapter extends BaseAdapter {
         void onCityClick(String name);
         void onLocateClick();
     }
-
 }

@@ -11,7 +11,6 @@ import com.lcc.bean.City;
 import java.util.List;
 
 public class ResultListAdapter extends BaseAdapter {
-
     private Context mContext;
     private List<City> mCities;
 
@@ -20,10 +19,10 @@ public class ResultListAdapter extends BaseAdapter {
         this.mContext = mContext;
     }
 
-    public void changeData(List<City> list) {
-        if (mCities == null) {
+    public void changeData(List<City> list){
+        if (mCities == null){
             mCities = list;
-        } else {
+        }else{
             mCities.clear();
             mCities.addAll(list);
         }
@@ -48,19 +47,19 @@ public class ResultListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ResultViewHolder holder;
-        if (view == null) {
+        if (view == null){
             view = LayoutInflater.from(mContext).inflate(R.layout.item_search_result_listview, parent, false);
             holder = new ResultViewHolder();
             holder.name = (TextView) view.findViewById(R.id.tv_item_result_listview_name);
             view.setTag(holder);
-        } else {
+        }else{
             holder = (ResultViewHolder) view.getTag();
         }
         holder.name.setText(mCities.get(position).getName());
         return view;
     }
 
-    public static class ResultViewHolder {
+    public static class ResultViewHolder{
         TextView name;
     }
 }

@@ -37,6 +37,7 @@ import retrofit.Call;
 import zsbpj.lccpj.app.activity.StartNetActivity;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.StringUtils;
+import zsbpj.lccpj.utils.ToastUtils;
 
 /**
  * Author:  梁铖城
@@ -44,7 +45,10 @@ import zsbpj.lccpj.utils.StringUtils;
  * Date:    2015年12月15日10:47:52
  * Description: 城市选择
  */
-public class CityPickerActivity extends AppCompatActivity implements View.OnClickListener{
+public class CityPickerActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public static final int REQUEST_CODE_PICK_CITY = 2333;
+    public static final String KEY_PICKED_CITY = "picked_city";
 
     private ListView mListView;
     private ListView mResultListView;
@@ -62,7 +66,7 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
     private AMapLocationClient mLocationClient;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_list);
 
@@ -71,9 +75,6 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
         initLocation();
     }
 
-    /**
-     * 初始化定位相关
-     */
     private void initLocation() {
         mLocationClient = new AMapLocationClient(this);
         AMapLocationClientOption option = new AMapLocationClientOption();
@@ -87,6 +88,8 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
                     if (aMapLocation.getErrorCode() == 0) {
                         String city = aMapLocation.getCity();
                         String district = aMapLocation.getDistrict();
+                        Log.e("onLocationChanged", "city: " + city);
+                        Log.e("onLocationChanged", "district: " + district);
                         String location = StringUtils.extractLocation(city, district);
                         mCityAdapter.updateLocateState(LocateState.SUCCESS, location);
                     } else {
@@ -97,6 +100,28 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
             }
         });
         mLocationClient.startLocation();
+    }
+
+    private void initData() {
+        dbManager = new CityDBManager(this);
+        dbManager.copyDBFile();
+        mAllCities = dbManager.getAllCities();
+        mCityAdapter = new CityListAdapter(this, mAllCities);
+        mCityAdapter.setOnCityClickListener(new CityListAdapter.OnCityClickListener() {
+            @Override
+            public void onCityClick(String name) {
+                back(name);
+            }
+
+            @Override
+            public void onLocateClick() {
+                Log.e("onLocateClick", "重新定位...");
+                mCityAdapter.updateLocateState(LocateState.LOCATING, null);
+                mLocationClient.startLocation();
+            }
+        });
+
+        mResultAdapter = new ResultListAdapter(this, null);
     }
 
     private void initView() {
@@ -162,27 +187,6 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
 
     private void back(String city){
         FrameManager.getInstance().toastPrompt(city);
-    }
-
-    private void initData() {
-        dbManager = new CityDBManager(this);
-        dbManager.copyDBFile();
-        mAllCities = dbManager.getAllCities();
-        mCityAdapter = new CityListAdapter(this, mAllCities);
-        mCityAdapter.setOnCityClickListener(new CityListAdapter.OnCityClickListener() {
-            @Override
-            public void onCityClick(String name) {
-                back(name);
-            }
-
-            @Override
-            public void onLocateClick() {
-                mCityAdapter.updateLocateState(LocateState.LOCATING, null);
-                mLocationClient.startLocation();
-            }
-        });
-
-        mResultAdapter = new ResultListAdapter(this, null);
     }
 
     @Override
