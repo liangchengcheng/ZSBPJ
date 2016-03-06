@@ -11,7 +11,8 @@ import android.widget.TextView;
 import com.lcc.activity.R;
 import com.lcc.bean.City;
 import com.lcc.bean.LocateState;
-import com.lcc.frame.sql.WrapHeightGridView;
+import com.lcc.view.cityview.WrapHeightGridView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

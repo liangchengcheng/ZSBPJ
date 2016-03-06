@@ -39,6 +39,11 @@
             android:name=".video.VideoPlayActivity"
             android:label="@string/title_activity_video"
             android:theme="@style/AppTheme"></activity>
+        <!--城市切换-->
+        <activity
+            android:name=".main.activity.CityPickerActivity"
+            android:label="@string/title_activity_video"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

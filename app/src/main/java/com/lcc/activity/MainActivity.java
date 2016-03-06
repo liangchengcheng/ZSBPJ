@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.lcc.activity.main.activity.CityPickerActivity;
 import com.lcc.activity.main.fragment.AllKnowFragment;
 import com.lcc.activity.main.fragment.HomeFragment;
 import com.lcc.activity.main.fragment.OnlineClassFragment;
@@ -63,9 +64,10 @@ public class MainActivity extends BaseActivity implements
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "快速导航");
         adapter.addFragment(new AllKnowFragment(), "专升本百科");
+        adapter.addFragment(new AllKnowFragment(), "专升本百科");
         //// TODO: 16/3/5 此处需要修改
-        Fragment onlineClassFragment=OnlineClassFragment.newInstance(1,1);
-        adapter.addFragment(onlineClassFragment, "在线课程");
+//        Fragment onlineClassFragment=OnlineClassFragment.newInstance(1,1);
+//        adapter.addFragment(onlineClassFragment, "在线课程");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }
@@ -120,6 +122,12 @@ public class MainActivity extends BaseActivity implements
             case R.id.action_search:
 
                 break;
+
+            case R.id.action_change:
+                Intent intent=new Intent(MainActivity.this, CityPickerActivity.class);
+                startActivityForResult(intent,100);
+                break;
+
             case R.id.action_about:
                 DialogUtil.showAbout(this);
                 break;

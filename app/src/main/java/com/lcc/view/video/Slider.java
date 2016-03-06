@@ -23,6 +23,8 @@ import com.lcc.activity.R;
 import com.lcc.utils.Utils;
 import com.nineoldandroids.view.ViewHelper;
 
+import zsbpj.lccpj.utils.AppUtils;
+
 public class Slider extends CustomView {
 
     private int backgroundColor = Color.parseColor("#4CAF50");
@@ -71,6 +73,8 @@ public class Slider extends CustomView {
             OnValueChangedListener onValueChangedListener) {
         this.onValueChangedListener = onValueChangedListener;
     }
+
+    // GETERS & SETTERS
 
     public int getValue() {
         return value;

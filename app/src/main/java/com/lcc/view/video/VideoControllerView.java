@@ -50,19 +50,19 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
 
     private void initView(Context context) {
         this.context = context;
-        View v = LayoutInflater.from(context).inflate(zsbpj.lccpj.R.layout.view_video_controller, null);
+        View v = LayoutInflater.from(context).inflate(R.layout.view_video_controller, null);
         addView(v);
-        mVideoView = (VideoView) findViewById(zsbpj.lccpj.R.id.videoView);
+        mVideoView = (VideoView) findViewById(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
         mVideoView.setOnBufferingUpdateListener(this);
         mVideoView.setOnCompletionListener(this);
 
-        mProgressWheel = (VideoProgressWheel) findViewById(zsbpj.lccpj.R.id.progressWheel);
+        mProgressWheel = (VideoProgressWheel) findViewById(R.id.progressWheel);
         mProgressWheel.startSpinning();
-        viewPlay = (ImageButton) findViewById(zsbpj.lccpj.R.id.button_play);
+        viewPlay = (ImageButton) findViewById(R.id.button_play);
 
-        slider = (Slider) findViewById(zsbpj.lccpj.R.id.slider);
+        slider = (Slider) findViewById(R.id.slider);
         slider.setOnValueChangedListener(this);
         slider.setOnNumberIndicatorConvert(new Slider.OnNumberIndicatorConvert() {
             @Override

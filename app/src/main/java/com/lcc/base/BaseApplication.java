@@ -23,7 +23,7 @@ public class BaseApplication  extends Application{
         FrameManager.setAppContext(this);
         FrameManager.getInstance().init();
 
-        RxService.getInstance().initService();
+       // RxService.getInstance().initService();
 
         new RetrofitBuilder.Builder()
                 .baseUrl("")

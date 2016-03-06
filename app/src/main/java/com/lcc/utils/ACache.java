@@ -46,6 +46,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 //copy from https://github.com/yangfuhai/ASimpleCache
+
 public class ACache {
 
     public static final int TIME_HOUR = 60 * 60;

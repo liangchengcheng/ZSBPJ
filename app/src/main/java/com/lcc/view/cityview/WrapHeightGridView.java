@@ -1,11 +1,11 @@
-package com.lcc.frame.sql;
+package com.lcc.view.cityview;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-public class WrapHeightGridView extends GridView {
 
+public class WrapHeightGridView extends GridView {
     public WrapHeightGridView(Context context) {
         this(context, null);
     }

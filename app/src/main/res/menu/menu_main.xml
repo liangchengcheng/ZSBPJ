@@ -8,7 +8,12 @@
         android:title="搜索"
         android:orderInCategory="90"
         android:icon="@mipmap/ic_search_white_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />】
+    <item
+        android:id="@+id/action_change"
+        android:orderInCategory="100"
+        android:title="切换城市"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
