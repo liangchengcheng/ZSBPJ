@@ -2,6 +2,7 @@ package com.lcc.base;
 
 import android.app.Application;
 
+import com.lcc.constants.AppConstants;
 import com.lcc.rx.RxService;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -23,11 +24,11 @@ public class BaseApplication  extends Application{
         FrameManager.setAppContext(this);
         FrameManager.getInstance().init();
 
-       // RxService.getInstance().initService();
-
         new RetrofitBuilder.Builder()
-                .baseUrl("")
+                .baseUrl(AppConstants.RequestPath.BASE_URL)
                 .client(new OkHttpClient())
                 .build();
+
+        RxService.getInstance().initService();
     }
 }

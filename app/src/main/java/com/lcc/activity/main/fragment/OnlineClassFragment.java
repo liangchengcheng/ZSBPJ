@@ -20,6 +20,7 @@ import com.lcc.rx.RxService;
 
 import java.util.List;
 
+import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.recyclerview.MGridLayoutManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
@@ -62,10 +63,14 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        RxService.getInstance().getBus().register(this);
+    }
+
+    @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
-        RxService.getInstance().getBus().register(this);
-
         id = getArguments().getInt(KEY_VIDEO_ID);
         type = getArguments().getInt(KEY_VIDEO_TYPE);
 
@@ -102,6 +107,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     public void onEventMainThread(List<VideoItemEntity> response) {
         if (response != null) {
             //获取到数据
+            LogUtils.e("lcc",response);
         }
     }
 

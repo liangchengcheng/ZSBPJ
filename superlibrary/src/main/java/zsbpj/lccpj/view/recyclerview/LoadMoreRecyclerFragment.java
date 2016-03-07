@@ -38,14 +38,13 @@ public abstract class LoadMoreRecyclerFragment<T> extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.view_loadmore_recyclerview, container, false);
-        mRecyclerView= (RecyclerView)view.findViewById(R.id.recycler_view);
-        return view;
+        return inflater.inflate(R.layout.view_loadmore_recyclerview, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mRecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
             public void onLoadMore() {
