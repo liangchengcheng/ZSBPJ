@@ -6,6 +6,7 @@ import com.lcc.constants.AppConstants;
 import com.lcc.rx.RxService;
 import com.squareup.okhttp.OkHttpClient;
 
+import retrofit.GsonConverterFactory;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.network.RetrofitBuilder;
 

@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.lcc.activity.R;
+import com.lcc.rx.RxService;
 import com.lcc.utils.NetWorkUtils;
 import com.lcc.utils.PreferenceUtils;
 import com.lcc.utils.SystemBarTintManager;
@@ -35,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         preferenceUtils=PreferenceUtils.getInstance(this);
         initTheme();
         super.onCreate(savedInstanceState);
+        RxService.getInstance().addCompositeSub(getTaskId());
         initWindow(Open());
         setContentView(getLayoutView());
         initView();

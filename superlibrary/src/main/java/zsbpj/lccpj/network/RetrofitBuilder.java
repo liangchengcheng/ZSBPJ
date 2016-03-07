@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
+import retrofit.RxJavaCallAdapterFactory;
 import zsbpj.lccpj.utils.ObjectUtils;
 
 /**
@@ -18,7 +19,6 @@ public class RetrofitBuilder {
 
     private String baseUrl;
     private Retrofit mRetrofit;
-
     private OkHttpClient client;
     private RetrofitBuilder(){}
 
@@ -52,6 +52,7 @@ public class RetrofitBuilder {
             Retrofit.Builder builder=newRetrofitBuilder();
 
             mRetrofit=builder.baseUrl(baseUrl)
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();

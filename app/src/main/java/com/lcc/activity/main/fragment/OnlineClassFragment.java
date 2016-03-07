@@ -54,18 +54,18 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
 
     @Override
     public void onRefreshData() {
-        RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, 1, PAGER_SIZE);
+        RxService.getInstance().getVideoList(getTaskId(), PAGER_SIZE,1);
     }
 
     @Override
     protected void onFragmentLoadMore() {
-        RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, getCurrentPage(), PAGER_SIZE);
+        RxService.getInstance().getVideoList(getTaskId(),  PAGER_SIZE,getCurrentPage());
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RxService.getInstance().getBus().register(this);
+
     }
 
     @Override
@@ -94,7 +94,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
             public void run() {
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                RxService.getInstance().getVideoList(getActivity().getTaskId(), id, type, 1, PAGER_SIZE);
+                RxService.getInstance().getVideoList(getTaskId(),PAGER_SIZE,1);
             }
         }, 500);
     }

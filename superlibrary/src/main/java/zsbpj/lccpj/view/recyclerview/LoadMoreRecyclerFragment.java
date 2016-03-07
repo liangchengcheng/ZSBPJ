@@ -23,7 +23,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:    2015年12月15日10:47:52
  * Description:    LoadMoreRecyclerFragment
  */
-public abstract class LoadMoreRecyclerFragment<T> extends Fragment {
+public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
 
     protected static final  int DEF_DELAY=1000;
     protected final static int STATE_LOAD=0;

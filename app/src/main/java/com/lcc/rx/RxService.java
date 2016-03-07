@@ -69,8 +69,8 @@ public class RxService {
     /**
      * 获取视频列表
      */
-    public void getVideoList(int taskId,int id, int type, int page, int count) {
-        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(id, type, page, count));
+    public void getVideoList(int taskId, int page, int count) {
+        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(count,page));
     }
 
     private CompositeSubscription getCompositeSubscription(int taskId) {
