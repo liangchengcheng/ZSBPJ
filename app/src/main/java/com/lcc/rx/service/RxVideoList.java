@@ -37,7 +37,7 @@ public class RxVideoList {
 //        List<VideoItemEntity>
         Subscription subscription = RxService.getVideoListService().getVideoList(count + "", page + "")
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<TestEntity>() {
+                .subscribe(new Observer<List<TestEntity>>() {
 
                     @Override
                     public void onCompleted() {
@@ -50,7 +50,7 @@ public class RxVideoList {
                     }
 
                     @Override
-                    public void onNext(TestEntity videoItemEntities) {
+                    public void onNext(List<TestEntity> videoItemEntities) {
                         LogUtils.e("lccq",videoItemEntities);
                     }
                 });

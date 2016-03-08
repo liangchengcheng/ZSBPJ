@@ -26,7 +26,7 @@ public class BaseApplication  extends Application{
         FrameManager.getInstance().init();
 
         new RetrofitBuilder.Builder()
-                .baseUrl(AppConstants.RequestPath.BASE_URL)
+                .baseUrl(AppConstants.RequestPath.BASE_URL+"/")
                 .client(new OkHttpClient())
                 .build();
 
