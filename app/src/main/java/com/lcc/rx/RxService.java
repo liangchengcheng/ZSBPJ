@@ -14,6 +14,7 @@ import de.greenrobot.event.EventBus;
 import rx.subscriptions.CompositeSubscription;
 
 public class RxService {
+
     private static final RxService NBAPLUS_SERVICE=new RxService();
 
     private static Gson sGson;

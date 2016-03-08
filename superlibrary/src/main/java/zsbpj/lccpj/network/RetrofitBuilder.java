@@ -66,7 +66,7 @@ public class RetrofitBuilder {
 
     public static class Builder{
         private String baseUrl;
-        private Interceptor interceptor;
+//        private Interceptor interceptor;
         private OkHttpClient client=new OkHttpClient();
         private final List<Interceptor> interceptors = new ArrayList<>();
 
@@ -79,17 +79,17 @@ public class RetrofitBuilder {
             }
             RetrofitBuilder retrofitBuilder = get();
             retrofitBuilder.baseUrl = baseUrl;
-            interceptors.add(interceptor);
+//            interceptors.add(interceptor);
             client.interceptors().addAll(interceptors);
             retrofitBuilder.client=client;
             return  retrofitBuilder;
         }
 
-        private void ensureSaneDefaults() {
-
-            if (interceptor == null) {
-                interceptor = new DefaultHeaderInterceptor();
-            }
+        public void ensureSaneDefaults() {
+//
+//            if (interceptor == null) {
+//                interceptor = new DefaultHeaderInterceptor();
+//            }
 
             if (client == null) {
                 client = new OkHttpClient();
@@ -101,10 +101,10 @@ public class RetrofitBuilder {
             return this;
         }
 
-        public Builder headerInterceptor(Interceptor headerInterceptor) {
-            interceptor = headerInterceptor;
-            return this;
-        }
+//        public Builder headerInterceptor(Interceptor headerInterceptor) {
+//            interceptor = headerInterceptor;
+//            return this;
+//        }
 
         public Builder addInterceptors(Interceptor interceptor) {
             interceptors.add(interceptor);

@@ -15,7 +15,7 @@ import rx.Observable;
 public interface VideoListService {
 
     @GET("hot/feed_timeline.json/{count}/{page}")
-    Observable<List<TestEntity>> getVideoList(@Query("count") String count, @Query("page") String page);
+    Observable<List<VideoItemEntity>> getVideoList(@Query("count") String count, @Query("page") String page);
 
     @GET("api/v1.0/{type}/loadmore/{newsId}")
     Call<ArrayList<News>> loadMoreNews(@Path("type") String type, @Path("newsId") String newsId );

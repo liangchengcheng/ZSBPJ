@@ -36,21 +36,22 @@ public class RxVideoList {
 //    return subscription;
 //        List<VideoItemEntity>
         Subscription subscription = RxService.getVideoListService().getVideoList(count + "", page + "")
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<TestEntity>>() {
+                .subscribe(new Observer<List<VideoItemEntity>>() {
 
                     @Override
                     public void onCompleted() {
-
+                        LogUtils.e("lccq","完成");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        LogUtils.e("lccq",e);
                     }
 
                     @Override
-                    public void onNext(List<TestEntity> videoItemEntities) {
+                    public void onNext(List<VideoItemEntity> videoItemEntities) {
                         LogUtils.e("lccq",videoItemEntities);
                     }
                 });
