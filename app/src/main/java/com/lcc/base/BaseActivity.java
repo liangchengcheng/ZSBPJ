@@ -101,14 +101,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(toolbarId);
         mToolbar.setTitle(title);
         setSupportActionBar(mToolbar);
-        toobarAsBackButton(mToolbar);
+        toolBarAsBackButton(mToolbar);
     }
 
     /**
      * toolbar点击返回，模拟系统返回
      * 设置toolbar 为箭头按钮
      */
-    public void toobarAsBackButton(Toolbar toolbar) {
+    public void toolBarAsBackButton(Toolbar toolbar) {
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -166,4 +166,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this, style);
         return builder;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxService.getInstance().removeCompositeSub(getTaskId());
+        RxService.getInstance().getBus().unregister(this);
+    }
+
 }

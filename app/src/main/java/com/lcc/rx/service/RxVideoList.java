@@ -42,7 +42,7 @@ public class RxVideoList {
 
                     @Override
                     public void onCompleted() {
-                        LogUtils.e("lccq","完成");
+                        LogUtils.e("lcc","完成");
                     }
 
                     @Override
@@ -52,7 +52,8 @@ public class RxVideoList {
 
                     @Override
                     public void onNext(List<VideoItemEntity> videoItemEntities) {
-                        LogUtils.e("lccq",videoItemEntities);
+                        RxService.getBus().post(videoItemEntities);
+                        LogUtils.e("lcc",videoItemEntities);
                     }
                 });
         return subscription;

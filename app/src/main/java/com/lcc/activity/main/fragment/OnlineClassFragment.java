@@ -73,7 +73,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         super.onFragmentCreate();
         id = getArguments().getInt(KEY_VIDEO_ID);
         type = getArguments().getInt(KEY_VIDEO_TYPE);
-
+        RxService.getInstance().getBus().register(this);
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new MediasAdapter(getActivity());
@@ -108,6 +108,10 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         if (response != null) {
             //获取到数据
             LogUtils.e("lcc",response);
+            for (int i=0;i<response.size();i++){
+                LogUtils.e("lcc",response.get(i).getRecommend_cover_pic());
+            }
+           // showRefreshData(response);
         }
     }
 
