@@ -171,7 +171,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         RxService.getInstance().removeCompositeSub(getTaskId());
-        RxService.getInstance().getBus().unregister(this);
     }
 
 }

@@ -18,7 +18,6 @@ public class RxService {
     private static final RxService NBAPLUS_SERVICE=new RxService();
 
     private static Gson sGson;
-    private static EventBus sBus ;
     private static LoginService loginService;
     private static VideoListService videoListService;
     private static ExecutorService sSingleThreadExecutor;
@@ -26,7 +25,6 @@ public class RxService {
     private RxService(){}
 
     public void initService() {
-        sBus = new EventBus();
         sGson=new Gson();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
         sSingleThreadExecutor= Executors.newSingleThreadExecutor();
@@ -87,10 +85,6 @@ public class RxService {
 
     public static RxService getInstance() {
         return NBAPLUS_SERVICE;
-    }
-
-    public static EventBus getBus() {
-        return sBus;
     }
 
     public static Gson getGson() {

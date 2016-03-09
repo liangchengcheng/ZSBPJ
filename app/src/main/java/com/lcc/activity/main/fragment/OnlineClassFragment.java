@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 import com.lcc.activity.MainActivity;
 import com.lcc.activity.R;
 import com.lcc.activity.video.VideoPlayActivity;
+import com.lcc.activity.video.VideoUtils;
 import com.lcc.adapter.MediasAdapter;
 import com.lcc.constants.Constant;
 import com.lcc.entity.MediaEntity;
 import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
 
+import java.util.Iterator;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.recyclerview.MGridLayoutManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
@@ -65,7 +68,6 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -73,7 +75,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         super.onFragmentCreate();
         id = getArguments().getInt(KEY_VIDEO_ID);
         type = getArguments().getInt(KEY_VIDEO_TYPE);
-        RxService.getInstance().getBus().register(this);
+        EventBus.getDefault().register(this);
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new MediasAdapter(getActivity());
@@ -105,20 +107,26 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     }
 
     public void onEventMainThread(List<VideoItemEntity> response) {
+        LogUtils.e("lcc","进入onEventMainThread");
         if (response != null) {
-            //获取到数据
-            LogUtils.e("lcc",response);
-            for (int i=0;i<response.size();i++){
-                LogUtils.e("lcc",response.get(i).getRecommend_cover_pic());
+            for (Iterator<VideoItemEntity> it = response.iterator(); it.hasNext(); ) {
+                VideoItemEntity entity = it.next();
+                if (entity.getMedia() == null) {
+                    it.remove();
+                }
             }
-           // showRefreshData(response);
+            int delay = 0;
+
+            showRefreshData(VideoUtils.toMediaList(response));
+        }else {
+            LogUtils.e("lcc","进入onEventMainThread  但是没有数据");
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxService.getInstance().getBus().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
 
