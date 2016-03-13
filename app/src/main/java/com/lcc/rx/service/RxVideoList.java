@@ -83,6 +83,7 @@ public class RxVideoList {
                     public void onError(Throwable e) {
                         ResultEntity resultEntity = new ResultEntity();
                         resultEntity.setState(StateConstants.FAIL);
+                        resultEntity.setCode(1);
                         EventBus.getDefault().post(resultEntity);
                     }
 
@@ -90,7 +91,7 @@ public class RxVideoList {
                     public void onNext(MediaEntity mediaEntity) {
                         ResultEntity resultEntity = new ResultEntity();
                         resultEntity.setT(mediaEntity);
-                        resultEntity.setState(StateConstants.REFRESH_SUCCESS);
+                        resultEntity.setCode(1);
                         EventBus.getDefault().post(resultEntity);
                     }
                 });
@@ -121,6 +122,7 @@ public class RxVideoList {
                     public void onError(Throwable e) {
                         ResultEntity resultEntity = new ResultEntity();
                         resultEntity.setState(StateConstants.FAIL);
+                        resultEntity.setCode(0);
                         EventBus.getDefault().post(resultEntity);
                     }
 
@@ -128,7 +130,12 @@ public class RxVideoList {
                     public void onNext(List<CommentEntity> commentEntities) {
                         ResultEntity resultEntity = new ResultEntity();
                         resultEntity.setT(commentEntities);
-                        resultEntity.setState(StateConstants.REFRESH_SUCCESS);
+                        resultEntity.setCode(0);
+                        if (page==1){
+                            resultEntity.setState(StateConstants.REFRESH_SUCCESS);
+                        }else {
+                            resultEntity.setState(StateConstants.LOAD_SUCCESS);
+                        }
                         EventBus.getDefault().post(resultEntity);
                     }
                 });

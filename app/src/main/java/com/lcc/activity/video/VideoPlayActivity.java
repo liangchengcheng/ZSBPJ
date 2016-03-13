@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -25,16 +26,22 @@ import android.widget.ProgressBar;
 
 import com.lcc.activity.R;
 import com.lcc.adapter.CommentsAdapter;
+import com.lcc.constants.StateConstants;
 import com.lcc.entity.CommentEntity;
 import com.lcc.entity.MediaEntity;
+import com.lcc.entity.ResultEntity;
+import com.lcc.entity.VideoItemEntity;
+import com.lcc.rx.RxService;
 import com.lcc.utils.DeviceUtils;
 import com.lcc.utils.ResourcesUtils;
 
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import io.vov.vitamio.LibsChecker;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.DensityUtil;
+import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.utils.PinyinUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 import zsbpj.lccpj.view.recyclerview.listener.TopScrollListener;
@@ -51,8 +58,6 @@ public class VideoPlayActivity extends AppCompatActivity
     private int medias_id;
     private int current_comment_page = 1;
 
-    //我在这继承了他的接口就要实现 接口impl了
-
     public static Intent createIntent(Context context, int id) {
         Intent intent = new Intent(context, VideoPlayActivity.class);
         intent.putExtra(MEDIAS_ID_KEY, id);
@@ -63,9 +68,10 @@ public class VideoPlayActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        EventBus.getDefault().register(this);
+
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-
         //保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_video_play);
@@ -73,13 +79,21 @@ public class VideoPlayActivity extends AppCompatActivity
 
         int width = DeviceUtils.getScreenWidth(this) + DensityUtil.dip2px(this, 110) + getActionBarSize();
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT, width);
-
         view.setLayoutParams(params);
+
         medias_id = getIntent().getIntExtra(MEDIAS_ID_KEY, -1);
-        //mPresenter = new PlayVideoPresenterImpl(this);
-        //mPresenter.getMedia(medias_id);
+        RxService.getInstance().getMedias(getTaskId(), medias_id);
         initView();
-        //mPresenter.refresh(medias_id);
+        RxService.getInstance().getMedias(getTaskId(), medias_id);
+        refresh(medias_id);
+    }
+
+    public void refresh(int id) {
+        RxService.getInstance().getComments(getTaskId(), id, 1);
+    }
+
+    public void loadMore(int id, int page) {
+        RxService.getInstance().getComments(getTaskId(), id, page);
     }
 
     public int getActionBarSize() {
@@ -115,13 +129,12 @@ public class VideoPlayActivity extends AppCompatActivity
             @Override
             public void onLoadMore() {
                 mAdapter.setHasFooter(true);
-                // TODO: 16/3/6 加载更多的数据 loadmore(medias_id,current_comment_page)
+                loadMore(medias_id, current_comment_page);
                 mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnCommentItemClickListener(this);
-        // TODO: 16/3/6 为什么是在滑动的时候判断视频开始和暂停
         mRecyclerView.addOnScrollListener(new TopScrollListener() {
 
             @Override
@@ -179,6 +192,7 @@ public class VideoPlayActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         if (mVideoPlayHeader != null) {
             mVideoPlayHeader.getVideoControllerView().release();
         }
@@ -191,27 +205,56 @@ public class VideoPlayActivity extends AppCompatActivity
 
     @Override
     public void onClickAvatar(int uid) {
-
     }
 
     @Override
     public void onClickAtFriend(String screen_name) {
-
     }
 
     @Override
     public void thumbUp(int id) {
-        //mPresenter.createLikeComment(id);
     }
 
     @Override
     public void thumbDown(int id) {
-        //mPresenter.destoryLikeComment(id);
     }
 
     @Override
     public void onRefresh() {
-        //刷新数据
-        //presenter.refresh(mdeias_id);
+        refresh(medias_id);
+    }
+
+    public void onEventMainThread(ResultEntity response) {
+        LogUtils.e("lcc", "进入impl onEventMainThread");
+        if (response == null || response.getState() == StateConstants.FAIL) {
+            showError(response);
+        } else {
+            //是视频
+            if (response.getCode() == 1) {
+                MediaEntity media_entity = (MediaEntity) response.getT();
+                showMediaData(media_entity);
+            } else {
+                //是评论判断是第一次加载，还是加载更多。
+                List<CommentEntity> commentEntityList  = (List<CommentEntity>) response.getT();
+                if (response.getState() == StateConstants.REFRESH_SUCCESS) {
+                    refreshComment(commentEntityList);
+                } else {
+                    showMoreComments(commentEntityList);
+                }
+            }
+        }
+    }
+
+    //对基本的错误进行处理
+    private void showError(ResultEntity response) {
+        if (response!=null){
+            if (response.getCode()==1){
+                FrameManager.getInstance().toastPrompt("加载视频失败");
+            }else {
+                FrameManager.getInstance().toastPrompt("加载评论失败");
+            }
+        }else {
+            FrameManager.getInstance().toastPrompt("服务器数据异常");
+        }
     }
 }
