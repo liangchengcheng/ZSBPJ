@@ -15,6 +15,7 @@ import android.widget.GridView;
 import com.lcc.activity.R;
 import com.lcc.adapter.ColorsListAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.utils.PreferenceUtils;
 import com.lcc.utils.ThemeUtils;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferenceUtils = PreferenceUtils.getInstance(SettingActivity.this);
         activity = (BaseActivity)SettingActivity.this;
     }
 

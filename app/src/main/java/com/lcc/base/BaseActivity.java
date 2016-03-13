@@ -33,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        preferenceUtils=PreferenceUtils.getInstance(this);
+        preferenceUtils = PreferenceUtils.getInstance(this);
         initTheme();
         super.onCreate(savedInstanceState);
         RxService.getInstance().addCompositeSub(getTaskId());
@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
     }
 
-    protected abstract void  initView();
+    protected abstract void initView();
 
     /**
      * 设置是否打开沉浸式
@@ -54,12 +54,12 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected abstract int getLayoutView();
 
-    private void initTheme(){
+    private void initTheme() {
         ThemeUtils.Theme theme = getCurrentTheme();
         ThemeUtils.changTheme(this, theme);
     }
 
-    protected ThemeUtils.Theme getCurrentTheme(){
+    protected ThemeUtils.Theme getCurrentTheme() {
         int value = preferenceUtils.getIntParam(getString(R.string.change_theme_key), 0);
         return ThemeUtils.Theme.mapValueToTheme(value);
     }
@@ -67,15 +67,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 获取沉浸式的颜色为系统的颜色
      */
-    public int getStatusBarColor(){
+    public int getStatusBarColor() {
         return getColorPrimary();
     }
 
     /**
      * 获取当前的系统颜色
      */
-    public int getColorPrimary(){
-        TypedValue typedValue = new  TypedValue();
+    public int getColorPrimary() {
+        TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         return typedValue.data;
     }
@@ -84,8 +84,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 沉浸式的相关设置，我在这直接给他设置一个开关
      */
     @TargetApi(19)
-    private void initWindow(boolean open){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT&&open){
+    private void initWindow(boolean open) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && open) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -109,8 +109,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 设置toolbar 为箭头按钮
      */
     public void toolBarAsBackButton(Toolbar toolbar) {
-        ActionBar actionBar=getSupportActionBar();
-        if (actionBar!=null){
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -127,18 +127,18 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void checkNetWork() {
         if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)) {
-            Toast.makeText(BaseActivity.this,"当前无网络",Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseActivity.this, "当前无网络", Toast.LENGTH_SHORT).show();
         }
         if (NetWorkUtils.isWifiConnected(BaseActivity.this)) {
             //是移动网络做一些事情。
         }
     }
 
-    protected AlertDialog.Builder generateDialogBuilder(){
+    protected AlertDialog.Builder generateDialogBuilder() {
         ThemeUtils.Theme theme = getCurrentTheme();
         AlertDialog.Builder builder;
         int style = R.style.RedDialogTheme;
-        switch (theme){
+        switch (theme) {
             case BROWN:
                 style = R.style.BrownDialogTheme;
                 break;

@@ -57,12 +57,12 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
 
     @Override
     public void onRefreshData() {
-        RxService.getInstance().getVideoList(getTaskId(), PAGER_SIZE,1);
+        RxService.getInstance().getVideoList(getTaskId(), 1,PAGER_SIZE);
     }
 
     @Override
     protected void onFragmentLoadMore() {
-        RxService.getInstance().getVideoList(getTaskId(),  PAGER_SIZE,getCurrentPage());
+        RxService.getInstance().getVideoList(getTaskId(), getCurrentPage(),PAGER_SIZE);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
             public void run() {
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                RxService.getInstance().getVideoList(getTaskId(),PAGER_SIZE,1);
+                RxService.getInstance().getVideoList(getTaskId(),1,PAGER_SIZE);
             }
         }, 500);
     }
@@ -109,15 +109,8 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     public void onEventMainThread(List<VideoItemEntity> response) {
         LogUtils.e("lcc","进入onEventMainThread");
         if (response != null) {
-            for (Iterator<VideoItemEntity> it = response.iterator(); it.hasNext(); ) {
-                VideoItemEntity entity = it.next();
-                if (entity.getMedia() == null) {
-                    it.remove();
-                }
-            }
-            int delay = 0;
-
-            showRefreshData(VideoUtils.toMediaList(response));
+            List<MediaEntity> mediaEntities = VideoUtils.toMediaList(response);
+            showRefreshData(mediaEntities);
         }else {
             LogUtils.e("lcc","进入onEventMainThread  但是没有数据");
         }

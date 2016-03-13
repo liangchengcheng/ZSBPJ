@@ -1,17 +1,12 @@
 package com.lcc.rx.service;
 
-import com.lcc.bean.News;
-import com.lcc.entity.TestEntity;
 import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
-
 import java.util.List;
-
 import de.greenrobot.event.EventBus;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import zsbpj.lccpj.utils.LogUtils;
 
@@ -37,7 +32,9 @@ public class RxVideoList {
 //        return subscription;
 //        List<VideoItemEntity>
 
-        Subscription subscription = RxService.getVideoListService().getVideoList(count + "", page + "")
+        Subscription subscription = RxService.getVideoListService().getVideoList(count + "",
+                page + "","1089857302","867886022105856",
+                "2","38e8c5aet76d5c012e32","zh-Hans","1","8601-M02")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<VideoItemEntity>>() {
@@ -54,6 +51,7 @@ public class RxVideoList {
 
                     @Override
                     public void onNext(List<VideoItemEntity> videoItemEntities) {
+                        LogUtils.e("lcc","完成"+videoItemEntities.size());
                         EventBus.getDefault().post(videoItemEntities);
                     }
                 });
