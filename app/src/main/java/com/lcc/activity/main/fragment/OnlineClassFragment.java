@@ -15,7 +15,9 @@ import com.lcc.activity.video.VideoPlayActivity;
 import com.lcc.activity.video.VideoUtils;
 import com.lcc.adapter.MediasAdapter;
 import com.lcc.constants.Constant;
+import com.lcc.constants.StateConstants;
 import com.lcc.entity.MediaEntity;
+import com.lcc.entity.ResultEntity;
 import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
 
@@ -23,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.recyclerview.MGridLayoutManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
@@ -57,12 +60,12 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
 
     @Override
     public void onRefreshData() {
-        RxService.getInstance().getVideoList(getTaskId(), 1,PAGER_SIZE);
+        RxService.getInstance().getVideoList(getTaskId(), 1, PAGER_SIZE);
     }
 
     @Override
     protected void onFragmentLoadMore() {
-        RxService.getInstance().getVideoList(getTaskId(), getCurrentPage(),PAGER_SIZE);
+        RxService.getInstance().getVideoList(getTaskId(), getCurrentPage(), PAGER_SIZE);
     }
 
     @Override
@@ -96,7 +99,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
             public void run() {
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                RxService.getInstance().getVideoList(getTaskId(),1,PAGER_SIZE);
+                RxService.getInstance().getVideoList(getTaskId(), 1, PAGER_SIZE);
             }
         }, 500);
     }
@@ -105,15 +108,20 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
     public void OnItemClick(MediaEntity entity) {
         startActivity(VideoPlayActivity.createIntent(getActivity(), entity.getId()));
     }
-
-    public void onEventMainThread(List<VideoItemEntity> response) {
-        LogUtils.e("lcc","进入onEventMainThread");
-        if (response != null) {
-            List<MediaEntity> mediaEntities = VideoUtils.toMediaList(response);
-            showRefreshData(mediaEntities);
-        }else {
-            LogUtils.e("lcc","进入onEventMainThread  但是没有数据");
+    
+    public void onEventMainThread(ResultEntity response) {
+        LogUtils.e("lcc", "进入onEventMainThread");
+        if (response == null || response.getState()== StateConstants.FAIL) {
+            showError();
+        } else {
+            List<MediaEntity> mediaEntities = VideoUtils.toMediaList((List<VideoItemEntity>) response.getT());
+            if (response.getState()==StateConstants.REFRESH_SUCCESS){
+                showRefreshData(mediaEntities);
+            }else {
+                showMoreData(mediaEntities);
+            }
         }
+
     }
 
     @Override
@@ -122,16 +130,16 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         EventBus.getDefault().unregister(this);
     }
 
-
     public void showError() {
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
             getSwipeRefreshWidget().setRefreshing(false);
-            //刷新失败toast
+            FrameManager.getInstance().toastPrompt("刷新数据失败");
         } else {
-            //加载更多失败
+            FrameManager.getInstance().toastPrompt("加载数据失败");
             mAdapter.setHasFooter(false);
         }
     }
+
 
 }

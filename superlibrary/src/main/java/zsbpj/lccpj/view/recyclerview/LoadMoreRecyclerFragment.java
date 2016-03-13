@@ -30,6 +30,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
     protected final static int STATE_NORMAL=1;
 
     protected LoadMoreRecyclerAdapter adapter;
+
     private RecyclerView mRecyclerView;
     protected int currentState=STATE_NORMAL;
     protected long currentTime=0;
@@ -55,7 +56,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
                     mRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
                     onFragmentLoadMore();
                 } else {
-                    FrameManager.getInstance().toastPrompt("-----");
+                    FrameManager.getInstance().toastPrompt("请稍等，正在加载");
                 }
             }
         });
@@ -85,18 +86,21 @@ public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
         }, delay);
     }
 
+    public void setAdapter(LoadMoreRecyclerAdapter mAdapter) {
+        this.adapter = mAdapter;
+    }
+
+
     public void showLoadError(String errorMsg) {
         adapter.setHasFooter(false);
-        FrameManager.getInstance().toastPrompt("加载失败");
+        FrameManager.getInstance().toastPrompt("记在失败");
     }
+
 
     public void showLoadError(int errorMsgId) {
         showLoadError(getString(errorMsgId));
     }
 
-    public void setAdapter(LoadMoreRecyclerAdapter mAdapter) {
-        this.adapter = mAdapter;
-    }
 
     public int getCurrentPage() {
         return currentPage;

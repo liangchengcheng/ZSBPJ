@@ -50,11 +50,6 @@ public abstract class RefreshAndLoadFragment<T> extends LoadMoreRecyclerFragment
     public abstract void onRefreshData();
 
     @Override
-    protected void onFragmentLoadMore() {
-
-    }
-
-    @Override
     protected void onFragmentCreate() {
         View view=getView();
         if (view!=null){
