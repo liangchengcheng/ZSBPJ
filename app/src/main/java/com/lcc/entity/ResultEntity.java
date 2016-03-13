@@ -2,9 +2,7 @@ package com.lcc.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by lcc on 16/3/13.
- */
+// TODO: 16/3/13 因为每个bean都放在里面了，所以要加标识判断 ，否则每个activity或者fragment的接收都会强制解析那个 T
 public class ResultEntity<T> implements Serializable {
 
     private int state;
