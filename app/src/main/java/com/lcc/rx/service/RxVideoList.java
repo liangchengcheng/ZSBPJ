@@ -6,9 +6,7 @@ import com.lcc.entity.MediaEntity;
 import com.lcc.entity.ResultEntity;
 import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
-
 import java.util.List;
-
 import de.greenrobot.event.EventBus;
 import retrofit.http.PATCH;
 import rx.Observer;
@@ -17,6 +15,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import zsbpj.lccpj.utils.LogUtils;
 
+// TODO: 16/3/13 最好的rx资料 http://gank.io/post/560e15be2dca930e00da1083#toc_26
+//参考  nba项目+ 魅视
 public class RxVideoList {
 
     /**
