@@ -103,11 +103,6 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
             }
         }, 500);
     }
-
-    @Override
-    public void OnItemClick(MediaEntity entity) {
-        startActivity(VideoPlayActivity.createIntent(getActivity(), entity.getId()));
-    }
     
     public void onEventMainThread(ResultEntity response) {
         LogUtils.e("lcc", "进入onEventMainThread");
@@ -141,5 +136,9 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         }
     }
 
+    @Override
+    public void OnItemClick(MediaEntity entity) {
+        startActivity(VideoPlayActivity.createIntent(getActivity(), entity.getId()));
+    }
 
 }

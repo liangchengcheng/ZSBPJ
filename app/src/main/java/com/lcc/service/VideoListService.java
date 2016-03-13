@@ -1,9 +1,13 @@
 package com.lcc.service;
 
 import com.lcc.bean.News;
+import com.lcc.entity.CommentEntity;
+import com.lcc.entity.MediaEntity;
 import com.lcc.entity.VideoItemEntity;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -12,6 +16,7 @@ import rx.Observable;
 
 public interface VideoListService {
 
+    //获取视频列表
     @GET("channels/feed_timeline.json/{count}/{page}/{client_id}/{device_id}/{id}/{client_secret}/{language}/{type}/{model}")
     Observable<List<VideoItemEntity>> getVideoList(@Query("count") String count,
                                                    @Query("page") String page,
@@ -23,6 +28,11 @@ public interface VideoListService {
                                                    @Query("type") String type,
                                                    @Query("model") String model);
 
-    @GET("api/v1.0/{type}/loadmore/{newsId}")
-    Call<ArrayList<News>> loadMoreNews(@Path("type") String type, @Path("newsId") String newsId );
+    //获取dedias
+    @GET("medias/show.json/{id}")
+    Observable<MediaEntity> getMedias(@Query("id") String id);
+
+    //获取dedias
+    @GET("comments/show.json/{id}/{page}")
+    Observable<List<CommentEntity>> getComments(@Query("id") String id, @Query("page") String page);
 }

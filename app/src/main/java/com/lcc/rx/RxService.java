@@ -72,6 +72,20 @@ public class RxService {
         getCompositeSubscription(taskId).add(RxVideoList.getVideoList(count,page));
     }
 
+    /**
+     * 获取medias
+     */
+    public void getMedias(int taskId, int id) {
+        getCompositeSubscription(taskId).add(RxVideoList.getMedias(id));
+    }
+
+    /**
+     * 获取视频评论
+     */
+    public void getComments(int taskId, int id, int page) {
+        getCompositeSubscription(taskId).add(RxVideoList.getComments(id,page));
+    }
+
     private CompositeSubscription getCompositeSubscription(int taskId) {
         CompositeSubscription compositeSubscription ;
         if(mCompositeSubMap.get(taskId)==null) {

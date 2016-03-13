@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -24,20 +27,26 @@ import com.lcc.activity.R;
 import com.lcc.adapter.CommentsAdapter;
 import com.lcc.entity.CommentEntity;
 import com.lcc.entity.MediaEntity;
+import com.lcc.utils.DeviceUtils;
 import com.lcc.utils.ResourcesUtils;
 
 import java.util.List;
 
+import io.vov.vitamio.LibsChecker;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.DensityUtil;
 import zsbpj.lccpj.utils.PinyinUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 import zsbpj.lccpj.view.recyclerview.listener.TopScrollListener;
 
-public class VideoPlayActivity extends AppCompatActivity implements PlayVideoView ,SwipeRefreshLayout.OnRefreshListener, CommentsAdapter.OnCommentItemClickListener{
+public class VideoPlayActivity extends AppCompatActivity
+        implements PlayVideoView, SwipeRefreshLayout.OnRefreshListener,
+        CommentsAdapter.OnCommentItemClickListener {
 
     public final static String MEDIAS_ID_KEY = "media_id";
     private RecyclerView mRecyclerView;
     private CommentsAdapter mAdapter;
+
     private VideoPlayHeader mVideoPlayHeader;
     private int medias_id;
     private int current_comment_page = 1;
@@ -48,6 +57,37 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
         Intent intent = new Intent(context, VideoPlayActivity.class);
         intent.putExtra(MEDIAS_ID_KEY, id);
         return intent;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (!LibsChecker.checkVitamioLibs(this))
+            return;
+
+        //保持屏幕常亮
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_video_play);
+        View view = findViewById(R.id.appbar);
+
+        int width = DeviceUtils.getScreenWidth(this) + DensityUtil.dip2px(this, 110) + getActionBarSize();
+        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT, width);
+
+        view.setLayoutParams(params);
+        medias_id = getIntent().getIntExtra(MEDIAS_ID_KEY, -1);
+        //mPresenter = new PlayVideoPresenterImpl(this);
+        //mPresenter.getMedia(medias_id);
+        initView();
+        //mPresenter.refresh(medias_id);
+    }
+
+    public int getActionBarSize() {
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        return 0;
     }
 
     private void initView() {
@@ -62,6 +102,8 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
                 onBackPressed();
             }
         });
+        mVideoPlayHeader = new VideoPlayHeader(this, findViewById(R.id.video_header));
+        initRecyclerView();
     }
 
     private void initRecyclerView() {
@@ -80,7 +122,7 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnCommentItemClickListener(this);
         // TODO: 16/3/6 为什么是在滑动的时候判断视频开始和暂停
-        mRecyclerView.addOnScrollListener(new  TopScrollListener(){
+        mRecyclerView.addOnScrollListener(new TopScrollListener() {
 
             @Override
             protected void start() {
@@ -100,7 +142,6 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
     }
 
 
-
     @Override
     public void showMediaData(MediaEntity mediaEntity) {
         setHeaderView(mediaEntity);
@@ -113,10 +154,10 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
 
     @Override
     public void refreshComment(List<CommentEntity> dataList) {
-        current_comment_page=2;
+        current_comment_page = 2;
         mAdapter.clear();
         mAdapter.appendToList(dataList);
-        if (dataList.isEmpty()){
+        if (dataList.isEmpty()) {
             mAdapter.setHasMoreData(false);
         }
         mAdapter.notifyDataSetChanged();
@@ -124,10 +165,10 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
 
     @Override
     public void showMoreComments(List<CommentEntity> dataList) {
-        if (dataList.isEmpty()){
+        if (dataList.isEmpty()) {
             mAdapter.setHasMoreData(false);
             FrameManager.getInstance().toastPrompt("没有更多的数据...");
-        }else {
+        } else {
             current_comment_page++;
             mAdapter.appendToList(dataList);
             mAdapter.notifyDataSetChanged();
@@ -138,7 +179,7 @@ public class VideoPlayActivity extends AppCompatActivity implements PlayVideoVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mVideoPlayHeader!=null){
+        if (mVideoPlayHeader != null) {
             mVideoPlayHeader.getVideoControllerView().release();
         }
     }
