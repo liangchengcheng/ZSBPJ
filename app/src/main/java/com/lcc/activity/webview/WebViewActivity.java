@@ -110,6 +110,7 @@ public class WebViewActivity extends AppCompatActivity implements SwipeRefreshLa
             }
 
         });
+
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
