@@ -182,5 +182,8 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+    <style name="selectableItemBackground">
+        <item name="android:background">@drawable/bt_selector</item>
+    </style>
 
 </resources>
