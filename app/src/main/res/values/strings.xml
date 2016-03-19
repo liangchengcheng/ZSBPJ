@@ -14,4 +14,6 @@
     <string name="nothing_found">没有搜索结果~</string>
     <string name="locating">正在定位…</string>
     <string name="located_failed">定位失败</string>
+    <string name="nong_test">(。﹏。*) \n题库已经没有题目了</string>
+    <string name="reset">再做一遍</string>
 </resources>

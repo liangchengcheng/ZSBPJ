@@ -78,6 +78,7 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         super.onFragmentCreate();
         id = getArguments().getInt(KEY_VIDEO_ID);
         type = getArguments().getInt(KEY_VIDEO_TYPE);
+        // TODO: 16/3/19 此处会出现一个异常 重复的注册eventbus
         EventBus.getDefault().register(this);
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);

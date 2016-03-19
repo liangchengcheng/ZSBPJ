@@ -245,7 +245,9 @@ public class VideoPlayActivity extends AppCompatActivity
         }
     }
 
-    //对基本的错误进行处理
+    /**
+     * 对基本的错误进行处理
+     */
     private void showError(ResultEntity response) {
         if (response!=null){
             if (response.getCode()==1){

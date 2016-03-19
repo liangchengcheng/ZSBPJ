@@ -487,4 +487,11 @@
   <color name="alpha_gray">#CC646464</color>
   <color name="theme_gray">#646464</color>
 
+
+  <color name="theme_color">#3F51B5</color><!--App主色调-->
+  <color name="theme_color_level2">#5c6bc0</color><!--App主色调2-->
+
+
+  <color name="red_900">#b0120a</color>
+  <color name="list_divider">#19000000</color><!--列表item 分割线-->
 </resources>
