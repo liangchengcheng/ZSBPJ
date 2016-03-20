@@ -26,7 +26,7 @@
             android:lineSpacingExtra="15dp"
             android:text="@string/nong_test"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:layout_marginTop="10dp"

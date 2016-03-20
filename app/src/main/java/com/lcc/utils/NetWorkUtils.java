@@ -10,9 +10,12 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import java.util.List;
+
+import zsbpj.lccpj.frame.FrameManager;
 
 /**
  * Author:  梁铖城
@@ -22,6 +25,11 @@ import java.util.List;
  */
 
 public class NetWorkUtils {
+
+	// 手机网络类型
+	public static final int NETTYPE_WIFI = 0x01;
+	public static final int NETTYPE_CMWAP = 0x02;
+	public static final int NETTYPE_CMNET = 0x03;
 
 	/**
 	 * 判断是否有网络
@@ -91,4 +99,39 @@ public class NetWorkUtils {
 		intent.setAction("android.intent.action.VIEW");
 		activity.startActivityForResult(intent, 0);
 	}
+
+	public static int getNetworkType() {
+		int netType = 0;
+		ConnectivityManager connectivityManager = (ConnectivityManager) FrameManager.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+		if (networkInfo == null) {
+			return netType;
+		}
+		int nType = networkInfo.getType();
+		if (nType == ConnectivityManager.TYPE_MOBILE) {
+			String extraInfo = networkInfo.getExtraInfo();
+			if (!TextUtils.isEmpty(extraInfo)) {
+				if (extraInfo.toLowerCase().equals("cmnet")) {
+					netType = NETTYPE_CMNET;
+				} else {
+					netType = NETTYPE_CMWAP;
+				}
+			}
+		} else if (nType == ConnectivityManager.TYPE_WIFI) {
+			netType = NETTYPE_WIFI;
+		}
+		return netType;
+	}
+
+	public static boolean hasInternet() {
+		boolean flag;
+		if (((ConnectivityManager) FrameManager.getAppContext().getSystemService(
+				"connectivity")).getActiveNetworkInfo() != null)
+			flag = true;
+		else
+			flag = false;
+		return flag;
+	}
+
+
 }

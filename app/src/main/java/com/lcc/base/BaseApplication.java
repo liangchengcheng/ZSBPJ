@@ -1,6 +1,7 @@
 package com.lcc.base;
 
 import android.app.Application;
+import android.os.Build;
 
 import com.lcc.constants.AppConstants;
 import com.lcc.rx.RxService;
@@ -17,6 +18,14 @@ import zsbpj.lccpj.network.RetrofitBuilder;
  * Description:   BaseApplication
  */
 public class BaseApplication  extends Application{
+
+    public static boolean isAtLeastGB;
+
+    static {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            isAtLeastGB = true;
+        }
+    }
 
     @Override
     public void onCreate() {
