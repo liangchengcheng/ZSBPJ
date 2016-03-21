@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lcc.activity.R;
+import com.lcc.activity.data.FavListActivity;
 import com.lcc.activity.data.TestActivity;
 
 /**
@@ -25,6 +26,7 @@ public class AllKnowFragment  extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_know, null);
         view.findViewById(R.id.zwcs).setOnClickListener(new My_btnListener());
+        view.findViewById(R.id.wdsc).setOnClickListener(new My_btnListener());
         return  view;
     }
 
@@ -33,8 +35,13 @@ public class AllKnowFragment  extends Fragment{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+
                 case R.id.zwcs:
                     startActivity(new Intent(getActivity(), TestActivity.class));
+                    break;
+
+                case R.id.wdsc:
+                    startActivity(new Intent(getActivity(), FavListActivity.class));
                     break;
             }
         }

@@ -64,7 +64,7 @@ public class TestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         //创建UI
-        creatViews();
+        createViews();
         //设置按钮点击事件
         setButtonListener();
         //读取网上题库并加载题目
@@ -87,7 +87,7 @@ public class TestActivity extends BaseActivity {
         return R.layout.activity_test;
     }
 
-    private void creatViews() {
+    private void createViews() {
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle("");
@@ -210,22 +210,26 @@ public class TestActivity extends BaseActivity {
             preLoadLayout();
             SystemClock.sleep(2000);
             List<Test> list = new ArrayList<>();
-            Test test = new Test();
-            test.setAnswer("C");
-            test.setTestId(1);
-            test.setQuestion("请问你最喜欢的水果是什么呢");
-            test.setTestType(TYPE_QUESTIONS_AND_ANSWERS);
-            test.setExplain("1111");
-            test.setAnswerA("我最喜欢的水果是香蕉");
-            test.setAnswerB("我最喜欢的水果是草莓");
-            test.setAnswerC("我最喜欢的水果是菠萝");
-            test.setAnswerD("我最喜欢的水果是大梨");
-            test.setTestType(1);
-            list.add(test);
+            for (int i=0;i<10;i++){
+                Test test = new Test();
+                test.setAnswer("C");
+                test.setTestId(i);
+                test.setQuestion("请问你最喜欢的水果是什么呢"+i);
+                test.setTestType(TYPE_SINGLE_ANSWER);
+                test.setExplain("1111");
+                test.setAnswerA("我最喜欢的水果是香蕉"+i);
+                test.setAnswerB("我最喜欢的水果是草莓"+i);
+                test.setAnswerC("我最喜欢的水果是菠萝"+i);
+                test.setAnswerD("我最喜欢的水果是大梨"+i);
+                test.setTestType(1);
+                list.add(test);
+            }
+
             mTest = list.get(0);
             //把数据缓存到本地
-            SaveCacheAsyncTask savecaheTask = new SaveCacheAsyncTask(TestActivity.this, mTest, CacheHelper.TEST + mRandomList.get(0));
-            savecaheTask.execute();
+            SaveCacheAsyncTask saveCacheAsyncTaskTask = new SaveCacheAsyncTask(TestActivity.this,
+                    mTest, CacheHelper.TEST + mRandomList.get(0));
+            saveCacheAsyncTaskTask.execute();
             //显示题目
             showTest();
             //加载完数据后的布局操作
@@ -274,7 +278,7 @@ public class TestActivity extends BaseActivity {
         preLoadLayout();
         //请求服务器中题库数目，为了客户端能更有效同步服务器题库。因此这里不做默认值，只能从网络获取题库数目。
         //TODO: 16/3/20 次数需要获取一个count
-        mTestCount = 1;
+        mTestCount = 10;
         //根据题量生成随机数字集合
         initRandom();
         //读取数据，获取缓存或者网络数据
