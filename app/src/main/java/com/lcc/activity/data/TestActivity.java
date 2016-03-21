@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,15 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.lcc.activity.R;
+import com.lcc.base.BaseActivity;
 import com.lcc.utils.CacheHelper;
 import com.lcc.utils.NetWorkUtils;
 import com.lcc.view.LoadingLayout;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TestActivity extends Activity {
+public class TestActivity extends BaseActivity {
 
     //toolbar 已做题目数目统计
     private static int sTestCount = 0;
@@ -51,6 +57,7 @@ public class TestActivity extends Activity {
     private int mTestCount = 0;
     //随机list 每次根据服务器总体数量生成 随机顺序的list 每次请求题目的时候取出里面的值。（做到随机而不重复题目）
     private List<Integer> mRandomList = new ArrayList<>();
+    private TextView toolbar_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +69,39 @@ public class TestActivity extends Activity {
         setButtonListener();
         //读取网上题库并加载题目
         loadTestCountAndData();
-        
+
     }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected boolean Open() {
+        return true;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.activity_test;
+    }
+
     private void creatViews() {
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        toolbar.setTitle("");
+        toolbar.setBackgroundColor(getColorPrimary());
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar_count= (TextView) findViewById(R.id.toolbar_count);
         // TODO: 16/3/20
         //设置已做题目统计数
-        //mParentActivity.setTextCount(0);
+        toolbar_count.setText("第0题");
         //数据加载loading 布局
         mLoadingLayout = (LoadingLayout) findViewById(R.id.ly_loading);
         //小圆点
@@ -84,7 +118,7 @@ public class TestActivity extends Activity {
         //button
         mBtShowAnswer = (TextView) findViewById(R.id.bt_show_answer);
         mBtNext = (TextView) findViewById(R.id.bt_next);
-        mBtReset = (TextView)findViewById(R.id.bt_reset);
+        mBtReset = (TextView) findViewById(R.id.bt_reset);
 
     }
 
@@ -138,7 +172,7 @@ public class TestActivity extends Activity {
                 }
                 //顶部toolbar做题总数统计
                 // TODO: 16/3/20 此处
-                //mParentActivity.setTextCount(++sTestCount);
+                toolbar_count.setText("第"+(++sTestCount)+"题");
             }
         });
         //显示答案
@@ -175,14 +209,17 @@ public class TestActivity extends Activity {
             // TODO: 16/3/20 从网上获取数据 "testId", mRandomList.get(0)
             preLoadLayout();
             SystemClock.sleep(2000);
-            List<Test> list=new ArrayList<>();
-            Test test=new Test();
+            List<Test> list = new ArrayList<>();
+            Test test = new Test();
             test.setAnswer("C");
             test.setTestId(1);
-            test.setAnswerA("你猜我是谁啊a");
-            test.setAnswerB("你猜我是谁啊b");
-            test.setAnswerC("你猜我是谁啊c");
-            test.setAnswerD("你猜我是谁啊d");
+            test.setQuestion("请问你最喜欢的水果是什么呢");
+            test.setTestType(TYPE_QUESTIONS_AND_ANSWERS);
+            test.setExplain("1111");
+            test.setAnswerA("我最喜欢的水果是香蕉");
+            test.setAnswerB("我最喜欢的水果是草莓");
+            test.setAnswerC("我最喜欢的水果是菠萝");
+            test.setAnswerD("我最喜欢的水果是大梨");
             test.setTestType(1);
             list.add(test);
             mTest = list.get(0);
@@ -236,7 +273,7 @@ public class TestActivity extends Activity {
         //准备网络请求前的布局变动
         preLoadLayout();
         //请求服务器中题库数目，为了客户端能更有效同步服务器题库。因此这里不做默认值，只能从网络获取题库数目。
-        // TODO: 16/3/20 次数需要获取一个count
+        //TODO: 16/3/20 次数需要获取一个count
         mTestCount = 1;
         //根据题量生成随机数字集合
         initRandom();
@@ -293,7 +330,7 @@ public class TestActivity extends Activity {
     }
 
     private void initSingleChoice() {
-        if (mTest.getAnswerA() != null&& !TextUtils.isEmpty(mTest.getAnswerA())) {
+        if (mTest.getAnswerA() != null && !TextUtils.isEmpty(mTest.getAnswerA())) {
             AnswerItem answerA = new AnswerItem(TestActivity.this);
             answerA.setChoiceText("A");
             answerA.setChoiceContent(mTest.getAnswerA());
@@ -309,7 +346,7 @@ public class TestActivity extends Activity {
             answerB.setOnClickListener(new AnswerItemClick(answerB));
             mAnswerSelectLayout.addView(answerB);
         }
-        if (mTest.getAnswerC() != null&& !TextUtils.isEmpty(mTest.getAnswerC())) {
+        if (mTest.getAnswerC() != null && !TextUtils.isEmpty(mTest.getAnswerC())) {
             AnswerItem answerC = new AnswerItem(TestActivity.this);
             answerC.setChoiceText("C");
             answerC.setChoiceContent(mTest.getAnswerC());
@@ -317,7 +354,7 @@ public class TestActivity extends Activity {
             answerC.setOnClickListener(new AnswerItemClick(answerC));
             mAnswerSelectLayout.addView(answerC);
         }
-        if (mTest.getAnswerD() != null&& !TextUtils.isEmpty(mTest.getAnswerD())) {
+        if (mTest.getAnswerD() != null && !TextUtils.isEmpty(mTest.getAnswerD())) {
             AnswerItem answerD = new AnswerItem(TestActivity.this);
             answerD.setChoiceText("D");
             answerD.setChoiceContent(mTest.getAnswerD());
@@ -325,7 +362,7 @@ public class TestActivity extends Activity {
             answerD.setOnClickListener(new AnswerItemClick(answerD));
             mAnswerSelectLayout.addView(answerD);
         }
-        if (mTest.getAnswerE() != null&& !TextUtils.isEmpty(mTest.getAnswerE())) {
+        if (mTest.getAnswerE() != null && !TextUtils.isEmpty(mTest.getAnswerE())) {
             AnswerItem answerE = new AnswerItem(TestActivity.this);
             answerE.setChoiceText("E");
             answerE.setChoiceContent(mTest.getAnswerE());
@@ -333,7 +370,7 @@ public class TestActivity extends Activity {
             answerE.setOnClickListener(new AnswerItemClick(answerE));
             mAnswerSelectLayout.addView(answerE);
         }
-        if (mTest.getAnswerF() != null&& !TextUtils.isEmpty(mTest.getAnswerF())) {
+        if (mTest.getAnswerF() != null && !TextUtils.isEmpty(mTest.getAnswerF())) {
             AnswerItem answerF = new AnswerItem(TestActivity.this);
             answerF.setChoiceText("F");
             answerF.setChoiceContent(mTest.getAnswerF());
@@ -341,7 +378,7 @@ public class TestActivity extends Activity {
             answerF.setOnClickListener(new AnswerItemClick(answerF));
             mAnswerSelectLayout.addView(answerF);
         }
-        if (mTest.getAnswerG() != null&& !TextUtils.isEmpty(mTest.getAnswerG())) {
+        if (mTest.getAnswerG() != null && !TextUtils.isEmpty(mTest.getAnswerG())) {
             AnswerItem answerG = new AnswerItem(TestActivity.this);
             answerG.setChoiceText("G");
             answerG.setChoiceContent(mTest.getAnswerG());
