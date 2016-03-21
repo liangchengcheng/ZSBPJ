@@ -1,11 +1,10 @@
 package com.lcc.activity.data;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,12 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.lcc.activity.R;
 import com.lcc.utils.CacheHelper;
 import com.lcc.utils.NetWorkUtils;
 import com.lcc.view.LoadingLayout;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +28,6 @@ public class TestActivity extends Activity {
     public static final int TYPE_SINGLE_ANSWER = 1;
     //简答题
     public static final int TYPE_QUESTIONS_AND_ANSWERS = 2;
-
     //根布局
     private View mRootView;
     //小圆点控件
@@ -46,7 +42,6 @@ public class TestActivity extends Activity {
     private RelativeLayout mTestEmpty;
     //当前题目
     private Test mTest;
-
     private TextView mTvQuestion, mTvAnswer, mTvAnswerLong;
     //答案 布局
     private RelativeLayout mRyAnswer;
@@ -73,24 +68,19 @@ public class TestActivity extends Activity {
         // TODO: 16/3/20
         //设置已做题目统计数
         //mParentActivity.setTextCount(0);
-
         //数据加载loading 布局
         mLoadingLayout = (LoadingLayout) findViewById(R.id.ly_loading);
-
         //小圆点
         mFAB = (FloatingActionButton) findViewById(R.id.fab);
-
         //布局
         mMainLayout = (ScrollView) findViewById(R.id.sv_main_test);
         mAnswerSelectLayout = (LinearLayout) findViewById(R.id.ly_select_answers);
         mRyAnswer = (RelativeLayout) findViewById(R.id.rl_answer);
         mTestEmpty = (RelativeLayout) findViewById(R.id.ry_test_empty);
-
         //TextView
         mTvQuestion = (TextView) findViewById(R.id.tv_test_question);
         mTvAnswer = (TextView) findViewById(R.id.tv_answer);
         mTvAnswerLong = (TextView) findViewById(R.id.tv_answer_long);
-
         //button
         mBtShowAnswer = (TextView) findViewById(R.id.bt_show_answer);
         mBtNext = (TextView) findViewById(R.id.bt_next);
@@ -183,14 +173,16 @@ public class TestActivity extends Activity {
             loadTestCountAndData();
         } else {
             // TODO: 16/3/20 从网上获取数据 "testId", mRandomList.get(0)
+            preLoadLayout();
+            SystemClock.sleep(2000);
             List<Test> list=new ArrayList<>();
             Test test=new Test();
-            test.setAnswer("A");
+            test.setAnswer("C");
             test.setTestId(1);
-            test.setAnswerA("你猜我是谁啊");
-            test.setAnswerB("你猜我是谁啊");
-            test.setAnswerC("你猜我是谁啊");
-            test.setAnswerD("你猜我是谁啊");
+            test.setAnswerA("你猜我是谁啊a");
+            test.setAnswerB("你猜我是谁啊b");
+            test.setAnswerC("你猜我是谁啊c");
+            test.setAnswerD("你猜我是谁啊d");
             test.setTestType(1);
             list.add(test);
             mTest = list.get(0);
@@ -201,9 +193,7 @@ public class TestActivity extends Activity {
             showTest();
             //加载完数据后的布局操作
             postLoadLayout();
-
             //errorLoadLayout();
-
         }
     }
 
@@ -267,7 +257,6 @@ public class TestActivity extends Activity {
             //用AsyncTask读取缓存
             readCache();
         }
-
     }
 
     private void showFav() {
@@ -279,6 +268,9 @@ public class TestActivity extends Activity {
         }
     }
 
+    /**
+     * 读取缓存
+     */
     private void readCache() {
         ReadCacheAsyncTask<Test> readCacheAsyncTask = new ReadCacheAsyncTask<>(TestActivity.this);
         //设置读取缓存的回调函数，
@@ -302,13 +294,11 @@ public class TestActivity extends Activity {
 
     private void initSingleChoice() {
         if (mTest.getAnswerA() != null&& !TextUtils.isEmpty(mTest.getAnswerA())) {
-            //新建答案选项
             AnswerItem answerA = new AnswerItem(TestActivity.this);
             answerA.setChoiceText("A");
             answerA.setChoiceContent(mTest.getAnswerA());
             answerA.setTest(mTest);
             answerA.setOnClickListener(new AnswerItemClick(answerA));
-            //加入答案选项布局中
             mAnswerSelectLayout.addView(answerA);
         }
         if (mTest.getAnswerB() != null && !TextUtils.isEmpty(mTest.getAnswerB())) {
@@ -407,7 +397,7 @@ public class TestActivity extends Activity {
             answerItem.click();
             setAnswerItemEnabled(false);
             mRyAnswer.setVisibility(View.VISIBLE);
-            scrollToBottom(mMainLayout, mRootView.findViewById(R.id.ly_main));
+            scrollToBottom(mMainLayout, findViewById(R.id.ly_main));
         }
     }
 

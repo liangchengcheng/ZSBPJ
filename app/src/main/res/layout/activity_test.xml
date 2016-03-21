@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_test_main"
     android:layout_width="match_parent"
@@ -57,4 +58,4 @@
         app:layout_anchorGravity="bottom|right"
         app:pressedTranslationZ="12dp"
         app:rippleColor="@color/theme_color_level2" />
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
