@@ -15,6 +15,7 @@ public class ZgFragment extends Fragment{
         Fragment fragment = new ZgFragment();
         fragment.setArguments(bundle);
         return fragment;
+
     }
 
 }

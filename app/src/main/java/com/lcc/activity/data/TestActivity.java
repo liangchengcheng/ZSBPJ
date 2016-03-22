@@ -191,6 +191,9 @@ public class TestActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 打乱顺序
+     */
     private void initRandom() {
         for (int i = 0; i < mTestCount; i++) {
             mRandomList.add(i);
@@ -291,16 +294,16 @@ public class TestActivity extends BaseActivity {
         boolean isCacheOverTiem = CacheHelper.isCacheDataFailure(TestActivity.this, CacheHelper.TEST + mRandomList.get(0));
         //有网络并且有没缓存||有网络且缓存过期  就请求网络数据 否则 读取缓存
         if ((NetWorkUtils.hasInternet() && !hasCache) || (NetWorkUtils.hasInternet() && isCacheOverTiem)) {
-            //从网络上读取数据
             loadDataByNet();
         } else {
-            //用AsyncTask读取缓存
             readCache();
         }
     }
 
+    /**
+     * 回显此题是否被收藏
+     */
     private void showFav() {
-        //回显此题是否被收藏
         if (CacheHelper.getFav(mTest.getTestId() + "") == mTest.getTestId()) {
             mFAB.setImageResource(R.mipmap.icon_fav_select);
         } else {
@@ -313,17 +316,14 @@ public class TestActivity extends BaseActivity {
      */
     private void readCache() {
         ReadCacheAsyncTask<Test> readCacheAsyncTask = new ReadCacheAsyncTask<>(TestActivity.this);
-        //设置读取缓存的回调函数，
         readCacheAsyncTask.setOnReadCacheToDo(new ReadCacheAsyncTask.OnReadCacheToDo<Test>() {
             @Override
             public void preExecute() {
-                //读取缓存操作前 布局的准备操作
                 preLoadLayout();
             }
 
             @Override
-            public void postExectue(Test data) {
-                //读取缓存的操作。生成选择项改变布局等操作
+            public void postExecute(Test data) {
                 mTest = data;
                 showTest();
                 postLoadLayout();

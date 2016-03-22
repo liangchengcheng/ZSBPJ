@@ -495,4 +495,6 @@
   <color name="red_900">#b0120a</color>
   <color name="list_divider">#19000000</color><!--列表item 分割线-->
   <color name="bt_updown">#1e000000</color>
+
+  <color name="bb_inActiveBottomBarItemColor">#909090</color>
 </resources>

@@ -12,7 +12,7 @@ public class ReadCacheAsyncTask<T> extends AsyncTask<String, Void, T> {
     public interface OnReadCacheToDo<T> {
         void preExecute();
 
-        void postExectue(T data);
+        void postExecute(T data);
     }
 
     private OnReadCacheToDo<T> onReadCacheToDo;
@@ -50,7 +50,7 @@ public class ReadCacheAsyncTask<T> extends AsyncTask<String, Void, T> {
     protected void onPostExecute(T data) {
         super.onPostExecute(data);
         if (onReadCacheToDo != null) {
-            onReadCacheToDo.postExectue(data);
+            onReadCacheToDo.postExecute(data);
         }
     }
 }
