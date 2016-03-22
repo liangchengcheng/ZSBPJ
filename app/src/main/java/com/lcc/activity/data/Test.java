@@ -2,9 +2,6 @@ package com.lcc.activity.data;
 
 import java.io.Serializable;
 
-/**
- * Created by lcc on 16/3/19.
- */
 public class Test implements Serializable {
 
     private Integer testId;

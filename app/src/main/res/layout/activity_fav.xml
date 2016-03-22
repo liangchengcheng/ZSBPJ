@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical">
@@ -8,6 +9,34 @@
         android:id="@+id/ly_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ToolbarTheme"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="我的收藏"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/toolbar_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="5dp"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="14sp" />
+    </android.support.v7.widget.Toolbar>
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

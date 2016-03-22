@@ -208,7 +208,6 @@ public class TestActivity extends BaseActivity {
         } else {
             // TODO: 16/3/20 从网上获取数据 "testId", mRandomList.get(0)
             preLoadLayout();
-            SystemClock.sleep(2000);
             List<Test> list = new ArrayList<>();
             for (int i=0;i<10;i++){
                 Test test = new Test();

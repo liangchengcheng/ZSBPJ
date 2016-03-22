@@ -2,17 +2,10 @@ package com.lcc.activity.data;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
 import com.lcc.utils.CacheHelper;
-
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 
-/**
- * Author：Vv on .
- * Mail：envyfan@qq.com
- * Description：
- */
 public class ReadCacheAsyncTask<T> extends AsyncTask<String, Void, T> {
     private WeakReference<Context> mContext;
 
@@ -43,11 +36,11 @@ public class ReadCacheAsyncTask<T> extends AsyncTask<String, Void, T> {
     @Override
     protected T doInBackground(String... params) {
         if (mContext.get() != null) {
-            Serializable seri = CacheHelper.readObject(mContext.get(), params[0]);
-            if (seri == null) {
+            Serializable serializable = CacheHelper.readObject(mContext.get(), params[0]);
+            if (serializable == null) {
                 return null;
             } else {
-                return (T) seri;
+                return (T) serializable;
             }
         }
         return null;

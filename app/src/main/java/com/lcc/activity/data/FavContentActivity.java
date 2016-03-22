@@ -6,17 +6,22 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.lcc.activity.R;
 import com.lcc.base.BaseActivity;
 import com.lcc.utils.CacheHelper;
 
 public class FavContentActivity extends BaseActivity {
+
     public static final String FAV_KEY="fav_key";
     //当前题目
     private Test mTest;
@@ -31,8 +36,6 @@ public class FavContentActivity extends BaseActivity {
     //答案 布局
     private RelativeLayout mRyAnswer;
     private TextView mTvQuestion, mTvAnswer, mTvAnswerLong;
-
-    private View mRootView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class FavContentActivity extends BaseActivity {
 
     @Override
     protected boolean Open() {
-        return false;
+        return true;
     }
 
     @Override
@@ -97,6 +100,17 @@ public class FavContentActivity extends BaseActivity {
     }
 
     private void creatView() {
+
+        //toolbar
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        toolbar.setTitle("");
+        toolbar.setBackgroundColor(getColorPrimary());
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         //小圆点
         mFAB = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -134,11 +148,11 @@ public class FavContentActivity extends BaseActivity {
                 if (CacheHelper.getFav(mTest.getTestId() + "") == mTest.getTestId()) {
                     mFAB.setImageResource(R.mipmap.icon_fav);
                     CacheHelper.removeToFav(mTest.getTestId() + "");
-                    Snackbar.make(mRootView, "取消收藏", Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(FavContentActivity.this,"取消收藏",Toast.LENGTH_SHORT).show();
                 } else {
                     mFAB.setImageResource(R.mipmap.icon_fav_select);
                     CacheHelper.putToFav(mTest.getTestId() + "", mTest.getTestId());
-                    Snackbar.make(mRootView, "收藏成功", Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(FavContentActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -236,7 +250,8 @@ public class FavContentActivity extends BaseActivity {
             answerItem.click();
             setAnswerItemEnabled(false);
             mRyAnswer.setVisibility(View.VISIBLE);
-            scrollToBottom(mMainLayout,mRootView.findViewById(R.id.ly_main));
+            // TODO: 16/3/22 此处会有bug
+            scrollToBottom(mMainLayout,findViewById(R.id.ly_main));
         }
     }
 
