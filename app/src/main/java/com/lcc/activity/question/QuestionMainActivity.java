@@ -23,9 +23,9 @@ public class QuestionMainActivity extends BaseActivity {
         mBottomBar = BottomBar.attach(QuestionMainActivity.this, savedInstanceState);
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
                 new BottomBarFragment(ZchFragment.newInstance(), R.drawable.ic_subject_black_24dp, "最新信息"),
-                new BottomBarFragment(ZsjhFragment.newInstance(), R.drawable.ic_equalizer_black_24dp, "zs计划"),
+                new BottomBarFragment(ZsjhFragment.newInstance(), R.drawable.ic_equalizer_black_24dp, "招生计划"),
                 new BottomBarFragment(LqfsFragment.newInstance(1,1), R.drawable.ic_search_black_24dp, "录取分数"),
-                new BottomBarFragment(ZxzxFragment.newInstance(1,1), R.drawable.ic_call_black_24dp, "咨询")
+                new BottomBarFragment(ZxzxFragment.newInstance(1,1), R.drawable.ic_call_black_24dp, "问题咨询")
         );
     }
 
