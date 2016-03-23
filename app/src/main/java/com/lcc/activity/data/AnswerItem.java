@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.lcc.activity.R;
 
-/**
- * Created by lcc on 16/3/19.
- */
 public class AnswerItem extends LinearLayout {
 
     private TextView mChoice, mChoiceContent;
