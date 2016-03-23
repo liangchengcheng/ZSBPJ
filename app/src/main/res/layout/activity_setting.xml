@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context="cxsjcj.hdsx.com.activity.setting.SysTemSettingActivity">
+    >
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -41,7 +41,6 @@
                 android:layout_width="match_parent"
                 android:text="左手操作模式"
                 android:layout_height="wrap_content" />
-
             <TextView
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
@@ -94,7 +93,6 @@
                 android:layout_width="match_parent"
                 android:text="显示的操作记录"
                 android:layout_height="wrap_content" />
-
             <TextView
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"

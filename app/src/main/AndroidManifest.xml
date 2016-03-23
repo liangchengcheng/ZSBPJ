@@ -29,48 +29,62 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!--设置界面-->
         <activity
             android:name=".setting.SettingActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+
         <!--视频播放界面-->
         <activity
             android:name=".video.VideoPlayActivity"
             android:label="@string/title_activity_video"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+
         <!--城市切换-->
         <activity
             android:name=".main.activity.CityPickerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:supportsRtl="true"
             android:label="@string/title_activity_video"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
 
+        <!--单选测试-->
         <activity
             android:name=".data.TestActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
+        <!--收藏的测试题的列表-->
         <activity
             android:name=".data.FavListActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
+        <!--收藏测试题的内容界面-->
         <activity
             android:name=".data.FavContentActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
+        <!--信息的主界面-->
         <activity
             android:name=".question.QuestionMainActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+
+        <!--百科的主界面-->
+        <activity
+            android:name=".information.InformationMainActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" />
 
         <!--高德地图定位-->
-        <service android:name="com.amap.api.location.APSService"/>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="07e4e3deba98311f4e9749f8170a9166"/>
+        <service android:name="com.amap.api.location.APSService" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="07e4e3deba98311f4e9749f8170a9166" />
         <!--高德地图定位结束-->
     </application>
 

@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainNavigationHeader implements View.OnClickListener {
@@ -35,7 +36,7 @@ public class MainNavigationHeader implements View.OnClickListener {
     }
 
     public void bindData() {
-        String oauthUserEntity=null;
+        String oauthUserEntity = null;
         if (oauthUserEntity == null) {
             mImageViewAvatar.setImageResource(R.mipmap.head);
             mImageViewAvatar.setOnClickListener(this);
@@ -43,7 +44,7 @@ public class MainNavigationHeader implements View.OnClickListener {
             mRelativeLayout2.setVisibility(View.VISIBLE);
         } else {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            lp.gravity= Gravity.CENTER;
+            lp.gravity = Gravity.CENTER;
             mImageViewAvatar.setLayoutParams(lp);
             mTextViewNickName.setVisibility(View.GONE);
             mImageViewAvatar.setOnClickListener(null);

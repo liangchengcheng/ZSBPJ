@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.lcc.activity.R;
+import com.lcc.activity.information.InformationMainActivity;
 import com.lcc.activity.question.QuestionMainActivity;
 import com.lcc.frame.Advertisements;
 
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         initViews();
         view.findViewById(R.id.ll_xx).setOnClickListener(new BtnListener());
+        view.findViewById(R.id.cd_bk).setOnClickListener(new BtnListener());
         return view;
     }
 
@@ -75,8 +77,13 @@ public class HomeFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+
                 case R.id.ll_xx:
                     startActivity(new Intent(getActivity(), QuestionMainActivity.class));
+                    break;
+
+                case R.id.cd_bk:
+                    startActivity(new Intent(getActivity(), InformationMainActivity.class));
                     break;
             }
         }

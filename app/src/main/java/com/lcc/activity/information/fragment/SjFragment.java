@@ -3,9 +3,6 @@ package com.lcc.activity.information.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-/**
- * Created by lcc on 16/3/17.
- */
 public class SjFragment extends Fragment{
 
     public static Fragment newInstance(int id, int type) {
@@ -16,5 +13,6 @@ public class SjFragment extends Fragment{
         fragment.setArguments(bundle);
         return fragment;
     }
+
 
 }

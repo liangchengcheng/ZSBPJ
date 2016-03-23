@@ -31,7 +31,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceUtils = PreferenceUtils.getInstance(SettingActivity.this);
-        activity = (BaseActivity)SettingActivity.this;
+        activity = (BaseActivity) SettingActivity.this;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tx_changetheme:
                 showThemeDialog();
                 break;
