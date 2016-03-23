@@ -36,6 +36,7 @@
                 card_view:cardCornerRadius="4dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_xx"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

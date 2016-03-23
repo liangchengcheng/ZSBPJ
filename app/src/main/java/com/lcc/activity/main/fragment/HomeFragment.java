@@ -1,5 +1,6 @@
 package com.lcc.activity.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.lcc.activity.R;
+import com.lcc.activity.question.QuestionMainActivity;
 import com.lcc.frame.Advertisements;
 
 import org.json.JSONArray;
@@ -35,7 +37,8 @@ public class HomeFragment extends Fragment {
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         initViews();
-        return  view;
+        view.findViewById(R.id.ll_xx).setOnClickListener(new BtnListener());
+        return view;
     }
 
     private void initViews() {
@@ -56,14 +59,26 @@ public class HomeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Advertisements advertisements= new Advertisements(getActivity(), true, inflaters, 3000);
-        View view=advertisements.initView(advertiseArray);
+        Advertisements advertisements = new Advertisements(getActivity(), true, inflaters, 3000);
+        View view = advertisements.initView(advertiseArray);
         advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
             @Override
             public void onClick(int position) {
-                FrameManager.getInstance().toastPrompt("点击的是"+position);
+                FrameManager.getInstance().toastPrompt("点击的是" + position);
             }
         });
         llAdvertiseBoard.addView(view);
+    }
+
+    public class BtnListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ll_xx:
+                    startActivity(new Intent(getActivity(), QuestionMainActivity.class));
+                    break;
+            }
+        }
     }
 }

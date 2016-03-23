@@ -63,6 +63,11 @@
             android:label="@string/title_activity_setting"
             android:theme="@style/AppTheme"></activity>
 
+        <activity
+            android:name=".question.QuestionMainActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme"></activity>
+
         <!--高德地图定位-->
         <service android:name="com.amap.api.location.APSService"/>
         <meta-data android:name="com.amap.api.v2.apikey" android:value="07e4e3deba98311f4e9749f8170a9166"/>

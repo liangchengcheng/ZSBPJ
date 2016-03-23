@@ -14,12 +14,10 @@ import com.lcc.activity.R;
  */
 public class ZsjhFragment extends Fragment{
 
-    public static Fragment newInstance(int id, int type) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", id);
-        bundle.putInt("id", type);
+    public static Fragment newInstance() {
+
         Fragment fragment = new ZsjhFragment();
-        fragment.setArguments(bundle);
+
         return fragment;
     }
 
