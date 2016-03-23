@@ -1,14 +1,18 @@
-package com.lcc.activity.login;
+package com.lcc.activity.information.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import com.lcc.activity.R;
 import com.lcc.base.BaseActivity;
 
-public class RegionActivity extends BaseActivity {
+/**
+ * Created by lcc on 16/3/17.
+ */
+public class kmActivity extends BaseActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +29,6 @@ public class RegionActivity extends BaseActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override
@@ -35,6 +38,6 @@ public class RegionActivity extends BaseActivity {
 
     @Override
     protected int getLayoutView() {
-        return R.layout.activity_region;
+        return R.layout.km_activity;
     }
 }

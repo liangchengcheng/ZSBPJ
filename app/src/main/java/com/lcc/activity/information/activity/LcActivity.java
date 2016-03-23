@@ -1,4 +1,4 @@
-package com.lcc.activity.information.fragment;
+package com.lcc.activity.information.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,13 +6,13 @@ import android.support.v4.app.Fragment;
 /**
  * Created by lcc on 16/3/17.
  */
-public class kmFragment extends Fragment{
+public class LcActivity extends Fragment{
 
     public static Fragment newInstance(int id, int type) {
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
         bundle.putInt("id", type);
-        Fragment fragment = new kmFragment();
+        Fragment fragment = new LcActivity();
         fragment.setArguments(bundle);
         return fragment;
     }

@@ -2,6 +2,7 @@ package com.lcc.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -34,8 +35,9 @@ import de.greenrobot.event.EventBus;
 public class MainActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
     }
