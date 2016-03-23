@@ -10,6 +10,7 @@ import java.lang.ref.WeakReference;
 
 
 public class SaveCacheAsyncTask extends AsyncTask<Void, Void, Void> {
+
     private WeakReference<Context> mContext;
     private Serializable serializable;
     private String cacheKey;

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.lang.ref.WeakReference;
 
 public class ReadCacheAsyncTask<T> extends AsyncTask<String, Void, T> {
+
     private WeakReference<Context> mContext;
 
     public interface OnReadCacheToDo<T> {

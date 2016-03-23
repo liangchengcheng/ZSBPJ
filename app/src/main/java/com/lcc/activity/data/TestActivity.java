@@ -69,7 +69,6 @@ public class TestActivity extends BaseActivity {
         setButtonListener();
         //读取网上题库并加载题目
         loadTestCountAndData();
-
     }
 
     @Override

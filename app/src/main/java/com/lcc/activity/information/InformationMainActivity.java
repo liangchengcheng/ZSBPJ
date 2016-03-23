@@ -18,7 +18,7 @@ public class InformationMainActivity extends BaseActivity {
     protected void initView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setBackgroundColor(getColorPrimary());
-        toolbar.setTitle("");
+        toolbar.setTitle("专升本百科");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
