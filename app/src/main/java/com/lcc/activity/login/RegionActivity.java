@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.lcc.activity.R;
 import com.lcc.base.BaseActivity;
 
-public class RegionActivity extends BaseActivity {
+public class RegionActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class RegionActivity extends BaseActivity {
     protected void initView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setBackgroundColor(getColorPrimary());
-        toolbar.setTitle("");
+        toolbar.setTitle(" ");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -30,11 +31,16 @@ public class RegionActivity extends BaseActivity {
 
     @Override
     protected boolean Open() {
-        return false;
+        return true;
     }
 
     @Override
     protected int getLayoutView() {
         return R.layout.activity_region;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

@@ -86,6 +86,12 @@
             android:label="@string/title_activity_setting"
             android:theme="@style/AppTheme" />
 
+        <!--百科的主界面-->
+        <activity
+            android:name=".login.RegionActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" />
+
         <!--高德地图定位-->
         <service android:name="com.amap.api.location.APSService" />
         <meta-data

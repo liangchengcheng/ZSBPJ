@@ -103,7 +103,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="5dp"
                 android:text="     微博帐号"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="?attr/colorPrimary" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -124,7 +124,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="5dp"
                 android:text="     QQ帐号"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="?attr/colorPrimary" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -148,7 +148,7 @@
                 android:id="@+id/land"
                 android:layout_width="fill_parent"
                 android:layout_height="40dip"
-                android:background="@color/colorPrimary"
+                android:background="?attr/colorPrimary"
                 android:text="登录"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
@@ -162,7 +162,7 @@
             android:layout_alignLeft="@+id/mr_ll"
             android:layout_marginTop="20dp"
             android:text="忘记密码"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="?attr/colorPrimary" />
 
         <TextView
             android:layout_marginTop="20dp"
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/mr_ll"
             android:text="注册帐号"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="?attr/colorPrimary" />
 
     </RelativeLayout>
 

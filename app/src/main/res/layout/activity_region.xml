@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
@@ -29,7 +30,7 @@
         android:id="@+id/ll_tip"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/tool_bar"
         android:background="#E9E9E9">
 
         <TextView
