@@ -1,5 +1,6 @@
 package com.lcc.activity.question.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lcc.activity.R;
+import com.lcc.activity.webview.WebViewActivity;
 import com.lcc.adapter.question.LQAdapter;
 import com.lcc.adapter.question.ZSAdapter;
 import com.lcc.entity.LQTest;
@@ -91,7 +93,9 @@ public class LqfsFragment extends RefreshAndLoadFragment implements LQAdapter.On
 
     @Override
     public void OnItemClick(LQTest entity) {
-
+        Intent intent=new Intent(getActivity(),WebViewActivity.class);
+        intent.putExtra("url","http://www.17yxb.cn");
+        startActivity(intent);
     }
 
     private List<LQTest> getData(){
@@ -106,9 +110,7 @@ public class LqfsFragment extends RefreshAndLoadFragment implements LQAdapter.On
         return data;
     }
     public static Fragment newInstance() {
-
         Fragment fragment = new LqfsFragment();
-
         return fragment;
     }
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -19,12 +20,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import com.lcc.activity.R;
+import com.lcc.base.BaseActivity;
 import com.lcc.utils.ResourcesUtils;
 
 /**
  * 应该继承baseactivity
  */
-public class WebViewActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String KEY_URL="url";
     private Toolbar mToolbar;
@@ -33,15 +35,13 @@ public class WebViewActivity extends AppCompatActivity implements SwipeRefreshLa
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
 
-    public static Intent createIntent(Context context, String url) {
-        Intent intent = new Intent(context, WebViewActivity.class);
-        intent.putExtra(KEY_URL, url);
-        return intent;
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
+    }
+
+    @Override
+    protected void initView() {
         initToolBar();
         initWebView();
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -55,20 +55,35 @@ public class WebViewActivity extends AppCompatActivity implements SwipeRefreshLa
     }
 
     @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.activity_webview;
+    }
+
+    @Override
     public void onRefresh() {
         webView.reload();
         swipeRefreshLayout.setRefreshing(false);
     }
 
     private void initToolBar(){
-        mToolbar= (Toolbar) findViewById(R.id.tool_bar);
+        mToolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         toolbarAsBackButton(mToolbar);
     }
 
     public void toolbarAsBackButton(Toolbar toolbar) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setBackgroundColor(getColorPrimary());
+        toolbar.setTitle("内容展示");
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
