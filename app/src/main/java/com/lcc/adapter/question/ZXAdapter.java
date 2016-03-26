@@ -1,20 +1,15 @@
-package com.lcc.adapter;
+package com.lcc.adapter.question;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lcc.activity.R;
-import com.lcc.entity.MediaEntity;
 import com.lcc.entity.ZXTest;
-import com.lcc.view.ShadowImageView;
-import com.lcc.view.TextImageView;
 
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 

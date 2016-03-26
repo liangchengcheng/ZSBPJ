@@ -5,29 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.lcc.activity.R;
-import com.lcc.activity.video.VideoPlayActivity;
-import com.lcc.activity.video.VideoUtils;
-import com.lcc.adapter.MediasAdapter;
-import com.lcc.adapter.ZXAdapter;
-import com.lcc.constants.StateConstants;
-import com.lcc.entity.MediaEntity;
-import com.lcc.entity.ResultEntity;
-import com.lcc.entity.VideoItemEntity;
+import com.lcc.adapter.question.ZXAdapter;
 import com.lcc.entity.ZXTest;
-import com.lcc.rx.RxService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
-import zsbpj.lccpj.utils.LogUtils;
-import zsbpj.lccpj.view.recyclerview.MGridLayoutManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
 public class ZchFragment extends RefreshAndLoadFragment implements ZXAdapter.OnItemClickListener{
