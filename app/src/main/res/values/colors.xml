@@ -497,4 +497,5 @@
   <color name="bt_updown">#1e000000</color>
 
   <color name="bb_inActiveBottomBarItemColor">#909090</color>
+  <color name="login_edit_bg">#ededed</color>
 </resources>

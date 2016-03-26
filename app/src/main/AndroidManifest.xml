@@ -74,6 +74,12 @@
             android:label="@string/title_activity_setting"
             android:theme="@style/AppTheme" />
 
+        <!--信息的主界面-->
+        <activity
+            android:name=".login.LoginActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" />
+
         <!--百科的主界面-->
         <activity
             android:name=".information.InformationMainActivity"

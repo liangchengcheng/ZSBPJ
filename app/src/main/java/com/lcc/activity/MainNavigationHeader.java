@@ -1,12 +1,15 @@
 package com.lcc.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.lcc.activity.login.LoginActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,6 +28,7 @@ public class MainNavigationHeader implements View.OnClickListener {
         this.mActivity = activity;
         View headView = navigationView.getHeaderView(0);
         headView.findViewById(R.id.textView_login).setOnClickListener(this);
+        headView.findViewById(R.id.headview).setOnClickListener(this);
         headView.findViewById(R.id.textView_signup).setOnClickListener(this);
         mRelativeLayout1 = headView.findViewById(R.id.relative_layout1);
         mRelativeLayout2 = headView.findViewById(R.id.relative_layout2);
@@ -57,7 +61,13 @@ public class MainNavigationHeader implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.textView_login:
+                mActivity.startActivity(new Intent(mActivity, LoginActivity.class));
                 break;
+
+            case R.id.headview:
+                mActivity.startActivity(new Intent(mActivity, LoginActivity.class));
+                break;
+
             case R.id.textView_signup:
                 break;
         }

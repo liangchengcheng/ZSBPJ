@@ -1,6 +1,11 @@
 package com.lcc.activity.login;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
+
+import com.lcc.activity.R;
+import com.lcc.base.BaseActivity;
 import com.lcc.bean.News;
 import com.lcc.rx.RxService;
 import com.lcc.service.ApiService;
@@ -15,38 +20,25 @@ import zsbpj.lccpj.app.activity.StartNetActivity;
  * Date:    2015年12月15日10:47:52
  * Description:  登录界面的简单的实现
  */
-public class LoginActivity extends StartNetActivity <ArrayList<News>>{
+public class LoginActivity extends BaseActivity{
 
     @Override
-    public View provideSnackbarView() {
-        return null;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Call<ArrayList<News>> listCall = ApiService.createNewsService().loadMoreNews("","");
-        networkQueue().enqueue(listCall);
-
-        RxService.getInstance().Login(getTaskId(), "");
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
-    public void respondSuccess(ArrayList<News> data) {
-        try {
-            if (!isNull(data)) {
-                //the data is data
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    protected void initView() {
+
     }
 
-    @Override public void respondWithError(Throwable t) {
+    @Override
+    protected boolean Open() {
+        return true;
     }
 
-
-    private boolean isNull(List list) {
-        return (null == list || list.size() == 0);
+    @Override
+    protected int getLayoutView() {
+        return R.layout.activity_login;
     }
 }
