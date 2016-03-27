@@ -1,21 +1,33 @@
 package com.lcc.activity.information.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-/**
- * Created by lcc on 16/3/17.
- */
-public class ZgActivity extends Fragment{
+import com.lcc.base.BaseActivity;
 
-    public static Fragment newInstance(int id, int type) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", id);
-        bundle.putInt("id", type);
-        Fragment fragment = new ZgActivity();
-        fragment.setArguments(bundle);
-        return fragment;
+/**
+ * 考试资格
+ */
+public class ZgActivity extends BaseActivity{
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
 
     }
 
+    @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return 0;
+    }
 }

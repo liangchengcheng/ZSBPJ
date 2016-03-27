@@ -4,13 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -18,7 +25,12 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.lcc.activity.R;
 import com.lcc.base.BaseActivity;
 import com.lcc.utils.ResourcesUtils;
@@ -26,9 +38,9 @@ import com.lcc.utils.ResourcesUtils;
 /**
  * 应该继承baseactivity
  */
-public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String KEY_URL="url";
+    private static final String KEY_URL = "url";
     private Toolbar mToolbar;
     private String url;
     private WebView webView;
@@ -70,8 +82,8 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private void initToolBar(){
-        mToolbar= (Toolbar) findViewById(R.id.toolbar);
+    private void initToolBar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         toolbarAsBackButton(mToolbar);
     }
@@ -90,12 +102,49 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
                 onBackPressed();
             }
         });
+        findViewById(R.id.iv_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopwindow();
+            }
+        });
+    }
+
+    /**
+     * 显示popupWindow
+     */
+    private void showPopwindow() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_layout, null);
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+        PopupWindow window = new PopupWindow(view,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        // 在底部显示
+        window.showAtLocation(WebViewActivity.this.findViewById(R.id.root_View),
+                Gravity.BOTTOM, 0, 0);
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                System.out.println("popWindow消失");
+            }
+        });
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==KeyEvent.KEYCODE_BACK){
-            if (webView.canGoBack()){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView.canGoBack()) {
                 webView.goBack();
                 return true;
             }
@@ -103,17 +152,18 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
         return super.onKeyDown(keyCode, event);
     }
 
-    private void initWebView(){
-        webView= (WebView) findViewById(R.id.webview);
-        WebSettings setting=webView.getSettings();
+    private void initWebView() {
+        webView = (WebView) findViewById(R.id.webview);
+        WebSettings setting = webView.getSettings();
         setting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         setting.setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
                 view.loadUrl(url);
                 return true;
             }
+
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
@@ -126,14 +176,14 @@ public class WebViewActivity extends BaseActivity implements SwipeRefreshLayout.
 
         });
 
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if (newProgress!=100){
+                if (newProgress != 100) {
                     progressBar.setVisibility(View.VISIBLE);
                     progressBar.setProgress(newProgress);
-                }else {
+                } else {
                     progressBar.setVisibility(View.GONE);
                 }
             }
