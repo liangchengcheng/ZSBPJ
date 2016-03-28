@@ -145,7 +145,7 @@
             app:mrl_rippleOverlay="true">
 
             <Button
-                android:id="@+id/land"
+                android:id="@+id/btn_login"
                 android:layout_width="fill_parent"
                 android:layout_height="40dip"
                 android:background="?attr/colorPrimary"
