@@ -2,21 +2,30 @@ package com.lcc.activity.main.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.lcc.activity.R;
 import com.lcc.activity.information.InformationMainActivity;
 import com.lcc.activity.question.QuestionMainActivity;
 import com.lcc.frame.Advertisements;
+import com.lcc.utils.DateUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import zsbpj.lccpj.frame.FrameManager;
 
@@ -30,6 +39,12 @@ public class HomeFragment extends Fragment {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
+    private Timer mTimer = null;
+    private TimerTask mTimerTask = null;
+    private static final int UPDATE_TEXTVIEW = 99;
+    private static int delay = 1000;
+    private static int period = 1000;
+    private TextView tv_count;
 
     @Nullable
     @Override
@@ -37,6 +52,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, null);
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
+        tv_count= (TextView) view.findViewById(R.id.tv_count);
         initViews();
         view.findViewById(R.id.ll_xx).setOnClickListener(new BtnListener());
         view.findViewById(R.id.cd_bk).setOnClickListener(new BtnListener());
@@ -70,6 +86,7 @@ public class HomeFragment extends Fragment {
             }
         });
         llAdvertiseBoard.addView(view);
+        startTimer();
     }
 
     public class BtnListener implements View.OnClickListener {
@@ -88,4 +105,57 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+    private void startTimer() {
+        if (mTimer == null) {
+            mTimer = new Timer();
+        }
+        if (mTimerTask == null) {
+            mTimerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    Message message = Message.obtain(handler3, UPDATE_TEXTVIEW);
+                    handler3.sendMessage(message);
+                }
+            };
+        }
+        if (mTimer != null && mTimerTask != null)
+            mTimer.schedule(mTimerTask, delay, period);
+    }
+
+    /**
+     * 更新倒计时
+     */
+    private void updateTextView() {
+        try {
+            long mbTime = 1483113600;
+            long current = System.currentTimeMillis();
+            long time = (mbTime - current) / (60 * 60 * 24);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date d1 = sdf.parse(sdf.format(current));
+            Date d2 = sdf.parse("2016-09-15 00:00:00");
+            String time_str = DateUtils.daysBetween(d1, d2) + "";
+            tv_count.setText("剩余: "+time_str+"天");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private Handler handler3 = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+
+            switch (msg.what) {
+                case UPDATE_TEXTVIEW:
+                    updateTextView();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        ;
+    };
+
 }

@@ -1,5 +1,6 @@
 package com.lcc.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,9 +37,9 @@ public class DateUtils {
             return "今天 " + new java.text.SimpleDateFormat("HH:mm").format(date);
         } else if (elapsedMinutes > 0) {
             return elapsedMinutes + "分钟前";
-        } else if(elapsedSeconds>0){
-            return elapsedSeconds+ "秒前";
-        }else {
+        } else if (elapsedSeconds > 0) {
+            return elapsedSeconds + "秒前";
+        } else {
             return "刚刚";
         }
     }
@@ -61,6 +62,7 @@ public class DateUtils {
         cal2.setTime(date2);
         return isSameDay(cal1, cal2);
     }
+
     /**
      * <p>Checks if two calendars represent the same day ignoring time.</p>
      *
@@ -307,4 +309,20 @@ public class DateUtils {
      * The maximum date possible.
      */
     public static Date MAX_DATE = new Date(Long.MAX_VALUE);
+
+    public static int daysBetween(Date smdate, Date bdate) throws Exception {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        smdate = sdf.parse(sdf.format(smdate));
+        bdate = sdf.parse(sdf.format(bdate));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(smdate);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(bdate);
+        long time2 = cal.getTimeInMillis();
+        long between_days = (time2 - time1) / (1000 * 3600 * 24);
+
+        return Integer.parseInt(String.valueOf(between_days));
+    }
+
 }
