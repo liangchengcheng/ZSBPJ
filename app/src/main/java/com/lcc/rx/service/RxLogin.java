@@ -6,6 +6,7 @@ import com.lcc.entity.MediaEntity;
 import com.lcc.entity.ResultEntity;
 import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
+import com.squareup.okhttp.RequestBody;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class RxLogin {
 
     /**
      * 登录的相关操作
+     *
      * @param username 用户名
      * @param password 密码
      * @return 返回结果
@@ -57,6 +59,7 @@ public class RxLogin {
 
     /**
      * 注册的相关操作
+     *
      * @param username 用户名
      * @param password 密码
      * @return 返回结果
@@ -81,6 +84,43 @@ public class RxLogin {
 
                     @Override
                     public void onNext(MediaEntity videoItemEntities) {
+                        ResultEntity resultEntity = new ResultEntity();
+                        resultEntity.setT(videoItemEntities);
+                        resultEntity.setClass_tag(StateConstants.VIDEO_CLASS_TAG);
+                        resultEntity.setState(StateConstants.LOAD_SUCCESS);
+                        EventBus.getDefault().post(resultEntity);
+                    }
+                });
+        return subscription;
+    }
+
+    /**
+     * 上传基本信息+图片
+     * @param filename 文件名
+     * @param requestBody 文件
+     * @param username 用户名
+     * @param password 密码
+     */
+    public static Subscription doPostAllInfo(String filename, RequestBody requestBody, String username, final String password) {
+        Subscription subscription = RxService.getLoginService().uploadImage(filename,requestBody,username, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ResultEntity resultEntity = new ResultEntity();
+                        resultEntity.setState(StateConstants.FAIL);
+                        EventBus.getDefault().post(resultEntity);
+                    }
+
+                    @Override
+                    public void onNext(String videoItemEntities) {
                         ResultEntity resultEntity = new ResultEntity();
                         resultEntity.setT(videoItemEntities);
                         resultEntity.setClass_tag(StateConstants.VIDEO_CLASS_TAG);

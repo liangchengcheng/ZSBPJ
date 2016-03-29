@@ -5,29 +5,33 @@ import com.lcc.rx.service.RxLogin;
 import com.lcc.rx.service.RxVideoList;
 import com.lcc.service.LoginService;
 import com.lcc.service.VideoListService;
+import com.squareup.okhttp.RequestBody;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import de.greenrobot.event.EventBus;
 import rx.subscriptions.CompositeSubscription;
 
 public class RxService {
 
-    private static final RxService NBAPLUS_SERVICE=new RxService();
+    private static final RxService NBAPLUS_SERVICE = new RxService();
 
     private static Gson sGson;
     private static LoginService loginService;
     private static VideoListService videoListService;
     private static ExecutorService sSingleThreadExecutor;
-    private Map<Integer,CompositeSubscription> mCompositeSubMap;
-    private RxService(){}
+    private Map<Integer, CompositeSubscription> mCompositeSubMap;
+
+    private RxService() {
+    }
 
     public void initService() {
-        sGson=new Gson();
-        mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
-        sSingleThreadExecutor= Executors.newSingleThreadExecutor();
+        sGson = new Gson();
+        mCompositeSubMap = new HashMap<Integer, CompositeSubscription>();
+        sSingleThreadExecutor = Executors.newSingleThreadExecutor();
         backGroundInit();
     }
 
@@ -43,7 +47,7 @@ public class RxService {
 
     public void addCompositeSub(int taskId) {
         CompositeSubscription compositeSubscription;
-        if(mCompositeSubMap.get(taskId)==null) {
+        if (mCompositeSubMap.get(taskId) == null) {
             compositeSubscription = new CompositeSubscription();
             mCompositeSubMap.put(taskId, compositeSubscription);
         }
@@ -51,8 +55,8 @@ public class RxService {
 
     public void removeCompositeSub(int taskId) {
         CompositeSubscription compositeSubscription;
-        if(mCompositeSubMap!=null&& mCompositeSubMap.get(taskId)!=null){
-            compositeSubscription= mCompositeSubMap.get(taskId);
+        if (mCompositeSubMap != null && mCompositeSubMap.get(taskId) != null) {
+            compositeSubscription = mCompositeSubMap.get(taskId);
             compositeSubscription.unsubscribe();
             mCompositeSubMap.remove(taskId);
         }
@@ -61,21 +65,22 @@ public class RxService {
     /**
      * 登录
      */
-    public void getLogin(int taskId,String username,String password) {
-        getCompositeSubscription(taskId).add(RxLogin.doLogin(username,password));
+    public void getLogin(int taskId, String username, String password) {
+        getCompositeSubscription(taskId).add(RxLogin.doLogin(username, password));
     }
 
     /**
      * 注册
      */
-    public void getRegister(int taskId,String username,String password) {
-        getCompositeSubscription(taskId).add(RxLogin.doLogin(username,password));
+    public void getRegister(int taskId, String username, String password) {
+        getCompositeSubscription(taskId).add(RxLogin.doLogin(username, password));
     }
+
     /**
      * 获取视频列表
      */
     public void getVideoList(int taskId, int page, int count) {
-        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(count,page));
+        getCompositeSubscription(taskId).add(RxVideoList.getVideoList(count, page));
     }
 
     /**
@@ -89,16 +94,23 @@ public class RxService {
      * 获取视频评论
      */
     public void getComments(int taskId, int id, int page) {
-        getCompositeSubscription(taskId).add(RxVideoList.getComments(id,page));
+        getCompositeSubscription(taskId).add(RxVideoList.getComments(id, page));
+    }
+
+    /**
+     * 上传个人信息带头像
+     */
+    public void getPostDataImage(int taskId, String filename, RequestBody requestBody, String username, String password) {
+        getCompositeSubscription(taskId).add(RxLogin.doPostAllInfo(filename, requestBody, username, password));
     }
 
     private CompositeSubscription getCompositeSubscription(int taskId) {
-        CompositeSubscription compositeSubscription ;
-        if(mCompositeSubMap.get(taskId)==null) {
+        CompositeSubscription compositeSubscription;
+        if (mCompositeSubMap.get(taskId) == null) {
             compositeSubscription = new CompositeSubscription();
             mCompositeSubMap.put(taskId, compositeSubscription);
-        }else {
-            compositeSubscription= mCompositeSubMap.get(taskId);
+        } else {
+            compositeSubscription = mCompositeSubMap.get(taskId);
         }
         return compositeSubscription;
     }
@@ -111,7 +123,7 @@ public class RxService {
         return sGson;
     }
 
-    public static ExecutorService getSingleThreadExecutor(){
+    public static ExecutorService getSingleThreadExecutor() {
         return sSingleThreadExecutor;
     }
 
