@@ -1,12 +1,15 @@
 package com.lcc.service;
 
 import com.lcc.bean.News;
+import com.lcc.entity.MediaEntity;
 
 import java.util.ArrayList;
 
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -17,8 +20,12 @@ import rx.Observable;
  */
 public interface LoginService {
 
-    @GET("api/v1.0/{type}/update")
-    Observable<News> updateNews(@Path("type") String type);
-    @GET("api/v1.0/{type}/loadmore/{newsId}")
-    Call<ArrayList<News>> loadMoreNews(@Path("type") String type,@Path("newsId") String newsId );
+    //登录接口
+    @POST("medias/show.json/{username}/{password}")
+    Observable<MediaEntity> Login(@Query("username") String username, @Query("password") String password);
+
+    //注册接口
+    @POST("medias/show.json/{username}/{password}")
+    Observable<MediaEntity> Register(@Query("username") String username, @Query("password") String password);
+
 }

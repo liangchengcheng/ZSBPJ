@@ -9,6 +9,16 @@ public class ResultEntity<T> implements Serializable {
 
     private int code;
 
+    private int class_tag;
+
+    public int getClass_tag() {
+        return class_tag;
+    }
+
+    public void setClass_tag(int class_tag) {
+        this.class_tag = class_tag;
+    }
+
     private T t;
 
     public int getState() {

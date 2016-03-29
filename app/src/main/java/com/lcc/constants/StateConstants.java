@@ -8,6 +8,7 @@ package com.lcc.constants;
  */
 public class StateConstants {
 
+    public final static int BEGIN =1 ;
     //刷新数据成功
     public final static int REFRESH_SUCCESS = 0;
 
@@ -16,5 +17,10 @@ public class StateConstants {
 
     //加载数据成功
     public final static int FAIL = 3;
+
+    //Video Class Tag
+    public final static int VIDEO_CLASS_TAG = 4;
+
+    public final static int LOGIN_CLASS_TAG = 4;
 
 }

@@ -3,6 +3,7 @@ package com.lcc.activity.login;
 import android.view.View;
 
 import com.lcc.bean.News;
+import com.lcc.entity.MediaEntity;
 import com.lcc.rx.RxService;
 import com.lcc.service.ApiService;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Call;
+import rx.Observable;
 import zsbpj.lccpj.app.activity.StartNetActivity;
 
 /**
@@ -28,10 +30,9 @@ public class LoginActivity1 extends StartNetActivity <ArrayList<News>>{
     @Override
     protected void onResume() {
         super.onResume();
-        Call<ArrayList<News>> listCall = ApiService.createNewsService().loadMoreNews("","");
-        networkQueue().enqueue(listCall);
-
-        RxService.getInstance().Login(getTaskId(), "");
+        final Observable<MediaEntity> login = ApiService.createNewsService().Login("", "");
+        //networkQueue().enqueue(listCall);
+        //RxService.getInstance().Login(getTaskId(), "");
     }
 
     @Override

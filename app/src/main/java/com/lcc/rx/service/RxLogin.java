@@ -1,51 +1,94 @@
 package com.lcc.rx.service;
 
 import com.lcc.bean.News;
+import com.lcc.constants.StateConstants;
+import com.lcc.entity.MediaEntity;
+import com.lcc.entity.ResultEntity;
+import com.lcc.entity.VideoItemEntity;
 import com.lcc.rx.RxService;
 
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import zsbpj.lccpj.utils.LogUtils;
 
 public class RxLogin {
-    public static Subscription getTeams(String date) {
 
-        Subscription subscription = RxService.getLoginService().updateNews(date)
+    /**
+     * 登录的相关操作
+     * @param username 用户名
+     * @param password 密码
+     * @return 返回结果
+     */
+    public static Subscription doLogin(String username, final String password) {
+        Subscription subscription = RxService.getLoginService().Login(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<News>() {
+                .subscribe(new Observer<MediaEntity>() {
+
                     @Override
-                    public void call(News games) {
-                        //用bus回调
-                        //RxService.getBus().post(new GamesEvent(games, Constant.Result.SUCCESS));
+                    public void onCompleted() {
+                        LogUtils.e("lcc", "完成");
                     }
-                }, new Action1<Throwable>() {
+
                     @Override
-                    public void call(Throwable throwable) {
-                        //RxService.getBus().post(new GamesEvent(null, Constant.Result.FAIL));
+                    public void onError(Throwable e) {
+                        ResultEntity resultEntity = new ResultEntity();
+                        resultEntity.setState(StateConstants.FAIL);
+                        EventBus.getDefault().post(resultEntity);
+                    }
+
+                    @Override
+                    public void onNext(MediaEntity videoItemEntities) {
+                        ResultEntity resultEntity = new ResultEntity();
+                        resultEntity.setT(videoItemEntities);
+                        resultEntity.setClass_tag(StateConstants.LOGIN_CLASS_TAG);
+                        resultEntity.setState(StateConstants.LOAD_SUCCESS);
+                        EventBus.getDefault().post(resultEntity);
                     }
                 });
         return subscription;
     }
 
-    public static Subscription login(String date) {
-
-        Subscription subscription = RxService.getLoginService().updateNews(date)
+    /**
+     * 注册的相关操作
+     * @param username 用户名
+     * @param password 密码
+     * @return 返回结果
+     */
+    public static Subscription doRegister(String username, final String password) {
+        Subscription subscription = RxService.getLoginService().Register(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<News>() {
+                .subscribe(new Observer<MediaEntity>() {
+
                     @Override
-                    public void call(News games) {
-                        //用bus回调
-                        //RxService.getBus().post(new GamesEvent(games, Constant.Result.SUCCESS));
+                    public void onCompleted() {
+                        LogUtils.e("lcc", "完成");
                     }
-                }, new Action1<Throwable>() {
+
                     @Override
-                    public void call(Throwable throwable) {
-                        //RxService.getBus().post(new GamesEvent(null, Constant.Result.FAIL));
+                    public void onError(Throwable e) {
+                        ResultEntity resultEntity = new ResultEntity();
+                        resultEntity.setState(StateConstants.FAIL);
+                        EventBus.getDefault().post(resultEntity);
+                    }
+
+                    @Override
+                    public void onNext(MediaEntity videoItemEntities) {
+                        ResultEntity resultEntity = new ResultEntity();
+                        resultEntity.setT(videoItemEntities);
+                        resultEntity.setClass_tag(StateConstants.VIDEO_CLASS_TAG);
+                        resultEntity.setState(StateConstants.LOAD_SUCCESS);
+                        EventBus.getDefault().post(resultEntity);
                     }
                 });
         return subscription;
     }
+
 }

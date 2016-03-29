@@ -61,8 +61,8 @@ public class RxService {
     /**
      * 登录
      */
-    public void Login(int taskId,String type) {
-        getCompositeSubscription(taskId).add(RxLogin.login(type));
+    public void getLogin(int taskId,String username,String password) {
+        getCompositeSubscription(taskId).add(RxLogin.doLogin(username,password));
     }
 
     /**

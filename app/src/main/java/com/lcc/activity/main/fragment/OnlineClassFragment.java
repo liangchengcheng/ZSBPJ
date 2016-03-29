@@ -1,6 +1,7 @@
 package com.lcc.activity.main.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -111,14 +112,15 @@ public class OnlineClassFragment extends RefreshAndLoadFragment implements Media
         if (response == null || response.getState()== StateConstants.FAIL) {
             showError();
         } else {
-            List<MediaEntity> mediaEntities = VideoUtils.toMediaList((List<VideoItemEntity>) response.getT());
-            if (response.getState()==StateConstants.REFRESH_SUCCESS){
-                showRefreshData(mediaEntities);
-            }else {
-                showMoreData(mediaEntities);
+            if (response.getClass_tag()==StateConstants.VIDEO_CLASS_TAG){
+                List<MediaEntity> mediaEntities = VideoUtils.toMediaList((List<VideoItemEntity>) response.getT());
+                if (response.getState()==StateConstants.REFRESH_SUCCESS){
+                    showRefreshData(mediaEntities);
+                }else {
+                    showMoreData(mediaEntities);
+                }
             }
         }
-
     }
 
     @Override

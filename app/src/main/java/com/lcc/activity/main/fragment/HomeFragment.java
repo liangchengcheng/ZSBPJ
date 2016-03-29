@@ -74,18 +74,22 @@ public class HomeFragment extends Fragment {
             advertiseArray.put(head_img1);
             advertiseArray.put(head_img2);
             advertiseArray.put(head_img3);
+            if (advertiseArray.length()>0){
+                Advertisements advertisements = new Advertisements(getActivity(), true, inflaters, 3000);
+                View view = advertisements.initView(advertiseArray);
+                advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        FrameManager.getInstance().toastPrompt("点击的是" + position);
+                    }
+                });
+                llAdvertiseBoard.addView(view);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Advertisements advertisements = new Advertisements(getActivity(), true, inflaters, 3000);
-        View view = advertisements.initView(advertiseArray);
-        advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
-            @Override
-            public void onClick(int position) {
-                FrameManager.getInstance().toastPrompt("点击的是" + position);
-            }
-        });
-        llAdvertiseBoard.addView(view);
+
+
         startTimer();
     }
 

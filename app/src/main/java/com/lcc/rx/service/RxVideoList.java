@@ -50,6 +50,7 @@ public class RxVideoList {
                     public void onNext(List<VideoItemEntity> videoItemEntities) {
                         ResultEntity resultEntity = new ResultEntity();
                         resultEntity.setT(videoItemEntities);
+                        resultEntity.setClass_tag(StateConstants.VIDEO_CLASS_TAG);
                         if (page == 1) {
                             resultEntity.setState(StateConstants.REFRESH_SUCCESS);
                         } else {

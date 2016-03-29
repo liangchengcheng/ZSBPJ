@@ -9,11 +9,16 @@ import android.view.View;
 import com.lcc.activity.R;
 import com.lcc.base.BaseActivity;
 
+import de.greenrobot.event.EventBus;
+
 public class RegionActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
@@ -42,5 +47,13 @@ public class RegionActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 }
