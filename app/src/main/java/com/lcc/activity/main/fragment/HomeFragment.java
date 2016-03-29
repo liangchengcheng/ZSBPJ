@@ -39,11 +39,6 @@ public class HomeFragment extends Fragment {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
-    private Timer mTimer = null;
-    private TimerTask mTimerTask = null;
-    private static final int UPDATE_TEXTVIEW = 99;
-    private static int delay = 1000;
-    private static int period = 1000;
     private TextView tv_count;
 
     @Nullable
@@ -88,9 +83,7 @@ public class HomeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-        startTimer();
+        updateTextView();
     }
 
     public class BtnListener implements View.OnClickListener {
@@ -110,32 +103,9 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void startTimer() {
-        if (mTimer == null) {
-            mTimer = new Timer();
-        }
-        if (mTimerTask == null) {
-            mTimerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    Message message = Message.obtain(handler3, UPDATE_TEXTVIEW);
-                    handler3.sendMessage(message);
-                }
-            };
-        }
-        if (mTimer != null && mTimerTask != null)
-            mTimer.schedule(mTimerTask, delay, period);
-    }
-
-    /**
-     * 更新倒计时
-     */
     private void updateTextView() {
         try {
-            long mbTime = 1483113600;
             long current = System.currentTimeMillis();
-            long time = (mbTime - current) / (60 * 60 * 24);
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date d1 = sdf.parse(sdf.format(current));
             Date d2 = sdf.parse("2016-09-15 00:00:00");
@@ -145,21 +115,5 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
-    private Handler handler3 = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-
-            switch (msg.what) {
-                case UPDATE_TEXTVIEW:
-                    updateTextView();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        ;
-    };
 
 }

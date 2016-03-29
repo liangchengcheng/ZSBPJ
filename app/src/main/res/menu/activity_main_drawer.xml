@@ -4,20 +4,20 @@
         <menu>
             <item
                 android:id="@+id/nav_camera"
-                android:icon="@drawable/ic_share_white_36dp"
+                android:icon="@drawable/ic_supervisor_account_white_36dp"
                 android:title="我的信息" />
             <item
                 android:id="@+id/nav_gallery"
-                android:icon="@drawable/ic_share_white_36dp"
+                android:icon="@drawable/ic_favorite_border_white_36dp"
                 android:title="我的收藏" />
             <item
                 android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_share_white_36dp"
+                android:icon="@drawable/ic_equalizer_white_36dp"
                 android:title="我的积分" />
             <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_share_white_36dp"
-                android:title="系统设置" />
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_shopping_basket_white_36dp"
+                android:title="进入商城" />
         </menu>
     </item>
 
@@ -28,9 +28,10 @@
                 android:icon="@drawable/ic_share_white_36dp"
                 android:title="分享软件" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_share_white_36dp"
-                android:title="进入商城" />
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_build_white_36dp"
+                android:title="系统设置" />
+
         </menu>
     </item>
 </menu>
