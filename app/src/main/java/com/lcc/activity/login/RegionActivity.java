@@ -45,7 +45,7 @@ public class RegionActivity extends BaseActivity implements View.OnClickListener
 
         et_username = (EditText) findViewById(R.id.et_username);
         et_pwd = (EditText) findViewById(R.id.et_pwd);
-        new_pwd = (EditText) findViewById(R.id.new_pwd);
+        new_pwd = (EditText) findViewById(R.id.et_newpassword);
 
     }
 

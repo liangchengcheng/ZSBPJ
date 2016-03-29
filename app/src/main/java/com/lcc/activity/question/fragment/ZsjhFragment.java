@@ -14,6 +14,7 @@ import com.lcc.entity.ZXTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
@@ -66,11 +67,6 @@ public class ZsjhFragment  extends RefreshAndLoadFragment implements ZSAdapter.O
         }, 500);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     public void showError() {
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
@@ -99,10 +95,16 @@ public class ZsjhFragment  extends RefreshAndLoadFragment implements ZSAdapter.O
         return data;
     }
     public static Fragment newInstance() {
-
         Fragment fragment = new ZsjhFragment();
-
         return fragment;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
 }

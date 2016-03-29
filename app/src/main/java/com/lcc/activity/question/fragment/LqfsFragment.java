@@ -20,6 +20,7 @@ import com.lcc.entity.ZXTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
@@ -75,11 +76,6 @@ public class LqfsFragment extends RefreshAndLoadFragment implements LQAdapter.On
         }, 500);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     public void showError() {
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
@@ -112,6 +108,14 @@ public class LqfsFragment extends RefreshAndLoadFragment implements LQAdapter.On
     public static Fragment newInstance() {
         Fragment fragment = new LqfsFragment();
         return fragment;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
 }

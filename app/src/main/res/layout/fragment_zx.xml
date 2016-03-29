@@ -1,12 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="#fff"
     android:layout_height="match_parent">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ccccccc"
-        android:id="@+id/button" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:title=" "
+        app:titleTextColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="?attr/colorPrimary"
+        app:layout_collapseMode="pin" >
+        <TextView
+            android:text="问题咨询"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_head"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_airplay_black_36dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/shape_contact"
+            android:layout_centerVertical="true"
+            android:textColor="?attr/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="本省客服代表"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:background="#ededed"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_px"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_audiotrack_black_36dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/shape_contact"
+            android:layout_centerVertical="true"
+            android:textColor="?attr/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="本省培训计划"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:background="#ededed"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_jc"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_view_comfy_black_36dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/shape_contact"
+            android:layout_centerVertical="true"
+            android:textColor="?attr/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="本省教材售卖"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:background="#ededed"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_jl"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_subject_black_36dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/shape_contact"
+            android:layout_centerVertical="true"
+            android:textColor="?attr/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="本省学习qq群"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:background="#ededed"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_kq"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_camera_black_36dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/shape_contact"
+            android:layout_centerVertical="true"
+            android:textColor="?attr/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="本省客服帮助"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:background="#ededed"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 </LinearLayout>

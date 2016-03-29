@@ -6,13 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.lcc.activity.video.VideoUtils;
 import com.lcc.adapter.question.ZXAdapter;
+import com.lcc.constants.StateConstants;
+import com.lcc.entity.MediaEntity;
+import com.lcc.entity.ResultEntity;
+import com.lcc.entity.VideoItemEntity;
 import com.lcc.entity.ZXTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
 public class ZchFragment extends RefreshAndLoadFragment implements ZXAdapter.OnItemClickListener{
@@ -70,11 +77,6 @@ public class ZchFragment extends RefreshAndLoadFragment implements ZXAdapter.OnI
         }, 500);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     public void showError() {
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
@@ -102,4 +104,30 @@ public class ZchFragment extends RefreshAndLoadFragment implements ZXAdapter.OnI
         }
         return data;
     }
+
+
+    public void onEventMainThread(ResultEntity response) {
+        LogUtils.e("lcc", "进入onEventMainThread");
+        if (response == null || response.getState()== StateConstants.FAIL) {
+            showError();
+        } else {
+            if (response.getClass_tag()==StateConstants.VIDEO_CLASS_TAG){
+                List<MediaEntity> mediaEntities = VideoUtils.toMediaList((List<VideoItemEntity>) response.getT());
+                if (response.getState()==StateConstants.REFRESH_SUCCESS){
+                    showRefreshData(mediaEntities);
+                }else {
+                    showMoreData(mediaEntities);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
 }

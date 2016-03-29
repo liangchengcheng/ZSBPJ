@@ -1,41 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-   <LinearLayout
-       android:layout_centerInParent="true"
-       android:layout_width="wrap_content"
-       android:orientation="vertical"
-       android:layout_height="wrap_content">
-       <Button
-           android:textColor="#fff"
-           android:padding="5dp"
-           android:background="@color/blue"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="考试资料"
-           android:id="@+id/kszl"
-           android:layout_gravity="center_horizontal" />
-       <Button
-           android:layout_marginTop="10dp"
-           android:textColor="#fff"
-           android:background="@color/green"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="自我检测"
-           android:id="@+id/zwcs"
-           android:layout_gravity="center_horizontal" />
 
-       <Button
-           android:layout_marginTop="10dp"
-           android:textColor="#fff"
-           android:background="@color/dark_yellow"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="我的收藏"
-           android:id="@+id/wdsc"
-           android:layout_gravity="center_horizontal" />
-   </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/circle_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_circle_yellow" />
+
+            <TextView
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/circle_yellow"
+                android:text="历届真题集锦" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/circle_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_circle_blue" />
+
+            <TextView
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/circle_blue"
+                android:text="历届模拟考题" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:id="@+id/wdsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/circle_green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_circle_green" />
+
+            <TextView
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/circle_green"
+                android:text="收藏的练习题目" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:id="@+id/zwcs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/circle_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_circle_red" />
+
+            <TextView
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/circle_red"
+                android:text="随机单选题测试" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
