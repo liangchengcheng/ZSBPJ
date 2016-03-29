@@ -98,6 +98,12 @@
             android:label="@string/title_activity_setting"
             android:theme="@style/AppTheme" />
 
+        <!--个人中心的界面-->
+        <activity
+            android:name=".personinfo.PersonInfoActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" />
+
 
         <!--高德地图定位-->
         <service android:name="com.amap.api.location.APSService" />

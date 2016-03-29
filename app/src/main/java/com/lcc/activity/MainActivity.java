@@ -23,6 +23,7 @@ import com.lcc.activity.main.activity.CityPickerActivity;
 import com.lcc.activity.main.fragment.AllKnowFragment;
 import com.lcc.activity.main.fragment.HomeFragment;
 import com.lcc.activity.main.fragment.OnlineClassFragment;
+import com.lcc.activity.personinfo.PersonInfoActivity;
 import com.lcc.activity.setting.SettingActivity;
 import com.lcc.base.BaseActivity;
 import com.lcc.view.dialog.DialogUtil;
@@ -56,7 +57,7 @@ public class MainActivity extends BaseActivity implements
         setViewPager();
     }
 
-    private void setViewPager(){
+    private void setViewPager() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         if (viewPager != null) {
@@ -69,7 +70,7 @@ public class MainActivity extends BaseActivity implements
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "快速导航");
         adapter.addFragment(new AllKnowFragment(), "考试资料");
-        Fragment onlineClassFragment=OnlineClassFragment.newInstance(1,1);
+        Fragment onlineClassFragment = OnlineClassFragment.newInstance(1, 1);
         adapter.addFragment(onlineClassFragment, "在线课程");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
@@ -96,17 +97,19 @@ public class MainActivity extends BaseActivity implements
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-            Toast.makeText(MainActivity.this,"nav_camera",Toast.LENGTH_LONG).show();
+            //去我的信息中心的界面
+            Intent intent = new Intent(MainActivity.this, PersonInfoActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-            Toast.makeText(MainActivity.this,"nav_gallery",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "nav_gallery", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_slideshow) {
-            Toast.makeText(MainActivity.this,"nav_slideshow",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "nav_slideshow", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_manage) {
             startActivity(new Intent(MainActivity.this, SettingActivity.class));
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this,"nav_share",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "nav_share", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_send) {
-            Toast.makeText(MainActivity.this,"nav_send",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "nav_send", Toast.LENGTH_LONG).show();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -127,8 +130,8 @@ public class MainActivity extends BaseActivity implements
                 break;
 
             case R.id.action_change:
-                Intent intent=new Intent(MainActivity.this, CityPickerActivity.class);
-                startActivityForResult(intent,100);
+                Intent intent = new Intent(MainActivity.this, CityPickerActivity.class);
+                startActivityForResult(intent, 100);
                 break;
 
             case R.id.action_about:
