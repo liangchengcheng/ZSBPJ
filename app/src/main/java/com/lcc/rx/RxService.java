@@ -66,6 +66,12 @@ public class RxService {
     }
 
     /**
+     * 注册
+     */
+    public void getRegister(int taskId,String username,String password) {
+        getCompositeSubscription(taskId).add(RxLogin.doLogin(username,password));
+    }
+    /**
      * 获取视频列表
      */
     public void getVideoList(int taskId, int page, int count) {

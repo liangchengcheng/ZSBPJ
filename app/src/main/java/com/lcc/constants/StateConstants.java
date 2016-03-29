@@ -18,9 +18,13 @@ public class StateConstants {
     //加载数据成功
     public final static int FAIL = 3;
 
-    //Video Class Tag
+    //视频列表类标记
     public final static int VIDEO_CLASS_TAG = 4;
 
+    //登录接口类标记
     public final static int LOGIN_CLASS_TAG = 4;
+
+    //注册接口类标记
+    public final static int REGISTER_CLASS_TAG = 4;
 
 }

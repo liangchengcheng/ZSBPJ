@@ -96,7 +96,7 @@
             android:layout_marginRight="20dp">
 
             <EditText
-                android:id="@+id/et_name"
+                android:id="@+id/et_pwd"
                 android:layout_width="fill_parent"
                 android:layout_height="50dip"
                 android:layout_marginBottom="-1dip"
@@ -120,7 +120,7 @@
             android:textColor="#000" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/newpassword"
+            android:id="@+id/new_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
