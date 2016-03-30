@@ -44,7 +44,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
-            android:text="本省客服代表"
+            android:text="本省代理代表"
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <TextView

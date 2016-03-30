@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".login.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -30,6 +30,11 @@
             </intent-filter>
         </activity>
 
+        <!--设置界面-->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" />
         <!--设置界面-->
         <activity
             android:name=".setting.SettingActivity"

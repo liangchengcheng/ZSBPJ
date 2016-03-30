@@ -1,8 +1,11 @@
 package com.lcc.utils;
 
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+
+import zsbpj.lccpj.frame.FrameManager;
 
 public class Utils {
 
@@ -23,6 +26,12 @@ public class Utils {
 			return myView.getLeft();
 		else
 			return myView.getLeft() + getRelativeLeft((View) myView.getParent());
+	}
+
+	public static int dpToPx(int dp) {
+		DisplayMetrics displayMetrics = FrameManager.getAppContext().getResources().getDisplayMetrics();
+		int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+		return px;
 	}
 	
 }
