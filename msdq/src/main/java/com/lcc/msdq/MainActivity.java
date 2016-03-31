@@ -1,6 +1,7 @@
 package com.lcc.msdq;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,20 +15,29 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lcc.view.LivingTabsLayout;
+import com.lcc.view.menu.GuillotineAnimation;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
+    private FrameLayout root;
+    private static final long RIPPLE_DURATION = 250;
+    private ImageView iv_menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        root= (FrameLayout) findViewById(R.id.root);
+        iv_menu= (ImageView) findViewById(R.id.iv_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbar.setTitle(null);
+
+        setSupportActionBar(toolbar); getSupportActionBar().setTitle(null);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -36,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(1);
         LivingTabsLayout tabs = (LivingTabsLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+        View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.guillotine, null);
+        root.addView(guillotineMenu);
+
+        new GuillotineAnimation.GuillotineBuilder(guillotineMenu, guillotineMenu.findViewById(R.id.guillotine_hamburger), iv_menu)
+                .setStartDelay(RIPPLE_DURATION)
+                .setActionBarViewForAnimation(toolbar)
+                .setClosedOnStart(true)
+                .build();
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter implements LivingTabsLayout.DrawableResIconAdapter {
