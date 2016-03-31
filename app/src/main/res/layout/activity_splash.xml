@@ -13,7 +13,7 @@
         android:background="?attr/colorPrimary"
         android:orientation="vertical" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,75 +24,31 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
 
             <ImageView
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/image"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icon" />
-
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:src="@mipmap/head" />
 
-                <TextView
-                    android:id="@+id/app_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:gravity="center_vertical"
-                    android:text="欢迎你"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/loading_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:gravity="center_vertical"
-                    android:text="等待...."
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="SSS超级睡眠助手"
+                android:textColor="@color/white"
+                android:textSize="26sp" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </io.codetail.widget.RevealFrameLayout>

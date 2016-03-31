@@ -30,9 +30,9 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:id="@+id/iv_head"
-            android:layout_width="wrap_content"
-            android:background="@drawable/ic_airplay_black_36dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="54dp"
+            android:background="@drawable/partner_icon"
+            android:layout_height="54dp" />
         <TextView
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
@@ -60,9 +60,9 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:id="@+id/iv_px"
-            android:layout_width="wrap_content"
-            android:background="@drawable/ic_audiotrack_black_36dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="54dp"
+            android:background="@drawable/book_icon"
+            android:layout_height="54dp" />
         <TextView
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
@@ -90,9 +90,9 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:id="@+id/iv_jc"
-            android:layout_width="wrap_content"
-            android:background="@drawable/ic_view_comfy_black_36dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="54dp"
+            android:background="@drawable/fund_icon"
+            android:layout_height="54dp" />
         <TextView
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
@@ -120,9 +120,9 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:id="@+id/iv_jl"
-            android:layout_width="wrap_content"
-            android:background="@drawable/ic_subject_black_36dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="54dp"
+            android:background="@drawable/friend_icon"
+            android:layout_height="54dp" />
         <TextView
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
@@ -150,9 +150,9 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:id="@+id/iv_kq"
-            android:layout_width="wrap_content"
-            android:background="@drawable/ic_camera_black_36dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="54dp"
+            android:background="@drawable/donation_icon"
+            android:layout_height="54dp" />
         <TextView
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"

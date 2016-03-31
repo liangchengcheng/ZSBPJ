@@ -60,7 +60,7 @@
                android:layout_height="wrap_content"
                android:layout_marginLeft="3dp"
                android:layout_marginRight="3dp"
-               android:layout_marginTop="50dp"
+               android:layout_marginTop="40dp"
                android:orientation="horizontal">
 
                <android.support.v7.widget.CardView
@@ -76,23 +76,23 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_camera_black_36dp" />
-
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/breakfast_icon" />
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="报名资格" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
 
@@ -109,23 +109,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_audiotrack_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/book_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="考试科目" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
 
@@ -142,23 +143,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_filter_vintage_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/sum_histogram_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="考试复习" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
            </LinearLayout>
@@ -183,23 +185,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_gradient_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/telephone_bill_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="考试时间" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
 
@@ -216,23 +219,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_hdr_strong_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/sum_pie_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="报名流程" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
 
@@ -249,23 +253,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_healing_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/education_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="学历待遇" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
            </LinearLayout>
@@ -290,23 +295,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_straighten_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/fruit_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="其他" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
 
@@ -323,23 +329,25 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_style_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/lunch_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="其他" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
 
@@ -356,23 +364,24 @@
                    app:cardUseCompatPadding="true">
 
                    <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center_horizontal"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
                        android:orientation="vertical">
 
                        <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="5dp"
-                           android:background="@drawable/ic_view_comfy_black_36dp" />
+                           android:layout_gravity="center_horizontal"
+                           android:layout_width="54dp"
+                           android:layout_height="54dp"
+                           android:layout_marginTop="10dp"
+                           android:background="@drawable/sport_icon" />
 
                        <TextView
+                           android:layout_gravity="center_horizontal"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:paddingBottom="5dp"
+                           android:paddingBottom="10dp"
                            android:paddingTop="5dp"
-                           android:text=" 梁铖城" />
+                           android:text="其他" />
                    </LinearLayout>
                </android.support.v7.widget.CardView>
            </LinearLayout>
