@@ -278,5 +278,4 @@ public class MainActivity extends BaseActivity implements
         dialog.show();
     }
 
-
 }

@@ -4,24 +4,22 @@
     android:layout_height="wrap_content"
     android:background="@color/base_bg_color"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpAdvertise"
         android:layout_width="match_parent"
-        android:layout_height="150dip" />
+        android:layout_height="match_parent" />
 
-
+    <!--android:background="@drawable/news_gallery_text_bg"-->
     <LinearLayout
-        android:gravity="right"
-        android:background="@drawable/news_gallery_text_bg"
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal" 
-       >
-    </LinearLayout>
+        android:background="#22ffffff"
+        android:gravity="right"
+        android:orientation="horizontal"></LinearLayout>
 
 </RelativeLayout>
