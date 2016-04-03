@@ -1,6 +1,10 @@
 package com.lcc.activity;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -12,11 +16,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.lcc.activity.main.activity.CityPickerActivity;
@@ -25,7 +34,9 @@ import com.lcc.activity.main.fragment.HomeFragment;
 import com.lcc.activity.main.fragment.OnlineClassFragment;
 import com.lcc.activity.personinfo.PersonInfoActivity;
 import com.lcc.activity.setting.SettingActivity;
+import com.lcc.adapter.MaterialSimpleListAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.ShareListItem;
 import com.lcc.view.dialog.DialogUtil;
 
 import java.util.ArrayList;
@@ -107,7 +118,7 @@ public class MainActivity extends BaseActivity implements
         } else if (id == R.id.nav_manage) {
             startActivity(new Intent(MainActivity.this, SettingActivity.class));
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this, "nav_share", Toast.LENGTH_LONG).show();
+            showShareDialog();
         } else if (id == R.id.nav_send) {
             Toast.makeText(MainActivity.this, "nav_send", Toast.LENGTH_LONG).show();
         }
@@ -198,5 +209,74 @@ public class MainActivity extends BaseActivity implements
                 break;
         }
     }
+
+    private void showShareDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.ShareDialog);
+        builder.setTitle("分享到");
+        final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(this);
+        String[] array = getResources().getStringArray(R.array.share_dialog_text);
+        adapter.add(new ShareListItem.Builder(this)
+                .content(array[0])
+                .icon(R.drawable.ic_wx_logo)
+                .build());
+        adapter.add(new ShareListItem.Builder(this)
+                .content(array[1])
+                .icon(R.drawable.ic_wx_moments)
+                .build());
+        adapter.add(new ShareListItem.Builder(this)
+                .content(array[2])
+                .icon(R.drawable.ic_wx_collect)
+                .build());
+        adapter.add(new ShareListItem.Builder(this)
+                .content(array[3])
+                .icon(R.drawable.ic_sina_logo)
+                .build());
+        adapter.add(new ShareListItem.Builder(this)
+                .content(array[4])
+                .icon(R.drawable.ic_share_more)
+                .build());
+        builder.setAdapter(adapter, (new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        //shareToWeChatSession();
+                        break;
+                    case 1:
+                        //shareToWeChatTimeline();
+                        break;
+                    case 2:
+                        //shareToWeChatFavorite();
+                        break;
+                    case 3:
+                        //shareToWeibo();
+                        break;
+
+                }
+            }
+        }));
+        AlertDialog dialog = builder.create();
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        Display display = getWindowManager().getDefaultDisplay();
+        Point out = new Point();
+        display.getSize(out);
+        lp.width = out.x;
+        window.setAttributes(lp);
+        final View decorView = window.getDecorView();
+        decorView.setBackgroundColor(getResources().getColor(R.color.window_background));
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Animator animator = ObjectAnimator
+                        .ofFloat(decorView, "translationY", decorView.getMeasuredHeight() / 1.5F, 0);
+                animator.setDuration(200);
+                animator.start();
+            }
+        });
+        dialog.show();
+    }
+
 
 }

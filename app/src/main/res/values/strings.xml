@@ -16,5 +16,11 @@
     <string name="located_failed">定位失败</string>
     <string name="nong_test">(。﹏。*) \n题库已经没有题目了</string>
     <string name="reset">再做一遍</string>
-
+    <array name="share_dialog_text">
+        <item>Wechat Friends</item>
+        <item>Wechat Moments</item>
+        <item>Wechat Favorite</item>
+        <item>Sina Weibo</item>
+        <item>More</item>
+    </array>
 </resources>

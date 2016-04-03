@@ -9,4 +9,9 @@
     <dimen name="side_letter_bar_letter_size">12sp</dimen>
     <dimen name="side_letter_bar_width">36dp</dimen>
     <dimen name="city_text_size">16sp</dimen>
+
+    <dimen name="md_content_textsize">16sp</dimen>
+    <dimen name="md_listitem_height">48dp</dimen>
+    <dimen name="md_simplelistitem_padding_top">8dp</dimen>
+
 </resources>
