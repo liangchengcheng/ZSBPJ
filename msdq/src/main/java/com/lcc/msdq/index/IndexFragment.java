@@ -9,11 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lcc.base.BaseFragment;
 import com.lcc.frame.Advertisements;
 import com.lcc.msdq.R;
+import com.lcc.view.menu.GuillotineAnimation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,21 +26,30 @@ public class IndexFragment extends BaseFragment {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
+    private FrameLayout root;
+    private static final long RIPPLE_DURATION = 250;
+    private ImageView iv_menu;
 
     public static Fragment newInstance() {
         Fragment fragment = new IndexFragment();
         return fragment;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.index_fragment,null);
-
-        final Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getColorPrimary());
-        toolbar.setTitle("用户登录");
+        Toolbar toolbar= (Toolbar) view.findViewById(R.id.toolbar);
+        iv_menu= (ImageView) view.findViewById(R.id.iv_menu);
+        root= (FrameLayout) view.findViewById(R.id.root);
+        View guillotineMenu
+                = LayoutInflater.from(getActivity()).inflate(R.layout.guillotine, null);
+        root.addView(guillotineMenu);
+        new GuillotineAnimation.GuillotineBuilder(guillotineMenu, guillotineMenu.findViewById(R.id.guillotine_hamburger), iv_menu)
+                .setStartDelay(RIPPLE_DURATION)
+                .setActionBarViewForAnimation(toolbar)
+                .setClosedOnStart(true)
+                .build();
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         initViews();

@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lcc.base.BaseActivity;
 import com.lcc.msdq.compony.CompanyIndexFragment;
 import com.lcc.msdq.index.IndexFragment;
 import com.lcc.msdq.personinfo.PersonInfoIndexFragment;
@@ -31,22 +32,36 @@ import com.lcc.view.menu.GuillotineAnimation;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private BottomBar mBottomBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.index);
-        mBottomBar = BottomBar.attach(MainActivity.this, savedInstanceState);
 
+        mBottomBar = BottomBar.attach(MainActivity.this, savedInstanceState);
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
                 new BottomBarFragment(IndexFragment.newInstance(), R.drawable.ic_home_black_24dp, "主页"),
-                new BottomBarFragment(TestIndexFragment.newInstance(), R.drawable.ic_receipt_black_24dp, "面试题"),
-                new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司题"),
+                new BottomBarFragment(TestIndexFragment.newInstance(), R.drawable.ic_receipt_black_24dp, "面试资料"),
+                new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司真题"),
                 new BottomBarFragment(PersonInfoIndexFragment.newInstance(), R.drawable.ic_perm_identity_black_24dp, "问题咨询")
         );
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected boolean Open() {
+        return true;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.index;
     }
 
     @Override
