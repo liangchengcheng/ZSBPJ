@@ -1,9 +1,9 @@
 package com.lcc.utils;
 
 import android.app.Activity;
-import android.content.Context;
 
-import com.lcc.activity.R;
+import com.lcc.msdq.R;
+
 
 public class ThemeUtils {
 
@@ -37,12 +37,6 @@ public class ThemeUtils {
                 break;
         }
         activity.setTheme(style);
-    }
-
-    public static Theme getCurrentTheme(Context context){
-        int value = PreferenceUtils.getInstance(context)
-                .getIntParam(context.getString(R.string.change_theme_key), 0);
-        return ThemeUtils.Theme.mapValueToTheme(value);
     }
 
     public enum Theme{

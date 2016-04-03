@@ -20,6 +20,6 @@
     <string name="popular">Popular</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
-
+    <string name="change_theme_key">change_theme_key</string>
     <string name="page">Page %1$d</string>
 </resources>

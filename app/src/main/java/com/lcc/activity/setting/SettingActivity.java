@@ -15,6 +15,7 @@ import android.widget.GridView;
 import com.lcc.activity.R;
 import com.lcc.adapter.ColorsListAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.utils.DialogUtils;
 import com.lcc.utils.PreferenceUtils;
 import com.lcc.utils.ThemeUtils;
 
@@ -58,20 +59,21 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void showThemeDialog() {
-        AlertDialog.Builder builder = generateDialogBuilder();
-        builder.setTitle("主题颜色");
+
+        android.support.v7.app.AlertDialog.Builder builder = DialogUtils.makeDialogBuilder(activity);
+        builder.setTitle("更换主题");
         Integer[] res = new Integer[]{R.drawable.red_round, R.drawable.brown_round, R.drawable.blue_round,
                 R.drawable.blue_grey_round, R.drawable.yellow_round, R.drawable.deep_purple_round,
                 R.drawable.pink_round, R.drawable.green_round};
         List<Integer> list = Arrays.asList(res);
         ColorsListAdapter adapter = new ColorsListAdapter(SettingActivity.this, list);
-        adapter.setCheckItem(getCurrentTheme().getIntValue());
-        GridView gridView = (GridView) LayoutInflater.from(SettingActivity.this).inflate(R.layout.colors_panel_layout, null);
+        adapter.setCheckItem(ThemeUtils.getCurrentTheme(activity).getIntValue());
+        GridView gridView = (GridView)LayoutInflater.from(activity).inflate(R.layout.colors_panel_layout, null);
         gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
         gridView.setCacheColorHint(0);
         gridView.setAdapter(adapter);
         builder.setView(gridView);
-        final AlertDialog dialog = builder.show();
+        final android.support.v7.app.AlertDialog dialog = builder.show();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,6 +85,32 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
+//
+//        AlertDialog.Builder builder = generateDialogBuilder();
+//        builder.setTitle("主题颜色");
+//        Integer[] res = new Integer[]{R.drawable.red_round, R.drawable.brown_round, R.drawable.blue_round,
+//                R.drawable.blue_grey_round, R.drawable.yellow_round, R.drawable.deep_purple_round,
+//                R.drawable.pink_round, R.drawable.green_round};
+//        List<Integer> list = Arrays.asList(res);
+//        ColorsListAdapter adapter = new ColorsListAdapter(SettingActivity.this, list);
+//        adapter.setCheckItem(getCurrentTheme().getIntValue());
+//        GridView gridView = (GridView) LayoutInflater.from(SettingActivity.this).inflate(R.layout.colors_panel_layout, null);
+//        gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+//        gridView.setCacheColorHint(0);
+//        gridView.setAdapter(adapter);
+//        builder.setView(gridView);
+//        final AlertDialog dialog = builder.show();
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                dialog.dismiss();
+//                int value = getCurrentTheme().getIntValue();
+//                if (value != position) {
+//                    preferenceUtils.saveParam(getString(R.string.change_theme_key), position);
+//                    changeTheme(ThemeUtils.Theme.mapValueToTheme(position));
+//                }
+//            }
+//        });
     }
 
     protected AlertDialog.Builder generateDialogBuilder() {

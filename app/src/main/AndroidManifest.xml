@@ -34,12 +34,14 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/RedTheme"
+            />
         <!--设置界面-->
         <activity
+            android:theme="@style/Theme.DesignDemo"
             android:name=".setting.SettingActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme" />
+            />
 
         <!--视频播放界面-->
         <activity

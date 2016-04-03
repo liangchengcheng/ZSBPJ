@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements
                 break;
 
             case R.id.action_settings:
-                DialogUtil.showAbout(this);
+                startActivity(new Intent(MainActivity.this,SettingActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

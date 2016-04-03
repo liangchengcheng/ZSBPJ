@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lcc.msdq.R;
+
 public class CompanyIndexFragment extends Fragment{
 
     public static Fragment newInstance() {
@@ -15,12 +17,11 @@ public class CompanyIndexFragment extends Fragment{
         return fragment;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //View view=inflater.inflate(R.layout.fragment_zx,null);
-        //return view;
-        return null;
+        View view=inflater.inflate(R.layout.company_fragment,null);
+        return view;
+
     }
 }
