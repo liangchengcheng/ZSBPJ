@@ -195,5 +195,4 @@ public class TestIndexFragment extends BaseFragment implements PopupWindow.OnDis
         icon3.setImageResource(R.drawable.icon_435);
     }
 
-
 }

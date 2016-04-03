@@ -31,4 +31,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile project(':superlibrary')
+    compile 'com.sothree.slidinguppanel:library:3.3.0'
+    compile 'com.lapism:searchview:2.2'
 }
