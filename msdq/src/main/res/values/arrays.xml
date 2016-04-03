@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="tiaojian1">
+        <item>价格不限</item>
+        <item>100元以下</item>
+        <item>100-500元</item>
+        <item>500-1000元</item>
+        <item>1000-2000元</item>
+        <item>2000元以上</item>
+    </string-array>
+    <string-array name="tiaojian2">
+        <item>价格不限</item>
+        <item>100元以下</item>
+        <item>100-500元</item>
+        <item>500-1000元</item>
+        <item>1000-2000元</item>
+        <item>2000元以上</item>
+    </string-array>
+
+    <string-array name="tiaojian3">
+        <item>价格不限</item>
+        <item>100元以下</item>
+        <item>100-500元</item>
+        <item>500-1000元</item>
+        <item>1000-2000元</item>
+        <item>2000元以上</item>
+    </string-array>
+</resources>
