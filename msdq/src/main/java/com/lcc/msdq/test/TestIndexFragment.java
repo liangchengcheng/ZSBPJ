@@ -5,6 +5,8 @@ import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +19,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lcc.adapter.CompanyAdapter;
 import com.lcc.adapter.MyAdapter;
 import com.lcc.adapter.SubAdapter;
+import com.lcc.adapter.TestAdapter;
 import com.lcc.base.BaseFragment;
+import com.lcc.entity.CompanyEntity;
+import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 
 import java.util.ArrayList;
@@ -27,7 +33,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class TestIndexFragment extends BaseFragment implements PopupWindow.OnDismissListener{
+import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
+
+public class TestIndexFragment extends S_RefreshAndLoadFragment implements PopupWindow.OnDismissListener,
+        TestAdapter.OnItemClickListener {
 
     private LinearLayout ll_quyu, ll_jiage, ll_huxing, lv1_layout;
     private ListView lv1, lv2;
@@ -36,14 +46,31 @@ public class TestIndexFragment extends BaseFragment implements PopupWindow.OnDis
     private int screenWidth;
     private int screenHeight;
     private int idx;
-    private SubAdapter subAdapter;
     private MyAdapter madapter;
     private View ll_layout;
+    static final int ACTION_NONE = 0;
+    private TestAdapter mAdapter;
 
 
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment();
         return fragment;
+    }
+
+    @Override
+    protected void onFragmentCreate() {
+        super.onFragmentCreate();
+        View view = getView();
+        RecyclerView mRecyclerView = getRecyclerView();
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new TestAdapter(getActivity());
+        setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(this);
+        mAdapter.setHasMoreData(true);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        autoRefresh();
     }
 
     @Nullable
@@ -88,6 +115,21 @@ public class TestIndexFragment extends BaseFragment implements PopupWindow.OnDis
         icon3 = (ImageView) view.findViewById(R.id.icon3);
         initScreenWidth();
         return view;
+    }
+
+    @Override
+    protected void onFragmentLoadMore() {
+        showMoreData(getData());
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.test_fragment;
+    }
+
+    @Override
+    public void onRefreshData() {
+        showRefreshData(getData());
     }
 
     public void showPopupWindow(View anchor, int flag) {
@@ -195,4 +237,45 @@ public class TestIndexFragment extends BaseFragment implements PopupWindow.OnDis
         icon3.setImageResource(R.drawable.icon_435);
     }
 
+    @Override
+    public void OnItemClick(TestEntity entity) {
+
+    }
+
+    /**
+     * 刷新数据
+     */
+    private void autoRefresh() {
+        getSwipeRefreshWidget().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentPage = STATE_REFRESH;
+                getSwipeRefreshWidget().setRefreshing(true);
+                showRefreshData(getData());
+            }
+        }, 500);
+    }
+
+    public void showError() {
+        currentState = ACTION_NONE;
+        if (getSwipeRefreshWidget().isRefreshing()) {
+            getSwipeRefreshWidget().setRefreshing(false);
+            FrameManager.getInstance().toastPrompt("刷新数据失败");
+        } else {
+            FrameManager.getInstance().toastPrompt("加载数据失败");
+            mAdapter.setHasFooter(false);
+        }
+    }
+
+    private List<TestEntity> getData() {
+        List<TestEntity> data = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            TestEntity zxTest = new TestEntity();
+            zxTest.setDate("2016年03月23日14:26:29" + i);
+            zxTest.setName("SD学院公布了最新的录取分数线");
+            zxTest.setJj("浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）");
+            data.add(zxTest);
+        }
+        return data;
+    }
 }
