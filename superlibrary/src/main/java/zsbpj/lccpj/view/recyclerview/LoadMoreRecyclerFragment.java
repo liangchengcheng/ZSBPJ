@@ -93,7 +93,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
 
     public void showLoadError(String errorMsg) {
         adapter.setHasFooter(false);
-        FrameManager.getInstance().toastPrompt("记在失败");
+        FrameManager.getInstance().toastPrompt("加载失败");
     }
 
 

@@ -105,6 +105,7 @@ public class LqfsFragment extends RefreshAndLoadFragment implements LQAdapter.On
         }
         return data;
     }
+
     public static Fragment newInstance() {
         Fragment fragment = new LqfsFragment();
         return fragment;
