@@ -1,6 +1,7 @@
 package com.lcc.msdq.compony;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -150,7 +151,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void OnItemClick(CompanyEntity entity) {
-
+        startActivity(new Intent(getActivity(),CompanyContentActivity.class));
     }
 
     /**

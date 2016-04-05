@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.lcc.base.BaseFragment;
 import com.lcc.frame.Advertisements;
+import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.R;
 import com.lcc.view.menu.GuillotineAnimation;
 
@@ -53,6 +54,9 @@ public class IndexFragment extends BaseFragment {
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         initViews();
+        UpdateApkTask task = new UpdateApkTask(getActivity(), false);
+        task.detectionVersionInfo();
+
         return view;
     }
 

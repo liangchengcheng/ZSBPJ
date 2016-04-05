@@ -2,6 +2,7 @@ package com.lcc.base;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,9 +29,15 @@ import com.lcc.utils.ThemeUtils;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected PreferenceUtils preferenceUtils;
+    protected boolean isStartAnim = true;
+    protected boolean isCloseAnim = true;
+    public final static String IS_START_ANIM = "IS_START_ANIM";
+    public final static String IS_CLOSE_ANIM = "IS_CLOSE_ANIM";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        parseIntent(getIntent());
+        showActivityInAnim();
         preferenceUtils = PreferenceUtils.getInstance(this);
         initTheme();
         super.onCreate(savedInstanceState);
@@ -155,5 +162,30 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    protected void showActivityInAnim(){
+        if (isStartAnim) {
+            overridePendingTransition(R.anim.activity_right_left_anim, R.anim.activity_left_right_anim);
+        }
+    }
+
+    protected void showActivityExitAnim(){
+        if (isCloseAnim) {
+            overridePendingTransition(R.anim.activity_left_right_anim, R.anim.activity_right_left_anim);
+        }
+    }
+
+    private void parseIntent(Intent intent){
+        if (intent != null) {
+            isStartAnim = intent.getBooleanExtra(IS_START_ANIM, true);
+            isCloseAnim = intent.getBooleanExtra(IS_CLOSE_ANIM, true);
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        showActivityExitAnim();
     }
 }
