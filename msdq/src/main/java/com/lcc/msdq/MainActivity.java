@@ -1,5 +1,6 @@
 package com.lcc.msdq;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -32,6 +33,8 @@ import com.lcc.view.menu.GuillotineAnimation;
 
 import java.util.Locale;
 
+import zsbpj.lccpj.view.toast.SuperCustomToast;
+
 public class MainActivity extends BaseActivity {
 
     private BottomBar mBottomBar;
@@ -39,6 +42,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
+        toast.setDefaultTextColor(Color.WHITE);
+        toast.show("不好了。", R.layout.toast_item,R.id.content_toast,MainActivity.this);
 
         mBottomBar = BottomBar.attach(MainActivity.this, savedInstanceState);
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
