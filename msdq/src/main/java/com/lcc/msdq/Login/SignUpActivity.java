@@ -1,20 +1,156 @@
 package com.lcc.msdq.Login;
 
+import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.SignUpPresenter;
+import com.lcc.mvp.presenter.impl.SignUpPresenterImpl;
+import com.lcc.mvp.view.SignUpView;
+import com.lcc.utils.FormValidation;
+import com.lcc.utils.KeyboardUtils;
+import com.lcc.utils.TextWatcher;
+import com.lcc.utils.WidgetUtils;
 
-public class SignUpActivity extends BaseActivity {
+public class SignUpActivity extends BaseActivity implements SignUpView, View.OnClickListener {
+
+    private static final int DELAY_MILLIS = 1 * 1000;
+    private TextInputLayout mTextInputLayoutPhone;
+    private TextInputLayout mTextInputLayoutPassword;
+    private EditText mEditTextVerifyCode;
+    private Button mButtonSendVerifyCode;
+    private Button mButtonSignUp;
+    private SignUpPresenter mPresenter;
+    private int verifyCodeCountdown = 30;
+    protected Handler taskHandler = new Handler();
+
     @Override
     protected void initView() {
+        mPresenter = new SignUpPresenterImpl(this);
+        mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
+        mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
+        mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
+        mEditTextVerifyCode = (EditText) findViewById(R.id.editText_verify_code);
+        mButtonSendVerifyCode = (Button) findViewById(R.id.button_send_verify_code);
+        mButtonSendVerifyCode.setOnClickListener(this);
+        mButtonSignUp = (Button) findViewById(R.id.buttonSignUp);
+        mButtonSignUp.setOnClickListener(this);
+        mTextInputLayoutPhone.getEditText().addTextChangedListener(new TextWatcher(mTextInputLayoutPhone) {
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (getEditString().length() > 10)
+                    if (FormValidation.isMobile(getEditString())) {
+                        mTextInputLayoutPhone.setErrorEnabled(false);
+                    } else {
+                        setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
+                    }
+            }
+        });
+
+        mTextInputLayoutPassword.getEditText().addTextChangedListener(new TextWatcher(mTextInputLayoutPassword) {
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (getEditString().length() > 5)
+                    if (FormValidation.isSimplePassword(getEditString())) {
+                        mTextInputLayoutPassword.setErrorEnabled(false);
+                    } else {
+                        setEditTextError(mTextInputLayoutPassword, R.string.msg_error_password);
+                    }
+            }
+        });
 
     }
 
-    @Override
-    protected boolean Open() {
+    public boolean valid(String phone, String password) {
+        if (!FormValidation.isMobile(phone)) {
+            WidgetUtils.requestFocus(mTextInputLayoutPhone.getEditText());
+            setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
+            return true;
+        }
+        if (!FormValidation.isSimplePassword(password)) {
+            WidgetUtils.requestFocus(mTextInputLayoutPassword.getEditText());
+            setEditTextError(mTextInputLayoutPassword, R.string.msg_error_password);
+            return true;
+        }
         return false;
     }
 
     @Override
+    protected boolean Open() {
+        return true;
+    }
+
+    @Override
     protected int getLayoutView() {
-        return 0;
+        return R.layout.activity_signup;
+    }
+
+    @Override
+    public void onClick(View v) {
+        KeyboardUtils.hide(this);
+        String phone = mTextInputLayoutPhone.getEditText().getText().toString();
+        String password = mTextInputLayoutPassword.getEditText().getText().toString();
+        if (valid(phone, password))
+            return;
+        switch (v.getId()) {
+            case R.id.button_send_verify_code:
+                mPresenter.getVerifySMS(phone, password);
+                break;
+            case R.id.buttonSignUp:
+                String verify_code = mEditTextVerifyCode.getText().toString();
+                if (FormValidation.isVerifyCode(verify_code)) {
+                    mPresenter.signUp(phone, password, verify_code);
+                } else {
+                    WidgetUtils.requestFocus(mEditTextVerifyCode);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showVerifyError(String errorMsg) {
+
+    }
+
+    @Override
+    public void showVerifySuccess() {
+        mButtonSendVerifyCode.setClickable(false);
+        taskHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (verifyCodeCountdown == 0) {
+                    mButtonSendVerifyCode.setClickable(true);
+                    mButtonSendVerifyCode.setText(R.string.msg_get_verify_code);
+                    return;
+                }
+                mButtonSendVerifyCode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
+                verifyCodeCountdown--;
+                taskHandler.postDelayed(this, DELAY_MILLIS);
+            }
+        }, DELAY_MILLIS);
+    }
+
+    @Override
+    public void showSignUpError(String msg) {
+
+    }
+
+    @Override
+    public void signUpSuccess() {
+
+    }
+
+    @Override
+    public void showMsg(String msg) {
+
+    }
+
+    private void setEditTextError(TextInputLayout layout, int msgId) {
+        layout.setErrorEnabled(true);
+        layout.setError(getString(msgId));
     }
 }

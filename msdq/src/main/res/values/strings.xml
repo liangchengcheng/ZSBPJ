@@ -7,4 +7,13 @@
     <string name="page">Page %1$d</string>
     <string name="msg_error_phone">请输入正确的手机号码</string>
     <string name="msg_error_password">请输入6到16位数字或字母密码</string>
+    <string name="layout_str_msg_login_successs"> 登录成功</string>
+    <string name="layout_str_hint_login"> 登录</string>
+    <string name="layout_str_hint_sign_up">注册</string>
+    <string name="layout_str_hint_phone"> 手机</string>
+    <string name="layout_str_hint_password">密码</string>
+    <string name="layout_str_hint_input_code">请输入验证码</string>
+    <string name="msg_get_verify_code">获取验证码</string>
+    <string name="msg_verify_code_point">秒后获取</string>
+
 </resources>

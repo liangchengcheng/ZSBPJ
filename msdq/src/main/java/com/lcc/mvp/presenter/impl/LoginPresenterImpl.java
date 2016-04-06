@@ -10,7 +10,6 @@ import com.squareup.okhttp.Request;
 public class LoginPresenterImpl  implements LoginPresenter {
 
     private LoginView view;
-
     private LoginModel model;
 
     public LoginPresenterImpl(LoginView view) {
