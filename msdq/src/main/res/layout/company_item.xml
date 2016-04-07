@@ -16,35 +16,98 @@
         android:orientation="horizontal"
         app:cardCornerRadius="1dp"
         app:cardUseCompatPadding="true">
-        <LinearLayout
-           android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_marginTop="5dp"
-                android:id="@+id/tv_title"
-                android:text="这个位置是标题"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginTop="5dp"
-                android:background="#ededed"
-                android:layout_width="match_parent"
-                android:layout_height="1dp" />
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_marginTop="5dp"
-                android:text="浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）；浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）；"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:text="2016年03月23日14:16:21"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:orientation="horizontal"
+           android:layout_height="wrap_content">
+           <LinearLayout
+               android:layout_gravity="center_vertical"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+               <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/iv_icon"
+                   android:background="@drawable/baidu"
+                   app:border_color="#fff"
+                   app:border_width="1dp"
+                   android:layout_width="80dp"
+                   android:layout_height="80dp" />
+           </LinearLayout>
+           <LinearLayout
+               android:layout_margin="10dp"
+               android:orientation="vertical"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:layout_marginTop="5dp"
+                   android:id="@+id/tv_title"
+                   android:text="百度科技网络有限公司"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:layout_marginTop="5dp"
+                   android:background="#ededed"
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp" />
+               <TextView
+                   android:id="@+id/tv_content"
+                   android:layout_marginTop="5dp"
+                   android:lines="2"
+                   android:ellipsize="end"
+                   android:text="国内三巨头之一，一家世界级的搜索公司，世界500强，工资福利很高"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
+               <LinearLayout
+                   android:layout_marginTop="5dp"
+                   android:layout_width="match_parent"
+                   android:orientation="horizontal"
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:layout_weight="1"
+                       android:id="@+id/tv_time"
+                       android:layout_marginTop="5dp"
+                       android:layout_width="0dp"
+                       android:text="03/23 14:16"
+                       android:layout_height="wrap_content" />
+                   <LinearLayout
+                       android:layout_weight="1"
+                       android:layout_marginLeft="10dp"
+                       android:layout_width="0dp"
+                       android:orientation="horizontal"
+                       android:layout_height="wrap_content">
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:background="@drawable/ic_favorite_black_24dp"
+                           android:layout_height="wrap_content" />
+                       <TextView
+                           android:layout_marginLeft="3dp"
+                           android:id="@+id/tv_f_number"
+                           android:layout_marginTop="5dp"
+                           android:layout_width="match_parent"
+                           android:text="2233"
+                           android:layout_height="wrap_content" />
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_weight="1"
+                       android:layout_marginLeft="10dp"
+                       android:layout_width="0dp"
+                       android:orientation="horizontal"
+                       android:layout_height="wrap_content">
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:background="@drawable/ic_visibility_black_24dp"
+                           android:layout_height="wrap_content" />
+                       <TextView
+                           android:layout_marginLeft="3dp"
+                           android:id="@+id/tv_l_number"
+                           android:layout_marginTop="5dp"
+                           android:layout_width="match_parent"
+                           android:text="2233"
+                           android:layout_height="wrap_content" />
+                   </LinearLayout>
+               </LinearLayout>
+
+           </LinearLayout>
+       </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -183,9 +183,10 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         List<CompanyEntity> data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             CompanyEntity zxTest = new CompanyEntity();
-            zxTest.setDate("2016年03月23日14:26:29" + i);
+            zxTest.setDate("03/23 14:26");
             zxTest.setName("SD学院公布了最新的录取分数线");
-            zxTest.setJj("浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）");
+            zxTest.setJj("这个是对这个公司的基本的简介这个是对这个公司的基本的简介这个是对这个公司的基本的简介这" +
+                    "个是对这个公司的基本的简介这个是对这个公司的基本的简介");
             data.add(zxTest);
         }
         return data;

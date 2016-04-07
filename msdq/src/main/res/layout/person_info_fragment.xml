@@ -49,25 +49,21 @@
             android:padding="10dp"
             android:text="梁铖城"
             android:textSize="18sp" />
+
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-
-
 
                     <RelativeLayout
                         android:layout_width="match_parent"
