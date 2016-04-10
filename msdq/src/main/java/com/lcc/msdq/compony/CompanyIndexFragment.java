@@ -172,9 +172,9 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
             getSwipeRefreshWidget().setRefreshing(false);
-            FrameManager.getInstance().toastPrompt("刷新数据失败");
+            FrameManager.getInstance().toastPrompt("刷新数据失败...");
         } else {
-            FrameManager.getInstance().toastPrompt("加载数据失败");
+            FrameManager.getInstance().toastPrompt("加载数据失败...");
             mAdapter.setHasFooter(false);
         }
     }
@@ -184,7 +184,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         for (int i = 0; i < 10; i++) {
             CompanyEntity zxTest = new CompanyEntity();
             zxTest.setDate("03/23 14:26");
-            zxTest.setName("SD学院公布了最新的录取分数线");
+            zxTest.setName("百度科技网络有限公司");
             zxTest.setJj("这个是对这个公司的基本的简介这个是对这个公司的基本的简介这个是对这个公司的基本的简介这" +
                     "个是对这个公司的基本的简介这个是对这个公司的基本的简介");
             data.add(zxTest);

@@ -48,7 +48,7 @@ public class CompanyContentActivity extends BaseActivity{
 
     @Override
     protected boolean Open() {
-        return true;
+        return false;
     }
 
     @Override

@@ -47,10 +47,17 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
         holder.tv_content.setText(entity.getJj());
         holder.tv_time.setText(entity.getDate());
 
-        Glide.with(holder.iv_icon.getContext())
-                .load(R.drawable.baidu)
-                .fitCenter()
-                .into(holder.iv_icon);
+        if (position%2==1){
+            Glide.with(holder.iv_icon.getContext())
+                    .load(R.drawable.baidu)
+                    .fitCenter()
+                    .into(holder.iv_icon);
+        }else {
+            Glide.with(holder.iv_icon.getContext())
+                    .load(R.drawable.guge)
+                    .fitCenter()
+                    .into(holder.iv_icon);
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -73,4 +80,5 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
     public interface OnItemClickListener{
         void OnItemClick(CompanyEntity entity);
     }
+
 }

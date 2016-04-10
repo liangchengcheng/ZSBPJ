@@ -29,8 +29,8 @@
                    android:background="@drawable/baidu"
                    app:border_color="#fff"
                    app:border_width="1dp"
-                   android:layout_width="80dp"
-                   android:layout_height="80dp" />
+                   android:layout_width="72dp"
+                   android:layout_height="72dp" />
            </LinearLayout>
            <LinearLayout
                android:layout_margin="10dp"
@@ -68,42 +68,50 @@
                        android:layout_width="0dp"
                        android:text="03/23 14:16"
                        android:layout_height="wrap_content" />
-                   <LinearLayout
+                   <RelativeLayout
                        android:layout_weight="1"
                        android:layout_marginLeft="10dp"
                        android:layout_width="0dp"
                        android:orientation="horizontal"
                        android:layout_height="wrap_content">
                        <ImageView
+                           android:layout_centerVertical="true"
+                           android:id="@+id/iv_left_head"
                            android:layout_width="wrap_content"
-                           android:background="@drawable/ic_favorite_black_24dp"
+                           android:background="@drawable/ic_favorite_black_18dp"
                            android:layout_height="wrap_content" />
                        <TextView
+                           android:layout_centerVertical="true"
+                           android:layout_toRightOf="@+id/iv_left_head"
                            android:layout_marginLeft="3dp"
                            android:id="@+id/tv_f_number"
                            android:layout_marginTop="5dp"
                            android:layout_width="match_parent"
                            android:text="2233"
                            android:layout_height="wrap_content" />
-                   </LinearLayout>
-                   <LinearLayout
+                   </RelativeLayout>
+                   <RelativeLayout
                        android:layout_weight="1"
                        android:layout_marginLeft="10dp"
                        android:layout_width="0dp"
                        android:orientation="horizontal"
                        android:layout_height="wrap_content">
                        <ImageView
+                           android:id="@+id/lv_head"
+                           android:layout_centerVertical="true"
                            android:layout_width="wrap_content"
-                           android:background="@drawable/ic_visibility_black_24dp"
+                           android:background="@drawable/ic_favorite_black_18dp"
                            android:layout_height="wrap_content" />
                        <TextView
+                           android:layout_toRightOf="@+id/lv_head"
+                           android:layout_centerVertical="true"
                            android:layout_marginLeft="3dp"
                            android:id="@+id/tv_l_number"
                            android:layout_marginTop="5dp"
-                           android:layout_width="match_parent"
+                           android:layout_width="wrap_content"
                            android:text="2233"
                            android:layout_height="wrap_content" />
-                   </LinearLayout>
+                   </RelativeLayout>
                </LinearLayout>
 
            </LinearLayout>
