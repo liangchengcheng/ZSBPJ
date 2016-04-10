@@ -19,25 +19,24 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lcc.adapter.CompanyAdapter;
 import com.lcc.adapter.MyAdapter;
-import com.lcc.adapter.SubAdapter;
 import com.lcc.adapter.TestAdapter;
-import com.lcc.base.BaseFragment;
-import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.TestPresenter;
+import com.lcc.mvp.presenter.impl.TestPresenterImpl;
+import com.lcc.mvp.view.TestView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
-public class TestIndexFragment extends S_RefreshAndLoadFragment implements
+public class TestIndexFragment1 extends S_RefreshAndLoadFragment implements
         PopupWindow.OnDismissListener,
+        TestView,
         TestAdapter.OnItemClickListener {
 
     private LinearLayout ll_quyu, ll_jiage, ll_huxing, lv1_layout;
@@ -51,15 +50,17 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private View ll_layout;
     static final int ACTION_NONE = 0;
     private TestAdapter mAdapter;
+    private TestPresenter mPresenter;
 
-    public static Fragment newInstance() {
-        Fragment fragment = new TestIndexFragment();
-        return fragment;
-    }
+    //别忘记设置下面的值
+    private int id;
+    private int type;
+    private static final int PAGER_SIZE = 20;
 
     @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
+        mPresenter=new TestPresenterImpl(this);
         View view = getView();
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
@@ -69,7 +70,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         autoRefresh();
     }
 
@@ -251,11 +251,12 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             public void run() {
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                showRefreshData(getData());
+                mPresenter.refresh(id, type, PAGER_SIZE);
             }
         }, 500);
     }
 
+    @Override
     public void showError() {
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
@@ -278,4 +279,20 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         }
         return data;
     }
+
+    public static Fragment newInstance() {
+        Fragment fragment = new TestIndexFragment1();
+        return fragment;
+    }
+
+    @Override
+    public void refreshView(List<TestEntity> entities) {
+        showRefreshData(entities);
+    }
+
+    @Override
+    public void loadMoreView(List<TestEntity> entities) {
+        showMoreData(entities);
+    }
+
 }

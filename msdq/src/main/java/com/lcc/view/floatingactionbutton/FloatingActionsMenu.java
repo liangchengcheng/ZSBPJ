@@ -20,7 +20,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
-import com.jlgzcx.R;
+import com.lcc.msdq.R;
 
 
 public class FloatingActionsMenu extends ViewGroup {

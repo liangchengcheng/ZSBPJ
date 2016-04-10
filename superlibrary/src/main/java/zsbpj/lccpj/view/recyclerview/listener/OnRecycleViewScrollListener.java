@@ -72,8 +72,8 @@ public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollL
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
-        if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE && (lastVisibleItemPosition) >=
-                totalItemCount - 1)) {
+        if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE &&
+                (lastVisibleItemPosition) >= totalItemCount - 1)) {
             onLoadMore();
         }
     }
