@@ -20,6 +20,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_back_white_24dp" />
+        <TextView
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:textColor="#fff"
+            android:text="登录界面"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
 
 

@@ -3,11 +3,13 @@ package com.lcc.msdq.Login;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
@@ -54,6 +56,8 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
         };
         SMSSDK.registerEventHandler(eh);
+        TextView iv_head= (TextView) findViewById(R.id.iv_head);
+        iv_head.setText("用户注册");
         mPresenter = new SignUpPresenterImpl(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);

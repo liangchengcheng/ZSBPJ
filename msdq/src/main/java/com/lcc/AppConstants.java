@@ -80,6 +80,7 @@ public class AppConstants {
         public final static String AUTO_LOGIN_KEY = "auto_login";
 
         public final static String SCREEN_NAEM_KEY = "screen_name";
+
         public final static String GENDER_KEY = "gender";
 
         public final static String DESCRIPTION_KEY = "description";
@@ -103,6 +104,7 @@ public class AppConstants {
         public final static String GRANT_TYPE = "phone";
 
         public final static String TYPR_RESET_PASSWORD = "reset_password";
+
         public final static int AUTO_LOGIN = 1;
 
         public final static int WITH_CAPTION = 1;

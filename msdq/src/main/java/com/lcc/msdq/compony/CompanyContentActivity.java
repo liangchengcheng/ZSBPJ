@@ -41,7 +41,7 @@ public class CompanyContentActivity extends BaseActivity{
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new CodeFragment(), "技术面试");
         adapter.addFragment(new HrFragment(), "人事面试");
-        adapter.addFragment(new OtherFragment(), "其他");
+        adapter.addFragment(new OtherFragment(), "其他/经验");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }
