@@ -12,7 +12,7 @@ public class LoginModel {
     /**
      * 用户登陆
      *
-     * @param phone    手机号码
+     * @param phone 手机号码
      * @param password 密码
      * @param callback 回调函数 默认返回的String 其实可以是其他的javabean
      */
@@ -21,6 +21,6 @@ public class LoginModel {
         paramsMap.put(AppConstants.ParamKey.PHONE_KEY, phone);
         paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, password);
         paramsMap.put(AppConstants.ParamKey.GRANT_TYPE_KEY, AppConstants.ParamDefaultValue.GRANT_TYPE);
-        return ApiClient.create(AppConstants.RequestPath.OAUTH, paramsMap).tag("").post(callback);
+        return ApiClient.create(AppConstants.RequestPath.LOGIN, paramsMap).tag("").post(callback);
     }
 }

@@ -1,11 +1,15 @@
 package com.lcc.msdq.Login;
 
 import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.ResetPasswordPresenter;
@@ -15,6 +19,11 @@ import com.lcc.utils.FormValidation;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.TextWatcher;
 import com.lcc.utils.WidgetUtils;
+
+import org.json.JSONObject;
+
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 
 public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView, View.OnClickListener {
 
@@ -27,9 +36,24 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
     private ResetPasswordPresenter mPresenter;
     private int verifyCodeCountdown = 30;
     protected Handler taskHandler = new Handler();
+    private String phone,password,verify_code;
 
     @Override
     protected void initView() {
+        SMSSDK.initSDK(this,"11cc5d753865c","3c6cdfb8371e181a03f8a27f217e2043",true);
+        EventHandler eh=new EventHandler(){
+
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = result;
+                msg.obj = data;
+                mHandler.sendMessage(msg);
+            }
+
+        };
+        SMSSDK.registerEventHandler(eh);
         mPresenter = new ResetPasswordPresenterImpl(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
@@ -76,18 +100,20 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
     @Override
     public void onClick(View v) {
         KeyboardUtils.hide(this);
-        String phone = mTextInputLayoutPhone.getEditText().getText().toString();
-        String password = mTextInputLayoutPassword.getEditText().getText().toString();
+        phone = mTextInputLayoutPhone.getEditText().getText().toString();
+        password = mTextInputLayoutPassword.getEditText().getText().toString();
         if (valid(phone, password))
             return;
         switch (v.getId()) {
             case R.id.button_send_verify_code:
-                mPresenter.getVerifySMS(phone, password);
+                //mPresenter.getVerifySMS(phone, password);
+                SMSSDK.getVerificationCode("86",phone);
                 break;
             case R.id.buttonSignUp:
-                String verify_code = mEditTextVerifyCode.getText().toString();
+                verify_code = mEditTextVerifyCode.getText().toString();
                 if (FormValidation.isVerifyCode(verify_code)) {
-                    mPresenter.resetPassword(verify_code, phone, password);
+                    //mPresenter.resetPassword(verify_code, phone, password);
+                    SMSSDK.submitVerificationCode("86", phone, verify_code);
                 } else {
                     WidgetUtils.requestFocus(mEditTextVerifyCode);
                 }
@@ -145,5 +171,44 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
     private void setEditTextError(TextInputLayout layout, int msgId) {
         layout.setErrorEnabled(true);
         layout.setError(getString(msgId));
+    }
+
+    Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+
+            super.handleMessage(msg);
+            int event = msg.arg1;
+            int result = msg.arg2;
+            Object data = msg.obj;
+            if (result == SMSSDK.RESULT_COMPLETE) {
+                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                    Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_SHORT).show();
+                    mPresenter.resetPassword(phone, password, verify_code);
+                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                    Toast.makeText(getApplicationContext(), "短信发送成功", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                int status = 0;
+                try {
+                    ((Throwable) data).printStackTrace();
+                    Throwable throwable = (Throwable) data;
+                    JSONObject object = new JSONObject(throwable.getMessage());
+                    String des = object.optString("detail");
+                    status = object.optInt("status");
+                    if (!TextUtils.isEmpty(des)) {
+                        Toast.makeText(ResetPasswordActivity.this, des, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SMSSDK.unregisterAllEventHandler();
     }
 }

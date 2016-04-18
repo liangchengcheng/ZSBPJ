@@ -10,7 +10,7 @@ public class FormValidation {
      * 判断是不是验证码
      */
     public static boolean isVerifyCode(String code) {
-        return validation("\\d{6}", code);
+        return validation("\\d{4}", code);
     }
 
     public static boolean isMobile(String phoneNum) {

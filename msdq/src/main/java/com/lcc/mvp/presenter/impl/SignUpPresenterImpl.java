@@ -47,8 +47,6 @@ public class SignUpPresenterImpl implements SignUpPresenter {
             public void onResponse(JsonElement response) {
                 if (response.getAsBoolean()) {
                     view.showVerifySuccess();
-
-
                 }
             }
         });

@@ -4,7 +4,9 @@ package com.lcc;
 public class AppConstants {
 
     public final class RequestPath {
-        public final static String BASE_URL = "https://newapi.meipai.com";
+        //public final static String BASE_URL = "https://newapi.meipai.com";
+
+        public final static String BASE_URL = "http://114.215.164.168:8080";
         public final static String CATEGOTY = "/channels/header_list.json?language=zh-Hans";
         public final static String VIDEO_LIST = "/channels/feed_timeline.json";
         public final static String HOT_VIDEO_LIST = "/hot/feed_timeline.json";
@@ -17,11 +19,22 @@ public class AppConstants {
         public final static String CREATE_COMMENTS_LIKE = "/comments/create_like.json";
         public final static String DESTORY_COMMENT_LIKE = "/comments/destroy_like.json";
 
-        public final static String OAUTH = "/oauth/access_token.json";
+        /**
+         * 注册账号
+         */
+        public final static String OAUTH = "/register";
+
+        /**
+         * 登录账号
+         */
+        public final static String LOGIN = "/login";
+
+        /**
+         * 初始化密码，重置密码。
+         */
+        public final static String RESET_PASSWORD = "/reset";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
-
-        public final static String RESET_PASSWORD = "/users/reset_password.json";
 
         public final static String USERS_UPDATE = "/users/update.json";
 

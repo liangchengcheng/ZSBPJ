@@ -36,6 +36,15 @@
         <activity
             android:name=".compony.CompanyContentActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Login.LoginActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Login.ResetPasswordActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Login.SignUpActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
