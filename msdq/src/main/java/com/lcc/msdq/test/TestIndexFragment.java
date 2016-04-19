@@ -51,6 +51,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private View ll_layout;
     static final int ACTION_NONE = 0;
     private TestAdapter mAdapter;
+    private String tj1,tj2,tj3;
 
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment();
@@ -199,14 +200,17 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         switch (idx) {
             case 1:
                 quyu.setText(text);
+                tj1=text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
             case 2:
                 jiage.setText(text);
+                tj2=text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
             case 3:
                 huxing.setText(text);
+                tj3=text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
         }

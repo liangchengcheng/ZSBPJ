@@ -166,13 +166,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void showActivityInAnim(){
         if (isStartAnim) {
-            overridePendingTransition(R.anim.activity_right_left_anim, R.anim.activity_left_right_anim);
+            overridePendingTransition(R.anim.activity_down_up_anim, R.anim.activity_up_down_anim);
         }
     }
 
     protected void showActivityExitAnim(){
         if (isCloseAnim) {
-            overridePendingTransition(R.anim.activity_left_right_anim, R.anim.activity_right_left_anim);
+            overridePendingTransition(R.anim.activity_up_down_anim, R.anim.activity_down_up_anim);
         }
     }
 

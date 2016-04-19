@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="选择时间范围"
+                    android:text="选择时间"
                     android:textColor="#4d4d4d" />
 
                 <ImageView
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="其他选项"
+                    android:text="智能排序"
                     android:textColor="#4d4d4d" />
 
                 <ImageView
