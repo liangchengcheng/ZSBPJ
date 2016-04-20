@@ -1,6 +1,5 @@
 package com.lcc.msdq.index;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +22,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Author:  梁铖城
+ * Email:   1038127753@qq.com
+ * Date:    2016年04月21日07:17:52
+ * Description: 第一页fragment
+ */
 public class IndexFragment extends BaseFragment {
 
     private LinearLayout llAdvertiseBoard;

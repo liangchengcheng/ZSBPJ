@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import com.lcc.msdq.R;
 
-
 public class ThemeUtils {
 
     public static void changTheme(Activity activity, Theme theme){

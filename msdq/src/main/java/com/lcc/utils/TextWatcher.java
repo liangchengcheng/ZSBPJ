@@ -3,7 +3,6 @@ package com.lcc.utils;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 
-
 public abstract class TextWatcher implements android.text.TextWatcher {
 
     public String getEditString() {
