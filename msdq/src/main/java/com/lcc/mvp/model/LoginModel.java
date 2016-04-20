@@ -21,6 +21,7 @@ public class LoginModel {
         paramsMap.put(AppConstants.ParamKey.PHONE_KEY, phone);
         paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, password);
         paramsMap.put(AppConstants.ParamKey.GRANT_TYPE_KEY, AppConstants.ParamDefaultValue.GRANT_TYPE);
-        return ApiClient.create(AppConstants.RequestPath.LOGIN, paramsMap).tag("").post(callback);
+        // TODO: 16/4/20 改为post 
+        return ApiClient.create(AppConstants.RequestPath.LOGIN, paramsMap).tag("").get(callback);
     }
 }

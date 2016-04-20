@@ -1,5 +1,7 @@
 package com.lcc.mvp.presenter.impl;
 
+import android.util.Log;
+
 import com.lcc.App;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.LoginModel;
@@ -29,6 +31,7 @@ public class LoginPresenterImpl  implements LoginPresenter {
             @Override
             public void onResponse(String response) {
                 //将response保存起来
+                Log.e("lccx",response);
                 view.loginSuccess();
             }
         });

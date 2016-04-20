@@ -27,7 +27,7 @@ public class AppConstants {
         /**
          * 登录账号
          */
-        public final static String LOGIN = "/login";
+        public final static String LOGIN = "/service/login";
 
         /**
          * 初始化密码，重置密码。
@@ -63,7 +63,7 @@ public class AppConstants {
 
         public final static String ACCESS_TOKEN_KEY = "access-token";
 
-        public final static String PHONE_KEY = "phone";
+        public final static String PHONE_KEY = "username";
 
         public final static String PASSWORD_KEY = "password";
 

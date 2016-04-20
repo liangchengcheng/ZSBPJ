@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tiaojian1">
+        <item>全部时间</item>
         <item>最近一周</item>
         <item>最近一月</item>
         <item>最近一年</item>
     </string-array>
 
     <string-array name="tiaojian2">
+        <item>全部题型</item>
         <item>技术相关</item>
         <item>人事相关</item>
         <item>经验杂谈</item>
@@ -14,6 +16,7 @@
     </string-array>
 
     <string-array name="tiaojian3">
+        <item>综合排序</item>
         <item>最多收藏</item>
         <item>最多点赞</item>
     </string-array>

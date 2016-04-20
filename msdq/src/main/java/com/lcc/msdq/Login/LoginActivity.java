@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,7 +94,8 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         String phone = mTextInputLayoutPhone.getEditText().getText().toString();
         String password = mTextInputLayoutPassword.getEditText().getText().toString();
         if (valid(phone, password))
-            return;
+         //   return;
+            Log.e("lccx","开始请求");
         mPresenter.login(phone, password);
     }
 
