@@ -4,42 +4,73 @@
     android:layout_height="match_parent"
     android:background="@drawable/zhigan"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_c1"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="请选择你当前的"
                 android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_height="wrap_content" />
+                android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="职业"
                 android:textColor="@color/pink_pressed"
-                android:textSize="24sp"
-                android:layout_height="wrap_content" />
+                android:textSize="24sp" />
         </LinearLayout>
     </RelativeLayout>
+
     <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp">
+
         <EditText
-            android:padding="5dp"
             android:layout_width="match_parent"
-            android:background="#ededed"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_search"
             android:hint="请输入职业关键字"
-            android:layout_height="wrap_content" />
+            android:padding="7dp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <GridView
+            android:id="@+id/gv_gz"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:horizontalSpacing="20dp"
+            android:numColumns="3"
+            android:verticalSpacing="20dp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="30dp"
+        android:text="设置完成，进入主页" />
 </LinearLayout>

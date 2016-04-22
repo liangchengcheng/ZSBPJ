@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.lcc.msdq.choice.ChoiceMainActivity;
 import com.lcc.utils.Utils;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
@@ -53,7 +55,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd() {
-                startActivity(new Intent(mContext, MainActivity.class));
+                startActivity(new Intent(mContext, ChoiceMainActivity.class));
                 finish();
             }
 

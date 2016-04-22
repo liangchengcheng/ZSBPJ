@@ -45,6 +45,9 @@
         <activity
             android:name=".Login.SignUpActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".choice.ChoiceMainActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
