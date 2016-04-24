@@ -54,10 +54,10 @@ import java.util.List;
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		if (position == selectItem) {
-			convertView.setBackgroundColor(Color.rgb(122, 205, 109));
+			convertView.setBackgroundColor(Color.rgb(26, 145, 133));
 		}
 		else {
-			convertView.setBackgroundColor(Color.BLUE);
+			convertView.setBackgroundColor(Color.rgb(0, 188, 212));
 		}
 		viewHolder.btn_name.setText(list.get(position));
 		return convertView;

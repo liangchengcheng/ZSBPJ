@@ -4,7 +4,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:layout_height="match_parent"
-    android:background="@drawable/zhigan"
+    android:background="#fff"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_search"
             android:hint="请输入职业关键字"
-            android:padding="7dp" />
+            android:padding="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,12 +68,21 @@
             android:numColumns="3"
             android:verticalSpacing="20dp" />
     </LinearLayout>
-
     <Button
+        android:textColor="#fff"
+        android:background="@color/cyan_500"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="5dp"
         android:text="设置完成，进入主页" />
+  <RelativeLayout
+      android:layout_gravity="bottom"
+      android:background="@drawable/zsc_activity_startpage"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+  </RelativeLayout>
 </LinearLayout>
