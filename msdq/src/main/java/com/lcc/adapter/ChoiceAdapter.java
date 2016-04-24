@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.lcc.msdq.R;
 import java.util.List;
 
-@SuppressLint("InflateParams") public class ChoiceAdapter extends BaseAdapter {
+@SuppressLint("InflateParams")
+public class ChoiceAdapter extends BaseAdapter {
 
 	private int  selectItem=-1;
 	private Context context;
