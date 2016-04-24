@@ -3,6 +3,7 @@ package com.lcc.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class ChoiceAdapter extends BaseAdapter {
 			convertView.setBackgroundColor(Color.rgb(26, 145, 133));
 		}
 		else {
-			convertView.setBackgroundColor(Color.rgb(0, 188, 212));
+			convertView.setBackgroundColor(getColorPrimary());
 		}
 		viewHolder.btn_name.setText(list.get(position));
 		return convertView;
@@ -70,5 +71,11 @@ public class ChoiceAdapter extends BaseAdapter {
 
 	public void setSelectItem(int p) {
 		selectItem=p;
+	}
+
+	public int getColorPrimary() {
+		TypedValue typedValue = new TypedValue();
+		context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+		return typedValue.data;
 	}
 }
