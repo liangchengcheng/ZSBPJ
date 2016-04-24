@@ -21,6 +21,7 @@ public class ChoiceMainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 adapter.setSelectItem(position);
+                adapter.notifyDataSetInvalidated();
             }
         });
     }
