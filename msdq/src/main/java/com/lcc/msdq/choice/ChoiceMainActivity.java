@@ -40,6 +40,7 @@ public class ChoiceMainActivity extends BaseActivity {
                 adapter.notifyDataSetInvalidated();
             }
         });
+
         findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
