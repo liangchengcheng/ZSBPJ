@@ -12,10 +12,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-
 import com.lcc.msdq.R;
 import com.lcc.view.UpdateDialog;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
