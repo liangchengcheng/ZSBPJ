@@ -43,5 +43,11 @@
     <color name="font_black_5">#bdbdbd</color>
     <color name="font_black_6">#e0e0e0</color>
 
+    <!-- background -->
+    <color name="bg">#FFF5F5F5</color>
+    <color name="bg_pressed">#FFF2F2F2</color>
+
+    <color name="orange">#f27242</color>
+
 
 </resources>
