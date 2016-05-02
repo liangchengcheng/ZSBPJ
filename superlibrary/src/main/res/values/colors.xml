@@ -48,6 +48,7 @@
     <color name="bg_pressed">#FFF2F2F2</color>
 
     <color name="orange">#f27242</color>
+    <color name="half_transparent">#8f000000</color>
 
 
 </resources>
