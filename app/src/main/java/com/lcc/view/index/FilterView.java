@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.lcc.activity.R;
 import com.lcc.adapter.FilterLeftAdapter;
 import com.lcc.adapter.FilterOneAdapter;

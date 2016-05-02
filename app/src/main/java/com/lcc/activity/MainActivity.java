@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.lcc.activity.main.activity.CityPickerActivity;
 import com.lcc.activity.main.fragment.AllKnowFragment;
 import com.lcc.activity.main.fragment.HomeFragment;
+import com.lcc.activity.main.fragment.IndexFragment;
 import com.lcc.activity.main.fragment.OnlineClassFragment;
 import com.lcc.activity.personinfo.PersonInfoActivity;
 import com.lcc.activity.setting.SettingActivity;
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity implements
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "快速导航");
+        adapter.addFragment(new IndexFragment(), "快速导航");
         adapter.addFragment(new AllKnowFragment(), "考试资料");
         Fragment onlineClassFragment = OnlineClassFragment.newInstance(1, 1);
         adapter.addFragment(onlineClassFragment, "在线课程");

@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.lcc.activity.R;
-
 
 public class SmoothListViewHeader extends LinearLayout {
 	private LinearLayout mContainer;
