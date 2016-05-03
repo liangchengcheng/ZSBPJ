@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 
 import zsbpj.lccpj.utils.DensityUtil;
 
-
 /**
  * 广告轮询的类
  */
@@ -80,7 +79,9 @@ public class HeaderAdViewView extends HeaderViewInterface<List<String>> {
         startADRotate();
     }
 
-    // 创建要显示的ImageView
+    /**
+     * 创建要显示的ImageView
+     */
     private ImageView createImageView(String url) {
         ImageView imageView = new ImageView(mContext);
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -89,7 +90,9 @@ public class HeaderAdViewView extends HeaderViewInterface<List<String>> {
         return imageView;
     }
 
-    // 添加指示图标
+    /**
+     * 添加指示图标
+     */
     private void addIndicatorImageViews(int size) {
         llIndexContainer.removeAllViews();
         for (int i = 0; i < size; i++) {
@@ -108,7 +111,9 @@ public class HeaderAdViewView extends HeaderViewInterface<List<String>> {
         }
     }
 
-    // 为ViewPager设置监听器
+    /**
+     * 为ViewPager设置监听器
+     */
     private void setViewPagerChangeListener(final int size) {
         vpAd.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -134,7 +139,9 @@ public class HeaderAdViewView extends HeaderViewInterface<List<String>> {
         });
     }
 
-    // 启动循环广告的线程
+    /**
+     * 启动循环广告的线程
+     */
     private void startADRotate() {
         // 一个广告的时候不用转
         if (adList == null || adList.size() <= 1) {
@@ -158,7 +165,9 @@ public class HeaderAdViewView extends HeaderViewInterface<List<String>> {
         }
     }
 
-    // 停止循环广告的线程，清空消息队列
+    /**
+     * 停止循环广告的线程，清空消息队列
+     */
     public void stopADRotate() {
         isStopThread = true;
         if (mHandler != null && mHandler.hasMessages(TYPE_CHANGE_AD)) {

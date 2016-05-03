@@ -20,7 +20,6 @@ import com.lcc.adapter.FilterRightAdapter;
 import com.lcc.entity.FilterData;
 import com.lcc.entity.FilterEntity;
 import com.lcc.entity.FilterTwoEntity;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -145,7 +144,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
 
     }
 
-    // 复位筛选的显示状态
+    /**
+     * 复位筛选的显示状态
+     */
     public void resetFilterStatus() {
         tvCategory.setTextColor(mContext.getResources().getColor(R.color.font_black_2));
         ivCategoryArrow.setImageResource(R.drawable.home_down_arrow);
@@ -157,13 +158,17 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         ivFilterArrow.setImageResource(R.drawable.home_down_arrow);
     }
 
-    // 复位所有的状态
+    /**
+     * 复位所有的状态
+     */
     public void resetAllStatus() {
         resetFilterStatus();
         hide();
     }
 
-    // 显示筛选布局
+    /**
+     * 显示筛选布局
+     */
     public void showFilterLayout(int position) {
         resetFilterStatus();
         switch (position) {
@@ -182,7 +187,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         show();
     }
 
-    // 设置分类数据
+    /**
+     * 设置分类数据
+     */
     private void setCategoryAdapter() {
         tvCategory.setTextColor(mActivity.getResources().getColor(R.color.orange));
         ivCategoryArrow.setImageResource(R.drawable.home_up_arrow);
@@ -241,7 +248,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         });
     }
 
-    // 设置排序数据
+    /**
+     * 设置排序数据
+     */
     private void setSortAdapter() {
         tvSort.setTextColor(mActivity.getResources().getColor(R.color.orange));
         ivSortArrow.setImageResource(R.drawable.home_up_arrow);
@@ -262,7 +271,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         });
     }
 
-    // 设置筛选数据
+    /**
+     * 设置筛选数据
+     */
     private void setFilterAdapter() {
         tvFilter.setTextColor(mActivity.getResources().getColor(R.color.orange));
         ivFilterArrow.setImageResource(R.drawable.home_up_arrow);
@@ -283,7 +294,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         });
     }
 
-    // 动画显示
+    /**
+     * 动画显示
+     */
     private void show() {
         isShowing = true;
         viewMaskBg.setVisibility(VISIBLE);
@@ -298,7 +311,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         });
     }
 
-    // 隐藏动画
+    /**
+     * 隐藏动画
+     */
     public void hide() {
         isShowing = false;
         resetFilterStatus();
@@ -306,23 +321,31 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         ObjectAnimator.ofFloat(llContentListView, "translationY", 0, -panelHeight).setDuration(200).start();
     }
 
-    // 是否吸附在顶部
+    /**
+     * 是否吸附在顶部
+     */
     public void setStickyTop(boolean stickyTop) {
         isStickyTop = stickyTop;
     }
 
-    // 设置筛选数据
+    /**
+     * 设置筛选数据
+     */
     public void setFilterData(Activity activity, FilterData filterData) {
         this.mActivity = activity;
         this.filterData = filterData;
     }
 
-    // 是否显示
+    /**
+     * 是否显示
+     */
     public boolean isShowing() {
         return isShowing;
     }
 
-    // 筛选视图点击
+    /**
+     * 筛选视图点击
+     */
     private OnFilterClickListener onFilterClickListener;
     public void setOnFilterClickListener(OnFilterClickListener onFilterClickListener) {
         this.onFilterClickListener = onFilterClickListener;
@@ -331,7 +354,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         void onFilterClick(int position);
     }
 
-    // 分类Item点击
+    /**
+     * 分类Item点击
+     */
     private OnItemCategoryClickListener onItemCategoryClickListener;
     public void setOnItemCategoryClickListener(OnItemCategoryClickListener onItemCategoryClickListener) {
         this.onItemCategoryClickListener = onItemCategoryClickListener;
@@ -340,7 +365,9 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         void onItemCategoryClick(FilterTwoEntity entity);
     }
 
-    // 排序Item点击
+    /**
+     * 排序Item点击
+     */
     private OnItemSortClickListener onItemSortClickListener;
     public void setOnItemSortClickListener(OnItemSortClickListener onItemSortClickListener) {
         this.onItemSortClickListener = onItemSortClickListener;
@@ -349,11 +376,15 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
         void onItemSortClick(FilterEntity entity);
     }
 
-    // 筛选Item点击
+    /**
+     * 筛选Item点击
+     */
     private OnItemFilterClickListener onItemFilterClickListener;
+
     public void setOnItemFilterClickListener(OnItemFilterClickListener onItemFilterClickListener) {
         this.onItemFilterClickListener = onItemFilterClickListener;
     }
+
     public interface OnItemFilterClickListener {
         void onItemFilterClick(FilterEntity entity);
     }

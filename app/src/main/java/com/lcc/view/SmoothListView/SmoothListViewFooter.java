@@ -106,5 +106,4 @@ public class SmoothListViewFooter extends LinearLayout {
 		mHintView = (TextView)moreView.findViewById(R.id.smoothlistview_footer_hint_textview);
 	}
 	
-	
 }

@@ -113,8 +113,6 @@ public class SmoothListView extends ListView implements OnScrollListener {
 
     /**
      * enable or disable pull down refresh feature.
-     *
-     * @param enable
      */
     public void setRefreshEnable(boolean enable) {
         mEnablePullRefresh = enable;
@@ -127,8 +125,6 @@ public class SmoothListView extends ListView implements OnScrollListener {
 
     /**
      * enable or disable pull up load more feature.
-     *
-     * @param enable
      */
     public void setLoadMoreEnable(boolean enable) {
         mEnablePullLoad = enable;
@@ -175,8 +171,6 @@ public class SmoothListView extends ListView implements OnScrollListener {
 
     /**
      * set last refresh time
-     *
-     * @param time
      */
     public void setRefreshTime(String time) {
         mHeaderTimeView.setText(time);
@@ -237,7 +231,7 @@ public class SmoothListView extends ListView implements OnScrollListener {
         }
         mFooterView.setBottomMargin(height);
 
-//		setSelection(mTotalItemCount - 1); // scroll to bottom
+        //setSelection(mTotalItemCount - 1); // scroll to bottom
     }
 
     private void resetFooterHeight() {
