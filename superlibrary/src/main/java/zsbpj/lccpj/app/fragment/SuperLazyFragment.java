@@ -5,7 +5,6 @@ package zsbpj.lccpj.app.fragment;
  */
 public abstract class SuperLazyFragment extends LazyFragment {
 
-
     @Override
     protected void onFirstUserVisible() {
 

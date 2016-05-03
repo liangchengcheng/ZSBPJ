@@ -1,13 +1,11 @@
 package com.lcc.utils;
 
-
 import com.lcc.entity.ChannelEntity;
 import com.lcc.entity.FilterEntity;
 import com.lcc.entity.FilterTwoEntity;
 import com.lcc.entity.OperationEntity;
 import com.lcc.entity.TravelingEntity;
 import com.lcc.entity.TravelingEntityComparator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,8 +13,6 @@ import java.util.List;
 
 /**
  * 好吧，让你找到了，这是假的数据源
- *
- * Created by sunfusheng on 16/4/22.
  */
 public class ModelUtil {
 
