@@ -3,15 +3,12 @@ package com.lcc.view.index;
 import android.app.Activity;
 import android.view.View;
 import android.widget.ListView;
-
 import com.lcc.activity.R;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-
-
-public class HeaderFilterViewView extends HeaderViewInterface<Object> implements FilterView.OnFilterClickListener {
+public class HeaderFilterViewView extends HeaderViewInterface<Object> implements
+        FilterView.OnFilterClickListener {
 
     @Bind(R.id.fv_filter)
     FilterView fvFilter;
@@ -48,9 +45,11 @@ public class HeaderFilterViewView extends HeaderViewInterface<Object> implements
     }
 
     private OnFilterClickListener onFilterClickListener;
+
     public void setOnFilterClickListener(OnFilterClickListener onFilterClickListener) {
         this.onFilterClickListener = onFilterClickListener;
     }
+
     public interface OnFilterClickListener {
         void onFilterClick(int position);
     }

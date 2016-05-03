@@ -59,31 +59,44 @@ public class IndexFragment  extends Fragment implements SmoothListView.ISmoothLi
 
     private Context mContext;
     private Activity mActivity;
-    private int mScreenHeight; // 屏幕高度
-
-    private List<String> adList = new ArrayList<>(); // 广告数据
-    private List<ChannelEntity> channelList = new ArrayList<>(); // 频道数据
-    private List<OperationEntity> operationList = new ArrayList<>(); // 运营数据
-    private List<TravelingEntity> travelingList = new ArrayList<>(); // ListView数据
-
-    private HeaderAdViewView listViewAdHeaderView; // 广告视图
-    private HeaderChannelViewView headerChannelView; // 频道视图
-    private HeaderOperationViewView headerOperationViewView; // 运营视图
-    private HeaderDividerViewView headerDividerViewView; // 分割线占位图
-    private HeaderFilterViewView headerFilterViewView; // 分类筛选视图
-    private FilterData filterData; // 筛选数据
+    //屏幕高度
+    private int mScreenHeight;
+    // 广告数据
+    private List<String> adList = new ArrayList<>();
+    // 频道数据
+    private List<ChannelEntity> channelList = new ArrayList<>();
+    // 运营数据
+    private List<OperationEntity> operationList = new ArrayList<>();
+    // ListView数据
+    private List<TravelingEntity> travelingList = new ArrayList<>();
+    // 广告视图
+    private HeaderAdViewView listViewAdHeaderView;
+    // 频道视图
+    private HeaderChannelViewView headerChannelView;
+    // 运营视图
+    private HeaderOperationViewView headerOperationViewView;
+    // 分割线占位图
+    private HeaderDividerViewView headerDividerViewView;
+    // 分类筛选视图
+    private HeaderFilterViewView headerFilterViewView;
+    // 筛选数据
+    private FilterData filterData;
     private TravelingAdapter mAdapter;
-
-    private boolean isStickyTop = false; // 是否吸附在顶部
-    private boolean isSmooth = false; // 没有吸附的前提下，是否在滑动
-    private int titleViewHeight = 50; // 标题栏的高度
+    // 是否吸附在顶部
+    private boolean isStickyTop = false;
+    // 没有吸附的前提下，是否在滑动
+    private boolean isSmooth = false;
+    // 标题栏的高度
+    private int titleViewHeight = 50;
     private int filterPosition = -1;
-
-    private int adViewHeight = 180; // 广告视图的高度
-    private int adViewTopSpace; // 广告视图距离顶部的距离
-
-    private int filterViewPosition = 4; // 筛选视图的位置
-    private int filterViewTopSpace; // 筛选视图距离顶部的距离
+    // 广告视图的高度
+    private int adViewHeight = 180;
+    // 广告视图距离顶部的距离
+    private int adViewTopSpace;
+    // 筛选视图的位置
+    private int filterViewPosition = 4;
+    // 筛选视图距离顶部的距离
+    private int filterViewTopSpace;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -196,10 +209,12 @@ public class IndexFragment  extends Fragment implements SmoothListView.ISmoothLi
 
                 // 处理筛选是否吸附在顶部
                 if (filterViewTopSpace > titleViewHeight) {
-                    isStickyTop = false; // 没有吸附在顶部
+                    // 没有吸附在顶部
+                    isStickyTop = false;
                     fvTopFilter.setVisibility(View.INVISIBLE);
                 } else {
-                    isStickyTop = true; // 吸附在顶部
+                    // 吸附在顶部
+                    isStickyTop = true;
                     fvTopFilter.setVisibility(View.VISIBLE);
                 }
 

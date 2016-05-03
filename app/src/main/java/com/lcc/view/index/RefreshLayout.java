@@ -61,7 +61,9 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
         }
     }
 
-    // 获取ListView对象
+    /**
+     * 获取ListView对象
+     */
     private void getListView() {
         int childes = getChildCount();
         if (childes > 0) {
@@ -99,12 +101,16 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
         return super.dispatchTouchEvent(event);
     }
 
-    // 是否可以加载更多, 条件是到了最底部, ListView不在加载中, 且为上拉操作
+    /**
+     * 是否可以加载更多, 条件是到了最底部, ListView不在加载中, 且为上拉操作
+     */
     private boolean canLoad() {
         return canLoad && isBottom() && !isLoading && isPullUp();
     }
 
-    // 判断是否到了最底部
+    /**
+     * 判断是否到了最底部
+     */
     private boolean isBottom() {
         if (mListView != null && mListView.getAdapter() != null) {
             return mListView.getLastVisiblePosition() == (mListView.getAdapter().getCount() - 3);
@@ -112,12 +118,16 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
         return false;
     }
 
-    // 是否是上拉操作
+    /**
+     * 是否是上拉操作
+     */
     private boolean isPullUp() {
         return (mYDown - mLastY) >= mTouchSlop;
     }
 
-    // 如果到了最底部, 而且是上拉操作, 那么执行onLoad方法
+    /**
+     * 如果到了最底部, 而且是上拉操作, 那么执行onLoad方法
+     */
     private void loadData() {
         if (mOnLoadListener != null) {
             // 设置状态
@@ -141,12 +151,16 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
         }
     }
 
-    // 是否可以上拉加载更多
+    /**
+     * 是否可以上拉加载更多
+     */
     public void setCanLoad(boolean canLoad) {
         this.canLoad = canLoad;
     }
 
-    // 是否显示加载更多的Footer View
+    /**
+     * 是否显示加载更多的Footer View
+     */
     public void setHaveLoadingView(boolean haveLoadingView) {
         this.haveLoadingView = haveLoadingView;
     }
@@ -162,7 +176,9 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
         }
     }
 
-    // 加载更多的监听器
+    /**
+     * 加载更多的监听器
+     */
     public interface OnLoadListener {
         void onLoad();
     }

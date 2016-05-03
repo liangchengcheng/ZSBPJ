@@ -59,15 +59,18 @@ public class FilterView extends LinearLayout implements View.OnClickListener {
 
     private Context mContext;
     private Activity mActivity;
-    private boolean isStickyTop = false; // 是否吸附在顶部
+    // 是否吸附在顶部
+    private boolean isStickyTop = false;
     private boolean isShowing = false;
     private int filterPosition = -1;
     private int panelHeight;
     private FilterData filterData;
-
-    private FilterTwoEntity selectedCategoryEntity; // 被选择的分类项
-    private FilterEntity selectedSortEntity; // 被选择的排序项
-    private FilterEntity selectedFilterEntity; // 被选择的筛选项
+    // 被选择的分类项
+    private FilterTwoEntity selectedCategoryEntity;
+    // 被选择的排序项
+    private FilterEntity selectedSortEntity;
+    // 被选择的筛选项
+    private FilterEntity selectedFilterEntity;
 
     private FilterLeftAdapter leftAdapter;
     private FilterRightAdapter rightAdapter;
