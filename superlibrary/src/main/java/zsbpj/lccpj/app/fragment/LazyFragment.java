@@ -30,14 +30,9 @@ public abstract class LazyFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //在下面进行公用的操作
-        //ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         //EventBus.getDefault().register(this);
     }
-
-    /**
-     * here we can do some initialized work
-     */
-    protected abstract void initFragmentConfig();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -49,14 +44,13 @@ public abstract class LazyFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         //取消公用方法
-        //ButterKnife.unbind(this);
+        ButterKnife.unbind(this);
         //EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        // for bug ---> java.lang.IllegalStateException: Activity has been destroyed
         try {
             Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
             childFragmentManager.setAccessible(true);
