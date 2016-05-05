@@ -69,17 +69,14 @@ public class IndexFragment extends BaseFragment {
         JSONArray advertiseArray = new JSONArray();
         try {
             JSONObject head_img0 = new JSONObject();
-            head_img0.put("head_img", "http://www.17yxb.cn/image/m1.png");
+            head_img0.put("head_img", "http://img0.imgtn.bdimg.com/it/u=1270781761,1881354959&fm=21&gp=0.jpg");
             JSONObject head_img1 = new JSONObject();
-            head_img1.put("head_img", "http://www.17yxb.cn/image/m2.png");
+            head_img1.put("head_img", "http://img0.imgtn.bdimg.com/it/u=2138116966,3662367390&fm=21&gp=0.jpg");
             JSONObject head_img2 = new JSONObject();
-            head_img2.put("head_img", "http://www.17yxb.cn/image/m3.png");
-            JSONObject head_img3 = new JSONObject();
-            head_img3.put("head_img", "http://www.17yxb.cn/image/m4.png");
+            head_img2.put("head_img", "http://img0.imgtn.bdimg.com/it/u=1296117362,655885600&fm=21&gp=0.jpg");
             advertiseArray.put(head_img0);
             advertiseArray.put(head_img1);
             advertiseArray.put(head_img2);
-            advertiseArray.put(head_img3);
             if (advertiseArray.length()>0){
                 Advertisements advertisements = new Advertisements(getActivity(), true, inflaters, 3000);
                 View view = advertisements.initView(advertiseArray);
