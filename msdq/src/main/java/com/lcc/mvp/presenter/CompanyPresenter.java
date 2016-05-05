@@ -1,13 +1,9 @@
 package com.lcc.mvp.presenter;
 
-import com.lcc.entity.TestEntity;
-
-import java.util.List;
-
-public interface TestPresenter {
+public interface CompanyPresenter {
 
     void loadMore(int id, int type, int page, int count);
-
+    
     void refresh(int id, int type, int count);
 
 }
