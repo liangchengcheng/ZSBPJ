@@ -31,6 +31,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     private static final int DELAY_MILLIS = 1 * 1000;
     private TextInputLayout mTextInputLayoutPhone;
+    private TextInputLayout textInputLayout_username;
     private TextInputLayout mTextInputLayoutPassword;
     private EditText mEditTextVerifyCode;
     private Button mButtonSendVerifyCode;
@@ -38,12 +39,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     private SignUpPresenter mPresenter;
     private int verifyCodeCountdown = 30;
     protected Handler taskHandler = new Handler();
-    private String phone,password,verify_code;
+    private String phone, password, verify_code,username;
 
     @Override
     protected void initView() {
-        SMSSDK.initSDK(this,"11cc5d753865c","3c6cdfb8371e181a03f8a27f217e2043",true);
-        EventHandler eh=new EventHandler(){
+        SMSSDK.initSDK(this, "11cc5d753865c", "3c6cdfb8371e181a03f8a27f217e2043", true);
+        EventHandler eh = new EventHandler() {
 
             @Override
             public void afterEvent(int event, int result, Object data) {
@@ -56,10 +57,11 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
         };
         SMSSDK.registerEventHandler(eh);
-        TextView iv_head= (TextView) findViewById(R.id.iv_head);
+        TextView iv_head = (TextView) findViewById(R.id.iv_head);
         iv_head.setText("用户注册");
         mPresenter = new SignUpPresenterImpl(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
+        textInputLayout_username = (TextInputLayout) findViewById(R.id.textInputLayout_username);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
         mEditTextVerifyCode = (EditText) findViewById(R.id.editText_verify_code);
@@ -79,6 +81,15 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
             }
         });
 
+        textInputLayout_username.getEditText().addTextChangedListener(new TextWatcher(textInputLayout_username) {
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (getEditString().length() < 1)
+                    setEditTextError(textInputLayout_username, R.string.msg_error_username);
+            }
+        });
+
+
         mTextInputLayoutPassword.getEditText().addTextChangedListener(new TextWatcher(mTextInputLayoutPassword) {
             @Override
             public void afterTextChanged(Editable s) {
@@ -94,6 +105,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     }
 
     public boolean valid(String phone, String password) {
+
         if (!FormValidation.isMobile(phone)) {
             WidgetUtils.requestFocus(mTextInputLayoutPhone.getEditText());
             setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
@@ -122,15 +134,17 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
         KeyboardUtils.hide(this);
         phone = mTextInputLayoutPhone.getEditText().getText().toString();
         password = mTextInputLayoutPassword.getEditText().getText().toString();
+        username = textInputLayout_username.getEditText().getText().toString();
         if (valid(phone, password))
             return;
         switch (v.getId()) {
             case R.id.button_send_verify_code:
                 //mPresenter.getVerifySMS(phone, password);
-                SMSSDK.getVerificationCode("86",phone);
+                SMSSDK.getVerificationCode("86", phone);
                 break;
             case R.id.buttonSignUp:
                 verify_code = mEditTextVerifyCode.getText().toString();
+                mPresenter.signUp(phone, password, verify_code,username);
                 if (FormValidation.isVerifyCode(verify_code)) {
                     //mPresenter.signUp(phone, password, verify_code);
                     SMSSDK.submitVerificationCode("86", phone, verify_code);
@@ -194,9 +208,10 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
             if (result == SMSSDK.RESULT_COMPLETE) {
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_SHORT).show();
-                     mPresenter.signUp(phone, password, verify_code);
-                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                    mPresenter.signUp(phone, password, verify_code,username);
+                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     Toast.makeText(getApplicationContext(), "短信发送成功", Toast.LENGTH_SHORT).show();
+                    showVerifySuccess();
                 }
             } else {
                 int status = 0;
@@ -211,10 +226,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
                         return;
                     }
                 } catch (Exception e) {
-                  e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
-        };
+        }
+
+        ;
     };
 
     @Override

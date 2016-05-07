@@ -6,6 +6,7 @@
     <string name="change_theme_key">change_theme_key</string>
     <string name="page">Page %1$d</string>
     <string name="msg_error_phone">请输入正确的手机号码</string>
+    <string name="msg_error_username">昵称不能为空</string>
     <string name="msg_error_password">请输入6到16位数字或字母密码</string>
     <string name="layout_str_msg_login_successs"> 登录成功</string>
     <string name="layout_str_hint_login"> 登录</string>

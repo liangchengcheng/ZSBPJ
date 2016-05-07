@@ -12,7 +12,7 @@ public class SignUpModel {
     /**
      * 获取短信验证码
      */
-    public OkHttpRequest getVerifySMS(String phone, String password, ResultCallback<JsonElement> callback) {
+    public OkHttpRequest getVerifySMS(String phone, String password, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PHONE_KEY, phone);
         paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, password);
@@ -22,13 +22,14 @@ public class SignUpModel {
     /**
      * 用户注册
      */
-    public OkHttpRequest signUp(String phone, String password, String verify_code, ResultCallback<JsonElement> callback) {
+    public OkHttpRequest signUp(String username,String phone, String password, String verify_code, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.PHONE_KEY, phone);
+        paramsMap.put(AppConstants.ParamKey.PHONE_KEY, username);
+        paramsMap.put(AppConstants.ParamKey.PHONE, phone);
         paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, password);
         paramsMap.put(AppConstants.ParamKey.VERIFY_CODE_KEY, verify_code);
         paramsMap.put(AppConstants.ParamKey.GRANT_TYPE_KEY, AppConstants.ParamDefaultValue.GRANT_TYPE);
-        return ApiClient.create(AppConstants.RequestPath.OAUTH, paramsMap).tag("").post(callback);
+        return ApiClient.create(AppConstants.RequestPath.OAUTH, paramsMap).tag("").get(callback);
     }
 
 }

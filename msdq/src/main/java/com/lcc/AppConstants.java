@@ -7,6 +7,7 @@ public class AppConstants {
         //public final static String BASE_URL = "https://newapi.meipai.com";
 
         public final static String BASE_URL = "http://114.215.164.168:8080";
+
         public final static String CATEGOTY = "/channels/header_list.json?language=zh-Hans";
         public final static String VIDEO_LIST = "/channels/feed_timeline.json";
         public final static String HOT_VIDEO_LIST = "/hot/feed_timeline.json";
@@ -22,7 +23,7 @@ public class AppConstants {
         /**
          * 注册账号
          */
-        public final static String OAUTH = "/register";
+        public final static String OAUTH = "/service/register";
 
         /**
          * 登录账号
@@ -32,7 +33,7 @@ public class AppConstants {
         /**
          * 初始化密码，重置密码。
          */
-        public final static String RESET_PASSWORD = "/reset";
+        public final static String RESET_PASSWORD = "/service/reset";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 
@@ -60,6 +61,8 @@ public class AppConstants {
         public final static String LANGUAGE_KEY = "language";
 
         public final static String MODEL_KEY = "model";
+
+        public final static String PHONE = "phone";
 
         public final static String ACCESS_TOKEN_KEY = "access-token";
 
