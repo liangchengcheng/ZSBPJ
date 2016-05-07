@@ -68,7 +68,8 @@
         android:layout_margin="20dp"
         android:layout_marginBottom="16dp"
         android:text="登录"
-        android:textColor="?attr/colorPrimary"
+        android:background="?attr/colorPrimary"
+        android:textColor="#fff"
         android:textSize="18sp" />
 
     <TextView

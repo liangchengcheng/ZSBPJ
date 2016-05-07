@@ -18,12 +18,18 @@ import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.TextWatcher;
 import com.lcc.utils.WidgetUtils;
 
+import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
+
 public class LoginActivity extends BaseActivity implements LoginView, View.OnClickListener {
 
     private LoginPresenter mPresenter;
 
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout mTextInputLayoutPassword;
+
+    private SimpleArcDialog mDialog;
 
     @Override
     protected void initView() {
@@ -111,17 +117,29 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
     @Override
     public void showLoading() {
-
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在登录...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
     }
 
     @Override
     public void showLoginFail(String msg) {
-
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("登录失败"+msg);
     }
 
     @Override
     public void loginSuccess() {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("登录成功");
+    }
 
+    private void closeDialog(){
+        if (mDialog!=null&&mDialog.isShowing()){
+            mDialog.dismiss();
+        }
     }
 
     @Override

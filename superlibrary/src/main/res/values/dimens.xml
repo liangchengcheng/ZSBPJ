@@ -26,4 +26,5 @@
     <dimen name="dimen_8_dp">8dp</dimen>
     <dimen name="dimen_16_dp">16dp</dimen>
     <dimen name="dimen_32_dp">32dp</dimen>
+    <dimen name="stroke_width">3dp</dimen>
 </resources>
