@@ -24,11 +24,12 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class LoginActivity extends BaseActivity implements LoginView, View.OnClickListener {
 
+    //MVP P层的实现
     private LoginPresenter mPresenter;
-
+    //用户名和密码
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout mTextInputLayoutPassword;
-
+    //简单的登录时候的等待的diaolog
     private SimpleArcDialog mDialog;
 
     @Override
@@ -100,8 +101,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         String phone = mTextInputLayoutPhone.getEditText().getText().toString();
         String password = mTextInputLayoutPassword.getEditText().getText().toString();
         if (valid(phone, password))
-         //   return;
-            Log.e("lccx","开始请求");
+            return;
         mPresenter.login(phone, password);
     }
 

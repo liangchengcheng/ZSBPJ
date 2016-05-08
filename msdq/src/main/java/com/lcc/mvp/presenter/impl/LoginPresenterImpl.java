@@ -3,11 +3,15 @@ package com.lcc.mvp.presenter.impl;
 import android.util.Log;
 
 import com.lcc.App;
+import com.lcc.entity.Result;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.LoginModel;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.view.LoginView;
+import com.lcc.utils.SharePreferenceUtil;
 import com.squareup.okhttp.Request;
+
+import zsbpj.lccpj.utils.GsonUtils;
 
 public class LoginPresenterImpl  implements LoginPresenter {
 
@@ -30,9 +34,13 @@ public class LoginPresenterImpl  implements LoginPresenter {
 
             @Override
             public void onResponse(String response) {
-                //将response保存起来
-                Log.e("lccx",response);
-                view.loginSuccess();
+                Result result= GsonUtils.changeGsonToBean(response,Result.class);
+                if (result.getStatus()==1){
+                    SharePreferenceUtil.setUserTk(result.getResult());
+                    view.loginSuccess();
+                }else {
+                    view.showLoginFail(result.getMessage());
+                }
             }
         });
     }
