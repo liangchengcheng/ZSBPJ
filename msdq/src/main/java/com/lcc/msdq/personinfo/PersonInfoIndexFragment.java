@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.lcc.msdq.Login.LoginActivity;
 import com.lcc.msdq.R;
 
+import zsbpj.lccpj.frame.FrameManager;
+
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {
 
     public static Fragment newInstance() {
@@ -35,8 +37,15 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_more:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivityForResult(new Intent(getActivity(), LoginActivity.class),100);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==100&&resultCode==100){
+            FrameManager.getInstance().toastPrompt("111");
         }
     }
 }

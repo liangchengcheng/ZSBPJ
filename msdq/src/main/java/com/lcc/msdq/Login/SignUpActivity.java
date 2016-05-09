@@ -1,5 +1,6 @@
 package com.lcc.msdq.Login;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import zsbpj.lccpj.frame.FrameManager;
 
 public class SignUpActivity extends BaseActivity implements SignUpView, View.OnClickListener {
 
@@ -89,7 +91,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
             }
         });
 
-
         mTextInputLayoutPassword.getEditText().addTextChangedListener(new TextWatcher(mTextInputLayoutPassword) {
             @Override
             public void afterTextChanged(Editable s) {
@@ -146,7 +147,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
                 verify_code = mEditTextVerifyCode.getText().toString();
                 mPresenter.signUp(phone, password, verify_code,username);
                 if (FormValidation.isVerifyCode(verify_code)) {
-                    //mPresenter.signUp(phone, password, verify_code);
                     SMSSDK.submitVerificationCode("86", phone, verify_code);
                 } else {
                     WidgetUtils.requestFocus(mEditTextVerifyCode);
@@ -162,6 +162,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     @Override
     public void showVerifySuccess() {
+        showMsg("短信发送成功");
         mButtonSendVerifyCode.setClickable(false);
         taskHandler.postDelayed(new Runnable() {
             @Override
@@ -180,17 +181,19 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     @Override
     public void showSignUpError(String msg) {
-
+        FrameManager.getInstance().toastPrompt("账号注册失败"+msg);
     }
 
     @Override
     public void signUpSuccess() {
-
+        FrameManager.getInstance().toastPrompt("账号注册成功");
+        startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+        finish();
     }
 
     @Override
     public void showMsg(String msg) {
-
+        FrameManager.getInstance().toastPrompt(msg);
     }
 
     private void setEditTextError(TextInputLayout layout, int msgId) {
@@ -207,10 +210,9 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
             Object data = msg.obj;
             if (result == SMSSDK.RESULT_COMPLETE) {
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_SHORT).show();
+                    showMsg("验证成功");
                     mPresenter.signUp(phone, password, verify_code,username);
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    Toast.makeText(getApplicationContext(), "短信发送成功", Toast.LENGTH_SHORT).show();
                     showVerifySuccess();
                 }
             } else {

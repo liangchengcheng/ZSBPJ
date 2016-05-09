@@ -134,6 +134,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     public void loginSuccess() {
         closeDialog();
         FrameManager.getInstance().toastPrompt("登录成功");
+        Intent intent=new Intent();
+        setResult(100,intent);
+        finish();
     }
 
     private void closeDialog(){
