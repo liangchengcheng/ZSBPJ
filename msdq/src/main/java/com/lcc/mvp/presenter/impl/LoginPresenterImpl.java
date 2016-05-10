@@ -10,7 +10,7 @@ import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.view.LoginView;
 import com.lcc.utils.SharePreferenceUtil;
 import com.squareup.okhttp.Request;
-
+import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 
 public class LoginPresenterImpl  implements LoginPresenter {
@@ -29,7 +29,7 @@ public class LoginPresenterImpl  implements LoginPresenter {
         model.login(phone, pwd, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.showLoginFail(e.getMessage());
+                view.showLoginFail(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
