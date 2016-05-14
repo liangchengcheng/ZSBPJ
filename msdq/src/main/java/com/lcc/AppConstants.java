@@ -9,10 +9,7 @@ public class AppConstants {
 
         public final static String CATEGOTY = "/channels/header_list.json?language=zh-Hans";
 
-        /**
-         * 获取试题的列表
-         */
-        public final static String TEST_LIST = "/admins/pagetestforAndroid";
+
         public final static String HOT_VIDEO_LIST = "/hot/feed_timeline.json";
         public final static String MEDIAS = "/medias/show.json";
 
@@ -37,6 +34,11 @@ public class AppConstants {
          * 初始化密码，重置密码。
          */
         public final static String RESET_PASSWORD = "/service/reset";
+
+        /**
+         * 获取试题的列表
+         */
+        public final static String TEST_LIST = "/admins/pagetestforAndroid";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 
@@ -94,6 +96,8 @@ public class AppConstants {
         public final static String UID_KEY = "uid";
 
         public final static String WITH_CAPTION_KEY = "with_caption";
+
+        public final static String TOKEN = "token";
 
     }
 

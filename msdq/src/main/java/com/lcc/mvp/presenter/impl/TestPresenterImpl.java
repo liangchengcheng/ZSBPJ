@@ -23,7 +23,7 @@ public class TestPresenterImpl implements TestPresenter{
 
     private void loadData(int id, int type, final int page, int count) {
         final long current_time = TimeUtils.getCurrentTime();
-        model.getTestList(id, type, page, count, new ResultCallback<List<TestEntity>>() {
+        model.getTestList(page,  new ResultCallback<List<TestEntity>>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.showError();

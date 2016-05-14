@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface TestPresenter {
 
-    void loadMore(int id, int type, int page, int count);
+    void loadMore(int page);
 
-    void refresh(int id, int type, int count);
+    void refresh(int page);
 
 }
