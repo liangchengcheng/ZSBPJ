@@ -4,12 +4,15 @@ package com.lcc;
 public class AppConstants {
 
     public final class RequestPath {
-        //public final static String BASE_URL = "https://newapi.meipai.com";
 
         public final static String BASE_URL = "http://114.215.164.168:8080";
 
         public final static String CATEGOTY = "/channels/header_list.json?language=zh-Hans";
-        public final static String VIDEO_LIST = "/channels/feed_timeline.json";
+
+        /**
+         * 获取试题的列表
+         */
+        public final static String TEST_LIST = "/admins/pagetestforAndroid";
         public final static String HOT_VIDEO_LIST = "/hot/feed_timeline.json";
         public final static String MEDIAS = "/medias/show.json";
 
