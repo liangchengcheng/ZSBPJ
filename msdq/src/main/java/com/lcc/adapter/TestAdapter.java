@@ -6,12 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 
+import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
 public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.ViewHolder>{
@@ -42,9 +44,10 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
                 onItemClickListener.OnItemClick(getItem(position));
             }
         });
-        holder.tv_title.setText(entity.getName());
-        holder.tv_content.setText(entity.getJj());
-        holder.tv_time.setText(entity.getDate());
+        holder.tv_title.setText(entity.getTitle());
+        holder.tv_content.setText(entity.getSummary());
+        holder.tv_time.setText(entity.getUpdated_time());
+        ImageManager.getInstance().loadCircleImage(mActivity,entity.getUserinfo().getUser_image(),holder.iv_image);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -52,6 +55,7 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         public final TextView tv_content;
         public final TextView tv_time;
         public final CardView ll_all;
+        public final ImageView iv_image;
 
         public ViewHolder(View view) {
             super(view);
@@ -59,6 +63,7 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
             tv_content = (TextView) view.findViewById(R.id.tv_content);
             tv_time = (TextView) view.findViewById(R.id.tv_time);
             ll_all = (CardView) view.findViewById(R.id.ll_all);
+            iv_image = (ImageView) view.findViewById(R.id.iv_image);
         }
     }
 

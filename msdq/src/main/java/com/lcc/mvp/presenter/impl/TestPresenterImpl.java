@@ -9,8 +9,11 @@ import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.view.TestView;
 import com.squareup.okhttp.Request;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
+import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class TestPresenterImpl implements TestPresenter {
@@ -26,14 +29,14 @@ public class TestPresenterImpl implements TestPresenter {
 
     private void loadData(final int page) {
         final long current_time = TimeUtils.getCurrentTime();
-        model.getTestList(page, new ResultCallback<List<TestEntity>>() {
+        model.getTestList(page, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.showError();
             }
 
             @Override
-            public void onResponse(List<TestEntity> response) {
+            public void onResponse(String response) {
                 int delay = 0;
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
@@ -43,17 +46,26 @@ public class TestPresenterImpl implements TestPresenter {
         });
     }
 
-    private void updateView(final List<TestEntity> entities, int delay, final int page) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (page == 1) {
-                    view.refreshView(entities);
-                } else {
-                    view.loadMoreView(entities);
-                }
-            }
-        }, delay);
+    private void updateView(final String entities, int delay, final int page) {
+
+           new Handler().postDelayed(new Runnable() {
+               @Override
+               public void run() {
+                   try{
+                       JSONObject jsonObject=new JSONObject(entities);
+                       String data=jsonObject.getString("data");
+                       List<TestEntity> entitys= GsonUtils.fromJsonArray(data,TestEntity.class);
+                       if (page == 1) {
+                           view.refreshView(entitys);
+                       } else {
+                           view.loadMoreView(entitys);
+                       }
+                   }catch (Exception e){
+                       view.showError();
+                       e.printStackTrace();
+                   }
+               }
+           }, delay);
     }
 
     @Override
@@ -63,6 +75,6 @@ public class TestPresenterImpl implements TestPresenter {
 
     @Override
     public void refresh(int page) {
-        loadData(1);
+        loadData(page);
     }
 }

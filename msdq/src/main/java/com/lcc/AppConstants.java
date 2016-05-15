@@ -38,7 +38,7 @@ public class AppConstants {
         /**
          * 获取试题的列表
          */
-        public final static String TEST_LIST = "/admins/pagetestforAndroid";
+        public final static String TEST_LIST = "/pagetestforAndroid";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 

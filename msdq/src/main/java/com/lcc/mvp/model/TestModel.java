@@ -9,7 +9,7 @@ import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 import java.util.List;
 
 public class TestModel {
-    public OkHttpRequest getTestList(int page, ResultCallback<List<TestEntity>> callback) {
+    public OkHttpRequest getTestList(int page, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         return ApiClient.create(AppConstants.RequestPath.TEST_LIST, paramsMap).tag("").get(callback);
