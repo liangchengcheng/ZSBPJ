@@ -53,9 +53,8 @@ public class TestIndexFragment1 extends S_RefreshAndLoadFragment implements
     private TestPresenter mPresenter;
 
     //别忘记设置下面的值
-    private int id;
-    private int type;
-    private static final int PAGER_SIZE = 20;
+    private int page;
+
 
     @Override
     protected void onFragmentCreate() {
@@ -251,7 +250,8 @@ public class TestIndexFragment1 extends S_RefreshAndLoadFragment implements
             public void run() {
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                mPresenter.refresh(id, type, PAGER_SIZE);
+                page=1;
+                mPresenter.refresh(page);
             }
         }, 500);
     }

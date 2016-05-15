@@ -1,16 +1,19 @@
 package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
+
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.TestModel;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.view.TestView;
 import com.squareup.okhttp.Request;
+
 import java.util.List;
+
 import zsbpj.lccpj.utils.TimeUtils;
 
-public class TestPresenterImpl implements TestPresenter{
+public class TestPresenterImpl implements TestPresenter {
 
     private static final int DEF_DELAY = (int) (1 * 1000);
     private TestModel model;
@@ -21,9 +24,9 @@ public class TestPresenterImpl implements TestPresenter{
         model = new TestModel();
     }
 
-    private void loadData(int id, int type, final int page, int count) {
+    private void loadData(final int page) {
         final long current_time = TimeUtils.getCurrentTime();
-        model.getTestList(page,  new ResultCallback<List<TestEntity>>() {
+        model.getTestList(page, new ResultCallback<List<TestEntity>>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.showError();
@@ -54,12 +57,12 @@ public class TestPresenterImpl implements TestPresenter{
     }
 
     @Override
-    public void loadMore(int id, int type, int page, int count) {
-        loadData(id, type, page, count);
+    public void loadMore(int page) {
+        loadData(page);
     }
 
     @Override
-    public void refresh(int id, int type, int count) {
-        loadData(id, type, 1, count);
+    public void refresh(int page) {
+        loadData(1);
     }
 }
