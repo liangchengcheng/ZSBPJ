@@ -98,6 +98,7 @@
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
                     <RelativeLayout
+                        android:id="@+id/rl_qd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -111,6 +112,7 @@
                             android:src="@drawable/ic_bookmark_border_black_24dp" />
 
                         <TextView
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -118,23 +120,58 @@
                             android:padding="10dp"
                             android:text="每日签到"
                             android:textSize="16sp" />
-
-                        <ImageView
-                            android:background="@drawable/ic_chevron_right_black_24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:id="@+id/tv_qd"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            />
+                            android:text="已连续签到0天"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
                     </RelativeLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
+                        <ImageView
+                            android:id="@+id/iv_qq"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/ic_credit_card_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_qq"
+                            android:padding="10dp"
+                            android:text="我的积分"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="end"
+                            android:padding="10dp"
+                            android:text="389积分"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -308,44 +345,6 @@
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_qq"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_credit_card_black_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/iv_qq"
-                            android:padding="10dp"
-                            android:text="我的积分"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="389积分"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"/>
                 </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -2,6 +2,7 @@ package com.lcc.msdq.personinfo;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,21 +11,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.Login.LoginActivity;
 import com.lcc.msdq.R;
+import com.ufreedom.uikit.FloatingText;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {
 
+    //头像
     private ImageView iv_more;
+    //用户名
     private TextView tv_username;
+    //签名
     private TextView tv_qm;
+    //签到
+    private RelativeLayout rl_qd;
+    private TextView tv_qd;
 
     public static Fragment newInstance() {
         Fragment fragment = new PersonInfoIndexFragment();
@@ -44,6 +53,9 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         iv_more= (ImageView) view.findViewById(R.id.iv_more);
         tv_username= (TextView) view.findViewById(R.id.tv_username);
         tv_qm= (TextView) view.findViewById(R.id.tv_qm);
+        rl_qd= (RelativeLayout) view.findViewById(R.id.rl_qd);
+        tv_qd= (TextView) view.findViewById(R.id.tv_qd);
+        rl_qd.setOnClickListener(this);
         setData();
     }
 
@@ -52,6 +64,16 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         switch (v.getId()) {
             case R.id.iv_more:
                 startActivityForResult(new Intent(getActivity(), LoginActivity.class),100);
+                break;
+            case R.id.rl_qd:
+                FloatingText floatingText = new FloatingText.FloatingTextBuilder(getActivity())
+                        .textColor(Color.RED)
+                        .textSize(50)
+                        .textContent("签到成功,恭喜你")
+                        .build();
+
+                floatingText.attach2Window();
+                floatingText.startFloating(tv_qd);
                 break;
         }
     }
@@ -75,4 +97,5 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             }
         }
     }
+
 }
