@@ -5,16 +5,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.lcc.db.test.UserInfo;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.Login.LoginActivity;
 import com.lcc.msdq.R;
 
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.frame.ImageManager;
 
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {
+
+    private ImageView iv_more;
+    private TextView tv_username;
+    private TextView tv_qm;
 
     public static Fragment newInstance() {
         Fragment fragment = new PersonInfoIndexFragment();
@@ -31,6 +41,10 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
     private void initView(View view) {
         view.findViewById(R.id.iv_more).setOnClickListener(this);
+        iv_more= (ImageView) view.findViewById(R.id.iv_more);
+        tv_username= (TextView) view.findViewById(R.id.tv_username);
+        tv_qm= (TextView) view.findViewById(R.id.tv_qm);
+        setData();
     }
 
     @Override
@@ -45,7 +59,20 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==100&&resultCode==100){
-            FrameManager.getInstance().toastPrompt("111");
+            setData();
+        }
+    }
+
+    private void setData(){
+        UserInfo userInfo= DataManager.getUserInfo();
+        if (userInfo!=null){
+            ImageManager.getInstance().loadCircleImage(getActivity(),userInfo.getUser_image(),iv_more);
+            tv_username.setText(userInfo.getNickname());
+            if (TextUtils.isEmpty(userInfo.getQm())){
+                tv_qm.setText("这个家伙很懒，什么也没留下");
+            }else {
+                tv_qm.setText(userInfo.getQm());
+            }
         }
     }
 }

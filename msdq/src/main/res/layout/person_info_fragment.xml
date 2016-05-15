@@ -25,12 +25,12 @@
              />
     </android.support.v7.widget.Toolbar>
     <RelativeLayout
-        android:background="@drawable/bg_banner_dialog"
+        android:background="@drawable/bg_ps"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/iv_more"
             android:layout_marginLeft="10dp"
             android:layout_width="80dp"
@@ -39,16 +39,30 @@
             android:layout_centerVertical="true"
             android:background="@drawable/default_user_logo" />
 
-        <TextView
-            android:layout_toRightOf="@+id/iv_more"
-            android:textColor="#fff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:padding="10dp"
-            android:text="梁铖城"
-            android:textSize="18sp" />
+       <LinearLayout
+           android:layout_centerVertical="true"
+           android:layout_toRightOf="@+id/iv_more"
+           android:layout_marginLeft="10dp"
+           android:layout_width="match_parent"
+           android:orientation="vertical"
+           android:layout_height="wrap_content">
+           <TextView
+               android:id="@+id/tv_username"
+               android:textColor="#fff"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:text="梁铖城"
+               android:textSize="18sp" />
+           <TextView
+               android:id="@+id/tv_qm"
+               android:textColor="#fff"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:text="这个家伙很懒，什么也没留下"
+               android:textSize="16sp" />
+       </LinearLayout>
 
     </RelativeLayout>
     <ScrollView
@@ -88,21 +102,29 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <ImageView
+                            android:id="@+id/iv_qd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
+                            android:src="@drawable/ic_bookmark_border_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_qd"
                             android:padding="10dp"
-                            android:text="修改密码"
+                            android:text="每日签到"
                             android:textSize="16sp" />
 
                         <ImageView
-                            android:layout_marginRight="10dp"
                             android:background="@drawable/ic_chevron_right_black_24dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             />
@@ -113,26 +135,35 @@
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
 
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <ImageView
+                            android:id="@+id/iv_cpwd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
+                            android:src="@drawable/ic_https_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_cpwd"
                             android:padding="10dp"
-                            android:text="其他功能"
+                            android:text="修改密码"
                             android:textSize="16sp" />
 
                         <ImageView
-                            android:layout_marginRight="10dp"
                             android:background="@drawable/ic_chevron_right_black_24dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             />
@@ -140,8 +171,9 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="1dp"
                         android:background="#EDEDED" />
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -174,7 +206,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_view_comfy_black_24dp" />
+                            android:src="@drawable/ic_grade_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -212,7 +244,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_view_comfy_black_24dp" />
+                            android:src="@drawable/ic_create_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -249,7 +281,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_view_comfy_black_24dp" />
+                            android:src="@drawable/ic_build_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -288,7 +320,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_view_comfy_black_24dp" />
+                            android:src="@drawable/ic_credit_card_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -313,124 +345,7 @@
                     <TextView
                         android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:background="#EDEDED" />
-
-                    <RelativeLayout
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:padding="10dp"
-                            android:text="安全设置"
-                            android:textColor="?attr/colorPrimary"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#EDEDED" />
-
-                    <RelativeLayout
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:padding="10dp"
-                            android:text="登录密码"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="******"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#EDEDED" />
-
-                    <RelativeLayout
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:padding="10dp"
-                            android:text="支付密码"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="******"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#EDEDED" />
-                    <RelativeLayout
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:padding="10dp"
-                            android:text="登录保护"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="已开始"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#EDEDED" />
+                        android:layout_height="20dp"/>
                 </LinearLayout>
         </LinearLayout>
     </ScrollView>

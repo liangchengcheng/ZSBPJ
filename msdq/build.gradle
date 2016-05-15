@@ -38,4 +38,5 @@ dependencies {
     }
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'de.greenrobot:greendao:2.1.0'
 }
