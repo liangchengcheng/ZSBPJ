@@ -27,6 +27,9 @@ import com.lcc.base.BaseFragment;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.TestPresenter;
+import com.lcc.mvp.presenter.impl.TestPresenterImpl;
+import com.lcc.mvp.view.TestView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +41,7 @@ import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         PopupWindow.OnDismissListener,
-        TestAdapter.OnItemClickListener {
+        TestAdapter.OnItemClickListener, TestView {
 
     private LinearLayout ll_quyu, ll_jiage, ll_huxing, lv1_layout;
     private ListView lv1, lv2;
@@ -51,7 +54,9 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private View ll_layout;
     static final int ACTION_NONE = 0;
     private TestAdapter mAdapter;
-    private String tj1,tj2,tj3;
+    private String tj1, tj2, tj3;
+    private TestPresenter mPresenter;
+    private int current_page = 1;
 
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment();
@@ -61,6 +66,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
+        mPresenter = new TestPresenterImpl(this);
         View view = getView();
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
@@ -70,7 +76,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         autoRefresh();
     }
 
@@ -120,7 +125,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentLoadMore() {
-        showMoreData(getData());
+        current_page++;
+        mPresenter.loadMore(current_page);
     }
 
     @Override
@@ -130,7 +136,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        showRefreshData(getData());
+        current_page=1;
+        mPresenter.refresh(current_page);
     }
 
     public void showPopupWindow(View anchor, int flag) {
@@ -200,17 +207,17 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         switch (idx) {
             case 1:
                 quyu.setText(text);
-                tj1=text;
+                tj1 = text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
             case 2:
                 jiage.setText(text);
-                tj2=text;
+                tj2 = text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
             case 3:
                 huxing.setText(text);
-                tj3=text;
+                tj3 = text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -243,7 +250,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void OnItemClick(TestEntity entity) {
-
+        FrameManager.getInstance().toastPrompt("点击事件");
     }
 
     /**
@@ -255,7 +262,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             public void run() {
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                showRefreshData(getData());
+                current_page = 1;
+                mPresenter.refresh(current_page);
             }
         }, 500);
     }
@@ -271,15 +279,13 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         }
     }
 
-    private List<TestEntity> getData() {
-        List<TestEntity> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            TestEntity zxTest = new TestEntity();
-            zxTest.setDate("2016年03月23日14:26:29" + i);
-            zxTest.setName("SD学院公布了最新的录取分数线");
-            zxTest.setJj("浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）");
-            data.add(zxTest);
-        }
-        return data;
+    @Override
+    public void refreshView(List<TestEntity> entities) {
+        showRefreshData(entities);
+    }
+
+    @Override
+    public void loadMoreView(List<TestEntity> entities) {
+        showMoreData(entities);
     }
 }
