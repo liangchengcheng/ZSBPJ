@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.compony.CompanyIndexFragment;
 import com.lcc.msdq.index.IndexFragment;
 import com.lcc.msdq.personinfo.PersonInfoIndexFragment;
@@ -53,6 +54,10 @@ public class MainActivity extends BaseActivity {
                 new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司真题"),
                 new BottomBarFragment(PersonInfoIndexFragment.newInstance(), R.drawable.ic_perm_identity_black_24dp, "问题咨询")
         );
+
+        UpdateApkTask task = new UpdateApkTask(MainActivity.this, false);
+        task.detectionVersionInfo();
+
     }
 
     @Override

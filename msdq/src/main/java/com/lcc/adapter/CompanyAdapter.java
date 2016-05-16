@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -13,6 +14,7 @@ import com.lcc.entity.CompanyEntity;
 import com.lcc.msdq.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
 public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,CompanyAdapter.ViewHolder>{
@@ -48,15 +50,13 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
         holder.tv_time.setText(entity.getDate());
 
         if (position%2==1){
-            Glide.with(holder.iv_icon.getContext())
-                    .load(R.drawable.baidu)
-                    .fitCenter()
-                    .into(holder.iv_icon);
+            String url="http://img2.imgtn.bdimg.com/it/u=3711220099,629041631&fm=21&gp=0.jpg";
+            ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
+                    ,url,holder.iv_icon);
         }else {
-            Glide.with(holder.iv_icon.getContext())
-                    .load(R.drawable.guge)
-                    .fitCenter()
-                    .into(holder.iv_icon);
+            String url="http://img1.imgtn.bdimg.com/it/u=3169520611,2159897782&fm=21&gp=0.jpg";
+            ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
+                    ,url,holder.iv_icon);
         }
     }
 
@@ -65,7 +65,7 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
         public final TextView tv_content;
         public final TextView tv_time;
         public final CardView ll_all;
-        public final CircleImageView iv_icon;
+        public final ImageView iv_icon;
 
         public ViewHolder(View view) {
             super(view);
@@ -73,7 +73,7 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
             tv_content = (TextView) view.findViewById(R.id.tv_content);
             tv_time = (TextView) view.findViewById(R.id.tv_time);
             ll_all = (CardView) view.findViewById(R.id.ll_all);
-            iv_icon = (CircleImageView) view.findViewById(R.id.iv_icon);
+            iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
         }
     }
 

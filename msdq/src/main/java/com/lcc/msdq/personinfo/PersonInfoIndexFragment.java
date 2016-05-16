@@ -79,7 +79,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                         .textSize(50)
                         .textContent("签到成功!")
                         .build();
-
                 floatingText.attach2Window();
                 floatingText.startFloating(tv_qd);
                 break;

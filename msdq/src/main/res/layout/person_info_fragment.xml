@@ -15,24 +15,30 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:text="个人中心"
-            android:textColor="#fff"
             android:id="@+id/guillotine_hamburger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-             />
+            android:layout_gravity="center"
+            android:text="个人中心"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_settings_white_24dp" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.ecloud.pulltozoomview.PullToZoomScrollViewEx
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>

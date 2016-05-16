@@ -59,9 +59,6 @@ public class IndexFragment extends BaseFragment {
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         initViews();
-        UpdateApkTask task = new UpdateApkTask(getActivity(), false);
-        task.detectionVersionInfo();
-
         return view;
     }
 
