@@ -40,4 +40,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'de.greenrobot:greendao:2.1.0'
     compile 'com.ufreedom.uikit:FloatingTextLibrary:0.2.0'
+    compile 'com.github.frank-zhu:pullzoomview:1.0.0'
 }
