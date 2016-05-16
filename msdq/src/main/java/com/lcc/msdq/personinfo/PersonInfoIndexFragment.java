@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.Login.LoginActivity;
@@ -49,6 +49,14 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     }
 
     private void initView(View view) {
+        PullToZoomScrollViewEx scrollView = (PullToZoomScrollViewEx) view.findViewById(R.id.scroll_view);
+        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_head_view, null, false);
+        View zoomView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_zoom_view, null, false);
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_content_view, null, false);
+        scrollView.setHeaderView(headView);
+        scrollView.setZoomView(zoomView);
+        scrollView.setScrollContentView(contentView);
+
         view.findViewById(R.id.iv_more).setOnClickListener(this);
         iv_more= (ImageView) view.findViewById(R.id.iv_more);
         tv_username= (TextView) view.findViewById(R.id.tv_username);
@@ -69,7 +77,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 FloatingText floatingText = new FloatingText.FloatingTextBuilder(getActivity())
                         .textColor(Color.RED)
                         .textSize(50)
-                        .textContent("签到成功,恭喜你")
+                        .textContent("签到成功!")
                         .build();
 
                 floatingText.attach2Window();

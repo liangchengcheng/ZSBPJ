@@ -2,5 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/default_user_logo" />
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_more"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_username"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="梁铖城"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tv_qm"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="这个家伙很懒，什么也没留下"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>
