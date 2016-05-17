@@ -40,6 +40,11 @@ public class AppConstants {
          */
         public final static String TEST_LIST = "/pagetestforAndroid";
 
+        /**
+         * 获取活动数据
+         */
+        public final static String GET_ACTIVITY = "/service/getactivity";
+
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 
         public final static String USERS_UPDATE = "/users/update.json";
