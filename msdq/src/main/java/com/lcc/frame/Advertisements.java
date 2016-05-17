@@ -13,11 +13,14 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
+import com.lcc.AppConstants;
 import com.lcc.adapter.ZoomOutPageTransformer;
+import com.lcc.entity.ActivityEntity;
 import com.lcc.msdq.R;
 
 import org.json.JSONArray;
 
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -68,7 +71,7 @@ public class Advertisements implements OnPageChangeListener {
 		this.timeDratioin = timeDratioin;
 	}
 
-	public View initView(final JSONArray advertiseArray){
+	public View initView(final List<ActivityEntity> list){
 		View view = inflater.inflate(R.layout.advertisement_board, null);
 		view.setPadding(5, 5, 5, 12);
 		vpAdvertise = (ViewPager) view.findViewById(R.id.vpAdvertise);
@@ -76,7 +79,7 @@ public class Advertisements implements OnPageChangeListener {
 		views = new ArrayList<View>();
 		//获取轮播图片的点的parent，用于动态添加要显示的点
 		LinearLayout ll = (LinearLayout) view.findViewById(R.id.ll);
-		for(int i = 0 ; i < advertiseArray.length() ; i ++){
+		for(int i = 0 ; i < list.size() ; i ++){
 			if(fitXY){
 				views.add(inflater.inflate(R.layout.advertisement_item_fitxy, null));
 			}else {
@@ -86,7 +89,7 @@ public class Advertisements implements OnPageChangeListener {
 		}
 		initDots(view , ll);
 	
-		AdvertisementAdapter adapter = new AdvertisementAdapter(context , views , advertiseArray);
+		AdvertisementAdapter adapter = new AdvertisementAdapter(context , views , list);
 		vpAdvertise.setOffscreenPageLimit(3);
 		vpAdvertise.setAdapter(adapter);
 		vpAdvertise.setPageTransformer(true,new ZoomOutPageTransformer());
@@ -94,7 +97,7 @@ public class Advertisements implements OnPageChangeListener {
 		task = new TimerTask() {
 			@Override
 			public void run() {
-				int currentPage = count%advertiseArray.length();
+				int currentPage = count%list.size();
 				count++;
 				Message msg = Message.obtain();
 				msg.what = 0x01;
@@ -153,16 +156,16 @@ public class Advertisements implements OnPageChangeListener {
 
 		private Context context;
 		private List<View> views;
-		JSONArray advertiseArray;
+		List<ActivityEntity> list;
 
 		public AdvertisementAdapter() {
 			super();
 		}
 
-		public AdvertisementAdapter(Context context, List<View> views, JSONArray advertiseArray) {
+		public AdvertisementAdapter(Context context, List<View> views, List<ActivityEntity> list) {
 			this.context = context;
 			this.views = views;
-			this.advertiseArray = advertiseArray;
+			this.list = list;
 		}
 
 		@Override
@@ -186,8 +189,8 @@ public class Advertisements implements OnPageChangeListener {
 			final int POSITION = position;
 			View view = views.get(position);
 			try {
-				//图片的下载地址在json里面
-				String head_img = advertiseArray.optJSONObject(position).optString("head_img");
+				//图片的下载地址在json里面- [x] http://www.tengxungame.pub:8080
+				String head_img = AppConstants.RequestPath.BASE_URL+list.get(position).getActivity_pic();
 				ImageView ivAdvertise = (ImageView) view.findViewById(R.id.ivAdvertise);
 				Glide.with(ivAdvertise.getContext())
 						.load(head_img)

@@ -13,14 +13,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lcc.base.BaseFragment;
+import com.lcc.entity.ActivityEntity;
 import com.lcc.frame.Advertisements;
 import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.IndexPresenter;
+import com.lcc.mvp.presenter.LoginPresenter;
+import com.lcc.mvp.presenter.impl.IndexPresenterImpl;
+import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
+import com.lcc.mvp.view.IndexView;
+import com.lcc.mvp.view.LoginView;
 import com.lcc.view.menu.GuillotineAnimation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+
+import zsbpj.lccpj.frame.FrameManager;
 
 /**
  * Author:  梁铖城
@@ -28,13 +39,14 @@ import org.json.JSONObject;
  * Date:    2016年04月21日07:17:52
  * Description: 第一页fragment
  */
-public class IndexFragment extends BaseFragment {
+public class IndexFragment extends BaseFragment implements IndexView {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
     private FrameLayout root;
     private static final long RIPPLE_DURATION = 250;
     private ImageView iv_menu;
+    private IndexPresenter mPresenter;
 
     public static Fragment newInstance() {
         Fragment fragment = new IndexFragment();
@@ -44,6 +56,7 @@ public class IndexFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view=inflater.inflate(R.layout.index_fragment,null);
         Toolbar toolbar= (Toolbar) view.findViewById(R.id.toolbar);
         iv_menu= (ImageView) view.findViewById(R.id.iv_menu);
@@ -58,25 +71,27 @@ public class IndexFragment extends BaseFragment {
                 .build();
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
-        initViews();
+        mPresenter = new IndexPresenterImpl(this);
+        mPresenter.getActivity();
         return view;
     }
 
-    private void initViews() {
-        JSONArray advertiseArray = new JSONArray();
+    @Override
+    public void getAcitivity() {
+
+    }
+
+    @Override
+    public void getLoginFail(String msg) {
+        FrameManager.getInstance().toastPrompt(msg);
+    }
+
+    @Override
+    public void getSuccess(List<ActivityEntity> list) {
         try {
-            JSONObject head_img0 = new JSONObject();
-            head_img0.put("head_img", "http://img0.imgtn.bdimg.com/it/u=1270781761,1881354959&fm=21&gp=0.jpg");
-            JSONObject head_img1 = new JSONObject();
-            head_img1.put("head_img", "http://img0.imgtn.bdimg.com/it/u=2138116966,3662367390&fm=21&gp=0.jpg");
-            JSONObject head_img2 = new JSONObject();
-            head_img2.put("head_img", "http://img0.imgtn.bdimg.com/it/u=1296117362,655885600&fm=21&gp=0.jpg");
-            advertiseArray.put(head_img0);
-            advertiseArray.put(head_img1);
-            advertiseArray.put(head_img2);
-            if (advertiseArray.length()>0){
+            if (list.size()>0){
                 Advertisements advertisements = new Advertisements(getActivity(), true, inflaters, 3000);
-                View view = advertisements.initView(advertiseArray);
+                View view = advertisements.initView(list);
                 advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
                     @Override
                     public void onClick(int position) {
@@ -85,7 +100,7 @@ public class IndexFragment extends BaseFragment {
                 });
                 llAdvertiseBoard.addView(view);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
