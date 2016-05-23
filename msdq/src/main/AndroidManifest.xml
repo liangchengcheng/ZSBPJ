@@ -48,6 +48,9 @@
         <activity
             android:name=".choice.ChoiceMainActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".index.IndexContentActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

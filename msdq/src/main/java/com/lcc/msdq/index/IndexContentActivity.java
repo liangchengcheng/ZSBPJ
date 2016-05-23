@@ -21,21 +21,29 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 import com.lcc.utils.ResourcesUtils;
 
 /**
- * 应该继承baseactivity
+ * Author:  梁铖城
+ * Email:   1038127753@qq.com
+ * Date:    2016年04月21日07:17:52
+ * Description: 显示内容
  */
-public class IndexContentActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class IndexContentActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener
+,View.OnClickListener{
 
-    private static final String KEY_URL = "url";
+    public static final String KEY_URL = "url";
     private Toolbar mToolbar;
     private String url;
     private WebView webView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
+    private TextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +52,9 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
 
     @Override
     protected void initView() {
-        initToolBar();
+        //initToolBar();
         initWebView();
+        tv_title= (TextView) findViewById(R.id.tv_title);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
@@ -53,7 +62,9 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
         int color = ResourcesUtils.getColor(this, R.color.colorPrimary);
         progressBar.getProgressDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         url = getIntent().getStringExtra(KEY_URL);
-        webView.loadUrl(url);
+        webView.loadUrl(AppConstants.RequestPath.ACTIVITY_CONTENT+url);
+        findViewById(R.id.iv_back).setOnClickListener(this);
+
     }
 
     @Override
@@ -80,7 +91,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
 
     public void toolbarAsBackButton(Toolbar toolbar) {
         toolbar.setBackgroundColor(getColorPrimary());
-        toolbar.setTitle("内容展示");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -90,12 +100,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
             @Override
             public void onClick(View v) {
                 onBackPressed();
-            }
-        });
-        findViewById(R.id.iv_share).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // showPopwindow();
             }
         });
     }
@@ -174,8 +178,17 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                mToolbar.setTitle(title);
+                tv_title.setText(title);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

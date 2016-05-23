@@ -1,5 +1,6 @@
 package com.lcc.msdq.index;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -87,15 +88,17 @@ public class IndexFragment extends BaseFragment implements IndexView {
     }
 
     @Override
-    public void getSuccess(List<ActivityEntity> list) {
+    public void getSuccess(final List<ActivityEntity> list) {
         try {
-            if (list.size()>0){
+            if (list!=null&&list.size()>0){
                 Advertisements advertisements = new Advertisements(getActivity(), true, inflaters, 3000);
                 View view = advertisements.initView(list);
                 advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
                     @Override
                     public void onClick(int position) {
-
+                        Intent intent=new Intent(getActivity(),IndexContentActivity.class);
+                        intent.putExtra(IndexContentActivity.KEY_URL,list.get(position).getMid());
+                        startActivity(intent);
                     }
                 });
                 llAdvertiseBoard.addView(view);

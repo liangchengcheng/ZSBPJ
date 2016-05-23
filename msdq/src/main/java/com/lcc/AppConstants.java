@@ -6,6 +6,10 @@ public class AppConstants {
     public final class RequestPath {
 
         public final static String BASE_URL = "http://114.215.164.168:8080";
+        /**
+         * 首页活动的内容界面
+         */
+        public final static String ACTIVITY_CONTENT = "http://www.tengxungame.pub:8081/news?mid=";
 
         public final static String CATEGOTY = "/channels/header_list.json?language=zh-Hans";
 
