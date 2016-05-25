@@ -43,7 +43,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
     private WebView webView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
-    private TextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
     protected void initView() {
         //initToolBar();
         initWebView();
-        tv_title= (TextView) findViewById(R.id.tv_title);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
@@ -178,7 +176,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                tv_title.setText(title);
             }
         });
     }

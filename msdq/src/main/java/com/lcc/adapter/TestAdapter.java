@@ -47,7 +47,9 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         holder.tv_title.setText(entity.getTitle());
         holder.tv_content.setText(entity.getSummary());
         holder.tv_time.setText(entity.getUpdated_time());
+
         ImageManager.getInstance().loadCircleImage(mActivity,entity.getUserinfo().getUser_image(),holder.iv_image);
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

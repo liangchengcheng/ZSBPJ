@@ -21,8 +21,14 @@ import com.lapism.searchview.history.SearchHistoryTable;
 import com.lapism.searchview.view.SearchCodes;
 import com.lapism.searchview.view.SearchView;
 import com.lcc.adapter.CompanyAdapter;
+import com.lcc.entity.CompanyDescription;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.CompanyDescriptionPresenter;
+import com.lcc.mvp.presenter.TestPresenter;
+import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
+import com.lcc.mvp.presenter.impl.TestPresenterImpl;
+import com.lcc.mvp.view.CompanyDescriptionView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +38,14 @@ import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         SearchView.OnQueryTextListener, SearchView.SearchViewListener,
-        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener {
+        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,CompanyDescriptionView {
 
     private SearchView mSearchView = null;
     private SearchHistoryTable mHistoryDatabase;
     private CompanyAdapter mAdapter;
     static final int ACTION_NONE = 0;
+
+    private CompanyDescriptionPresenter mPresenter;
 
     public static Fragment newInstance() {
         Fragment fragment = new CompanyIndexFragment();
@@ -47,6 +55,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
+        mPresenter = new CompanyDescriptionPresenterImpl(this);
         View view = getView();
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
@@ -69,7 +78,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentLoadMore() {
-        showMoreData(getData());
+        mPresenter.loadMore(getCurrentPage());
     }
 
     @Override
@@ -79,7 +88,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        showRefreshData(getData());
+        mPresenter.refresh(currentPage);
     }
 
     private void initSearchView(View view) {
@@ -150,7 +159,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     }
 
     @Override
-    public void OnItemClick(CompanyEntity entity) {
+    public void OnItemClick(CompanyDescription entity) {
         startActivity(new Intent(getActivity(),CompanyContentActivity.class));
     }
 
@@ -161,9 +170,9 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         getSwipeRefreshWidget().postDelayed(new Runnable() {
             @Override
             public void run() {
-                currentPage = STATE_REFRESH;
+                currentState = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                showRefreshData(getData());
+                mPresenter.refresh(currentPage);
             }
         }, 500);
     }
@@ -179,16 +188,14 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         }
     }
 
-    private List<CompanyEntity> getData() {
-        List<CompanyEntity> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            CompanyEntity zxTest = new CompanyEntity();
-            zxTest.setDate("03/23 14:26");
-            zxTest.setName("百度科技网络有限公司");
-            zxTest.setJj("这个是对这个公司的基本的简介这个是对这个公司的基本的简介这个是对这个公司的基本的简介这" +
-                    "个是对这个公司的基本的简介这个是对这个公司的基本的简介");
-            data.add(zxTest);
-        }
-        return data;
+    @Override
+    public void refreshView(List<CompanyDescription> entities) {
+        showRefreshData(entities);
     }
+
+    @Override
+    public void loadMoreView(List<CompanyDescription> entities) {
+        showMoreData(entities);
+    }
+
 }

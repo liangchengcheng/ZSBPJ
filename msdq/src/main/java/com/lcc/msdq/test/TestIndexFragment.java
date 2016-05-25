@@ -56,7 +56,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private TestAdapter mAdapter;
     private String tj1, tj2, tj3;
     private TestPresenter mPresenter;
-    private int current_page = 1;
 
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment();
@@ -125,8 +124,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentLoadMore() {
-        current_page++;
-        mPresenter.loadMore(current_page);
+        mPresenter.loadMore(getCurrentPage());
     }
 
     @Override
@@ -136,8 +134,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        current_page=1;
-        mPresenter.refresh(current_page);
+        mPresenter.refresh(currentPage);
     }
 
     public void showPopupWindow(View anchor, int flag) {
@@ -260,10 +257,9 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         getSwipeRefreshWidget().postDelayed(new Runnable() {
             @Override
             public void run() {
-                currentPage = STATE_REFRESH;
+                currentState = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                current_page = 1;
-                mPresenter.refresh(current_page);
+                mPresenter.refresh(currentPage);
             }
         }, 500);
     }

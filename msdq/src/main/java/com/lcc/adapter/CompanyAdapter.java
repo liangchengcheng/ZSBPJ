@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.lcc.entity.CompanyDescription;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.msdq.R;
 
@@ -17,17 +18,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
-public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,CompanyAdapter.ViewHolder>{
+public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, CompanyAdapter.ViewHolder> {
 
-    private  OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
     private Activity mActivity;
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener=onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
-    public CompanyAdapter(Activity activity){
-        this.mActivity=activity;
+    public CompanyAdapter(Activity activity) {
+        this.mActivity = activity;
     }
 
     @Override
@@ -38,29 +39,25 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
 
     @Override
     public void onBindItemViewHolder(ViewHolder holder, final int position) {
-        CompanyEntity entity=getItem(position);
+        CompanyDescription entity = getItem(position);
         holder.ll_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemClickListener.OnItemClick(getItem(position));
             }
         });
-        holder.tv_title.setText(entity.getName());
-        holder.tv_content.setText(entity.getJj());
-        holder.tv_time.setText(entity.getDate());
+        holder.tv_title.setText(entity.getCompany_name());
+        holder.tv_content.setText(entity.getCompany_description());
+        holder.tv_time.setText(entity.getLocation());
 
-        if (position%2==1){
-            String url="http://img2.imgtn.bdimg.com/it/u=3711220099,629041631&fm=21&gp=0.jpg";
-            ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
-                    ,url,holder.iv_icon);
-        }else {
-            String url="http://img1.imgtn.bdimg.com/it/u=3169520611,2159897782&fm=21&gp=0.jpg";
-            ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
-                    ,url,holder.iv_icon);
-        }
+
+        String url = "http://www.tengxungame.pub:8080/"+entity.getCompany_image();
+        ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
+                , url, holder.iv_icon);
+
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView tv_title;
         public final TextView tv_content;
         public final TextView tv_time;
@@ -77,8 +74,8 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyEntity,Compan
         }
     }
 
-    public interface OnItemClickListener{
-        void OnItemClick(CompanyEntity entity);
+    public interface OnItemClickListener {
+        void OnItemClick(CompanyDescription entity);
     }
 
 }

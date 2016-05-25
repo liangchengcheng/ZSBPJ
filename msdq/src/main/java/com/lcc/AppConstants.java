@@ -49,6 +49,11 @@ public class AppConstants {
          */
         public final static String GET_ACTIVITY = "/service/getactivity";
 
+        /**
+         * 获取试题的列表
+         */
+        public final static String COMPANY_DES = "/service/pagedes";
+
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 
         public final static String USERS_UPDATE = "/users/update.json";
