@@ -74,7 +74,7 @@ public class TestPresenterImpl implements TestPresenter {
     }
 
     @Override
-    public void refresh(int page) {
-        loadData(page);
+    public void refresh() {
+        loadData(1);
     }
 }

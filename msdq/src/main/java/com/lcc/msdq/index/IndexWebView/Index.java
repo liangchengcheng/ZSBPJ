@@ -45,7 +45,6 @@ public class Index extends AppCompatActivity {
 
     private FloatingActionButton fabButton;
 
-    private int type;
     private String id;
     private String title;
     private String url;
@@ -54,10 +53,12 @@ public class Index extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index_webview);
+        initData();
+        initView();
+        getData();
     }
 
     private void initData() {
-        type = getIntent().getIntExtra("type", 0);
         id = getIntent().getStringExtra("id");
         title = getIntent().getStringExtra("title");
     }

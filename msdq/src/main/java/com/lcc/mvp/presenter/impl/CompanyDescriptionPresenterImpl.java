@@ -78,7 +78,7 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
     }
 
     @Override
-    public void refresh(int page) {
-        loadData(page);
+    public void refresh() {
+        loadData(1);
     }
 }

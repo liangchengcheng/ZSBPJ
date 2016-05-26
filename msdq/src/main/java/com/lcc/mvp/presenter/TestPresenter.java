@@ -8,6 +8,6 @@ public interface TestPresenter {
 
     void loadMore(int page);
 
-    void refresh(int page);
+    void refresh();
 
 }

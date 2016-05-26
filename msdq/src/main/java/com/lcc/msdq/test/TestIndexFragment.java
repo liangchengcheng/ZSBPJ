@@ -134,7 +134,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        mPresenter.refresh(currentPage);
+        mPresenter.refresh();
     }
 
     public void showPopupWindow(View anchor, int flag) {
@@ -259,7 +259,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             public void run() {
                 currentState = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
-                mPresenter.refresh(currentPage);
+                mPresenter.refresh();
             }
         }, 500);
     }

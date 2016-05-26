@@ -251,7 +251,7 @@ public class TestIndexFragment1 extends S_RefreshAndLoadFragment implements
                 currentPage = STATE_REFRESH;
                 getSwipeRefreshWidget().setRefreshing(true);
                 page=1;
-                mPresenter.refresh(page);
+                mPresenter.refresh();
             }
         }, 500);
     }
