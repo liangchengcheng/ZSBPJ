@@ -11,10 +11,6 @@ import java.util.List;
  * Description:  开始或者结束轮训器
  */
 public interface IndexContentView {
-    /**
-     * 获取活动数据
-     */
-    void getContent();
 
     /**
      * 登录失败：错误信息
@@ -24,6 +20,6 @@ public interface IndexContentView {
     /**
      * 获取成功
      */
-    void getSuccess(List<ActivityEntity> list);
+    void getSuccess(String result);
 
 }

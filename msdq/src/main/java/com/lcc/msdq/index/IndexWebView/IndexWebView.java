@@ -1,13 +1,11 @@
 package com.lcc.msdq.index.IndexWebView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +17,16 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.IndexContentPresenter;
+import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
+import com.lcc.mvp.view.IndexContentView;
 
-import java.lang.reflect.InvocationTargetException;
+import java.net.URLEncoder;
+
+import zsbpj.lccpj.frame.FrameManager;
 
 /**
  * Author:       梁铖城
@@ -31,11 +34,15 @@ import java.lang.reflect.InvocationTargetException;
  * Date:         2015年11月21日15:28:25
  * Description:  先暂时先弄个页面
  */
-public class Index extends AppCompatActivity {
+public class IndexWebView extends AppCompatActivity implements IndexContentView {
+
+    public static final String KEY_URL = "url";
+
+    public static final String IMAGE_URL = "image";
 
     private Toolbar toolbar;
 
-    private WebView wvZhihu;
+    private WebView webView;
 
     private ImageView ivZhihuStory;
 
@@ -46,8 +53,8 @@ public class Index extends AppCompatActivity {
     private FloatingActionButton fabButton;
 
     private String id;
-    private String title;
-    private String url;
+    private String image_url;
+    private IndexContentPresenter indexContentPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,36 +66,28 @@ public class Index extends AppCompatActivity {
     }
 
     private void initData() {
-        id = getIntent().getStringExtra("id");
-        title = getIntent().getStringExtra("title");
+        id = getIntent().getStringExtra(KEY_URL);
+        image_url = getIntent().getStringExtra(IMAGE_URL);
+        indexContentPresenter = new IndexContentPresenterImpl(this);
     }
 
     private void initView() {
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
-        boolean isKitKat = Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT;
-//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.swipe_back);
-//        if (linearLayout != null) {
-//            linearLayout.setBackgroundColor(vibrantColor);
-//        }
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Index.this.onBackPressed();
-//            }
-//        });
+        ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        nest= (NestedScrollView) findViewById(R.id.nest);
+        fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nest.smoothScrollTo(0, 0);
             }
         });
-
-        WebSettings settings = wvZhihu.getSettings();
+        webView= (WebView) findViewById(R.id.webView);
+        WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setLoadWithOverviewMode(true);
@@ -99,9 +98,14 @@ public class Index extends AppCompatActivity {
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        wvZhihu.setWebChromeClient(new WebChromeClient());
-       // ctl.setContentScrimColor(getSharedPreferences(SharePreferenceUtil.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).getInt(SharePreferenceUtil.VIBRANT, ContextCompat.getColor(this, R.color.colorPrimary)));
-        //ctl.setStatusBarScrimColor(getSharedPreferences(SharePreferenceUtil.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).getInt(SharePreferenceUtil.VIBRANT, ContextCompat.getColor(this, R.color.colorPrimary)));
+        webView.setWebChromeClient(new WebChromeClient());
+        ctl= (CollapsingToolbarLayout) findViewById(R.id.ctl);
+        ctl.setContentScrimColor(Color.BLACK);
+        ctl.setStatusBarScrimColor(Color.BLUE);
+    }
+
+    private void getData() {
+        indexContentPresenter.getActivityContent(id);
     }
 
     @Override
@@ -110,7 +114,7 @@ public class Index extends AppCompatActivity {
             case R.id.action_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, title + " " + url + getString(R.string.share_tail));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
                 //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
@@ -123,8 +127,8 @@ public class Index extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         try {
-            wvZhihu.getClass().getMethod("onResume").invoke(wvZhihu, (Object[]) null);
-        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            webView.getClass().getMethod("onResume").invoke(webView, (Object[]) null);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -133,20 +137,38 @@ public class Index extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         try {
-            wvZhihu.getClass().getMethod("onPause").invoke(wvZhihu, (Object[]) null);
-        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            webView.getClass().getMethod("onPause").invoke(webView, (Object[]) null);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     protected void onDestroy() {
-        if (wvZhihu != null) {
-            ((ViewGroup) wvZhihu.getParent()).removeView(wvZhihu);
-            wvZhihu.destroy();
-            wvZhihu = null;
+        if (webView != null) {
+            ((ViewGroup) webView.getParent()).removeView(webView);
+            webView.destroy();
+            webView = null;
         }
         super.onDestroy();
     }
 
+    @Override
+    public void getLoginFail(String msg) {
+        FrameManager.getInstance().toastPrompt("加载数据失败");
+    }
+
+    @Override
+    public void getSuccess(String result) {
+        Glide.with(IndexWebView.this)
+                .load(image_url)
+                .placeholder(R.drawable.loading1)
+                .into(ivZhihuStory);
+        try{
+            webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
+           // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,5 +1,5 @@
 package com.lcc.mvp.presenter;
 
 public interface IndexContentPresenter {
-    void getActivityContent();
+    void getActivityContent(String id);
 }

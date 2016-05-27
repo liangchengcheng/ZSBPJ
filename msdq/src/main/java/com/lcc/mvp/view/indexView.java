@@ -11,10 +11,6 @@ import java.util.List;
  * Description:  开始或者结束轮训器
  */
 public interface IndexView {
-    /**
-     * 获取活动数据
-     */
-    void getAcitivity();
 
     /**
      * 登录失败：错误信息

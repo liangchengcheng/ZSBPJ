@@ -32,7 +32,7 @@ public class IndexPresenterImpl implements IndexPresenter {
 
     @Override
     public void getActivity() {
-        model.login(new ResultCallback<String>() {
+        model.getActivity(new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.getLoginFail(ApiException.getApiExceptionMessage(e.getMessage()));

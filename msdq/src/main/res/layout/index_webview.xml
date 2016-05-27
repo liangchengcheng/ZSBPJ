@@ -22,7 +22,7 @@
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
             <ImageView
-                android:id="@+id/iv_zhihu_story"
+                android:id="@+id/ivZhihuStory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
@@ -48,7 +48,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <WebView
-            android:id="@+id/wv_zhihu"
+            android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.NestedScrollView>
@@ -64,7 +64,7 @@
         android:layout_gravity="bottom|end"
         app:pressedTranslationZ="12dp"
         app:backgroundTint="@color/colorAccent"
-        app:layout_behavior="name.caiyao.microreader.ui.view.ScrollAwareFABBehavior"
+        app:layout_behavior="com.lcc.view.ScrollAwareFABBehavior"
         app:rippleColor="#33728dff"
         android:src="@drawable/ic_arrow_upward_white_24px" />
 </android.support.design.widget.CoordinatorLayout>

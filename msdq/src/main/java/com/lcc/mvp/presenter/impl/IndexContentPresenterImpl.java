@@ -28,8 +28,8 @@ public class IndexContentPresenterImpl implements IndexContentPresenter {
     }
 
     @Override
-    public void getActivityContent() {
-        model.getActivityContent(new ResultCallback<String>() {
+    public void getActivityContent(String id) {
+        model.getActivityContent(id,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.getLoginFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -42,9 +42,10 @@ public class IndexContentPresenterImpl implements IndexContentPresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
-                    List<ActivityEntity> userInfo = GsonUtils.fromJsonArray(result, ActivityEntity.class);
                     if (status == 1) {
-                        view.getSuccess(userInfo);
+                        JSONObject json_result = new JSONObject(result);
+                        String content=json_result.getString("content");
+                        view.getSuccess(content);
                     } else {
                         view.getLoginFail(message);
                     }

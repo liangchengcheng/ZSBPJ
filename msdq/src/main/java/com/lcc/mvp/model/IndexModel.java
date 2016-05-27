@@ -13,7 +13,7 @@ public class IndexModel {
      * 获取活动数据
      * @param callback 回调函数 默认返回的String 其实可以是其他的javabean
      */
-    public OkHttpRequest login( ResultCallback<String> callback) {
+    public OkHttpRequest getActivity( ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         // TODO: 16/4/20 改为post
         return ApiClient.create(AppConstants.RequestPath.GET_ACTIVITY, paramsMap).tag("").get(callback);

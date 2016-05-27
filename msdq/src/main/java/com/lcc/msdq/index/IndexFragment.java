@@ -18,6 +18,7 @@ import com.lcc.entity.ActivityEntity;
 import com.lcc.frame.Advertisements;
 import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.R;
+import com.lcc.msdq.index.IndexWebView.IndexWebView;
 import com.lcc.mvp.presenter.IndexPresenter;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.IndexPresenterImpl;
@@ -78,11 +79,6 @@ public class IndexFragment extends BaseFragment implements IndexView {
     }
 
     @Override
-    public void getAcitivity() {
-
-    }
-
-    @Override
     public void getLoginFail(String msg) {
         FrameManager.getInstance().toastPrompt(msg);
     }
@@ -96,8 +92,14 @@ public class IndexFragment extends BaseFragment implements IndexView {
                 advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
                     @Override
                     public void onClick(int position) {
-                        Intent intent=new Intent(getActivity(),IndexContentActivity.class);
-                        intent.putExtra(IndexContentActivity.KEY_URL,list.get(position).getMid());
+//                        Intent intent=new Intent(getActivity(),IndexContentActivity.class);
+//                        intent.putExtra(IndexContentActivity.KEY_URL,list.get(position).getMid());
+//                        intent.putExtra(IndexContentActivity.IMAGE_URL,list.get(position).getActivity_pic());
+//                        startActivity(intent);
+
+                        Intent intent=new Intent(getActivity(),IndexWebView.class);
+                        intent.putExtra(IndexWebView.KEY_URL,list.get(position).getMid());
+                        intent.putExtra(IndexWebView.IMAGE_URL,list.get(position).getActivity_pic());
                         startActivity(intent);
                     }
                 });

@@ -57,7 +57,7 @@ public class AppConstants {
         /**
          * 获取活动内容
          */
-        public final static String GET_ACTIVITY_CONTENT = "/service/getactivitycontent";
+        public final static String GET_ACTIVITY_CONTENT = "/service/getactivitycontentforad";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 
@@ -94,7 +94,7 @@ public class AppConstants {
 
         public final static String PASSWORD_KEY = "password";
 
-        public final static String ID_KEY = "id";
+        public final static String ID_KEY = "mid";
 
         public final static String TYPE_KEY = "type";
 
