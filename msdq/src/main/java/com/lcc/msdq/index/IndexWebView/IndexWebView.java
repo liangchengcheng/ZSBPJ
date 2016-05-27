@@ -10,6 +10,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.lcc.AppConstants;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
@@ -54,7 +57,9 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
 
     private String id;
     private String image_url;
+
     private IndexContentPresenter indexContentPresenter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,8 +77,11 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
     }
 
     private void initView() {
+
         ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("第五种基本能力是真你的被发现了？");
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -100,14 +108,19 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
         ctl= (CollapsingToolbarLayout) findViewById(R.id.ctl);
-        ctl.setContentScrimColor(Color.BLACK);
-        ctl.setStatusBarScrimColor(Color.BLUE);
     }
 
     private void getData() {
         indexContentPresenter.getActivityContent(id);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+        menu.findItem(R.id.action_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.removeItem(R.id.action_use_browser);
+        return super.onCreateOptionsMenu(menu);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -160,9 +173,11 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
 
     @Override
     public void getSuccess(String result) {
+        String head_img = AppConstants.RequestPath.BASE_URL+image_url;
         Glide.with(IndexWebView.this)
-                .load(image_url)
+                .load(head_img)
                 .placeholder(R.drawable.loading1)
+                .centerCrop()
                 .into(ivZhihuStory);
         try{
             webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
