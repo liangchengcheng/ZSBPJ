@@ -34,6 +34,7 @@ import com.lcc.view.menu.GuillotineAnimation;
 
 import java.util.Locale;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 public class MainActivity extends BaseActivity {
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
         toast.setDefaultTextColor(Color.WHITE);
         toast.show("不好了。", R.layout.toast_item,R.id.content_toast,MainActivity.this);
