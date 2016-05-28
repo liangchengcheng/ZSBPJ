@@ -1,6 +1,7 @@
 package com.lcc.msdq.test;
 
 
+import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,7 @@ import com.lcc.base.BaseFragment;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
@@ -76,6 +78,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         autoRefresh();
     }
 
@@ -248,7 +251,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void OnItemClick(TestEntity entity) {
-        FrameManager.getInstance().toastPrompt("点击事件");
+       startActivity(new Intent(getActivity(), AnswerIndexActivity.class));
     }
 
     /**

@@ -2,6 +2,7 @@ package com.lcc.msdq.test.answer;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -22,13 +23,13 @@ import java.util.ArrayList;
  */
 public class AnswerIndexActivity extends BaseActivity {
 
-    private LoadMoreRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private AnswerIndexAdapter mAdapter;
 
     @Override
     protected void initView() {
-        mRecyclerView = (LoadMoreRecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -44,7 +45,7 @@ public class AnswerIndexActivity extends BaseActivity {
         });
     }
 
-    private void setHeader(LoadMoreRecyclerView view) {
+    private void setHeader(RecyclerView view) {
         View header = LayoutInflater.from(this).inflate(R.layout.activity_answer_header, view, false);
         mAdapter.setHeaderView(header);
     }
