@@ -13,6 +13,8 @@ import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 
+import org.w3c.dom.Text;
+
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
@@ -47,6 +49,8 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         holder.tv_title.setText(entity.getTitle());
         holder.tv_content.setText(entity.getSummary());
         holder.tv_time.setText(entity.getUpdated_time());
+        holder.tv_ll.setText("收藏:"+entity.getLnumber());
+        holder.tv_sc.setText("浏览:"+entity.getFnumber());
 
         ImageManager.getInstance().loadCircleImage(mActivity,entity.getUserinfo().getUser_image(),holder.iv_image);
 
@@ -58,10 +62,14 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         public final TextView tv_time;
         public final CardView ll_all;
         public final ImageView iv_image;
+        public final TextView tv_ll;
+        public final TextView tv_sc;
 
         public ViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_title);
+            tv_sc = (TextView) view.findViewById(R.id.tv_sc);
+            tv_ll = (TextView) view.findViewById(R.id.tv_ll);
             tv_content = (TextView) view.findViewById(R.id.tv_content);
             tv_time = (TextView) view.findViewById(R.id.tv_time);
             ll_all = (CardView) view.findViewById(R.id.ll_all);

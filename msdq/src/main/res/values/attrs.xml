@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="widgetBackground" format="color|reference"/>
     <declare-styleable name="BottomBar">
     </declare-styleable>
     <declare-styleable name="FloatingActionButton">

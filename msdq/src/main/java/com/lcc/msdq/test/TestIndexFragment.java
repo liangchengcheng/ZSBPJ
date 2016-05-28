@@ -53,6 +53,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private MyAdapter madapter;
     private View ll_layout;
     static final int ACTION_NONE = 0;
+
     private TestAdapter mAdapter;
     private String tj1, tj2, tj3;
     private TestPresenter mPresenter;
