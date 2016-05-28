@@ -21,5 +21,8 @@
     <dimen name="fab_stroke_width">1dp</dimen>
     <dimen name="fab_actions_spacing">16dp</dimen>
     <dimen name="fab_labels_margin">8dp</dimen>
-
+    <dimen name="default_elevation">8dp</dimen>
+    <dimen name="comment_avatar_size">56dp</dimen>
+    <dimen name="md_simplelist_icon">40dp</dimen>
+    <dimen name="md_simplelist_icon_margin">18dp</dimen>
 </resources>

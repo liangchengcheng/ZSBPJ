@@ -33,5 +33,6 @@ public class Utils {
 		int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
 		return px;
 	}
+
 	
 }

@@ -54,6 +54,12 @@
         <activity
             android:name=".index.IndexWebView.IndexWebView"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".comments.CommentsActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".setting.SettingActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

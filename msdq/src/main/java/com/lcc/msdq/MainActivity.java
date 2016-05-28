@@ -81,5 +81,13 @@ public class MainActivity extends BaseActivity {
         mBottomBar.onSaveInstanceState(outState);
     }
 
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x02:
+                this.recreate();
+                break;
+        }
+    }
+
 
 }

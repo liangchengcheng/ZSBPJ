@@ -18,6 +18,7 @@ import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.Login.LoginActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.setting.SettingActivity;
 import com.ufreedom.uikit.FloatingText;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -58,6 +59,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         scrollView.setScrollContentView(contentView);
 
         view.findViewById(R.id.iv_more).setOnClickListener(this);
+        view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
         iv_more= (ImageView) view.findViewById(R.id.iv_more);
         tv_username= (TextView) view.findViewById(R.id.tv_username);
         tv_qm= (TextView) view.findViewById(R.id.tv_qm);
@@ -81,6 +83,9 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                         .build();
                 floatingText.attach2Window();
                 floatingText.startFloating(tv_qd);
+                break;
+            case R.id.iv_sys_image:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
         }
     }
