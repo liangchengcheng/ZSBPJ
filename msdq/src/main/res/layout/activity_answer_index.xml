@@ -105,7 +105,7 @@
                               android:text="收藏:988" />
 
                           <TextView
-
+                                android:id="@+id/tv_sc"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:layout_alignParentRight="true"

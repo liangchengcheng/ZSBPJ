@@ -1,14 +1,18 @@
 package com.lcc.msdq.test.answer;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.lcc.adapter.AnswerIndexAdapter;
@@ -16,6 +20,7 @@ import com.lcc.adapter.BaseRecyclerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
+import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestAnswerPresenterImpl;
@@ -36,7 +41,8 @@ import zsbpj.lccpj.frame.FrameManager;
  * Description:  AnswerIndexActivity
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, ObservableScrollView.ScrollViewListener{
+        SwipeRefreshLayout.OnRefreshListener, ObservableScrollView.ScrollViewListener
+,View.OnClickListener{
 
     private RecyclerView mRecyclerView;
     private FullyLinearLayoutManager mLayoutManager;
@@ -48,10 +54,12 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private String fid="5e7f684866bee25219269994f4784573";
     private ObservableScrollView scroll_view;
     private LinearLayout ll_loading;
+    private TextView tv_sc;
 
     @Override
     protected void initView() {
 
+        findViewById(R.id.tv_sc).setOnClickListener(this);
         mPresenter=new TestAnswerPresenterImpl(this);
         ll_loading= (LinearLayout) findViewById(R.id.ll_loading);
         scroll_view= (ObservableScrollView) findViewById(R.id.scroll_view);
@@ -129,5 +137,37 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         ll_loading.setVisibility(View.VISIBLE);
         currentPage++;
         mPresenter.loadMore(currentPage,fid);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_answer, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
+                break;
+
+            case R.id.action_use_browser:
+                startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_sc:
+                startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
+                break;
+        }
     }
 }

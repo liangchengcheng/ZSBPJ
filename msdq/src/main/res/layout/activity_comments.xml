@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/shadow_top" />
+                android:background="#ededed" />
         </FrameLayout>
 
         <LinearLayout
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/btn_send_comment"
+                android:background="@color/btn_send_normal"
                 android:elevation="4dp"
                 android:orientation="vertical" />
 

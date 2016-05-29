@@ -20,11 +20,14 @@ import com.lcc.adapter.CommentsAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 import com.lcc.utils.ScreenUtils;
+import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.SendCommentButton;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener {
+
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
 
     @Bind(R.id.contentRoot)
@@ -46,6 +49,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         setupComments();
         setupSendCommentButton();
 
@@ -78,7 +82,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     }
 
     private void setupComments() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvComments = (RecyclerView) findViewById(R.id.rvComments);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvComments.setLayoutManager(linearLayoutManager);
         rvComments.setHasFixedSize(true);
 
@@ -96,6 +101,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     }
 
     private void setupSendCommentButton() {
+        btnSendComment= (SendCommentButton) findViewById(R.id.btnSendComment);
         btnSendComment.setOnSendClickListener(this);
     }
 

@@ -1,19 +1,36 @@
 package com.lcc.adapter;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
-
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup.LayoutParams;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.util.TypedValue;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewParent;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,12 +58,14 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<AnswerIndexAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Answer answer = mList.get(position);
-        holder.tv_content.setText(answer.getAnswer());
+
+        holder.des_content.setText(answer.getAnswer());
         holder.tv_name.setText(answer.getUserinfo().getNickname());
         ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                 answer.getUserinfo().getUser_image(),holder.iv_image);
+
     }
 
     @Override
@@ -56,8 +75,8 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<AnswerIndexAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_content)
-        TextView tv_content;
+        @Bind(R.id.des_content)
+        TextView des_content;
 
         @Bind(R.id.tv_name)
         TextView tv_name;
@@ -81,5 +100,6 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<AnswerIndexAdapter.
     public List<Answer> getList() {
         return mList;
     }
+
 
 }
