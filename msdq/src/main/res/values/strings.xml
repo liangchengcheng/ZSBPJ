@@ -18,4 +18,6 @@
     <string name="msg_verify_code_point">秒后获取</string>
     <string name="share_tail">\r\n(分享自小城面试助手！)</string>
     <string name="share">分享到</string>
+    <string name="retract">收起</string>
+    <string name="spread">展开</string>
 </resources>

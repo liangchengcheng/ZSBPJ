@@ -41,4 +41,5 @@ dependencies {
     compile 'de.greenrobot:greendao:2.1.0'
     compile 'com.ufreedom.uikit:FloatingTextLibrary:0.2.0'
     compile 'com.github.frank-zhu:pullzoomview:1.0.0'
+    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
 }

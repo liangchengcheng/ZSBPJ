@@ -9,7 +9,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.lcc.msdq.R;
+
 
 public class LoadMoreRecyclerView extends RecyclerView {
     /**

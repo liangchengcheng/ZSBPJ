@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  BaseRecyclerAdapter
+ * Description:  BaseRecyclerAdapter带headView的
  */
 public  abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TYPE_HEADER = 0;
