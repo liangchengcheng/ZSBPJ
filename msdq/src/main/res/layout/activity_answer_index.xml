@@ -5,6 +5,27 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageView
+            android:id="@+id/guillotine_hamburger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_arrow_back_white_24dp" />
+        <TextView
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:textColor="#fff"
+            android:text="共27个答案"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_widget"
         android:layout_width="match_parent"
@@ -14,6 +35,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.lcc.view.LoadMoreRecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
@@ -26,25 +48,75 @@
                 android:layout_height="300dp"
                 android:layout_gravity="center_horizontal|top">
 
-               <LinearLayout
-                   android:orientation="vertical"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_centerInParent="true"
-                       android:textSize="20sp"
-                       android:textColor="#000"
-                       android:text="那些去年刚毕业的前端们现在都在干什么？" />
-                   <com.lcc.view.StretchyTextView
-                       android:id="@+id/spread_textview"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"></com.lcc.view.StretchyTextView>
-               </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="那些去年刚毕业的前端们现在都在干什么？"
+                        android:textColor="#000"
+                        android:textSize="20sp" />
+
+                    <com.lcc.view.StretchyTextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/spread_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></com.lcc.view.StretchyTextView>
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ededed" />
+
+                    <RelativeLayout
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:id="@+id/tv_llrs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="浏览:988" />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:id="@+id/tv_llsc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_llrs"
+                            android:text="收藏:988" />
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:text="收藏"
+                            android:layout_marginRight="5dp"
+                          android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="10dp"
+                            android:paddingLeft="10dp"
+                            android:textColor="#fff"
+                            android:background="?attr/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:background="#ededed"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+                </LinearLayout>
 
             </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
-
         </FrameLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.lcc.msdq.R;
 
@@ -27,7 +28,7 @@ public class StretchyTextView extends LinearLayout implements View.OnClickListen
 
     private TextView contentText;
     private TextView operateText;
-    private LinearLayout bottomTextLayout;
+    private RelativeLayout bottomTextLayout;
 
     private String shrinkup;
     private String spread;
@@ -48,7 +49,7 @@ public class StretchyTextView extends LinearLayout implements View.OnClickListen
         view.setPadding(0, -1, 0, 0);
         contentText = (TextView) view.findViewById(R.id.content_textview);
         operateText = (TextView) view.findViewById(R.id.bottom_textview);
-        bottomTextLayout = (LinearLayout) view.findViewById(R.id.bottom_text_layout);
+        bottomTextLayout = (RelativeLayout) view.findViewById(R.id.bottom_text_layout);
         setBottomTextGravity(Gravity.LEFT);
         operateText.setOnClickListener(this);
         runable = new InnerRunnable();
