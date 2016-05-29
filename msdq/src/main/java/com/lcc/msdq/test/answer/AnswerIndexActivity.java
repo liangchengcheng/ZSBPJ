@@ -54,7 +54,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private String fid="5e7f684866bee25219269994f4784573";
     private ObservableScrollView scroll_view;
     private LinearLayout ll_loading;
-    private TextView tv_sc;
 
     @Override
     protected void initView() {
