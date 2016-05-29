@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action1;
+import zsbpj.lccpj.frame.ImageManager;
 
 /**
  * Author:       梁铖城
@@ -25,10 +28,10 @@ import rx.functions.Action1;
  */
 public class AnswerIndexAdapter extends RecyclerView.Adapter<AnswerIndexAdapter.ViewHolder> {
 
-    private List<String> messages = new ArrayList<>();
+    private List<Answer> mList = new ArrayList<>();
 
-    public void bind(List<String> messages) {
-        this.messages = messages;
+    public void bind(List<Answer> messages) {
+        this.mList = messages;
         notifyDataSetChanged();
     }
 
@@ -39,23 +42,44 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<AnswerIndexAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String message = messages.get(position);
-        holder.text.setText(message);
+        Answer answer = mList.get(position);
+        holder.tv_content.setText(answer.getAnswer());
+        holder.tv_name.setText(answer.getUserinfo().getNickname());
+        ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
+                answer.getUserinfo().getUser_image(),holder.iv_image);
     }
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return mList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.text)
-        TextView text;
+        @Bind(R.id.tv_content)
+        TextView tv_content;
+
+        @Bind(R.id.tv_name)
+        TextView tv_name;
+
+        @Bind(R.id.iv_image)
+        ImageView iv_image;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public void appendToList(List<Answer> list) {
+        if (list == null) {
+            return;
+        }
+        mList.addAll(list);
+    }
+
+    public List<Answer> getList() {
+        return mList;
+    }
+
 }

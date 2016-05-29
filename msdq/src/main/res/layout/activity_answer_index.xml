@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,105 +19,145 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_back_white_24dp" />
+
         <TextView
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
-            android:textColor="#fff"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="共27个答案"
-            android:layout_height="wrap_content" />
+            android:textColor="#fff"
+            android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+      <com.lcc.view.ObservableScrollView
+          android:id="@+id/scroll_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="wrap_content">
+              <android.support.v7.widget.CardView
+                  android:id="@+id/ll_all"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="1.5dp"
+                  android:clickable="true"
+                  android:focusable="true"
+                  android:foreground="?android:attr/selectableItemBackground"
+                  android:orientation="horizontal"
+                  app:cardCornerRadius="1dp"
+                  app:cardUseCompatPadding="true">
 
-            <com.lcc.view.LoadMoreRecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical" />
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
 
-            <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_gravity="center_horizontal|top">
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_centerInParent="true"
+                          android:layout_marginLeft="10dp"
+                          android:text="那些去年刚毕业的前端们现在都在干什么？"
+                          android:textColor="#000"
+                          android:textSize="20sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                      <com.lcc.view.StretchyTextView
+                          android:id="@+id/spread_textview"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="10dp"
+                          android:layout_marginTop="10dp"></com.lcc.view.StretchyTextView>
 
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="那些去年刚毕业的前端们现在都在干什么？"
-                        android:textColor="#000"
-                        android:textSize="20sp" />
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="1dp"
+                          android:layout_marginTop="10dp"
+                          android:background="#ededed" />
 
-                    <com.lcc.view.StretchyTextView
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/spread_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.lcc.view.StretchyTextView>
+                      <RelativeLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="10dp"
+                          android:layout_marginTop="10dp">
 
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#ededed" />
+                          <TextView
+                              android:id="@+id/tv_llrs"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_centerVertical="true"
+                              android:text="浏览:988" />
 
-                    <RelativeLayout
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                          <TextView
+                              android:id="@+id/tv_llsc"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_centerVertical="true"
+                              android:layout_marginLeft="10dp"
+                              android:layout_toRightOf="@+id/tv_llrs"
+                              android:text="收藏:988" />
 
-                        <TextView
-                            android:layout_centerVertical="true"
-                            android:id="@+id/tv_llrs"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="浏览:988" />
+                          <TextView
 
-                        <TextView
-                            android:layout_centerVertical="true"
-                            android:id="@+id/tv_llsc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/tv_llrs"
-                            android:text="收藏:988" />
-                        <TextView
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            android:text="收藏"
-                            android:layout_marginRight="5dp"
-                          android:paddingTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:paddingRight="10dp"
-                            android:paddingLeft="10dp"
-                            android:textColor="#fff"
-                            android:background="?attr/colorPrimary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </RelativeLayout>
-                    <TextView
-                        android:layout_marginTop="5dp"
-                        android:background="#ededed"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp" />
-                </LinearLayout>
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentRight="true"
+                              android:layout_centerVertical="true"
+                              android:layout_marginRight="5dp"
+                              android:background="?attr/colorPrimary"
+                              android:paddingBottom="5dp"
+                              android:paddingLeft="10dp"
+                              android:paddingRight="10dp"
+                              android:paddingTop="5dp"
+                              android:text="收藏"
+                              android:textColor="#fff" />
+                      </RelativeLayout>
 
-            </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
-        </FrameLayout>
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="20dp"
+                          android:layout_marginTop="5dp"
+                          android:background="#ededed" />
+                  </LinearLayout>
+              </android.support.v7.widget.CardView>
+
+              <android.support.v7.widget.RecyclerView
+                  android:id="@+id/recyclerView"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:scrollbars="vertical" />
+              <LinearLayout
+                  android:visibility="gone"
+                  android:id="@+id/ll_loading"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:orientation="horizontal"
+                  android:padding="10dp">
+
+                  <ProgressBar
+                      android:layout_width="25dp"
+                      android:layout_height="25dp" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="10dp"
+                      android:text="正在加载"
+                      android:textColor="?android:textColorSecondary"
+                      android:textSize="16dp" />
+
+              </LinearLayout>
+          </LinearLayout>
+      </com.lcc.view.ObservableScrollView>
+
+
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

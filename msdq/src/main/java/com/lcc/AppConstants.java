@@ -45,6 +45,10 @@ public class AppConstants {
         public final static String TEST_LIST = "/pagetestforAndroid";
 
         /**
+         * 获取试题的列表
+         */
+        public final static String TEST_ANSWER_LIST = "/pageanswerforAndroid";
+        /**
          * 获取活动数据
          */
         public final static String GET_ACTIVITY = "/service/getactivity";
@@ -95,6 +99,8 @@ public class AppConstants {
         public final static String PASSWORD_KEY = "password";
 
         public final static String ID_KEY = "mid";
+
+        public final static String FID = "fid";
 
         public final static String TYPE_KEY = "type";
 
