@@ -1,6 +1,7 @@
 package com.lcc.msdq.test.answer;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.TimeUtils;
+import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
+import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
 /**
  * Author:       梁铖城
@@ -48,10 +52,14 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private AnswerIndexAdapter mAdapter;
     private TestAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
-    private int currentPage=0;
     private String fid="5e7f684866bee25219269994f4784573";
 
-
+    protected static final  int DEF_DELAY=1000;
+    protected final static int STATE_LOAD=0;
+    protected final static int STATE_NORMAL=1;
+    protected int currentState=STATE_NORMAL;
+    protected long currentTime=0;
+    protected int currentPage=1;
 
     @Override
     protected void initView() {
@@ -74,6 +82,21 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new AnswerIndexAdapter();
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
+            @Override
+            public void onLoadMore() {
+                if (currentState == STATE_NORMAL) {
+                    currentState = STATE_LOAD;
+                    currentTime = TimeUtils.getCurrentTime();
+                    mAdapter.setHasFooter(true);
+                    mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
+                    currentPage++;
+                    mPresenter.loadMore(currentPage,fid);
+                } else {
+                    FrameManager.getInstance().toastPrompt("请稍等，正在加载");
+                }
+            }
+        });
         onRefresh();
     }
 
@@ -111,11 +134,25 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     @Override
-    public void loadMoreView(List<Answer> entities) {
-        mAdapter.appendToList(entities);
-        mAdapter.notifyDataSetChanged();
-
-
+    public void loadMoreView(final List<Answer> entities) {
+        int delay = 0;
+        if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
+            delay = DEF_DELAY;
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentState = STATE_NORMAL;
+                if (entities.isEmpty()) {
+                    mAdapter.setHasMoreDataAndFooter(false, false);
+                    FrameManager.getInstance().toastPrompt("没有更多数据...");
+                } else {
+                    mAdapter.appendToList(entities);
+                    mAdapter.setHasMoreDataAndFooter(true, false);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+        }, delay);
     }
 
     @Override
@@ -128,11 +165,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 mPresenter.refresh(currentPage,fid);
             }
         }, 500);
-    }
-
-    public void onScrollChangedToBottom() {
-        currentPage++;
-        mPresenter.loadMore(currentPage,fid);
     }
 
     @Override

@@ -7,10 +7,12 @@
     android:padding="10dp">
 
     <ProgressBar
+        android:id="@+id/mProgressView"
         android:layout_width="25dp"
         android:layout_height="25dp" />
 
     <TextView
+        android:id="@+id/mTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

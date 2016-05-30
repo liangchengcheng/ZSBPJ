@@ -25,4 +25,18 @@
     <dimen name="comment_avatar_size">56dp</dimen>
     <dimen name="md_simplelist_icon">40dp</dimen>
     <dimen name="md_simplelist_icon_margin">18dp</dimen>
+
+    <dimen name="viewpager_height">180dp</dimen>
+    <dimen name="head_height">244dp</dimen>
+    <dimen name="card_elevation_static">2dp</dimen>
+    <dimen name="card_elevation_selected">8dp</dimen>
+    <dimen name="card_radius_default">2dp</dimen>
+    <dimen name="text_spacing_default">8dp</dimen>
+    <dimen name="card_spacing_default_half">4dp</dimen>
+    <dimen name="card_title_size_24sp">24sp</dimen>
+    <dimen name="card_context_size_18sp">18sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="card_context_size_14sp">14sp</dimen>
+    <dimen name="text_padding_default">12dp</dimen>
+    <dimen name="text_padding_double">24dp</dimen>
 </resources>

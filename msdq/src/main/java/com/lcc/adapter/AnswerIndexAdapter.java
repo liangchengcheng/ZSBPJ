@@ -11,15 +11,20 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
 import com.lcc.view.StretchyTextView;
+
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup.LayoutParams;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -47,8 +53,19 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private static final int NORMAL_ITEM = 0;
     private static final int HEAD_ITEM = 1;
+    public static final int FOOTER_ITEM = 2;
 
     private List<Object> mList = new ArrayList<>();
+
+    /**
+     * 是否设置了footer
+     */
+    private boolean hasFooter;
+
+    /**
+     * 是否继续加载数据
+     */
+    private boolean hasMoreData = true;
 
     public void bind(List<Object> messages) {
         this.mList = messages;
@@ -57,51 +74,61 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0)
+        if (position == 0) {
             return HEAD_ITEM;
-        return NORMAL_ITEM;
+        } else if (position == getBasicItemCount() && hasFooter) {
+            return FOOTER_ITEM;
+        } else {
+            return NORMAL_ITEM;
+        }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType== NORMAL_ITEM) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_item, parent, false));        } else {
+        if (viewType == NORMAL_ITEM) {
+            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_item, parent, false));
+        } else if (viewType == FOOTER_ITEM) {
+            return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
+        } else {
+            return new HeadViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_header, parent, false));
         }
-        return new HeadViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_header, parent, false));
     }
-
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-//        int type = getItemViewType(position);
-//
-//        if (type == HEAD_ITEM) {
-//
-//        }else {
-//
-//        }
-
-        Object object = mList.get(position);
-
         if (viewHolder instanceof HeadViewHolder) {
+            Object object = mList.get(position);
             HeadViewHolder holder = (HeadViewHolder) viewHolder;
             holder.tv_title.setText("会尽快好看好看好看");
             holder.tv_name.setContent("jksjlajsdlasjdlaj");
 
+        } else if (viewHolder instanceof FootViewHolder) {
+            if (hasMoreData) {
+                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
+                ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
+            } else {
+                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
+                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
+            }
         } else {
-            Answer answer= (Answer) object;
+            Object object = mList.get(position);
+            Answer answer = (Answer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(answer.getAnswer());
             holder.tv_name.setText(answer.getUserinfo().getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
-                    answer.getUserinfo().getUser_image(),holder.iv_image);
-
+                    answer.getUserinfo().getUser_image(), holder.iv_image);
         }
     }
 
     @Override
     public int getItemCount() {
+        return getBasicItemCount() + (hasFooter ? 1 : 0);
+
+    }
+
+    public int getBasicItemCount() {
         return mList.size();
     }
 
@@ -145,6 +172,23 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    /**
+     * 头部的布局
+     */
+    class FootViewHolder extends RecyclerView.ViewHolder {
+
+        @Bind(R.id.mProgressView)
+        ProgressBar mProgressView;
+
+        @Bind(R.id.mTextView)
+        TextView mTextView;
+
+        public FootViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
     public void appendToList(List<Answer> list) {
         if (list == null) {
             return;
@@ -156,5 +200,29 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mList;
     }
 
+    public void setHasFooter(boolean hasFooter) {
+        if (this.hasFooter != hasFooter) {
+            this.hasFooter = hasFooter;
+            notifyDataSetChanged();
+        }
+    }
 
+    public boolean hasMoreData() {
+        return hasMoreData;
+    }
+
+    public void setHasMoreData(boolean isMoreData) {
+        if (this.hasMoreData != isMoreData) {
+            this.hasMoreData = isMoreData;
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setHasMoreDataAndFooter(boolean hasMoreData, boolean hasFooter) {
+        if (this.hasMoreData != hasMoreData || this.hasFooter != hasFooter) {
+            this.hasMoreData = hasMoreData;
+            this.hasFooter = hasFooter;
+            notifyDataSetChanged();
+        }
+    }
 }
