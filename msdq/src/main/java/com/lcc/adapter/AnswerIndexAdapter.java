@@ -13,11 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
 import com.lcc.view.StretchyTextView;
-
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup.LayoutParams;
 import java.util.ArrayList;
@@ -50,9 +48,9 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private static final int NORMAL_ITEM = 0;
     private static final int HEAD_ITEM = 1;
 
-    private List<Answer> mList = new ArrayList<>();
+    private List<Object> mList = new ArrayList<>();
 
-    public void bind(List<Answer> messages) {
+    public void bind(List<Object> messages) {
         this.mList = messages;
         notifyDataSetChanged();
     }
@@ -76,14 +74,23 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        Answer answer = mList.get(position);
+//        int type = getItemViewType(position);
+//
+//        if (type == HEAD_ITEM) {
+//
+//        }else {
+//
+//        }
+
+        Object object = mList.get(position);
 
         if (viewHolder instanceof HeadViewHolder) {
             HeadViewHolder holder = (HeadViewHolder) viewHolder;
-            holder.tv_title.setText(answer.getAnswer());
-            holder.tv_name.setContent(answer.getUserinfo().getNickname());
+            holder.tv_title.setText("会尽快好看好看好看");
+            holder.tv_name.setContent("jksjlajsdlasjdlaj");
 
         } else {
+            Answer answer= (Answer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(answer.getAnswer());
             holder.tv_name.setText(answer.getUserinfo().getNickname());
@@ -145,7 +152,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         mList.addAll(list);
     }
 
-    public List<Answer> getList() {
+    public List<Object> getList() {
         return mList;
     }
 
