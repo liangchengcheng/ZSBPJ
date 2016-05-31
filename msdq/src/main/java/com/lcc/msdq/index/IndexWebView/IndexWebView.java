@@ -60,7 +60,6 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
 
     private IndexContentPresenter indexContentPresenter;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +120,7 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
         menu.removeItem(R.id.action_use_browser);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

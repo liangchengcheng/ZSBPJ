@@ -74,13 +74,13 @@ public class AnswerAddActivity extends BaseActivity {
         mEditor = (RichEditor) findViewById(R.id.editor);
         mEditor.setEditorHeight(200);
         mEditor.setEditorFontSize(22);
-        mEditor.setEditorFontColor(Color.RED);
+        mEditor.setEditorFontColor(Color.BLACK);
         //mEditor.setEditorBackgroundColor(Color.BLUE);
         //mEditor.setBackgroundColor(Color.BLUE);
         //mEditor.setBackgroundResource(R.drawable.bg);
         mEditor.setPadding(10, 10, 10, 10);
         //    mEditor.setBackground("https://raw.githubusercontent.com/wasabeef/art/master/chip.jpg");
-        mEditor.setPlaceholder("Insert text here...");
+        mEditor.setPlaceholder("请在此输入你的答案...");
 
         mPreview = (TextView) findViewById(R.id.preview);
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {

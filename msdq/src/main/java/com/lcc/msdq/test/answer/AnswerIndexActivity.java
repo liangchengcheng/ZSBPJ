@@ -3,9 +3,11 @@ package com.lcc.msdq.test.answer;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -76,6 +78,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     private void initRecycleView(){
+
         findViewById(R.id.fabButton).setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -169,7 +172,9 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_answer, menu);
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+        menu.findItem(R.id.action_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.removeItem(R.id.action_use_browser);
         return super.onCreateOptionsMenu(menu);
     }
 

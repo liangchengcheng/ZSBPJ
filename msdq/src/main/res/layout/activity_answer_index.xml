@@ -31,6 +31,12 @@
                 android:text="共27个答案"
                 android:textColor="#fff"
                 android:textSize="20sp" />
+            <ImageView
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right"
+                android:background="@drawable/ic_share_white_24px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </android.support.v7.widget.Toolbar>
 
         <android.support.v4.widget.SwipeRefreshLayout
