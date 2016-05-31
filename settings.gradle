@@ -1,1 +1,1 @@
-include ':app', ':vitamio', ':superlibrary', ':msdq', ':SMSSDK', ':dxjnzgz'
+include ':app', ':vitamio', ':superlibrary', ':msdq', ':SMSSDK', ':dxjnzgz', ':richText'

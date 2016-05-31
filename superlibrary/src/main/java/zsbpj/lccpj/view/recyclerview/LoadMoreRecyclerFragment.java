@@ -75,7 +75,7 @@ public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
                 currentState = STATE_NORMAL;
                 if (dataList.isEmpty()) {
                     adapter.setHasMoreDataAndFooter(false, false);
-                  FrameManager.getInstance().toastPrompt("正在加载...");
+                  FrameManager.getInstance().toastPrompt("没有更多数据...");
                 } else {
                     adapter.appendToList(dataList);
                     currentPage++;

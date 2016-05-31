@@ -63,19 +63,20 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     protected void initView() {
-
         mPresenter=new TestAnswerPresenterImpl(this);
+        initRefreshView();
+        initRecycleView();
+        onRefresh();
+    }
+
+    private void initRefreshView(){
         mSwipeRefreshWidget = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshWidget.setOnRefreshListener(this);
+    }
 
-//        spreadTextView = (StretchyTextView) findViewById(R.id.spread_textview);
-//        spreadTextView.setMaxLineCount(3);
-//        spreadTextView.setContent("近些年来，越来越多的行业开始和互联网结合，诞生了越来越多的互联网创业公司。" +
-//                "互联网创业公司需要面对许多的不确定因素。如果你和你的小伙伴们够幸运，你们的公司可能会在几个星期之内让用户数、商品数" +
-//                "、订单量增长几十倍上百倍。一次促销可能会带来平时几十倍的访问流量，" +
-//                "一次秒杀活动可能会吸引平时数百倍的访问用户。这对公司自然是极大的好事，说明产品得到认可，公司未来前景美妙。");
-
+    private void initRecycleView(){
+        findViewById(R.id.fabButton).setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -97,7 +98,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 }
             }
         });
-        onRefresh();
     }
 
     @Override
@@ -196,6 +196,9 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         switch (v.getId()){
             case R.id.tv_sc:
                 startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
+                break;
+            case R.id.fabButton:
+                startActivity(new Intent(AnswerIndexActivity.this, AnswerAddActivity.class));
                 break;
         }
     }

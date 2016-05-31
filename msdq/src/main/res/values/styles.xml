@@ -255,5 +255,10 @@
     <style name="Color1SwitchStyle">
         <item name="colorControlActivated">?attr/colorPrimary</item>
     </style>
-
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/pop_show</item>
+        <!-- 指定显示的动画xml -->
+        <item name="android:windowExitAnimation">@anim/pop_hide</item>
+        <!-- 指定消失的动画xml -->
+    </style>
 </resources>

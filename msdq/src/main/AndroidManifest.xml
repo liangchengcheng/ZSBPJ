@@ -64,6 +64,10 @@
         <activity
             android:name=".test.answer.AnswerIndexActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".test.answer.AnswerAddActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
