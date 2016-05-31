@@ -33,6 +33,7 @@
                 android:textSize="20sp" />
 
             <com.lcc.view.StretchyTextView
+                android:textSize="16sp"
                 android:id="@+id/spread_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
+                    android:textSize="16sp"
                     android:id="@+id/tv_llrs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,6 +61,7 @@
                     android:text="浏览:988" />
 
                 <TextView
+                    android:textSize="16sp"
                     android:id="@+id/tv_llsc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,11 +78,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:background="?attr/colorPrimary"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="7dp"
                     android:text="收藏"
+                    android:textSize="16sp"
                     android:textColor="#fff" />
             </RelativeLayout>
 
