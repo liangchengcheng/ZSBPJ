@@ -1,7 +1,5 @@
 package com.lcc.frame.update;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,11 +9,17 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.lcc.entity.UpdateInfo;
 import com.lcc.msdq.R;
 import com.lcc.view.UpdateDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,10 +32,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
+
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.GsonUtils;
 
 public class UpdateApkTask {
-    public static final String UPDATE_APK_URL = "http://app.hdsxtech.com:8181/drivers/android/driver/getVersion/nmjkVedio";
+
+
+    public static final String UPDATE_APK_URL = "http://www.tengxungame.pub:8080/service/getupdateinfo";
     public static final String APK_NAME = "nmjkvedio.apk";
     public static final String APKPAKEG_NAME = "com.hdsx.nmjkvedio";
     private static final int DOWNLOAD = 1;
@@ -40,7 +48,7 @@ public class UpdateApkTask {
     private UpdateDialog mDialog;
     private Context mContext;
     private boolean mIsShowToast;
-	public static final String HDSX_NMJK =  Environment.getExternalStorageDirectory() + "/com.hdsx.nmjkvedio/";
+    public static final String HDSX_NMJK = Environment.getExternalStorageDirectory() + "/com.hdsx.nmjkvedio/";
 
     public UpdateApkTask(Context mContext, boolean mIsShowToast) {
         this.mContext = mContext;
@@ -71,35 +79,21 @@ public class UpdateApkTask {
                 }
 
                 if (TextUtils.isEmpty(sb)) {
-                    if (mIsShowToast) {
-                        FrameManager.getInstance().toastPrompt("当前已是最新版本");
-                    }
-
                     return;
                 }
 
                 try {
-                    JSONObject jb = new JSONObject(sb);
-                    if (jb.getBoolean("success")) {
-                        String info = jb.getString("data");
-                        Map<String, String> map = parseJsonObject(info);
-                        int versionCode = Integer.parseInt(map.get("code"));
-                        if (versionCode > getVersionCode(mContext, APKPAKEG_NAME)) {
-                            Message message = Message.obtain();
-                            message.obj = map.get("url");
-                            message.what = 3;
-                            mHandler.sendMessage(message);
-                        } else {
-                            if (mIsShowToast) {
-                                FrameManager.getInstance().toastPrompt("已经是最新版本");
-                            }
-                        }
-                    } else {
-                        if (mIsShowToast) {
-                            FrameManager.getInstance().toastPrompt("获取版本信息失败");
-                        }
+                    UpdateInfo updateInfo = GsonUtils.changeGsonToBean(sb, UpdateInfo.class);
+
+                    String code = updateInfo.getVersion_code();
+                    int versionCode = Integer.parseInt(code);
+                    if (versionCode > getVersionCode(mContext, APKPAKEG_NAME)) {
+                        Message message = Message.obtain();
+                        message.obj = updateInfo;
+                        message.what = 3;
+                        mHandler.sendMessage(message);
                     }
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -129,56 +123,28 @@ public class UpdateApkTask {
                     installApk();
                     break;
                 case 3:
-                    String url = (String) msg.obj;
-                    showNoticeDialog(url);
+                    UpdateInfo updateInfo = (UpdateInfo) msg.obj;
+                    showUpdateDialog(updateInfo);
                     break;
             }
         }
     };
 
     /**
-     * 显示软件更新对话框
-     */
-    public void showNoticeDialog(String path) {
-        new AlertDialog.Builder(mContext)
-                .setTitle("版本升级")
-                .setMessage("发现了新的版本，是否进行程序升级？")
-                .setPositiveButton("现在升级", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        showDownloadDialog();
-                    }
-                })
-                .setNegativeButton("以后再说",  new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-
-
-        mXMLPath = path;
-    }
-
-    /**
      * 显示下载对话框
      */
-    private void showDownloadDialog() {
+    private void showDownloadDialog(String url) {
 
         mDialog = new UpdateDialog(mContext);
         mDialog.show();
         // 下载文件
-        downloadAPK();
+        downloadAPK(url);
     }
 
     /**
      * 下载apk文件
      */
-    private void downloadAPK() {
+    private void downloadAPK(final String update_url) {
 
         new Thread(new Runnable() {
 
@@ -191,7 +157,7 @@ public class UpdateApkTask {
                 }
                 URL url;
                 try {
-                    url = new URL(mXMLPath);
+                    url = new URL(update_url);
                     // 创建连接
                     HttpURLConnection conn = (HttpURLConnection) url
                             .openConnection();
@@ -260,5 +226,24 @@ public class UpdateApkTask {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    private void showUpdateDialog(final UpdateInfo updateInfo) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("升级新版本")
+                .setMessage(Html.fromHtml(updateInfo.getVersion_info()))
+                .setPositiveButton("现在更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        showDownloadDialog(updateInfo.getVersion_url());
+                    }
+                })
+                .setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 }
