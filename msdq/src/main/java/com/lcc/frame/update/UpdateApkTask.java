@@ -100,17 +100,6 @@ public class UpdateApkTask {
         }).start();
     }
 
-    public static HashMap<String, String> parseJsonObject(String str)
-            throws JSONException {
-        HashMap<String, String> hashMap = new HashMap<String, String>();
-        JSONObject jb = new JSONObject(str);
-        hashMap.put("code", jb.getInt("code") + "");
-        hashMap.put("version", jb.getString("version"));
-        hashMap.put("url", jb.getString("downloadUrl"));
-
-        return hashMap;
-    }
-
     Handler mHandler = new Handler() {
 
         @Override

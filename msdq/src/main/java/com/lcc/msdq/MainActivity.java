@@ -54,12 +54,11 @@ public class MainActivity extends BaseActivity {
                 new BottomBarFragment(IndexFragment.newInstance(), R.drawable.ic_home_black_24dp, "主页"),
                 new BottomBarFragment(TestIndexFragment.newInstance(), R.drawable.ic_receipt_black_24dp, "面试资料"),
                 new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司真题"),
-                new BottomBarFragment(PersonInfoIndexFragment.newInstance(), R.drawable.ic_perm_identity_black_24dp, "问题咨询")
+                new BottomBarFragment(PersonInfoIndexFragment.newInstance(), R.drawable.ic_perm_identity_black_24dp, "个人中心")
         );
 
         UpdateApkTask task = new UpdateApkTask(MainActivity.this, false);
         task.detectionVersionInfo();
-
     }
 
     @Override

@@ -22,9 +22,6 @@ public class CompanyContentActivity extends BaseActivity{
 
     @Override
     protected void initView() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.tool_bar);
-        mToolbar.setTitle(R.string.app_name);
-        setSupportActionBar(mToolbar);
         setViewPager();
     }
 
