@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -48,6 +49,7 @@ public class UpdateDialog extends Dialog {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.e("xxxxx",msg.obj.toString());
             tv_title.setText("正在下载..." + msg.obj.toString() + "%");
             progress_view.setProgress((Integer) msg.obj);
             if (progress_view.getProgress() == 100) {

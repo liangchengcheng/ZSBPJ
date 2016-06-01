@@ -134,10 +134,8 @@ public class UpdateApkTask {
      * 显示下载对话框
      */
     private void showDownloadDialog(String url) {
-
         mDialog = new UpdateDialog(mContext);
         mDialog.show();
-        // 下载文件
         downloadAPK(url);
     }
 
@@ -207,11 +205,11 @@ public class UpdateApkTask {
      * 安装APK文件
      */
     private void installApk() {
-        File apkfile = new File(HDSX_NMJK + APK_NAME);
+        File apk_file = new File(HDSX_NMJK + APK_NAME);
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setAction(Intent.ACTION_VIEW);
-        i.setDataAndType(Uri.fromFile(apkfile), "application/vnd.android.package-archive");
+        i.setDataAndType(Uri.fromFile(apk_file), "application/vnd.android.package-archive");
         mContext.startActivity(i);
     }
 
