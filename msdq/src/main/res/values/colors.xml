@@ -499,4 +499,7 @@
     <color name="guillotine_background">#444153</color>
     <color name="guillotine_background_dark">#383547</color>
     <color name="selected_item_color">#30d1d5</color>
+
+    <color name="retry_button_background">#30000000</color>
+    <color name="retry_button_background_stroke">#50000000</color>
 </resources>
