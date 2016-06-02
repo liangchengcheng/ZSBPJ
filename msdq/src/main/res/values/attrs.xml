@@ -30,4 +30,10 @@
             <enum name="right" value="3"/>
         </attr>
     </declare-styleable>
+    <declare-styleable name="LoadingLayout">
+        <attr name="loadingView" format="reference" />
+        <attr name="errorView" format="reference" />
+        <attr name="retryView" format="reference" />
+        <attr name="emptyView" format="reference" />
+    </declare-styleable>
 </resources>
