@@ -48,7 +48,7 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
         });
         holder.tv_title.setText(entity.getCompany_name());
         holder.tv_content.setText(entity.getCompany_description());
-        holder.tv_time.setText(entity.getLocation());
+        holder.tv_time.setText(entity.getArea());
 
 
         String url = "http://www.tengxungame.pub:8080/"+entity.getCompany_image();

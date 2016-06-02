@@ -95,7 +95,10 @@
                         android:text="累计积分387"
                         android:textSize="16sp" />
                 </RelativeLayout>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EDEDED" />
                 <TextView
                     android:visibility="gone"
                     android:layout_width="match_parent"

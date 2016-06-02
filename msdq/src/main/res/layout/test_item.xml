@@ -45,7 +45,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_image"
-                    android:text=""
+                    android:text="梁铖城科技有限公司"
                     android:textColor="#000"
                     android:textSize="16sp" />
             </RelativeLayout>
