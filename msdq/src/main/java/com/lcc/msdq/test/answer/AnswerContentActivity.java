@@ -20,6 +20,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
+import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
@@ -36,7 +37,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  AnswerContentActivity
  */
-public class AnswerContentActivity extends AppCompatActivity implements View.OnClickListener {
+public class AnswerContentActivity extends BaseActivity implements View.OnClickListener {
 
     private WebView webView;
 
@@ -49,7 +50,6 @@ public class AnswerContentActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer_content);
         initData();
         initView();
         setData();
@@ -59,7 +59,8 @@ public class AnswerContentActivity extends AppCompatActivity implements View.OnC
         answer = (Answer) getIntent().getSerializableExtra("data");
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         findViewById(R.id.ll_comments).setOnClickListener(this);
         user_head= (ImageView) findViewById(R.id.user_head);
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
@@ -82,6 +83,16 @@ public class AnswerContentActivity extends AppCompatActivity implements View.OnC
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
+    }
+
+    @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.activity_answer_content;
     }
 
     @Override
