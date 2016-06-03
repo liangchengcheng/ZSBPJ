@@ -1,11 +1,7 @@
 package com.lcc.frame.fragment.state;
 
+import com.lcc.msdq.R;
 
-import com.gzsll.hupu.R;
-
-/**
- * Created by sll on 2015/3/13.
- */
 public class EmptyState extends AbstractShowState {
     @Override
     public void show(boolean animate) {

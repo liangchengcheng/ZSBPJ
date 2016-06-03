@@ -3,6 +3,7 @@ package com.lcc.adapter;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -118,12 +119,21 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
         } else {
             Object object = mList.get(position);
-            Answer answer = (Answer) object;
+            final Answer answer = (Answer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(answer.getAnswer());
             holder.tv_name.setText(answer.getUserinfo().getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUserinfo().getUser_image(), holder.iv_image);
+
+            if(mListener != null) {
+                holder.ll_all.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onItemClick(answer);
+                    }
+                });
+            }
         }
     }
 
@@ -150,6 +160,9 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @Bind(R.id.iv_image)
         ImageView iv_image;
+
+        @Bind(R.id.ll_all)
+        CardView ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
@@ -229,5 +242,15 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.hasFooter = hasFooter;
             notifyDataSetChanged();
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(com.lcc.entity.Answer data);
+    }
+
+    private OnItemClickListener mListener;
+
+    public void setOnItemClickListener(OnItemClickListener li) {
+        this.mListener = li;
     }
 }

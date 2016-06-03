@@ -1,11 +1,8 @@
 package com.lcc.frame.fragment.state;
 
 
-import com.gzsll.hupu.R;
+import com.lcc.msdq.R;
 
-/**
- * Created by sll on 2015/3/13.
- */
 public class ProgressState extends AbstractShowState {
 
     @Override

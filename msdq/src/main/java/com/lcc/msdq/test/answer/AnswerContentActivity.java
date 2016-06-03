@@ -20,74 +20,53 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
+import com.lcc.entity.Answer;
 import com.lcc.msdq.R;
+import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.frame.ImageManager;
 
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  先暂时先弄个页面
+ * Description:  AnswerContentActivity
  */
-public class AnswerContentActivity extends AppCompatActivity implements IndexContentView {
-
-    public static final String KEY_URL = "url";
-
-    public static final String IMAGE_URL = "image";
-
-    private Toolbar toolbar;
+public class AnswerContentActivity extends AppCompatActivity implements View.OnClickListener {
 
     private WebView webView;
 
-    private ImageView ivZhihuStory;
-
-    private CollapsingToolbarLayout ctl;
-
-    private NestedScrollView nest;
+    private ImageView user_head;
 
     private FloatingActionButton fabButton;
 
-    private String id;
-    private String image_url;
-
-    private IndexContentPresenter indexContentPresenter;
-
+    private Answer answer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.index_webview);
+        setContentView(R.layout.activity_answer_content);
         initData();
         initView();
-        getData();
+        setData();
     }
 
     private void initData() {
-        id = getIntent().getStringExtra(KEY_URL);
-        image_url = getIntent().getStringExtra(IMAGE_URL);
-        indexContentPresenter = new IndexContentPresenterImpl(this);
+        answer = (Answer) getIntent().getSerializableExtra("data");
     }
 
     private void initView() {
-
-        ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("第五种基本能力是真你的被发现了？");
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        nest= (NestedScrollView) findViewById(R.id.nest);
+        findViewById(R.id.ll_comments).setOnClickListener(this);
+        user_head= (ImageView) findViewById(R.id.user_head);
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nest.smoothScrollTo(0, 0);
+               // nest.smoothScrollTo(0, 0);
             }
         });
         webView= (WebView) findViewById(R.id.webView);
@@ -103,11 +82,6 @@ public class AnswerContentActivity extends AppCompatActivity implements IndexCon
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
-        ctl= (CollapsingToolbarLayout) findViewById(R.id.ctl);
-    }
-
-    private void getData() {
-        indexContentPresenter.getActivityContent(id);
     }
 
     @Override
@@ -162,24 +136,25 @@ public class AnswerContentActivity extends AppCompatActivity implements IndexCon
         super.onDestroy();
     }
 
-    @Override
-    public void getLoginFail(String msg) {
-        FrameManager.getInstance().toastPrompt("加载数据失败");
-    }
-
-    @Override
-    public void getSuccess(String result) {
-        String head_img = AppConstants.RequestPath.BASE_URL+image_url;
-        Glide.with(AnswerContentActivity.this)
-                .load(head_img)
-                .placeholder(R.drawable.loading1)
-                .centerCrop()
-                .into(ivZhihuStory);
+    public void setData() {
+        if (answer==null){
+            return;
+        }
+        ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,answer.getUserinfo().getUser_image(),user_head);
         try{
-            webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
+            webView.loadDataWithBaseURL("about:blank",answer.getAnswer(), "text/html", "utf-8", null);
            // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_comments:
+                startActivity(new Intent(AnswerContentActivity.this, CommentsActivity.class));
+                break;
         }
     }
 }

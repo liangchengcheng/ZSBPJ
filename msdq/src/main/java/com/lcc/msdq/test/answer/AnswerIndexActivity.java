@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.BaseRecyclerAdapter;
@@ -32,6 +33,7 @@ import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.LoadMoreRecyclerView;
 import com.lcc.view.ObservableScrollView;
 import com.lcc.view.StretchyTextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,37 +49,37 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  AnswerIndexActivity
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener{
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private AnswerIndexAdapter mAdapter;
     private TestAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
-    private String fid="5e7f684866bee25219269994f4784573";
+    private String fid = "5e7f684866bee25219269994f4784573";
 
-    protected static final  int DEF_DELAY=1000;
-    protected final static int STATE_LOAD=0;
-    protected final static int STATE_NORMAL=1;
-    protected int currentState=STATE_NORMAL;
-    protected long currentTime=0;
-    protected int currentPage=1;
+    protected static final int DEF_DELAY = 1000;
+    protected final static int STATE_LOAD = 0;
+    protected final static int STATE_NORMAL = 1;
+    protected int currentState = STATE_NORMAL;
+    protected long currentTime = 0;
+    protected int currentPage = 1;
 
     @Override
     protected void initView() {
-        mPresenter=new TestAnswerPresenterImpl(this);
+        mPresenter = new TestAnswerPresenterImpl(this);
         initRefreshView();
         initRecycleView();
         onRefresh();
     }
 
-    private void initRefreshView(){
-        mSwipeRefreshWidget = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_widget);
+    private void initRefreshView() {
+        mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshWidget.setOnRefreshListener(this);
     }
 
-    private void initRecycleView(){
+    private void initRecycleView() {
 
         findViewById(R.id.fabButton).setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -85,6 +87,14 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new AnswerIndexAdapter();
+        mAdapter.setOnItemClickListener(new AnswerIndexAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Answer data) {
+                Intent intent = new Intent(AnswerIndexActivity.this, AnswerContentActivity.class);
+                intent.putExtra("data", data);
+                startActivity(intent);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -95,7 +105,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,fid);
+                    mPresenter.loadMore(currentPage, fid);
                 } else {
                     FrameManager.getInstance().toastPrompt("请稍等，正在加载");
                 }
@@ -125,10 +135,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void refreshView(List<Answer> entities) {
-        if (entities!=null&&entities.size()>0){
-            List<Object>objects=new ArrayList<>();
+        if (entities != null && entities.size() > 0) {
+            List<Object> objects = new ArrayList<>();
             objects.add("1");
-            for (int i=0;i<entities.size();i++){
+            for (int i = 0; i < entities.size(); i++) {
                 objects.add(entities.get(i));
             }
             mAdapter.bind(objects);
@@ -163,9 +173,9 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mSwipeRefreshWidget.postDelayed(new Runnable() {
             @Override
             public void run() {
-                currentPage=1;
+                currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,fid);
+                mPresenter.refresh(currentPage, fid);
             }
         }, 500);
     }
@@ -198,7 +208,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_sc:
                 startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
                 break;

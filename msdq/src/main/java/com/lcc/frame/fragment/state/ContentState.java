@@ -1,6 +1,7 @@
 package com.lcc.frame.fragment.state;
 
 
+import com.lcc.msdq.R;
 
 public class ContentState extends AbstractShowState implements ShowState {
 
