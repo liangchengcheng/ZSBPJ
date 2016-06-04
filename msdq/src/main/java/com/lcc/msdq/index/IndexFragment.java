@@ -45,7 +45,7 @@ public class IndexFragment extends BaseFragment implements IndexView {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
-    private FrameLayout root;
+    private LinearLayout root;
     private static final long RIPPLE_DURATION = 250;
     private ImageView iv_menu;
     private IndexPresenter mPresenter;
@@ -62,7 +62,7 @@ public class IndexFragment extends BaseFragment implements IndexView {
         View view=inflater.inflate(R.layout.index_fragment,null);
         Toolbar toolbar= (Toolbar) view.findViewById(R.id.toolbar);
         iv_menu= (ImageView) view.findViewById(R.id.iv_menu);
-        root= (FrameLayout) view.findViewById(R.id.root);
+        root= (LinearLayout) view.findViewById(R.id.root);
         View guillotineMenu
                 = LayoutInflater.from(getActivity()).inflate(R.layout.guillotine, null);
         root.addView(guillotineMenu);
@@ -96,7 +96,6 @@ public class IndexFragment extends BaseFragment implements IndexView {
 //                        intent.putExtra(IndexContentActivity.KEY_URL,list.get(position).getMid());
 //                        intent.putExtra(IndexContentActivity.IMAGE_URL,list.get(position).getActivity_pic());
 //                        startActivity(intent);
-
                         Intent intent=new Intent(getActivity(),IndexWebView.class);
                         intent.putExtra(IndexWebView.KEY_URL,list.get(position).getMid());
                         intent.putExtra(IndexWebView.IMAGE_URL,list.get(position).getActivity_pic());

@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lcc.msdq.R;
+import com.lcc.view.ProgressBarCircularIndeterminate;
 
 public class LoadingLayout extends LinearLayout {
 
@@ -29,7 +30,7 @@ public class LoadingLayout extends LinearLayout {
     private Context mContext;
     private ImageView mErrorImage, mRefreshImage;
     private TextView mTextView;
-    private ProgressBar mAnimProgress;
+    private ProgressBarCircularIndeterminate mAnimProgress;
 
     public LoadingLayout(Context context) {
         this(context, null);
@@ -51,7 +52,7 @@ public class LoadingLayout extends LinearLayout {
         mErrorImage = (ImageView) view.findViewById(R.id.img_error);
         mRefreshImage = (ImageView) view.findViewById(R.id.img_refresh);
         mTextView = (TextView) view.findViewById(R.id.tv_tip);
-        mAnimProgress = (ProgressBar) view.findViewById(R.id.animProgress);
+        mAnimProgress = (ProgressBarCircularIndeterminate) view.findViewById(R.id.animProgress);
 
         addView(view);
     }

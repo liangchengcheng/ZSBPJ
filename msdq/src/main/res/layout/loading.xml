@@ -14,7 +14,7 @@
             android:id="@+id/img_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/pagefailed_bg"
+            android:background="@drawable/error_view_cloud"
             android:visibility="gone" />
 
         <ImageView
@@ -23,15 +23,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/pagefailed_bg"
             android:visibility="gone" />
-
-        <ProgressBar
+        <com.lcc.view.ProgressBarCircularIndeterminate
             android:id="@+id/animProgress"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/progressloading"
-            android:indeterminateDuration="2000"
-            android:indeterminateOnly="true" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/colorPrimary" />
     </RelativeLayout>
 
     <TextView
