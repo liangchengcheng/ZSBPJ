@@ -1,6 +1,8 @@
 package com.lcc.mvp.view;
 
 import com.lcc.entity.ActivityEntity;
+import com.lcc.entity.Answer;
+import com.lcc.entity.WeekData;
 
 import java.util.List;
 
@@ -12,14 +14,19 @@ import java.util.List;
  */
 public interface IndexView {
 
-    /**
-     * 登录失败：错误信息
-     */
-    void getLoginFail(String msg);
+    void getFail(String msg);
 
-    /**
-     * 获取成功
-     */
     void getSuccess(List<ActivityEntity> list);
+
+
+    void getWeekDataLoading();
+
+    void getWeekDataEmpty();
+
+    void getWeekDataFail(String msg);
+
+    void refreshWeekDataSuccess(List<WeekData> list);
+
+    void loadMoreWeekDataSuccess(List<WeekData> entities);
 
 }

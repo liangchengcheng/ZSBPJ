@@ -1,7 +1,12 @@
 package com.lcc.mvp.presenter.impl;
 
+import android.os.Handler;
+import android.view.View;
+
 import com.lcc.db.test.UserInfo;
 import com.lcc.entity.ActivityEntity;
+import com.lcc.entity.Answer;
+import com.lcc.entity.WeekData;
 import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.IndexModel;
@@ -19,11 +24,13 @@ import java.util.List;
 
 import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
+import zsbpj.lccpj.utils.TimeUtils;
 
 public class IndexPresenterImpl implements IndexPresenter {
 
     private IndexView view;
     private IndexModel model;
+    private static final int DEF_DELAY = (int) (1 * 1000);
 
     public IndexPresenterImpl(IndexView view) {
         this.view = view;
@@ -35,7 +42,7 @@ public class IndexPresenterImpl implements IndexPresenter {
         model.getActivity(new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.getLoginFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.getFail(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
@@ -49,13 +56,75 @@ public class IndexPresenterImpl implements IndexPresenter {
                     if (status == 1) {
                         view.getSuccess(userInfo);
                     } else {
-                        view.getLoginFail(message);
+                        view.getFail(message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    @Override
+    public void loadMore(int page) {
+        loadData(page);
+    }
+
+    @Override
+    public void refresh(int page) {
+        loadData(page);
+    }
+
+    private void loadData(final int page) {
+        view.getWeekDataLoading();
+        final long current_time = TimeUtils.getCurrentTime();
+        model.getWeekData(page, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.getFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                int delay = 0;
+                if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
+                    delay = DEF_DELAY;
+                }
+                updateView(response, delay, page);
+            }
+        });
+    }
+
+    private void updateView(final String entities, int delay, final int page) {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject(entities);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    String result = jsonObject.getString("result");
+                    List<WeekData> weekDatas = GsonUtils.fromJsonArray(result, WeekData.class);
+                    if (status == 1) {
+                        if (page == 1) {
+                            if (weekDatas != null && weekDatas.size() > 0) {
+                                view.refreshWeekDataSuccess(weekDatas);
+                            } else {
+                                view.getWeekDataEmpty();
+                            }
+                        } else {
+                            view.loadMoreWeekDataSuccess(weekDatas);
+                        }
+                    } else {
+                        view.getWeekDataFail(message);
+                    }
+                } catch (Exception e) {
+                    view.getFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        }, delay);
     }
 }
 

@@ -22,7 +22,7 @@ public class LoadingLayout extends LinearLayout {
     public static final int NETWORK_LOADING = 2;
     public static final int NETWORK_REFRESH = 3;
     public static final int LOADDATA_ERROR = 4;
-    public static final int NO_DATA_FAV = 5;
+    public static final int NO_DATA = 5;
 
     public static int sState = STATE_NONE;
 
@@ -108,14 +108,14 @@ public class LoadingLayout extends LinearLayout {
                 mTextView.setText("数据加载失败,请点击重新加载");
                 break;
 
-            case NO_DATA_FAV:
+            case NO_DATA:
                 setEnabled(true);
                 sState = STATE_NONE;
                 setVisibility(View.VISIBLE);
                 mErrorImage.setVisibility(View.GONE);
                 mRefreshImage.setVisibility(View.VISIBLE);
                 mAnimProgress.setVisibility(View.GONE);
-                mTextView.setText("你还没有收藏任何题目哦");
+                mTextView.setText("暂时没有任何数据");
                 break;
         }
     }

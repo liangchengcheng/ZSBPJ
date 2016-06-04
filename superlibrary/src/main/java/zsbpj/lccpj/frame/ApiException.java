@@ -16,7 +16,7 @@ public class ApiException {
         } else if (msg.contains("net work")) {
             message="服务器不可用";
         }  else {
-            message="未知错误";
+            message="程序发生错误";
         }
         return message;
     }

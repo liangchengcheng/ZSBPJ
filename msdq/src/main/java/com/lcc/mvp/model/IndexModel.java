@@ -18,4 +18,13 @@ public class IndexModel {
         // TODO: 16/4/20 改为post
         return ApiClient.create(AppConstants.RequestPath.GET_ACTIVITY, paramsMap).tag("").get(callback);
     }
+
+    /**
+     * 获取活动数据
+     */
+    public OkHttpRequest getWeekData(int page, ResultCallback<String> callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
+        return ApiClient.create(AppConstants.RequestPath.GET_ACTIVITY, paramsMap).tag("").get(callback);
+    }
 }

@@ -21,8 +21,9 @@
             android:id="@+id/img_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/pagefailed_bg"
+            android:background="@drawable/error_view_cloud"
             android:visibility="gone" />
+
         <com.lcc.view.ProgressBarCircularIndeterminate
             android:id="@+id/animProgress"
             android:layout_width="50dp"
