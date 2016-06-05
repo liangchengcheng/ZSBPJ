@@ -502,4 +502,5 @@
 
     <color name="retry_button_background">#30000000</color>
     <color name="retry_button_background_stroke">#50000000</color>
+    <color name="parent_color">#E5E9F1</color>
 </resources>
