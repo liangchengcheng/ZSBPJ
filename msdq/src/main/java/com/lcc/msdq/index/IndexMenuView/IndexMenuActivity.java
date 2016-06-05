@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.adapter.WeekDataAdapter;
@@ -61,6 +62,8 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
     @Override
     protected void initView() {
         type=getIntent().getStringExtra(TYPE);
+        TextView tv_title= (TextView) findViewById(R.id.tv_title);
+        tv_title.setText(type);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         mPresenter = new IndexMenuPresenterImpl(this);
         initRefreshView();
@@ -76,7 +79,8 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
 
     private void initRecycleView() {
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(IndexMenuActivity.this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(IndexMenuActivity.this,
+                LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new IndexMenuAdapter();

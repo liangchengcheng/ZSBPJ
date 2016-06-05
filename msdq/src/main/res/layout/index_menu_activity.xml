@@ -14,16 +14,14 @@
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
         <ImageView
-            android:id="@+id/iv_menu"
+            android:id="@+id/guillotine_hamburger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/ic_reorder_white_24dp" />
+            android:background="@drawable/ic_arrow_back_white_24dp" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
