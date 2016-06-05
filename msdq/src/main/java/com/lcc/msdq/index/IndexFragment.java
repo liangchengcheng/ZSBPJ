@@ -27,6 +27,7 @@ import com.lcc.entity.WeekData;
 import com.lcc.frame.Advertisements;
 import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.R;
+import com.lcc.msdq.index.IndexMenuView.IndexMenuActivity;
 import com.lcc.msdq.index.IndexWebView.IndexWebView;
 import com.lcc.msdq.test.answer.AnswerContentActivity;
 import com.lcc.mvp.presenter.IndexPresenter;
@@ -57,11 +58,12 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description: 第一页fragment
  */
 public class IndexFragment extends BaseFragment implements IndexView,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
     private LinearLayout root;
+
     private static final long RIPPLE_DURATION = 250;
     private ImageView iv_menu;
     private IndexPresenter mPresenter;
@@ -85,9 +87,18 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.index_fragment, null);
+        view.findViewById(R.id.mszb).setOnClickListener(this);
+        view.findViewById(R.id.msjl).setOnClickListener(this);
+        view.findViewById(R.id.mszz).setOnClickListener(this);
+        view.findViewById(R.id.msjq).setOnClickListener(this);
+        view.findViewById(R.id.msgx).setOnClickListener(this);
+        view.findViewById(R.id.msjz).setOnClickListener(this);
+        view.findViewById(R.id.msjt).setOnClickListener(this);
+        view.findViewById(R.id.qt).setOnClickListener(this);
         initRefreshView(view);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -125,9 +136,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
         mAdapter.setOnItemClickListener(new WeekDataAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(WeekData data) {
-                Intent intent = new Intent(getActivity(), AnswerContentActivity.class);
-                intent.putExtra("data", data);
-                startActivity(intent);
+
             }
         });
 
@@ -192,9 +201,10 @@ public class IndexFragment extends BaseFragment implements IndexView,
     public void getWeekDataFail(String msg) {
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        }else {
+            FrameManager.getInstance().toastPrompt(msg);
         }
-        FrameManager.getInstance().toastPrompt(msg);
-        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
@@ -239,4 +249,43 @@ public class IndexFragment extends BaseFragment implements IndexView,
             }
         }, 500);
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.mszb:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试准备");
+                break;
+
+            case R.id.msjl:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试简历");
+                break;
+
+            case R.id.msjq:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试技巧");
+                break;
+
+            case R.id.mszz:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试着装");
+                break;
+
+            case R.id.msgx:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试感想");
+                break;
+
+            case R.id.msjz:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试举止");
+                break;
+
+            case R.id.msjt:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试交通");
+                break;
+
+            case R.id.qt:
+                IndexMenuActivity.startIndexMenuActivity(getActivity(),"其他");
+                break;
+        }
+    }
+
+
 }

@@ -194,6 +194,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/mszb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -218,6 +219,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/msjl"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -236,12 +238,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="关于简历"
+                            android:text="面试简历"
                             android:textColor="#585858"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/msjq"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -266,6 +269,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/mszz"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -301,6 +305,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/msgx"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -319,12 +324,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="其他功能"
+                            android:text="面试感想"
                             android:textColor="#585858"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/msjz"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -343,12 +349,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="其他"
+                            android:text="面试举止"
                             android:textColor="#585858"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/msjt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -367,12 +374,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="其他"
+                            android:text="面试交通"
                             android:textColor="#585858"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/qt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"

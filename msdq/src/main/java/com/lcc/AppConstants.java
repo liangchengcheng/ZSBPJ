@@ -54,9 +54,14 @@ public class AppConstants {
         public final static String GET_ACTIVITY = "/service/getactivity";
 
         /**
-         * 获取活动数据
+         * 每周精选的数据
          */
         public final static String GET_WEEKDATA = "/service/getWeekData";
+
+        /**
+         * 每周精选的数据
+         */
+        public final static String ARTICLE_DATA = "/service/pageArticleforAndroid";
 
         /**
          * 获取试题的列表

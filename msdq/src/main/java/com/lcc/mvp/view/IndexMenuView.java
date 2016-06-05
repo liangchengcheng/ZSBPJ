@@ -1,7 +1,6 @@
 package com.lcc.mvp.view;
 
 import com.lcc.entity.ActivityEntity;
-import com.lcc.entity.Answer;
 import com.lcc.entity.WeekData;
 
 import java.util.List;
@@ -12,19 +11,26 @@ import java.util.List;
  * Date:         2015年11月21日15:28:25
  * Description:  开始或者结束轮训器
  */
-public interface IndexView {
+public interface IndexMenuView {
 
-    void getFail(String msg);
+    /**
+     * 第一次加载
+     */
+    void getLoading();
 
-    void getSuccess(List<ActivityEntity> list);
+    /**
+     * 获取空数据
+     */
+    void getDataEmpty();
 
-    void getWeekDataLoading();
+    /**
+     * 获取数据失败
+     */
+    void getDataFail(String msg);
 
-    void getWeekDataEmpty();
+    void refreshOrLoadFail(String msg);
 
-    void getWeekDataFail(String msg);
-
-    void refreshWeekDataSuccess(List<WeekData> list);
+    void refreshDataSuccess(List<WeekData> list);
 
     void loadMoreWeekDataSuccess(List<WeekData> entities);
 

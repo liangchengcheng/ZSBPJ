@@ -10,13 +10,17 @@ public class ApiException {
     public static String getApiExceptionMessage(String msg) {
         String message = "";
         if (msg.contains("fail")) {
-            message="连接服务器失败";
+            message = "连接服务器失败";
         } else if (msg.contains("time out")) {
-            message="连接服务器超时";
+            message = "连接服务器超时";
+        } else if (msg.contains("为空")) {
+            message = "数据为空";
         } else if (msg.contains("net work")) {
-            message="服务器不可用";
-        }  else {
-            message="程序发生错误";
+            message = "服务器不可用";
+        } else if (msg.contains("JSONException")) {
+            message = "暂无数据";
+        } else {
+            message = msg;
         }
         return message;
     }

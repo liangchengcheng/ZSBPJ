@@ -49,7 +49,7 @@
             android:name=".choice.ChoiceMainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".index.IndexContentActivity"
+            android:name=".index.IndexWebView.IndexContentActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".index.IndexWebView.IndexWebView"
@@ -70,6 +70,10 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".test.answer.AnswerContentActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".index.IndexMenuView.IndexMenuActivity"
             android:theme="@style/AppTheme" />
     </application>
 

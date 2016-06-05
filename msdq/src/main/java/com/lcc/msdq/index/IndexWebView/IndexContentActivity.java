@@ -1,4 +1,4 @@
-package com.lcc.msdq.index;
+package com.lcc.msdq.index.IndexWebView;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -52,7 +52,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
 
     @Override
     protected void initView() {
-        //initToolBar();
         initWebView();
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -80,12 +79,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
     public void onRefresh() {
         webView.reload();
         swipeRefreshLayout.setRefreshing(false);
-    }
-
-    private void initToolBar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        toolbarAsBackButton(mToolbar);
     }
 
     public void toolbarAsBackButton(Toolbar toolbar) {

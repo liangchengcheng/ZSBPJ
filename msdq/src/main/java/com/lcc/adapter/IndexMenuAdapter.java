@@ -2,19 +2,17 @@ package com.lcc.adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.lcc.entity.Answer;
 import com.lcc.entity.WeekData;
 import com.lcc.msdq.R;
-import com.lcc.view.StretchyTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +25,9 @@ import zsbpj.lccpj.frame.ImageManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  WeekDataAdapter
+ * Description:  IndexMenuAdapter
  */
-public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
@@ -63,7 +61,7 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.week_item, parent, false));
+            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.index_menu_item, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
         }
@@ -83,11 +81,15 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else {
             final WeekData weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_time.setText(weekData.getCreated_time());
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
-            ImageManager.getInstance().loadUrlImage(holder.iv_head.getContext(),
-                    weekData.getImage_url(), holder.iv_head);
+            if (TextUtils.isEmpty(weekData.getImage_url())){
+                holder.iv_head.setVisibility(View.GONE);
+            }else {
+                holder.iv_head.setVisibility(View.VISIBLE);
+                ImageManager.getInstance().loadUrlImage(holder.iv_head.getContext(),
+                        weekData.getImage_url(), holder.iv_head);
+            }
 
             if(mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
@@ -120,9 +122,6 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @Bind(R.id.tv_title)
         TextView tv_title;
-
-        @Bind(R.id.tv_time)
-        TextView tv_time;
 
         @Bind(R.id.tv_summary)
         TextView tv_summary;
