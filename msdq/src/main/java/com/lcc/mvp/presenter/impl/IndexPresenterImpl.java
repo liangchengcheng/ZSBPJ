@@ -105,7 +105,9 @@ public class IndexPresenterImpl implements IndexPresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
-                    List<WeekData> weekDatas = GsonUtils.fromJsonArray(result, WeekData.class);
+                    JSONObject resultObject = new JSONObject(result);
+                    String data=resultObject.getString("data");
+                    List<WeekData> weekDatas = GsonUtils.fromJsonArray(data, WeekData.class);
                     if (status == 1) {
                         if (page == 1) {
                             if (weekDatas != null && weekDatas.size() > 0) {

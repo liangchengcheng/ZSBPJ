@@ -25,6 +25,6 @@ public class IndexModel {
     public OkHttpRequest getWeekData(int page, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
-        return ApiClient.create(AppConstants.RequestPath.GET_ACTIVITY, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_WEEKDATA, paramsMap).tag("").get(callback);
     }
 }

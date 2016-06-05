@@ -32,9 +32,9 @@ public class ImageManager {
     public void loadUrlImage(Context context, String url, ImageView imageView) {
         Glide.with(context)
                 .load(url)
-                .placeholder(R.color.font_black_6)
-                .error(R.color.font_black_6)
-                .crossFade()
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.loading)
+                .centerCrop()
                 .into(imageView);
     }
 

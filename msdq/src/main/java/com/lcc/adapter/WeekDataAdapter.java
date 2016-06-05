@@ -8,9 +8,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lcc.entity.Answer;
+import com.lcc.entity.WeekData;
 import com.lcc.msdq.R;
 import com.lcc.view.StretchyTextView;
 
@@ -30,10 +32,9 @@ import zsbpj.lccpj.frame.ImageManager;
 public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int NORMAL_ITEM = 0;
-    private static final int HEAD_ITEM = 1;
     public static final int FOOTER_ITEM = 2;
 
-    private List<Object> mList = new ArrayList<>();
+    private List<WeekData> mList = new ArrayList<>();
 
     /**
      * 是否设置了footer
@@ -45,16 +46,14 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     private boolean hasMoreData = true;
 
-    public void bind(List<Object> messages) {
+    public void bind(List<WeekData> messages) {
         this.mList = messages;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
-            return HEAD_ITEM;
-        } else if (position == getBasicItemCount() && hasFooter) {
+        if (position == getBasicItemCount() && hasFooter) {
             return FOOTER_ITEM;
         } else {
             return NORMAL_ITEM;
@@ -64,29 +63,16 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_item, parent, false));
-        } else if (viewType == FOOTER_ITEM) {
-            return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
+            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.week_item, parent, false));
         } else {
-            return new HeadViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_header, parent, false));
+            return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
         }
     }
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        if (viewHolder instanceof HeadViewHolder) {
-            Object object = mList.get(position);
-            HeadViewHolder holder = (HeadViewHolder) viewHolder;
-            holder.tv_name.setMaxLineCount(3);
-            holder.tv_name.setContent("近些年来，越来越多的行业开始和互联网结合，诞生了越来越多的互联网创业公司。" +
-                "互联网创业公司需要面对许多的不确定因素。如果你和你的小伙伴们够幸运，你们的公司可能会在几个星期之内让用户数、商品数" +
-                "、订单量增长几十倍上百倍。一次促销可能会带来平时几十倍的访问流量，" +
-                "一次秒杀活动可能会吸引平时数百倍的访问用户。这对公司自然是极大的好事，说明产品得到认可，公司未来前景美妙。");
-
-            holder.tv_title.setText("你觉得你的人生的意义是什么");
-
-        } else if (viewHolder instanceof FootViewHolder) {
+        if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
@@ -95,19 +81,19 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
-            Object object = mList.get(position);
-            final Answer answer = (Answer) object;
+            final WeekData weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.des_content.setText(answer.getAnswer());
-            holder.tv_name.setText(answer.getUserinfo().getNickname());
-            ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
-                    answer.getUserinfo().getUser_image(), holder.iv_image);
+            holder.tv_time.setText(weekData.getCreated_time());
+            holder.tv_title.setText(weekData.getTitle());
+            holder.tv_summary.setText(weekData.getSummary());
+            ImageManager.getInstance().loadUrlImage(holder.iv_head.getContext(),
+                    weekData.getImage_url(), holder.iv_head);
 
             if(mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mListener.onItemClick(answer);
+                        mListener.onItemClick(weekData);
                     }
                 });
             }
@@ -129,39 +115,22 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.des_content)
-        TextView des_content;
+        @Bind(R.id.iv_head)
+        ImageView iv_head;
 
-        @Bind(R.id.tv_name)
-        TextView tv_name;
+        @Bind(R.id.tv_title)
+        TextView tv_title;
 
-        @Bind(R.id.iv_image)
-        ImageView iv_image;
+        @Bind(R.id.tv_time)
+        TextView tv_time;
+
+        @Bind(R.id.tv_summary)
+        TextView tv_summary;
 
         @Bind(R.id.ll_all)
         CardView ll_all;
 
         public NormalViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }
-
-    /**
-     * 头部的布局
-     */
-    class HeadViewHolder extends RecyclerView.ViewHolder {
-
-        @Bind(R.id.tv_title)
-        TextView tv_title;
-
-        @Bind(R.id.spread_textview)
-        StretchyTextView tv_name;
-
-        @Bind(R.id.tv_llrs)
-        TextView tv_llrs;
-
-        public HeadViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -184,14 +153,14 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public void appendToList(List<Answer> list) {
+    public void appendToList(List<WeekData> list) {
         if (list == null) {
             return;
         }
         mList.addAll(list);
     }
 
-    public List<Object> getList() {
+    public List<WeekData> getList() {
         return mList;
     }
 
@@ -222,7 +191,7 @@ public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Answer data);
+        void onItemClick(WeekData data);
     }
 
     private OnItemClickListener mListener;

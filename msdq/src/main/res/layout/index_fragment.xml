@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/ic_header_hot" />
 
                 <TextView
@@ -345,7 +345,7 @@
                             android:padding="8dp"
                             android:text="其他"
                             android:textColor="#585858"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -411,7 +411,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/ic_header_new" />
 
                 <TextView
@@ -423,19 +423,22 @@
                     android:text="热门文章"
                     android:textSize="18sp" />
             </RelativeLayout>
-
-            <com.lcc.view.loadview.LoadingLayout
-                android:id="@+id/loading_layout"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:emptyView="@layout/empty_view">
+                android:layout_height="wrap_content">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="vertical" />
-            </com.lcc.view.loadview.LoadingLayout>
+                <com.lcc.view.loadview.LoadingLayout
+                    android:id="@+id/loading_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:emptyView="@layout/empty_view">
+                </com.lcc.view.loadview.LoadingLayout>
+            </FrameLayout>
         </LinearLayout>
 
     </ScrollView>

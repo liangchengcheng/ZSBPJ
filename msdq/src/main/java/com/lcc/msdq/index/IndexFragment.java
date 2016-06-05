@@ -2,6 +2,7 @@ package com.lcc.msdq.index;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -42,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -86,6 +88,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.index_fragment, null);
+        initRefreshView(view);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
@@ -102,6 +105,8 @@ public class IndexFragment extends BaseFragment implements IndexView,
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         mPresenter = new IndexPresenterImpl(this);
         mPresenter.getActivity();
+        initRecycleView(view);
+        onRefresh();
         return view;
     }
 
@@ -112,7 +117,6 @@ public class IndexFragment extends BaseFragment implements IndexView,
     }
 
     private void initRecycleView(View view) {
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mLayoutManager = new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -120,7 +124,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
         mAdapter = new WeekDataAdapter();
         mAdapter.setOnItemClickListener(new WeekDataAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Answer data) {
+            public void onItemClick(WeekData data) {
                 Intent intent = new Intent(getActivity(), AnswerContentActivity.class);
                 intent.putExtra("data", data);
                 startActivity(intent);
@@ -186,21 +190,53 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     @Override
     public void getWeekDataFail(String msg) {
-
+        if (mSwipeRefreshWidget.isRefreshing()) {
+            mSwipeRefreshWidget.setRefreshing(false);
+        }
+        FrameManager.getInstance().toastPrompt(msg);
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
-    public void refreshWeekDataSuccess(List<WeekData> list) {
-
+    public void refreshWeekDataSuccess(List<WeekData> entities) {
+        if (entities != null && entities.size() > 0) {
+            mAdapter.bind(entities);
+        }
+        mSwipeRefreshWidget.setRefreshing(false);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
-    public void loadMoreWeekDataSuccess(List<WeekData> entities) {
-
+    public void loadMoreWeekDataSuccess(final List<WeekData> entities) {
+        int delay = 0;
+        if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
+            delay = DEF_DELAY;
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentState = STATE_NORMAL;
+                if (entities.isEmpty()) {
+                    mAdapter.setHasMoreDataAndFooter(false, false);
+                    FrameManager.getInstance().toastPrompt("没有更多数据...");
+                } else {
+                    mAdapter.appendToList(entities);
+                    mAdapter.setHasMoreDataAndFooter(true, false);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+        }, delay);
     }
 
     @Override
     public void onRefresh() {
-
+        mSwipeRefreshWidget.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentPage = 1;
+                mSwipeRefreshWidget.setRefreshing(true);
+                mPresenter.refresh(currentPage);
+            }
+        }, 500);
     }
 }
