@@ -1,5 +1,6 @@
 package com.lcc.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -92,6 +93,20 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         weekData.getImage_url(), holder.iv_head);
             }
 
+            if (weekData.getState().equals("0")){
+                holder.state.setVisibility(View.GONE);
+            }else {
+                holder.state.setVisibility(View.VISIBLE);
+                if (weekData.getState().equals("1")){
+                    holder.state.setText("热门");
+                    holder.state.setTextColor(Color.parseColor("#FFFF0000"));
+                }
+                if (weekData.getState().equals("2")){
+                    holder.state.setText("置顶");
+                    holder.state.setTextColor(Color.parseColor("#388E3C"));
+                }
+            }
+
             if(mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
@@ -129,6 +144,10 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.ll_all)
         CardView ll_all;
+
+
+        @Bind(R.id.state)
+        TextView state;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
