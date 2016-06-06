@@ -62,10 +62,8 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
-    private LinearLayout root;
 
     private static final long RIPPLE_DURATION = 250;
-    private ImageView iv_menu;
     private IndexPresenter mPresenter;
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
@@ -78,7 +76,6 @@ public class IndexFragment extends BaseFragment implements IndexView,
     protected long currentTime = 0;
     protected int currentPage = 1;
     private WeekDataAdapter mAdapter;
-    private FullyLinearLayoutManager mLayoutManager;
 
     public static Fragment newInstance() {
         Fragment fragment = new IndexFragment();
@@ -100,18 +97,21 @@ public class IndexFragment extends BaseFragment implements IndexView,
         view.findViewById(R.id.msjt).setOnClickListener(this);
         view.findViewById(R.id.qt).setOnClickListener(this);
         initRefreshView(view);
+
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
-        root = (LinearLayout) view.findViewById(R.id.root);
+        ImageView iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
+        LinearLayout root = (LinearLayout) view.findViewById(R.id.root);
         View guillotineMenu
                 = LayoutInflater.from(getActivity()).inflate(R.layout.guillotine, null);
         root.addView(guillotineMenu);
-        new GuillotineAnimation.GuillotineBuilder(guillotineMenu, guillotineMenu.findViewById(R.id.guillotine_hamburger), iv_menu)
+        new GuillotineAnimation.GuillotineBuilder(guillotineMenu,
+                guillotineMenu.findViewById(R.id.guillotine_hamburger), iv_menu)
                 .setStartDelay(RIPPLE_DURATION)
                 .setActionBarViewForAnimation(toolbar)
                 .setClosedOnStart(true)
                 .build();
+
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         mPresenter = new IndexPresenterImpl(this);
@@ -129,7 +129,8 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     private void initRecycleView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mLayoutManager = new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        FullyLinearLayoutManager mLayoutManager = new FullyLinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new WeekDataAdapter();
@@ -189,6 +190,10 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     @Override
     public void getWeekDataLoading() {
+        if (mSwipeRefreshWidget.isRefreshing()) {
+            mSwipeRefreshWidget.setRefreshing(false);
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        }
         loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
@@ -201,10 +206,10 @@ public class IndexFragment extends BaseFragment implements IndexView,
     public void getWeekDataFail(String msg) {
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
-            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         }else {
             FrameManager.getInstance().toastPrompt(msg);
         }
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
@@ -286,6 +291,5 @@ public class IndexFragment extends BaseFragment implements IndexView,
                 break;
         }
     }
-
 
 }

@@ -86,7 +86,6 @@ public class LoadingLayout extends LinearLayout {
                 mErrorImage.setVisibility(View.GONE);
                 mRefreshImage.setVisibility(View.GONE);
                 mAnimProgress.setVisibility(View.VISIBLE);
-
                 mTextView.setText("加载中");
                 break;
             case NETWORK_REFRESH:

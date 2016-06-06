@@ -69,10 +69,10 @@ public class IndexMenuPresenterImpl implements IndexMenuPresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
-                    JSONObject resultObject = new JSONObject(result);
-                    String data = resultObject.getString("data");
-                    List<WeekData> weekDatas = GsonUtils.fromJsonArray(data, WeekData.class);
                     if (status == 1) {
+                        JSONObject resultObject = new JSONObject(result);
+                        String data = resultObject.getString("data");
+                        List<WeekData> weekDatas = GsonUtils.fromJsonArray(data, WeekData.class);
                         if (page == 1) {
                             if (weekDatas != null && weekDatas.size() > 0) {
                                 view.refreshDataSuccess(weekDatas);
@@ -83,10 +83,14 @@ public class IndexMenuPresenterImpl implements IndexMenuPresenter {
                             view.loadMoreWeekDataSuccess(weekDatas);
                         }
                     } else {
-                        if (get_data) {
-                            view.getDataFail(ApiException.getApiExceptionMessage(message));
+                        if (message.equals("数据为空") && page == 1) {
+                            view.getDataEmpty();
                         } else {
-                            view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                            if (get_data) {
+                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                            } else {
+                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                            }
                         }
                     }
                 } catch (Exception e) {

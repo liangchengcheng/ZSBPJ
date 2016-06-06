@@ -81,7 +81,7 @@ public class IndexPresenterImpl implements IndexPresenter {
         model.getWeekData(page, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.getFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.getWeekDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
@@ -122,7 +122,7 @@ public class IndexPresenterImpl implements IndexPresenter {
                         view.getWeekDataFail(message);
                     }
                 } catch (Exception e) {
-                    view.getFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.getWeekDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }

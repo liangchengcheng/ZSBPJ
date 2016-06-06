@@ -20,7 +20,7 @@ public class ApiException {
         } else if (msg.contains("JSONException")) {
             message = "暂无数据";
         } else {
-            message = msg;
+            message = "服务器正在维护...";
         }
         return message;
     }
