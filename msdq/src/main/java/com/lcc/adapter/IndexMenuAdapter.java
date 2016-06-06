@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.lcc.entity.Article;
 import com.lcc.entity.WeekData;
 import com.lcc.msdq.R;
 
@@ -32,7 +33,7 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
 
-    private List<WeekData> mList = new ArrayList<>();
+    private List<Article> mList = new ArrayList<>();
 
     /**
      * 是否设置了footer
@@ -44,7 +45,7 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      */
     private boolean hasMoreData = true;
 
-    public void bind(List<WeekData> messages) {
+    public void bind(List<Article> messages) {
         this.mList = messages;
         notifyDataSetChanged();
     }
@@ -79,7 +80,7 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
-            final WeekData weekData = mList.get(position);
+            final Article weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
@@ -152,14 +153,14 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public void appendToList(List<WeekData> list) {
+    public void appendToList(List<Article> list) {
         if (list == null) {
             return;
         }
         mList.addAll(list);
     }
 
-    public List<WeekData> getList() {
+    public List<Article> getList() {
         return mList;
     }
 
@@ -190,7 +191,7 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface OnItemClickListener {
-        void onItemClick(WeekData data);
+        void onItemClick(Article data);
     }
 
     private OnItemClickListener mListener;

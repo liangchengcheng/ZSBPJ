@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.adapter.WeekDataAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.Article;
 import com.lcc.entity.WeekData;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.AnswerContentActivity;
@@ -35,7 +36,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuActivity
  */
-public class IndexMenuActivity extends BaseActivity implements IndexMenuView, SwipeRefreshLayout.OnRefreshListener {
+public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
+        SwipeRefreshLayout.OnRefreshListener {
 
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
@@ -86,7 +88,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
         mAdapter = new IndexMenuAdapter();
         mAdapter.setOnItemClickListener(new IndexMenuAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(WeekData data) {
+            public void onItemClick(Article data) {
 
             }
         });
@@ -143,7 +145,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
     }
 
     @Override
-    public void refreshDataSuccess(List<WeekData> entities) {
+    public void refreshDataSuccess(List<Article> entities) {
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
         }
@@ -152,7 +154,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
     }
 
     @Override
-    public void loadMoreWeekDataSuccess(final List<WeekData> entities) {
+    public void loadMoreWeekDataSuccess(final List<Article> entities) {
         int delay = 0;
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;

@@ -1,6 +1,7 @@
 package com.lcc.mvp.view;
 
 import com.lcc.entity.ActivityEntity;
+import com.lcc.entity.Article;
 import com.lcc.entity.WeekData;
 
 import java.util.List;
@@ -30,8 +31,8 @@ public interface IndexMenuView {
 
     void refreshOrLoadFail(String msg);
 
-    void refreshDataSuccess(List<WeekData> list);
+    void refreshDataSuccess(List<Article> list);
 
-    void loadMoreWeekDataSuccess(List<WeekData> entities);
+    void loadMoreWeekDataSuccess(List<Article> entities);
 
 }

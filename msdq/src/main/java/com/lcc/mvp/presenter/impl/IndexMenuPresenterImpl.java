@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.lcc.entity.ActivityEntity;
+import com.lcc.entity.Article;
 import com.lcc.entity.WeekData;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.IndexMenuModel;
@@ -70,9 +71,7 @@ public class IndexMenuPresenterImpl implements IndexMenuPresenter {
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
                     if (status == 1) {
-                        JSONObject resultObject = new JSONObject(result);
-                        String data = resultObject.getString("data");
-                        List<WeekData> weekDatas = GsonUtils.fromJsonArray(data, WeekData.class);
+                        List<Article> weekDatas = GsonUtils.fromJsonArray(result, Article.class);
                         if (page == 1) {
                             if (weekDatas != null && weekDatas.size() > 0) {
                                 view.refreshDataSuccess(weekDatas);
