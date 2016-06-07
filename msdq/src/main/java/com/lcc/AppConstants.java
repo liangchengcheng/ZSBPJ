@@ -73,6 +73,8 @@ public class AppConstants {
          */
         public final static String GET_ACTIVITY_CONTENT = "/service/getactivitycontentforad";
 
+        public final static String GET_MENU_CONTENT = "/service/getContentByID";
+
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
 
         public final static String USERS_UPDATE = "/users/update.json";

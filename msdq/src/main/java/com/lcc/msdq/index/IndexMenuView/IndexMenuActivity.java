@@ -89,7 +89,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
         mAdapter.setOnItemClickListener(new IndexMenuAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Article data) {
-
+               IndexMenuWebView.startIndexMenuWebView(IndexMenuActivity.this,data);
             }
         });
 

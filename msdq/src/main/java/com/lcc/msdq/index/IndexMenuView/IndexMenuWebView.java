@@ -1,5 +1,6 @@
 package com.lcc.msdq.index.IndexMenuView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,10 +21,14 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
+import com.lcc.entity.Article;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.IndexContentPresenter;
+import com.lcc.mvp.presenter.MenuContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
+import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
+import com.lcc.mvp.view.MenuContentView;
 
 import zsbpj.lccpj.frame.FrameManager;
 
@@ -33,28 +38,23 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2015年11月21日15:28:25
  * Description:  先暂时先弄个页面
  */
-public class IndexMenuWebView extends AppCompatActivity implements IndexContentView {
+public class IndexMenuWebView extends AppCompatActivity implements MenuContentView {
 
-    public static final String KEY_URL = "url";
-
-    public static final String IMAGE_URL = "image";
-
-    private Toolbar toolbar;
+    public static final String DATA = "data";
 
     private WebView webView;
 
     private ImageView ivZhihuStory;
 
-    private CollapsingToolbarLayout ctl;
+    private MenuContentPresenter indexContentPresenter;
 
-    private NestedScrollView nest;
+    private Article article;
 
-    private FloatingActionButton fabButton;
-
-    private String id;
-    private String image_url;
-
-    private IndexContentPresenter indexContentPresenter;
+    public static void startIndexMenuWebView(Activity startingActivity, Article type) {
+        Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
+        intent.putExtra(DATA, type);
+        startingActivity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,29 +66,12 @@ public class IndexMenuWebView extends AppCompatActivity implements IndexContentV
     }
 
     private void initData() {
-        id = getIntent().getStringExtra(KEY_URL);
-        image_url = getIntent().getStringExtra(IMAGE_URL);
-        indexContentPresenter = new IndexContentPresenterImpl(this);
+        article = (Article) getIntent().getSerializableExtra(DATA);
+        indexContentPresenter = new MenuContentPresenterImpl(this);
     }
 
     private void initView() {
-
         ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("第五种基本能力是真你的被发现了？");
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        nest= (NestedScrollView) findViewById(R.id.nest);
-        fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
-        fabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nest.smoothScrollTo(0, 0);
-            }
-        });
         webView= (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -102,11 +85,10 @@ public class IndexMenuWebView extends AppCompatActivity implements IndexContentV
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
-        ctl= (CollapsingToolbarLayout) findViewById(R.id.ctl);
     }
 
     private void getData() {
-        indexContentPresenter.getActivityContent(id);
+        indexContentPresenter.getArticleContent(article.getMid());
     }
 
     @Override
@@ -125,7 +107,6 @@ public class IndexMenuWebView extends AppCompatActivity implements IndexContentV
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
-                //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
         }
@@ -163,13 +144,14 @@ public class IndexMenuWebView extends AppCompatActivity implements IndexContentV
     }
 
     @Override
-    public void getLoginFail(String msg) {
+    public void getFail(String msg) {
         FrameManager.getInstance().toastPrompt("加载数据失败");
     }
 
     @Override
     public void getSuccess(String result) {
-        String head_img = AppConstants.RequestPath.BASE_URL+image_url;
+        //String head_img = AppConstants.RequestPath.BASE_URL+image_url;
+        String head_img = article.getImage_url();
         Glide.with(IndexMenuWebView.this)
                 .load(head_img)
                 .placeholder(R.drawable.loading1)
@@ -177,7 +159,6 @@ public class IndexMenuWebView extends AppCompatActivity implements IndexContentV
                 .into(ivZhihuStory);
         try{
             webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
-           // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
         }catch (Exception e){
             e.printStackTrace();
         }

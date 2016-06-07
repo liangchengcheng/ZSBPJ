@@ -75,6 +75,10 @@
         <activity
             android:name=".index.IndexMenuView.IndexMenuActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".index.IndexMenuView.IndexMenuWebView"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
