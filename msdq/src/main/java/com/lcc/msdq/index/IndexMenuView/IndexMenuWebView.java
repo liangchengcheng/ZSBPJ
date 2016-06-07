@@ -10,6 +10,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,14 +72,13 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     }
 
     private void initView() {
-        ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
+        ivZhihuStory= (ImageView) findViewById(R.id.user_head);
         webView= (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true);
-        //settings.setUseWideViewPort(true);造成文字太小
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
@@ -152,11 +152,16 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     public void getSuccess(String result) {
         //String head_img = AppConstants.RequestPath.BASE_URL+image_url;
         String head_img = article.getImage_url();
-        Glide.with(IndexMenuWebView.this)
-                .load(head_img)
-                .placeholder(R.drawable.loading1)
-                .centerCrop()
-                .into(ivZhihuStory);
+        if (TextUtils.isEmpty(head_img)){
+            ivZhihuStory.setVisibility(View.GONE);
+        }else {
+            Glide.with(IndexMenuWebView.this)
+                    .load(head_img)
+                    .placeholder(R.drawable.loading1)
+                    .centerCrop()
+                    .into(ivZhihuStory);
+        }
+
         try{
             webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
         }catch (Exception e){
