@@ -3,6 +3,7 @@ package com.lcc.base;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.lcc.utils.NetWorkUtils;
 import com.lcc.utils.PreferenceUtils;
 import com.lcc.utils.SystemBarTintManager;
 import com.lcc.utils.ThemeUtils;
+
+import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 /**
  * Author:  梁铖城
@@ -37,13 +40,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         parseIntent(getIntent());
-        showActivityInAnim();
+        //showActivityInAnim();
         preferenceUtils = PreferenceUtils.getInstance(this);
         initTheme();
         super.onCreate(savedInstanceState);
         initWindow(Open());
         setContentView(getLayoutView());
         initView();
+        if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)){
+            SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
+            toast.setDefaultTextColor(Color.WHITE);
+            toast.show("你的手机已经失去网络连接。", R.layout.toast_item,R.id.content_toast,BaseActivity.this);
+        }
     }
 
     protected abstract void initView();
@@ -166,13 +174,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void showActivityInAnim(){
         if (isStartAnim) {
-            overridePendingTransition(R.anim.activity_down_up_anim, R.anim.activity_up_down_anim);
+            overridePendingTransition(R.anim.activity_left_right_anim, R.anim.activity_right_left_anim);
         }
     }
 
     protected void showActivityExitAnim(){
         if (isCloseAnim) {
-            overridePendingTransition(R.anim.activity_up_down_anim, R.anim.activity_down_up_anim);
+            overridePendingTransition(R.anim.activity_right_left_anim, R.anim.activity_left_right_anim);
         }
     }
 
@@ -186,6 +194,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        showActivityExitAnim();
+        //showActivityExitAnim();
     }
 }

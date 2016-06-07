@@ -45,9 +45,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-        SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
-        toast.setDefaultTextColor(Color.WHITE);
-        toast.show("不好了。", R.layout.toast_item,R.id.content_toast,MainActivity.this);
 
         mBottomBar = BottomBar.attach(MainActivity.this, savedInstanceState);
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,

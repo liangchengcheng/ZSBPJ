@@ -19,7 +19,7 @@
                         android:padding="10dp"
                         android:text="账号设置"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -155,7 +155,7 @@
                         android:padding="10dp"
                         android:text="常用操作"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <TextView

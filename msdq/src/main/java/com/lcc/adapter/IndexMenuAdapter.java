@@ -85,29 +85,29 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
-            if (TextUtils.isEmpty(weekData.getImage_url())){
+            if (TextUtils.isEmpty(weekData.getImage_url())) {
                 holder.iv_head.setVisibility(View.GONE);
-            }else {
+            } else {
                 holder.iv_head.setVisibility(View.VISIBLE);
                 ImageManager.getInstance().loadUrlImage(holder.iv_head.getContext(),
                         weekData.getImage_url(), holder.iv_head);
             }
 
-            if (weekData.getState().equals("0")){
+            if (weekData.getState().equals("0")) {
                 holder.state.setVisibility(View.GONE);
-            }else {
+            } else {
                 holder.state.setVisibility(View.VISIBLE);
-                if (weekData.getState().equals("1")){
+                if (weekData.getState().equals("1")) {
                     holder.state.setText("热门");
                     holder.state.setTextColor(Color.parseColor("#FFFF0000"));
                 }
-                if (weekData.getState().equals("2")){
+                if (weekData.getState().equals("2")) {
                     holder.state.setText("置顶");
                     holder.state.setTextColor(Color.parseColor("#388E3C"));
                 }
             }
 
-            if(mListener != null) {
+            if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -144,7 +144,6 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.ll_all)
         CardView ll_all;
-
 
         @Bind(R.id.state)
         TextView state;

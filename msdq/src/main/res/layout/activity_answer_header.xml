@@ -30,7 +30,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
                 android:text="那些去年刚毕业的前端们现在都在干什么？"
-                android:textColor="#000"
+                android:textColor="@color/article_title"
                 android:textSize="20sp" />
 
             <com.lcc.view.StretchyTextView
@@ -48,6 +48,7 @@
                 android:background="#ededed" />
 
             <RelativeLayout
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -87,12 +88,6 @@
                     android:textSize="16sp"
                     android:textColor="#fff" />
             </RelativeLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
-                android:background="#ededed" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

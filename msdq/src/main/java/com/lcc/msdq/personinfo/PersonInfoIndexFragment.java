@@ -19,6 +19,7 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.setting.SettingActivity;
+import com.lcc.view.ObservableScrollView;
 import com.ufreedom.uikit.FloatingText;
 
 import zsbpj.lccpj.frame.ImageManager;

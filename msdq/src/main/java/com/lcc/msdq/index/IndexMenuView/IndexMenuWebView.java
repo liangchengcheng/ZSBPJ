@@ -19,6 +19,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
@@ -40,7 +41,8 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class IndexMenuWebView extends AppCompatActivity implements MenuContentView {
+public class IndexMenuWebView extends AppCompatActivity implements MenuContentView,
+        View.OnClickListener{
 
     public static final String DATA = "data";
 
@@ -52,6 +54,8 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
 
     private Article article;
     private LoadingLayout loading_layout;
+
+    private TextView tv_question,tv_source;
 
     public static void startIndexMenuWebView(Activity startingActivity, Article type) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
@@ -74,6 +78,11 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     }
 
     private void initView() {
+        tv_question= (TextView) findViewById(R.id.tv_question);
+        tv_source= (TextView) findViewById(R.id.tv_source);
+
+        findViewById(R.id.iv_share).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory= (ImageView) findViewById(R.id.user_head);
         webView= (WebView) findViewById(R.id.webView);
@@ -93,28 +102,6 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     private void getData() {
         Loading();
         indexContentPresenter.getArticleContent(article.getMid());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_share, menu);
-        menu.findItem(R.id.action_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.removeItem(R.id.action_use_browser);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -160,26 +147,46 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     @Override
     public void getSuccess(String result) {
         //String head_img = AppConstants.RequestPath.BASE_URL+image_url;
-        String head_img = article.getImage_url();
-        if (TextUtils.isEmpty(head_img)){
-            ivZhihuStory.setVisibility(View.GONE);
-        }else {
-            Glide.with(IndexMenuWebView.this)
-                    .load(head_img)
-                    .placeholder(R.drawable.loading1)
-                    .centerCrop()
-                    .into(ivZhihuStory);
-        }
-
         try{
             if (TextUtils.isEmpty(result)){
                 loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             }else {
-                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+                String head_img = article.getImage_url();
+                if (TextUtils.isEmpty(head_img)){
+                    ivZhihuStory.setVisibility(View.GONE);
+                }else {
+                    ivZhihuStory.setVisibility(View.VISIBLE);
+                    Glide.with(IndexMenuWebView.this)
+                            .load(head_img)
+                            .placeholder(R.drawable.loading1)
+                            .centerCrop()
+                            .into(ivZhihuStory);
+                }
+
                 webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
+                tv_question.setText(article.getTitle());
+                tv_source.setText(article.getSource());
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "在此处插入内容" + getString(R.string.share_tail));
+                shareIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
+                break;
+
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
         }
     }
 }

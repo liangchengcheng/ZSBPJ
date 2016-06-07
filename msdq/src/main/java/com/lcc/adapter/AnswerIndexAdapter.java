@@ -3,6 +3,7 @@ package com.lcc.adapter;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -106,7 +107,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 "互联网创业公司需要面对许多的不确定因素。如果你和你的小伙伴们够幸运，你们的公司可能会在几个星期之内让用户数、商品数" +
                 "、订单量增长几十倍上百倍。一次促销可能会带来平时几十倍的访问流量，" +
                 "一次秒杀活动可能会吸引平时数百倍的访问用户。这对公司自然是极大的好事，说明产品得到认可，公司未来前景美妙。");
-
+            holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
             holder.tv_title.setText("你觉得你的人生的意义是什么");
 
         } else if (viewHolder instanceof FootViewHolder) {

@@ -42,14 +42,12 @@
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/iv_image"
                     android:ellipsize="end"
-                    android:lines="2"
-                    android:text="梁铖城"
-                    android:textColor="#000"
+                    android:text=""
+                    android:textColor="@color/article_title"
                     android:textSize="15sp" />
 
                 <TextView
@@ -58,14 +56,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:lines="3"
-                    android:text="她说facebook是一家很牛逼的公司，她说facebook是一家很牛逼的公司，她说facebook是一家很牛逼的公司她说facebook是一家很牛逼的公司"
-                    android:textColor="#000"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text=""
+                    android:textColor="@color/article_des"
                     android:textSize="13sp" />
 
                 <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -74,20 +76,32 @@
                         android:paddingRight="5dp"
                         android:paddingBottom="2dp"
                         android:paddingTop="2dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_gravity="right"
                         android:textColor="?attr/colorPrimary"
                         android:background="#ededed"
                         android:text="热门"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+
+                    <LinearLayout
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/ic_favorite_border_black_24dp" />
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_favorite_border_black_24dp" />
+                        <TextView
+                            android:layout_marginLeft="2dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:text="76"
+                            android:textColor="@color/article_des"
+                            android:textSize="14sp"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
 
