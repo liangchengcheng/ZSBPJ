@@ -30,6 +30,7 @@ import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.MenuContentView;
+import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
 
@@ -37,7 +38,7 @@ import zsbpj.lccpj.frame.FrameManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  先暂时先弄个页面
+ * Description:  IndexMenuWebView
  */
 public class IndexMenuWebView extends AppCompatActivity implements MenuContentView {
 
@@ -50,6 +51,7 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     private MenuContentPresenter indexContentPresenter;
 
     private Article article;
+    private LoadingLayout loading_layout;
 
     public static void startIndexMenuWebView(Activity startingActivity, Article type) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
@@ -72,6 +74,7 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     }
 
     private void initView() {
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory= (ImageView) findViewById(R.id.user_head);
         webView= (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
@@ -88,6 +91,7 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     }
 
     private void getData() {
+        Loading();
         indexContentPresenter.getArticleContent(article.getMid());
     }
 
@@ -144,8 +148,13 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     }
 
     @Override
+    public void Loading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
     public void getFail(String msg) {
-        FrameManager.getInstance().toastPrompt("加载数据失败");
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
@@ -163,7 +172,12 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
         }
 
         try{
-            webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
+            if (TextUtils.isEmpty(result)){
+                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+            }else {
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+                webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

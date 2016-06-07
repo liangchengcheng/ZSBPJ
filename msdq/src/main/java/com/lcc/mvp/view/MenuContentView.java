@@ -8,6 +8,7 @@ package com.lcc.mvp.view;
  */
 public interface MenuContentView {
 
+    void Loading();
     /**
      * 错误信息
      */
