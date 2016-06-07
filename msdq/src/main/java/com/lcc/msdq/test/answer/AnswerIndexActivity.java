@@ -135,7 +135,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     public void refreshView(List<Answer> entities) {
         if (entities != null && entities.size() > 0) {
             List<Object> objects = new ArrayList<>();
-            // TODO: 16/6/7 在这加入头部数据 
+            // TODO: 16/6/7 在这加入头部数据
             objects.add("1");
             for (int i = 0; i < entities.size(); i++) {
                 objects.add(entities.get(i));

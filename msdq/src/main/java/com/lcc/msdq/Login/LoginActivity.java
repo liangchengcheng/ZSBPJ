@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     //用户名和密码
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout mTextInputLayoutPassword;
-    //简单的登录时候的等待的diaolog
+    //简单的登录时候的等待的对话框
     private SimpleArcDialog mDialog;
 
     @Override

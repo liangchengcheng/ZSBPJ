@@ -1,6 +1,7 @@
 package com.lcc.msdq.setting;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -35,15 +36,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initView() {
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getColorPrimary());
-        toolbar.setTitle("系统设置");
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
         findViewById(R.id.tx_changetheme).setOnClickListener(this);
+        findViewById(R.id.ml_yjfk).setOnClickListener(this);
     }
 
     @Override
@@ -117,6 +111,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.tx_changetheme:
                 showThemeDialog();
+                break;
+
+            case R.id.ml_yjfk:
+                startActivity(new Intent(SettingActivity.this,FeedBackActivity.class));
                 break;
         }
     }
