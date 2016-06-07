@@ -1,10 +1,9 @@
-package com.lcc.msdq.Login;
+package com.lcc.msdq.login;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;

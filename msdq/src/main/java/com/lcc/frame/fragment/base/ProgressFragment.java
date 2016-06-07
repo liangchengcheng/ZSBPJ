@@ -1,4 +1,4 @@
-package com.lcc.frame.fragment;
+package com.lcc.frame.fragment.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +14,8 @@ import com.lcc.frame.fragment.state.NonState;
 import com.lcc.frame.fragment.state.ProgressState;
 import com.lcc.frame.fragment.state.ShowState;
 import com.lcc.msdq.R;
+
+import zsbpj.lccpj.view.recyclerview.LoadMoreRecyclerFragment;
 
 public class ProgressFragment extends Fragment {
 
@@ -36,7 +38,6 @@ public class ProgressFragment extends Fragment {
     public View onCreateProgressView(LayoutInflater inflater) {
         return null;
     }
-
 
     private View mContentView;
 
@@ -144,4 +145,5 @@ public class ProgressFragment extends Fragment {
         mLastState.dismiss(animate);
         mLastState = mProgressState;
     }
+
 }

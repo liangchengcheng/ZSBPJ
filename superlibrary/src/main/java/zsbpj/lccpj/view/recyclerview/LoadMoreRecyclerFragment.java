@@ -96,11 +96,9 @@ public abstract class LoadMoreRecyclerFragment<T> extends SuperFragment {
         FrameManager.getInstance().toastPrompt("加载失败");
     }
 
-
     public void showLoadError(int errorMsgId) {
         showLoadError(getString(errorMsgId));
     }
-
 
     public int getCurrentPage() {
         return currentPage;

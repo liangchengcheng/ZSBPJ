@@ -37,13 +37,13 @@
             android:name=".compony.CompanyContentActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Login.ResetPasswordActivity"
+            android:name=".login.ResetPasswordActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Login.SignUpActivity"
+            android:name=".login.SignUpActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".choice.ChoiceMainActivity"

@@ -1,4 +1,4 @@
-package com.lcc.frame.fragment;
+package com.lcc.frame.fragment.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -97,7 +97,6 @@ public abstract class BaseFragment extends ProgressFragment {
             a.recycle();
         }
     }
-
 
     public void setErrorText(String text) {
         tvError.setText(text);

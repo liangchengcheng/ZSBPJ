@@ -1,4 +1,4 @@
-package com.lcc.frame.fragment;
+package com.lcc.frame.fragment.base;
 
 import android.os.Bundle;
 import android.view.View;

@@ -16,12 +16,11 @@ import android.widget.TextView;
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
-import com.lcc.msdq.Login.LoginActivity;
+import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.setting.SettingActivity;
 import com.ufreedom.uikit.FloatingText;
 
-import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {

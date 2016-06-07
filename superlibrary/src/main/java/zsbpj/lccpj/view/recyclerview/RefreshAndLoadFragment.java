@@ -53,7 +53,6 @@ public abstract class RefreshAndLoadFragment<T> extends LoadMoreRecyclerFragment
     protected void onFragmentCreate() {
         View view=getView();
         if (view!=null){
-            //此处我对view进行了非空判断
             mSwipeRefreshWidget = (SwipeRefreshLayout)view .findViewById(R.id.swipe_refresh_widget);
             mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
             mSwipeRefreshWidget.setOnRefreshListener(this);
@@ -67,8 +66,6 @@ public abstract class RefreshAndLoadFragment<T> extends LoadMoreRecyclerFragment
             currentTime=TimeUtils.getCurrentTime();
             adapter.setHasFooter(true);
             onRefreshData();
-        }else {
-            FrameManager.getInstance().toastPrompt("正在加载数据...");
         }
     }
 
