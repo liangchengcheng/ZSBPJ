@@ -13,6 +13,7 @@ import android.widget.GridView;
 
 import com.lcc.adapter.ColorsListAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.frame.data.DataCleanManager;
 import com.lcc.msdq.R;
 import com.lcc.utils.DialogUtils;
 import com.lcc.utils.PreferenceUtils;
@@ -38,6 +39,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     protected void initView() {
         findViewById(R.id.tx_changetheme).setOnClickListener(this);
         findViewById(R.id.ml_yjfk).setOnClickListener(this);
+        findViewById(R.id.ll_clear_cache).setOnClickListener(this);
     }
 
     @Override
@@ -109,12 +111,20 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            //弹出界面样式选择弹窗
             case R.id.tx_changetheme:
                 showThemeDialog();
                 break;
 
+            //去意见反馈的界面
             case R.id.ml_yjfk:
                 startActivity(new Intent(SettingActivity.this,FeedBackActivity.class));
+                break;
+
+            //清理缓存，这里我知情理sp的缓存
+            case R.id.ll_clear_cache:
+                DataCleanManager.cleanSharedPreference(SettingActivity.this);
                 break;
         }
     }

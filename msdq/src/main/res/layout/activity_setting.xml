@@ -198,6 +198,7 @@
         app:mrl_rippleColor="@color/md_pink_400"
         app:mrl_rippleOverlay="true">
     <LinearLayout
+        android:id="@+id/ll_clear_cache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
