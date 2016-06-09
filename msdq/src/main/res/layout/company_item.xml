@@ -18,142 +18,155 @@
         app:cardCornerRadius="1dp"
         app:cardUseCompatPadding="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/rl_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_icon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/baidu" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_icon"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:background="#E5F0FD"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="7dp"
-                    android:paddingRight="7dp"
-                    android:paddingTop="4dp"
-                    android:text="129"
-                    android:textColor="@color/md_light_blue_A700" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_toRightOf="@+id/rl_left"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
+
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:id="@+id/rl_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/baidu" />
 
                     <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="5dp"
-                        android:text="百度科技网络有限公司"
-                        android:textColor="@color/article_title"
-                        android:textSize="18sp" />
-
+                        android:layout_below="@+id/iv_icon"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:background="#E5F0FD"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="4dp"
+                        android:text="129"
+                        android:textColor="@color/md_light_blue_A700" />
                 </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#ededed" />
-
-                <TextView
-                    android:id="@+id/tv_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:ellipsize="end"
-                    android:lines="3"
-                    android:text="国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一，一家世界级的搜索公司，世界500强，工资福利很高"
-                    android:textColor="@color/article_des" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/rl_left"
+                    android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <ImageButton
-                            android:id="@+id/btnLike"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_centerVertical="true"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_comment_outline_grey" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/tv_f_number"
+                            android:id="@+id/tv_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btnLike"
-                            android:text="77" />
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="5dp"
+                            android:text="百度科技网络有限公司"
+                            android:textColor="@color/article_title"
+                            android:textSize="18sp" />
+
                     </RelativeLayout>
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:background="#ededed" />
+
+                    <TextView
+                        android:id="@+id/tv_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1">
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:lines="3"
+                        android:text="国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一，一家世界级的搜索公司，世界500强，工资福利很高"
+                        android:textColor="@color/article_des" />
 
 
-                        <ImageButton
-                            android:id="@+id/btn_sc"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_centerVertical="true"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_heart_outline_grey" />
-
-                        <TextView
-                            android:id="@+id/tv_l_number"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btn_sc"
-                            android:text="2233" />
-                    </RelativeLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </RelativeLayout>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="#ededed" />
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <RelativeLayout
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/rl_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/btnLike"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_comment_outline_grey" />
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/tv_f_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/btnLike"
+                        android:text="77" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@+id/rl_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/btn_sc"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_heart_outline_grey" />
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/tv_l_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/btn_sc"
+                        android:text="2233" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
