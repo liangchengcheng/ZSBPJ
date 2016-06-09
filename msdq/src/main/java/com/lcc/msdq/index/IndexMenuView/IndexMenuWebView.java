@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
+import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.IndexContentPresenter;
@@ -41,7 +42,7 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class IndexMenuWebView extends AppCompatActivity implements MenuContentView,
+public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         View.OnClickListener{
 
     public static final String DATA = "data";
@@ -66,7 +67,6 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.index_menu_webview);
         initData();
         initView();
         getData();
@@ -77,7 +77,8 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
         indexContentPresenter = new MenuContentPresenterImpl(this);
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         tv_question= (TextView) findViewById(R.id.tv_question);
         tv_source= (TextView) findViewById(R.id.tv_source);
 
@@ -97,6 +98,16 @@ public class IndexMenuWebView extends AppCompatActivity implements MenuContentVi
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
+    }
+
+    @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.index_menu_webview;
     }
 
     private void getData() {

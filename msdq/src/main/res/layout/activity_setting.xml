@@ -29,362 +29,380 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:padding="5dp"
-        android:text="常规"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="14sp" />
+ <ScrollView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:orientation="vertical"
+         android:layout_height="wrap_content">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="20dp"
+             android:padding="5dp"
+             android:text="常规"
+             android:textColor="?attr/colorPrimary"
+             android:textSize="14sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="20dp"
+             android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="左手操作模式"
-                android:textSize="16sp" />
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="左手操作模式"
+                     android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="开启左手操作模式之后侧边栏会从右边滑到左边，默认呢是从左边滑到右边"
-                android:textSize="14sp" />
-        </LinearLayout>
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:text="开启左手操作模式之后侧边栏会从右边滑到左边，默认呢是从左边滑到右边"
+                     android:textSize="14sp" />
+             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
-            android:gravity="right">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginLeft="10dp"
+                 android:layout_weight="4"
+                 android:gravity="right">
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/grids"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:theme="@style/Color1SwitchStyle" />
-        </LinearLayout>
-    </LinearLayout>
+                 <android.support.v7.widget.SwitchCompat
+                     android:id="@+id/grids"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:checked="true"
+                     android:theme="@style/Color1SwitchStyle" />
+             </LinearLayout>
+         </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#EDEDED" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:layout_marginTop="10dp"
+             android:background="#EDEDED" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="5dp"
+             android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="显示的操作记录"
-                android:textSize="16sp" />
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:text="收藏记录同步到云端"
+                     android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="开启显示笔记的全部操作的记录将显示笔记所有的操作记录，否则只显示最新操作记录"
-                android:textSize="14sp" />
-        </LinearLayout>
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:text="开启这个功能后你在别设备登录你的账号后也能看见你收藏的文章等收藏信息"
+                     android:textSize="14sp" />
+             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
-            android:gravity="right">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginLeft="10dp"
+                 android:layout_weight="4"
+                 android:gravity="right">
 
-            <CheckBox
-                android:id="@+id/gridss"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:theme="@style/Color1SwitchStyle" />
-        </LinearLayout>
-    </LinearLayout>
+                 <CheckBox
+                     android:id="@+id/gridss"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:checked="true"
+                     android:theme="@style/Color1SwitchStyle" />
+             </LinearLayout>
+         </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#EDEDED" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:layout_marginTop="10dp"
+             android:background="#EDEDED" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="5dp"
+             android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="是否自动更新                                               "
-                android:textSize="16sp" />
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="是否自动更新                                               "
+                     android:textSize="16sp" />
 
-        </LinearLayout>
+             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
-            android:gravity="right">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginLeft="10dp"
+                 android:layout_weight="4"
+                 android:gravity="right">
 
-            <CheckBox
-                android:id="@+id/gridsss"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:theme="@style/Color1SwitchStyle" />
-        </LinearLayout>
-    </LinearLayout>
+                 <CheckBox
+                     android:id="@+id/gridsss"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:checked="true"
+                     android:theme="@style/Color1SwitchStyle" />
+             </LinearLayout>
+         </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#EDEDED" />
-    <com.balysv.materialripple.MaterialRippleLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        app:mrl_rippleColor="@color/md_pink_400"
-        app:mrl_rippleOverlay="true">
-    <LinearLayout
-        android:id="@+id/ll_clear_cache"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:layout_marginTop="10dp"
+             android:background="#EDEDED" />
+         <com.balysv.materialripple.MaterialRippleLayout
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingBottom="10dp"
+             app:mrl_rippleColor="@color/md_pink_400"
+             app:mrl_rippleOverlay="true">
+             <LinearLayout
+                 android:id="@+id/ll_clear_cache"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginTop="5dp"
+                 android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_weight="1"
+                     android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="点击清除缓存                                               "
-                android:textSize="16sp" />
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:text="点击清除缓存                                               "
+                         android:textSize="16sp" />
 
-        </LinearLayout>
+                 </LinearLayout>
 
-    </LinearLayout>
-    </com.balysv.materialripple.MaterialRippleLayout>
+             </LinearLayout>
+         </com.balysv.materialripple.MaterialRippleLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#EDEDED" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:background="#EDEDED" />
 
-    <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:mrl_rippleColor="@color/md_pink_400"
-        app:mrl_rippleOverlay="true">
+         <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:mrl_rippleColor="@color/md_pink_400"
+             app:mrl_rippleOverlay="true">
 
-        <TextView
-            android:id="@+id/tx_changetheme"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="更换系统主题                                               "
-            android:textSize="16sp" />
+             <TextView
+                 android:id="@+id/tx_changetheme"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_marginBottom="10dp"
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginTop="10dp"
+                 android:text="更换系统主题                                               "
+                 android:textSize="16sp" />
 
-    </com.balysv.materialripple.MaterialRippleLayout>
+         </com.balysv.materialripple.MaterialRippleLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
 
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#EDEDED" />
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:background="#EDEDED" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:padding="5dp"
-        android:text="其他"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="14sp" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="20dp"
+             android:padding="5dp"
+             android:text="其他"
+             android:textColor="?attr/colorPrimary"
+             android:textSize="14sp" />
 
-    <com.balysv.materialripple.MaterialRippleLayout
+         <com.balysv.materialripple.MaterialRippleLayout
 
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        app:mrl_rippleColor="@color/md_pink_400"
-        app:mrl_rippleOverlay="true">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingBottom="10dp"
+             app:mrl_rippleColor="@color/md_pink_400"
+             app:mrl_rippleOverlay="true">
 
-        <LinearLayout
-            android:id="@+id/ml_yjfk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+             <LinearLayout
+                 android:id="@+id/ml_yjfk"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginTop="20dp"
+                 android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_weight="1"
+                     android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="意见反馈                                               "
-                    android:textSize="16sp" />
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:text="意见反馈                                               "
+                         android:textSize="16sp" />
 
-            </LinearLayout>
+                 </LinearLayout>
 
-        </LinearLayout>
-    </com.balysv.materialripple.MaterialRippleLayout>
+             </LinearLayout>
+         </com.balysv.materialripple.MaterialRippleLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#EDEDED" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:background="#EDEDED" />
 
-    <com.balysv.materialripple.MaterialRippleLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        app:mrl_rippleColor="@color/md_pink_400"
-        app:mrl_rippleOverlay="true">
+         <com.balysv.materialripple.MaterialRippleLayout
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingBottom="10dp"
+             app:mrl_rippleColor="@color/md_pink_400"
+             app:mrl_rippleOverlay="true">
 
-        <LinearLayout
-            android:id="@+id/ll_zan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+             <LinearLayout
+                 android:id="@+id/ll_zan"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginLeft="20dp"
+                     android:layout_weight="1"
+                     android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="鼓励作者，给应用点赞                                               "
-                    android:textSize="16sp" />
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:text="鼓励作者，给应用点赞                                               "
+                         android:textSize="16sp" />
 
-            </LinearLayout>
-        </LinearLayout>
-    </com.balysv.materialripple.MaterialRippleLayout>
+                 </LinearLayout>
+             </LinearLayout>
+         </com.balysv.materialripple.MaterialRippleLayout>
 
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginRight="10dp"
+             android:background="#EDEDED" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginRight="10dp"
-        android:background="#EDEDED" />
+         <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingBottom="10dp"
+             app:mrl_rippleColor="@color/md_pink_400"
+             app:mrl_rippleOverlay="true">
 
-    <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        app:mrl_rippleColor="@color/md_pink_400"
-        app:mrl_rippleOverlay="true">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginLeft="20dp"
+                     android:layout_weight="1"
+                     android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:text="觉得不错，随意打赏一下                                               "
+                         android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="觉得不错，随意打赏一下                                               "
-                    android:textSize="16sp" />
+                 </LinearLayout>
 
-            </LinearLayout>
+             </LinearLayout>
+         </com.balysv.materialripple.MaterialRippleLayout>
 
-        </LinearLayout>
-    </com.balysv.materialripple.MaterialRippleLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#EDEDED" />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:background="#EDEDED" />
+         <TextView
+             android:textSize="16sp"
+             android:layout_margin="10dp"
+             android:gravity="center"
+             android:padding="10dp"
+             android:textColor="#fff"
+             android:background="?attr/colorPrimary"
+             android:layout_width="match_parent"
+             android:text="注销账号"
+             android:layout_height="wrap_content" />
+     </LinearLayout>
+ </ScrollView>
 </LinearLayout>

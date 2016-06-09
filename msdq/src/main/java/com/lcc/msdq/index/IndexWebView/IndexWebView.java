@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
+import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
@@ -37,7 +38,7 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2015年11月21日15:28:25
  * Description:  先暂时先弄个页面
  */
-public class IndexWebView extends AppCompatActivity implements IndexContentView {
+public class IndexWebView extends BaseActivity implements IndexContentView {
 
     public static final String KEY_URL = "url";
 
@@ -63,7 +64,6 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.index_webview);
         initData();
         initView();
         getData();
@@ -75,7 +75,8 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
         indexContentPresenter = new IndexContentPresenterImpl(this);
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
 
         ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
@@ -107,6 +108,16 @@ public class IndexWebView extends AppCompatActivity implements IndexContentView 
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
         ctl= (CollapsingToolbarLayout) findViewById(R.id.ctl);
+    }
+
+    @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.index_webview;
     }
 
     private void getData() {

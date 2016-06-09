@@ -2,7 +2,6 @@ package com.lcc.frame.data;
 
 import android.content.Context;
 import android.os.Environment;
-
 import java.io.File;
 
 /**
@@ -29,8 +28,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) * * @param
-     * context
+     * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) * * @param
      */
     public static void cleanSharedPreference(Context context) {
         deleteFilesByDirectory(new File("/data/data/"
@@ -52,8 +50,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) * * @param
-     * context
+     *   清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) * * @param
      */
     public static void cleanExternalCache(Context context) {
         if (Environment.getExternalStorageState().equals(

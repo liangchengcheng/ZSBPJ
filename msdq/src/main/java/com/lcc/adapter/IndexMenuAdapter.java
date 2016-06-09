@@ -63,9 +63,11 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.index_menu_item, parent, false));
+            return new NormalViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.index_menu_item, parent, false));
         } else {
-            return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
+            return new FootViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.layout_foot_loading, parent, false));
         }
     }
 

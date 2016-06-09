@@ -1,5 +1,7 @@
 package zsbpj.lccpj.frame;
 
+import android.text.TextUtils;
+
 public class ApiException {
 
     /**
@@ -9,6 +11,10 @@ public class ApiException {
     // TODO: 16/5/9 此处没处理完成 
     public static String getApiExceptionMessage(String msg) {
         String message = "";
+        if (TextUtils.isEmpty(msg)){
+            return "服务器正在维护...请稍后再来";
+        }
+
         if (msg.contains("fail")) {
             message = "连接服务器失败";
         } else if (msg.contains("time out")) {

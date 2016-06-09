@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.frame.FrameManager;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -125,6 +126,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             //清理缓存，这里我知情理sp的缓存
             case R.id.ll_clear_cache:
                 DataCleanManager.cleanSharedPreference(SettingActivity.this);
+                FrameManager.getInstance().toastPrompt("清除缓存成功");
                 break;
         }
     }

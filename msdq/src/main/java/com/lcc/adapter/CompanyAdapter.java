@@ -48,10 +48,9 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
         });
         holder.tv_title.setText(entity.getCompany_name());
         holder.tv_content.setText(entity.getCompany_description());
-        holder.tv_time.setText(entity.getArea());
 
-
-        String url = "http://www.tengxungame.pub:8080/"+entity.getCompany_image();
+       // String url = "http://www.tengxungame.pub:8080/"+entity.getCompany_image();
+        String url = "http://b.hiphotos.baidu.com/image/h%3D200/sign=954a2073cfef7609230b9e9f1edfa301/810a19d8bc3eb135aa449355a21ea8d3fc1f4458.jpg";
         ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
                 , url, holder.iv_icon);
 
@@ -60,7 +59,6 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView tv_title;
         public final TextView tv_content;
-        public final TextView tv_time;
         public final CardView ll_all;
         public final ImageView iv_icon;
 
@@ -68,7 +66,6 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_title);
             tv_content = (TextView) view.findViewById(R.id.tv_content);
-            tv_time = (TextView) view.findViewById(R.id.tv_time);
             ll_all = (CardView) view.findViewById(R.id.ll_all);
             iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
         }

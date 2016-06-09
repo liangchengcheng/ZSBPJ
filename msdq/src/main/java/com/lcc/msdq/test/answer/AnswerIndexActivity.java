@@ -80,7 +80,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     private void initRecycleView() {
-
         findViewById(R.id.fabButton).setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

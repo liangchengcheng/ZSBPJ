@@ -99,7 +99,7 @@
         app:borderWidth="0dp"
         android:layout_gravity="bottom|end"
         app:pressedTranslationZ="12dp"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_behavior="com.lcc.view.ScrollAwareFABBehavior"
         app:rippleColor="#33728dff"
         android:src="@drawable/ic_arrow_upward_white_24px" />

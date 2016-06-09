@@ -84,7 +84,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_fragment, null);
 
         ll_layout = view.findViewById(R.id.ll_layout);

@@ -123,7 +123,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:background="#eeeeee" />
 
             <LinearLayout
@@ -137,6 +137,7 @@
                     android:layout_height="wrap_content"></LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -147,9 +148,9 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_favorite_black_18dp" />
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/ic_thumb_up_gray_18dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -167,12 +168,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_favorite_black_18dp" />
+                        android:background="@drawable/ic_favor" />
 
                     <TextView
+                        android:layout_marginTop="2dp"
+                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="收藏" />
@@ -190,15 +193,17 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_favorite_black_18dp" />
+                        android:background="@drawable/ic_comment" />
 
                     <TextView
+                        android:layout_marginTop="2dp"
+                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="评论" />
+                        android:text="113" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

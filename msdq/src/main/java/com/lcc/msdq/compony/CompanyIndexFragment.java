@@ -11,10 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.lapism.searchview.adapter.SearchAdapter;
 import com.lapism.searchview.adapter.SearchItem;
 import com.lapism.searchview.history.SearchHistoryTable;
@@ -29,23 +33,23 @@ import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.CompanyDescriptionView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         SearchView.OnQueryTextListener, SearchView.SearchViewListener,
-        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,CompanyDescriptionView {
+        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,CompanyDescriptionView,
+        PopupMenu.OnMenuItemClickListener,View.OnClickListener{
 
     private SearchView mSearchView = null;
     private SearchHistoryTable mHistoryDatabase;
     private CompanyAdapter mAdapter;
     static final int ACTION_NONE = 0;
-
     private CompanyDescriptionPresenter mPresenter;
+    private View iv_more;
+
 
     public static Fragment newInstance() {
         Fragment fragment = new CompanyIndexFragment();
@@ -73,6 +77,9 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
                 mSearchView.show(true);
             }
         });
+        iv_more=view.findViewById(R.id.iv_more);
+        iv_more.setOnClickListener(this);
+
         autoRefresh();
     }
 
@@ -198,4 +205,31 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         showMoreData(entities);
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.news:
+                Toast.makeText(getActivity(), "新建",
+                        Toast.LENGTH_LONG).show();
+                break;
+            case R.id.open:
+                Toast.makeText(getActivity(), "打开",
+                        Toast.LENGTH_LONG).show();
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_more:
+                PopupMenu popup = new PopupMenu(getActivity(), iv_more);
+                popup.getMenuInflater()
+                        .inflate(R.menu.pop_com_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(this);
+                popup.show();
+                break;
+        }
+    }
 }
