@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
+import com.lcc.msdq.description.UserProfileActivity;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.setting.SettingActivity;
@@ -62,6 +63,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
         iv_more= (ImageView) view.findViewById(R.id.iv_more);
         tv_username= (TextView) view.findViewById(R.id.tv_username);
+        tv_username.setOnClickListener(this);
         tv_qm= (TextView) view.findViewById(R.id.tv_qm);
         rl_qd= (RelativeLayout) view.findViewById(R.id.rl_qd);
         tv_qd= (TextView) view.findViewById(R.id.tv_qd);
@@ -86,6 +88,10 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 break;
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+
+            case R.id.tv_username:
+                startActivity(new Intent(getActivity(), UserProfileActivity.class));
                 break;
         }
     }

@@ -37,7 +37,7 @@
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                 tools:background="@drawable/header_back_night">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/img_image_user"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
@@ -117,15 +117,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fab_operate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="@color/white"
-        app:layout_behavior="licola.demo.com.huabandemo.Widget.ScrollAwareFABBehavior" />
-
 </android.support.design.widget.CoordinatorLayout>
