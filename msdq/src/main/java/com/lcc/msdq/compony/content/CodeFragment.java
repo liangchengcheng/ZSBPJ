@@ -45,12 +45,19 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     protected int currentPage = 1;
 
     private JSAdapter adapter;
-    private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private JSPresenter mPresenter;
     private String fid="1cddd741560e7d90ebf9112b989ba955";
     private String type;
+
+    public static CodeFragment newInstance(String fid) {
+        CodeFragment mFragment = new CodeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("fid", fid);
+        mFragment.setArguments(bundle);
+        return mFragment;
+    }
 
     @Override
     public int initContentView() {
@@ -59,12 +66,11 @@ public class CodeFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void getBundle(Bundle bundle) {
-
+        fid = bundle.getString("fid");
     }
 
     @Override
     public void initUI(View view) {
-        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         mPresenter = new JSPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
@@ -84,7 +90,6 @@ public class CodeFragment extends BaseLazyLoadFragment implements
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new JSAdapter();
-
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -120,24 +125,24 @@ public class CodeFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void getLoading() {
-        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+        showProgress(true);
     }
 
     @Override
     public void getDataEmpty() {
-        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        showEmpty(true);
     }
 
     @Override
     public void getDataFail(String msg) {
-        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+       showError(true);
     }
 
     @Override
     public void refreshOrLoadFail(String msg) {
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
-            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+            showError(true);
         } else {
             FrameManager.getInstance().toastPrompt(msg);
         }
@@ -149,7 +154,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
             adapter.bind(entities);
         }
         mSwipeRefreshWidget.setRefreshing(false);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        showContent(true);
     }
 
     @Override
@@ -174,4 +179,9 @@ public class CodeFragment extends BaseLazyLoadFragment implements
         }, delay);
     }
 
+    @Override
+    public void onReloadClicked() {
+        super.onReloadClicked();
+        onRefresh();
+    }
 }

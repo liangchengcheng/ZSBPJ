@@ -17,6 +17,6 @@ public class JSModel {
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         paramsMap.put(AppConstants.ParamKey.FID , fid);
-        return ApiClient.create(AppConstants.RequestPath.ARTICLE_DATA, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.JS_TEST, paramsMap).tag("").get(callback);
     }
 }

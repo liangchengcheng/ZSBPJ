@@ -73,6 +73,13 @@ public class AppConstants {
          */
         public final static String GET_ACTIVITY_CONTENT = "/service/getactivitycontentforad";
 
+        /**
+         * 获取公司的面试资料
+         */
+        public final static String JS_TEST = "/service/pageCompanyTestforAndroid";
+
+
+
         public final static String GET_MENU_CONTENT = "/service/getContentByID";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";

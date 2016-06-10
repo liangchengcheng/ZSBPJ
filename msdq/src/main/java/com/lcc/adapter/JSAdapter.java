@@ -87,6 +87,13 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
+            holder.tv_month.setText(weekData.getCreated_time());
+            holder.tv_nickname.setText(weekData.getUserinfo().getNickname());
+            String image_url= weekData.getUserinfo().getUser_image();
+            if (!TextUtils.isEmpty(image_url)){
+                ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
+                        weekData.getUserinfo().getUser_image(),holder.iv_head);
+            }
 //            if (TextUtils.isEmpty(weekData.getImage_url())) {
 //                holder.iv_head.setVisibility(View.GONE);
 //            } else {
@@ -149,6 +156,12 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Bind(R.id.state)
         TextView state;
+
+        @Bind(R.id.tv_month)
+        TextView tv_month;
+
+        @Bind(R.id.tv_nickname)
+        TextView tv_nickname;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
