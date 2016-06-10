@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#E5E9F1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:id="@+id/ll_all"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1.5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        app:cardCornerRadius="1dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/iv_head"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp" />
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_head"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_nickname"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/tv_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:text="那些去年刚毕业的前端们现在都在干什么？"
+                android:textColor="@color/article_title"
+                android:textSize="20sp" />
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tv_phone"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <com.lcc.view.StretchyTextView
+                android:textSize="16sp"
+                android:id="@+id/spread_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"></com.lcc.view.StretchyTextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#ededed" />
+
+            <RelativeLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:textSize="16sp"
+                    android:id="@+id/tv_llrs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="浏览:988" />
+
+                <TextView
+                    android:textSize="16sp"
+                    android:id="@+id/tv_llsc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_llrs"
+                    android:text="收藏:988" />
+
+                <TextView
+                    android:id="@+id/tv_sc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="?attr/colorPrimary"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="7dp"
+                    android:text="收藏"
+                    android:textSize="16sp"
+                    android:textColor="#fff" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

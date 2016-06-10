@@ -1,6 +1,7 @@
 package com.lcc.msdq.compony.content;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,7 @@ import com.lcc.entity.CodeEntity;
 import com.lcc.entity.CompanyTest;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.compony.answer.CompanyAnswerIndexActivity;
 import com.lcc.msdq.index.IndexMenuView.IndexMenuWebView;
 import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.JSPresenter;
@@ -34,7 +36,7 @@ import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
 public class CodeFragment extends BaseLazyLoadFragment implements
-        SwipeRefreshLayout.OnRefreshListener,JSView {
+        SwipeRefreshLayout.OnRefreshListener,JSView ,JSAdapter.OnItemClickListener{
 
     static final int ACTION_NONE = 0;
     protected static final int DEF_DELAY = 1000;
@@ -49,7 +51,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     private RecyclerView mRecyclerView;
     private JSPresenter mPresenter;
     private String fid="1cddd741560e7d90ebf9112b989ba955";
-    private String type;
+    private String type="技术";
 
     public static CodeFragment newInstance(String fid) {
         CodeFragment mFragment = new CodeFragment();
@@ -90,6 +92,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new JSAdapter();
+        adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -183,5 +186,12 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     public void onReloadClicked() {
         super.onReloadClicked();
         onRefresh();
+    }
+
+    @Override
+    public void onItemClick(CompanyTest data) {
+        Intent intent=new Intent(getActivity(), CompanyAnswerIndexActivity.class);
+        intent.putExtra("data",data);
+        startActivity(intent);
     }
 }

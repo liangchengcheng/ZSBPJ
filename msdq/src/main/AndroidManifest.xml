@@ -82,6 +82,9 @@
 
         <activity android:name=".setting.FeedBackActivity"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".compony.answer.CompanyAnswerIndexActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -48,6 +48,11 @@ public class AppConstants {
          * 获取试题的列表
          */
         public final static String TEST_ANSWER_LIST = "/pageanswerforAndroid";
+
+        /**
+         * 获公司面试资料的答案的列表
+         */
+        public final static String COMPANY_ANSWER_LIST = "/service/getTestanswer";
         /**
          * 获取活动数据
          */
