@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/base_bg_color"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -11,8 +12,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvUserProfile"
+        <android.support.v4.view.ViewPager
+
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -21,7 +23,6 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.design.widget.CollapsingToolbarLayout
@@ -64,6 +65,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_nickname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="John Smith"
@@ -71,13 +73,8 @@
                                 android:textSize="24sp" />
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="\@jsmith"
-                                android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
-
-                            <TextView
+                                android:id="@+id/tv_gxqm"
+                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Mobile development passionate."
@@ -123,7 +120,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="posts"
+                                android:text="赞"
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -145,7 +142,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="followers"
+                                android:text="粉丝"
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -167,14 +164,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="following"
+                                android:text="关注"
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
-
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -184,15 +180,36 @@
                     app:layout_collapseMode="pin"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-                    <ImageView
-                        android:id="@+id/ivLogo"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:scaleType="center"
-                        android:src="@drawable/img_toolbar_logo" />
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/guillotine_hamburger"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_arrow_back_white_24dp" />
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textSize="20sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="#fff"
+                            android:text="个人资料"
+                            android:layout_gravity="center"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="30dp"
+                            android:background="@drawable/ic_border_color_white_24dp"
+                            android:text="详情"
+                            android:textColor="#fff" />
+                    </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
+
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         if (mButtonSign != null) {
             mButtonSign.setOnClickListener(this);
         }
-
+        mPresenter = new LoginPresenterImpl(this);
         findViewById(R.id.textView_create_account).setOnClickListener(this);
         findViewById(R.id.textView_reset_password).setOnClickListener(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
@@ -71,7 +71,6 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 }
             });
         }
-        mPresenter = new LoginPresenterImpl(this);
     }
 
     /**

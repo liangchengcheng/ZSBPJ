@@ -1,4 +1,4 @@
-package com.lcc.msdq.description;
+package com.lcc.msdq.description.user;
 
 import android.content.Context;
 import android.content.res.Resources;

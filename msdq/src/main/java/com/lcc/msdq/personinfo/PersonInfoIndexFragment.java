@@ -16,11 +16,10 @@ import android.widget.TextView;
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
-import com.lcc.msdq.description.UserProfileActivity;
+import com.lcc.msdq.description.user.UserProfileActivity;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.setting.SettingActivity;
-import com.lcc.view.ObservableScrollView;
 import com.ufreedom.uikit.FloatingText;
 
 import zsbpj.lccpj.frame.ImageManager;
@@ -75,7 +74,13 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_more:
-                startActivityForResult(new Intent(getActivity(), LoginActivity.class),100);
+                if (DataManager.getUserInfo()!=null){
+                    Intent intent=new Intent(getActivity(), UserProfileActivity.class);
+                    intent.putExtra("data",DataManager.getUserInfo());
+                    startActivityForResult(intent,200);
+                }else {
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class),100);
+                }
                 break;
             case R.id.rl_qd:
                 FloatingText floatingText = new FloatingText.FloatingTextBuilder(getActivity())

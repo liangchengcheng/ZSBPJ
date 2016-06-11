@@ -173,7 +173,6 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
                 webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
                 tv_question.setText(article.getTitle());
-                tv_source.setText(article.getSource());
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
         }catch (Exception e){

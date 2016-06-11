@@ -1,10 +1,13 @@
 package com.lcc.frame.data;
 
 import android.content.Context;
+
 import com.lcc.App;
 import com.lcc.db.test.UserInfo;
 import com.lcc.db.test.UserInfoDao;
+
 import java.util.List;
+
 import de.greenrobot.dao.query.Query;
 import zsbpj.lccpj.frame.FrameManager;
 
@@ -43,9 +46,9 @@ public class DataManager {
     public static UserInfo getUserInfo() {
         Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder()
                 .build();
-        List<UserInfo>userInfos= query.list();
-        if (userInfos!=null&&userInfos.size()>0){
-            return  userInfos.get(0);
+        List<UserInfo> userInfos = query.list();
+        if (userInfos != null && userInfos.size() > 0) {
+            return userInfos.get(0);
         }
         return null;
     }

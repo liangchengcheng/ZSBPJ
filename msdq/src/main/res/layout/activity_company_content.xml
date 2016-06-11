@@ -38,7 +38,6 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/ic_border_color_white_24dp"
-                android:text="详情"
                 android:textColor="#fff" />
 
             <ImageView
@@ -47,7 +46,6 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/ic_store_white_24dp"
-                android:text="详情"
                 android:textColor="#fff" />
         </android.support.v7.widget.Toolbar>
 

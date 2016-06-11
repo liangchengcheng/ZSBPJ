@@ -1,20 +1,32 @@
-package com.lcc.msdq.description;
+package com.lcc.msdq.description.user;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.db.test.UserInfo;
 import com.lcc.msdq.R;
+import com.lcc.msdq.compony.content.CodeFragment;
+import com.lcc.msdq.compony.content.HrFragment;
+import com.lcc.msdq.compony.content.OtherFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,9 +38,6 @@ public class UserProfileActivity extends BaseActivity {
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
 
-
-    @Bind(R.id.rvUserProfile)
-    RecyclerView rvUserProfile;
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
     @Bind(R.id.ivUserProfilePhoto)
@@ -42,9 +51,17 @@ public class UserProfileActivity extends BaseActivity {
     @Bind(R.id.vUserProfileRoot)
     View vUserProfileRoot;
 
+    @Bind(R.id.tv_nickname)
+    TextView tv_nickname;
+
+    @Bind(R.id.tv_gxqm)
+    TextView tv_gxqm;
+
     private int avatarSize;
     private String profilePhoto;
     private UserProfileAdapter userPhotosAdapter;
+
+    private UserInfo userInfo;
 
     public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
@@ -56,16 +73,19 @@ public class UserProfileActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setContentView(R.layout.activity_user_profile);
-
+        userInfo= (UserInfo) getIntent().getSerializableExtra("data");
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
 
-        ImageManager.getInstance().loadUrlImage(UserProfileActivity.this,
-                "http://www.tengxungame.pub/phpmyadmin/themes/pmahomme/img/logo_left.png",
+        ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
+                userInfo.getUser_image(),
                 ivUserProfilePhoto);
-        setupTabs();
-        setupUserProfileGrid();
-        onStateChange();
+        tv_nickname.setText(userInfo.getNickname());
+        if (TextUtils.isEmpty(userInfo.getQm())){
+            tv_gxqm.setText("这个家伙很懒，什么也没留下");
+        }else {
+            tv_gxqm.setText(userInfo.getQm());
+        }
+        setViewPager();
     }
 
     @Override
@@ -83,34 +103,57 @@ public class UserProfileActivity extends BaseActivity {
         return R.layout.activity_user_profile;
     }
 
+    private void setViewPager() {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        if (viewPager != null) {
+            setupViewPager(viewPager);
+            tlUserProfileTabs.setupWithViewPager(viewPager);
+        }
+    }
+
     private void setupTabs() {
         tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_grid_on_white));
         tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_list_white));
         tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_place_white));
         tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_label_white));
     }
-
-    private void setupUserProfileGrid() {
-        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        rvUserProfile.setLayoutManager(layoutManager);
-        rvUserProfile.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                userPhotosAdapter.setLockedAnimations(true);
-            }
-        });
+    private void setupViewPager(ViewPager viewPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955"), "技术面试");
+        adapter.addFragment(new HrFragment(), "人事面试");
+        adapter.addFragment(new OtherFragment(), "其他/经验");
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(0);
     }
 
-    public void onStateChange() {
+    static class Adapter extends FragmentPagerAdapter {
 
-        rvUserProfile.setVisibility(View.VISIBLE);
-        tlUserProfileTabs.setVisibility(View.VISIBLE);
-        vUserProfileRoot.setVisibility(View.VISIBLE);
-        userPhotosAdapter = new UserProfileAdapter(this);
-        rvUserProfile.setAdapter(userPhotosAdapter);
-        tlUserProfileTabs.setVisibility(View.INVISIBLE);
-        rvUserProfile.setVisibility(View.INVISIBLE);
-        vUserProfileRoot.setVisibility(View.INVISIBLE);
+        private final List<Fragment> mFragments = new ArrayList<>();
+        private final List<String> mFragmentTitles = new ArrayList<>();
 
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitles.get(position);
+        }
     }
+
 }

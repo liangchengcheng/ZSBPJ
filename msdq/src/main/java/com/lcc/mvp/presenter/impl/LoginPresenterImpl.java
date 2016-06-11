@@ -44,13 +44,13 @@ public class LoginPresenterImpl implements LoginPresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
 
-                    String result = jsonObject.getString("result");
-                    JSONObject json_result = new JSONObject(result);
-                    SharePreferenceUtil.setUserTk(json_result.getString("tk"));
-                    String user_info=json_result.getString("userinfo");
-
-                    UserInfo userInfo = GsonUtils.changeGsonToBean(user_info, UserInfo.class);
                     if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        JSONObject json_result = new JSONObject(result);
+                        SharePreferenceUtil.setUserTk(json_result.getString("tk"));
+                        String user_info=json_result.getString("userinfo");
+
+                        UserInfo userInfo = GsonUtils.changeGsonToBean(user_info, UserInfo.class);
                         DataManager.saveUserInfo(userInfo);
                         view.loginSuccess();
                     } else {

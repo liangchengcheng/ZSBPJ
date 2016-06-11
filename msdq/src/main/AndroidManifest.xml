@@ -86,7 +86,7 @@
         <activity android:name=".compony.answer.CompanyAnswerIndexActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".description.UserProfileActivity"
+        <activity android:name=".description.user.UserProfileActivity"
             android:theme="@style/AppTheme" />
 
         <activity android:name=".compony.answer.CompanyAnswerWebView"
