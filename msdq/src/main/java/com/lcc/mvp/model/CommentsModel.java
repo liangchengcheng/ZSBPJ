@@ -16,6 +16,6 @@ public class CommentsModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.NID, nid);
-        return ApiClient.create(AppConstants.RequestPath.ARTICLE_DATA, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.COMMENTS_URL, paramsMap).tag("").get(callback);
     }
 }

@@ -31,6 +31,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.index.IndexMenuView.IndexMenuWebView;
 import com.lcc.mvp.presenter.CommentsPresenter;
 import com.lcc.mvp.presenter.IndexMenuPresenter;
+import com.lcc.mvp.presenter.impl.CommentsPresenterImpl;
 import com.lcc.mvp.view.CommentsView;
 import com.lcc.utils.ScreenUtils;
 import com.lcc.view.FullyLinearLayoutManager;
@@ -93,10 +94,14 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        content_id=getIntent().getStringExtra(ID);
+        mPresenter=new CommentsPresenterImpl(this);
+        //content_id=getIntent().getStringExtra(ID);
+        content_id="46f337bddcb925c166bfac9acf96dea6";
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
         initRecycleView();
         setupSendCommentButton();
+        mPresenter.getData(1,content_id);
 
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
         if (savedInstanceState == null) {

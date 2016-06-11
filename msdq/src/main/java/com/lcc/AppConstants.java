@@ -83,8 +83,10 @@ public class AppConstants {
          */
         public final static String JS_TEST = "/service/pageCompanyTestforAndroid";
 
-
-
+        /**
+         * 获取所有评论的url
+         */
+        public final static String COMMENTS_URL = "/service/getCommentsbyId";
         public final static String GET_MENU_CONTENT = "/service/getContentByID";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";
