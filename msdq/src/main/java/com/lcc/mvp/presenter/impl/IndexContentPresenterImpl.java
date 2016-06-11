@@ -29,6 +29,7 @@ public class IndexContentPresenterImpl implements IndexContentPresenter {
 
     @Override
     public void getActivityContent(String id) {
+        view.loading();
         model.getActivityContent(id,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

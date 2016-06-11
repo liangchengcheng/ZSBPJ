@@ -23,6 +23,7 @@
            >
 
             <ImageView
+                android:background="@drawable/loading"
                 android:id="@+id/ivZhihuStory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -41,52 +42,28 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:fitsSystemWindows="true"-->
-        <!--android:layout_height="256dp"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-        <!--&gt;-->
-        <!--<android.support.design.widget.CollapsingToolbarLayout-->
-            <!--android:id="@+id/ctl"-->
-            <!--android:layout_width="match_parent"-->
-            <!--app:expandedTitleTextAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
-            <!--android:fitsSystemWindows="true"-->
-            <!--app:contentScrim="?attr/colorPrimary">-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/ivZhihuStory"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:scaleType="centerCrop"-->
-                <!--android:fitsSystemWindows="true"-->
-                <!--app:layout_collapseMode="parallax" />-->
-
-            <!--<android.support.v7.widget.Toolbar-->
-                <!--android:background="?attr/colorPrimary"-->
-                <!--android:id="@+id/toolbar"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="?attr/actionBarSize"-->
-                <!--app:layout_collapseMode="pin"-->
-                <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >-->
-            <!--</android.support.v7.widget.Toolbar>-->
-        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-
-
-    <!--</android.support.design.widget.AppBarLayout>-->
-
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <WebView
-            android:id="@+id/webView"
+        <FrameLayout
+            android:background="#E5E9F1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.lcc.view.loadview.LoadingLayout
+                android:id="@+id/loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyView="@layout/empty_view"></com.lcc.view.loadview.LoadingLayout>
+        </FrameLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton

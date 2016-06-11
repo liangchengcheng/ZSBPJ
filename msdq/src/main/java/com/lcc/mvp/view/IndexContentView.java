@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface IndexContentView {
 
+    void loading();
     /**
      * 登录失败：错误信息
      */

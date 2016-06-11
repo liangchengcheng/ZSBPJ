@@ -31,7 +31,7 @@ import com.lcc.mvp.view.IndexContentView;
 import java.net.URLEncoder;
 
 import zsbpj.lccpj.frame.FrameManager;
-
+import com.lcc.view.loadview.LoadingLayout;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
@@ -55,6 +55,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     private NestedScrollView nest;
 
     private FloatingActionButton fabButton;
+    private LoadingLayout loading_layout;
 
     private String id;
     private String image_url;
@@ -77,7 +78,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
 
     @Override
     protected void initView() {
-
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("第五种基本能力是真你的被发现了？");
@@ -138,7 +139,8 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
             case R.id.action_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " "
+                        + "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
                 //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
@@ -178,8 +180,13 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     }
 
     @Override
+    public void loading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
     public void getLoginFail(String msg) {
-        FrameManager.getInstance().toastPrompt("加载数据失败");
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
@@ -196,5 +203,6 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         }catch (Exception e){
             e.printStackTrace();
         }
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 }
