@@ -124,6 +124,8 @@ public class AppConstants {
 
         public final static String ID_KEY = "mid";
 
+        public final static String NID = "nid";
+
         public final static String FID = "fid";
 
         public final static String TYPE_KEY = "type";

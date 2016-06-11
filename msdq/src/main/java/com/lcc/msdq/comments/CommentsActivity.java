@@ -5,7 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,25 +21,40 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.lcc.adapter.CommentAdapter;
 import com.lcc.adapter.CommentsAdapter;
+import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.Article;
+import com.lcc.entity.Comments;
 import com.lcc.msdq.R;
+import com.lcc.msdq.index.IndexMenuView.IndexMenuWebView;
+import com.lcc.mvp.presenter.CommentsPresenter;
+import com.lcc.mvp.presenter.IndexMenuPresenter;
+import com.lcc.mvp.view.CommentsView;
 import com.lcc.utils.ScreenUtils;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.SendCommentButton;
+import com.lcc.view.loadview.LoadingLayout;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.TimeUtils;
+import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
-public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener {
+public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener ,
+        CommentsView,SwipeRefreshLayout.OnRefreshListener{
 
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
     public static final String ID= "id";
 
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
-    @Bind(R.id.rvComments)
-    RecyclerView rvComments;
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView;
     @Bind(R.id.llAddComment)
     LinearLayout llAddComment;
     @Bind(R.id.etComment)
@@ -46,9 +64,24 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    private CommentsAdapter commentsAdapter;
+    private CommentAdapter commentsAdapter;
     private int drawingStartLocation;
     private String content_id;
+
+    public static final String TYPE = "type";
+    private LoadingLayout loading_layout;
+    private SwipeRefreshLayout mSwipeRefreshWidget;
+    private RecyclerView mRecyclerView;
+
+    protected static final int DEF_DELAY = 1000;
+    protected final static int STATE_LOAD = 0;
+    protected final static int STATE_NORMAL = 1;
+    protected int currentState = STATE_NORMAL;
+    protected long currentTime = 0;
+    protected int currentPage = 1;
+
+    private CommentsPresenter mPresenter;
+
 
     public static void startUserProfileFromLocation(String id, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, CommentsActivity.class);
@@ -61,7 +94,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         content_id=getIntent().getStringExtra(ID);
-        setupComments();
+        initRefreshView();
+        initRecycleView();
         setupSendCommentButton();
 
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
@@ -92,27 +126,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         return R.layout.activity_comments;
     }
 
-    private void setupComments() {
-        rvComments = (RecyclerView) findViewById(R.id.rvComments);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-
-        rvComments.setLayoutManager(linearLayoutManager);
-        rvComments.setHasFixedSize(true);
-
-        commentsAdapter = new CommentsAdapter(this);
-        rvComments.setAdapter(commentsAdapter);
-        rvComments.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        rvComments.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    commentsAdapter.setAnimationsLocked(true);
-                }
-            }
-        });
-    }
-
     private void setupSendCommentButton() {
         btnSendComment= (SendCommentButton) findViewById(R.id.btnSendComment);
         btnSendComment.setOnSendClickListener(this);
@@ -132,17 +145,9 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         ViewCompat.setElevation(toolbar, ScreenUtils.dpToPx(8));
-                        animateContent();
+
                     }
                 })
-                .start();
-    }
-
-    private void animateContent() {
-        commentsAdapter.updateItems();
-        llAddComment.animate().translationY(0)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(200)
                 .start();
     }
 
@@ -165,11 +170,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     @Override
     public void onSendClickListener(View v) {
         if (validateComment()) {
-            commentsAdapter.addItem();
-            commentsAdapter.setAnimationsLocked(false);
-            commentsAdapter.setDelayEnterAnimation(false);
-            rvComments.smoothScrollBy(0, rvComments.getChildAt(0).getHeight() * commentsAdapter.getItemCount());
-
+            recyclerView.smoothScrollBy(0, recyclerView.getChildAt(0).getHeight() *
+                    commentsAdapter.getItemCount());
             etComment.setText(null);
             btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
         }
@@ -182,5 +184,110 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         }
 
         return true;
+    }
+
+    private void initRefreshView() {
+        mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
+        mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshWidget.setOnRefreshListener(this);
+    }
+
+    private void initRecycleView() {
+        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(CommentsActivity.this,
+                LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        commentsAdapter = new CommentAdapter();
+        commentsAdapter.setOnItemClickListener(new CommentAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Comments data) {
+                //IndexMenuWebView.startIndexMenuWebView(CommentsActivity.this,data);
+            }
+        });
+
+        mRecyclerView.setAdapter(commentsAdapter);
+        mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
+            @Override
+            public void onLoadMore() {
+                if (currentState == STATE_NORMAL) {
+                    currentState = STATE_LOAD;
+                    currentTime = TimeUtils.getCurrentTime();
+                    commentsAdapter.setHasFooter(true);
+                    mRecyclerView.scrollToPosition(commentsAdapter.getItemCount() - 1);
+                    currentPage++;
+                    mPresenter.loadMore(currentPage,content_id);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getLoading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
+    public void getDataEmpty() {
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
+        if (mSwipeRefreshWidget.isRefreshing()) {
+            mSwipeRefreshWidget.setRefreshing(false);
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        } else {
+            FrameManager.getInstance().toastPrompt(msg);
+        }
+    }
+
+    @Override
+    public void refreshDataSuccess(List<Comments> entities) {
+        if (entities != null && entities.size() > 0) {
+            commentsAdapter.bind(entities);
+        }
+        mSwipeRefreshWidget.setRefreshing(false);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+    }
+
+    @Override
+    public void loadMoreWeekDataSuccess(final List<Comments> entities) {
+        int delay = 0;
+        if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
+            delay = DEF_DELAY;
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentState = STATE_NORMAL;
+                if (entities.isEmpty()) {
+                    commentsAdapter.setHasMoreDataAndFooter(false, false);
+                    FrameManager.getInstance().toastPrompt("没有更多数据...");
+                } else {
+                    commentsAdapter.appendToList(entities);
+                    commentsAdapter.setHasMoreDataAndFooter(true, false);
+                }
+                commentsAdapter.notifyDataSetChanged();
+            }
+        }, delay);
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshWidget.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentPage = 1;
+                mSwipeRefreshWidget.setRefreshing(true);
+                mPresenter.refresh(currentPage,content_id);
+            }
+        }, 500);
     }
 }
