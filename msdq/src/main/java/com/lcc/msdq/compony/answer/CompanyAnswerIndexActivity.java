@@ -83,9 +83,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mAdapter.setOnItemClickListener(new CompanyAnswerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(CompanyAnswer data) {
-                Intent intent = new Intent(CompanyAnswerIndexActivity.this, AnswerContentActivity.class);
-                intent.putExtra("data", data);
-                startActivity(intent);
+                CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this,data);
             }
         });
         mRecyclerView.setAdapter(mAdapter);

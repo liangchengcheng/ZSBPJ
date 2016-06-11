@@ -1,15 +1,10 @@
-package com.lcc.msdq.index.IndexMenuView;
+package com.lcc.msdq.compony.answer;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,44 +17,39 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.Answer;
 import com.lcc.entity.Article;
+import com.lcc.entity.CompanyAnswer;
 import com.lcc.msdq.R;
-import com.lcc.mvp.presenter.IndexContentPresenter;
+import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.MenuContentPresenter;
-import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
-import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.loadview.LoadingLayout;
 
-import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.frame.ImageManager;
 
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  IndexMenuWebView
+ * Description:  【这个地方的答案需要单独的提炼到一个表里面去】
  */
-public class IndexMenuWebView extends BaseActivity implements MenuContentView,
+public class CompanyAnswerWebView extends BaseActivity implements
         View.OnClickListener{
 
     public static final String DATA = "data";
-
     private WebView webView;
 
-    private ImageView ivZhihuStory;
+    private ImageView user_head;
 
-    private MenuContentPresenter indexContentPresenter;
+    private FloatingActionButton fabButton;
 
-    private Article article;
-    private LoadingLayout loading_layout;
+    private CompanyAnswer answer;
 
-    private TextView tv_question,tv_source;
-
-    public static void startIndexMenuWebView(Activity startingActivity, Article type) {
-        Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
+    public static void startCompanyAnswerWebView(Activity startingActivity, CompanyAnswer type) {
+        Intent intent = new Intent(startingActivity, CompanyAnswerWebView.class);
         intent.putExtra(DATA, type);
         startingActivity.startActivity(intent);
     }
@@ -69,26 +59,31 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         super.onCreate(savedInstanceState);
         initData();
         initView();
-        getData();
+        setData();
     }
 
     private void initData() {
-        article = (Article) getIntent().getSerializableExtra(DATA);
-        indexContentPresenter = new MenuContentPresenterImpl(this);
+        answer = (CompanyAnswer) getIntent().getSerializableExtra("data");
     }
 
     @Override
     protected void initView() {
-        tv_question= (TextView) findViewById(R.id.tv_question);
-        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
-        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        ivZhihuStory= (ImageView) findViewById(R.id.user_head);
+        findViewById(R.id.ll_comments).setOnClickListener(this);
+        user_head= (ImageView) findViewById(R.id.user_head);
+        fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
+        fabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // nest.smoothScrollTo(0, 0);
+            }
+        });
         webView= (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true);
+        //settings.setUseWideViewPort(true);造成文字太小
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
@@ -104,12 +99,30 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
     @Override
     protected int getLayoutView() {
-        return R.layout.index_menu_webview;
+        return R.layout.activity_answer_content;
     }
 
-    private void getData() {
-        Loading();
-        indexContentPresenter.getArticleContent(article.getMid());
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+        menu.findItem(R.id.action_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.removeItem(R.id.action_use_browser);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.setType("text/plain");
+                //设置分享列表的标题，并且每次都显示分享列表
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -142,40 +155,13 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         super.onDestroy();
     }
 
-    @Override
-    public void Loading() {
-        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
-    }
-
-    @Override
-    public void getFail(String msg) {
-        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
-    }
-
-    @Override
-    public void getSuccess(String result) {
-        //String head_img = AppConstants.RequestPath.BASE_URL+image_url;
+    public void setData() {
+        if (answer==null){
+            return;
+        }
+        ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,answer.getUserinfo().getUser_image(),user_head);
         try{
-            if (TextUtils.isEmpty(result)){
-                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
-            }else {
-                String head_img = article.getImage_url();
-                if (TextUtils.isEmpty(head_img)){
-                    ivZhihuStory.setVisibility(View.GONE);
-                }else {
-                    ivZhihuStory.setVisibility(View.VISIBLE);
-                    Glide.with(IndexMenuWebView.this)
-                            .load(head_img)
-                            .placeholder(R.drawable.loading1)
-                            .centerCrop()
-                            .into(ivZhihuStory);
-                }
-
-                webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
-                tv_question.setText(article.getTitle());
-                tv_source.setText(article.getSource());
-                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-            }
+            webView.loadDataWithBaseURL("about:blank",answer.getAnswer_content(), "text/html", "utf-8", null);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -184,9 +170,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
-            case R.id.guillotine_hamburger:
-                finish();
+            case R.id.ll_comments:
+                startActivity(new Intent(CompanyAnswerWebView.this, CommentsActivity.class));
                 break;
         }
     }

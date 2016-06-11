@@ -89,6 +89,9 @@
         <activity android:name=".description.UserProfileActivity"
             android:theme="@style/AppTheme" />
 
+        <activity android:name=".compony.answer.CompanyAnswerWebView"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
