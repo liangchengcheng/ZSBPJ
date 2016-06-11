@@ -83,7 +83,9 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     private void setupComments() {
         rvComments = (RecyclerView) findViewById(R.id.rvComments);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+
         rvComments.setLayoutManager(linearLayoutManager);
         rvComments.setHasFixedSize(true);
 

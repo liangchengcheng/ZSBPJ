@@ -116,7 +116,8 @@ public class CompanyAnswerWebView extends BaseActivity implements
             case R.id.action_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " "
+                        + "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
                 //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
@@ -159,9 +160,11 @@ public class CompanyAnswerWebView extends BaseActivity implements
         if (answer==null){
             return;
         }
-        ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,answer.getUserinfo().getUser_image(),user_head);
+        ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,
+                answer.getUserinfo().getUser_image(),user_head);
         try{
-            webView.loadDataWithBaseURL("about:blank",answer.getAnswer_content(), "text/html", "utf-8", null);
+            webView.loadDataWithBaseURL("about:blank",answer.getAnswer_content(),
+                    "text/html", "utf-8", null);
         }catch (Exception e){
             e.printStackTrace();
         }
