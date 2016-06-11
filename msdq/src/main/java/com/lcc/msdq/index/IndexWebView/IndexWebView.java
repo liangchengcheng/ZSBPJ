@@ -191,15 +191,16 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
 
     @Override
     public void getSuccess(String result) {
-        String head_img = AppConstants.RequestPath.BASE_URL+image_url;
-        Glide.with(IndexWebView.this)
-                .load(head_img)
-                .placeholder(R.drawable.loading1)
-                .centerCrop()
-                .into(ivZhihuStory);
+
         try{
             webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
            // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
+            String head_img = AppConstants.RequestPath.BASE_URL+image_url;
+            Glide.with(IndexWebView.this)
+                    .load(head_img)
+                    .placeholder(R.drawable.loading1)
+                    .centerCrop()
+                    .into(ivZhihuStory);
         }catch (Exception e){
             e.printStackTrace();
         }

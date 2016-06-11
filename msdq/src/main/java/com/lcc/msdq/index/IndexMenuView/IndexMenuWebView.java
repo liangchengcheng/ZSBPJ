@@ -26,6 +26,7 @@ import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.msdq.R;
+import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.MenuContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
@@ -79,6 +80,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
     @Override
     protected void initView() {
+        findViewById(R.id.ll_comments).setOnClickListener(this);
         tv_question= (TextView) findViewById(R.id.tv_question);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
@@ -183,6 +185,10 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+
+            case R.id.ll_comments:
+                CommentsActivity.startUserProfileFromLocation(article.getMid(),IndexMenuWebView.this);
+                break;
 
             case R.id.guillotine_hamburger:
                 finish();

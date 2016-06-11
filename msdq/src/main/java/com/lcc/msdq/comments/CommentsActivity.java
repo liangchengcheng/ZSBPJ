@@ -2,6 +2,8 @@ package com.lcc.msdq.comments;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +31,7 @@ import butterknife.ButterKnife;
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener {
 
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
+    public static final String ID= "id";
 
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
@@ -45,11 +48,19 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     private CommentsAdapter commentsAdapter;
     private int drawingStartLocation;
+    private String content_id;
+
+    public static void startUserProfileFromLocation(String id, Activity startingActivity) {
+        Intent intent = new Intent(startingActivity, CommentsActivity.class);
+        intent.putExtra(ID, id);
+        startingActivity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        content_id=getIntent().getStringExtra(ID);
         setupComments();
         setupSendCommentButton();
 

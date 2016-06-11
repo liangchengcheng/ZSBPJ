@@ -20,6 +20,9 @@ import butterknife.Bind;
 import zsbpj.lccpj.frame.ImageManager;
 
 
+/**
+ * 名字头像 时间 赞
+ */
 public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
