@@ -132,7 +132,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     }
 
     private void setupSendCommentButton() {
-        btnSendComment= (SendCommentButton) findViewById(R.id.btnSendComment);
         btnSendComment.setOnSendClickListener(this);
     }
 
@@ -150,11 +149,19 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         ViewCompat.setElevation(toolbar, ScreenUtils.dpToPx(8));
-
+                        animateContent();
                     }
                 })
                 .start();
     }
+
+    private void animateContent() {
+        llAddComment.animate().translationY(0)
+                .setInterpolator(new DecelerateInterpolator())
+                .setDuration(200)
+                .start();
+    }
+
 
     @Override
     public void onBackPressed() {

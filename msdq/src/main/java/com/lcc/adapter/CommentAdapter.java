@@ -3,12 +3,16 @@ package com.lcc.adapter;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -85,23 +89,29 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             final Comments weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-//            holder.tv_title.setText(weekData.getTitle());
-//            holder.tv_summary.setText(weekData.getSummary());
-//            if (TextUtils.isEmpty(weekData.getImage_url())) {
-//                holder.iv_head.setVisibility(View.GONE);
-//            } else {
-//                holder.iv_head.setVisibility(View.VISIBLE);
-//                ImageManager.getInstance().loadUrlImage(holder.iv_head.getContext(),
-//                        weekData.getImage_url(), holder.iv_head);
-//            }
+            holder.tv_nickname.setText(weekData.getNickname());
+
+            String aite=weekData.getReplay_author();
+            if (!TextUtils.isEmpty(aite)){
+                holder.tvComment.setText("@"+aite+weekData.getContent());
+                SpannableStringBuilder builder = new SpannableStringBuilder( holder.tvComment.getText().toString());
+                ForegroundColorSpan blueSpan = new ForegroundColorSpan(Color.BLUE);
+                builder.setSpan(blueSpan, 0, aite.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                holder.tvComment.setText(builder);
+            }
+            if (!TextUtils.isEmpty(weekData.getUser_image())) {
+                holder.ivUserAvatar.setVisibility(View.VISIBLE);
+                ImageManager.getInstance().loadCircleImage(holder.ivUserAvatar.getContext(),
+                        weekData.getUser_image(), holder.ivUserAvatar);
+            }
 
             if (mListener != null) {
-//                holder.ll_all.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        mListener.onItemClick(weekData);
-//                    }
-//                });
+                holder.ll_all.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onItemClick(weekData);
+                    }
+                });
             }
         }
     }
@@ -125,6 +135,12 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ImageView ivUserAvatar;
         @Bind(R.id.tvComment)
         TextView tvComment;
+        @Bind(R.id.ll_all)
+        LinearLayout ll_all;
+        @Bind(R.id.tv_nickname)
+        TextView tv_nickname;
+        @Bind(R.id.tv_time)
+        TextView tv_time;
 
         public NormalViewHolder(View view) {
             super(view);
