@@ -25,4 +25,10 @@ public interface CommentsView {
 
     void loadMoreWeekDataSuccess(List<Comments> entities);
 
+    void rePlaying();
+
+    void replaySuccess();
+
+    void replayFail();
+
 }

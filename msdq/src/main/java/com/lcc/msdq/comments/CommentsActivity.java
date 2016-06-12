@@ -27,6 +27,7 @@ import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.entity.Comments;
+import com.lcc.entity.Replay;
 import com.lcc.msdq.R;
 import com.lcc.msdq.index.IndexMenuView.IndexMenuWebView;
 import com.lcc.mvp.presenter.CommentsPresenter;
@@ -45,12 +46,14 @@ import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
-public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener ,
-        CommentsView,SwipeRefreshLayout.OnRefreshListener{
+public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
+        CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener, CommentsDialog.onChoiceListener {
 
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
-    public static final String ID= "id";
+    public static final String ID = "id";
 
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
@@ -73,6 +76,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
+    private CommentsDialog dialog;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -80,6 +84,9 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+    private SimpleArcDialog mDialog;
+
+    private Replay replay = new Replay();
 
     private CommentsPresenter mPresenter;
 
@@ -94,14 +101,19 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        mPresenter=new CommentsPresenterImpl(this);
+        mPresenter = new CommentsPresenterImpl(this);
+
         //content_id=getIntent().getStringExtra(ID);
-        content_id="46f337bddcb925c166bfac9acf96dea6";
+        content_id = "46f337bddcb925c166bfac9acf96dea6";
+        replay.setNid(content_id);
+        replay.setType("最小的类别");
+        replay.setAuthor("18813149871");
+
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
         initRecycleView();
         setupSendCommentButton();
-        mPresenter.getData(1,content_id);
+        mPresenter.getData(1, content_id);
 
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
         if (savedInstanceState == null) {
@@ -162,7 +174,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
                 .start();
     }
 
-
     @Override
     public void onBackPressed() {
         ViewCompat.setElevation(toolbar, 0);
@@ -182,10 +193,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     @Override
     public void onSendClickListener(View v) {
         if (validateComment()) {
-            recyclerView.smoothScrollBy(0, recyclerView.getChildAt(0).getHeight() *
-                    commentsAdapter.getItemCount());
-            etComment.setText(null);
-            btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
+            replay.setContent(etComment.getText().toString().trim());
+            mPresenter.sendComments(replay);
         }
     }
 
@@ -205,19 +214,13 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     }
 
     private void initRecycleView() {
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(CommentsActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         commentsAdapter = new CommentAdapter();
-        commentsAdapter.setOnItemClickListener(new CommentAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Comments data) {
-                //IndexMenuWebView.startIndexMenuWebView(CommentsActivity.this,data);
-            }
-        });
-
+        commentsAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(commentsAdapter);
         mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
@@ -229,7 +232,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
                     commentsAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(commentsAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,content_id);
+                    mPresenter.loadMore(currentPage, content_id);
                 }
             }
         });
@@ -292,14 +295,61 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     }
 
     @Override
+    public void rePlaying() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在发送评论...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
+    }
+
+    @Override
+    public void replaySuccess() {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("提交成功");
+        onRefresh();
+        etComment.setText(null);
+        btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
+    }
+
+    @Override
+    public void replayFail() {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("提交失败");
+    }
+
+    @Override
     public void onRefresh() {
         mSwipeRefreshWidget.postDelayed(new Runnable() {
             @Override
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,content_id);
+                mPresenter.refresh(currentPage, content_id);
             }
         }, 500);
+    }
+
+    @Override
+    public void onItemClick(Comments data) {
+        dialog = new CommentsDialog(CommentsActivity.this, data);
+        dialog.setOnChoiceListener(this);
+        dialog.show();
+    }
+
+    @Override
+    public void onChoice(Comments data) {
+        etComment.setHint("@" + data.getAuthor() + " ");
+        replay.setReplay_author(data.getAuthor());
+        replay.setPid(data.getMid());
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    private void closeDialog(){
+        if (mDialog!=null&&mDialog.isShowing()){
+            mDialog.dismiss();
+        }
     }
 }

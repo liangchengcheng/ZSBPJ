@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.lcc.entity.Article;
 import com.lcc.entity.Comments;
+import com.lcc.entity.Replay;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.CommentsModel;
 import com.lcc.mvp.model.IndexMenuModel;
@@ -115,6 +116,32 @@ public class CommentsPresenterImpl implements CommentsPresenter {
     @Override
     public void refresh(int page, String nid) {
         loadData(page, nid, false);
+    }
+
+    @Override
+    public void sendComments(Replay replay) {
+        model.sendComments(replay, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.replayFail();
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if (status == 1) {
+                        view.replaySuccess();
+                    } else {
+                        view.replayFail();
+                    }
+                } catch (Exception e) {
+                    view.replayFail();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
 
