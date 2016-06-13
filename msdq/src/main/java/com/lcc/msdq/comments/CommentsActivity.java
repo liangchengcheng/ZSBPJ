@@ -34,6 +34,7 @@ import com.lcc.mvp.presenter.CommentsPresenter;
 import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.impl.CommentsPresenterImpl;
 import com.lcc.mvp.view.CommentsView;
+import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.ScreenUtils;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.SendCommentButton;
@@ -305,6 +306,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void replaySuccess() {
+        KeyboardUtils.hide(CommentsActivity.this);
         closeDialog();
         FrameManager.getInstance().toastPrompt("提交成功");
         onRefresh();
@@ -314,6 +316,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void replayFail() {
+        KeyboardUtils.hide(CommentsActivity.this);
         closeDialog();
         FrameManager.getInstance().toastPrompt("提交失败");
     }

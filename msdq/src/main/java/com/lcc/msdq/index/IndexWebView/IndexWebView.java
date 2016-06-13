@@ -199,6 +199,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
             Glide.with(IndexWebView.this)
                     .load(head_img)
                     .placeholder(R.drawable.loading1)
+                    .error(R.drawable.bg_ps)
                     .centerCrop()
                     .into(ivZhihuStory);
         }catch (Exception e){
