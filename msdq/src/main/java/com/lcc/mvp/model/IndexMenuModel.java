@@ -4,6 +4,7 @@ package com.lcc.mvp.model;
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
+import com.lcc.entity.Article;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 
@@ -18,4 +19,6 @@ public class IndexMenuModel {
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         return ApiClient.create(AppConstants.RequestPath.ARTICLE_DATA, paramsMap).tag("").get(callback);
     }
+
+
 }

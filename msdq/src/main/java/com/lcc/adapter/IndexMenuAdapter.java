@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -87,6 +88,13 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
+            //精品文章的收藏事件
+            holder.ll_sc.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    favListener.onOnFavClick(weekData);
+                }
+            });
             if (TextUtils.isEmpty(weekData.getImage_url())) {
                 holder.iv_head.setVisibility(View.GONE);
             } else {
@@ -149,6 +157,9 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.state)
         TextView state;
+
+        @Bind(R.id.ll_sc)
+        LinearLayout ll_sc;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
@@ -219,4 +230,16 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void setOnItemClickListener(OnItemClickListener li) {
         this.mListener = li;
     }
+
+    public interface OnFavClickListener {
+        void onOnFavClick(Article data);
+    }
+
+    private OnFavClickListener favListener;
+
+    public void setOnFavClickListener(OnFavClickListener li) {
+        this.favListener = li;
+    }
+
+
 }

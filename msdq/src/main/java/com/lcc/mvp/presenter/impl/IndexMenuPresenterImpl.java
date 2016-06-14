@@ -2,6 +2,7 @@ package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.lcc.entity.ActivityEntity;
 import com.lcc.entity.Article;
@@ -118,5 +119,6 @@ public class IndexMenuPresenterImpl implements IndexMenuPresenter {
     public void refresh(int page, String type) {
         loadData(page, type, false);
     }
+
 }
 

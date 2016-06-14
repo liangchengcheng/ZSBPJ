@@ -1,5 +1,7 @@
 package com.lcc.mvp.presenter;
 
+import com.lcc.entity.Article;
+
 public interface IndexMenuPresenter {
 
     void getData(int page,String type);

@@ -37,7 +37,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  IndexMenuActivity
  */
 public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener ,IndexMenuAdapter.OnFavClickListener
+,IndexMenuAdapter.OnItemClickListener{
 
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
@@ -86,12 +87,9 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new IndexMenuAdapter();
-        mAdapter.setOnItemClickListener(new IndexMenuAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Article data) {
-               IndexMenuWebView.startIndexMenuWebView(IndexMenuActivity.this,data);
-            }
-        });
+
+        mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnFavClickListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
@@ -185,5 +183,15 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
                 mPresenter.refresh(currentPage,type);
             }
         }, 500);
+    }
+
+    @Override
+    public void onOnFavClick(Article data) {
+        FrameManager.getInstance().toastPrompt(data.getMid());
+    }
+
+    @Override
+    public void onItemClick(Article data) {
+        IndexMenuWebView.startIndexMenuWebView(IndexMenuActivity.this,data);
     }
 }

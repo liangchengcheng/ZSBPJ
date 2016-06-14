@@ -155,6 +155,8 @@ public class AppConstants {
 
         public final static String TOKEN = "token";
 
+        public final static String AUTHOR = "author";
+
     }
 
     public final class ParamDefaultValue {

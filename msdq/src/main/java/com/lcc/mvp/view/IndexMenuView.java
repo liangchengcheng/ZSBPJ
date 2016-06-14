@@ -14,19 +14,11 @@ import java.util.List;
  */
 public interface IndexMenuView {
 
-    /**
-     * 第一次加载
-     */
+
     void getLoading();
 
-    /**
-     * 获取空数据
-     */
     void getDataEmpty();
 
-    /**
-     * 获取数据失败
-     */
     void getDataFail(String msg);
 
     void refreshOrLoadFail(String msg);

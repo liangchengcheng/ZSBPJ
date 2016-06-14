@@ -12,6 +12,7 @@ public class ParamsMap extends HashMap<String, String> {
         put(AppConstants.ParamKey.CLIENT_ID_KEY, AppConstants.ParamDefaultValue.CLIENT_ID);
         //token
         put(AppConstants.ParamKey.TOKEN, SharePreferenceUtil.getUserTk());
+
     }
 
     public void put(String key, int value) {

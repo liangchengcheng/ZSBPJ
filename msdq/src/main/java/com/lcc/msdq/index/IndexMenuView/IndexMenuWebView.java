@@ -44,20 +44,19 @@ import zsbpj.lccpj.frame.FrameManager;
  * Description:  IndexMenuWebView
  */
 public class IndexMenuWebView extends BaseActivity implements MenuContentView,
-        View.OnClickListener{
+        View.OnClickListener {
 
     public static final String DATA = "data";
 
     private WebView webView;
-
     private ImageView ivZhihuStory;
+    private LoadingLayout loading_layout;
+    private TextView tv_question,
+            tv_source;
+
 
     private MenuContentPresenter indexContentPresenter;
-
     private Article article;
-    private LoadingLayout loading_layout;
-
-    private TextView tv_question,tv_source;
 
     public static void startIndexMenuWebView(Activity startingActivity, Article type) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
@@ -81,11 +80,11 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     protected void initView() {
         findViewById(R.id.ll_comments).setOnClickListener(this);
-        tv_question= (TextView) findViewById(R.id.tv_question);
+        tv_question = (TextView) findViewById(R.id.tv_question);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        ivZhihuStory= (ImageView) findViewById(R.id.user_head);
-        webView= (WebView) findViewById(R.id.webView);
+        ivZhihuStory = (ImageView) findViewById(R.id.user_head);
+        webView = (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -157,14 +156,14 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     public void getSuccess(String result) {
         //String head_img = AppConstants.RequestPath.BASE_URL+image_url;
-        try{
-            if (TextUtils.isEmpty(result)){
+        try {
+            if (TextUtils.isEmpty(result)) {
                 loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
-            }else {
+            } else {
                 String head_img = article.getImage_url();
-                if (TextUtils.isEmpty(head_img)){
+                if (TextUtils.isEmpty(head_img)) {
                     ivZhihuStory.setVisibility(View.GONE);
-                }else {
+                } else {
                     ivZhihuStory.setVisibility(View.VISIBLE);
                     Glide.with(IndexMenuWebView.this)
                             .load(head_img)
@@ -173,21 +172,21 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                             .into(ivZhihuStory);
                 }
 
-                webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
+                webView.loadDataWithBaseURL("about:blank", result, "text/html", "utf-8", null);
                 tv_question.setText(article.getTitle());
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.ll_comments:
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),IndexMenuWebView.this);
+                CommentsActivity.startUserProfileFromLocation(article.getMid(), IndexMenuWebView.this);
                 break;
 
             case R.id.guillotine_hamburger:
@@ -195,4 +194,15 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                 break;
         }
     }
+
+    @Override
+    public void FavSuccess() {
+        FrameManager.getInstance().toastPrompt("收藏成功，然后进行操作");
+    }
+
+    @Override
+    public void FavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("收藏失败," + msg);
+    }
+
 }
