@@ -10,7 +10,6 @@ import java.io.Serializable;
  */
 public class Article implements Serializable {
 
-
     /**
      * id : 1
      * mid : 46f337bddcb925c166bfac9acf96dea6
@@ -23,7 +22,8 @@ public class Article implements Serializable {
      * type : 面试感想
      * source : 百度
      * image_url :
-     * summary : 编辑推荐：稀土掘金，这是一个针对技术开发者的一个应用，你可以在掘金上获取最新最优质的技术干货，不仅仅是Android知识、前端、后端以至于产品和设计都有涉猎，想成为全栈工程师的朋友不要错过！
+     * summary : 编辑推荐：稀土掘金，这是一个针对技术开发者的一个应用，你可以在掘金上获取最新最优质的技术干货，
+     * 不仅仅是Android知识、前端、后端以至于产品和设计都有涉猎，想成为全栈工程师的朋友不要错过！
      * state : 2
      * phone : 18813149871
      * nickname : xiaochengcheng
@@ -33,7 +33,8 @@ public class Article implements Serializable {
      * jf : 10
      * qm : 我走的很慢，但是我不会停的
      * zy : 程序员
-     * user_image : http://h.hiphotos.baidu.com/image/h%3D200/sign=71cd4229be014a909e3e41bd99763971/472309f7905298221dd4c458d0ca7bcb0b46d442.jpg
+     * user_image : http://h.hiphotos.baidu.com/image/h%3D200/sign=71cd4229be014a909e3e41bd99763971/
+     * 472309f7905298221dd4c458d0ca7bcb0b46d442.jpg
      */
 
     private String id;

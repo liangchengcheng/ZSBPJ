@@ -1,6 +1,8 @@
 package com.lcc.mvp.presenter.impl;
 
+import com.lcc.entity.ActivityEntity;
 import com.lcc.entity.Article;
+import com.lcc.entity.ArticleContent;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.IndexContentModel;
 import com.lcc.mvp.model.MenuContentModel;
@@ -12,7 +14,10 @@ import com.squareup.okhttp.Request;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 import zsbpj.lccpj.frame.ApiException;
+import zsbpj.lccpj.utils.GsonUtils;
 
 public class MenuContentPresenterImpl implements MenuContentPresenter {
 
@@ -40,9 +45,13 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
                     if (status == 1) {
-                        JSONObject json_result = new JSONObject(result);
-                        String content=json_result.getString("content");
-                        view.getSuccess(content);
+                        List<ArticleContent> articleContents = GsonUtils.fromJsonArray(result, ArticleContent.class);
+                        if (articleContents!=null&&articleContents.size()>0){
+                            view.getSuccess(articleContents.get(0));
+                        }else {
+                            view.getFail("文章不存在");
+                        }
+
                     } else {
                         view.getFail(message);
                     }
@@ -74,6 +83,33 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
                     }
                 } catch (Exception e) {
                     view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void UnFav(Article article) {
+        model.UnfavArticle(article, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        view.UnFavSuccess();
+                    } else {
+                        view.UnFavFail(message);
+                    }
+                } catch (Exception e) {
+                    view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }
