@@ -1,6 +1,5 @@
 package com.lcc.msdq.compony.content;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -76,7 +75,6 @@ public class CodeFragment extends BaseLazyLoadFragment implements
         mPresenter = new JSPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
-
     }
 
     private void initRefreshView(View view) {

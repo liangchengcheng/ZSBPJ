@@ -505,4 +505,8 @@
     <color name="parent_color">#E5E9F1</color>
     <color name="article_des">#6D6D6D</color>
     <color name="article_title">#2E2E2E</color>
+
+    <color name="common_android_tag_bg">#ff388E3C</color>
+    <color name="common_ios_tag_bg">#ff0377BC</color>
+    <color name="common_js_tag_bg">#ffEF6C02</color>
 </resources>

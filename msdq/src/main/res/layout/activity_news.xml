@@ -82,7 +82,7 @@
             android:layout_centerVertical="true"
             android:textSize="16sp"
             android:layout_toRightOf="@+id/iv_head_sx"
-            android:text="私信"
+            android:text="我的私信"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
