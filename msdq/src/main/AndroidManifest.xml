@@ -92,6 +92,9 @@
         <activity android:name=".compony.answer.CompanyAnswerWebView"
             android:theme="@style/AppTheme" />
 
+        <activity android:name=".news.NewsIndex"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

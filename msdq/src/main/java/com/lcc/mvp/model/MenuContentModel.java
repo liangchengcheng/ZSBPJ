@@ -10,7 +10,6 @@ import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 
 // TODO: 16/6/14 获取文章的时候动态的获取作者和token
 public class MenuContentModel {
-    
 
     /**
      * 获取文章的具体内容

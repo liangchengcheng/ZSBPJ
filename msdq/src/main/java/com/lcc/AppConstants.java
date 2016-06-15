@@ -71,8 +71,14 @@ public class AppConstants {
          */
         public final static String JS_TEST = "/service/pageCompanyTestforAndroid";
 
+        /**
+         * 收藏的具体功能的url
+         */
         public final static String UserFavAdd = "/service/UserFavAdd";
 
+        /**
+         * 取消收藏的具体功能的url
+         */
         public final static String DDELETEFAV = "/service/deleteFav";
 
         /**
@@ -80,6 +86,9 @@ public class AppConstants {
          */
         public final static String COMMENTS_URL = "/service/getCommentsbyId";
 
+        /**
+         * 获取文章具体内容的url
+         */
         public final static String GET_MENU_CONTENT = "/service/getContentByID";
 
         public final static String SEND_VERIFY_CODE = "/common/send_verify_code_to_phone.json";

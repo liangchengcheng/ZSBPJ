@@ -29,6 +29,7 @@ import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.R;
 import com.lcc.msdq.index.IndexMenuView.IndexMenuActivity;
 import com.lcc.msdq.index.IndexWebView.IndexWebView;
+import com.lcc.msdq.news.NewsIndex;
 import com.lcc.msdq.test.answer.AnswerContentActivity;
 import com.lcc.mvp.presenter.IndexPresenter;
 import com.lcc.mvp.presenter.LoginPresenter;
@@ -96,6 +97,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
         view.findViewById(R.id.msjz).setOnClickListener(this);
         view.findViewById(R.id.msjt).setOnClickListener(this);
         view.findViewById(R.id.qt).setOnClickListener(this);
+        view.findViewById(R.id.ll_news).setOnClickListener(this);
         initRefreshView(view);
 
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
@@ -288,6 +290,10 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
             case R.id.qt:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(),"其他");
+                break;
+
+            case R.id.ll_news:
+                NewsIndex.startNewsIndex(getActivity(),"其他");
                 break;
         }
     }

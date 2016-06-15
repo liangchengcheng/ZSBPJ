@@ -132,6 +132,7 @@
                         android:layout_weight="1">
 
                         <LinearLayout
+                            android:id="@+id/ll_news"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/blue"
@@ -149,7 +150,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="历史"
+                                android:text="消息"
                                 android:textColor="#fff" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
