@@ -16,6 +16,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lcc.base.BaseActivity;
@@ -24,6 +25,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
 import com.lcc.msdq.compony.content.OtherFragment;
+import com.lcc.msdq.flow.FlowIndex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
 
-public class UserProfileActivity extends BaseActivity {
+public class UserProfileActivity extends BaseActivity implements View.OnClickListener{
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
 
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
@@ -57,6 +59,12 @@ public class UserProfileActivity extends BaseActivity {
     @Bind(R.id.tv_gxqm)
     TextView tv_gxqm;
 
+    @Bind(R.id.tv_me)
+    LinearLayout tv_me;
+
+    @Bind(R.id.tv_you)
+    LinearLayout tv_you;
+
     private int avatarSize;
     private String profilePhoto;
     private UserProfileAdapter userPhotosAdapter;
@@ -76,6 +84,8 @@ public class UserProfileActivity extends BaseActivity {
         userInfo= (UserInfo) getIntent().getSerializableExtra("data");
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
 
+        tv_me.setOnClickListener(this);
+        tv_you.setOnClickListener(this);
         ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
                 userInfo.getUser_image(),
                 ivUserProfilePhoto);
@@ -117,6 +127,7 @@ public class UserProfileActivity extends BaseActivity {
         tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_place_white));
         tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_label_white));
     }
+
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955"), "技术面试");
@@ -124,6 +135,20 @@ public class UserProfileActivity extends BaseActivity {
         adapter.addFragment(new OtherFragment(), "其他/经验");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.tv_me:
+                FlowIndex.startUserProfileFromLocation("me","18813149871",UserProfileActivity.this);
+                break;
+
+            case R.id.tv_you:
+                FlowIndex.startUserProfileFromLocation("you","18813149871",UserProfileActivity.this);
+                break;
+        }
     }
 
     static class Adapter extends FragmentPagerAdapter {

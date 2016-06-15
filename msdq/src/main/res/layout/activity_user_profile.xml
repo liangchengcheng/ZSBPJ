@@ -126,6 +126,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/tv_you"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -148,6 +149,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/tv_me"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

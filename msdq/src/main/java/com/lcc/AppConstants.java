@@ -57,6 +57,16 @@ public class AppConstants {
         public final static String ARTICLE_DATA = "/service/pageArticleforAndroid";
 
         /**
+         * 我的粉丝
+         */
+        public final static String getWhoLikeMeList = "/service/getWhoLikeMeList";
+
+        /**
+         * 我关注的人
+         */
+        public final static String getILikeWhoList = "/service/getILikeWhoList";
+
+        /**
          * 获取试题的列表
          */
         public final static String COMPANY_DES = "/service/pagedes";
