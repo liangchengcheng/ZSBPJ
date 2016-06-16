@@ -184,6 +184,6 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
 
     @Override
     public void onItemClick(Article data) {
-        IndexMenuWebView.startIndexMenuWebView(IndexMenuActivity.this,data);
+        IndexMenuWebView.startIndexMenuWebView(IndexMenuActivity.this,data,type);
     }
 }

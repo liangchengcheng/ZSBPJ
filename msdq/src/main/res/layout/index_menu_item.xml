@@ -112,9 +112,9 @@
                             android:background="@android:color/transparent"
                             android:src="@drawable/ic_comment_outline_grey" />
                         <TextView
+                            android:id="@+id/l_num"
                             android:layout_gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:text="76"
                             android:textColor="@color/article_des"
                             android:textSize="14sp"
                             android:layout_height="wrap_content" />

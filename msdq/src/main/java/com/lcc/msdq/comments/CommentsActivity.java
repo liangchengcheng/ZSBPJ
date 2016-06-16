@@ -82,11 +82,13 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
+    private String type="面试感想";
 
 
-    public static void startUserProfileFromLocation(String id, Activity startingActivity) {
+    public static void startUserProfileFromLocation(String id,String type, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, CommentsActivity.class);
         intent.putExtra(ID, id);
+        intent.putExtra(TYPE, type);
         startingActivity.startActivity(intent);
     }
 
@@ -96,10 +98,11 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         ButterKnife.bind(this);
         mPresenter = new CommentsPresenterImpl(this);
 
-        //content_id=getIntent().getStringExtra(ID);
-        content_id = "46f337bddcb925c166bfac9acf96dea6";
+        content_id=getIntent().getStringExtra(ID);
+        type=getIntent().getStringExtra(TYPE);
+        //content_id = "46f337bddcb925c166bfac9acf96dea6";
         replay.setNid(content_id);
-        replay.setType("最小的类别");
+        replay.setType(type);
         replay.setAuthor("18813149871");
 
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);

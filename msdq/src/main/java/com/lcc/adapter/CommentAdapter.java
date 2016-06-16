@@ -98,7 +98,10 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ForegroundColorSpan blueSpan = new ForegroundColorSpan(Color.BLUE);
                 builder.setSpan(blueSpan, 0, aite.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 holder.tvComment.setText(builder);
+            }else {
+                holder.tvComment.setText(weekData.getContent());
             }
+
             if (!TextUtils.isEmpty(weekData.getUser_image())) {
                 holder.ivUserAvatar.setVisibility(View.VISIBLE);
                 ImageManager.getInstance().loadCircleImage(holder.ivUserAvatar.getContext(),

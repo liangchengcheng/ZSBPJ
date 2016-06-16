@@ -88,6 +88,7 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
+            holder.l_num.setText(weekData.getL_num());
             //精品文章的收藏事件
             holder.ll_sc.setOnClickListener(new OnClickListener() {
                 @Override
@@ -164,6 +165,9 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.state_red)
         TextView state_red;
+
+        @Bind(R.id.l_num)
+        TextView l_num;
 
         @Bind(R.id.ll_sc)
         LinearLayout ll_sc;

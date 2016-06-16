@@ -38,6 +38,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         View.OnClickListener {
 
     public static final String DATA = "data";
+    public static final String TYPE = "type";
 
     private WebView webView;
     private ImageView ivZhihuStory;
@@ -51,10 +52,12 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     private MenuContentPresenter indexContentPresenter;
     private Article article;
     private ArticleContent articleContent;
+    private String type="面试感想";
 
-    public static void startIndexMenuWebView(Activity startingActivity, Article type) {
+    public static void startIndexMenuWebView(Activity startingActivity, Article article,String type) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
-        intent.putExtra(DATA, type);
+        intent.putExtra(DATA, article);
+        intent.putExtra(TYPE, type);
         startingActivity.startActivity(intent);
     }
 
@@ -69,6 +72,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     private void initData() {
         articleContent=new ArticleContent();
         article = (Article) getIntent().getSerializableExtra(DATA);
+        type = getIntent().getStringExtra(TYPE);
         indexContentPresenter = new MenuContentPresenterImpl(this);
     }
 
@@ -194,12 +198,12 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_comments:
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                CommentsActivity.startUserProfileFromLocation(article.getMid(),type,
                         IndexMenuWebView.this);
                 break;
 
             case R.id.tv_to_comments:
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                CommentsActivity.startUserProfileFromLocation(article.getMid(),type,
                         IndexMenuWebView.this);
                 break;
 
