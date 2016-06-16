@@ -49,10 +49,10 @@
             android:name=".choice.ChoiceMainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".index.IndexWebView.IndexContentActivity"
+            android:name=".index.activity.IndexContentActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".index.IndexWebView.IndexWebView"
+            android:name=".index.activity.IndexWebView"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".comments.CommentsActivity"
@@ -73,11 +73,11 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".index.IndexMenuView.IndexMenuActivity"
+            android:name=".index.article.IndexMenuActivity"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".index.IndexMenuView.IndexMenuWebView"
+            android:name=".index.article.IndexMenuWebView"
             android:theme="@style/AppTheme" />
 
         <activity android:name=".setting.FeedBackActivity"

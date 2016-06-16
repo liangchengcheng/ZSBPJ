@@ -1,14 +1,12 @@
-package com.lcc.msdq.index.IndexWebView;
+package com.lcc.msdq.index.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +16,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
@@ -28,9 +25,6 @@ import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 
-import java.net.URLEncoder;
-
-import zsbpj.lccpj.frame.FrameManager;
 import com.lcc.view.loadview.LoadingLayout;
 /**
  * Author:       梁铖城

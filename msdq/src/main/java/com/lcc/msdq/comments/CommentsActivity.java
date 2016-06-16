@@ -22,21 +22,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.lcc.adapter.CommentAdapter;
-import com.lcc.adapter.CommentsAdapter;
-import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.base.BaseActivity;
-import com.lcc.entity.Article;
 import com.lcc.entity.Comments;
 import com.lcc.entity.Replay;
 import com.lcc.msdq.R;
-import com.lcc.msdq.index.IndexMenuView.IndexMenuWebView;
 import com.lcc.mvp.presenter.CommentsPresenter;
-import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.impl.CommentsPresenterImpl;
 import com.lcc.mvp.view.CommentsView;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.ScreenUtils;
-import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.SendCommentButton;
 import com.lcc.view.loadview.LoadingLayout;
 
@@ -70,25 +64,23 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     Toolbar toolbar;
 
     private CommentAdapter commentsAdapter;
-    private int drawingStartLocation;
-    private String content_id;
-
-    public static final String TYPE = "type";
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private CommentsDialog dialog;
+    private SimpleArcDialog mDialog;
 
+    private int drawingStartLocation;
+    private String content_id;
+    public static final String TYPE = "type";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    private SimpleArcDialog mDialog;
 
     private Replay replay = new Replay();
-
     private CommentsPresenter mPresenter;
 
 

@@ -105,15 +105,19 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             if (weekData.getState().equals("0")) {
                 holder.state.setVisibility(View.GONE);
+                holder.state_red.setVisibility(View.GONE);
             } else {
-                holder.state.setVisibility(View.VISIBLE);
                 if (weekData.getState().equals("1")) {
-                    holder.state.setText("热门");
-                    holder.state.setTextColor(Color.parseColor("#FFFF0000"));
+                    holder.state.setVisibility(View.GONE);
+                    holder.state_red.setVisibility(View.VISIBLE);
                 }
                 if (weekData.getState().equals("2")) {
-                    holder.state.setText("置顶");
-                    holder.state.setTextColor(Color.parseColor("#388E3C"));
+                    holder.state_red.setVisibility(View.GONE);
+                    holder.state.setVisibility(View.VISIBLE);
+                }
+                if (weekData.getState().equals("3")) {
+                    holder.state.setVisibility(View.VISIBLE);
+                    holder.state_red.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -157,6 +161,9 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.state)
         TextView state;
+
+        @Bind(R.id.state_red)
+        TextView state_red;
 
         @Bind(R.id.ll_sc)
         LinearLayout ll_sc;

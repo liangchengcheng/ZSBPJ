@@ -27,6 +27,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:id="@+id/iv_head"
                 android:layout_width="match_parent"
                 android:layout_height="150dp" />
@@ -77,6 +78,21 @@
                         android:paddingTop="2dp"
                         android:textColor="@color/white"
                         android:background="@drawable/bg_android_tag"
+                        android:text="置顶"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/state"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/state_red"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_android_red_tag"
                         android:text="热门"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
@@ -94,7 +110,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:background="@android:color/transparent"
-                            android:src="@drawable/ic_heart_outline_grey" />
+                            android:src="@drawable/ic_comment_outline_grey" />
                         <TextView
                             android:layout_gravity="center_vertical"
                             android:layout_width="wrap_content"

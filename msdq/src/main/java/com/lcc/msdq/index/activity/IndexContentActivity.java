@@ -1,17 +1,12 @@
-package com.lcc.msdq.index.IndexWebView;
+package com.lcc.msdq.index.activity;
 
-import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -19,9 +14,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;

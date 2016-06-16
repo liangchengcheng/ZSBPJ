@@ -1,29 +1,21 @@
-package com.lcc.msdq.index.IndexMenuView;
+package com.lcc.msdq.index.article;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
 
 import com.lcc.adapter.IndexMenuAdapter;
-import com.lcc.adapter.WeekDataAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
-import com.lcc.entity.WeekData;
 import com.lcc.msdq.R;
-import com.lcc.msdq.test.answer.AnswerContentActivity;
 import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.impl.IndexMenuPresenterImpl;
-import com.lcc.mvp.presenter.impl.IndexPresenterImpl;
 import com.lcc.mvp.view.IndexMenuView;
-import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.loadview.LoadingLayout;
 import java.util.List;
 import zsbpj.lccpj.frame.FrameManager;

@@ -9,29 +9,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.lcc.adapter.CodeAdapter;
-import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.adapter.JSAdapter;
-import com.lcc.entity.Article;
-import com.lcc.entity.CodeEntity;
 import com.lcc.entity.CompanyTest;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.answer.CompanyAnswerIndexActivity;
-import com.lcc.msdq.index.IndexMenuView.IndexMenuWebView;
-import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.JSPresenter;
-import com.lcc.mvp.presenter.impl.IndexMenuPresenterImpl;
 import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.JSView;
-import com.lcc.view.loadview.LoadingLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
-import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
 public class CodeFragment extends BaseLazyLoadFragment implements

@@ -74,10 +74,9 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .inflate(R.layout.fav_item, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.layout_foot_loading, parent, false));
+                    .inflate(R.layout.fav_layout_foot_loading, parent, false));
         }
     }
-
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
@@ -95,15 +94,17 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             String title = weekData.getFav_title();
             String time = weekData.getCreated_time();
-            SpannableString styledText = new SpannableString("收藏了" + title + time);
-            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(), R.style.style0),
-                    0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(), R.style.style1),
-                    3, 3+title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(), R.style.style2),
-                    3+title.length(), 3+title.length()+time.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            holder.tv_nickname.setText(styledText, TextView.BufferType.SPANNABLE);
 
+            SpannableString styledText = new SpannableString("收藏了" + title + time);
+            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
+                    R.style.style0), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
+                    R.style.style1), 3, 3+title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
+                    R.style.style2), 3+title.length(), 3+title.length()+time.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            holder.tv_nickname.setText(styledText, TextView.BufferType.SPANNABLE);
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
@@ -118,16 +119,12 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() {
         return getBasicItemCount() + (hasFooter ? 1 : 0);
-
     }
 
     public int getBasicItemCount() {
         return mList.size();
     }
 
-    /**
-     * 正常的布局
-     */
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.ll_all)
@@ -142,9 +139,6 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    /**
-     * 头部的布局
-     */
     class FootViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.mProgressView)

@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,38 +13,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.WeekDataAdapter;
 import com.lcc.base.BaseFragment;
 import com.lcc.entity.ActivityEntity;
-import com.lcc.entity.Answer;
 import com.lcc.entity.WeekData;
 import com.lcc.frame.Advertisements;
-import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.R;
-import com.lcc.msdq.index.IndexMenuView.IndexMenuActivity;
-import com.lcc.msdq.index.IndexWebView.IndexWebView;
+import com.lcc.msdq.index.article.IndexMenuActivity;
+import com.lcc.msdq.index.activity.IndexWebView;
 import com.lcc.msdq.news.NewsIndex;
-import com.lcc.msdq.test.answer.AnswerContentActivity;
 import com.lcc.mvp.presenter.IndexPresenter;
-import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.IndexPresenterImpl;
-import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
 import com.lcc.mvp.view.IndexView;
-import com.lcc.mvp.view.LoginView;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.loadview.LoadingLayout;
 import com.lcc.view.menu.GuillotineAnimation;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;

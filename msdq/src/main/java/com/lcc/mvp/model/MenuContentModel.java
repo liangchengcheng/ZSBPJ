@@ -29,6 +29,7 @@ public class MenuContentModel {
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149803");
+        paramsMap.put("fav_title",article.getTitle());
         return ApiClient.create(AppConstants.RequestPath.UserFavAdd, paramsMap).tag("").get(callback);
     }
 

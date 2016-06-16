@@ -1,18 +1,10 @@
-package com.lcc.msdq.index.IndexMenuView;
+package com.lcc.msdq.index.article;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -23,17 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.entity.ArticleContent;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
-import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.MenuContentPresenter;
-import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
-import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.loadview.LoadingLayout;
 
@@ -88,6 +76,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     protected void initView() {
         findViewById(R.id.ll_issc).setOnClickListener(this);
         findViewById(R.id.ll_comments).setOnClickListener(this);
+        findViewById(R.id.tv_to_comments).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         ll_bottom_state= (LinearLayout) findViewById(R.id.ll_bottom_state);
         tv_favorite= (TextView) findViewById(R.id.tv_favorite);
@@ -166,7 +155,6 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
     @Override
     public void getSuccess(ArticleContent result) {
-        //String head_img = AppConstants.RequestPath.BASE_URL+image_url;
         try {
             articleContent=result;
             ll_bottom_state.setVisibility(View.VISIBLE);
@@ -192,7 +180,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                             R.drawable.ic_heart_red,iv_state);
                 }
 
-                webView.loadDataWithBaseURL("about:blank", result.getContent(), "text/html", "utf-8", null);
+                webView.loadDataWithBaseURL("about:blank", result.getContent(),
+                        "text/html", "utf-8", null);
                 tv_question.setText(article.getTitle());
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
@@ -205,7 +194,13 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_comments:
-                CommentsActivity.startUserProfileFromLocation(article.getMid(), IndexMenuWebView.this);
+                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                        IndexMenuWebView.this);
+                break;
+
+            case R.id.tv_to_comments:
+                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                        IndexMenuWebView.this);
                 break;
 
             case R.id.guillotine_hamburger:
