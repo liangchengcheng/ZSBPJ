@@ -1,8 +1,15 @@
 package com.lcc.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -85,8 +92,17 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             final FavEntity weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_nickname.setText(weekData.getFav_title());
-            holder.tv_time.setText(weekData.getCreated_time());
+
+            String title = weekData.getFav_title();
+            String time = weekData.getCreated_time();
+            SpannableString styledText = new SpannableString("收藏了" + title + time);
+            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(), R.style.style0),
+                    0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(), R.style.style1),
+                    3, 3+title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(), R.style.style2),
+                    3+title.length(), 3+title.length()+time.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.tv_nickname.setText(styledText, TextView.BufferType.SPANNABLE);
 
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
@@ -116,9 +132,6 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Bind(R.id.ll_all)
         CardView ll_all;
-
-        @Bind(R.id.tv_time)
-        TextView tv_time;
 
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
