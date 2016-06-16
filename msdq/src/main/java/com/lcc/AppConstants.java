@@ -82,6 +82,11 @@ public class AppConstants {
         public final static String JS_TEST = "/service/pageCompanyTestforAndroid";
 
         /**
+         * 获取某个人的收藏列表
+         */
+        public final static String getUserFavList = "/service/getUserFavList";
+
+        /**
          * 收藏的具体功能的url
          */
         public final static String UserFavAdd = "/service/UserFavAdd";

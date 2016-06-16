@@ -25,6 +25,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
 import com.lcc.msdq.compony.content.OtherFragment;
+import com.lcc.msdq.favorite.ArticleFragment;
 import com.lcc.msdq.flow.FlowIndex;
 
 import java.util.ArrayList;
@@ -52,16 +53,12 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     View vUserStats;
     @Bind(R.id.vUserProfileRoot)
     View vUserProfileRoot;
-
     @Bind(R.id.tv_nickname)
     TextView tv_nickname;
-
     @Bind(R.id.tv_gxqm)
     TextView tv_gxqm;
-
     @Bind(R.id.tv_me)
     LinearLayout tv_me;
-
     @Bind(R.id.tv_you)
     LinearLayout tv_you;
 
@@ -130,9 +127,9 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955"), "技术面试");
-        adapter.addFragment(new HrFragment(), "人事面试");
-        adapter.addFragment(new OtherFragment(), "其他/经验");
+        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏文章");
+        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏资料");
+        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的公司");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }
