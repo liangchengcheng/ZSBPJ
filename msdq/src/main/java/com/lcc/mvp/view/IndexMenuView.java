@@ -14,7 +14,6 @@ import java.util.List;
  */
 public interface IndexMenuView {
 
-
     void getLoading();
 
     void getDataEmpty();

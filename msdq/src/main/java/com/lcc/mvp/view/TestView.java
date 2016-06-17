@@ -6,7 +6,13 @@ import java.util.List;
 
 public interface TestView {
 
-    void showError();
+    void getLoading();
+
+    void getDataEmpty();
+
+    void getDataFail(String msg);
+
+    void refreshOrLoadFail(String msg);
 
     void refreshView(List<TestEntity> entities);
 

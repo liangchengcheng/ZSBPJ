@@ -32,6 +32,7 @@ import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
+import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private ListView lv1, lv2;
     private TextView quyu, huxing, jiage;
     private ImageView icon1, icon2, icon3;
+    private LoadingLayout loading_layout;
+
     private int screenWidth;
     private int screenHeight;
     private int idx;
@@ -69,7 +72,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     protected void onFragmentCreate() {
         super.onFragmentCreate();
         mPresenter = new TestPresenterImpl(this);
-        View view = getView();
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new TestAdapter(getActivity());
@@ -78,8 +80,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        autoRefresh();
+        mPresenter.getData(currentPage);
     }
 
     @Nullable
@@ -87,7 +88,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_fragment, null);
-
+        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         ll_layout = view.findViewById(R.id.ll_layout);
         ll_quyu = (LinearLayout) view.findViewById(R.id.ll_quyu);
         ll_quyu.setOnClickListener(new View.OnClickListener() {
@@ -252,12 +253,9 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void OnItemClick(TestEntity entity) {
-       startActivity(new Intent(getActivity(), AnswerIndexActivity.class));
+        startActivity(new Intent(getActivity(), AnswerIndexActivity.class));
     }
 
-    /**
-     * 刷新数据
-     */
     private void autoRefresh() {
         getSwipeRefreshWidget().postDelayed(new Runnable() {
             @Override
@@ -269,14 +267,28 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         }, 500);
     }
 
-    public void showError() {
-        currentState = ACTION_NONE;
+    @Override
+    public void getLoading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
+    public void getDataEmpty() {
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
         if (getSwipeRefreshWidget().isRefreshing()) {
             getSwipeRefreshWidget().setRefreshing(false);
-            FrameManager.getInstance().toastPrompt("刷新数据失败");
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
-            FrameManager.getInstance().toastPrompt("加载数据失败");
-            mAdapter.setHasFooter(false);
+            FrameManager.getInstance().toastPrompt(msg);
         }
     }
 
