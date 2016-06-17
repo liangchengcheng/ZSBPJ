@@ -44,7 +44,7 @@ import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         PopupWindow.OnDismissListener,
-        TestAdapter.OnItemClickListener, TestView {
+        TestAdapter.OnItemClickListener, TestView,View.OnClickListener {
 
     private LinearLayout ll_quyu, ll_jiage, ll_huxing, lv1_layout;
     private ListView lv1, lv2;
@@ -91,33 +91,10 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         ll_layout = view.findViewById(R.id.ll_layout);
         ll_quyu = (LinearLayout) view.findViewById(R.id.ll_quyu);
-        ll_quyu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                idx = 1;
-                icon1.setImageResource(R.drawable.icon_43343434);
-                showPopupWindow(ll_layout, 1);
-            }
-        });
+        view.findViewById(R.id.ll_quyu).setOnClickListener(this);
+        view.findViewById(R.id.ll_jiage).setOnClickListener(this);
+        view.findViewById(R.id.ll_huxing).setOnClickListener(this);
 
-        ll_jiage = (LinearLayout) view.findViewById(R.id.ll_jiage);
-        ll_jiage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                idx = 2;
-                icon2.setImageResource(R.drawable.icon_43343434);
-                showPopupWindow(ll_layout, 2);
-            }
-        });
-        ll_huxing = (LinearLayout) view.findViewById(R.id.ll_huxing);
-        ll_huxing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                idx = 3;
-                icon3.setImageResource(R.drawable.icon_43343434);
-                showPopupWindow(ll_layout, 3);
-            }
-        });
         quyu = (TextView) view.findViewById(R.id.quyu);
         huxing = (TextView) view.findViewById(R.id.huxing);
         jiage = (TextView) view.findViewById(R.id.jiage);
@@ -176,18 +153,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                     lv2.setVisibility(View.INVISIBLE);
                     if (lv2.getVisibility() == View.INVISIBLE) {
                         lv2.setVisibility(View.VISIBLE);
-                        switch (idx) {
-                            case 1:
-                                lv1_layout.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-                                break;
-                            case 2:
-                                lv1_layout.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-
-                                break;
-                            case 3:
-                                lv1_layout.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-                                break;
-                        }
+                        lv1_layout.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
                         String name = (String) parent.getAdapter().getItem(
                                 position);
                         setHeadText(idx, name);
@@ -240,7 +206,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         for (String result : results) {
             list.add(result);
         }
-
         return list;
     }
 
@@ -254,17 +219,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public void OnItemClick(TestEntity entity) {
         startActivity(new Intent(getActivity(), AnswerIndexActivity.class));
-    }
-
-    private void autoRefresh() {
-        getSwipeRefreshWidget().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                currentState = STATE_REFRESH;
-                getSwipeRefreshWidget().setRefreshing(true);
-                mPresenter.refresh();
-            }
-        }, 500);
     }
 
     @Override
@@ -295,10 +249,34 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public void refreshView(List<TestEntity> entities) {
         showRefreshData(entities);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
     public void loadMoreView(List<TestEntity> entities) {
         showMoreData(entities);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_quyu:
+                idx = 1;
+                icon1.setImageResource(R.drawable.icon_43343434);
+                showPopupWindow(ll_layout, 1);
+                break;
+
+            case R.id.ll_jiage:
+                idx = 2;
+                icon2.setImageResource(R.drawable.icon_43343434);
+                showPopupWindow(ll_layout, 2);
+                break;
+
+            case R.id.ll_huxing:
+                idx = 3;
+                icon3.setImageResource(R.drawable.icon_43343434);
+                showPopupWindow(ll_layout, 3);
+                break;
+        }
     }
 }

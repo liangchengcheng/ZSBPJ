@@ -256,7 +256,7 @@ public class TestIndexFragment1 extends S_RefreshAndLoadFragment implements
         }, 500);
     }
 
-    @Override
+
     public void showError() {
         currentState = ACTION_NONE;
         if (getSwipeRefreshWidget().isRefreshing()) {
@@ -283,6 +283,26 @@ public class TestIndexFragment1 extends S_RefreshAndLoadFragment implements
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment1();
         return fragment;
+    }
+
+    @Override
+    public void getLoading() {
+
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
+
     }
 
     @Override

@@ -6,25 +6,35 @@ public class TestEntity implements Serializable {
 
 
     /**
-     * id : 1
-     * mid : 775c8460706676357b8e8ba8e164350b
+     * id : 2
+     * mid : d9d2044bd781d8e8c65427763a844fbf
      * category : 程序员
      * type : javaweb开发
-     * options : 0
-     * title : qqwqwqwq
-     * summary :
-     * created_time : 16-05-12 01:46:24
-     * updated_time : 16-05-12 01:46:24
-     * author : 18813149871
-     * fnumber : 0
-     * lnumber : 0
-     * source : wqwq
-     * keyword : wq
+     * options : 专业知识
+     * title : 怎么学习android呢？
+     * summary : 我很喜欢android但是我改怎么学习呢？我现在很是苦恼！，希望有人能给我指点一下，在这我先谢谢大家了,我一定会好好学习的。
+     * created_time : 16-05-15 07:31:52
+     * updated_time : 16-05-15 07:31:52
+     * author : 18813149801
+     * f_num : 0
+     * l_num : 0
+     * z_num : 0
+     * p_num : 0
+     * source : 百度
+     * keyword : android
      * ok : 已下架
-     * userinfo : {"id":1,"phone":"18813149871","nickname":"xiaochengcheng","xb":"男","email":"1038127753@qq.com","created_at":"2016年05月07日12:53:37","jf":"10","qm":"人生自古谁不死啊","zy":"程序员","user_image":"http://h.hiphotos.baidu.com/image/h%3D200/sign=71cd4229be014a909e3e41bd99763971/472309f7905298221dd4c458d0ca7bcb0b46d442.jpg"}
+     * phone : 18813149801
+     * nickname : xiaochengcheng
+     * xb : 男
+     * email : 1038127753@qq.com
+     * created_at : 2016年05月06日22:45:46
+     * jf : 10
+     * qm : 人生自古谁无死
+     * zy : 程序员
+     * user_image : http://ww1.sinaimg.cn/crop.7.22.1192.1192.1024/5c6defebjw8epti0r9noaj20xc0y1n0x.jpg
      */
 
-    private int id;
+    private String id;
     private String mid;
     private String category;
     private String type;
@@ -34,31 +44,28 @@ public class TestEntity implements Serializable {
     private String created_time;
     private String updated_time;
     private String author;
-    private String fnumber;
-    private String lnumber;
+    private String f_num;
+    private String l_num;
+    private String z_num;
+    private String p_num;
     private String source;
     private String keyword;
     private String ok;
-    /**
-     * id : 1
-     * phone : 18813149871
-     * nickname : xiaochengcheng
-     * xb : 男
-     * email : 1038127753@qq.com
-     * created_at : 2016年05月07日12:53:37
-     * jf : 10
-     * qm : 人生自古谁不死啊
-     * zy : 程序员
-     * user_image : http://h.hiphotos.baidu.com/image/h%3D200/sign=71cd4229be014a909e3e41bd99763971/472309f7905298221dd4c458d0ca7bcb0b46d442.jpg
-     */
+    private String phone;
+    private String nickname;
+    private String xb;
+    private String email;
+    private String created_at;
+    private String jf;
+    private String qm;
+    private String zy;
+    private String user_image;
 
-    private UserinfoEntity userinfo;
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -134,20 +141,36 @@ public class TestEntity implements Serializable {
         this.author = author;
     }
 
-    public String getFnumber() {
-        return fnumber;
+    public String getF_num() {
+        return f_num;
     }
 
-    public void setFnumber(String fnumber) {
-        this.fnumber = fnumber;
+    public void setF_num(String f_num) {
+        this.f_num = f_num;
     }
 
-    public String getLnumber() {
-        return lnumber;
+    public String getL_num() {
+        return l_num;
     }
 
-    public void setLnumber(String lnumber) {
-        this.lnumber = lnumber;
+    public void setL_num(String l_num) {
+        this.l_num = l_num;
+    }
+
+    public String getZ_num() {
+        return z_num;
+    }
+
+    public void setZ_num(String z_num) {
+        this.z_num = z_num;
+    }
+
+    public String getP_num() {
+        return p_num;
+    }
+
+    public void setP_num(String p_num) {
+        this.p_num = p_num;
     }
 
     public String getSource() {
@@ -174,104 +197,75 @@ public class TestEntity implements Serializable {
         this.ok = ok;
     }
 
-    public UserinfoEntity getUserinfo() {
-        return userinfo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserinfo(UserinfoEntity userinfo) {
-        this.userinfo = userinfo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public static class UserinfoEntity {
-        private int id;
-        private String phone;
-        private String nickname;
-        private String xb;
-        private String email;
-        private String created_at;
-        private String jf;
-        private String qm;
-        private String zy;
-        private String user_image;
+    public String getNickname() {
+        return nickname;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public String getXb() {
+        return xb;
+    }
 
-        public String getPhone() {
-            return phone;
-        }
+    public void setXb(String xb) {
+        this.xb = xb;
+    }
 
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public String getNickname() {
-            return nickname;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
-        }
+    public String getCreated_at() {
+        return created_at;
+    }
 
-        public String getXb() {
-            return xb;
-        }
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 
-        public void setXb(String xb) {
-            this.xb = xb;
-        }
+    public String getJf() {
+        return jf;
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public void setJf(String jf) {
+        this.jf = jf;
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public String getQm() {
+        return qm;
+    }
 
-        public String getCreated_at() {
-            return created_at;
-        }
+    public void setQm(String qm) {
+        this.qm = qm;
+    }
 
-        public void setCreated_at(String created_at) {
-            this.created_at = created_at;
-        }
+    public String getZy() {
+        return zy;
+    }
 
-        public String getJf() {
-            return jf;
-        }
+    public void setZy(String zy) {
+        this.zy = zy;
+    }
 
-        public void setJf(String jf) {
-            this.jf = jf;
-        }
+    public String getUser_image() {
+        return user_image;
+    }
 
-        public String getQm() {
-            return qm;
-        }
-
-        public void setQm(String qm) {
-            this.qm = qm;
-        }
-
-        public String getZy() {
-            return zy;
-        }
-
-        public void setZy(String zy) {
-            this.zy = zy;
-        }
-
-        public String getUser_image() {
-            return user_image;
-        }
-
-        public void setUser_image(String user_image) {
-            this.user_image = user_image;
-        }
+    public void setUser_image(String user_image) {
+        this.user_image = user_image;
     }
 }

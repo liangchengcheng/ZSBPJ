@@ -40,15 +40,17 @@ import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         SearchView.OnQueryTextListener, SearchView.SearchViewListener,
-        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,CompanyDescriptionView,
+        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,
+        CompanyDescriptionView,
         PopupMenu.OnMenuItemClickListener,View.OnClickListener{
 
     private SearchView mSearchView = null;
     private SearchHistoryTable mHistoryDatabase;
+    private View iv_more;
+
+    private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
     static final int ACTION_NONE = 0;
-    private CompanyDescriptionPresenter mPresenter;
-    private View iv_more;
 
     public static Fragment newInstance() {
         Fragment fragment = new CompanyIndexFragment();
@@ -192,6 +194,26 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
             FrameManager.getInstance().toastPrompt("加载数据失败...");
             mAdapter.setHasFooter(false);
         }
+    }
+
+    @Override
+    public void getLoading() {
+
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
+
     }
 
     @Override

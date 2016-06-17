@@ -20,6 +20,7 @@
         <item>最多收藏</item>
         <item>最多点赞</item>
     </string-array>
+
     <string-array name="zhiye">
         <item>编辑</item>
         <item>会计</item>
@@ -31,6 +32,5 @@
         <item>平面设计</item>
         <item>程序员</item>
     </string-array>
-
 
 </resources>

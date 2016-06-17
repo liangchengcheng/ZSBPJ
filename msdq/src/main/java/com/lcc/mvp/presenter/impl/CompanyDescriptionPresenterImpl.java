@@ -2,6 +2,7 @@ package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
 
+import com.lcc.entity.Article;
 import com.lcc.entity.CompanyDescription;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
@@ -31,12 +33,19 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
         model = new CompanyDescriptionModel();
     }
 
-    private void loadData(final int page) {
+    private void loadData(final int page,final boolean get_data) {
+        if (get_data) {
+            view.getLoading();
+        }
         final long current_time = TimeUtils.getCurrentTime();
         model.getCompanyDescriptionList(page, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.showError();
+                if (get_data) {
+                    view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                } else {
+                    view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                }
             }
 
             @Override
@@ -45,27 +54,49 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
                 }
-                updateView(response, delay, page);
+                updateView(response, delay, page,get_data);
             }
         });
     }
 
-    private void updateView(final String entities, int delay, final int page) {
+    private void updateView(final String entities, int delay, final int page, final boolean get_data) {
 
            new Handler().postDelayed(new Runnable() {
                @Override
                public void run() {
-                   try{
-                       JSONObject jsonObject=new JSONObject(entities);
-                       String data=jsonObject.getString("data");
-                       List<CompanyDescription> entitys= GsonUtils.fromJsonArray(data,CompanyDescription.class);
-                       if (page == 1) {
-                           view.refreshView(entitys);
+                   try {
+                       JSONObject jsonObject = new JSONObject(entities);
+                       int status = jsonObject.getInt("status");
+                       String message = jsonObject.getString("message");
+                       String result = jsonObject.getString("result");
+                       if (status == 1) {
+                           List<CompanyDescription> weekDatas = GsonUtils.fromJsonArray(result, CompanyDescription.class);
+                           if (page == 1) {
+                               if (weekDatas != null && weekDatas.size() > 0) {
+                                   view.refreshView(weekDatas);
+                               } else {
+                                   view.getDataEmpty();
+                               }
+                           } else {
+                               view.loadMoreView(weekDatas);
+                           }
                        } else {
-                           view.loadMoreView(entitys);
+                           if (message.equals("数据为空") && page == 1) {
+                               view.getDataEmpty();
+                           } else {
+                               if (get_data) {
+                                   view.getDataFail(ApiException.getApiExceptionMessage(message));
+                               } else {
+                                   view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                               }
+                           }
                        }
-                   }catch (Exception e){
-                       view.showError();
+                   } catch (Exception e) {
+                       if (get_data) {
+                           view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                       } else {
+                           view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                       }
                        e.printStackTrace();
                    }
                }
@@ -73,12 +104,17 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
     }
 
     @Override
+    public void getData(int page, String type) {
+        loadData(page, true);
+    }
+
+    @Override
     public void loadMore(int page) {
-        loadData(page);
+        loadData(page,false);
     }
 
     @Override
     public void refresh() {
-        loadData(1);
+        loadData(1,false);
     }
 }
