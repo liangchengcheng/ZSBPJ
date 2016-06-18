@@ -18,6 +18,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         app:cardCornerRadius="1dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout

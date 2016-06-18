@@ -53,13 +53,13 @@
                         android:layout_below="@+id/iv_icon"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:background="#E5F0FD"
+                        android:background="@drawable/bg_android_blue_tag"
                         android:paddingBottom="4dp"
                         android:paddingLeft="7dp"
                         android:paddingRight="7dp"
                         android:paddingTop="4dp"
                         android:text="129"
-                        android:textColor="@color/md_light_blue_A700" />
+                        android:textColor="@color/white" />
                 </RelativeLayout>
 
                 <LinearLayout

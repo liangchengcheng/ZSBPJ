@@ -26,6 +26,7 @@ import com.lcc.mvp.presenter.impl.CompanyAnswerPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestAnswerPresenterImpl;
 import com.lcc.mvp.view.CompanyAnswerView;
 import com.lcc.mvp.view.TestAnswerView;
+import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,9 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     private CompanyAnswerAdapter mAdapter;
     private CompanyAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
-    private String fid = "00f2c2cd7816689923b41694baaa1ff5";
+    private LoadingLayout loading_layout;
 
+    private String fid = "00f2c2cd7816689923b41694baaa1ff5";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -61,10 +63,11 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     @Override
     protected void initView() {
         mPresenter = new CompanyAnswerPresenterImpl(this);
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         companyTest= (CompanyTest) getIntent().getSerializableExtra("data");
         initRefreshView();
         initRecycleView();
-        onRefresh();
+        mPresenter.getData(currentPage,fid);
     }
 
     private void initRefreshView() {
@@ -113,7 +116,22 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     }
 
     @Override
-    public void showError() {
+    public void getLoading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
+    public void getDataEmpty() {
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
             FrameManager.getInstance().toastPrompt("刷新数据失败");
@@ -133,6 +151,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
             mAdapter.bind(objects);
         }
         mSwipeRefreshWidget.setRefreshing(false);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
@@ -183,7 +202,8 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
             case R.id.action_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " +
+                        "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;

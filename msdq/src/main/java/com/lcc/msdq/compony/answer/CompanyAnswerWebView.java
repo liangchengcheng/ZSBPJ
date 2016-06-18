@@ -161,7 +161,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
             return;
         }
         ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,
-                answer.getUserinfo().getUser_image(),user_head);
+                answer.getUser_image(),user_head);
         try{
             webView.loadDataWithBaseURL("about:blank",answer.getAnswer_content(),
                     "text/html", "utf-8", null);

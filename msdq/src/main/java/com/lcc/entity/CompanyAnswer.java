@@ -10,26 +10,15 @@ import java.io.Serializable;
  */
 public class CompanyAnswer implements Serializable {
 
+
     /**
-     * id : 10
+     * id : 1
      * answer_time : 16-06-09 01:28:01
      * answer_content : 看数据库里大街上了的几率就垃圾的两件事来得及拉伸
      * author : 18813149871
-     * mid : 00f2c2cd7816689923b41694bvbf1ff1
+     * mid : 00f2c2cd7816689923b41694baaa1fa1
      * fid : 00f2c2cd7816689923b41694baaa1ff5
-     * z_num : 333
-     * userinfo : {"id":1,"phone":"18813149871","nickname":"xiaochengcheng","xb":"男","email":"1038127753@qq.com","created_at":"2016年05月07日12:53:37","jf":"10","qm":"我走的很慢，但是我不会停的","zy":"程序员","user_image":"http://h.hiphotos.baidu.com/image/h%3D200/sign=71cd4229be014a909e3e41bd99763971/472309f7905298221dd4c458d0ca7bcb0b46d442.jpg"}
-     */
-
-    private int id;
-    private String answer_time;
-    private String answer_content;
-    private String author;
-    private String mid;
-    private String fid;
-    private String z_num;
-    /**
-     * id : 1
+     * z_num : 111
      * phone : 18813149871
      * nickname : xiaochengcheng
      * xb : 男
@@ -41,13 +30,28 @@ public class CompanyAnswer implements Serializable {
      * user_image : http://h.hiphotos.baidu.com/image/h%3D200/sign=71cd4229be014a909e3e41bd99763971/472309f7905298221dd4c458d0ca7bcb0b46d442.jpg
      */
 
-    private UserinfoEntity userinfo;
+    private String id;
+    private String answer_time;
+    private String answer_content;
+    private String author;
+    private String mid;
+    private String fid;
+    private String z_num;
+    private String phone;
+    private String nickname;
+    private String xb;
+    private String email;
+    private String created_at;
+    private String jf;
+    private String qm;
+    private String zy;
+    private String user_image;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -99,104 +103,75 @@ public class CompanyAnswer implements Serializable {
         this.z_num = z_num;
     }
 
-    public UserinfoEntity getUserinfo() {
-        return userinfo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserinfo(UserinfoEntity userinfo) {
-        this.userinfo = userinfo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public static class UserinfoEntity implements Serializable{
-        private int id;
-        private String phone;
-        private String nickname;
-        private String xb;
-        private String email;
-        private String created_at;
-        private String jf;
-        private String qm;
-        private String zy;
-        private String user_image;
+    public String getNickname() {
+        return nickname;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public String getXb() {
+        return xb;
+    }
 
-        public String getPhone() {
-            return phone;
-        }
+    public void setXb(String xb) {
+        this.xb = xb;
+    }
 
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public String getNickname() {
-            return nickname;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
-        }
+    public String getCreated_at() {
+        return created_at;
+    }
 
-        public String getXb() {
-            return xb;
-        }
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 
-        public void setXb(String xb) {
-            this.xb = xb;
-        }
+    public String getJf() {
+        return jf;
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public void setJf(String jf) {
+        this.jf = jf;
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public String getQm() {
+        return qm;
+    }
 
-        public String getCreated_at() {
-            return created_at;
-        }
+    public void setQm(String qm) {
+        this.qm = qm;
+    }
 
-        public void setCreated_at(String created_at) {
-            this.created_at = created_at;
-        }
+    public String getZy() {
+        return zy;
+    }
 
-        public String getJf() {
-            return jf;
-        }
+    public void setZy(String zy) {
+        this.zy = zy;
+    }
 
-        public void setJf(String jf) {
-            this.jf = jf;
-        }
+    public String getUser_image() {
+        return user_image;
+    }
 
-        public String getQm() {
-            return qm;
-        }
-
-        public void setQm(String qm) {
-            this.qm = qm;
-        }
-
-        public String getZy() {
-            return zy;
-        }
-
-        public void setZy(String zy) {
-            this.zy = zy;
-        }
-
-        public String getUser_image() {
-            return user_image;
-        }
-
-        public void setUser_image(String user_image) {
-            this.user_image = user_image;
-        }
+    public void setUser_image(String user_image) {
+        this.user_image = user_image;
     }
 }

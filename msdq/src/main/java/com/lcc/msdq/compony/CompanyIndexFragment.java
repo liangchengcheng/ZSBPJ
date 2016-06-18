@@ -83,8 +83,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         });
         iv_more=view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
-
-        autoRefresh();
+        mPresenter.getData(currentPage);
     }
 
     @Override

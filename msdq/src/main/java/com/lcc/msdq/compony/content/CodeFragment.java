@@ -39,6 +39,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private JSPresenter mPresenter;
+
     private String fid="1cddd741560e7d90ebf9112b989ba955";
     private String type="技术";
 

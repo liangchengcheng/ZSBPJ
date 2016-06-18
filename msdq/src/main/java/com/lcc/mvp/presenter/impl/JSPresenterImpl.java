@@ -67,11 +67,9 @@ public class JSPresenterImpl implements JSPresenter {
                     JSONObject jsonObject = new JSONObject(entities);
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
-                    String result = jsonObject.getString("result");
                     if (status == 1) {
-                        JSONObject jsonResult = new JSONObject(result);
-                        String data = jsonResult.getString("data");
-                        List<CompanyTest> weekDatas = GsonUtils.fromJsonArray(data, CompanyTest.class);
+                        String result = jsonObject.getString("result");
+                        List<CompanyTest> weekDatas = GsonUtils.fromJsonArray(result, CompanyTest.class);
                         if (page == 1) {
                             if (weekDatas != null && weekDatas.size() > 0) {
                                 view.refreshDataSuccess(weekDatas);

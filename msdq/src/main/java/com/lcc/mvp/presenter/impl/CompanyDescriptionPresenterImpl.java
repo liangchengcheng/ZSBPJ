@@ -104,7 +104,7 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
     }
 
     @Override
-    public void getData(int page, String type) {
+    public void getData(int page) {
         loadData(page, true);
     }
 

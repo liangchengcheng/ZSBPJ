@@ -7,7 +7,13 @@ import java.util.List;
 
 public interface CompanyAnswerView {
 
-    void showError();
+    void getLoading();
+
+    void getDataEmpty();
+
+    void getDataFail(String msg);
+
+    void refreshOrLoadFail(String msg);
 
     void refreshView(List<CompanyAnswer> entities);
 

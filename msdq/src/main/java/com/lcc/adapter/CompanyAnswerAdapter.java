@@ -96,9 +96,9 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
 
 
-            String head_url=object.getUserinfo().getUser_image();
+            String head_url=object.getUser_image();
             ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),head_url,holder.iv_head);
-            holder.tv_nickname.setText(object.getUserinfo().getNickname());
+            holder.tv_nickname.setText(object.getNickname());
             holder.tv_month.setText(object.getCreated_time());
 
 
@@ -115,9 +115,9 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             final CompanyAnswer answer = (CompanyAnswer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(answer.getAnswer_content());
-            holder.tv_name.setText(answer.getUserinfo().getNickname());
+            holder.tv_name.setText(answer.getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
-                    answer.getUserinfo().getUser_image(), holder.iv_image);
+                    answer.getUser_image(), holder.iv_image);
 
             if(mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {

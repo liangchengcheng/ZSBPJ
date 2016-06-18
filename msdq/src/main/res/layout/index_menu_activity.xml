@@ -53,7 +53,7 @@
                 android:id="@+id/loading_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:emptyView="@layout/empty_view"></com.lcc.view.loadview.LoadingLayout>
+                app:emptyView="@layout/empty_view" />
         </FrameLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
