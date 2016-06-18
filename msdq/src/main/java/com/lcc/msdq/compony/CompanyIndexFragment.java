@@ -62,6 +62,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentCreate() {
+        currentPage=1;
         super.onFragmentCreate();
         mPresenter = new CompanyDescriptionPresenterImpl(this);
         View view = getView();

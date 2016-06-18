@@ -70,6 +70,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentCreate() {
+        currentPage=1;
         super.onFragmentCreate();
         mPresenter = new TestPresenterImpl(this);
         RecyclerView mRecyclerView = getRecyclerView();
@@ -218,7 +219,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void OnItemClick(TestEntity entity) {
-        startActivity(new Intent(getActivity(), AnswerIndexActivity.class));
+        AnswerIndexActivity.startAnswerIndexActivity(entity,getActivity());
     }
 
     @Override

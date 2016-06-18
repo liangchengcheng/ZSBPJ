@@ -1,5 +1,6 @@
 package com.lcc.msdq.test.answer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,6 +24,7 @@ import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.BaseRecyclerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
+import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
@@ -33,6 +35,7 @@ import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.LoadMoreRecyclerView;
 import com.lcc.view.ObservableScrollView;
 import com.lcc.view.StretchyTextView;
+import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +54,15 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
+    public static final String ID="id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
+    private LoadingLayout loading_layout;
     private AnswerIndexAdapter mAdapter;
     private TestAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private String fid = "5e7f684866bee25219269994f4784573";
+    private TestEntity entity;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -65,12 +71,21 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     protected long currentTime = 0;
     protected int currentPage = 1;
 
+    public static void startAnswerIndexActivity(TestEntity entity, Activity startingActivity) {
+        Intent intent = new Intent(startingActivity, AnswerIndexActivity.class);
+        intent.putExtra(ID, entity);
+        startingActivity.startActivity(intent);
+    }
+
     @Override
     protected void initView() {
+        currentPage=1;
+        entity= (TestEntity) getIntent().getSerializableExtra(ID);
         mPresenter = new TestAnswerPresenterImpl(this);
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
         initRecycleView();
-        onRefresh();
+        mPresenter.getData(currentPage,fid);
     }
 
     private void initRefreshView() {
@@ -121,7 +136,22 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     @Override
-    public void showError() {
+    public void getLoading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
+    public void getDataEmpty() {
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
             FrameManager.getInstance().toastPrompt("刷新数据失败");
@@ -134,14 +164,14 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     public void refreshView(List<Answer> entities) {
         if (entities != null && entities.size() > 0) {
             List<Object> objects = new ArrayList<>();
-            // TODO: 16/6/7 在这加入头部数据
-            objects.add("1");
+            objects.add(entity);
             for (int i = 0; i < entities.size(); i++) {
                 objects.add(entities.get(i));
             }
             mAdapter.bind(objects);
         }
         mSwipeRefreshWidget.setRefreshing(false);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
@@ -192,7 +222,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
             case R.id.action_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " "
+                        + "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
@@ -210,6 +241,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
             case R.id.tv_sc:
                 startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
                 break;
+
             case R.id.fabButton:
                 startActivity(new Intent(AnswerIndexActivity.this, AnswerAddActivity.class));
                 break;

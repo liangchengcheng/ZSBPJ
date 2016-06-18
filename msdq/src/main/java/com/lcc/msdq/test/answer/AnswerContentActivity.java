@@ -151,7 +151,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         if (answer==null){
             return;
         }
-        ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,answer.getUserinfo().getUser_image(),user_head);
+        ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,answer.getUser_image(),user_head);
         try{
             webView.loadDataWithBaseURL("about:blank",answer.getAnswer(), "text/html", "utf-8", null);
            // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
