@@ -48,6 +48,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     private ImageView iv_state;
     private TextView tv_favorite;
     private LinearLayout ll_bottom_state;
+    private TextView tv_comments;
 
     private MenuContentPresenter indexContentPresenter;
     private Article article;
@@ -74,6 +75,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         article = (Article) getIntent().getSerializableExtra(DATA);
         type = getIntent().getStringExtra(TYPE);
         indexContentPresenter = new MenuContentPresenterImpl(this);
+        if (!article.getL_num().equals("0")){
+            tv_comments.setText(article.getL_num());
+        }
     }
 
     @Override
@@ -82,6 +86,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         findViewById(R.id.ll_comments).setOnClickListener(this);
         findViewById(R.id.tv_to_comments).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        tv_comments= (TextView) findViewById(R.id.tv_comments);
         ll_bottom_state= (LinearLayout) findViewById(R.id.ll_bottom_state);
         tv_favorite= (TextView) findViewById(R.id.tv_favorite);
         iv_state= (ImageView) findViewById(R.id.iv_state);
@@ -94,6 +99,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
@@ -161,10 +167,10 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     public void getSuccess(ArticleContent result) {
         try {
             articleContent=result;
-            ll_bottom_state.setVisibility(View.VISIBLE);
             if (TextUtils.isEmpty(result.getContent())) {
                 loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             } else {
+                //判断是否有介绍的图片
                 String head_img = article.getImage_url();
                 if (TextUtils.isEmpty(head_img)) {
                     ivZhihuStory.setVisibility(View.GONE);
@@ -176,12 +182,14 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                             .centerCrop()
                             .into(ivZhihuStory);
                 }
+                //判断是否被我收藏了
                 if (result.getAuthor()==null){
                     tv_favorite.setText("收藏");
                 }else {
                     tv_favorite.setText("已收藏");
-                    ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
-                            R.drawable.ic_heart_red,iv_state);
+                    iv_state.setBackgroundResource(R.drawable.ic_heart_red);
+//                    ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
+//                            R.drawable.ic_heart_red,iv_state);
                 }
 
                 webView.loadDataWithBaseURL("about:blank", result.getContent(),
@@ -189,6 +197,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                 tv_question.setText(article.getTitle());
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
+            ll_bottom_state.setVisibility(View.VISIBLE);
         } catch (Exception e) {
             e.printStackTrace();
         }

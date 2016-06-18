@@ -509,4 +509,5 @@
     <color name="common_android_tag_bg">#ff388E3C</color>
     <color name="common_ios_tag_bg">#ff0377BC</color>
     <color name="common_js_tag_bg">#ffEF6C02</color>
+    <color name="base_color">#E5E9F1</color>
 </resources>

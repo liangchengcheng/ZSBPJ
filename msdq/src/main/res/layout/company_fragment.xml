@@ -60,51 +60,26 @@
             android:id="@+id/swipe_refresh_widget"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:background="#E5E9F1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical" />
+
+                <com.lcc.view.loadview.LoadingLayout
+                    android:id="@+id/loading_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:emptyView="@layout/empty_view" />
+            </FrameLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
-
-        <com.lcc.view.floatingactionbutton.FloatingActionsMenu
-            android:id="@+id/multiple_actions"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            fab:fab_addButtonColorNormal="@color/white"
-            fab:fab_addButtonColorPressed="@color/white_pressed"
-            fab:fab_addButtonPlusIconColor="@color/half_black"
-            fab:fab_labelStyle="@style/menu_labels_style">
-
-            <com.lcc.view.floatingactionbutton.FloatingActionButton
-                android:id="@+id/action_a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_search_black_24dp"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_colorPressed="@color/white_pressed"
-                fab:fab_title="我要发布" />
-
-            <com.lcc.view.floatingactionbutton.FloatingActionButton
-                android:id="@+id/action_q"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_search_black_24dp"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_colorPressed="@color/white_pressed"
-                fab:fab_title="历史记录" />
-
-        </com.lcc.view.floatingactionbutton.FloatingActionsMenu>
 
     </RelativeLayout>
 

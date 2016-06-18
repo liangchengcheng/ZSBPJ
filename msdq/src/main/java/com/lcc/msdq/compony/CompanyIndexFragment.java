@@ -33,6 +33,8 @@ import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.CompanyDescriptionView;
+import com.lcc.view.loadview.LoadingLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import zsbpj.lccpj.frame.FrameManager;
@@ -47,6 +49,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     private SearchView mSearchView = null;
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
+    private LoadingLayout loading_layout;
 
     private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
@@ -70,7 +73,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         initSearchView(view);
         view.findViewById(R.id.iv_menu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +128,6 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         adapter.setOnItemClickListener(this);
         mSearchView.setAdapter(adapter);
     }
-
 
     @Override
     public void onItemClick(View view, int position) {
@@ -198,27 +200,33 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void getLoading() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
     public void getDataEmpty() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
     }
 
     @Override
     public void getDataFail(String msg) {
-
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
     public void refreshOrLoadFail(String msg) {
-
+        if (getSwipeRefreshWidget().isRefreshing()) {
+            getSwipeRefreshWidget().setRefreshing(false);
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        } else {
+            FrameManager.getInstance().toastPrompt(msg);
+        }
     }
 
     @Override
     public void refreshView(List<CompanyDescription> entities) {
         showRefreshData(entities);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override

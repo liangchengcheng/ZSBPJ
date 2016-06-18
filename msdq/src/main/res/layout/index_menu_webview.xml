@@ -70,7 +70,7 @@
                             android:visibility="gone"
                             android:id="@+id/user_head"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="250dp"
                             android:fitsSystemWindows="true"
                             android:scaleType="centerCrop"
                             app:layout_collapseMode="parallax" />
@@ -112,7 +112,7 @@
                 android:id="@+id/loading_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:emptyView="@layout/empty_view"></com.lcc.view.loadview.LoadingLayout>
+                app:emptyView="@layout/empty_view" />
         </FrameLayout>
 
         <LinearLayout
@@ -158,8 +158,6 @@
                     android:layout_width="0dp"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
-
-
                     <LinearLayout
                         android:id="@+id/ll_comments"
                         android:layout_width="wrap_content"
