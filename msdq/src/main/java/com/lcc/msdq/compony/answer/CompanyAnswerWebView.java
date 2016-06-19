@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,9 +15,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.Article;
@@ -26,8 +29,10 @@ import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.MenuContentPresenter;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.MenuContentView;
+import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
 
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
 /**
@@ -37,14 +42,14 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  【这个地方的答案需要单独的提炼到一个表里面去】
  */
 public class CompanyAnswerWebView extends BaseActivity implements
-        View.OnClickListener{
+        View.OnClickListener, MyWebView.OnScrollChangedCallback {
 
     public static final String DATA = "data";
-    private WebView webView;
 
+    private MyWebView webView;
     private ImageView user_head;
-
-    private FloatingActionButton fabButton;
+    private FloatingActionMenu floatingMenu;
+    private LinearLayout ll_top;
 
     private CompanyAnswer answer;
 
@@ -68,16 +73,11 @@ public class CompanyAnswerWebView extends BaseActivity implements
 
     @Override
     protected void initView() {
-        findViewById(R.id.ll_comments).setOnClickListener(this);
-        user_head= (ImageView) findViewById(R.id.user_head);
-        fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
-        fabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // nest.smoothScrollTo(0, 0);
-            }
-        });
-        webView= (WebView) findViewById(R.id.webView);
+        ll_top= (LinearLayout) findViewById(R.id.ll_top);
+        floatingMenu= (FloatingActionMenu) findViewById(R.id.floatingMenu);
+        user_head = (ImageView) findViewById(R.id.user_head);
+        webView = (MyWebView) findViewById(R.id.webView);
+        webView.setOnScrollChangedCallback(this);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -86,6 +86,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
         //settings.setUseWideViewPort(true);造成文字太小
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
+        settings.setDisplayZoomControls(false);
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -157,25 +158,38 @@ public class CompanyAnswerWebView extends BaseActivity implements
     }
 
     public void setData() {
-        if (answer==null){
+        if (answer == null) {
             return;
         }
         ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,
-                answer.getUser_image(),user_head);
-        try{
-            webView.loadDataWithBaseURL("about:blank",answer.getAnswer_content(),
+                answer.getUser_image(), user_head);
+        try {
+            webView.loadDataWithBaseURL("about:blank", answer.getAnswer_content(),
                     "text/html", "utf-8", null);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_comments:
                 startActivity(new Intent(CompanyAnswerWebView.this, CommentsActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    public void onScroll(int dx, int dy) {
+        Log.e("lcccc",dx+"x");
+        Log.e("lcccc",dy+"");
+        if (Math.abs(dy) > 4) {
+            if (dy < 0) {
+                floatingMenu.showMenu(true);
+            } else {
+                floatingMenu.hideMenu(true);
+            }
         }
     }
 }
