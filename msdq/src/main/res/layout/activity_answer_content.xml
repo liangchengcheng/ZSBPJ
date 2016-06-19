@@ -210,20 +210,46 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </FrameLayout>
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/floatingMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="10dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_arrow_upward_white_24px"
-        app:backgroundTint="@color/colorAccent"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:layout_behavior="com.lcc.view.ScrollAwareFABBehavior"
-        app:pressedTranslationZ="12dp"
-        app:rippleColor="#33728dff" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatingComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_comment"
+                app:fab_label="回复"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatingReport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_report"
+                app:fab_label="举报"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatingCollect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_star"
+                app:fab_label="收藏"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floatingShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_share"
+                app:fab_label="分享"
+                app:fab_size="mini" />
+        </com.github.clans.fab.FloatingActionMenu>
+    </FrameLayout>
 </LinearLayout>
