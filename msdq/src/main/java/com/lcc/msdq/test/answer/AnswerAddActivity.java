@@ -271,6 +271,7 @@ public class AnswerAddActivity extends BaseActivity {
             }
         });
     }
+
     private void showPopMenu() {
         initImageLoader(AnswerAddActivity.this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);

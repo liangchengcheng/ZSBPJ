@@ -31,6 +31,7 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile project(':superlibrary')
     compile project(':SMSSDK')
+    compile project(':nice-spinner')
     compile project(':richText')
     compile 'com.sothree.slidinguppanel:library:3.3.0'
     compile 'com.lapism:searchview:2.2'

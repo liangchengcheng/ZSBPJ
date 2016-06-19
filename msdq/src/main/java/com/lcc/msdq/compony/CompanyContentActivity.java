@@ -1,5 +1,6 @@
 package com.lcc.msdq.compony;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
@@ -18,10 +20,11 @@ import com.lcc.msdq.compony.content.OtherFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyContentActivity extends BaseActivity{
+public class CompanyContentActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void initView() {
+        findViewById(R.id.iv_q_add).setOnClickListener(this);
         setViewPager();
     }
 
@@ -51,6 +54,15 @@ public class CompanyContentActivity extends BaseActivity{
     @Override
     protected int getLayoutView() {
         return R.layout.activity_company_content;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_q_add:
+                startActivity(new Intent(CompanyContentActivity.this,ComquestionActivity.class));
+                break;
+        }
     }
 
     static class Adapter extends FragmentPagerAdapter {
