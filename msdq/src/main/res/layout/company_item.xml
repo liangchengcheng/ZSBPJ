@@ -10,7 +10,6 @@
         android:id="@+id/ll_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="1.5dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -19,7 +18,6 @@
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -27,7 +25,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginLeft="5dp"
                 android:orientation="horizontal">
 
@@ -43,26 +40,22 @@
                         android:id="@+id/iv_icon"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/baidu" />
 
                     <TextView
+                        android:layout_below="@+id/iv_icon"
+                        android:layout_marginTop="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_icon"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/bg_android_blue_tag"
-                        android:paddingBottom="4dp"
-                        android:paddingLeft="7dp"
-                        android:paddingRight="7dp"
-                        android:paddingTop="4dp"
                         android:text="129"
                         android:textColor="@color/white" />
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -100,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:ellipsize="end"
+                        android:lineSpacingMultiplier="1.2"
                         android:lines="3"
                         android:text="国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一，一家世界级的搜索公司，世界500强，工资福利很高"
                         android:textColor="@color/article_des" />
@@ -108,63 +102,74 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:background="#ededed" />
+
             <RelativeLayout
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/rl_right"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true">
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/btnLike"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/ic_comment_outline_grey" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/tv_f_number"
+                        <ImageButton
+                            android:id="@+id/btnLike"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_comment_outline_grey" />
+
+                        <TextView
+                            android:id="@+id/tv_ll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/btnLike"
+                            android:text="22"
+
+                            android:textColor="@color/article_des"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/btnLike"
-                        android:text="77" />
-                </RelativeLayout>
+                        android:layout_marginLeft="5dp">
 
-                <RelativeLayout
-                    android:layout_marginRight="20dp"
-                    android:layout_toLeftOf="@+id/rl_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                        <ImageButton
+                            android:id="@+id/btn_sc"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_heart_outline_grey" />
 
-                    <ImageView
-                        android:id="@+id/btn_sc"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/ic_heart_outline_grey" />
+                        <TextView
+                            android:id="@+id/tv_sc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/btn_sc"
+                            android:text="22"
+                            android:textColor="@color/article_des"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
 
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/tv_l_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/btn_sc"
-                        android:text="2233" />
-                </RelativeLayout>
+                </LinearLayout>
+
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -1,6 +1,8 @@
 package com.lcc.msdq.test;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.R;
+
 
 /**
  * Author:       梁铖城
@@ -22,6 +24,6 @@ public class TestAddActivity extends BaseActivity {
 
     @Override
     protected int getLayoutView() {
-        return 0;
+        return R.layout.test_add_activity;
     }
 }
