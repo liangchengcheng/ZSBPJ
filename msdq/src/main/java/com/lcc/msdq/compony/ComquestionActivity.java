@@ -38,21 +38,26 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.frame.ImageManager;
 
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  ComquestionActivity
+ * Description:  添加公司问题的界面
  */
-public class ComquestionActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
+public class ComquestionActivity extends BaseActivity implements View.OnClickListener,
+        AdapterView.OnItemSelectedListener{
 
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
     public FunctionConfig functionConfig;
 
+    private ImageView iv_question_des;
+
     @Override
     protected void initView() {
+        iv_question_des= (ImageView) findViewById(R.id.iv_question_des);
         NiceSpinner niceSpinner = (NiceSpinner) findViewById(R.id.nice_spinner);
         List<String> dataset = new LinkedList<>(Arrays.asList("技术", "人事", "其他"));
         niceSpinner.attachDataSource(dataset);
@@ -64,7 +69,6 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.iv_question_des).setOnClickListener(this);
 
         ThemeConfig themeConfig = ThemeConfig.GREEN;
-        //配置功能
         functionConfig = new FunctionConfig.Builder()
                 .setEnableCamera(true)
                 .setEnableEdit(true)
@@ -116,7 +120,6 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
         initImageLoader(ComquestionActivity.this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_layout, null);
-        //下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
         final PopupWindow window = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
@@ -159,7 +162,7 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
         config.threadPriority(Thread.NORM_PRIORITY - 2);
         config.denyCacheImageMultipleSizesInMemory();
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
-        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
+        config.diskCacheSize(50 * 1024 * 1024);
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
         config.writeDebugLogs();
         ImageLoader.getInstance().init(config.build());
@@ -170,19 +173,8 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
             if (resultList != null) {
-                for (int i = 0; i < resultList.size(); i++) {
-                    Log.e("lcc", resultList.get(i).getPhotoPath());
-                    String extra_Path = Environment.getExternalStorageDirectory().getPath();
-                    Log.e("lcc", extra_Path);
-                    Bitmap b = BitmapFactory.decodeFile(resultList.get(0).getPhotoPath());
-                    try {
-                        Thread.sleep(200);
-//                        mEditor.insertImage("file:"+resultList.get(i).getPhotoPath(),
-//                                "dachshund");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                ImageManager.getInstance().loadLocalImage(ComquestionActivity.this,
+                        resultList.get(0).getPhotoPath(), iv_question_des);
             }
         }
 
