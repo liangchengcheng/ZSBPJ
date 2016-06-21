@@ -113,6 +113,11 @@ public class AppConstants {
          */
         public final static String CommentsAdd = "/service/CommentsAdd";
 
+        /**
+         * 发布公司的题目
+         */
+        public final static String AddServiceAPI = "/service/AddServiceAPI";
+
     }
 
     public final class ParamKey {

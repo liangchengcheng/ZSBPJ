@@ -1,6 +1,8 @@
 package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
+
+import com.lcc.entity.ComTestAdd;
 import com.lcc.entity.Comments;
 import com.lcc.entity.Replay;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
@@ -29,7 +31,7 @@ public class ComQuesAddPresenterImpl implements ComQuesAddPresenter {
     }
 
     @Override
-    public void ComQuesAdd(Replay replay,List<File> files) {
+    public void ComQuesAdd(ComTestAdd replay, List<File> files) {
         model.ComQuesAdd(replay,files, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

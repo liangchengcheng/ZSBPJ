@@ -28,7 +28,7 @@ public class ApiClient {
 
         Pair[] pairs = new Pair[files.size()];
         for (int i = 0; i < files.size(); i++) {
-            Pair pair = new Pair("file" + i, files.get(i));
+            Pair pair = new Pair("file", files.get(i));
             pairs[i] = pair;
         }
 

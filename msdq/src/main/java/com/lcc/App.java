@@ -6,6 +6,10 @@ import android.graphics.Typeface;
 
 import com.lcc.db.test.DaoMaster;
 import com.lcc.db.test.DaoSession;
+import com.lcc.frame.net.okhttp.OkHttpClientManager;
+import com.squareup.okhttp.OkHttpClient;
+
+import java.util.concurrent.TimeUnit;
 
 import zsbpj.lccpj.frame.FrameManager;
 
@@ -18,6 +22,9 @@ public class App extends Application {
     public SQLiteDatabase db;
     public DaoMaster.DevOpenHelper helper;
     public DaoMaster daoMaster;
+    private OkHttpClient okHttpClient;
+    private static final int CONNECT_TIMEOUT_MILLIS = 15 * 1000;
+    private static final int READ_TIMEOUT_MILLIS = 15 * 1000;
 
     @Override
     public void onCreate() {
@@ -27,6 +34,8 @@ public class App extends Application {
 
         initTypeface();
         setupDatabase();
+        initOkHttp();
+
     }
 
     private void initTypeface() {
@@ -49,6 +58,14 @@ public class App extends Application {
 
     public SQLiteDatabase getDb() {
         return db;
+    }
+
+    private void initOkHttp() {
+        okHttpClient =
+                OkHttpClientManager.getInstance().getOkHttpClient();
+        okHttpClient = new OkHttpClient();
+        okHttpClient.setConnectTimeout(CONNECT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+        okHttpClient.setReadTimeout(READ_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
     }
 
 }

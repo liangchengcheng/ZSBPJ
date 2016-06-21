@@ -138,7 +138,10 @@ public abstract class OkHttpRequest {
             return this;
         }
 
-
+        public Builder file(File file) {
+            this.file = file;
+            return this;
+        }
         public Builder files(Pair<String, File>... files) {
             this.files = files;
             return this;

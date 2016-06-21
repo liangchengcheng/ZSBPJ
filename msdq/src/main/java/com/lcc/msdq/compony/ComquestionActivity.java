@@ -16,22 +16,25 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.ComTestAdd;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
+import com.lcc.mvp.presenter.ComQuesAddPresenter;
+import com.lcc.mvp.presenter.impl.ComQuesAddPresenterImpl;
+import com.lcc.mvp.view.ComQuesAddView;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-
 import org.angmarch.views.NiceSpinner;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -39,6 +42,8 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 /**
  * Author:       梁铖城
@@ -47,16 +52,21 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  添加公司问题的界面
  */
 public class ComquestionActivity extends BaseActivity implements View.OnClickListener,
-        AdapterView.OnItemSelectedListener{
+        AdapterView.OnItemSelectedListener,ComQuesAddView{
 
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
     public FunctionConfig functionConfig;
 
     private ImageView iv_question_des;
+    private SimpleArcDialog mDialog;
+    private ComQuesAddPresenter presenter;
+    private List<File> files=new ArrayList<>();
 
     @Override
     protected void initView() {
+        presenter=new ComQuesAddPresenterImpl(this);
+        findViewById(R.id.buttonSignUp).setOnClickListener(this);
         iv_question_des= (ImageView) findViewById(R.id.iv_question_des);
         NiceSpinner niceSpinner = (NiceSpinner) findViewById(R.id.nice_spinner);
         List<String> dataset = new LinkedList<>(Arrays.asList("技术", "人事", "其他"));
@@ -83,7 +93,6 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
                 .setPauseOnScrollListener(new UILPauseOnScrollListener(false, true))
                 .build();
         GalleryFinal.init(coreConfig);
-
     }
 
     @Override
@@ -102,6 +111,17 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
             case R.id.iv_question_des:
             case R.id.tv_add_pic:
                 showPopMenu();
+                break;
+
+            case R.id.buttonSignUp:
+                adding();
+                ComTestAdd comTestAdd=new ComTestAdd();
+                comTestAdd.setAuthor("18813149871");
+                comTestAdd.setType("技术");
+                comTestAdd.setCom_id("606bcb4a1fe66c6a313738c7def97b52");
+                comTestAdd.setSummary("addingaddingaddingaddingaddingaddingaddingaddingadding");
+                comTestAdd.setTitle("呵呵？");
+                presenter.ComQuesAdd(comTestAdd,files);
                 break;
         }
     }
@@ -172,9 +192,13 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
             new GalleryFinal.OnHanlderResultCallback() {
         @Override
         public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-            if (resultList != null) {
+            if (resultList != null&&resultList.size()>0) {
                 ImageManager.getInstance().loadLocalImage(ComquestionActivity.this,
                         resultList.get(0).getPhotoPath(), iv_question_des);
+               for (int i=0;i<resultList.size();i++){
+                   File file = new File( resultList.get(i).getPhotoPath());
+                   files.add(file);
+               }
             }
         }
 
@@ -183,4 +207,31 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
             Toast.makeText(ComquestionActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    public void adding() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在提交数据...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
+    }
+
+    @Override
+    public void addSuccess() {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("发布成功");
+    }
+
+    @Override
+    public void addFail() {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("发布失败");
+    }
+
+    private void closeDialog(){
+        if (mDialog!=null&&mDialog.isShowing()){
+            mDialog.dismiss();
+        }
+    }
 }
