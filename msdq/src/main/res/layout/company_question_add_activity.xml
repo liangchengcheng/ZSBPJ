@@ -80,7 +80,7 @@
                     android:minHeight="150dp"
                     android:layout_height="wrap_content"
                     android:hint="请输入问题的内容"
-                    android:inputType="phone" />
+                     />
             </android.support.design.widget.TextInputLayout>
 
             <RelativeLayout
