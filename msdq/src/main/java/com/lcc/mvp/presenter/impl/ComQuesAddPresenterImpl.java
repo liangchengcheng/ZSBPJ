@@ -1,7 +1,6 @@
 package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
-
 import com.lcc.entity.ComTestAdd;
 import com.lcc.entity.Comments;
 import com.lcc.entity.Replay;

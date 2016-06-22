@@ -1,5 +1,6 @@
 package com.lcc.msdq.compony;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,8 +23,18 @@ import java.util.List;
 
 public class CompanyContentActivity extends BaseActivity implements View.OnClickListener{
 
+    public static final String ID = "id";
+    private String fid;
+
+    public static void startCompanyContentActivity(String id,Activity startingActivity) {
+        Intent intent = new Intent(startingActivity, CompanyContentActivity.class);
+        intent.putExtra(ID, id);
+        startingActivity.startActivity(intent);
+    }
+
     @Override
     protected void initView() {
+        fid=getIntent().getStringExtra(ID);
         findViewById(R.id.iv_q_add).setOnClickListener(this);
         setViewPager();
     }
@@ -60,7 +71,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_q_add:
-                startActivity(new Intent(CompanyContentActivity.this,ComquestionActivity.class));
+                ComquestionActivity.startComquestionActivity(fid,CompanyContentActivity.this);
                 break;
         }
     }

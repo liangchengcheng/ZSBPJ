@@ -170,7 +170,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void OnItemClick(CompanyDescription entity) {
-        startActivity(new Intent(getActivity(),CompanyContentActivity.class));
+        CompanyContentActivity.startCompanyContentActivity(entity.getMid(),getActivity());
     }
 
     /**
