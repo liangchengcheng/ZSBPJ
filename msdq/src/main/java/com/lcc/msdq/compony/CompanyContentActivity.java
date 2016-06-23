@@ -36,6 +36,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     protected void initView() {
         fid=getIntent().getStringExtra(ID);
         findViewById(R.id.iv_q_add).setOnClickListener(this);
+        findViewById(R.id.iv_com_des).setOnClickListener(this);
         setViewPager();
     }
 
@@ -71,6 +72,10 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_q_add:
+                ComquestionActivity.startComquestionActivity(fid,CompanyContentActivity.this);
+                break;
+
+            case R.id.iv_com_des:
                 ComquestionActivity.startComquestionActivity(fid,CompanyContentActivity.this);
                 break;
         }

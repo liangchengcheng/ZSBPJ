@@ -36,8 +36,10 @@ import zsbpj.lccpj.frame.ImageManager;
 public class UserEditActivity extends BaseActivity{
 
     private ImageView iv_question_des;
+
     private List<File>files=new ArrayList<>();
     public FunctionConfig functionConfig;
+
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
 

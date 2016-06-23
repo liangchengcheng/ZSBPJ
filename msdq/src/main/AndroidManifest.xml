@@ -106,7 +106,8 @@
 
         <activity android:name=".description.user.UserEditActivity"
             android:theme="@style/AppTheme" />
-
+        <activity android:name=".description.com.CompanyDesMain"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
