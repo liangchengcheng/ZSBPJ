@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.lcc.msdq">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -13,12 +14,14 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        tools:replace="android:icon"
         android:name="com.lcc.App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon128"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
@@ -99,6 +102,9 @@
             android:theme="@style/AppTheme" />
 
         <activity android:name=".compony.ComquestionActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".description.user.UserEditActivity"
             android:theme="@style/AppTheme" />
 
     </application>

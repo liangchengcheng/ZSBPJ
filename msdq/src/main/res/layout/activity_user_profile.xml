@@ -200,14 +200,14 @@
                             android:layout_height="wrap_content" />
 
                         <ImageView
+                            android:id="@+id/iv_edit"
                             android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginRight="30dp"
                             android:background="@drawable/ic_border_color_white_24dp"
-                            android:text="详情"
-                            android:textColor="#fff" />
+                            />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
 

@@ -61,6 +61,8 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     LinearLayout tv_me;
     @Bind(R.id.tv_you)
     LinearLayout tv_you;
+    @Bind(R.id.iv_edit)
+    ImageView iv_edit;
 
     private int avatarSize;
     private String profilePhoto;
@@ -83,6 +85,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
 
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
+        iv_edit.setOnClickListener(this);
         ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
                 userInfo.getUser_image(),
                 ivUserProfilePhoto);
@@ -144,6 +147,10 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
 
             case R.id.tv_you:
                 FlowIndex.startUserProfileFromLocation("you","18813149871",UserProfileActivity.this);
+                break;
+
+            case R.id.iv_edit:
+                startActivity(new Intent(UserProfileActivity.this,UserEditActivity.class));
                 break;
         }
     }

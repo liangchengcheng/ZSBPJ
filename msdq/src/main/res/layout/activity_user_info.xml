@@ -9,8 +9,23 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_collapseMode="pin"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageView
+            android:id="@+id/guillotine_hamburger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_arrow_back_white_24dp" />
+        <TextView
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:textColor="#fff"
+            android:text="编辑个人信息"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -53,7 +68,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_margin="5dp"
-                            android:background="@drawable/ic_favorite_black_24dp" />
+                            android:background="@drawable/default_user_logo" />
                     </RelativeLayout>
 
                     <TextView
@@ -75,7 +90,7 @@
                             android:text="用户名"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -83,6 +98,35 @@
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="小城521"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EDEDED" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:text="性    别"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="end"
+                            android:padding="10dp"
+                            android:text="男"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -102,17 +146,17 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
                             android:padding="10dp"
-                            android:text="收货地址"
+                            android:text="个性签名"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             android:padding="10dp"
-                            android:text="3个"
+                            android:text="人生自古谁无死，流去丹心赵汗青"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -147,50 +191,12 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/iv_phone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:background="@drawable/ic_favorite_black_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/iv_phone"
-                            android:padding="10dp"
-                            android:text="手机"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="188****9871"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#EDEDED" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
                             android:id="@+id/iv_weixin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_favorite_black_24dp" />
+                            android:src="@drawable/accounts_icon_weichat" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -228,7 +234,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_favorite_black_24dp" />
+                            android:src="@drawable/accounts_icon_qq" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -246,7 +252,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             android:padding="10dp"
-                            android:text="已绑定"
+                            android:text="未绑定"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -254,45 +260,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_weibo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_favorite_black_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/iv_weibo"
-                            android:padding="10dp"
-                            android:text="微博"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="未绑定"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:background="#EDEDED" />
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -324,7 +295,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
                             android:padding="10dp"
-                            android:text="登录密码"
+                            android:text="修改密码"
                             android:textSize="16sp" />
 
                         <TextView
@@ -334,7 +305,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             android:padding="10dp"
-                            android:text="******"
+                            android:text=""
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -354,7 +325,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
                             android:padding="10dp"
-                            android:text="支付密码"
+                            android:text="账号邮箱"
                             android:textSize="16sp" />
 
                         <TextView
@@ -364,7 +335,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             android:padding="10dp"
-                            android:text="******"
+                            android:text="未开启"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -384,7 +355,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
                             android:padding="10dp"
-                            android:text="登录保护"
+                            android:text="联系客服"
                             android:textSize="16sp" />
 
                         <TextView
@@ -394,7 +365,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="end"
                             android:padding="10dp"
-                            android:text="已开始"
+                            android:text="1038127753@qq.com"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
