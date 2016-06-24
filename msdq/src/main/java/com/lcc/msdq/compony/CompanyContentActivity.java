@@ -13,10 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.CompanyDescription;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
 import com.lcc.msdq.compony.content.OtherFragment;
+import com.lcc.msdq.description.com.CompanyDesMain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,9 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     public static final String ID = "id";
     private String fid;
+    private CompanyDescription companyDescription;
 
-    public static void startCompanyContentActivity(String id,Activity startingActivity) {
+    public static void startCompanyContentActivity(CompanyDescription id, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, CompanyContentActivity.class);
         intent.putExtra(ID, id);
         startingActivity.startActivity(intent);
@@ -34,7 +37,10 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView() {
-        fid=getIntent().getStringExtra(ID);
+        companyDescription= (CompanyDescription) getIntent()
+                .getSerializableExtra(ID);
+        fid=companyDescription.getMid();
+
         findViewById(R.id.iv_q_add).setOnClickListener(this);
         findViewById(R.id.iv_com_des).setOnClickListener(this);
         setViewPager();
@@ -76,7 +82,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
                 break;
 
             case R.id.iv_com_des:
-                ComquestionActivity.startComquestionActivity(fid,CompanyContentActivity.this);
+                CompanyDesMain.startCompanyDesMain(companyDescription,CompanyContentActivity.this);
                 break;
         }
     }
