@@ -50,7 +50,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)){
             SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
             toast.setDefaultTextColor(Color.WHITE);
-            toast.show("你的手机已经失去网络连接。", R.layout.toast_item,R.id.content_toast,BaseActivity.this);
+            toast.show("你的手机已经失去网络连接。", R.layout.toast_item,R.id.content_toast,
+                    BaseActivity.this);
         }
     }
 
