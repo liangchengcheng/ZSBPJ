@@ -23,6 +23,7 @@ import com.lcc.msdq.setting.SettingActivity;
 import com.ufreedom.uikit.FloatingText;
 
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {
 
@@ -83,13 +84,10 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 }
                 break;
             case R.id.rl_qd:
-                FloatingText floatingText = new FloatingText.FloatingTextBuilder(getActivity())
-                        .textColor(Color.RED)
-                        .textSize(50)
-                        .textContent("签到成功!")
-                        .build();
-                floatingText.attach2Window();
-                floatingText.startFloating(tv_qd);
+                SuperCustomToast toast = SuperCustomToast.getInstance(getActivity());
+                toast.setDefaultTextColor(Color.WHITE);
+                toast.show("签到成功。", R.layout.layout_qd,R.id.content_toast,
+                      getActivity());
                 break;
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
