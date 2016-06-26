@@ -39,27 +39,35 @@
         <activity
             android:name=".compony.CompanyContentActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".login.ResetPasswordActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".login.SignUpActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".choice.ChoiceMainActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".index.activity.IndexContentActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".index.activity.IndexWebView"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".comments.CommentsActivity"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".setting.SettingActivity"
             android:theme="@style/AppTheme" />
@@ -106,8 +114,14 @@
 
         <activity android:name=".description.user.UserEditActivity"
             android:theme="@style/AppTheme" />
+
         <activity android:name=".description.com.CompanyDesMain"
             android:theme="@style/AppTheme" />
-    </application>
 
+        <activity android:name=".choice.ChoiceTypeoneActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".choice.ChoiceTypetwoActivity"
+            android:theme="@style/AppTheme" />
+    </application>
 </manifest>
