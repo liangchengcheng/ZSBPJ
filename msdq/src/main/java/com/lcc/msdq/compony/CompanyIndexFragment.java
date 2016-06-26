@@ -56,7 +56,6 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
-    static final int ACTION_NONE = 0;
 
     public static Fragment newInstance() {
         Fragment fragment = new CompanyIndexFragment();

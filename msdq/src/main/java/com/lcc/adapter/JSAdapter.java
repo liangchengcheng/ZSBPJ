@@ -35,15 +35,7 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int FOOTER_ITEM = 2;
 
     private List<CompanyTest> mList = new ArrayList<>();
-
-    /**
-     * 是否设置了footer
-     */
     private boolean hasFooter;
-
-    /**
-     * 是否继续加载数据
-     */
     private boolean hasMoreData = true;
 
     public void bind(List<CompanyTest> messages) {
@@ -153,9 +145,6 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Bind(R.id.ll_all)
         CardView ll_all;
-
-        @Bind(R.id.state)
-        TextView state;
 
         @Bind(R.id.tv_month)
         TextView tv_month;

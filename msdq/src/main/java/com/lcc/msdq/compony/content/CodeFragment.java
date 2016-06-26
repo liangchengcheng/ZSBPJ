@@ -27,7 +27,6 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 public class CodeFragment extends BaseLazyLoadFragment implements
         SwipeRefreshLayout.OnRefreshListener,JSView ,JSAdapter.OnItemClickListener{
 
-    static final int ACTION_NONE = 0;
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -43,10 +42,11 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     private String fid="1cddd741560e7d90ebf9112b989ba955";
     private String type="技术";
 
-    public static CodeFragment newInstance(String fid) {
+    public static CodeFragment newInstance(String fid,String type) {
         CodeFragment mFragment = new CodeFragment();
         Bundle bundle = new Bundle();
         bundle.putString("fid", fid);
+        bundle.putString("type", type);
         mFragment.setArguments(bundle);
         return mFragment;
     }
@@ -59,6 +59,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     @Override
     public void getBundle(Bundle bundle) {
         fid = bundle.getString("fid");
+        type=bundle.getString("type");
     }
 
     @Override

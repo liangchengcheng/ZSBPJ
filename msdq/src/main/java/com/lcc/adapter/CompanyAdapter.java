@@ -33,7 +33,8 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
 
     @Override
     public ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent,
+                false);
         return new ViewHolder(view);
     }
 
@@ -46,8 +47,16 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
                 onItemClickListener.OnItemClick(getItem(position));
             }
         });
+
         holder.tv_title.setText(entity.getCompany_name());
         holder.tv_content.setText(entity.getCompany_description());
+        holder.tv_l_num.setText(entity.getLook_num());
+        holder.tv_sc.setText(entity.getZ_num());
+        String c_num=entity.getC_num();
+        if (c_num.length()<2){
+            c_num="  "+c_num+"  ";
+        }
+        holder.tv_c_num.setText(c_num);
 
        // String url = "http://www.tengxungame.pub:8080/"+entity.getCompany_image();
         String url = "http://b.hiphotos.baidu.com/image/h%3D200/sign=954a2073cfef7609230b9e9f1edfa301/810a19d8bc3eb135aa449355a21ea8d3fc1f4458.jpg";
@@ -57,6 +66,9 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView tv_title;
+        public final TextView tv_l_num;
+        public final TextView tv_sc;
+        public final TextView tv_c_num;
         public final TextView tv_content;
         public final CardView ll_all;
         public final ImageView iv_icon;
@@ -64,6 +76,9 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
         public ViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_title);
+            tv_l_num = (TextView) view.findViewById(R.id.tv_l_num);
+            tv_c_num = (TextView) view.findViewById(R.id.tv_c_num);
+            tv_sc = (TextView) view.findViewById(R.id.tv_sc);
             tv_content = (TextView) view.findViewById(R.id.tv_content);
             ll_all = (CardView) view.findViewById(R.id.ll_all);
             iv_icon = (ImageView) view.findViewById(R.id.iv_icon);

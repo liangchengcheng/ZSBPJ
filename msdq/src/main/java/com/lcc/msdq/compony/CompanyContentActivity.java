@@ -57,9 +57,12 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955"), "技术面试");
-        adapter.addFragment(new HrFragment(), "人事面试");
-        adapter.addFragment(new OtherFragment(), "其他/经验");
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955","技术面试"),
+                "技术面试");
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955","人事面试"),
+                "人事面试");
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955","其他/经验"),
+                "其他/经验");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

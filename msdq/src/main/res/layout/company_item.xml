@@ -44,6 +44,7 @@
                         android:background="@drawable/baidu" />
 
                     <TextView
+                        android:id="@+id/tv_c_num"
                         android:layout_below="@+id/iv_icon"
                         android:layout_marginTop="15dp"
                         android:layout_width="wrap_content"
@@ -132,13 +133,11 @@
                             android:src="@drawable/ic_comment_outline_grey" />
 
                         <TextView
-                            android:id="@+id/tv_ll"
+                            android:id="@+id/tv_l_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/btnLike"
-                            android:text="22"
-
                             android:textColor="@color/article_des"
                             android:textSize="14sp" />
                     </RelativeLayout>

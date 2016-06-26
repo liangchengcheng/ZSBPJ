@@ -56,7 +56,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="5dp"
+              android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -89,19 +91,19 @@
                     android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_centerVertical="true"
-                        android:id="@+id/state"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:paddingBottom="2dp"
-                        android:paddingTop="2dp"
-                        android:textColor="?attr/colorPrimary"
-                        android:background="#ededed"
-                        android:text="热门"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <!--<TextView-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:id="@+id/state"-->
+                        <!--android:paddingLeft="5dp"-->
+                        <!--android:paddingRight="5dp"-->
+                        <!--android:paddingBottom="2dp"-->
+                        <!--android:paddingTop="2dp"-->
+                        <!--android:textColor="?attr/colorPrimary"-->
+                        <!--android:background="#ededed"-->
+                        <!--android:text="热门"-->
+                        <!--android:textSize="14sp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
 
                     <LinearLayout
                         android:layout_centerVertical="true"

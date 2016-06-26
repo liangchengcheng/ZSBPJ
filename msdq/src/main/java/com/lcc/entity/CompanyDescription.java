@@ -37,8 +37,17 @@ public class CompanyDescription implements Serializable {
     private String province;
     private String city;
     private String area;
-    private String look_num;
+    private String l_num;
     private String z_num;
+    private String c_num;
+
+    public String getC_num() {
+        return c_num;
+    }
+
+    public void setC_num(String c_num) {
+        this.c_num = c_num;
+    }
 
     public int getId() {
         return id;
@@ -129,11 +138,11 @@ public class CompanyDescription implements Serializable {
     }
 
     public String getLook_num() {
-        return look_num;
+        return l_num;
     }
 
     public void setLook_num(String look_num) {
-        this.look_num = look_num;
+        this.l_num = look_num;
     }
 
     public String getZ_num() {
