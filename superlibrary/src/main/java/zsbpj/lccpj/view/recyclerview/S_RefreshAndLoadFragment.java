@@ -45,7 +45,7 @@ public abstract class S_RefreshAndLoadFragment<T> extends LoadMoreRecyclerFragme
                 currentState = STATE_NORMAL;
                 mSwipeRefreshWidget.setRefreshing(false);
                 currentPage = 2;
-                adapter.getList().clear();
+                adapter.clear();
                 adapter.appendToList(dataList);
                 adapter.notifyDataSetChanged();
             }

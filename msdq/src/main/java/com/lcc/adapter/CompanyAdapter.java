@@ -53,7 +53,6 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
         String url = "http://b.hiphotos.baidu.com/image/h%3D200/sign=954a2073cfef7609230b9e9f1edfa301/810a19d8bc3eb135aa449355a21ea8d3fc1f4458.jpg";
         ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
                 , url, holder.iv_icon);
-
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

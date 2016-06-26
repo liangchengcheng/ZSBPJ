@@ -7,9 +7,11 @@ import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 
 public class CompanyDescriptionModel {
-    public OkHttpRequest getCompanyDescriptionList(int page, ResultCallback<String> callback) {
+    public OkHttpRequest getCompanyDescriptionList(int page,String company_name,
+                                                   ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
+        paramsMap.put("company_name", company_name);
         return ApiClient.create(AppConstants.RequestPath.COMPANY_DES, paramsMap).tag("").get(callback);
     }
 }

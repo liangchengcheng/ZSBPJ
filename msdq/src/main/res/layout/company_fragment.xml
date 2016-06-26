@@ -39,13 +39,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/ic_more_vert_white_24dp" />
+                    android:background="@drawable/ic_pin_drop_white_24dp" />
 
                 <ImageView
                     android:id="@+id/iv_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="20dp"
                     android:layout_toLeftOf="@+id/iv_more"
                     android:background="@drawable/ic_search_white_24dp" />
             </RelativeLayout>
@@ -57,10 +57,10 @@
             android:layout_height="match_parent" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:layout_below="@+id/toolbar"
             android:id="@+id/swipe_refresh_widget"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <FrameLayout

@@ -33,12 +33,12 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
         model = new CompanyDescriptionModel();
     }
 
-    private void loadData(final int page,final boolean get_data) {
+    private void loadData(final int page, final String company_name, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
         final long current_time = TimeUtils.getCurrentTime();
-        model.getCompanyDescriptionList(page, new ResultCallback<String>() {
+        model.getCompanyDescriptionList(page, company_name, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -54,67 +54,63 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
                 }
-                updateView(response, delay, page,get_data);
+                updateView(response, delay, page, get_data);
             }
         });
     }
 
     private void updateView(final String entities, int delay, final int page, final boolean get_data) {
 
-           new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   try {
-                       JSONObject jsonObject = new JSONObject(entities);
-                       int status = jsonObject.getInt("status");
-                       String message = jsonObject.getString("message");
-                       String result = jsonObject.getString("result");
-                       if (status == 1) {
-                           List<CompanyDescription> weekDatas = GsonUtils.fromJsonArray(result, CompanyDescription.class);
-                           if (page == 1) {
-                               if (weekDatas != null && weekDatas.size() > 0) {
-                                   view.refreshView(weekDatas);
-                               } else {
-                                   view.getDataEmpty();
-                               }
-                           } else {
-                               view.loadMoreView(weekDatas);
-                           }
-                       } else {
-                           if (message.equals("数据为空") && page == 1) {
-                               view.getDataEmpty();
-                           } else {
-                               if (get_data) {
-                                   view.getDataFail(ApiException.getApiExceptionMessage(message));
-                               } else {
-                                   view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
-                               }
-                           }
-                       }
-                   } catch (Exception e) {
-                       if (get_data) {
-                           view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
-                       } else {
-                           view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
-                       }
-                       e.printStackTrace();
-                   }
-               }
-           }, delay);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject(entities);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    String result = jsonObject.getString("result");
+                    if (status == 1) {
+                        List<CompanyDescription> weekDatas = GsonUtils.fromJsonArray(result, CompanyDescription.class);
+                        if (page == 1) {
+                            view.refreshView(weekDatas);
+                        } else {
+                            view.loadMoreView(weekDatas);
+                        }
+                    } else {
+                        if (message.equals("数据为空") && page == 1) {
+                            view.getDataEmpty();
+                        } else {
+                            if (get_data) {
+                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                            } else {
+                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    if (get_data) {
+                        view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    } else {
+                        view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    }
+                    e.printStackTrace();
+                }
+            }
+        }, delay);
     }
 
     @Override
-    public void getData(int page) {
-        loadData(page, true);
+    public void getData(int page, String company_name) {
+        loadData(page, company_name, true);
     }
 
     @Override
-    public void loadMore(int page) {
-        loadData(page,false);
+    public void loadMore(int page, String company_name) {
+        loadData(page, company_name, false);
     }
 
     @Override
-    public void refresh() {
-        loadData(1,false);
+    public void refresh(String company_name) {
+        loadData(1, company_name, false);
     }
 }

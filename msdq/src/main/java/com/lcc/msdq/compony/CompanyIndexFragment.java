@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.lapism.searchview.adapter.SearchAdapter;
 import com.lapism.searchview.adapter.SearchItem;
 import com.lapism.searchview.history.SearchHistoryTable;
@@ -37,6 +38,7 @@ import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
@@ -44,12 +46,13 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         SearchView.OnQueryTextListener, SearchView.SearchViewListener,
         SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,
         CompanyDescriptionView,
-        PopupMenu.OnMenuItemClickListener,View.OnClickListener{
+        View.OnClickListener {
 
     private SearchView mSearchView = null;
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
     private LoadingLayout loading_layout;
+    private String company_name = "";
 
     private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
@@ -62,7 +65,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentCreate() {
-        currentPage=1;
+        currentPage = 1;
         super.onFragmentCreate();
         mPresenter = new CompanyDescriptionPresenterImpl(this);
         View view = getView();
@@ -82,14 +85,14 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
                 mSearchView.show(true);
             }
         });
-        iv_more=view.findViewById(R.id.iv_more);
+        iv_more = view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
-        mPresenter.getData(currentPage);
+        mPresenter.getData(currentPage, company_name);
     }
 
     @Override
     protected void onFragmentLoadMore() {
-        mPresenter.loadMore(getCurrentPage());
+        mPresenter.loadMore(getCurrentPage(), company_name);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        mPresenter.refresh();
+        mPresenter.refresh(company_name);
     }
 
     private void initSearchView(View view) {
@@ -161,41 +164,19 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         mSearchView.hide(false);
         mHistoryDatabase.addItem(new SearchItem(text));
         if (TextUtils.isEmpty(text) || text.equals("全部")) {
-            //加载全部的数据
+            company_name = "";
+            currentPage = 1;
+            mPresenter.getData(currentPage, company_name);
         } else {
-            //加载关键字的数据
-            //loadListViewData(text);
+            company_name = text;
+            currentPage = 1;
+            mPresenter.getData(currentPage, company_name);
         }
     }
 
     @Override
     public void OnItemClick(CompanyDescription entity) {
-        CompanyContentActivity.startCompanyContentActivity(entity,getActivity());
-    }
-
-    /**
-     * 刷新数据
-     */
-    private void autoRefresh() {
-        getSwipeRefreshWidget().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                currentState = STATE_REFRESH;
-                getSwipeRefreshWidget().setRefreshing(true);
-                mPresenter.refresh();
-            }
-        }, 500);
-    }
-
-    public void showError() {
-        currentState = ACTION_NONE;
-        if (getSwipeRefreshWidget().isRefreshing()) {
-            getSwipeRefreshWidget().setRefreshing(false);
-            FrameManager.getInstance().toastPrompt("刷新数据失败...");
-        } else {
-            FrameManager.getInstance().toastPrompt("加载数据失败...");
-            mAdapter.setHasFooter(false);
-        }
+        CompanyContentActivity.startCompanyContentActivity(entity, getActivity());
     }
 
     @Override
@@ -226,7 +207,11 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public void refreshView(List<CompanyDescription> entities) {
         showRefreshData(entities);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        if (entities == null || entities.size() == 0) {
+            getDataEmpty();
+        } else {
+            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }
     }
 
     @Override
@@ -235,29 +220,10 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.news:
-                Toast.makeText(getActivity(), "新建",
-                        Toast.LENGTH_LONG).show();
-                break;
-            case R.id.open:
-                Toast.makeText(getActivity(), "打开",
-                        Toast.LENGTH_LONG).show();
-                break;
-        }
-        return false;
-    }
-
-    @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_more:
-                PopupMenu popup = new PopupMenu(getActivity(), iv_more);
-                popup.getMenuInflater()
-                        .inflate(R.menu.pop_com_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener(this);
-                popup.show();
+
                 break;
         }
     }
