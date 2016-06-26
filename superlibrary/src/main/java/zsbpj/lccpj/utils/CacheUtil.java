@@ -39,6 +39,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 缓存的工具类
  */
 public class CacheUtil {
+
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
     // 50 mb

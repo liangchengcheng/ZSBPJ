@@ -11,17 +11,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
+import android.widget.Toast;
+import android.widget.PopupMenu;
 import com.lcc.adapter.WeekDataAdapter;
 import com.lcc.base.BaseFragment;
 import com.lcc.entity.ActivityEntity;
 import com.lcc.entity.WeekData;
 import com.lcc.frame.Advertisements;
+import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.choice.ChoiceTypeoneActivity;
 import com.lcc.msdq.index.article.IndexMenuActivity;
 import com.lcc.msdq.index.activity.IndexWebView;
 import com.lcc.msdq.news.NewsIndex;
@@ -31,12 +35,11 @@ import com.lcc.mvp.view.IndexView;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.loadview.LoadingLayout;
 import com.lcc.view.menu.GuillotineAnimation;
-
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
+import android.view.MenuItem;
 
 /**
  * Author:  梁铖城
@@ -45,16 +48,14 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description: 第一页fragment
  */
 public class IndexFragment extends BaseFragment implements IndexView,
-        SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
+        SwipeRefreshLayout.OnRefreshListener,View.OnClickListener ,
+        PopupMenu.OnMenuItemClickListener {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
 
     private static final long RIPPLE_DURATION = 250;
     private IndexPresenter mPresenter;
-    private LoadingLayout loading_layout;
-    private SwipeRefreshLayout mSwipeRefreshWidget;
-    private RecyclerView mRecyclerView;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -63,6 +64,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
     protected long currentTime = 0;
     protected int currentPage = 1;
     private WeekDataAdapter mAdapter;
+    private ImageView iv_more;
 
     public static Fragment newInstance() {
         Fragment fragment = new IndexFragment();
@@ -75,6 +77,8 @@ public class IndexFragment extends BaseFragment implements IndexView,
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.index_fragment, null);
+        iv_more= (ImageView) view.findViewById(R.id.iv_more);
+        iv_more.setOnClickListener(this);
         view.findViewById(R.id.mszb).setOnClickListener(this);
         view.findViewById(R.id.msjl).setOnClickListener(this);
         view.findViewById(R.id.mszz).setOnClickListener(this);
@@ -84,65 +88,14 @@ public class IndexFragment extends BaseFragment implements IndexView,
         view.findViewById(R.id.msjt).setOnClickListener(this);
         view.findViewById(R.id.qt).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
-        initRefreshView(view);
-
-        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ImageView iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
-        LinearLayout root = (LinearLayout) view.findViewById(R.id.root);
-        View guillotineMenu
-                = LayoutInflater.from(getActivity()).inflate(R.layout.guillotine, null);
-        root.addView(guillotineMenu);
-        new GuillotineAnimation.GuillotineBuilder(guillotineMenu,
-                guillotineMenu.findViewById(R.id.guillotine_hamburger), iv_menu)
-                .setStartDelay(RIPPLE_DURATION)
-                .setActionBarViewForAnimation(toolbar)
-                .setClosedOnStart(true)
-                .build();
 
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
         mPresenter = new IndexPresenterImpl(this);
         mPresenter.getActivity();
-        initRecycleView(view);
+
         onRefresh();
         return view;
-    }
-
-    private void initRefreshView(View view) {
-        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
-        mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
-        mSwipeRefreshWidget.setOnRefreshListener(this);
-    }
-
-    private void initRecycleView(View view) {
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        FullyLinearLayoutManager mLayoutManager = new FullyLinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new WeekDataAdapter();
-        mAdapter.setOnItemClickListener(new WeekDataAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(WeekData data) {
-
-            }
-        });
-
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
-            @Override
-            public void onLoadMore() {
-                if (currentState == STATE_NORMAL) {
-                    currentState = STATE_LOAD;
-                    currentTime = TimeUtils.getCurrentTime();
-                    mAdapter.setHasFooter(true);
-                    mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
-                    currentPage++;
-                    mPresenter.loadMore(currentPage);
-                }
-            }
-        });
     }
 
     @Override
@@ -178,35 +131,22 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     @Override
     public void getWeekDataLoading() {
-        if (mSwipeRefreshWidget.isRefreshing()) {
-            mSwipeRefreshWidget.setRefreshing(false);
-            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
-        }
-        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+
     }
 
     @Override
     public void getWeekDataEmpty() {
-        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+
     }
 
     @Override
     public void getWeekDataFail(String msg) {
-        if (mSwipeRefreshWidget.isRefreshing()) {
-            mSwipeRefreshWidget.setRefreshing(false);
-        }else {
-            FrameManager.getInstance().toastPrompt(msg);
-        }
-        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+
     }
 
     @Override
     public void refreshWeekDataSuccess(List<WeekData> entities) {
-        if (entities != null && entities.size() > 0) {
-            mAdapter.bind(entities);
-        }
-        mSwipeRefreshWidget.setRefreshing(false);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+
     }
 
     @Override
@@ -233,14 +173,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     @Override
     public void onRefresh() {
-        mSwipeRefreshWidget.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                currentPage = 1;
-                mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage);
-            }
-        }, 500);
+
     }
 
     @Override
@@ -281,7 +214,30 @@ public class IndexFragment extends BaseFragment implements IndexView,
             case R.id.ll_news:
                 NewsIndex.startNewsIndex(getActivity(),"其他");
                 break;
+
+            case R.id.iv_more:
+                PopupMenu popup = new PopupMenu(getActivity(), iv_more);
+                popup.getMenuInflater()
+                        .inflate(R.menu.index_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(this);
+                popup.show();
+                break;
         }
     }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.chnage_type:
+                startActivity(new Intent(getActivity(), ChoiceTypeoneActivity.class));
+                break;
+
+            case R.id.author:
+                startActivity(new Intent(getActivity(), AboutActivity.class));
+                break;
+        }
+        return  false;
+    }
+
 
 }

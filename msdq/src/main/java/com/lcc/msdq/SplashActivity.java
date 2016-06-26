@@ -1,14 +1,18 @@
 package com.lcc.msdq;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
-import com.lcc.msdq.choice.ChoiceMainActivity;
+
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.utils.SharePreferenceUtil;
 
 public class SplashActivity extends Activity {
 
@@ -29,18 +33,34 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation arg0) {
-                Intent intent = new Intent(SplashActivity.this, ChoiceTypeoneActivity.class);
-                startActivity(intent);
-                finish();
+                JumpNextPage();
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationRepeat(Animation animation) {
+            }
 
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onAnimationStart(Animation animation) {
+            }
         });
+    }
 
+    public void JumpNextPage() {
+        boolean is_guide = SharePreferenceUtil.getGuide();
+        Intent intent = null;
+        if (!is_guide) {
+            intent = new Intent(SplashActivity.this, GuideActivity.class);
+        } else {
+            String type = SharePreferenceUtil.getUserType();
+            if (TextUtils.isEmpty(type)) {
+                intent = new Intent(SplashActivity.this, ChoiceTypeoneActivity.class);
+            } else {
+                intent = new Intent(SplashActivity.this, MainActivity.class);
+            }
+        }
+        startActivity(intent);
+        finish();
     }
 
 }

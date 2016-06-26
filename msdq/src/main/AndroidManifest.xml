@@ -122,6 +122,12 @@
             android:theme="@style/AppTheme" />
 
         <activity android:name=".choice.ChoiceTypetwoActivity"
+        android:theme="@style/AppTheme" />
+
+        <activity android:name=".GuideActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".AboutActivity"
             android:theme="@style/AppTheme" />
     </application>
 </manifest>

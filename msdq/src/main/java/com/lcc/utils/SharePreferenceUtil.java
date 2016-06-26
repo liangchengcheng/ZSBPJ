@@ -9,6 +9,10 @@ public class SharePreferenceUtil {
 
     //session id
     public static final String USER_TK = "user_tk";
+    //职业类型
+    public static final String USER_TYPE = "user_type";
+    //是否已经看了首页
+    public static final String GUIDE = "guide";
 
     //是否开启缓存
     public static final String IS_CACHE = "is_cache";
@@ -43,6 +47,39 @@ public class SharePreferenceUtil {
     public static void setIsCache(boolean isCache){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
         sharedPreferences.edit().putBoolean(IS_CACHE,isCache).apply();
+    }
+
+
+    /**
+     * 获取职业类型
+     */
+    public static String getUserType() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        return sharedPreferences.getString(USER_TYPE, "");
+    }
+
+    /**
+     * 存放职业类型
+     */
+    public static void setUserType(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        sharedPreferences.edit().putString(USER_TYPE,value).apply();
+    }
+
+    /**
+     * 设置是否引导了界面
+     */
+    public static boolean getGuide() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        return sharedPreferences.getBoolean(GUIDE, false);
+    }
+
+    /**
+     * 设置是否引导了界面
+     */
+    public static void setGuide(boolean value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        sharedPreferences.edit().putBoolean(GUIDE,value).apply();
     }
 
 }

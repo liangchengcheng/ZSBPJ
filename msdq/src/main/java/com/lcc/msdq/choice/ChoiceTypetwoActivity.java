@@ -11,14 +11,17 @@ import com.lcc.adapter.ChoiceType2Adapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Type1;
 import com.lcc.entity.Type2;
+import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.ChoiceTypePresenter;
 import com.lcc.mvp.presenter.impl.ChoicePresenterImpl;
 import com.lcc.mvp.view.ChoiceTypeView;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.List;
 
+import zsbpj.lccpj.utils.CacheUtil;
 import zsbpj.lccpj.utils.GsonUtils;
 
 /**
@@ -104,6 +107,9 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
 
     @Override
     public void onItemClick(Type2 data) {
-
+        SharePreferenceUtil.setUserType(data.getS_name());
+        SharePreferenceUtil.setUserType(data.getS_name());
+        startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));
+        finish();
     }
 }

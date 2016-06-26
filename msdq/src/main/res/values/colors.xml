@@ -510,4 +510,8 @@
     <color name="common_ios_tag_bg">#ff0377BC</color>
     <color name="common_js_tag_bg">#ffEF6C02</color>
     <color name="base_color">#E5E9F1</color>
+
+    <color name="about_content">#ff414141</color>
+    <color name="about_title">#ff000000</color>
+    <color name="about_sign">#ff666666</color>
 </resources>
