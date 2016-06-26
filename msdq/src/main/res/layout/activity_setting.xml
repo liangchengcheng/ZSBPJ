@@ -62,14 +62,14 @@
                  <TextView
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:text="左手操作模式"
+                     android:text="推送模式"
                      android:textSize="16sp" />
 
                  <TextView
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:layout_marginTop="5dp"
-                     android:text="开启左手操作模式之后侧边栏会从右边滑到左边，默认呢是从左边滑到右边"
+                     android:text="开启推送模式之后，服务端将会把最新的消息推送到客户端"
                      android:textSize="14sp" />
              </LinearLayout>
 

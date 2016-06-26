@@ -63,12 +63,14 @@
 
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
+                        android:id="@+id/ll_fav"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="2dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="1dp">
 
                         <LinearLayout
+                            android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/yellow"
@@ -78,18 +80,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:background="@drawable/ic_favorite_border_white_36dp" />
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/ic_favorite_border_white_24dp" />
 
                             <TextView
+                                android:textSize="18sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:text="收藏"
+                                android:layout_marginLeft="10dp"
+                                android:text="我的收藏"
                                 android:textColor="#fff" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
+
 
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
@@ -98,35 +103,7 @@
                         android:layout_weight="1">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/red"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:background="@drawable/ic_filter_drama_white_36dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:text="签到"
-                                android:textColor="#fff" />
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1">
-
-                        <LinearLayout
+                            android:padding="10dp"
                             android:id="@+id/ll_news"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -137,15 +114,16 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:background="@drawable/ic_movie_creation_white_36dp" />
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/ic_menu_comment" />
 
                             <TextView
+                                android:textSize="18sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:text="消息"
+                                android:layout_marginLeft="10dp"
+                                android:text="我的消息"
                                 android:textColor="#fff" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>

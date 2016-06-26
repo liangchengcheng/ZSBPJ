@@ -17,8 +17,11 @@ import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.description.user.UserProfileActivity;
+import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.login.ResetPasswordActivity;
+import com.lcc.msdq.send.FabuList;
 import com.lcc.msdq.setting.SettingActivity;
 import com.ufreedom.uikit.FloatingText;
 
@@ -59,7 +62,10 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         scrollView.setZoomView(zoomView);
         scrollView.setScrollContentView(contentView);
 
+        view.findViewById(R.id.ll_change_pwd).setOnClickListener(this);
+        view.findViewById(R.id.ll_fabu).setOnClickListener(this);
         view.findViewById(R.id.iv_more).setOnClickListener(this);
+        view.findViewById(R.id.ll_fav).setOnClickListener(this);
         view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
         iv_more= (ImageView) view.findViewById(R.id.iv_more);
         tv_username= (TextView) view.findViewById(R.id.tv_username);
@@ -95,6 +101,18 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
             case R.id.tv_username:
                 startActivity(new Intent(getActivity(), UserProfileActivity.class));
+                break;
+
+            case R.id.ll_fav:
+                startActivity(new Intent(getActivity(), FavoriteList.class));
+                break;
+
+            case R.id.ll_fabu:
+                startActivity(new Intent(getActivity(), FabuList.class));
+                break;
+
+            case R.id.ll_change_pwd:
+                startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
                 break;
         }
     }

@@ -26,6 +26,7 @@ import com.lcc.frame.Advertisements;
 import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.index.article.IndexMenuActivity;
 import com.lcc.msdq.index.activity.IndexWebView;
 import com.lcc.msdq.news.NewsIndex;
@@ -79,6 +80,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
         View view = inflater.inflate(R.layout.index_fragment, null);
         iv_more= (ImageView) view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
+        view.findViewById(R.id.ll_fav).setOnClickListener(this);
         view.findViewById(R.id.mszb).setOnClickListener(this);
         view.findViewById(R.id.msjl).setOnClickListener(this);
         view.findViewById(R.id.mszz).setOnClickListener(this);
@@ -213,6 +215,10 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
             case R.id.ll_news:
                 NewsIndex.startNewsIndex(getActivity(),"其他");
+                break;
+
+            case R.id.ll_fav:
+                startActivity(new Intent(getActivity(), FavoriteList.class));
                 break;
 
             case R.id.iv_more:

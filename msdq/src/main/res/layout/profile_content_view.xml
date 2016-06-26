@@ -106,6 +106,7 @@
                     android:layout_height="20dp"/>
 
                 <RelativeLayout
+                    android:id="@+id/ll_change_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -165,6 +166,7 @@
                     android:background="#EDEDED" />
 
                 <RelativeLayout
+                    android:id="@+id/ll_fav"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -203,6 +205,7 @@
                     android:background="#EDEDED" />
 
                 <RelativeLayout
+                    android:id="@+id/ll_fabu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

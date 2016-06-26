@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#fff"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -20,13 +20,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_back_white_24dp" />
+
         <TextView
-            android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:textColor="#fff"
-            android:text="登录界面"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:text="登录界面"
+            android:textColor="#fff"
+            android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
 
@@ -34,8 +35,9 @@
         android:id="@+id/textInputLayout_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="166dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="150dp"
         app:hintTextAppearance="@style/TextAppearance.AppCompat">
 
         <EditText
@@ -67,8 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginBottom="16dp"
-        android:text="登录"
         android:background="?attr/colorPrimary"
+        android:text="登录"
         android:textColor="#fff"
         android:textSize="18sp" />
 
