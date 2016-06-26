@@ -86,16 +86,18 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
     public void getDataSuccess(String msg) {
         try {
             List<Type1> data = GsonUtils.fromJsonArray(msg, Type1.class);
+            if (data==null||data.size()==0){
+                getDataEmpty();
+            }
             mAdapter.bind(data);
             loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void onItemClick(Type1 data) {
-
+        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this,data.getN_id());
     }
 }

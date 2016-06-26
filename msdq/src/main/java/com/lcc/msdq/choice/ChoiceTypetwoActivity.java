@@ -35,6 +35,7 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private ChoiceType2Adapter mAdapter;
+    private String nid;
 
     public static void startChoiceTypetwoActivity(Activity startingActivity, String nid) {
         Intent intent = new Intent(startingActivity, ChoiceTypetwoActivity.class);
@@ -43,10 +44,11 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     }
     @Override
     protected void initView() {
+        nid=getIntent().getStringExtra(NID);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
         choiceTypePresenter = new ChoicePresenterImpl(this);
-        choiceTypePresenter.getType1();
+        choiceTypePresenter.getType2(nid);
     }
 
     private void initRecycleView() {
@@ -89,6 +91,9 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     public void getDataSuccess(String msg) {
         try {
             List<Type2> data = GsonUtils.fromJsonArray(msg, Type2.class);
+            if (data==null||data.size()==0){
+                getDataEmpty();
+            }
             mAdapter.bind(data);
             loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
         } catch (Exception e) {
