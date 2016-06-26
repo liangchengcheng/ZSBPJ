@@ -32,7 +32,6 @@ public class IndexContentActivity extends BaseActivity implements SwipeRefreshLa
 
     public static final String KEY_URL = "url";
     public static final String IMAGE_URL = "image";
-    private Toolbar mToolbar;
     private String url;
     private WebView webView;
     private SwipeRefreshLayout swipeRefreshLayout;

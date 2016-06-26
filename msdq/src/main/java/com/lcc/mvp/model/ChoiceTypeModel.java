@@ -14,7 +14,7 @@ public class ChoiceTypeModel {
      */
     public OkHttpRequest getType1( ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        return ApiClient.create(AppConstants.RequestPath.JS_TEST, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_TYPE1, paramsMap).tag("").get(callback);
     }
 
 
@@ -24,6 +24,6 @@ public class ChoiceTypeModel {
     public OkHttpRequest getType2(String type, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("nid", type);
-        return ApiClient.create(AppConstants.RequestPath.JS_TEST, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_TYPE2, paramsMap).tag("").get(callback);
     }
 }

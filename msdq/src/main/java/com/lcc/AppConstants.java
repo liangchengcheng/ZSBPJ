@@ -82,6 +82,16 @@ public class AppConstants {
         public final static String JS_TEST = "/service/pageCompanyTestforAndroid";
 
         /**
+         * 获取职业分类大
+         */
+        public final static String GET_TYPE1 = "/service/getType1";
+
+        /**
+         * 获取职业分类小
+         */
+        public final static String GET_TYPE2 = "/service/getType2";
+
+        /**
          * 获取某个人的收藏列表
          */
         public final static String getUserFavList = "/service/getUserFavList";

@@ -8,6 +8,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import com.lcc.msdq.choice.ChoiceMainActivity;
+import com.lcc.msdq.choice.ChoiceTypeoneActivity;
 
 public class SplashActivity extends Activity {
 
@@ -28,7 +29,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation arg0) {
-                Intent intent = new Intent(SplashActivity.this, ChoiceMainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, ChoiceTypeoneActivity.class);
                 startActivity(intent);
                 finish();
             }
