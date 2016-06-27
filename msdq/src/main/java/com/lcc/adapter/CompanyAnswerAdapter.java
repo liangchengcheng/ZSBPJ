@@ -40,14 +40,7 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private List<Object> mList = new ArrayList<>();
 
-    /**
-     * 是否设置了footer
-     */
     private boolean hasFooter;
-
-    /**
-     * 是否继续加载数据
-     */
     private boolean hasMoreData = true;
 
     public void bind(List<Object> messages) {
@@ -69,14 +62,16 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_item, parent, false));
+            return new NormalViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_answer_item, parent, false));
         } else if (viewType == FOOTER_ITEM) {
-            return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
+            return new FootViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.layout_foot_loading, parent, false));
         } else {
-            return new HeadViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.company_answer_header, parent, false));
+            return new HeadViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.company_answer_header, parent, false));
         }
     }
-
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
@@ -91,12 +86,14 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             String image_url=object.getQuestion_image();
             if (!TextUtils.isEmpty(image_url)){
                 holder.tv_phone.setVisibility(View.VISIBLE);
-                ImageManager.getInstance().loadUrlImage(holder.tv_phone.getContext(),image_url,holder.tv_phone);
+                ImageManager.getInstance().loadUrlImage(holder.tv_phone.getContext(),
+                        image_url,holder.tv_phone);
             }else {
                 holder.tv_phone.setVisibility(View.GONE);
             }
             String head_url=object.getUser_image();
-            ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),head_url,holder.iv_head);
+            ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
+                    head_url,holder.iv_head);
             holder.tv_nickname.setText(object.getNickname());
             holder.tv_month.setText(object.getCreated_time());
 

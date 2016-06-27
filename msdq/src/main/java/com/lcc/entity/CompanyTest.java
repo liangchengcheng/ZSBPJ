@@ -44,8 +44,26 @@ public class CompanyTest implements Serializable{
     private String summary;
     private String created_time;
     private String updated_time;
-    private String look_num;
+    private String l_num;
     private String z_num;
+    private String c_num;
+
+    public String getL_num() {
+        return l_num;
+    }
+
+    public void setL_num(String l_num) {
+        this.l_num = l_num;
+    }
+
+    public String getC_num() {
+        return c_num;
+    }
+
+    public void setC_num(String c_num) {
+        this.c_num = c_num;
+    }
+
     private String question_image;
     private String phone;
     private String nickname;
@@ -127,14 +145,6 @@ public class CompanyTest implements Serializable{
 
     public void setUpdated_time(String updated_time) {
         this.updated_time = updated_time;
-    }
-
-    public String getLook_num() {
-        return look_num;
-    }
-
-    public void setLook_num(String look_num) {
-        this.look_num = look_num;
     }
 
     public String getZ_num() {

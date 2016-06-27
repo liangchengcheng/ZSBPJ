@@ -86,27 +86,6 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
                         weekData.getUser_image(),holder.iv_head);
             }
-//            if (TextUtils.isEmpty(weekData.getImage_url())) {
-//                holder.iv_head.setVisibility(View.GONE);
-//            } else {
-//                holder.iv_head.setVisibility(View.VISIBLE);
-//                ImageManager.getInstance().loadUrlImage(holder.iv_head.getContext(),
-//                        weekData.getImage_url(), holder.iv_head);
-//            }
-//
-//            if (weekData.getState().equals("0")) {
-//                holder.state.setVisibility(View.GONE);
-//            } else {
-//                holder.state.setVisibility(View.VISIBLE);
-//                if (weekData.getState().equals("1")) {
-//                    holder.state.setText("热门");
-//                    holder.state.setTextColor(Color.parseColor("#FFFF0000"));
-//                }
-//                if (weekData.getState().equals("2")) {
-//                    holder.state.setText("置顶");
-//                    holder.state.setTextColor(Color.parseColor("#388E3C"));
-//                }
-//            }
 
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {

@@ -54,10 +54,14 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     }
 
     private void initView(View view) {
-        PullToZoomScrollViewEx scrollView = (PullToZoomScrollViewEx) view.findViewById(R.id.scroll_view);
-        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_head_view, null, false);
-        View zoomView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_zoom_view, null, false);
-        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.profile_content_view, null, false);
+        PullToZoomScrollViewEx scrollView = (PullToZoomScrollViewEx)
+                view.findViewById(R.id.scroll_view);
+        View headView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.profile_head_view, null, false);
+        View zoomView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.profile_zoom_view, null, false);
+        View contentView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.profile_content_view, null, false);
         scrollView.setHeaderView(headView);
         scrollView.setZoomView(zoomView);
         scrollView.setScrollContentView(contentView);

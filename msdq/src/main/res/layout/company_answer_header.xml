@@ -88,20 +88,26 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_comment_outline_grey"
                     android:textSize="16sp"
+                    android:paddingLeft="5dp"
                     android:id="@+id/tv_llrs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="浏览:988" />
+                    android:text="988" />
 
                 <TextView
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableLeft="@drawable/ic_heart_outline_grey"
                     android:textSize="16sp"
                     android:id="@+id/tv_llsc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/tv_llrs"
                     android:text="收藏:988" />
 
