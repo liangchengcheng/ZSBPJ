@@ -97,6 +97,16 @@ public class AppConstants {
         public final static String getUserFavList = "/service/getUserFavList";
 
         /**
+         * 获取某个人的发布的面试资料列表
+         */
+        public final static String getTestList = "/service/getTestList";
+
+        /**
+         * 获取某个人的发布的公司资料列表
+         */
+        public final static String getComList = "/service/getComList";
+
+        /**
          * 收藏的具体功能的url
          */
         public final static String UserFavAdd = "/service/UserFavAdd";

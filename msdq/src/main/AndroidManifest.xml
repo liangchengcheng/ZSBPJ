@@ -133,7 +133,7 @@
         <activity android:name=".favorite.FavoriteList"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".send.FabuList"
+        <activity android:name=".fabu.FabuList"
             android:theme="@style/AppTheme" />
     </application>
 </manifest>

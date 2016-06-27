@@ -7,6 +7,7 @@ import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.FabuModel;
 import com.lcc.mvp.model.FavModel;
+import com.lcc.mvp.presenter.FabuPresenter;
 import com.lcc.mvp.presenter.FavPresenter;
 import com.lcc.mvp.view.FabuTestView;
 import com.lcc.mvp.view.FavView;
@@ -20,7 +21,7 @@ import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
-public class FabuTestPresenterImpl implements FavPresenter {
+public class FabuTestPresenterImpl implements FabuPresenter {
 
     private FabuTestView view;
     private FabuModel model;

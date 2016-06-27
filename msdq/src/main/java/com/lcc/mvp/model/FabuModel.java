@@ -17,7 +17,7 @@ public class FabuModel {
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         paramsMap.put(AppConstants.ParamKey.AUTHOR , "18813149871");
-        return ApiClient.create(AppConstants.RequestPath.getUserFavList, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getTestList, paramsMap).tag("").get(callback);
     }
 
     /**
@@ -28,6 +28,6 @@ public class FabuModel {
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         paramsMap.put(AppConstants.ParamKey.AUTHOR , "18813149871");
-        return ApiClient.create(AppConstants.RequestPath.getUserFavList, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getComList, paramsMap).tag("").get(callback);
     }
 }

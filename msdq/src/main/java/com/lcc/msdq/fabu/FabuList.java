@@ -1,4 +1,4 @@
-package com.lcc.msdq.send;
+package com.lcc.msdq.fabu;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
-import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
 import com.lcc.msdq.compony.content.OtherFragment;
 
@@ -39,8 +38,8 @@ public class FabuList extends BaseActivity{
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new HrFragment(), "发布的资料");
-        adapter.addFragment(new OtherFragment(), "发布的面试题");
+        adapter.addFragment(FabuTestFragment.newInstance(), "发布的资料");
+        adapter.addFragment(FabuComFragment.newInstance(), "发布的面试题");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

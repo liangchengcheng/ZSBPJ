@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
@@ -21,9 +22,8 @@ import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.login.ResetPasswordActivity;
-import com.lcc.msdq.send.FabuList;
+import com.lcc.msdq.fabu.FabuList;
 import com.lcc.msdq.setting.SettingActivity;
-import com.ufreedom.uikit.FloatingText;
 
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
@@ -71,12 +71,12 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.iv_more).setOnClickListener(this);
         view.findViewById(R.id.ll_fav).setOnClickListener(this);
         view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
-        iv_more= (ImageView) view.findViewById(R.id.iv_more);
-        tv_username= (TextView) view.findViewById(R.id.tv_username);
+        iv_more = (ImageView) view.findViewById(R.id.iv_more);
+        tv_username = (TextView) view.findViewById(R.id.tv_username);
         tv_username.setOnClickListener(this);
-        tv_qm= (TextView) view.findViewById(R.id.tv_qm);
-        rl_qd= (RelativeLayout) view.findViewById(R.id.rl_qd);
-        tv_qd= (TextView) view.findViewById(R.id.tv_qd);
+        tv_qm = (TextView) view.findViewById(R.id.tv_qm);
+        rl_qd = (RelativeLayout) view.findViewById(R.id.rl_qd);
+        tv_qd = (TextView) view.findViewById(R.id.tv_qd);
         rl_qd.setOnClickListener(this);
         setData();
     }
@@ -85,19 +85,19 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_more:
-                if (DataManager.getUserInfo()!=null){
-                    Intent intent=new Intent(getActivity(), UserProfileActivity.class);
-                    intent.putExtra("data",DataManager.getUserInfo());
-                    startActivityForResult(intent,200);
-                }else {
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class),100);
+                if (DataManager.getUserInfo() != null) {
+                    Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+                    intent.putExtra("data", DataManager.getUserInfo());
+                    startActivityForResult(intent, 200);
+                } else {
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
                 break;
             case R.id.rl_qd:
                 SuperCustomToast toast = SuperCustomToast.getInstance(getActivity());
                 toast.setDefaultTextColor(Color.WHITE);
-                toast.show("签到成功。", R.layout.layout_qd,R.id.content_toast,
-                      getActivity());
+                toast.show("签到成功。", R.layout.layout_qd, R.id.content_toast,
+                        getActivity());
                 break;
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
@@ -123,19 +123,19 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==100&&resultCode==100){
+        if (requestCode == 100 && resultCode == 100) {
             setData();
         }
     }
 
-    private void setData(){
-        UserInfo userInfo= DataManager.getUserInfo();
-        if (userInfo!=null){
-            ImageManager.getInstance().loadCircleImage(getActivity(),userInfo.getUser_image(),iv_more);
+    private void setData() {
+        UserInfo userInfo = DataManager.getUserInfo();
+        if (userInfo != null) {
+            ImageManager.getInstance().loadCircleImage(getActivity(), userInfo.getUser_image(), iv_more);
             tv_username.setText(userInfo.getNickname());
-            if (TextUtils.isEmpty(userInfo.getQm())){
+            if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");
-            }else {
+            } else {
                 tv_qm.setText(userInfo.getQm());
             }
         }
