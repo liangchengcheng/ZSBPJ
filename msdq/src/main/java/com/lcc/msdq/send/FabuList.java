@@ -39,8 +39,8 @@ public class FabuList extends BaseActivity{
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new HrFragment(), "收藏的资料");
-        adapter.addFragment(new OtherFragment(), "收藏的公司");
+        adapter.addFragment(new HrFragment(), "发布的资料");
+        adapter.addFragment(new OtherFragment(), "发布的面试题");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

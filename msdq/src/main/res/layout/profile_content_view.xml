@@ -43,9 +43,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/wo_icon_jifen" />
-
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -53,7 +51,6 @@
                     android:padding="10dp"
                     android:text="每日签到"
                     android:textSize="16sp" />
-
                 <TextView
                     android:id="@+id/tv_qd"
                     android:layout_width="wrap_content"
@@ -64,12 +61,10 @@
                     android:text="连续签到0天"
                     android:textSize="16sp" />
             </RelativeLayout>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#EDEDED" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +77,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/wo_icon_yue" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,7 +85,6 @@
                     android:padding="10dp"
                     android:text="我的积分"
                     android:textSize="16sp" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
