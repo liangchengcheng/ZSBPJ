@@ -17,4 +17,10 @@ public class TimeUtils {
     public static String getTimestamp() {
         return new Timestamp(getCurrentTime()).toString();
     }
+
+    public static String StrTime(long time) {
+        String time_str = time + "";
+        time_str = time_str.substring(0, time_str.length() - 3);
+        return time_str;
+    }
 }

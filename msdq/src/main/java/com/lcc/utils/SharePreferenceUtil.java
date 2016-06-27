@@ -13,9 +13,10 @@ public class SharePreferenceUtil {
     public static final String USER_TYPE = "user_type";
     //是否已经看了首页
     public static final String GUIDE = "guide";
-
     //是否开启缓存
     public static final String IS_CACHE = "is_cache";
+    //软件更新的时间
+    public static final String UPDATE_TIME = "update_time";
 
     /**
      * 获取 session id
@@ -67,7 +68,7 @@ public class SharePreferenceUtil {
     }
 
     /**
-     * 设置是否引导了界面
+     * 获取是否引导了界面
      */
     public static boolean getGuide() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
@@ -80,6 +81,22 @@ public class SharePreferenceUtil {
     public static void setGuide(boolean value){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
         sharedPreferences.edit().putBoolean(GUIDE,value).apply();
+    }
+
+    /**
+     * 获取软件更新的时间
+     */
+    public static String getUpdateTime() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        return sharedPreferences.getString(UPDATE_TIME, null);
+    }
+
+    /**
+     * 设置是否引导了界面
+     */
+    public static void setUpdateTime(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        sharedPreferences.edit().putString(UPDATE_TIME,value).apply();
     }
 
 }

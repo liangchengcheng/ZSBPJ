@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.lcc.msdq.compony.CompanyIndexFragment;
 import com.lcc.msdq.index.IndexFragment;
 import com.lcc.msdq.personinfo.PersonInfoIndexFragment;
 import com.lcc.msdq.test.TestIndexFragment;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.LivingTabsLayout;
 import com.lcc.view.bottombar.BottomBar;
 import com.lcc.view.bottombar.BottomBarFragment;
@@ -36,6 +38,7 @@ import com.lcc.view.menu.GuillotineAnimation;
 import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 public class MainActivity extends BaseActivity {
@@ -54,6 +57,18 @@ public class MainActivity extends BaseActivity {
                 new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司真题"),
                 new BottomBarFragment(PersonInfoIndexFragment.newInstance(), R.drawable.ic_perm_identity_black_24dp, "个人中心")
         );
+
+        String updateTime = SharePreferenceUtil.getUpdateTime();
+        if (!TextUtils.isEmpty(updateTime)) {
+            String localtime = TimeUtils.StrTime(System.currentTimeMillis());
+            if ((Long.parseLong(localtime) - Long.parseLong(updateTime)) / (60 * 60 * 24) > 7) {
+                updateAPK();
+            }
+        }
+
+        if (updateTime == null) {
+            updateAPK();
+        }
 
         UpdateApkTask task = new UpdateApkTask(MainActivity.this, false);
         task.detectionVersionInfo();
@@ -87,6 +102,9 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
-
+    public void updateAPK(){
+        UpdateApkTask task = new UpdateApkTask(MainActivity.this, false);
+        task.detectionVersionInfo();
+    }
 
 }

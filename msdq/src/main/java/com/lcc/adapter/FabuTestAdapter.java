@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  JSAdapter
+ * Description:  FabuTestAdapter
  */
 public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -34,15 +34,7 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public static final int FOOTER_ITEM = 2;
 
     private List<TestEntity> mList = new ArrayList<>();
-
-    /**
-     * 是否设置了footer
-     */
     private boolean hasFooter;
-
-    /**
-     * 是否继续加载数据
-     */
     private boolean hasMoreData = true;
 
     public void bind(List<TestEntity> messages) {

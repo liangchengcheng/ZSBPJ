@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.lcc.entity.UpdateInfo;
 import com.lcc.msdq.R;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.UpdateDialog;
 
 import org.json.JSONException;
@@ -35,6 +36,7 @@ import java.util.Map;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.GsonUtils;
+import zsbpj.lccpj.utils.TimeUtils;
 
 public class UpdateApkTask {
 
@@ -228,6 +230,8 @@ public class UpdateApkTask {
                 .setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String localtime = TimeUtils.StrTime(System.currentTimeMillis());
+                        SharePreferenceUtil.setUpdateTime(localtime);
                         dialog.dismiss();
                     }
                 })
