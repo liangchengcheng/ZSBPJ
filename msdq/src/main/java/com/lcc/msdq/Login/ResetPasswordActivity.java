@@ -26,18 +26,21 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView, View.OnClickListener {
+public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView,
+        View.OnClickListener {
 
     private static final int DELAY_MILLIS = 1000;
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout mTextInputLayoutPassword;
+    private TextInputLayout textInputLayout_new_password;
     private EditText mEditTextVerifyCode;
     private Button mButtonSendVerifyCode;
     private Button mButtonSignUp;
+
     private ResetPasswordPresenter mPresenter;
     private int verifyCodeCountdown = 30;
     protected Handler taskHandler = new Handler();
-    private String phone,password,verify_code;
+    private String phone,password,new_password,verify_code;
 
     @Override
     protected void initView() {
@@ -65,7 +68,8 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
         mButtonSendVerifyCode.setOnClickListener(this);
         mButtonSignUp = (Button) findViewById(R.id.buttonSignUp);
         mButtonSignUp.setOnClickListener(this);
-        mTextInputLayoutPhone.getEditText().addTextChangedListener(new TextWatcher(mTextInputLayoutPhone) {
+        mTextInputLayoutPhone.getEditText().addTextChangedListener(
+                new TextWatcher(mTextInputLayoutPhone) {
             @Override
             public void afterTextChanged(Editable s) {
                 if (getEditString().length() > 10)
@@ -77,7 +81,8 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
             }
         });
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
-        mTextInputLayoutPassword.getEditText().addTextChangedListener(new TextWatcher(mTextInputLayoutPassword) {
+        mTextInputLayoutPassword.getEditText().addTextChangedListener(
+                new TextWatcher(mTextInputLayoutPassword) {
             @Override
             public void afterTextChanged(Editable s) {
                 if (getEditString().length() > 5)
@@ -85,6 +90,20 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
                         mTextInputLayoutPassword.setErrorEnabled(false);
                     } else {
                         setEditTextError(mTextInputLayoutPassword, R.string.msg_error_password);
+                    }
+            }
+        });
+
+        textInputLayout_new_password = (TextInputLayout) findViewById(R.id.textInputLayout_new_password);
+        textInputLayout_new_password.getEditText().addTextChangedListener(
+                new TextWatcher(textInputLayout_new_password) {
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (getEditString().length() > 5)
+                    if (FormValidation.isSimplePassword(getEditString())) {
+                        textInputLayout_new_password.setErrorEnabled(false);
+                    } else {
+                        setEditTextError(textInputLayout_new_password, R.string.msg_error_password);
                     }
             }
         });
@@ -97,7 +116,7 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
 
     @Override
     protected int getLayoutView() {
-        return R.layout.activity_signup;
+        return R.layout.activity_changepwd;
     }
 
     @Override
@@ -105,13 +124,17 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
         KeyboardUtils.hide(this);
         phone = mTextInputLayoutPhone.getEditText().getText().toString();
         password = mTextInputLayoutPassword.getEditText().getText().toString();
-        if (valid(phone, password))
+        new_password = textInputLayout_new_password.getEditText().getText().toString();
+
+        if (valid(phone, password,new_password))
             return;
+
         switch (v.getId()) {
             case R.id.button_send_verify_code:
                 //mPresenter.getVerifySMS(phone, password);
                 SMSSDK.getVerificationCode("86",phone);
                 break;
+
             case R.id.buttonSignUp:
                 verify_code = mEditTextVerifyCode.getText().toString();
                 if (FormValidation.isVerifyCode(verify_code)) {
@@ -157,15 +180,22 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
 
     }
 
-    public boolean valid(String phone, String password) {
+    public boolean valid(String phone, String password,String new_password) {
         if (!FormValidation.isMobile(phone)) {
             WidgetUtils.requestFocus(mTextInputLayoutPhone.getEditText());
             setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
             return true;
         }
+
         if (!FormValidation.isSimplePassword(password)) {
             WidgetUtils.requestFocus(mTextInputLayoutPassword.getEditText());
             setEditTextError(mTextInputLayoutPassword, R.string.msg_error_password);
+            return true;
+        }
+
+        if (!FormValidation.isSimplePassword(new_password)) {
+            WidgetUtils.requestFocus(textInputLayout_new_password.getEditText());
+            setEditTextError(textInputLayout_new_password, R.string.msg_error_password);
             return true;
         }
         return false;
@@ -186,7 +216,7 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
             if (result == SMSSDK.RESULT_COMPLETE) {
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_SHORT).show();
-                    mPresenter.resetPassword(phone, password, verify_code);
+                    mPresenter.resetPassword(phone, password,new_password, verify_code);
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                     Toast.makeText(getApplicationContext(), "短信发送成功", Toast.LENGTH_SHORT).show();
                 }

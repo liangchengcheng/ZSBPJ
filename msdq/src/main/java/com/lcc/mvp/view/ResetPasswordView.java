@@ -13,7 +13,6 @@ public interface ResetPasswordView {
      */
     void showResetError(String msg);
 
-
     /**
      * 发送短信成功
      */

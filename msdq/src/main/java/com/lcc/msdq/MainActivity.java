@@ -69,9 +69,6 @@ public class MainActivity extends BaseActivity {
         if (updateTime == null) {
             updateAPK();
         }
-
-        UpdateApkTask task = new UpdateApkTask(MainActivity.this, false);
-        task.detectionVersionInfo();
     }
 
     @Override

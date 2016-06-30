@@ -11,6 +11,7 @@
     <string name="layout_str_msg_login_successs"> 登录成功</string>
     <string name="layout_str_hint_login"> 登录</string>
     <string name="layout_str_hint_sign_up">注册</string>
+    <string name="layout_str_hint_new_pwd">重置密码</string>
     <string name="layout_str_hint_phone"> 手机</string>
     <string name="layout_str_hint_password">密码</string>
     <string name="layout_str_hint_input_code">请输入验证码</string>

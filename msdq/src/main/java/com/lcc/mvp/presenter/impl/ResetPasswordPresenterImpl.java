@@ -18,8 +18,8 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
     }
 
     @Override
-    public void resetPassword(String verify_code, String phone, String pwd) {
-        model.resetPassword(phone, pwd, verify_code, new ResultCallback<String>() {
+    public void resetPassword(String verify_code, String phone, String pwd,String new_pwd) {
+        model.resetPassword(verify_code,phone, pwd, new_pwd,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.showResetError(e.getMessage());
@@ -28,7 +28,6 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
 
             @Override
             public void onResponse(String response) {
-                //对response进行本地保存 他非String
                 view.showSuccess();
             }
         });

@@ -23,13 +23,13 @@ public class ResetPasswordModel {
     /**
      * 重置密码
      */
-    public OkHttpRequest resetPassword(String phone, String password, String verify_code, ResultCallback<String> callback) {
+    public OkHttpRequest resetPassword(String verify_code,String phone, String pwd, String new_pwd,
+            ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.PHONE_KEY, phone);
-        paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, password);
+        paramsMap.put("phone", phone);
+        paramsMap.put("o_password", pwd);
         paramsMap.put(AppConstants.ParamKey.VERIFY_CODE_KEY, verify_code);
-        paramsMap.put(AppConstants.ParamKey.GRANT_TYPE_KEY, AppConstants.ParamDefaultValue.GRANT_TYPE);
-        paramsMap.put(AppConstants.ParamKey.AUTO_LOGIN_KEY, AppConstants.ParamDefaultValue.AUTO_LOGIN);
+        paramsMap.put("new_pwd", AppConstants.ParamDefaultValue.GRANT_TYPE);
         return ApiClient.create(AppConstants.RequestPath.RESET_PASSWORD, paramsMap).tag("").post(callback);
     }
 
