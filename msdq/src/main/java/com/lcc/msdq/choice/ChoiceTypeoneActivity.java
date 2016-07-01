@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.lcc.adapter.ChoiceType1Adapter;
 import com.lcc.adapter.IndexMenuAdapter;
@@ -31,7 +32,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  ChoiceTypeoneActivity
  */
 public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeView,
-        ChoiceType1Adapter.OnItemClickListener {
+        ChoiceType1Adapter.OnItemClickListener ,View.OnClickListener{
 
     private ChoiceTypePresenter choiceTypePresenter;
     private LoadingLayout loading_layout;
@@ -40,6 +41,7 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
 
     @Override
     protected void initView() {
+        findViewById(R.id.img_error).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
         choiceTypePresenter = new ChoicePresenterImpl(this);
@@ -99,5 +101,14 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
     @Override
     public void onItemClick(Type1 data) {
         ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this,data.getN_id());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_error:
+                choiceTypePresenter.getType1();
+                break;
+        }
     }
 }

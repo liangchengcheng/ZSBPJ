@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.lcc.adapter.ChoiceType1Adapter;
 import com.lcc.adapter.ChoiceType2Adapter;
@@ -31,7 +32,7 @@ import zsbpj.lccpj.utils.GsonUtils;
  * Description:  ChoiceTypeoneActivity
  */
 public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeView,
-        ChoiceType2Adapter.OnItemClickListener {
+        ChoiceType2Adapter.OnItemClickListener ,View.OnClickListener{
 
     public static final String NID = "nid";
     private ChoiceTypePresenter choiceTypePresenter;
@@ -49,6 +50,7 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     @Override
     protected void initView() {
         nid = getIntent().getStringExtra(NID);
+        findViewById(R.id.img_error).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
         choiceTypePresenter = new ChoicePresenterImpl(this);
@@ -113,5 +115,14 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         SharePreferenceUtil.setUserType(data.getS_name());
         startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_error:
+                choiceTypePresenter.getType2(nid);
+                break;
+        }
     }
 }
