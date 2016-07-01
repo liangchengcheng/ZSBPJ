@@ -22,7 +22,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class LoginActivity extends BaseActivity implements LoginView, View.OnClickListener {
 
-    //MVP P层的实现
+    //MVP结构的 P层的实现
     private LoginPresenter mPresenter;
     //用户名和密码
     private TextInputLayout mTextInputLayoutPhone;
@@ -132,7 +132,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         closeDialog();
         FrameManager.getInstance().toastPrompt("登录成功");
         Intent intent=new Intent();
-        setResult(100,intent);
+        setResult(RESULT_OK,intent);
         finish();
     }
 

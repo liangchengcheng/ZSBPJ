@@ -9,36 +9,58 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import android.widget.LinearLayout;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.login.LoginActivity;
+import com.lcc.msdq.login.SignUpActivity;
 import com.lcc.utils.SharePreferenceUtil;
-
 import java.util.Calendar;
-
 import zsbpj.lccpj.frame.ImageManager;
-import zsbpj.lccpj.utils.LogUtils;
 
-public class SplashActivity extends Activity {
-    private ImageView ly;
+public class SplashActivity extends Activity implements View.OnClickListener {
+
+    private String type;
+    private boolean have_set;
+    private LinearLayout ll_bottom_view;
+    private String user_tk;
+    public static final int LOGIN=100;
+    public static final int REGISTER=101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        ly= (ImageView) findViewById(R.id.ly);
-        Calendar calendar= Calendar.getInstance();
-        int hour=calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour>6&&hour<12){
+
+        type = SharePreferenceUtil.getUserType();
+        have_set = SharePreferenceUtil.getGuide();
+        user_tk = SharePreferenceUtil.getUserTk();
+
+        ImageView ly = (ImageView) findViewById(R.id.ly);
+        ll_bottom_view = (LinearLayout) findViewById(R.id.ll_bottom_view);
+        findViewById(R.id.tv_tomain).setOnClickListener(this);
+        findViewById(R.id.tv_toregister).setOnClickListener(this);
+        findViewById(R.id.tv_tologin).setOnClickListener(this);
+        FrameLayout reveal = (FrameLayout) findViewById(R.id.reveal);
+
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        if (hour > 6 && hour < 12) {
             ImageManager.getInstance().loadResImage(SplashActivity.this,
-                    R.drawable.morning,ly);
-        }else if (hour>12&&hour<18){
+                    R.drawable.morning, ly);
+        } else if (hour > 12 && hour < 18) {
             ImageManager.getInstance().loadResImage(SplashActivity.this,
-                    R.drawable.afternoon,ly);
-        }else {
+                    R.drawable.afternoon, ly);
+        } else {
             ImageManager.getInstance().loadResImage(SplashActivity.this,
-                    R.drawable.night,ly);
+                    R.drawable.night, ly);
         }
 
-        FrameLayout reveal = (FrameLayout) findViewById(R.id.reveal);
+        if (!have_set || TextUtils.isEmpty(user_tk)) {
+            ll_bottom_view.setVisibility(View.VISIBLE);
+            SharePreferenceUtil.setGuide();
+        } else {
+            ll_bottom_view.setVisibility(View.GONE);
+        }
         getWelcomeView(reveal);
     }
 
@@ -64,21 +86,59 @@ public class SplashActivity extends Activity {
         });
     }
 
-    public void JumpNextPage() {
-        boolean is_guide = SharePreferenceUtil.getGuide();
-        Intent intent = null;
-        if (!is_guide) {
-            intent = new Intent(SplashActivity.this, GuideActivity.class);
-        } else {
-            String type = SharePreferenceUtil.getUserType();
-            if (TextUtils.isEmpty(type)) {
-                intent = new Intent(SplashActivity.this, ChoiceTypeoneActivity.class);
-            } else {
-                intent = new Intent(SplashActivity.this, MainActivity.class);
-            }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode!=RESULT_OK){
+            return;
         }
+        user_tk = SharePreferenceUtil.getUserTk();
+        switch (requestCode){
+            case LOGIN:
+                JumpNextPage();
+                break;
+
+            case REGISTER:
+                JumpNextPage();
+                break;
+        }
+    }
+
+    public void JumpNextPage() {
+        if (TextUtils.isEmpty(user_tk)){
+            return;
+        }
+        Intent intent = null;
+        if (TextUtils.isEmpty(type)) {
+            intent = new Intent(SplashActivity.this, ChoiceTypeoneActivity.class);
+        } else {
+            intent = new Intent(SplashActivity.this, MainActivity.class);
+        }
+
         startActivity(intent);
         finish();
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
+        switch (v.getId()) {
+            case R.id.tv_tologin:
+                intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivityForResult(intent,LOGIN);
+                break;
+
+            case R.id.tv_tomain:
+                intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            case R.id.tv_toregister:
+                intent = new Intent(SplashActivity.this, SignUpActivity.class);
+                startActivityForResult(intent,REGISTER);
+                break;
+        }
+
+    }
 }

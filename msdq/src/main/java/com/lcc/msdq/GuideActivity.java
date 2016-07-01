@@ -31,7 +31,7 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharePreferenceUtil.setGuide(true);
+        SharePreferenceUtil.setGuide();
         button= (Button) findViewById(R.id.button);
         for (int i = 0; i < ids.length; i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.guid_item_image, null);

@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/ly"
+        android:background="@drawable/night"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/night"
+        android:scaleType="centerCrop"
         android:orientation="vertical" />
 
     <RelativeLayout
@@ -43,10 +44,64 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-                android:text="抽抽面试助手"
+                android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="26sp" />
+                android:textSize="24sp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_view"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16sp"
+                android:gravity="center_horizontal"
+                android:text="欢迎加入我们，即可开启APP学习和分享最新最好的技巧，提高你的个人升值空间"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_tomain"
+                android:layout_marginTop="25dp"
+                android:textSize="16sp"
+                android:gravity="center_horizontal"
+                android:text="随便逛逛"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_toregister"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:text="注册"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@color/first_color_login"
+                    android:layout_width="165dp"
+                    android:layout_height="45dp" />
+                <TextView
+                    android:id="@+id/tv_tologin"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:text="登录"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@color/first_color_register"
+                    android:layout_width="165dp"
+                    android:layout_height="45dp" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

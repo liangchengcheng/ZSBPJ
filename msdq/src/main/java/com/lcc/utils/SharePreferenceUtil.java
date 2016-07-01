@@ -78,9 +78,9 @@ public class SharePreferenceUtil {
     /**
      * 设置是否引导了界面
      */
-    public static void setGuide(boolean value){
+    public static void setGuide(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
-        sharedPreferences.edit().putBoolean(GUIDE,value).apply();
+        sharedPreferences.edit().putBoolean(GUIDE,true).apply();
     }
 
     /**

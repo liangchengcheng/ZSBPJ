@@ -5,7 +5,8 @@ import android.view.View;
 
 public abstract class BaseLazyLoadFragment extends BaseFragment {
 
-    private boolean isFirstLoad = true;
+    //这里暂时取消第一次加载的标记
+    //private boolean isFirstLoad = true;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -30,9 +31,9 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
     }
 
     private void onVisible() {
-        if (isFirstLoad && isPrepare) {
+        if (isPrepare) {
             initData();
-            isFirstLoad = false;
+            //isFirstLoad = false;
         }
     }
 

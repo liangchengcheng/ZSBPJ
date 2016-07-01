@@ -514,4 +514,7 @@
     <color name="about_content">#ff414141</color>
     <color name="about_title">#ff000000</color>
     <color name="about_sign">#ff666666</color>
+
+    <color name="first_color_login">#17B8BE</color>
+    <color name="first_color_register">#656465</color>
 </resources>
