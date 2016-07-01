@@ -31,7 +31,7 @@ import zsbpj.lccpj.utils.GsonUtils;
  * Description:  ChoiceTypeoneActivity
  */
 public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeView,
-        ChoiceType2Adapter.OnItemClickListener{
+        ChoiceType2Adapter.OnItemClickListener {
 
     public static final String NID = "nid";
     private ChoiceTypePresenter choiceTypePresenter;
@@ -45,9 +45,10 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         intent.putExtra(NID, nid);
         startingActivity.startActivity(intent);
     }
+
     @Override
     protected void initView() {
-        nid=getIntent().getStringExtra(NID);
+        nid = getIntent().getStringExtra(NID);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
         choiceTypePresenter = new ChoicePresenterImpl(this);
@@ -94,11 +95,12 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     public void getDataSuccess(String msg) {
         try {
             List<Type2> data = GsonUtils.fromJsonArray(msg, Type2.class);
-            if (data==null||data.size()==0){
+            if (data == null || data.size() == 0) {
                 getDataEmpty();
+            } else {
+                mAdapter.bind(data);
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
-            mAdapter.bind(data);
-            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
         } catch (Exception e) {
             e.printStackTrace();
         }

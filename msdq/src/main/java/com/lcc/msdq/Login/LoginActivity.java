@@ -3,16 +3,22 @@ package com.lcc.msdq.login;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.lcc.App;
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.choice.ChoiceTypeoneActivity;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
 import com.lcc.mvp.view.LoginView;
 import com.lcc.utils.FormValidation;
 import com.lcc.utils.KeyboardUtils;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.utils.TextWatcher;
 import com.lcc.utils.WidgetUtils;
 
@@ -29,9 +35,11 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     private TextInputLayout mTextInputLayoutPassword;
     //简单的登录时候的等待的对话框
     private SimpleArcDialog mDialog;
+    private String from;
 
     @Override
     protected void initView() {
+        from = getIntent().getStringExtra("from");
         Button mButtonSign = (Button) findViewById(R.id.button_sign);
         if (mButtonSign != null) {
             mButtonSign.setOnClickListener(this);
@@ -57,8 +65,8 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             });
         }
 
-        EditText editText_psd=mTextInputLayoutPassword.getEditText();
-        if (editText_psd!=null){
+        EditText editText_psd = mTextInputLayoutPassword.getEditText();
+        if (editText_psd != null) {
             editText_psd.addTextChangedListener(new TextWatcher(mTextInputLayoutPassword) {
                 @Override
                 public void afterTextChanged(Editable s) {
@@ -124,20 +132,33 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     @Override
     public void showLoginFail(String msg) {
         closeDialog();
-        FrameManager.getInstance().toastPrompt("登录失败"+msg);
+        FrameManager.getInstance().toastPrompt("登录失败" + msg);
     }
 
     @Override
     public void loginSuccess() {
         closeDialog();
         FrameManager.getInstance().toastPrompt("登录成功");
-        Intent intent=new Intent();
-        setResult(RESULT_OK,intent);
-        finish();
+        Intent intent=null;
+        if (!TextUtils.isEmpty(from)) {
+            String type= SharePreferenceUtil.getUserType();
+            if (TextUtils.isEmpty(type)) {
+                intent = new Intent(LoginActivity.this, ChoiceTypeoneActivity.class);
+            } else {
+                intent = new Intent(LoginActivity.this, MainActivity.class);
+            }
+            startActivity(intent);
+            finish();
+            App.exit();
+        } else {
+            intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 
-    private void closeDialog(){
-        if (mDialog!=null&&mDialog.isShowing()){
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
     }

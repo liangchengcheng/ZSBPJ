@@ -12,13 +12,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lcc.App;
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.choice.ChoiceTypeoneActivity;
 import com.lcc.mvp.presenter.SignUpPresenter;
 import com.lcc.mvp.presenter.impl.SignUpPresenterImpl;
 import com.lcc.mvp.view.SignUpView;
 import com.lcc.utils.FormValidation;
 import com.lcc.utils.KeyboardUtils;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.utils.TextWatcher;
 import com.lcc.utils.WidgetUtils;
 
@@ -31,19 +35,24 @@ import zsbpj.lccpj.frame.FrameManager;
 public class SignUpActivity extends BaseActivity implements SignUpView, View.OnClickListener {
 
     private static final int DELAY_MILLIS = 1 * 1000;
+
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout textInputLayout_username;
     private TextInputLayout mTextInputLayoutPassword;
     private EditText mEditTextVerifyCode;
     private Button mButtonSendVerifyCode;
     private Button mButtonSignUp;
+
     private SignUpPresenter mPresenter;
     private int verifyCodeCountdown = 30;
     protected Handler taskHandler = new Handler();
     private String phone, password, verify_code,username;
 
+    private String from;
+
     @Override
     protected void initView() {
+        from = getIntent().getStringExtra("from");
         SMSSDK.initSDK(this, "11cc5d753865c", "3c6cdfb8371e181a03f8a27f217e2043", true);
         EventHandler eh = new EventHandler() {
 
@@ -186,8 +195,22 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     @Override
     public void signUpSuccess() {
         FrameManager.getInstance().toastPrompt("账号注册成功");
-        startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
-        finish();
+        if (!TextUtils.isEmpty(from)) {
+            String type= SharePreferenceUtil.getUserType();
+            Intent intent=null;
+            if (TextUtils.isEmpty(type)) {
+                intent = new Intent(SignUpActivity.this, ChoiceTypeoneActivity.class);
+            } else {
+                intent = new Intent(SignUpActivity.this, MainActivity.class);
+            }
+            App.exit();
+            startActivity(intent);
+            finish();
+        }else {
+            startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+            finish();
+        }
+
     }
 
     @Override

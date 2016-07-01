@@ -1,5 +1,6 @@
 package com.lcc;
 
+import android.app.Activity;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
@@ -9,6 +10,8 @@ import com.lcc.db.test.DaoSession;
 import com.lcc.frame.net.okhttp.OkHttpClientManager;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -18,13 +21,17 @@ public class App extends Application {
 
     private static final String CANARO_EXTRA_BOLD_PATH = "fonts/canaro_extra_bold.otf";
     public static Typeface canaroExtraBold;
+
     public DaoSession daoSession;
     public SQLiteDatabase db;
     public DaoMaster.DevOpenHelper helper;
     public DaoMaster daoMaster;
     private OkHttpClient okHttpClient;
+
     private static final int CONNECT_TIMEOUT_MILLIS = 15 * 1000;
     private static final int READ_TIMEOUT_MILLIS = 15 * 1000;
+
+    private static List<Activity> activityList = new LinkedList();
 
     @Override
     public void onCreate() {
@@ -66,6 +73,23 @@ public class App extends Application {
         okHttpClient = new OkHttpClient();
         okHttpClient.setConnectTimeout(CONNECT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(READ_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * 添加Activity到容器中
+     */
+    public static void addActivity(Activity activity) {
+        activityList.add(activity);
+    }
+
+    /**
+     * 遍历所有Activity并finish
+     */
+    public static void exit() {
+        for (Activity activity :activityList) {
+            activity.finish();
+        }
+        //  System.exit(0);
     }
 
 }

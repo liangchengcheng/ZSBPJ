@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lcc.entity.Type1;
@@ -21,8 +22,8 @@ import butterknife.ButterKnife;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
- * Description:  JSAdapter
+ * Date:         2016年07月01日13:40:00
+ * Description:  ChoiceType2Adapter
  */
 public class ChoiceType2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -51,7 +52,7 @@ public class ChoiceType2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         holder.tv_nickname.setText(title);
         if (mListener != null) {
-            holder.ll_all.setOnClickListener(new OnClickListener() {
+            holder.rl_choice.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onItemClick(weekData);
@@ -72,8 +73,8 @@ public class ChoiceType2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.ll_all)
-        CardView ll_all;
+        @Bind(R.id.rl_choice)
+        RelativeLayout rl_choice;
 
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
