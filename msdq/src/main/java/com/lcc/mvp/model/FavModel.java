@@ -10,7 +10,7 @@ import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 public class FavModel {
 
     /**
-     * 获取公司下面的面试资料的列表
+     * 获取自己的收藏的列表
      */
     public OkHttpRequest getFavList(int page,String type, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();

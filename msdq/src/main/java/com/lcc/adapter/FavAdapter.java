@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lcc.entity.CompanyTest;
@@ -34,24 +35,17 @@ import zsbpj.lccpj.frame.ImageManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  JSAdapter
+ * Description:  FavAdapter(收藏的适配器)
  */
 public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
 
-    private List<FavEntity> mList = new ArrayList<>();
-
-    /**
-     * 是否设置了footer
-     */
     private boolean hasFooter;
-
-    /**
-     * 是否继续加载数据
-     */
     private boolean hasMoreData = true;
+
+    private List<FavEntity> mList = new ArrayList<>();
 
     public void bind(List<FavEntity> messages) {
         this.mList = messages;
@@ -106,7 +100,7 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             holder.tv_nickname.setText(styledText, TextView.BufferType.SPANNABLE);
             if (mListener != null) {
-                holder.ll_all.setOnClickListener(new OnClickListener() {
+                holder.ll_item.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mListener.onItemClick(weekData);
@@ -127,9 +121,8 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.ll_all)
-        CardView ll_all;
-
+        @Bind(R.id.ll_item)
+        RelativeLayout ll_item;
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
 
@@ -143,7 +136,6 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

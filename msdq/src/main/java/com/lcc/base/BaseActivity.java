@@ -73,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected ThemeUtils.Theme getCurrentTheme() {
-        int value = preferenceUtils.getIntParam(getString(R.string.change_theme_key), 0);
+        int value = preferenceUtils.getIntParam(getString(R.string.change_theme_key), 2);
         return ThemeUtils.Theme.mapValueToTheme(value);
     }
 

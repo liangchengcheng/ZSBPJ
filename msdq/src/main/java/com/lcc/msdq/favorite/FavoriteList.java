@@ -40,8 +40,8 @@ public class FavoriteList extends BaseActivity{
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的文章");
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的资料");
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的真题");
+        adapter.addFragment(ArticleFragment.newInstance("收藏的资料"), "收藏的资料");
+        adapter.addFragment(ArticleFragment.newInstance("收藏的真题"), "收藏的真题");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

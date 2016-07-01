@@ -180,4 +180,10 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
             }
         }, 500);
     }
+
+    @Override
+    public void onReloadClicked() {
+        currentPage = 1;
+        mPresenter.getData(currentPage,type);
+    }
 }

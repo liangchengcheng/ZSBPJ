@@ -74,7 +74,7 @@ public class ThemeUtils {
 
         static Theme getDefault()
         {
-            return RED;
+            return BLUE;
         }
         public int getIntValue() {
             return mValue;

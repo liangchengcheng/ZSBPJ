@@ -53,5 +53,15 @@ public class DataManager {
         return null;
     }
 
+    public static String getUserName() {
+        Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder()
+                .build();
+        List<UserInfo> user = query.list();
+        if (user != null && user.size() > 0) {
+            return user.get(0).getPhone();
+        }
+        return "";
+    }
+
 
 }
