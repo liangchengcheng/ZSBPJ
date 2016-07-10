@@ -28,12 +28,14 @@ public class TestPresenterImpl implements TestPresenter {
         model = new TestModel();
     }
 
-    private void loadData(final int page,final boolean get_data) {
+    private void loadData(final int page,final String options,final String startTime,
+                          final String endTime,final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
+
         final long current_time = TimeUtils.getCurrentTime();
-        model.getTestList(page, new ResultCallback<String>() {
+        model.getTestList(page, options,startTime,endTime,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -99,17 +101,17 @@ public class TestPresenterImpl implements TestPresenter {
     }
 
     @Override
-    public void getData(int page) {
-        loadData(page,true);
+    public void getData(int page,String options,String startTime,String endTime) {
+        loadData(page,options,startTime,endTime,true);
     }
 
     @Override
-    public void loadMore(int page) {
-        loadData(page,false);
+    public void loadMore(int page,String options,String startTime,String endTime) {
+        loadData(page,options,startTime,endTime,false);
     }
 
     @Override
-    public void refresh() {
-        loadData(1,false);
+    public void refresh(int page,String options,String startTime,String endTime) {
+        loadData(1,options,startTime,endTime,false);
     }
 }

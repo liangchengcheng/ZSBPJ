@@ -60,14 +60,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private List<Object> mList = new ArrayList<>();
 
-    /**
-     * 是否设置了footer
-     */
     private boolean hasFooter;
-
-    /**
-     * 是否继续加载数据
-     */
     private boolean hasMoreData = true;
 
     public void bind(List<Object> messages) {

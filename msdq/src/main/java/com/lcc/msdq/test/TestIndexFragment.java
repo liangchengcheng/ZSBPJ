@@ -1,6 +1,5 @@
 package com.lcc.msdq.test;
 
-
 import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.lcc.adapter.CompanyAdapter;
 import com.lcc.adapter.MyAdapter;
 import com.lcc.adapter.SubAdapter;
@@ -33,12 +31,10 @@ import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
@@ -46,7 +42,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         PopupWindow.OnDismissListener,
         TestAdapter.OnItemClickListener, TestView,View.OnClickListener {
 
-    private LinearLayout ll_quyu, ll_jiage, ll_huxing, lv1_layout;
+    private LinearLayout lv1_layout;
     private ListView lv1, lv2;
     private TextView quyu, huxing, jiage;
     private ImageView icon1, icon2, icon3;
@@ -88,10 +84,11 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.test_fragment, null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         ll_layout = view.findViewById(R.id.ll_layout);
-        ll_quyu = (LinearLayout) view.findViewById(R.id.ll_quyu);
+
         view.findViewById(R.id.ll_quyu).setOnClickListener(this);
         view.findViewById(R.id.ll_jiage).setOnClickListener(this);
         view.findViewById(R.id.ll_huxing).setOnClickListener(this);

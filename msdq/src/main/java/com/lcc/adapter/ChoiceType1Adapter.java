@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  JSAdapter
+ * Description:  ChoiceType1Adapter
  */
 public class ChoiceType1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

@@ -20,9 +20,11 @@ public  abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recyc
     private ArrayList<T> mDatas = new ArrayList<>();
     private View mHeaderView;
     private OnItemClickListener mListener;
+
     public void setOnItemClickListener(OnItemClickListener li) {
         mListener = li;
     }
+
     public void setHeaderView(View headerView) {
         mHeaderView = headerView;
         notifyItemInserted(0);
@@ -30,21 +32,25 @@ public  abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recyc
     public View getHeaderView() {
         return mHeaderView;
     }
+
     public void addDatas(ArrayList<T> datas) {
         mDatas.addAll(datas);
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemViewType(int position) {
         if(mHeaderView == null) return TYPE_NORMAL;
         if(position == 0) return TYPE_HEADER;
         return TYPE_NORMAL;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         if(mHeaderView != null && viewType == TYPE_HEADER) return new Holder(mHeaderView);
         return onCreate(parent, viewType);
     }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if(getItemViewType(position) == TYPE_HEADER) return;
@@ -60,6 +66,7 @@ public  abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recyc
             });
         }
     }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -75,6 +82,7 @@ public  abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recyc
             });
         }
     }
+
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
@@ -86,21 +94,27 @@ public  abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recyc
             p.setFullSpan(true);
         }
     }
+
     public int getRealPosition(RecyclerView.ViewHolder holder) {
         int position = holder.getLayoutPosition();
         return mHeaderView == null ? position : position - 1;
     }
+
     @Override
     public int getItemCount() {
         return mHeaderView == null ? mDatas.size() : mDatas.size() + 1;
     }
+
     public abstract RecyclerView.ViewHolder onCreate(ViewGroup parent, final int viewType);
+
     public abstract void onBind(RecyclerView.ViewHolder viewHolder, int RealPosition, T data);
+
     public class Holder extends RecyclerView.ViewHolder {
         public Holder(View itemView) {
             super(itemView);
         }
     }
+
     public interface OnItemClickListener<T> {
         void onItemClick(int position, T data);
     }

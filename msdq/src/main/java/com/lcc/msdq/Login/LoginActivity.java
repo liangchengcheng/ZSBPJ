@@ -167,12 +167,15 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.textView_create_account:
-                startActivity(new Intent(this, SignUpActivity.class));
-                finish();
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                intent.putExtra("from","welcome");
+                startActivity(intent);
                 break;
+
             case R.id.button_sign:
                 login();
                 break;
+
             case R.id.textView_reset_password:
                 startActivity(new Intent(this, ResetPasswordActivity.class));
                 finish();

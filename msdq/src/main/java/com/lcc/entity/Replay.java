@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
- * Description:  开始或者结束轮训器
+ * Date:         2016年07月01日18:07:13
+ * Description:  回复
  */
 public class Replay implements Serializable {
 

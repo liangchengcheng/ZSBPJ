@@ -34,7 +34,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
         ImageView ly = (ImageView) findViewById(R.id.ly);
         ll_bottom_view = (LinearLayout) findViewById(R.id.ll_bottom_view);
-        findViewById(R.id.tv_tomain).setOnClickListener(this);
         findViewById(R.id.tv_toregister).setOnClickListener(this);
         findViewById(R.id.tv_tologin).setOnClickListener(this);
         FrameLayout reveal = (FrameLayout) findViewById(R.id.reveal);
@@ -103,16 +102,10 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 break;
 
-            case R.id.tv_tomain:
+            case R.id.tv_toregister:
                 intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-                break;
-
-            case R.id.tv_toregister:
-                intent = new Intent(SplashActivity.this, SignUpActivity.class);
-                intent.putExtra("from","welcome");
-                startActivity(intent);
                 break;
         }
     }

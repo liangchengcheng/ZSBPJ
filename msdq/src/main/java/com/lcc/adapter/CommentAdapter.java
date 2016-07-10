@@ -31,7 +31,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  IndexMenuAdapter
+ * Description:  CommentAdapter
  */
 public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -40,14 +40,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private List<Comments> mList = new ArrayList<>();
 
-    /**
-     * 是否设置了footer
-     */
     private boolean hasFooter;
-
-    /**
-     * 是否继续加载数据
-     */
     private boolean hasMoreData = true;
 
     public void bind(List<Comments> messages) {

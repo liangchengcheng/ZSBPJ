@@ -72,6 +72,7 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
         initRefreshView(view);
         initRecycleView(view);
     }
+
     private void initRefreshView(View view) {
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
@@ -186,4 +187,5 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
         currentPage = 1;
         mPresenter.getData(currentPage,type);
     }
+
 }

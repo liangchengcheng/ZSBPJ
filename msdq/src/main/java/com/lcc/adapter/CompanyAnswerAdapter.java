@@ -30,7 +30,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  AnswerIndexAdapter
+ * Description:  CompanyAnswerAdapter
  */
 public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

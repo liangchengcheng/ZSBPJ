@@ -37,14 +37,8 @@ public class FlowMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private List<FlowIEntity> mList = new ArrayList<>();
 
-    /**
-     * 是否设置了footer
-     */
-    private boolean hasFooter;
 
-    /**
-     * 是否继续加载数据
-     */
+    private boolean hasFooter;
     private boolean hasMoreData = true;
 
     public void bind(List<FlowIEntity> messages) {

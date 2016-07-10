@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.lcc.msdq.R;
 
 
-@SuppressLint("InflateParams") public class SubAdapter extends BaseAdapter {
+@SuppressLint("InflateParams")
+public class SubAdapter extends BaseAdapter {
 
 	Context context;
 	LayoutInflater layoutInflater;
