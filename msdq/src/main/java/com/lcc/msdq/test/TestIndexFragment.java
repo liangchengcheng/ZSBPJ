@@ -62,7 +62,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     private String start_time="全部时间";
     private String end_time="全部时间";
-    private String options;
+    private String options="全部题型";
     private String order;
 
     public static Fragment newInstance() {
@@ -84,7 +84,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.getData(currentPage,options,"","");
+        mPresenter.getData(currentPage,options,start_time,end_time);
     }
 
     @Nullable
@@ -182,17 +182,16 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         switch (idx) {
             case 1:
                 quyu.setText(text);
-
                 start_time= TimeUtils.getStartTime();
                 end_time=TimeUtils.getEndTime(text);
-                LogUtils.e("lccx","start_time"+start_time);
-                LogUtils.e("lccx","end_time"+start_time);
-                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                currentPage=1;
+                mPresenter.getData(currentPage,options,start_time,end_time);
                 break;
             case 2:
                 jiage.setText(text);
                 options = text;
-                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                currentPage=1;
+                mPresenter.getData(currentPage,options,start_time,end_time);
                 break;
             case 3:
                 huxing.setText(text);
