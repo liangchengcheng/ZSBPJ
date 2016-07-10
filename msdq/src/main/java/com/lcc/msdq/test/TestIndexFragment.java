@@ -30,12 +30,15 @@ import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.LogUtils;
+import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class TestIndexFragment extends S_RefreshAndLoadFragment implements
@@ -47,17 +50,20 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private TextView quyu, huxing, jiage;
     private ImageView icon1, icon2, icon3;
     private LoadingLayout loading_layout;
+    private View ll_layout;
 
     private int screenWidth;
     private int screenHeight;
     private int idx;
-    private MyAdapter madapter;
-    private View ll_layout;
-    static final int ACTION_NONE = 0;
 
+    private MyAdapter madapter;
     private TestAdapter mAdapter;
-    private String tj1, tj2, tj3;
     private TestPresenter mPresenter;
+
+    private String start_time="全部时间";
+    private String end_time="全部时间";
+    private String options;
+    private String order;
 
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment();
@@ -67,6 +73,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     protected void onFragmentCreate() {
         currentPage=1;
+        options= SharePreferenceUtil.getUserTypeId();
         super.onFragmentCreate();
         mPresenter = new TestPresenterImpl(this);
         RecyclerView mRecyclerView = getRecyclerView();
@@ -77,7 +84,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.getData(currentPage);
+        mPresenter.getData(currentPage,options,"","");
     }
 
     @Nullable
@@ -105,7 +112,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentLoadMore() {
-        mPresenter.loadMore(getCurrentPage());
+        mPresenter.loadMore(getCurrentPage(),options,start_time,end_time);
     }
 
     @Override
@@ -115,7 +122,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        mPresenter.refresh();
+        currentPage=1;
+        mPresenter.refresh(currentPage,options,start_time,end_time);
     }
 
     public void showPopupWindow(View anchor, int flag) {
@@ -174,17 +182,21 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         switch (idx) {
             case 1:
                 quyu.setText(text);
-                tj1 = text;
+
+                start_time= TimeUtils.getStartTime();
+                end_time=TimeUtils.getEndTime(text);
+                LogUtils.e("lccx","start_time"+start_time);
+                LogUtils.e("lccx","end_time"+start_time);
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
             case 2:
                 jiage.setText(text);
-                tj2 = text;
+                options = text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
             case 3:
                 huxing.setText(text);
-                tj3 = text;
+                order = text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
         }

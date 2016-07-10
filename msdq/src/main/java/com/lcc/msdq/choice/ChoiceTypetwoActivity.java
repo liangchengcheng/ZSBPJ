@@ -112,7 +112,7 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     @Override
     public void onItemClick(Type2 data) {
         SharePreferenceUtil.setUserType(data.getS_name());
-        SharePreferenceUtil.setUserType(data.getS_name());
+        SharePreferenceUtil.setUserTypeId(data.getS_id());
         startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));
         finish();
     }

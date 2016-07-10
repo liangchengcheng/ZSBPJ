@@ -11,6 +11,8 @@ public class SharePreferenceUtil {
     public static final String USER_TK = "user_tk";
     //职业类型
     public static final String USER_TYPE = "user_type";
+    //职业类型id
+    public static final String USER_TYPE_ID = "user_type_id";
     //是否已经看了首页
     public static final String GUIDE = "guide";
     //是否开启缓存
@@ -97,6 +99,22 @@ public class SharePreferenceUtil {
     public static void setUpdateTime(String value){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
         sharedPreferences.edit().putString(UPDATE_TIME,value).apply();
+    }
+
+    /**
+     * 获取职业类型ID
+     */
+    public static String getUserTypeId() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        return sharedPreferences.getString(USER_TYPE_ID, "");
+    }
+
+    /**
+     * 存放职业类型ID
+     */
+    public static void setUserTypeId(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FrameManager.getAppContext());
+        sharedPreferences.edit().putString(USER_TYPE_ID,value).apply();
     }
 
 }
