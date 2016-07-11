@@ -63,7 +63,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private String start_time="全部时间";
     private String end_time="全部时间";
     private String options="全部题型";
-    private String order;
 
     public static Fragment newInstance() {
         Fragment fragment = new TestIndexFragment();
@@ -73,7 +72,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     protected void onFragmentCreate() {
         currentPage=1;
-        options= SharePreferenceUtil.getUserTypeId();
         super.onFragmentCreate();
         mPresenter = new TestPresenterImpl(this);
         RecyclerView mRecyclerView = getRecyclerView();
@@ -195,7 +193,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                 break;
             case 3:
                 huxing.setText(text);
-                order = text;
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 break;
         }

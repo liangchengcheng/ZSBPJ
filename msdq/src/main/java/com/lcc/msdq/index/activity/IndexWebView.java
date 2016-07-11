@@ -38,6 +38,8 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
 
     public static final String IMAGE_URL = "image";
 
+    public static final String TITLE = "title";
+
     private Toolbar toolbar;
 
     private WebView webView;
@@ -53,6 +55,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
 
     private String id;
     private String image_url;
+    private String title;
 
     private IndexContentPresenter indexContentPresenter;
 
@@ -67,6 +70,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     private void initData() {
         id = getIntent().getStringExtra(KEY_URL);
         image_url = getIntent().getStringExtra(IMAGE_URL);
+        title = getIntent().getStringExtra(TITLE);
         indexContentPresenter = new IndexContentPresenterImpl(this);
     }
 
@@ -75,7 +79,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("第五种基本能力是真你的被发现了？");
+        toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

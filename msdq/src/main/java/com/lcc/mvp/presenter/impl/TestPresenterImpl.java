@@ -28,14 +28,14 @@ public class TestPresenterImpl implements TestPresenter {
         model = new TestModel();
     }
 
-    private void loadData(final int page,final String options,final String startTime,
-                          final String endTime,final boolean get_data) {
+    private void loadData(final int page, final String options, final String startTime,
+                          final String endTime, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
 
         final long current_time = TimeUtils.getCurrentTime();
-        model.getTestList(page, options,startTime,endTime,new ResultCallback<String>() {
+        model.getTestList(page, options, startTime, endTime, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -51,17 +51,17 @@ public class TestPresenterImpl implements TestPresenter {
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
                 }
-                updateView(response, delay, page,get_data);
+                updateView(response, delay, page, get_data);
             }
         });
     }
 
-    private void updateView(final String entities, int delay, final int page,final boolean get_data) {
+    private void updateView(final String entities, int delay, final int page, final boolean get_data) {
 
-           new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   try {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
                     JSONObject jsonObject = new JSONObject(entities);
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
@@ -96,22 +96,22 @@ public class TestPresenterImpl implements TestPresenter {
                     }
                     e.printStackTrace();
                 }
-               }
-           }, delay);
+            }
+        }, delay);
     }
 
     @Override
-    public void getData(int page,String options,String startTime,String endTime) {
-        loadData(page,options,startTime,endTime,true);
+    public void getData(int page, String options, String startTime, String endTime) {
+        loadData(page, options, startTime, endTime, true);
     }
 
     @Override
-    public void loadMore(int page,String options,String startTime,String endTime) {
-        loadData(page,options,startTime,endTime,false);
+    public void loadMore(int page, String options, String startTime, String endTime) {
+        loadData(page, options, startTime, endTime, false);
     }
 
     @Override
-    public void refresh(int page,String options,String startTime,String endTime) {
-        loadData(1,options,startTime,endTime,false);
+    public void refresh(int page, String options, String startTime, String endTime) {
+        loadData(1, options, startTime, endTime, false);
     }
 }
