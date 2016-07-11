@@ -82,11 +82,14 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
-            return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_item, parent, false));
+            return new NormalViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_answer_item, parent, false));
         } else if (viewType == FOOTER_ITEM) {
-            return new FootViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_foot_loading, parent, false));
+            return new FootViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.layout_foot_loading, parent, false));
         } else {
-            return new HeadViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_answer_header, parent, false));
+            return new HeadViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_answer_header, parent, false));
         }
     }
 
@@ -99,8 +102,19 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tv_name.setMaxLineCount(3);
             holder.tv_name.setContent(object.getSummary());
             holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
-            holder.tv_title.setText(object.getTitle());
 
+            holder.tv_title.setText(object.getTitle());
+            holder.tv_llrs.setText("浏览:"+object.getL_num());
+            holder.tv_llsc.setText("收藏"+object.getZ_num());
+
+            if(favListener != null) {
+                holder.tv_sc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        favListener.onFavClick();
+                    }
+                });
+            }
         } else if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
@@ -176,15 +190,18 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         @Bind(R.id.tv_llrs)
         TextView tv_llrs;
 
+        @Bind(R.id.tv_llsc)
+        TextView tv_llsc;
+
+        @Bind(R.id.tv_sc)
+        TextView tv_sc;
+
         public HeadViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
 
-    /**
-     * 头部的布局
-     */
     class FootViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.mProgressView)
@@ -244,5 +261,15 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void setOnItemClickListener(OnItemClickListener li) {
         this.mListener = li;
+    }
+
+    public interface  OnFavClickListener {
+        void onFavClick();
+    }
+
+    private OnFavClickListener favListener;
+
+    public void setOnFavClickListener(OnFavClickListener favListener) {
+        this.favListener = favListener;
     }
 }

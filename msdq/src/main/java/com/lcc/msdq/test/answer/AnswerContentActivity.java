@@ -61,7 +61,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void initView() {
-        findViewById(R.id.ll_comments).setOnClickListener(this);
+//        findViewById(R.id.ll_comments).setOnClickListener(this);
         user_head= (ImageView) findViewById(R.id.user_head);
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
         fabButton.setOnClickListener(new View.OnClickListener() {

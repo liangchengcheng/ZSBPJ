@@ -52,17 +52,19 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  AnswerIndexActivity
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener ,
+        AnswerIndexAdapter.OnItemClickListener,AnswerIndexAdapter.OnFavClickListener{
 
     public static final String ID="id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private LoadingLayout loading_layout;
-    private AnswerIndexAdapter mAdapter;
-    private TestAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
+
     private String fid = "5e7f684866bee25219269994f4784573";
     private TestEntity entity;
+    private TestAnswerPresenter mPresenter;
+    private AnswerIndexAdapter mAdapter;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -100,15 +102,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
         mAdapter = new AnswerIndexAdapter();
-        mAdapter.setOnItemClickListener(new AnswerIndexAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Answer data) {
-                Intent intent = new Intent(AnswerIndexActivity.this, AnswerContentActivity.class);
-                intent.putExtra("data", data);
-                startActivity(intent);
-            }
-        });
+        mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnFavClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -246,5 +243,17 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 startActivity(new Intent(AnswerIndexActivity.this, AnswerAddActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(Answer data) {
+        Intent intent = new Intent(AnswerIndexActivity.this, AnswerContentActivity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onFavClick() {
+        FrameManager.getInstance().toastPrompt("收藏成功");
     }
 }
