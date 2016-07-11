@@ -69,11 +69,7 @@ public class TestPresenterImpl implements TestPresenter {
                     if (status == 1) {
                         List<TestEntity> weekDatas = GsonUtils.fromJsonArray(result, TestEntity.class);
                         if (page == 1) {
-                            if (weekDatas != null && weekDatas.size() > 0) {
-                                view.refreshView(weekDatas);
-                            } else {
-                                view.getDataEmpty();
-                            }
+                            view.refreshView(weekDatas);
                         } else {
                             view.loadMoreView(weekDatas);
                         }

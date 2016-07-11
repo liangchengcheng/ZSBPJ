@@ -60,7 +60,7 @@ public class TimeUtils {
         return  sdf.format(dateFrom);
     }
 
-    public static String getStartTime(){
+    public static String getEndTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
         Date dateNow = new Date();
         Calendar cl = Calendar.getInstance();
@@ -69,7 +69,7 @@ public class TimeUtils {
         return  sdf.format(dateFrom);
     }
 
-    public static String getEndTime(String tj){
+    public static String getStartTime(String tj){
        if (tj.equals("最近一周")){
             return getAWeek();
        }else if (tj.equals("最近一月")){

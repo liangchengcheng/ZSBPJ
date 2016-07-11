@@ -180,8 +180,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         switch (idx) {
             case 1:
                 quyu.setText(text);
-                start_time= TimeUtils.getStartTime();
-                end_time=TimeUtils.getEndTime(text);
+                start_time= TimeUtils.getStartTime(text);
+                end_time=TimeUtils.getEndTime();
                 currentPage=1;
                 mPresenter.getData(currentPage,options,start_time,end_time);
                 break;
@@ -255,7 +255,11 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public void refreshView(List<TestEntity> entities) {
         showRefreshData(entities);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        if (entities == null || entities.size() == 0) {
+            getDataEmpty();
+        } else {
+            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }
     }
 
     @Override
