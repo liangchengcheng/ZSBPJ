@@ -87,15 +87,15 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
             String title = weekData.getFav_title();
-            String time = weekData.getCreated_time();
+            String time = weekData.getC_time();
 
             SpannableString styledText = new SpannableString("收藏了" + title + time);
             styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
                     R.style.style0), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
-                    R.style.style1), 3, 3+title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    R.style.style1), 3, 3 + title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
-                    R.style.style2), 3+title.length(), 3+title.length()+time.length(),
+                            R.style.style2), 3 + title.length(), 3 + title.length() + time.length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             holder.tv_nickname.setText(styledText, TextView.BufferType.SPANNABLE);

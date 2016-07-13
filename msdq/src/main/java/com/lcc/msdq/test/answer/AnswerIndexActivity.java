@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.Md5Utils;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -52,10 +53,10 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  AnswerIndexActivity
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener ,
-        AnswerIndexAdapter.OnItemClickListener,AnswerIndexAdapter.OnFavClickListener{
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
+        AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener {
 
-    public static final String ID="id";
+    public static final String ID = "id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private LoadingLayout loading_layout;
@@ -72,6 +73,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+    private boolean isfavEntity;
 
     public static void startAnswerIndexActivity(TestEntity entity, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, AnswerIndexActivity.class);
@@ -81,13 +83,13 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     protected void initView() {
-        currentPage=1;
-        entity= (TestEntity) getIntent().getSerializableExtra(ID);
+        currentPage = 1;
+        entity = (TestEntity) getIntent().getSerializableExtra(ID);
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
         initRecycleView();
-        mPresenter.getData(currentPage,fid);
+        mPresenter.getData(currentPage, fid);
     }
 
     private void initRefreshView() {
@@ -166,6 +168,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 objects.add(entities.get(i));
             }
             mAdapter.bind(objects);
+            mAdapter.setFav(isfavEntity);
         }
         mSwipeRefreshWidget.setRefreshing(false);
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
@@ -191,6 +194,14 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 mAdapter.notifyDataSetChanged();
             }
         }, delay);
+    }
+
+    @Override
+    public void isHaveFav(boolean isfavEntity) {
+        this.isfavEntity = isfavEntity;
+        if (mAdapter != null) {
+            mAdapter.setFav(isfavEntity);
+        }
     }
 
     @Override

@@ -61,16 +61,9 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void initView() {
-//        findViewById(R.id.ll_comments).setOnClickListener(this);
-        user_head= (ImageView) findViewById(R.id.user_head);
-        fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
-        fabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // nest.smoothScrollTo(0, 0);
-            }
-        });
-        webView= (WebView) findViewById(R.id.webView);
+        findViewById(R.id.floatingComment).setOnClickListener(this);
+        user_head = (ImageView) findViewById(R.id.user_head);
+        webView = (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -102,13 +95,15 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         menu.removeItem(R.id.action_use_browser);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " + "wwww.baidu.com" + getString(R.string.share_tail));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " +
+                        "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
                 //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
@@ -148,23 +143,37 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     }
 
     public void setData() {
-        if (answer==null){
+        if (answer == null) {
             return;
         }
-        ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,answer.getUser_image(),user_head);
-        try{
-            webView.loadDataWithBaseURL("about:blank",answer.getAnswer(), "text/html", "utf-8", null);
-           // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
-        }catch (Exception e){
+        ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,
+                answer.getUser_image(), user_head);
+        try {
+            webView.loadDataWithBaseURL("about:blank", answer.getAnswer(),
+                    "text/html", "utf-8", null);
+            // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.ll_comments:
+        switch (v.getId()) {
+            case R.id.floatingComment:
                 startActivity(new Intent(AnswerContentActivity.this, CommentsActivity.class));
+                break;
+
+            case R.id.floatingReport:
+                FrameManager.getInstance().toastPrompt("举报成功");
+                break;
+
+            case R.id.floatingCollect:
+                FrameManager.getInstance().toastPrompt("收藏成功");
+                break;
+
+            case R.id.floatingShare:
+                FrameManager.getInstance().toastPrompt("分享成功");
                 break;
         }
     }

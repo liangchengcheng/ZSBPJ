@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.lcc.entity.Answer;
 import com.lcc.entity.Article;
+import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.TestAnswerModel;
@@ -70,6 +71,16 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
+
+                    String fav = jsonObject.getString("fav");
+                    List<FavEntity> favEntityList = GsonUtils.fromJsonArray(fav, FavEntity.class);
+
+                    if (favEntityList != null && favEntityList.size() > 0) {
+                        view.isHaveFav(true);
+                    } else {
+                        view.isHaveFav(false);
+                    }
+
                     if (status == 1) {
                         List<Answer> weekDatas = GsonUtils.fromJsonArray(result, Answer.class);
                         if (page == 1) {

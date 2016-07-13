@@ -9,7 +9,7 @@ import java.util.Date;
  * Author:  梁铖城
  * Email:   1038127753@qq.com
  * Date:    2015年12月15日10:47:52
- * Description:    {  }
+ * Description:    TimeUtils一个特殊的时间管理类
  */
 public class TimeUtils {
 

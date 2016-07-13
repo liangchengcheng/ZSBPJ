@@ -59,6 +59,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_znum"
                         android:background="@drawable/bg_android_blue_tag"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"

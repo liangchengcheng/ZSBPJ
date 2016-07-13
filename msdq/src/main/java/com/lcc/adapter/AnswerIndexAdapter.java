@@ -62,6 +62,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private boolean hasFooter;
     private boolean hasMoreData = true;
+    private boolean isFav;
 
     public void bind(List<Object> messages) {
         this.mList = messages;
@@ -104,17 +105,23 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
 
             holder.tv_title.setText(object.getTitle());
-            holder.tv_llrs.setText("浏览:"+object.getL_num());
-            holder.tv_llsc.setText("收藏"+object.getZ_num());
+            holder.tv_llrs.setText("浏览:" + object.getL_num());
+            holder.tv_llsc.setText("收藏" + object.getZ_num());
 
-            if(favListener != null) {
-                holder.tv_sc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        favListener.onFavClick();
-                    }
-                });
+            if (isFav) {
+                holder.tv_sc.setText("取消收藏");
+            } else {
+                holder.tv_sc.setText("收藏");
+                if (favListener != null) {
+                    holder.tv_sc.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            favListener.onFavClick();
+                        }
+                    });
+                }
             }
+
         } else if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
@@ -131,8 +138,8 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tv_name.setText(answer.getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
-
-            if(mListener != null) {
+            holder.tv_znum.setText(answer.getZ_num());
+            if (mListener != null) {
                 holder.ll_all.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -163,6 +170,9 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @Bind(R.id.tv_name)
         TextView tv_name;
+
+        @Bind(R.id.tv_znum)
+        TextView tv_znum;
 
         @Bind(R.id.iv_image)
         ImageView iv_image;
@@ -245,6 +255,11 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    public void setFav(boolean isFav) {
+        this.isFav = isFav;
+        notifyDataSetChanged();
+    }
+
     public void setHasMoreDataAndFooter(boolean hasMoreData, boolean hasFooter) {
         if (this.hasMoreData != hasMoreData || this.hasFooter != hasFooter) {
             this.hasMoreData = hasMoreData;
@@ -263,7 +278,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.mListener = li;
     }
 
-    public interface  OnFavClickListener {
+    public interface OnFavClickListener {
         void onFavClick();
     }
 

@@ -52,11 +52,11 @@
 
             <LinearLayout
                 android:id="@+id/ll_top"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,15 +115,14 @@
 
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/floatingMenu"
-            app:menu_colorNormal="?attr/colorPrimary"
-            app:menu_colorRipple="?attr/colorPrimary"
-            app:menu_colorPressed="?attr/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="20dp"
-            android:layout_marginRight="10dp">
-
+            android:layout_marginRight="10dp"
+            app:menu_colorNormal="?attr/colorPrimary"
+            app:menu_colorPressed="?attr/colorPrimary"
+            app:menu_colorRipple="?attr/colorPrimary">
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/floatingComment"
@@ -152,10 +151,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_menu_star"
-                app:fab_label="收藏"
                 app:fab_colorNormal="?attr/colorPrimary"
                 app:fab_colorPressed="?attr/colorPrimary"
                 app:fab_colorRipple="?attr/colorPrimary"
+                app:fab_label="收藏"
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton

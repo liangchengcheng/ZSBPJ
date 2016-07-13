@@ -26,8 +26,25 @@ public class FavEntity implements Serializable {
     private String author;
     private String nid;
     private String fav_title;
-    private String created_time;
-    private String updated_time;
+    private String c_time;
+
+    public String getU_time() {
+        return u_time;
+    }
+
+    public void setU_time(String u_time) {
+        this.u_time = u_time;
+    }
+
+    public String getC_time() {
+        return c_time;
+    }
+
+    public void setC_time(String c_time) {
+        this.c_time = c_time;
+    }
+
+    private String u_time;
     private String type;
 
     public String getId() {
@@ -68,22 +85,6 @@ public class FavEntity implements Serializable {
 
     public void setFav_title(String fav_title) {
         this.fav_title = fav_title;
-    }
-
-    public String getCreated_time() {
-        return created_time;
-    }
-
-    public void setCreated_time(String created_time) {
-        this.created_time = created_time;
-    }
-
-    public String getUpdated_time() {
-        return updated_time;
-    }
-
-    public void setUpdated_time(String updated_time) {
-        this.updated_time = updated_time;
     }
 
     public String getType() {

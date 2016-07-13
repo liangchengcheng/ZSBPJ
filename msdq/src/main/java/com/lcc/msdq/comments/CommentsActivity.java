@@ -45,7 +45,8 @@ import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
-        CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener, CommentsDialog.onChoiceListener {
+        CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
+        CommentsDialog.onChoiceListener {
 
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
     public static final String ID = "id";
@@ -82,10 +83,10 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
-    private String type="面试感想";
+    private String type = "面试感想";
 
 
-    public static void startUserProfileFromLocation(String id,String type, Activity startingActivity) {
+    public static void startUserProfileFromLocation(String id, String type, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, CommentsActivity.class);
         intent.putExtra(ID, id);
         intent.putExtra(TYPE, type);
@@ -98,8 +99,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         ButterKnife.bind(this);
         mPresenter = new CommentsPresenterImpl(this);
 
-        content_id=getIntent().getStringExtra(ID);
-        type=getIntent().getStringExtra(TYPE);
+        content_id = getIntent().getStringExtra(ID);
+        type = getIntent().getStringExtra(TYPE);
         //content_id = "46f337bddcb925c166bfac9acf96dea6";
         replay.setNid(content_id);
         replay.setType(type);
@@ -345,8 +346,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         }
     }
 
-    private void closeDialog(){
-        if (mDialog!=null&&mDialog.isShowing()){
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
     }
