@@ -37,7 +37,6 @@ public class FlowMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private List<FlowIEntity> mList = new ArrayList<>();
 
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
 

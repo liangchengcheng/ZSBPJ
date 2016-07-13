@@ -161,7 +161,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floatingComment:
-                startActivity(new Intent(AnswerContentActivity.this, CommentsActivity.class));
+                CommentsActivity.startUserProfileFromLocation(answer.getMid(),"资料答案",
+                        AnswerContentActivity.this);
                 break;
 
             case R.id.floatingReport:

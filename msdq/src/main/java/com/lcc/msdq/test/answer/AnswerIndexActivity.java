@@ -205,6 +205,28 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     @Override
+    public void FavSuccess() {
+        changeFavState(true);
+        FrameManager.getInstance().toastPrompt("收藏成功，然后进行操作");
+    }
+
+    @Override
+    public void FavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("收藏失败");
+    }
+
+    @Override
+    public void UnFavSuccess() {
+        changeFavState(false);
+        FrameManager.getInstance().toastPrompt("取消收藏成功");
+    }
+
+    @Override
+    public void UnFavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("取消收藏失败");
+    }
+
+    @Override
     public void onRefresh() {
         mSwipeRefreshWidget.postDelayed(new Runnable() {
             @Override
@@ -265,6 +287,17 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void onFavClick() {
-        FrameManager.getInstance().toastPrompt("收藏成功");
+        if (isfavEntity) {
+            mPresenter.Fav(entity, "资料问题");
+        } else {
+            mPresenter.UnFav(entity);
+        }
+    }
+
+    private void changeFavState(boolean state) {
+        this.isfavEntity = state;
+        if (mAdapter != null) {
+            mAdapter.setFav(isfavEntity);
+        }
     }
 }

@@ -72,7 +72,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private SimpleArcDialog mDialog;
 
     private int drawingStartLocation;
-    private String content_id;
+
     public static final String TYPE = "type";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -84,6 +84,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
     private String type = "面试感想";
+    private String content_id;
+
 
 
     public static void startUserProfileFromLocation(String id, String type, Activity startingActivity) {
@@ -101,7 +103,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
         content_id = getIntent().getStringExtra(ID);
         type = getIntent().getStringExtra(TYPE);
-        //content_id = "46f337bddcb925c166bfac9acf96dea6";
         replay.setNid(content_id);
         replay.setType(type);
         replay.setAuthor("18813149871");
@@ -110,6 +111,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         initRefreshView();
         initRecycleView();
         setupSendCommentButton();
+
         mPresenter.getData(1, content_id);
 
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
