@@ -27,6 +27,7 @@ import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
+import com.lcc.mvp.view.TestAnswerContentView;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
@@ -35,14 +36,13 @@ import zsbpj.lccpj.frame.ImageManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  AnswerContentActivity
+ * Description:  答案的详情界面
  */
-public class AnswerContentActivity extends BaseActivity implements View.OnClickListener {
+public class AnswerContentActivity extends BaseActivity implements View.OnClickListener,
+        TestAnswerContentView{
 
     private WebView webView;
-
     private ImageView user_head;
-
     private FloatingActionButton fabButton;
 
     private Answer answer;
@@ -177,5 +177,45 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 FrameManager.getInstance().toastPrompt("分享成功");
                 break;
         }
+    }
+
+    @Override
+    public void getLoading() {
+
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void isHaveFav(boolean isfavEntity) {
+
+    }
+
+    @Override
+    public void FavSuccess() {
+
+    }
+
+    @Override
+    public void FavFail(String msg) {
+
+    }
+
+    @Override
+    public void UnFavSuccess() {
+
+    }
+
+    @Override
+    public void UnFavFail(String msg) {
+
     }
 }
