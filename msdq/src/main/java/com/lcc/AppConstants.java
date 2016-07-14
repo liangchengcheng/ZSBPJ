@@ -117,6 +117,12 @@ public class AppConstants {
         public final static String DDELETEFAV = "/service/deleteFav";
 
         /**
+         * 获取某个人是否收藏了
+         */
+        public final static String ISFAV = "/service/isHaveUserFav";
+
+
+        /**
          * 获取所有评论的url
          */
         public final static String COMMENTS_URL = "/service/getCommentsbyId";

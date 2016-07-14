@@ -24,13 +24,38 @@ import zsbpj.lccpj.utils.TimeUtils;
 
 public class TestAnswerContentPresenterImpl implements TestAnswerContentPresenter {
 
-    private static final int DEF_DELAY = (int) (1 * 1000);
     private TestAnswerContentModel model;
     private TestAnswerContentView view;
 
     public TestAnswerContentPresenterImpl(TestAnswerContentView view) {
         this.view = view;
         model = new TestAnswerContentModel();
+    }
+
+    @Override
+    public void isFav(String nid) {
+        model.isfavAnswer(nid, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if (status == 1) {
+                        view.isHaveFav(true);
+                    } else {
+                        view.isHaveFav(false);
+                    }
+                } catch (Exception e) {
+                    view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override

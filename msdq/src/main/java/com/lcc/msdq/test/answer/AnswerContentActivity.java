@@ -1,5 +1,6 @@
 package com.lcc.msdq.test.answer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,10 +23,13 @@ import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
+import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.IndexContentPresenter;
+import com.lcc.mvp.presenter.TestAnswerContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
+import com.lcc.mvp.presenter.impl.TestAnswerContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.TestAnswerContentView;
 
@@ -46,6 +50,19 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     private FloatingActionButton fabButton;
 
     private Answer answer;
+    private TestEntity testEntity;
+    private TestAnswerContentPresenter testAnswerContentPresenter;
+
+    public static final String DATA = "data";
+    public static final String ANSWER = "answer";
+
+
+    public static void startAnswerContentActivity(TestEntity data,Answer answer, Activity startingActivity) {
+        Intent intent = new Intent(startingActivity, CommentsActivity.class);
+        intent.putExtra(ANSWER, answer);
+        intent.putExtra(DATA, data);
+        startingActivity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +73,9 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initData() {
-        answer = (Answer) getIntent().getSerializableExtra("data");
+        answer = (Answer) getIntent().getSerializableExtra(ANSWER);
+        testEntity = (TestEntity) getIntent().getSerializableExtra(DATA);
+        testAnswerContentPresenter=new TestAnswerContentPresenterImpl(this);
     }
 
     @Override
