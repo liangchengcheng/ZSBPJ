@@ -17,6 +17,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
@@ -47,6 +49,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     private WebView webView;
     private ImageView user_head;
     private FloatingActionButton floatingCollect;
+    private TextView tv_who;
 
     private Answer answer;
     private TestEntity testEntity;
@@ -83,6 +86,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         floatingCollect= (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingCollect.setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
+        tv_who= (TextView) findViewById(R.id.tv_who);
+        tv_who.setText(answer.getNickname()+"的回答");
         user_head = (ImageView) findViewById(R.id.user_head);
         webView = (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
