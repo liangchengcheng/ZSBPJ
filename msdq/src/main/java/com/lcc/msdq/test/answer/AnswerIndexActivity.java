@@ -62,7 +62,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
 
-    private String fid = "5e7f684866bee25219269994f4784573";
+    private String fid;
     private TestEntity entity;
     private TestAnswerPresenter mPresenter;
     private AnswerIndexAdapter mAdapter;
@@ -85,6 +85,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     protected void initView() {
         currentPage = 1;
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
+        fid=entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
@@ -207,7 +208,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     public void FavSuccess() {
         changeFavState(true);
-        FrameManager.getInstance().toastPrompt("收藏成功，然后进行操作");
+        FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
     @Override
@@ -288,7 +289,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void onFavClick() {
-        if (isfavEntity) {
+        if (!isfavEntity) {
             mPresenter.Fav(entity, "资料问题");
         } else {
             mPresenter.UnFav(entity);

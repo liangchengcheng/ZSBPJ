@@ -110,16 +110,21 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             if (isFav) {
                 holder.tv_sc.setText("取消收藏");
+                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
+                        .getColor(R.color.retry_button_background_stroke));
             } else {
+                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
+                        .getColor(R.color.common_android_tag_bg));
                 holder.tv_sc.setText("收藏");
-                if (favListener != null) {
-                    holder.tv_sc.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            favListener.onFavClick();
-                        }
-                    });
-                }
+            }
+
+            if (favListener != null) {
+                holder.tv_sc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        favListener.onFavClick();
+                    }
+                });
             }
 
         } else if (viewHolder instanceof FootViewHolder) {
