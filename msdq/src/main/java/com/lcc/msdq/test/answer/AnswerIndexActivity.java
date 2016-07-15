@@ -281,7 +281,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     public void onItemClick(Answer data) {
         Intent intent = new Intent(AnswerIndexActivity.this, AnswerContentActivity.class);
-        intent.putExtra("data", data);
+        intent.putExtra(AnswerContentActivity.DATA, entity);
+        intent.putExtra(AnswerContentActivity.ANSWER, data);
         startActivity(intent);
     }
 
