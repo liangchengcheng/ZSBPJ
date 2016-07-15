@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
-
+import com.github.clans.fab.FloatingActionButton;
 import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
@@ -47,7 +46,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     private WebView webView;
     private ImageView user_head;
-    private FloatingActionButton fabButton;
+    private FloatingActionButton floatingCollect;
 
     private Answer answer;
     private TestEntity testEntity;
@@ -55,10 +54,11 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     public static final String DATA = "data";
     public static final String ANSWER = "answer";
+    private boolean isFav;
 
 
     public static void startAnswerContentActivity(TestEntity data,Answer answer, Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, CommentsActivity.class);
+        Intent intent = new Intent(startingActivity, AnswerContentActivity.class);
         intent.putExtra(ANSWER, answer);
         intent.putExtra(DATA, data);
         startingActivity.startActivity(intent);
@@ -67,7 +67,6 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
         initView();
         setData();
     }
@@ -80,6 +79,9 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void initView() {
+        initData();
+        floatingCollect= (FloatingActionButton) findViewById(R.id.floatingCollect);
+        floatingCollect.setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
         user_head = (ImageView) findViewById(R.id.user_head);
         webView = (WebView) findViewById(R.id.webView);
@@ -95,6 +97,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
+        testAnswerContentPresenter.isFav(answer.getMid());
     }
 
     @Override
@@ -124,7 +127,6 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " +
                         "wwww.baidu.com" + getString(R.string.share_tail));
                 shareIntent.setType("text/plain");
-                //设置分享列表的标题，并且每次都显示分享列表
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
         }
@@ -189,7 +191,11 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.floatingCollect:
-                FrameManager.getInstance().toastPrompt("收藏成功");
+                if (isFav){
+                    testAnswerContentPresenter.UnFav(answer);
+                }else {
+                    testAnswerContentPresenter.Fav(answer,"资料答案",testEntity.getTitle());
+                }
                 break;
 
             case R.id.floatingShare:
@@ -215,26 +221,33 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void isHaveFav(boolean isfavEntity) {
-
+        this.isFav=isfavEntity;
+        if (isfavEntity){
+            floatingCollect.setLabelText("取消收藏");
+        }else {
+            floatingCollect.setLabelText("收藏");
+        }
     }
 
     @Override
     public void FavSuccess() {
-
+        isHaveFav(true);
+        FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
     @Override
     public void FavFail(String msg) {
-
+        FrameManager.getInstance().toastPrompt("收藏失败");
     }
 
     @Override
     public void UnFavSuccess() {
-
+        isHaveFav(false);
+        FrameManager.getInstance().toastPrompt("取消收藏成功");
     }
 
     @Override
     public void UnFavFail(String msg) {
-
+        FrameManager.getInstance().toastPrompt("取消收藏失败");
     }
 }

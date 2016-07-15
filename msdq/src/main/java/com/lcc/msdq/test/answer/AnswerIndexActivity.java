@@ -61,6 +61,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private LinearLayoutManager mLayoutManager;
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
+    private TextView tv_count;
 
     private String fid;
     private TestEntity entity;
@@ -84,6 +85,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     protected void initView() {
         currentPage = 1;
+        tv_count= (TextView) findViewById(R.id.tv_count);
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
         fid=entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
@@ -281,10 +283,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void onItemClick(Answer data) {
-        Intent intent = new Intent(AnswerIndexActivity.this, AnswerContentActivity.class);
-        intent.putExtra(AnswerContentActivity.DATA, entity);
-        intent.putExtra(AnswerContentActivity.ANSWER, data);
-        startActivity(intent);
+        AnswerContentActivity.startAnswerContentActivity(entity,data,AnswerIndexActivity.this);
+        Log.e("lccx",data.getMid());
     }
 
     @Override
@@ -301,5 +301,12 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         if (mAdapter != null) {
             mAdapter.setFav(isfavEntity);
         }
+    }
+
+    /**
+     * 设置当前收到多少个回答
+     */
+    private void setCount(){
+
     }
 }

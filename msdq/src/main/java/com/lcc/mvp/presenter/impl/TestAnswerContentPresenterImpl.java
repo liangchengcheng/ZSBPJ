@@ -1,6 +1,7 @@
 package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.lcc.entity.Answer;
 import com.lcc.entity.FavEntity;
@@ -45,7 +46,8 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if (status == 1) {
+                    String result=jsonObject.getString("result");
+                    if (status == 1&&!result.equals("[]")) {
                         view.isHaveFav(true);
                     } else {
                         view.isHaveFav(false);
