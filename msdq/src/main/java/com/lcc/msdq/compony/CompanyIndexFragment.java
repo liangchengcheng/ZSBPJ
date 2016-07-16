@@ -48,18 +48,18 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         CompanyDescriptionView,
         View.OnClickListener {
 
-    private SearchView mSearchView = null;
+    private SearchView mSearchView;
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
     private LoadingLayout loading_layout;
     private String company_name = "";
+    private TextView tv_tip;
 
     private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
 
     public static Fragment newInstance() {
-        Fragment fragment = new CompanyIndexFragment();
-        return fragment;
+        return new CompanyIndexFragment();
     }
 
     @Override
@@ -68,6 +68,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         super.onFragmentCreate();
         mPresenter = new CompanyDescriptionPresenterImpl(this);
         View view = getView();
+        tv_tip= (TextView) view.findViewById(R.id.tv_tip);
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new CompanyAdapter(getActivity());
@@ -185,6 +186,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void getDataEmpty() {
+        tv_tip.setText("暂时没有数据点击添加");
         loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
     }
 

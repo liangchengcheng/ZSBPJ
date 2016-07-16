@@ -60,6 +60,15 @@ public class TestEntity implements Serializable {
     private String qm;
     private String zy;
     private String user_image;
+    private String answer_count;
+
+    public String getAnswer_count() {
+        return answer_count;
+    }
+
+    public void setAnswer_count(String answer_count) {
+        this.answer_count = answer_count;
+    }
 
     public String getId() {
         return id;

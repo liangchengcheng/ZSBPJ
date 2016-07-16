@@ -28,8 +28,8 @@ public class App extends Application {
     public DaoMaster daoMaster;
     private OkHttpClient okHttpClient;
 
-    private static final int CONNECT_TIMEOUT_MILLIS = 15 * 1000;
-    private static final int READ_TIMEOUT_MILLIS = 15 * 1000;
+    private static final int CONNECT_TIMEOUT_MILLIS = 30 * 1000;
+    private static final int READ_TIMEOUT_MILLIS = 30 * 1000;
 
     private static List<Activity> activityList = new LinkedList();
 

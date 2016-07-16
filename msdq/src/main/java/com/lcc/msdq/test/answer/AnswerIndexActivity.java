@@ -87,6 +87,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         currentPage = 1;
         tv_count= (TextView) findViewById(R.id.tv_count);
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
+        tv_count.setText("共"+entity.getAnswer_count()+"个回答");
         fid=entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);

@@ -41,6 +41,14 @@ public class CompanyDescription implements Serializable {
     private String z_num;
     private String c_num;
 
+    public String getL_num() {
+        return l_num;
+    }
+
+    public void setL_num(String l_num) {
+        this.l_num = l_num;
+    }
+
     public String getC_num() {
         return c_num;
     }
