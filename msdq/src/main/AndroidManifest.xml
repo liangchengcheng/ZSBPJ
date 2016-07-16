@@ -135,5 +135,11 @@
 
         <activity android:name=".fabu.FabuList"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".compony.CompanyAddActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".choice.AreaSelectActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

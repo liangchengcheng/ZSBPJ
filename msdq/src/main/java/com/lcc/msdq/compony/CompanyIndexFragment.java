@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.lcc.adapter.CompanyAdapter;
 import com.lcc.entity.CompanyDescription;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.choice.AreaSelectActivity;
 import com.lcc.mvp.presenter.CompanyDescriptionPresenter;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
@@ -52,11 +54,11 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
     private LoadingLayout loading_layout;
-    private String company_name = "";
     private TextView tv_tip;
 
     private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
+    private String company_name = "";
 
     public static Fragment newInstance() {
         return new CompanyIndexFragment();
@@ -69,6 +71,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         mPresenter = new CompanyDescriptionPresenterImpl(this);
         View view = getView();
         tv_tip= (TextView) view.findViewById(R.id.tv_tip);
+
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new CompanyAdapter(getActivity());
@@ -78,6 +81,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
+        loading_layout.setOnClickListener(this);
         initSearchView(view);
         view.findViewById(R.id.iv_menu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,8 +190,8 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void getDataEmpty() {
-        tv_tip.setText("暂时没有数据点击添加");
         loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        tv_tip.setText("暂时没有数据点击添加");
     }
 
     @Override
@@ -225,6 +229,9 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         switch (v.getId()) {
             case R.id.iv_more:
 
+                break;
+            case R.id.loading_layout:
+                AreaSelectActivity.startAreaSelectActivity(company_name,getActivity());
                 break;
         }
     }
