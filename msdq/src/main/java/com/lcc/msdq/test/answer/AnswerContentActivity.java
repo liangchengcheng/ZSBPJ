@@ -59,7 +59,6 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     public static final String ANSWER = "answer";
     private boolean isFav;
 
-
     public static void startAnswerContentActivity(TestEntity data,Answer answer, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, AnswerContentActivity.class);
         intent.putExtra(ANSWER, answer);

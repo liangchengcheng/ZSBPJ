@@ -200,4 +200,14 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void setOnItemClickListener(OnItemClickListener li) {
         this.mListener = li;
     }
+
+    public interface OnFavClickListener {
+        void onFavClick();
+    }
+
+    private OnFavClickListener favListener;
+
+    public void setOnFavClickListener(OnFavClickListener favListener) {
+        this.favListener = favListener;
+    }
 }

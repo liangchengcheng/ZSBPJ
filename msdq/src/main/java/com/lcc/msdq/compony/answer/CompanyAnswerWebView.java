@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -17,21 +16,27 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.Article;
 import com.lcc.entity.CompanyAnswer;
+import com.lcc.entity.CompanyEntity;
+import com.lcc.entity.CompanyTest;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
+import com.lcc.mvp.presenter.ComAnswerContentPresenter;
 import com.lcc.mvp.presenter.MenuContentPresenter;
+import com.lcc.mvp.presenter.TestAnswerContentPresenter;
+import com.lcc.mvp.presenter.impl.ComAnswerContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
+import com.lcc.mvp.view.ComAnswerContentView;
 import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
@@ -42,37 +47,47 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  【这个地方的答案需要单独的提炼到一个表里面去】
  */
 public class CompanyAnswerWebView extends BaseActivity implements
-        View.OnClickListener, MyWebView.OnScrollChangedCallback {
-
-    public static final String DATA = "data";
+        View.OnClickListener, MyWebView.OnScrollChangedCallback,ComAnswerContentView {
 
     private MyWebView webView;
     private ImageView user_head;
     private FloatingActionMenu floatingMenu;
     private LinearLayout ll_top;
+    private FloatingActionButton floatingCollect;
 
+    public static final String ANSWER = "answer";
+    public static final String QUESTION = "question";
     private CompanyAnswer answer;
+    private boolean isFav;
+    private ComAnswerContentPresenter comAnswerContentPresenter;
+    private CompanyTest entity;
 
-    public static void startCompanyAnswerWebView(Activity startingActivity, CompanyAnswer type) {
+    public static void startCompanyAnswerWebView(Activity startingActivity,
+                                                 CompanyAnswer type,CompanyTest test) {
         Intent intent = new Intent(startingActivity, CompanyAnswerWebView.class);
-        intent.putExtra(DATA, type);
+        intent.putExtra(QUESTION, test);
+        intent.putExtra(ANSWER, type);
         startingActivity.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
         initView();
         setData();
     }
 
     private void initData() {
-        answer = (CompanyAnswer) getIntent().getSerializableExtra("data");
+        comAnswerContentPresenter=new ComAnswerContentPresenterImpl(this);
+        answer = (CompanyAnswer) getIntent().getSerializableExtra(ANSWER);
+        entity = (CompanyTest) getIntent().getSerializableExtra(QUESTION);
     }
 
     @Override
     protected void initView() {
+        initData();
+        floatingCollect= (FloatingActionButton) findViewById(R.id.floatingCollect);
+        floatingCollect.setOnClickListener(this);
         ll_top= (LinearLayout) findViewById(R.id.ll_top);
         floatingMenu= (FloatingActionMenu) findViewById(R.id.floatingMenu);
         user_head = (ImageView) findViewById(R.id.user_head);
@@ -91,6 +106,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
+        comAnswerContentPresenter.isFav(answer.getMid());
     }
 
     @Override
@@ -174,16 +190,24 @@ public class CompanyAnswerWebView extends BaseActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_comments:
-                startActivity(new Intent(CompanyAnswerWebView.this, CommentsActivity.class));
+            case R.id.floatingComment:
+                CommentsActivity.startUserProfileFromLocation(answer.getMid(),"资料答案",
+                        CompanyAnswerWebView.this);
                 break;
+
+            case R.id.floatingCollect:
+                if (isFav){
+                    comAnswerContentPresenter.UnFav(answer);
+                }else {
+                    comAnswerContentPresenter.Fav(answer, Propertity.COM.ANSWER,entity.getTitle());
+                }
+                break;
+
         }
     }
 
     @Override
     public void onScroll(int dx, int dy) {
-        Log.e("lcccc",dx+"x");
-        Log.e("lcccc",dy+"");
         if (Math.abs(dy) > 4) {
             if (dy < 0) {
                 floatingMenu.showMenu(true);
@@ -191,5 +215,52 @@ public class CompanyAnswerWebView extends BaseActivity implements
                 floatingMenu.hideMenu(true);
             }
         }
+    }
+
+    @Override
+    public void getLoading() {
+
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void isHaveFav(boolean isfavEntity) {
+        this.isFav=isfavEntity;
+        if (isfavEntity){
+            floatingCollect.setLabelText("取消收藏");
+        }else {
+            floatingCollect.setLabelText("收藏");
+        }
+    }
+
+    @Override
+    public void FavSuccess() {
+        isHaveFav(true);
+        FrameManager.getInstance().toastPrompt("收藏成功");
+    }
+
+    @Override
+    public void FavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("收藏失败");
+    }
+
+    @Override
+    public void UnFavSuccess() {
+        isHaveFav(false);
+        FrameManager.getInstance().toastPrompt("取消收藏成功");
+    }
+
+    @Override
+    public void UnFavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("取消收藏失败");
     }
 }

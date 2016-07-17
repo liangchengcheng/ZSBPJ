@@ -40,6 +40,7 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
     private boolean hasFooter;
     private boolean hasMoreData = true;
     private List<Object> mList = new ArrayList<>();
+    private boolean isFav;
 
     public void bind(List<Object> messages) {
         this.mList = messages;
@@ -96,6 +97,26 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             holder.tv_month.setText(object.getCreated_time());
             holder.tv_llsc.setText(object.getL_num());
             holder.tv_llrs.setText(object.getL_num());
+
+
+            if (isFav) {
+                holder.tv_sc.setText("取消收藏");
+                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
+                        .getColor(R.color.retry_button_background_stroke));
+            } else {
+                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
+                        .getColor(R.color.common_android_tag_bg));
+                holder.tv_sc.setText("收藏");
+            }
+
+            if (favListener != null) {
+                holder.tv_sc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        favListener.onFavClick();
+                    }
+                });
+            }
 
         } else if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
@@ -187,15 +208,15 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Bind(R.id.tv_llsc)
         TextView tv_llsc;
 
+        @Bind(R.id.tv_sc)
+        TextView tv_sc;
+
         public HeadViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
 
-    /**
-     * 头部的布局
-     */
     class FootViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.mProgressView)
@@ -255,5 +276,20 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public void setOnItemClickListener(OnItemClickListener li) {
         this.mListener = li;
+    }
+
+    public interface OnFavClickListener {
+        void onFavClick();
+    }
+
+    private OnFavClickListener favListener;
+
+    public void setOnFavClickListener(OnFavClickListener favListener) {
+        this.favListener = favListener;
+    }
+
+    public void setFav(boolean isFav) {
+        this.isFav = isFav;
+        notifyDataSetChanged();
     }
 }

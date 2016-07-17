@@ -42,7 +42,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  AnswerIndexActivity
  */
 public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
+        CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -57,6 +58,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+    private boolean isfavEntity;
 
     private CompanyTest companyTest;
     private String fid = "00f2c2cd7816689923b41694baaa1ff5";
@@ -84,12 +86,9 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new CompanyAnswerAdapter();
-        mAdapter.setOnItemClickListener(new CompanyAnswerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(CompanyAnswer data) {
-                CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this,data);
-            }
-        });
+        mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnFavClickListener(this);
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -150,6 +149,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 objects.add(entities.get(i));
             }
             mAdapter.bind(objects);
+            mAdapter.setFav(isfavEntity);
         }
         mSwipeRefreshWidget.setRefreshing(false);
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
@@ -175,6 +175,43 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 mAdapter.notifyDataSetChanged();
             }
         }, delay);
+    }
+
+    @Override
+    public void isHaveFav(boolean isfavEntity) {
+        this.isfavEntity = isfavEntity;
+        if (mAdapter != null) {
+            mAdapter.setFav(isfavEntity);
+        }
+    }
+
+    @Override
+    public void FavSuccess() {
+        changeFavState(true);
+        FrameManager.getInstance().toastPrompt("收藏成功");
+    }
+
+    @Override
+    public void FavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("收藏失败");
+    }
+
+    @Override
+    public void UnFavSuccess() {
+        changeFavState(false);
+        FrameManager.getInstance().toastPrompt("取消收藏成功");
+    }
+
+    @Override
+    public void UnFavFail(String msg) {
+        FrameManager.getInstance().toastPrompt("取消收藏失败");
+    }
+
+    private void changeFavState(boolean state) {
+        this.isfavEntity = state;
+        if (mAdapter != null) {
+            mAdapter.setFav(isfavEntity);
+        }
     }
 
     @Override
@@ -226,5 +263,20 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 startActivity(new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onFavClick() {
+        if (!isfavEntity) {
+            mPresenter.Fav(companyTest, "公司问题");
+        } else {
+            mPresenter.UnFav(companyTest);
+        }
+    }
+
+    @Override
+    public void onItemClick(CompanyAnswer data) {
+        CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this,data,
+                companyTest);
     }
 }

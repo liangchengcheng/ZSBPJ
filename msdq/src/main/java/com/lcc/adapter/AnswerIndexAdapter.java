@@ -292,4 +292,6 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void setOnFavClickListener(OnFavClickListener favListener) {
         this.favListener = favListener;
     }
+
+
 }
