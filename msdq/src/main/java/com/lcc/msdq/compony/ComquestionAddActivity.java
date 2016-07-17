@@ -3,13 +3,9 @@ package com.lcc.msdq.compony;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
@@ -58,12 +53,13 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Date:         2015年11月21日15:28:25
  * Description:  添加公司问题的界面
  */
-public class ComquestionActivity extends BaseActivity implements View.OnClickListener,
+public class ComquestionAddActivity extends BaseActivity implements View.OnClickListener,
         AdapterView.OnItemSelectedListener, ComQuesAddView {
 
     public static final String ID = "id";
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
+
     public FunctionConfig functionConfig;
     private ComTestAdd comTestAdd = new ComTestAdd();
     private List<String> dataset;
@@ -77,7 +73,7 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
     private EditText editText_summary;
 
     public static void startComquestionActivity(String id,Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, ComquestionActivity.class);
+        Intent intent = new Intent(startingActivity, ComquestionAddActivity.class);
         intent.putExtra(ID, id);
         startingActivity.startActivity(intent);
     }
@@ -164,7 +160,7 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void showPopMenu() {
-        initImageLoader(ComquestionActivity.this);
+        initImageLoader(ComquestionAddActivity.this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_layout, null);
         final PopupWindow window = new PopupWindow(view,
@@ -174,7 +170,7 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        window.showAtLocation(ComquestionActivity.this.findViewById(R.id.rootview),
+        window.showAtLocation(ComquestionAddActivity.this.findViewById(R.id.rootview),
                 Gravity.BOTTOM, 0, 0);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
@@ -220,7 +216,7 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
                 @Override
                 public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
                     if (resultList != null && resultList.size() > 0) {
-                        ImageManager.getInstance().loadLocalImage(ComquestionActivity.this,
+                        ImageManager.getInstance().loadLocalImage(ComquestionAddActivity.this,
                                 resultList.get(0).getPhotoPath(), iv_question_des);
                         for (int i = 0; i < resultList.size(); i++) {
                             File file = new File(resultList.get(i).getPhotoPath());
@@ -231,7 +227,7 @@ public class ComquestionActivity extends BaseActivity implements View.OnClickLis
 
                 @Override
                 public void onHanlderFailure(int requestCode, String errorMsg) {
-                    Toast.makeText(ComquestionActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComquestionAddActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                 }
             };
 

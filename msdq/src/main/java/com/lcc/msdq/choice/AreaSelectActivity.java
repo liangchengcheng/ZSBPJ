@@ -28,6 +28,7 @@ public class AreaSelectActivity extends BaseActivity implements
     private Map map = new HashMap();
 
     public static final String NAME = "name";
+    private String com_name;
 
     public static void startAreaSelectActivity(String cn, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, AreaSelectActivity.class);
@@ -40,6 +41,7 @@ public class AreaSelectActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
+        com_name = getIntent().getStringExtra(NAME);
         oneFragment = AreaFragment.newInstance("");
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content, oneFragment).commit();
@@ -127,6 +129,7 @@ public class AreaSelectActivity extends BaseActivity implements
     private void nextPage(Map map) {
         Intent intent = new Intent(AreaSelectActivity.this, CompanyAddActivity.class);
         intent.putExtra("addressInfo", (Serializable) map);
+        intent.putExtra(CompanyAddActivity.NAME, com_name);
         startActivity(intent);
         finish();
     }

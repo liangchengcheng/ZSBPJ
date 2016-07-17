@@ -7,17 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
-import com.lcc.msdq.compony.content.HrFragment;
-import com.lcc.msdq.compony.content.OtherFragment;
 import com.lcc.msdq.description.com.CompanyDesMain;
 
 import java.util.ArrayList;
@@ -81,7 +76,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_q_add:
-                ComquestionActivity.startComquestionActivity(fid,CompanyContentActivity.this);
+                ComquestionAddActivity.startComquestionActivity(fid,CompanyContentActivity.this);
                 break;
 
             case R.id.iv_com_des:

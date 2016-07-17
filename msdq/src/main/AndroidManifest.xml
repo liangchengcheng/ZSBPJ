@@ -109,7 +109,7 @@
         <activity android:name=".flow.FlowIndex"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".compony.ComquestionActivity"
+        <activity android:name=".compony.ComquestionAddActivity"
             android:theme="@style/AppTheme" />
 
         <activity android:name=".description.user.UserEditActivity"
