@@ -131,7 +131,8 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     private void setData() {
         UserInfo userInfo = DataManager.getUserInfo();
         if (userInfo != null) {
-            ImageManager.getInstance().loadCircleImage(getActivity(), userInfo.getUser_image(), iv_more);
+            ImageManager.getInstance().loadCircleImage(getActivity(), userInfo.getUser_image(),
+                    iv_more);
             tv_username.setText(userInfo.getNickname());
             if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");
