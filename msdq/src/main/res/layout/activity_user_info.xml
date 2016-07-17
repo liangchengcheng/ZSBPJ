@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#fff"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,19 +18,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_back_white_24dp" />
+
         <TextView
-            android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:textColor="#fff"
-            android:text="编辑个人信息"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:text="编辑个人信息"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
         <ImageView
-            android:background="@drawable/ic_done_white_24dp"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_marginRight="20dp"
-            android:layout_height="wrap_content" />
+            android:background="@drawable/ic_done_white_24dp" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
@@ -88,23 +90,27 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_nickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
                             android:padding="10dp"
-                            android:text="用户名"
+                            android:text="昵    称"
                             android:textSize="16sp" />
 
                         <EditText
-                            android:layout_marginRight="20dp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:layout_toRightOf="@+id/tv_nickname"
+                            android:background="@null"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="小城521"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -112,12 +118,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_sex"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -127,14 +135,17 @@
                             android:textSize="16sp" />
 
                         <EditText
-                            android:layout_marginRight="20dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:layout_toRightOf="@+id/tv_sex"
+                            android:background="@null"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="男"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -149,6 +160,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_qm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -158,14 +170,17 @@
                             android:textSize="16sp" />
 
                         <EditText
-                            android:layout_marginRight="20dp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:layout_toRightOf="@+id/tv_qm"
+                            android:background="@null"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="人生自古谁无死，流去丹心赵汗青"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -217,14 +232,15 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:layout_marginRight="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="未绑定"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -256,14 +272,15 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:layout_marginRight="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="未绑定"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -271,10 +288,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#EDEDED" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:background="#EDEDED" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -340,14 +359,15 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:layout_marginRight="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="未开启"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 
@@ -371,14 +391,15 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:layout_marginRight="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:padding="10dp"
                             android:text="1038127753@qq.com"
+                            android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
 

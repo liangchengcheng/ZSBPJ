@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
@@ -17,9 +18,11 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -33,11 +36,11 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  UserEditActivity
  */
-public class UserEditActivity extends BaseActivity{
+public class UserEditActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_question_des;
 
-    private List<File>files=new ArrayList<>();
+    private List<File> files = new ArrayList<>();
     public FunctionConfig functionConfig;
 
     private final int REQUEST_CODE_CAMERA = 1000;
@@ -60,6 +63,9 @@ public class UserEditActivity extends BaseActivity{
                 .setPauseOnScrollListener(new UILPauseOnScrollListener(false, true))
                 .build();
         GalleryFinal.init(coreConfig);
+
+        iv_question_des = (ImageView) findViewById(R.id.iv_question_des);
+        iv_question_des.setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +77,7 @@ public class UserEditActivity extends BaseActivity{
     protected int getLayoutView() {
         return R.layout.activity_user_info;
     }
+
     private void initImageLoader(Context context) {
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
@@ -130,7 +137,8 @@ public class UserEditActivity extends BaseActivity{
         view.findViewById(R.id.ll_xc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY, functionConfig, mOnHanlderResultCallback);
+                GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY, functionConfig,
+                        mOnHanlderResultCallback);
                 window.dismiss();
             }
         });
@@ -143,4 +151,12 @@ public class UserEditActivity extends BaseActivity{
         });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_question_des:
+                showPopMenu();
+                break;
+        }
+    }
 }

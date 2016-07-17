@@ -17,7 +17,8 @@ public class CommentsModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.NID, nid);
-        return ApiClient.create(AppConstants.RequestPath.COMMENTS_URL, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.COMMENTS_URL, paramsMap).tag("")
+                .get(callback);
     }
 
     /**
@@ -31,6 +32,7 @@ public class CommentsModel {
         paramsMap.put("pid", replay.getPid());
         paramsMap.put("type", replay.getType());
         paramsMap.put("replay_author", replay.getReplay_author());
-        return ApiClient.create(AppConstants.RequestPath.CommentsAdd, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.CommentsAdd, paramsMap).tag("")
+                .get(callback);
     }
 }
