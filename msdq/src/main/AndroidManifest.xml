@@ -14,13 +14,13 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
-        tools:replace="android:icon"
         android:name="com.lcc.App"
         android:allowBackup="true"
         android:icon="@drawable/icon128"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
 
         <activity
             android:name=".SplashActivity"
@@ -32,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme" />
@@ -91,55 +92,76 @@
             android:name=".index.article.IndexMenuWebView"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".setting.FeedBackActivity"
+        <activity
+            android:name=".setting.FeedBackActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".compony.answer.CompanyAnswerIndexActivity"
+        <activity
+            android:name=".compony.answer.CompanyAnswerIndexActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".description.user.UserProfileActivity"
+        <activity
+            android:name=".description.user.UserProfileActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".compony.answer.CompanyAnswerWebView"
+        <activity
+            android:name=".compony.answer.CompanyAnswerWebView"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".news.NewsIndex"
+        <activity
+            android:name=".news.NewsIndex"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".flow.FlowIndex"
+        <activity
+            android:name=".flow.FlowIndex"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".compony.ComquestionAddActivity"
+        <activity
+            android:name=".compony.ComquestionAddActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".description.user.UserEditActivity"
+        <activity
+            android:name=".description.user.UserEditActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".description.com.CompanyDesMain"
+        <activity
+            android:name=".description.com.CompanyDesMain"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".choice.ChoiceTypeoneActivity"
+        <activity
+            android:name=".choice.ChoiceTypeoneActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".choice.ChoiceTypetwoActivity"
-        android:theme="@style/AppTheme" />
-
-        <activity android:name=".GuideActivity"
+        <activity
+            android:name=".choice.ChoiceTypetwoActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".AboutActivity"
+        <activity
+            android:name=".GuideActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".favorite.FavoriteList"
+        <activity
+            android:name=".AboutActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".fabu.FabuList"
+        <activity
+            android:name=".favorite.FavoriteList"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".compony.CompanyAddActivity"
+        <activity
+            android:name=".fabu.FabuList"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".choice.AreaSelectActivity"
+        <activity
+            android:name=".compony.CompanyAddActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".choice.AreaSelectActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".personinfo.HelpActivity"
             android:theme="@style/AppTheme" />
     </application>
 </manifest>

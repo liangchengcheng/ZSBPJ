@@ -38,16 +38,17 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     private TextView tv_qm;
     //签到
     private RelativeLayout rl_qd;
+    //
     private TextView tv_qd;
 
     public static Fragment newInstance() {
-        Fragment fragment = new PersonInfoIndexFragment();
-        return fragment;
+        return new PersonInfoIndexFragment();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.person_info_fragment, null);
         initView(view);
         return view;
@@ -62,6 +63,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 .inflate(R.layout.profile_zoom_view, null, false);
         View contentView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.profile_content_view, null, false);
+
         scrollView.setHeaderView(headView);
         scrollView.setZoomView(zoomView);
         scrollView.setScrollContentView(contentView);
@@ -71,6 +73,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.iv_more).setOnClickListener(this);
         view.findViewById(R.id.ll_fav).setOnClickListener(this);
         view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
+        view.findViewById(R.id.rl_help).setOnClickListener(this);
         iv_more = (ImageView) view.findViewById(R.id.iv_more);
         tv_username = (TextView) view.findViewById(R.id.tv_username);
         tv_username.setOnClickListener(this);
@@ -93,12 +96,14 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
                 break;
+
             case R.id.rl_qd:
                 SuperCustomToast toast = SuperCustomToast.getInstance(getActivity());
                 toast.setDefaultTextColor(Color.WHITE);
                 toast.show("签到成功。", R.layout.layout_qd, R.id.content_toast,
                         getActivity());
                 break;
+
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
@@ -118,6 +123,10 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_change_pwd:
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
                 break;
+
+            case R.id.rl_help:
+                startActivity(new Intent(getActivity(), HelpActivity.class));
+                break;
         }
     }
 
@@ -128,6 +137,9 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         }
     }
 
+    /**
+     * 设置自己的数据。
+     */
     private void setData() {
         UserInfo userInfo = DataManager.getUserInfo();
         if (userInfo != null) {
