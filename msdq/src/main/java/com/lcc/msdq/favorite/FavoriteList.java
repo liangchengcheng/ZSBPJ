@@ -19,9 +19,9 @@ import java.util.List;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  FavoriteList
+ * Description:  FavoriteList（收藏的列表）
  */
-public class FavoriteList extends BaseActivity{
+public class FavoriteList extends BaseActivity {
 
     @Override
     protected void initView() {
@@ -31,7 +31,7 @@ public class FavoriteList extends BaseActivity{
     private void setViewPager() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        if (viewPager != null) {
+        if (viewPager != null && tabLayout != null) {
             setupViewPager(viewPager);
             tabLayout.setupWithViewPager(viewPager);
         }

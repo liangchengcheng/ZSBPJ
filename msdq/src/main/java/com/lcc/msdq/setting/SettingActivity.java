@@ -41,6 +41,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.tx_changetheme).setOnClickListener(this);
         findViewById(R.id.ml_yjfk).setOnClickListener(this);
         findViewById(R.id.ll_clear_cache).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
 
     @Override
@@ -63,7 +64,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         List<Integer> list = Arrays.asList(res);
         ColorsListAdapter adapter = new ColorsListAdapter(SettingActivity.this, list);
         adapter.setCheckItem(ThemeUtils.getCurrentTheme(activity).getIntValue());
-        GridView gridView = (GridView)LayoutInflater.from(activity).inflate(R.layout.colors_panel_layout, null);
+        GridView gridView = (GridView) LayoutInflater.from(activity)
+                .inflate(R.layout.colors_panel_layout, null);
         gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
         gridView.setCacheColorHint(0);
         gridView.setAdapter(adapter);
@@ -89,12 +91,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case BROWN:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.BrownDialogTheme);
                 break;
+
             case BLUE:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.BlueDialogTheme);
                 break;
+
             case BLUE_GREY:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.BlueGreyDialogTheme);
                 break;
+
             default:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.RedDialogTheme);
                 break;
@@ -120,13 +125,18 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
             //去意见反馈的界面
             case R.id.ml_yjfk:
-                startActivity(new Intent(SettingActivity.this,FeedBackActivity.class));
+                startActivity(new Intent(SettingActivity.this, FeedBackActivity.class));
                 break;
 
             //清理缓存，这里我知情理sp的缓存
             case R.id.ll_clear_cache:
                 DataCleanManager.cleanSharedPreference(SettingActivity.this);
                 FrameManager.getInstance().toastPrompt("清除缓存成功");
+                break;
+
+            //返回按钮
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }
