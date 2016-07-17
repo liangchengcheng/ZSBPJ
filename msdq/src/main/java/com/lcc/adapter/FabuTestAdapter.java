@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lcc.entity.FavEntity;
@@ -110,10 +111,8 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ll_all)
-        CardView ll_all;
-
+        RelativeLayout ll_all;
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
 

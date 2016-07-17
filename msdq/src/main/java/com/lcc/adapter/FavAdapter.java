@@ -100,7 +100,7 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             holder.tv_nickname.setText(styledText, TextView.BufferType.SPANNABLE);
             if (mListener != null) {
-                holder.ll_item.setOnClickListener(new OnClickListener() {
+                holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mListener.onItemClick(weekData);
@@ -121,8 +121,8 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.ll_item)
-        RelativeLayout ll_item;
+        @Bind(R.id.ll_all)
+        RelativeLayout ll_all;
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
 
