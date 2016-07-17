@@ -68,8 +68,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
     private ImageView iv_more;
 
     public static Fragment newInstance() {
-        Fragment fragment = new IndexFragment();
-        return fragment;
+        return new IndexFragment();
     }
 
     @Nullable
@@ -214,6 +213,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
                 IndexMenuActivity.startIndexMenuActivity(getActivity(),"其他");
                 break;
 
+            //去我的消息的界面
             case R.id.ll_news:
                 NewsIndex.startNewsIndex(getActivity(),"其他");
                 break;

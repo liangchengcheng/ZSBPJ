@@ -11,9 +11,7 @@ import com.lcc.mvp.view.FeedBackView;
 import com.lcc.mvp.view.LoginView;
 import com.lcc.utils.SharePreferenceUtil;
 import com.squareup.okhttp.Request;
-
 import org.json.JSONObject;
-
 import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 

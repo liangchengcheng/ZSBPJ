@@ -48,9 +48,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
         CommentsDialog.onChoiceListener {
 
-    public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
-    public static final String ID = "id";
-
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
     @Bind(R.id.recyclerView)
@@ -72,7 +69,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private SimpleArcDialog mDialog;
 
     private int drawingStartLocation;
-
     public static final String TYPE = "type";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -80,13 +76,13 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+    public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
+    public static final String ID = "id";
 
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
     private String type = "面试感想";
     private String content_id;
-
-
 
     public static void startUserProfileFromLocation(String id, String type, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, CommentsActivity.class);
@@ -113,7 +109,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         setupSendCommentButton();
 
         mPresenter.getData(1, content_id);
-
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
         if (savedInstanceState == null) {
             contentRoot.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {

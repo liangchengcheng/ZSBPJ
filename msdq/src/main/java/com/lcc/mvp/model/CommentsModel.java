@@ -29,6 +29,7 @@ public class CommentsModel {
         paramsMap.put("author", replay.getAuthor());
         paramsMap.put("nid", replay.getNid());
         paramsMap.put("pid", replay.getPid());
+        paramsMap.put("type", replay.getType());
         paramsMap.put("replay_author", replay.getReplay_author());
         return ApiClient.create(AppConstants.RequestPath.CommentsAdd, paramsMap).tag("").get(callback);
     }
