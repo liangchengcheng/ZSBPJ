@@ -118,7 +118,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         mSearchView.setStyle(SearchCodes.STYLE_MENU_ITEM_CLASSIC);
         mSearchView.setTheme(SearchCodes.THEME_LIGHT);
         mSearchView.setDivider(false);
-        mSearchView.setHint("请输入你要查询的公司名称");
+        mSearchView.setHint("输入查询公司名称(输入全部查询全部)");
         mSearchView.setHintSize(getResources().getDimension(R.dimen.search_text_medium));
         mSearchView.setVoice(false);
         mSearchView.setAnimationDuration(300);

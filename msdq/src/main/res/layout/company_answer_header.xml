@@ -61,6 +61,7 @@
                 android:textColor="@color/article_title"
                 android:textSize="20sp" />
             <ImageView
+                android:scaleType="centerCrop"
                 android:layout_marginTop="10dp"
                 android:id="@+id/tv_phone"
                 android:layout_width="match_parent"
@@ -72,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"></com.lcc.view.StretchyTextView>
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -119,10 +120,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:background="?attr/colorPrimary"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
-                    android:paddingTop="7dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp"
                     android:text="收藏"
                     android:textSize="16sp"
                     android:textColor="#fff" />

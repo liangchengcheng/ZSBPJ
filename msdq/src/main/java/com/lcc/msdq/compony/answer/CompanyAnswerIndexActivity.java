@@ -51,13 +51,13 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private LoadingLayout loading_layout;
 
-
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+
     private CompanyTest companyTest;
     private String fid = "00f2c2cd7816689923b41694baaa1ff5";
 

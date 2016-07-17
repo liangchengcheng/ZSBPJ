@@ -37,11 +37,9 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
     private static final int NORMAL_ITEM = 0;
     private static final int HEAD_ITEM = 1;
     public static final int FOOTER_ITEM = 2;
-
-    private List<Object> mList = new ArrayList<>();
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
+    private List<Object> mList = new ArrayList<>();
 
     public void bind(List<Object> messages) {
         this.mList = messages;
@@ -96,6 +94,8 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     head_url,holder.iv_head);
             holder.tv_nickname.setText(object.getNickname());
             holder.tv_month.setText(object.getCreated_time());
+            holder.tv_llsc.setText(object.getL_num());
+            holder.tv_llrs.setText(object.getL_num());
 
         } else if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
@@ -183,6 +183,9 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         @Bind(R.id.tv_llrs)
         TextView tv_llrs;
+
+        @Bind(R.id.tv_llsc)
+        TextView tv_llsc;
 
         public HeadViewHolder(View itemView) {
             super(itemView);

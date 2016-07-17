@@ -144,6 +144,11 @@ public class AppConstants {
          */
         public final static String AddServiceAPI = "/service/AddServiceAPI";
 
+        /**
+         * 增加一家新的公司
+         */
+        public final static String saveCompanyForAndroid = "/service/saveCompanyForAndroid";
+
     }
 
     public final class ParamKey {
