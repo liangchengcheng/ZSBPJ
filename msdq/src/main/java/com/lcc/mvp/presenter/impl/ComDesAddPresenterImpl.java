@@ -27,7 +27,7 @@ public class ComDesAddPresenterImpl implements ComDesAddPresenter {
     }
 
     @Override
-    public void ComQuesAdd(CompanyDescription replay, List<File> files) {
+    public void ComDesAdd(CompanyDescription replay, List<File> files) {
         model.ComDesAdd(replay,files, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

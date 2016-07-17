@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ComDesAddPresenter {
 
-    void ComQuesAdd(CompanyDescription replay, List<File> files);
+    void ComDesAdd(CompanyDescription replay, List<File> files);
 }
