@@ -17,7 +17,7 @@ public class ComQuesAddModel {
     /**
      * 发送公司相关的问题到服务器
      */
-    public OkHttpRequest ComQuesAdd(ComTestAdd replay, List<File>files, ResultCallback<String> callback) {
+    public OkHttpRequest ComQuesAdd(ComTestAdd replay, List<File> files, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("type", replay.getType());
         paramsMap.put("com", replay.getCom_id());
@@ -25,7 +25,7 @@ public class ComQuesAddModel {
         paramsMap.put("author", "18813149871");
         paramsMap.put("summary", replay.getSummary());
         return ApiClient.createWithFile(AppConstants.RequestPath.AddServiceAPI,
-                paramsMap,files)
+                paramsMap, files)
                 .upload(callback);
     }
 }

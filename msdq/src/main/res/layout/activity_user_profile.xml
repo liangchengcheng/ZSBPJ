@@ -28,6 +28,7 @@
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/material_design_1"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -35,7 +36,6 @@
                     android:id="@+id/vUserProfileRoot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:orientation="vertical"
@@ -67,7 +67,7 @@
                                 android:id="@+id/tv_nickname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="John Smith"
+                                android:text="用户名字"
                                 android:textColor="#ffffff"
                                 android:textSize="20sp" />
 
@@ -76,9 +76,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Mobile development passionate."
+                                android:text="用户的个性签名"
                                 android:textColor="#ffffff"
-                                android:textSize="12sp" />
+                                android:textSize="14sp" />
 
                             <Button
                                 android:id="@+id/btnFollow"
@@ -87,7 +87,7 @@
                                 android:layout_marginRight="24dp"
                                 android:layout_marginTop="8dp"
                                 android:background="@drawable/btn_following"
-                                android:text="following"
+                                android:text="点击关注"
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -114,8 +114,6 @@
                                 android:text="1167/赞"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
-
-
                         </LinearLayout>
 
                         <LinearLayout
@@ -159,7 +157,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
+
                     app:elevation="@dimen/default_elevation"
                     app:layout_collapseMode="pin"
                     app:layout_scrollFlags="scroll|enterAlways"
@@ -195,8 +193,6 @@
                             android:background="@drawable/ic_border_color_white_24dp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
-
-
             </android.support.design.widget.CollapsingToolbarLayout>
 
             <FrameLayout
@@ -212,9 +208,7 @@
                     app:tabIndicatorColor="#5be5ad"
                     app:tabIndicatorHeight="4dp"
                     app:tabMode="fixed" />
-
             </FrameLayout>
-
         </android.support.design.widget.AppBarLayout>
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

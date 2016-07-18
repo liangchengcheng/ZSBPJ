@@ -2,18 +2,24 @@ package com.lcc.msdq.description.user;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.UserInfo;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
+import com.lcc.mvp.presenter.UserEditPresenter;
+import com.lcc.mvp.presenter.impl.UserEditPresenterImpl;
+import com.lcc.mvp.view.UserEditView;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -28,7 +34,10 @@ import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 /**
  * Author:       梁铖城
@@ -36,13 +45,18 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  UserEditActivity
  */
-public class UserEditActivity extends BaseActivity implements View.OnClickListener {
+public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView {
 
     private ImageView iv_question_des;
+    private ImageView iv_save;
+    private SimpleArcDialog mDialog;
+    //昵称 性别 签名 邮箱
+    private EditText edit_nickname, et_xb, et_qm, et_email;
 
     private List<File> files = new ArrayList<>();
     public FunctionConfig functionConfig;
-
+    private UserEditPresenter userEditPresenter;
+    private UserInfo userInfo = new UserInfo();
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
 
@@ -64,8 +78,16 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
                 .build();
         GalleryFinal.init(coreConfig);
 
+        edit_nickname = (EditText) findViewById(R.id.edit_nickname);
+        et_xb = (EditText) findViewById(R.id.et_xb);
+        et_qm = (EditText) findViewById(R.id.et_qm);
+        et_email = (EditText) findViewById(R.id.et_email);
+
         iv_question_des = (ImageView) findViewById(R.id.iv_question_des);
         iv_question_des.setOnClickListener(this);
+        iv_save = (ImageView) findViewById(R.id.iv_save);
+        iv_save.setOnClickListener(this);
+        userEditPresenter = new UserEditPresenterImpl(this);
     }
 
     @Override
@@ -92,7 +114,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     private GalleryFinal.OnHanlderResultCallback mOnHanlderResultCallback =
             new GalleryFinal.OnHanlderResultCallback() {
                 @Override
-                public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+                public void onHanlderSuccess(int requestCode, List<PhotoInfo> resultList) {
                     if (resultList != null && resultList.size() > 0) {
                         ImageManager.getInstance().loadLocalImage(UserEditActivity.this,
                                 resultList.get(0).getPhotoPath(), iv_question_des);
@@ -145,7 +167,8 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         view.findViewById(R.id.ll_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GalleryFinal.openCamera(REQUEST_CODE_CAMERA, functionConfig, mOnHanlderResultCallback);
+                GalleryFinal.openCamera(REQUEST_CODE_CAMERA, functionConfig,
+                        mOnHanlderResultCallback);
                 window.dismiss();
             }
         });
@@ -157,6 +180,56 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
             case R.id.iv_question_des:
                 showPopMenu();
                 break;
+
+            case R.id.iv_save:
+                sendUserInfo();
+
+                break;
         }
+    }
+
+    private void sendUserInfo() {
+        userInfo.setEmail("");
+        userInfo.setNickname("");
+        userInfo.setQm("");
+        userInfo.setXb("");
+
+        String nickname = edit_nickname.getText().toString();
+        String xb = et_xb.getText().toString();
+        String qm = et_qm.getText().toString();
+        String email = et_email.getText().toString();
+
+        userInfo.setEmail(email);
+        userInfo.setNickname(nickname);
+        userInfo.setQm(qm);
+        userInfo.setXb(xb);
+        userEditPresenter.userEdit(userInfo, files);
+    }
+
+    @Override
+    public void showLoading() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在登录...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void UserEditFail(String msg) {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("提交信息失败" + msg);
+    }
+
+    @Override
+    public void UserEditSuccess() {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("提交信息成功");
     }
 }
