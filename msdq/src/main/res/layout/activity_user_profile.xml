@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/base_bg_color"
     android:layout_height="match_parent"
+    android:background="@color/base_bg_color"
     android:orientation="vertical">
 
     <android.support.design.widget.CoordinatorLayout
@@ -39,7 +39,7 @@
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:orientation="vertical"
-                    android:paddingBottom="24dp"
+                    android:paddingBottom="10dp"
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
                     android:paddingTop="64dp"
@@ -52,8 +52,8 @@
 
                         <ImageView
                             android:id="@+id/ivUserProfilePhoto"
-                            android:layout_width="@dimen/user_profile_avatar_size"
-                            android:layout_height="@dimen/user_profile_avatar_size"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
                             android:layout_marginRight="16dp" />
 
                         <LinearLayout
@@ -69,13 +69,13 @@
                                 android:layout_height="wrap_content"
                                 android:text="John Smith"
                                 android:textColor="#ffffff"
-                                android:textSize="24sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/tv_gxqm"
-                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:text="Mobile development passionate."
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
@@ -90,7 +90,6 @@
                                 android:text="following"
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
-
                         </LinearLayout>
                     </LinearLayout>
 
@@ -112,16 +111,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1167"
+                                android:text="1167/赞"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp" />
+                                android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="赞"
-                                android:textColor="#ffffff"
-                                android:textSize="12sp" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -135,16 +129,10 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="396"
+                                android:text="396/粉"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp" />
+                                android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="粉丝"
-                                android:textColor="#ffffff"
-                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -158,20 +146,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="485"
+                                android:text="485/关注"
                                 android:textColor="#ffffff"
-                                android:textSize="20sp" />
+                                android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="关注"
-                                android:textColor="#ffffff"
-                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -181,33 +164,35 @@
                     app:layout_collapseMode="pin"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <ImageView
-                            android:layout_alignParentLeft="true"
                             android:id="@+id/guillotine_hamburger"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
                             android:background="@drawable/ic_arrow_back_white_24dp" />
+
                         <TextView
-                            android:layout_centerInParent="true"
-                            android:textSize="20sp"
                             android:layout_width="wrap_content"
-                            android:textColor="#fff"
-                            android:text="个人资料"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
                             android:layout_gravity="center"
-                            android:layout_height="wrap_content" />
+                            android:text="个人资料"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
 
                         <ImageView
                             android:id="@+id/iv_edit"
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
                             android:layout_gravity="right"
                             android:layout_marginRight="30dp"
-                            android:background="@drawable/ic_border_color_white_24dp"
-                            />
+                            android:background="@drawable/ic_border_color_white_24dp" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
 

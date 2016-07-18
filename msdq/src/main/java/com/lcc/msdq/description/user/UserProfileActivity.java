@@ -36,8 +36,8 @@ import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class UserProfileActivity extends BaseActivity implements View.OnClickListener{
-    public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
 
+    public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
 
@@ -67,10 +67,10 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     private int avatarSize;
     private String profilePhoto;
     private UserProfileAdapter userPhotosAdapter;
-
     private UserInfo userInfo;
 
-    public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity) {
+    public static void startUserProfileFromLocation(int[] startingLocation,
+                                                    Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
         intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
         startingActivity.startActivity(intent);
