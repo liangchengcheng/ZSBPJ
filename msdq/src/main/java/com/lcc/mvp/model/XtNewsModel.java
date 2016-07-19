@@ -15,8 +15,8 @@ public class XtNewsModel {
     public OkHttpRequest getXtNews( ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
-        return ApiClient.create(AppConstants.RequestPath.ARTICLE_DATA, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getSuperMessage, paramsMap).tag("")
+                .get(callback);
     }
-
 
 }

@@ -20,5 +20,4 @@ public interface XtNewsView {
     void getDataFail(String msg);
 
     void getDataSuccess(List<XtNewsEntity> list);
-
 }

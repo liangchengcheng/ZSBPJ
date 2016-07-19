@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.NewsInfo;
 import com.lcc.msdq.R;
+import com.lcc.msdq.news.xtnews.XtNewsActivity;
 import com.lcc.mvp.presenter.NewsInfoPresenter;
 import com.lcc.mvp.presenter.impl.NewsInfoPresenterImpl;
 import com.lcc.mvp.view.NewsInfoView;
@@ -42,6 +43,7 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
         tv_z_count = (TextView) findViewById(R.id.tv_z_count);
         tv_xt_count = (TextView) findViewById(R.id.tv_xt_count);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        findViewById(R.id.rl_xt).setOnClickListener(this);
         newsInfoPresenter.getNewsInfo();
     }
 
@@ -60,6 +62,9 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
         switch (v.getId()) {
             case R.id.guillotine_hamburger:
                 finish();
+                break;
+            case R.id.rl_xt:
+                startActivity(new Intent(NewsIndex.this, XtNewsActivity.class));
                 break;
         }
     }
@@ -85,21 +90,21 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
         if (newsInfo != null) {
             if (newsInfo.getReplay_data() != 0) {
                 tv_replay_count.setVisibility(View.VISIBLE);
-                tv_replay_count.setText(newsInfo.getReplay_data()+"");
+                tv_replay_count.setText(newsInfo.getReplay_data() + "");
             }
 
-            if (newsInfo.getLatter_data()!=0){
+            if (newsInfo.getLatter_data() != 0) {
                 tv_latter_count.setVisibility(View.VISIBLE);
-                tv_latter_count.setText(newsInfo.getLatter_data()+"");
+                tv_latter_count.setText(newsInfo.getLatter_data() + "");
             }
 
-            if (newsInfo.getZ_data()!=0){
-                tv_z_count.setText(newsInfo.getZ_data()+"");
+            if (newsInfo.getZ_data() != 0) {
+                tv_z_count.setText(newsInfo.getZ_data() + "");
                 tv_z_count.setVisibility(View.VISIBLE);
             }
 
-            if (newsInfo.getXt_data()!=0){
-                tv_xt_count.setText(newsInfo.getXt_data()+"");
+            if (newsInfo.getXt_data() != 0) {
+                tv_xt_count.setText(newsInfo.getXt_data() + "");
                 tv_xt_count.setVisibility(View.VISIBLE);
             }
         }

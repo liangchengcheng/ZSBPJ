@@ -10,8 +10,14 @@ import com.lcc.adapter.XtNewsAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.XtNewsEntity;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.XtNewsPresenter;
+import com.lcc.mvp.presenter.impl.XtNewsPresenterImpl;
+import com.lcc.mvp.view.XtNewsView;
 import com.lcc.view.loadview.LoadingLayout;
 
+import java.util.List;
+
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
@@ -21,16 +27,20 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  XtNewsActivity
  */
-public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItemClickListener {
+public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItemClickListener,
+        XtNewsView {
 
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private XtNewsAdapter mAdapter;
+    private XtNewsPresenter xtNewsPresenter;
 
     @Override
     protected void initView() {
         initRecycleView();
+        xtNewsPresenter=new XtNewsPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        xtNewsPresenter.getData();
     }
 
     @Override
@@ -57,5 +67,28 @@ public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItem
         mAdapter = new XtNewsAdapter();
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void getLoading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
+    public void getDataEmpty() {
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+        FrameManager.getInstance().toastPrompt("数据加载失败");
+    }
+
+    @Override
+    public void getDataSuccess(List<XtNewsEntity> entities) {
+        if (entities != null && entities.size() > 0) {
+            mAdapter.bind(entities);
+        }
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 }

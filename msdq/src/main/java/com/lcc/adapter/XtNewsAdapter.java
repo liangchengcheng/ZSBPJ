@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class XtNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         String title = weekData.getTitle();
         String time = weekData.getCreated_time();
-        String content = weekData.getCreated_time();
+        String content = weekData.getMessage_body();
 
         holder.tv_time.setText(title);
         holder.tv_content.setText(content);
@@ -80,7 +81,7 @@ public class XtNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.ll_all)
-        RelativeLayout ll_all;
+        LinearLayout ll_all;
         @Bind(R.id.tv_title)
         TextView tv_title;
         @Bind(R.id.tv_content)

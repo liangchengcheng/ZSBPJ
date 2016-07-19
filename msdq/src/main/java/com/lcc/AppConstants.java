@@ -154,6 +154,11 @@ public class AppConstants {
          */
         public final static String getInfoCount = "/service/getInfoCount";
 
+        /**
+         * 未读系统通知
+         */
+        public final static String getSuperMessage = "/service/getSuperMessage";
+
 
     }
 
