@@ -215,7 +215,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
             //去我的消息的界面
             case R.id.ll_news:
-                NewsIndex.startNewsIndex(getActivity(),"其他");
+                NewsIndex.startNewsIndex(getActivity());
                 break;
 
             case R.id.ll_fav:

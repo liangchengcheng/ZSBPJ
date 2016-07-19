@@ -53,6 +53,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_replay_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -60,7 +61,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/news_shape"
             android:gravity="center"
-            android:text="12"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </RelativeLayout>
@@ -94,6 +95,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_latter_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -101,7 +103,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/news_shape"
             android:gravity="center"
-            android:text="1"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </RelativeLayout>
@@ -135,6 +137,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_z_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -142,7 +145,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/news_shape"
             android:gravity="center"
-            android:text="1"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </RelativeLayout>
@@ -176,6 +179,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_xt_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -183,7 +187,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/news_shape"
             android:gravity="center"
-            android:text="1"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </RelativeLayout>
