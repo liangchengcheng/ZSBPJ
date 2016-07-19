@@ -84,7 +84,6 @@ public class UserGoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ll_all)
         LinearLayout ll_all;
         @Bind(R.id.tv_content)
