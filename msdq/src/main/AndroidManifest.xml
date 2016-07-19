@@ -167,5 +167,9 @@
         <activity
             android:name=".news.xtnews.XtNewsActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".news.znews.ZNewsActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

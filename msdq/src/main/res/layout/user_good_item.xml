@@ -15,15 +15,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="找个是标题"
-            android:textColor="@color/article_title"
-            android:textSize="18sp" />
-
-        <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:gravity="right"
             android:text="2016年07月19日15:46:22"
             android:textColor="@color/article_des"
             android:textSize="14sp" />

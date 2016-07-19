@@ -9,8 +9,7 @@
     <RelativeLayout
         android:id="@+id/ll_all"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_head"
@@ -21,6 +20,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_heart_red" />
+
         <TextView
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
@@ -36,8 +36,9 @@
             android:textColor="@color/article_title"
             android:textSize="14sp" />
     </RelativeLayout>
+
     <TextView
-        android:background="#ededed"
         android:layout_width="match_parent"
-        android:layout_height="1dp" />
+        android:layout_height="1dp"
+        android:background="#ededed" />
 </LinearLayout>

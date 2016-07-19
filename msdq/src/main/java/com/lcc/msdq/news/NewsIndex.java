@@ -9,6 +9,7 @@ import com.lcc.base.BaseActivity;
 import com.lcc.entity.NewsInfo;
 import com.lcc.msdq.R;
 import com.lcc.msdq.news.xtnews.XtNewsActivity;
+import com.lcc.msdq.news.znews.ZNewsActivity;
 import com.lcc.mvp.presenter.NewsInfoPresenter;
 import com.lcc.mvp.presenter.impl.NewsInfoPresenterImpl;
 import com.lcc.mvp.view.NewsInfoView;
@@ -43,6 +44,7 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
         tv_z_count = (TextView) findViewById(R.id.tv_z_count);
         tv_xt_count = (TextView) findViewById(R.id.tv_xt_count);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        findViewById(R.id.rl_z).setOnClickListener(this);
         findViewById(R.id.rl_xt).setOnClickListener(this);
         newsInfoPresenter.getNewsInfo();
     }
@@ -65,6 +67,10 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
                 break;
             case R.id.rl_xt:
                 startActivity(new Intent(NewsIndex.this, XtNewsActivity.class));
+                break;
+
+            case R.id.rl_z:
+                startActivity(new Intent(NewsIndex.this, ZNewsActivity.class));
                 break;
         }
     }
