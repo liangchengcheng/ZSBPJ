@@ -159,6 +159,11 @@ public class AppConstants {
          */
         public final static String getSuperMessage = "/service/getSuperMessage";
 
+        /**
+         * 未读的赞
+         */
+        public final static String getSuperUserGood = "/service/getSuperUserGood";
+
 
     }
 
