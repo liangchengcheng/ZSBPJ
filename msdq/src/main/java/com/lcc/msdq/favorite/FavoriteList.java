@@ -56,7 +56,6 @@ public class FavoriteList extends BaseActivity {
         return R.layout.favorite_list_activity;
     }
 
-
     static class Adapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragments = new ArrayList<>();

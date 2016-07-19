@@ -144,18 +144,21 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
         window.showAtLocation(UserEditActivity.this.findViewById(R.id.rootview),
                 Gravity.BOTTOM, 0, 0);
+
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override
             public void onDismiss() {
             }
         });
+
         view.findViewById(R.id.ll_qx).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 window.dismiss();
             }
         });
+
         view.findViewById(R.id.ll_xc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +167,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
                 window.dismiss();
             }
         });
+
         view.findViewById(R.id.ll_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +187,6 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.iv_save:
                 sendUserInfo();
-
                 break;
         }
     }
