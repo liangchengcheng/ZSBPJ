@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#E5E9F1"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -13,7 +14,6 @@
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
         <ImageView
             android:id="@+id/guillotine_hamburger"
             android:layout_width="wrap_content"
@@ -21,175 +21,40 @@
             android:background="@drawable/ic_arrow_back_white_24dp" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="消息中心"
+            android:layout_marginLeft="20sp"
+            android:gravity="center_vertical"
+            android:text="点赞通知"
             android:textColor="#fff"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_widget"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/iv_head"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_notification_reply" />
+        <FrameLayout
+            android:background="#E5E9F1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_head"
-            android:text="评论回复"
-            android:textSize="16sp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/news_shape"
-            android:gravity="center"
-            android:text="12"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </RelativeLayout>
+            <com.lcc.view.loadview.LoadingLayout
+                android:id="@+id/loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyView="@layout/empty_view" />
+        </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ededed" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_head_sx"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_notification_at" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_head_sx"
-            android:text="我的私信"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/news_shape"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ededed" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_head_z"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_notification_rating" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_head_z"
-            android:text="赞我的"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/news_shape"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ededed" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_head_xt"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_notification_sys" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_head_xt"
-            android:text="系统通知"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/news_shape"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ededed" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
