@@ -149,6 +149,12 @@ public class AppConstants {
          */
         public final static String saveCompanyForAndroid = "/service/saveCompanyForAndroid";
 
+        /**
+         * 获取用户的未读消息数
+         */
+        public final static String getInfoCount = "/service/getInfoCount";
+
+
     }
 
     public final class ParamKey {
