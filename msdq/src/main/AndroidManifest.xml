@@ -171,5 +171,9 @@
         <activity
             android:name=".news.znews.ZNewsActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".PhotoPickerActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

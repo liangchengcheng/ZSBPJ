@@ -517,4 +517,6 @@
 
     <color name="first_color_login">#17B8BE</color>
     <color name="first_color_register">#656465</color>
+
+    <color name="photoPackDivider">#DDDDDD</color>
 </resources>
