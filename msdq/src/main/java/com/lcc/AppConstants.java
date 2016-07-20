@@ -71,6 +71,8 @@ public class AppConstants {
         public final static String getSuperMessage = "/service/getSuperMessage";
         //未读的赞
         public final static String getSuperUserGood = "/service/getSuperUserGood";
+        //获取基本的个人信息根据手机号
+        public final static String getUserInfo = "/service/getUserInfo";
 
     }
 
