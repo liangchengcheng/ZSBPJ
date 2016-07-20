@@ -21,6 +21,9 @@
     <string name="share">分享到</string>
     <string name="retract">收起</string>
     <string name="spread">展开</string>
+    <item name="tag_position" type="id" />
+    <item name="tag_photo" type="id" />
+
 
     <string-array name="user_photos">
         <item>http://scontent-a-fra.cdninstagram.com/hphotos-xpf1/t51.2885-15/s306x306/e15/10665483_429615813855717_1490926670_n.jpg</item>
