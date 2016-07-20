@@ -298,6 +298,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onImageClick(String user_phone) {
-        startActivity(new Intent(getActivity(), OtherUserProfileActivity.class));
+        OtherUserProfileActivity.starOtherUserProfileActivity(user_phone,getActivity());
     }
 }

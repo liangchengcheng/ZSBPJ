@@ -50,7 +50,7 @@ public class GetUserInfoPresenterImpl implements GetUserInfoPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         String result = jsonObject.getString("result");
-                        List<otherUserInfo> userInfo = GsonUtils.fromJsonArray(result, otherUserInfo.class);
+                        otherUserInfo userInfo = GsonUtils.changeGsonToBean(result, otherUserInfo.class);
                         view.getDataSuccess(userInfo);
                     } else {
                         view.getDataFail(message);

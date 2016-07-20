@@ -9,7 +9,7 @@ import java.util.List;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  开始或者结束轮训器
+ * Description:  GetUserInfoView(获取用户的简单的个人资料)
  */
 public interface GetUserInfoView {
 
@@ -19,6 +19,6 @@ public interface GetUserInfoView {
 
     void getDataFail(String msg);
 
-    void getDataSuccess(List<otherUserInfo> list);
+    void getDataSuccess(otherUserInfo otherUserInfo);
 
 }

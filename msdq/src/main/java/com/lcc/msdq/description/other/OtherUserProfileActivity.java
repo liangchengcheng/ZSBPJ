@@ -19,11 +19,15 @@ import android.widget.TextView;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
+import com.lcc.entity.otherUserInfo;
 import com.lcc.msdq.R;
 import com.lcc.msdq.description.user.UserEditActivity;
 import com.lcc.msdq.description.user.UserProfileAdapter;
 import com.lcc.msdq.favorite.ArticleFragment;
 import com.lcc.msdq.flow.FlowIndex;
+import com.lcc.mvp.presenter.GetUserInfoPresenter;
+import com.lcc.mvp.presenter.impl.GetUserInfoPresenterImpl;
+import com.lcc.mvp.view.GetUserInfoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +36,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
 
-public class OtherUserProfileActivity extends BaseActivity implements View.OnClickListener{
+public class OtherUserProfileActivity extends BaseActivity implements View.OnClickListener
+        , GetUserInfoView {
 
-    public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
-    private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
-    private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
+    public static final String PHONE = "phone";
 
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
@@ -59,15 +62,13 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     @Bind(R.id.tv_you)
     LinearLayout tv_you;
 
-    private int avatarSize;
-    private String profilePhoto;
-    private UserProfileAdapter userPhotosAdapter;
-    private UserInfo userInfo;
+    private String phone;
+    private GetUserInfoPresenter getUserInfoPresenter;
 
-    public static void startUserProfileFromLocation(int[] startingLocation,
+    public static void starOtherUserProfileActivity(String phone,
                                                     Activity startingActivity) {
         Intent intent = new Intent(startingActivity, OtherUserProfileActivity.class);
-        intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
+        intent.putExtra(PHONE, phone);
         startingActivity.startActivity(intent);
     }
 
@@ -75,20 +76,11 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        userInfo= (UserInfo) getIntent().getSerializableExtra("data");
-        this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
-
+        phone = getIntent().getStringExtra(PHONE);
+        getUserInfoPresenter = new GetUserInfoPresenterImpl(this);
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
-        ImageManager.getInstance().loadCircleImage(OtherUserProfileActivity.this,
-                userInfo.getUser_image(),
-                ivUserProfilePhoto);
-        tv_nickname.setText(userInfo.getNickname());
-        if (TextUtils.isEmpty(userInfo.getQm())){
-            tv_gxqm.setText("这个家伙很懒，什么也没留下");
-        }else {
-            tv_gxqm.setText(userInfo.getQm());
-        }
+        getUserInfoPresenter.getData(phone);
         setViewPager();
     }
 
@@ -115,13 +107,6 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         }
     }
 
-    private void setupTabs() {
-        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_grid_on_white));
-        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_list_white));
-        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_place_white));
-        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_label_white));
-    }
-
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏文章");
@@ -133,15 +118,49 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.tv_me:
-                FlowIndex.startUserProfileFromLocation("me","18813149871",OtherUserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("me", "18813149871",
+                        OtherUserProfileActivity.this);
                 break;
 
             case R.id.tv_you:
-                FlowIndex.startUserProfileFromLocation("you","18813149871",OtherUserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("you", "18813149871",
+                        OtherUserProfileActivity.this);
                 break;
+
+        }
+    }
+
+    @Override
+    public void getLoading() {
+
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void getDataSuccess(otherUserInfo otherUserInfo) {
+        if (otherUserInfo != null) {
+            ImageManager.getInstance().loadCircleImage(OtherUserProfileActivity.this,
+                    otherUserInfo.getUser_image(),
+                    ivUserProfilePhoto);
+            tv_nickname.setText(otherUserInfo.getNickname());
+            if (TextUtils.isEmpty(otherUserInfo.getQm())) {
+                tv_gxqm.setText("这个家伙很懒，什么也没留下");
+            } else {
+                tv_gxqm.setText(otherUserInfo.getQm());
+            }
+        } else {
 
         }
     }
