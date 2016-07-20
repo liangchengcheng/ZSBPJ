@@ -175,5 +175,9 @@
         <activity
             android:name=".PhotoPickerActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".description.other.OtherUserProfileActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

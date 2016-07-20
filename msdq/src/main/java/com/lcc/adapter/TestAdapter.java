@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lcc.entity.CompanyEntity;
+import com.lcc.entity.CompanyTest;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 
@@ -39,7 +40,7 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
 
     @Override
     public void onBindItemViewHolder(ViewHolder holder, final int position) {
-        TestEntity entity=getItem(position);
+        final TestEntity entity=getItem(position);
         holder.ll_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +54,15 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         holder.tv_sc.setText(entity.getL_num());
 
         ImageManager.getInstance().loadCircleImage(mActivity,entity.getUser_image(),holder.iv_image);
+
+        if (ImageListener!=null){
+            holder.iv_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageListener.onImageClick(entity.getPhone());
+                }
+            });
+        }
 
     }
 
@@ -79,5 +89,15 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
 
     public interface OnItemClickListener{
         void OnItemClick(TestEntity entity);
+    }
+
+    public interface OnImageClickListener {
+        void onImageClick(String  user_phone);
+    }
+
+    private OnImageClickListener ImageListener;
+
+    public void setOnImageClickListener(OnImageClickListener ImageListener) {
+        this.ImageListener = ImageListener;
     }
 }

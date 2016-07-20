@@ -27,6 +27,7 @@ import com.lcc.base.BaseFragment;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
@@ -45,7 +46,7 @@ import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class TestIndexFragment extends S_RefreshAndLoadFragment implements
-        PopupWindow.OnDismissListener,
+        PopupWindow.OnDismissListener, TestAdapter.OnImageClickListener,
         TestAdapter.OnItemClickListener, TestView, View.OnClickListener {
 
     private LinearLayout lv1_layout;
@@ -77,9 +78,11 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mPresenter = new TestPresenterImpl(this);
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
+
         mAdapter = new TestAdapter(getActivity());
         setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnImageClickListener(this);
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -291,5 +294,10 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                 showPopupWindow(ll_layout, 3);
                 break;
         }
+    }
+
+    @Override
+    public void onImageClick(String user_phone) {
+        startActivity(new Intent(getActivity(), OtherUserProfileActivity.class));
     }
 }
