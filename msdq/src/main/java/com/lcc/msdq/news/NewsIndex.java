@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.NewsInfo;
 import com.lcc.msdq.R;
+import com.lcc.msdq.letter.LatterIndex;
+import com.lcc.msdq.news.letternews.LetterActivity;
 import com.lcc.msdq.news.xtnews.XtNewsActivity;
 import com.lcc.msdq.news.znews.ZNewsActivity;
 import com.lcc.mvp.presenter.NewsInfoPresenter;
@@ -46,6 +48,7 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.rl_z).setOnClickListener(this);
         findViewById(R.id.rl_xt).setOnClickListener(this);
+        findViewById(R.id.rl_latter).setOnClickListener(this);
         newsInfoPresenter.getNewsInfo();
     }
 
@@ -71,6 +74,10 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
 
             case R.id.rl_z:
                 startActivity(new Intent(NewsIndex.this, ZNewsActivity.class));
+                break;
+
+            case R.id.rl_latter:
+                startActivity(new Intent(NewsIndex.this, LetterActivity.class));
                 break;
         }
     }

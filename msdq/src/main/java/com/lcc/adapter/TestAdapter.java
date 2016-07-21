@@ -63,7 +63,6 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
                 }
             });
         }
-
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

@@ -72,6 +72,7 @@
         android:background="#ededed" />
 
     <RelativeLayout
+        android:id="@+id/rl_latter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

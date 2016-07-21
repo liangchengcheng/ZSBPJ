@@ -179,5 +179,9 @@
         <activity
             android:name=".description.other.OtherUserProfileActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".news.letternews.LetterActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

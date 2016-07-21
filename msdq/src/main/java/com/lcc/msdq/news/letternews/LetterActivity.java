@@ -1,6 +1,7 @@
 package com.lcc.msdq.news.letternews;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.R;
 
 /**
  * Author:       梁铖城
@@ -22,6 +23,6 @@ public class LetterActivity extends BaseActivity {
 
     @Override
     protected int getLayoutView() {
-        return 0;
+        return R.layout.message_one;
     }
 }

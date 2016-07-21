@@ -35,7 +35,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
 
-public class UserProfileActivity extends BaseActivity implements View.OnClickListener{
+public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
@@ -62,9 +62,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.iv_edit)
     ImageView iv_edit;
 
-    private int avatarSize;
-    private String profilePhoto;
-    private UserProfileAdapter userPhotosAdapter;
+
     private UserInfo userInfo;
 
     public static void startUserProfileFromLocation(int[] startingLocation,
@@ -78,19 +76,19 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        userInfo= (UserInfo) getIntent().getSerializableExtra("data");
-        this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
+        userInfo = (UserInfo) getIntent().getSerializableExtra("data");
 
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
         iv_edit.setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
                 userInfo.getUser_image(),
                 ivUserProfilePhoto);
         tv_nickname.setText(userInfo.getNickname());
-        if (TextUtils.isEmpty(userInfo.getQm())){
+        if (TextUtils.isEmpty(userInfo.getQm())) {
             tv_gxqm.setText("这个家伙很懒，什么也没留下");
-        }else {
+        } else {
             tv_gxqm.setText(userInfo.getQm());
         }
         setViewPager();
@@ -137,18 +135,22 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.tv_me:
-                FlowIndex.startUserProfileFromLocation("me","18813149871",UserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("me", "18813149871", UserProfileActivity.this);
                 break;
 
             case R.id.tv_you:
-                FlowIndex.startUserProfileFromLocation("you","18813149871",UserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("you", "18813149871", UserProfileActivity.this);
                 break;
 
             case R.id.iv_edit:
-                startActivity(new Intent(UserProfileActivity.this,UserEditActivity.class));
+                startActivity(new Intent(UserProfileActivity.this, UserEditActivity.class));
+                break;
+
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }
