@@ -80,8 +80,9 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         getUserInfoPresenter = new GetUserInfoPresenterImpl(this);
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         getUserInfoPresenter.getData(phone);
-        setViewPager();
+
     }
 
     @Override
@@ -130,6 +131,10 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
                         OtherUserProfileActivity.this);
                 break;
 
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+
         }
     }
 
@@ -160,6 +165,7 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
             } else {
                 tv_gxqm.setText(otherUserInfo.getQm());
             }
+            setViewPager();
         } else {
 
         }
