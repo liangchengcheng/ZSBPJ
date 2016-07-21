@@ -1,4 +1,4 @@
-package com.lcc.msdq.letter;
+package com.lcc.msdq.news.letternews;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
@@ -7,9 +7,9 @@ import com.lcc.msdq.R;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  LatterIndex
+ * Description:  LetterActivity(个人的私信的界面)
  */
-public class LatterIndex extends BaseActivity {
+public class LetterDetailsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
@@ -23,6 +23,6 @@ public class LatterIndex extends BaseActivity {
 
     @Override
     protected int getLayoutView() {
-        return R.layout.activity_latter_index;
+        return R.layout.message_one;
     }
 }

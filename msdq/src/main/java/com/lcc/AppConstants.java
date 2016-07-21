@@ -73,6 +73,8 @@ public class AppConstants {
         public final static String getSuperUserGood = "/service/getSuperUserGood";
         //获取基本的个人信息根据手机号
         public final static String getUserInfo = "/service/getUserInfo";
+        //获取未读的私信的用户信息
+        public final static String getSuperUserLetter = "/service/getSuperUserLetter";
 
     }
 
