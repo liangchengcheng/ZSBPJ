@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.NewsInfo;
 import com.lcc.msdq.R;
-import com.lcc.msdq.letter.LatterIndex;
 import com.lcc.msdq.news.letternews.LetterActivity;
 import com.lcc.msdq.news.xtnews.XtNewsActivity;
 import com.lcc.msdq.news.znews.ZNewsActivity;
