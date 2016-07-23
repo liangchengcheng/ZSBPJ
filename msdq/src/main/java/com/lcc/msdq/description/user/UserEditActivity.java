@@ -13,8 +13,10 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
@@ -25,6 +27,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +59,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     private SimpleArcDialog mDialog;
     //昵称 性别 签名 邮箱
     private EditText edit_nickname, et_qm, et_email;
-    private RadioButton rb_nan,rb_nv;
+    private RadioButton rb_nan, rb_nv;
     private RadioGroup radioSex;
 
     public static final String USERINFO = "userinfo";
@@ -73,9 +76,9 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
             EventBus.getDefault().register(this);
         }
 
-        rb_nan= (RadioButton) findViewById(R.id.rb_nan);
-        rb_nv= (RadioButton) findViewById(R.id.rb_nv);
-        radioSex= (RadioGroup) findViewById(R.id.radioSex);
+        rb_nan = (RadioButton) findViewById(R.id.rb_nan);
+        rb_nv = (RadioButton) findViewById(R.id.rb_nv);
+        radioSex = (RadioGroup) findViewById(R.id.radioSex);
         radioSex.setOnCheckedChangeListener(this);
 
         ThemeConfig themeConfig = ThemeConfig.GREEN;
@@ -106,25 +109,25 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         userEditPresenter = new UserEditPresenterImpl(this);
 
         String et = userInfo.getUser_image().toString();
-        if (!TextUtils.isEmpty(et)){
+        if (!TextUtils.isEmpty(et)) {
             ImageManager.getInstance().loadCircleImage(UserEditActivity.this,
                     userInfo.getUser_image(),
                     iv_question_des);
         }
 
-        if (!TextUtils.isEmpty(userInfo.getNickname())){
+        if (!TextUtils.isEmpty(userInfo.getNickname())) {
             edit_nickname.setText(userInfo.getNickname());
         }
 
-        if (userInfo.getXb().equals("女")){
+        if (userInfo.getXb().equals("女")) {
             rb_nv.setChecked(true);
         }
 
-        if (!TextUtils.isEmpty(userInfo.getQm())){
+        if (!TextUtils.isEmpty(userInfo.getQm())) {
             et_qm.setText(userInfo.getQm());
         }
 
-        if (!TextUtils.isEmpty(userInfo.getEmail())){
+        if (!TextUtils.isEmpty(userInfo.getEmail())) {
             et_email.setText(userInfo.getEmail());
         }
     }
@@ -235,24 +238,24 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         String qm = et_qm.getText().toString();
         String email = et_email.getText().toString();
 
-        if (TextUtils.isEmpty(nickname)){
+        if (TextUtils.isEmpty(nickname)) {
             FrameManager.getInstance().toastPrompt("昵称不能为空");
             return;
         }
 
-        if (TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             userInfo.setEmail("");
-        }else {
-            if (checkEmail(email)){
+        } else {
+            if (checkEmail(email)) {
                 userInfo.setEmail(email);
-            }else {
+            } else {
                 FrameManager.getInstance().toastPrompt("邮箱格式不正确");
             }
         }
 
-        if (TextUtils.isEmpty(qm)){
+        if (TextUtils.isEmpty(qm)) {
             userInfo.setQm("");
-        }else {
+        } else {
             userInfo.setQm(qm);
         }
 
@@ -286,26 +289,27 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         closeDialog();
         FrameManager.getInstance().toastPrompt("提交信息成功");
         EventBus.getDefault().post(0x02);
-        // TODO: 16/7/23 修改下本地数据库里面的数据 
+        // TODO: 16/7/23 修改下本地数据库里面的数据(此处我没验证可能会崩溃)
+        DataManager.editUser(userInfo);
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (checkedId==R.id.rb_nan){
+        if (checkedId == R.id.rb_nan) {
             userInfo.setXb("男");
-        }else {
+        } else {
             userInfo.setXb("女");
         }
     }
 
-    public static boolean checkEmail(String email){
+    public static boolean checkEmail(String email) {
         boolean flag = false;
-        try{
+        try {
             String check = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
             Pattern regex = Pattern.compile(check);
             Matcher matcher = regex.matcher(email);
             flag = matcher.matches();
-        }catch(Exception e){
+        } catch (Exception e) {
             flag = false;
         }
         return flag;

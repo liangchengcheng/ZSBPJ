@@ -1,6 +1,7 @@
 package com.lcc.frame.data;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.lcc.App;
 import com.lcc.db.test.UserInfo;
@@ -63,5 +64,15 @@ public class DataManager {
         return "";
     }
 
+    public static void editUser(UserInfo userInfo) {
+        UserInfoDao userInfoDao = getNoteDao(FrameManager.getAppContext());
+
+        Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder()
+                .build();
+        List<UserInfo> users = query.list();
+        if (users != null && users.size() > 0) {
+            userInfoDao.update(userInfo);
+        }
+    }
 
 }
