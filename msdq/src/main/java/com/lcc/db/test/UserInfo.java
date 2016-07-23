@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Entity mapped to table USER_INFO.
  */
-public class UserInfo implements Serializable{
+public class UserInfo implements Serializable {
 
     private Long id;
     private String phone;
@@ -19,6 +19,8 @@ public class UserInfo implements Serializable{
     private String qm;
     private String zy;
     private String user_image;
+    private String gz_num;
+    private String fs_num;
 
     public UserInfo() {
     }
@@ -27,7 +29,10 @@ public class UserInfo implements Serializable{
         this.id = id;
     }
 
-    public UserInfo(Long id, String phone, String nickname, String xb, String email, String created_at, String jf, String qm, String zy, String user_image) {
+
+    public UserInfo(Long id, String phone, String nickname, String xb, String email,
+                    String created_at, String jf,
+                    String qm, String zy, String user_image, String gz_num, String fs_num) {
         this.id = id;
         this.phone = phone;
         this.nickname = nickname;
@@ -38,6 +43,8 @@ public class UserInfo implements Serializable{
         this.qm = qm;
         this.zy = zy;
         this.user_image = user_image;
+        this.gz_num = gz_num;
+        this.fs_num = fs_num;
     }
 
     public Long getId() {
@@ -120,4 +127,20 @@ public class UserInfo implements Serializable{
         this.user_image = user_image;
     }
 
+
+    public String getGz_num() {
+        return gz_num;
+    }
+
+    public void setGz_num(String gz_num) {
+        this.gz_num = gz_num;
+    }
+
+    public String getFs_num() {
+        return fs_num;
+    }
+
+    public void setFs_num(String fs_num) {
+        this.fs_num = fs_num;
+    }
 }

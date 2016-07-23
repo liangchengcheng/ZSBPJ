@@ -31,6 +31,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property Qm = new Property(7, String.class, "qm", false, "QM");
         public final static Property Zy = new Property(8, String.class, "zy", false, "ZY");
         public final static Property User_image = new Property(9, String.class, "user_image", false, "USER_IMAGE");
+        public final static Property Gz_num = new Property(10, String.class, "gz_num", false, "GZ_NUM");
+        public final static Property Fs_num = new Property(11, String.class, "fs_num", false, "FS_NUM");
     };
 
 
@@ -55,7 +57,9 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "'JF' TEXT," + // 6: if
                 "'QM' TEXT," + // 7: qm
                 "'ZY' TEXT," + // 8: zy
-                "'USER_IMAGE' TEXT);"); // 9: user_image
+                "'USER_IMAGE' TEXT," + // 8: zy
+                "'GZ_NUM' TEXT," + // 8: zy
+                "'FS_NUM' TEXT);"); // 9: user_image
     }
 
     /** Drops the underlying database table. */
@@ -118,6 +122,16 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (user_image != null) {
             stmt.bindString(10, user_image);
         }
+
+        String gz_num = entity.getGz_num();
+        if (gz_num != null) {
+            stmt.bindString(11, gz_num);
+        }
+
+        String fs_num = entity.getFs_num();
+        if (fs_num != null) {
+            stmt.bindString(12, fs_num);
+        }
     }
 
     /** @inheritdoc */
@@ -139,7 +153,9 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // if
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // qm
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // zy
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // user_image
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // user_image
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // user_image
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // user_image
         );
         return entity;
     }
@@ -157,6 +173,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setQm(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setZy(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setUser_image(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setGz_num(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setFs_num(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
      }
     
     /** @inheritdoc */

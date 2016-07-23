@@ -61,10 +61,15 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.iv_edit)
     ImageView iv_edit;
 
+    @Bind(R.id.tv_fs)
+    TextView tv_fs;
+
+    @Bind(R.id.tv_gz)
+    TextView tv_gz;
+
     private UserInfo userInfo;
 
-    public static void startUserProfileActivity(UserInfo userInfo,
-                                                    Activity startingActivity) {
+    public static void startUserProfileActivity(UserInfo userInfo, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
         intent.putExtra(UserInfo, userInfo);
         startingActivity.startActivity(intent);
@@ -76,6 +81,8 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         ButterKnife.bind(this);
         userInfo = (UserInfo) getIntent().getSerializableExtra(UserInfo);
 
+        tv_fs= (TextView) findViewById(R.id.tv_fs);
+        tv_gz= (TextView) findViewById(R.id.tv_gz);
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
         iv_edit.setOnClickListener(this);
@@ -88,6 +95,8 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                     ivUserProfilePhoto);
         }
 
+        tv_gz.setText(userInfo.getGz_num()+"/关注");
+        tv_fs.setText(userInfo.getFs_num()+"/粉丝");
         tv_nickname.setText(userInfo.getNickname());
         if (TextUtils.isEmpty(userInfo.getQm())) {
             tv_gxqm.setText("这个家伙很懒，什么也没留下");
@@ -149,7 +158,9 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.iv_edit:
-                startActivity(new Intent(UserProfileActivity.this, UserEditActivity.class));
+                Intent intent=new Intent(UserProfileActivity.this, UserEditActivity.class);
+                intent.putExtra(UserEditActivity.USERINFO,userInfo);
+                startActivity(intent);
                 break;
 
             case R.id.guillotine_hamburger:

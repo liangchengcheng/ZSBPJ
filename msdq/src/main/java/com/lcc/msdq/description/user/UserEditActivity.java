@@ -10,10 +10,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.lcc.base.BaseActivity;
-import com.lcc.entity.UserInfo;
+import com.lcc.db.test.UserInfo;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
@@ -24,11 +25,9 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -45,14 +44,18 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Date:         2015年11月21日15:28:25
  * Description:  UserEditActivity
  */
-public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView {
+public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView,
+        RadioGroup.OnCheckedChangeListener {
 
     private ImageView iv_question_des;
     private ImageView iv_save;
     private SimpleArcDialog mDialog;
     //昵称 性别 签名 邮箱
-    private EditText edit_nickname, et_xb, et_qm, et_email;
+    private EditText edit_nickname, et_qm, et_email;
+    private RadioButton rb_nan,rb_nv;
+    private RadioGroup radioSex;
 
+    public static final String USERINFO = "userinfo";
     private List<File> files = new ArrayList<>();
     public FunctionConfig functionConfig;
     private UserEditPresenter userEditPresenter;
@@ -62,6 +65,11 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initView() {
+        rb_nan= (RadioButton) findViewById(R.id.rb_nan);
+        rb_nv= (RadioButton) findViewById(R.id.rb_nv);
+        radioSex= (RadioGroup) findViewById(R.id.radioSex);
+        radioSex.setOnCheckedChangeListener(this);
+
         ThemeConfig themeConfig = ThemeConfig.GREEN;
         functionConfig = new FunctionConfig.Builder()
                 .setEnableCamera(true)
@@ -78,16 +86,39 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
                 .build();
         GalleryFinal.init(coreConfig);
 
+        userInfo = (UserInfo) getIntent().getSerializableExtra(USERINFO);
+
         edit_nickname = (EditText) findViewById(R.id.edit_nickname);
-        et_xb = (EditText) findViewById(R.id.et_xb);
         et_qm = (EditText) findViewById(R.id.et_qm);
         et_email = (EditText) findViewById(R.id.et_email);
-
         iv_question_des = (ImageView) findViewById(R.id.iv_question_des);
         iv_question_des.setOnClickListener(this);
         iv_save = (ImageView) findViewById(R.id.iv_save);
         iv_save.setOnClickListener(this);
         userEditPresenter = new UserEditPresenterImpl(this);
+
+        String et = userInfo.getUser_image().toString();
+        if (!TextUtils.isEmpty(et)){
+            ImageManager.getInstance().loadCircleImage(UserEditActivity.this,
+                    userInfo.getUser_image(),
+                    iv_question_des);
+        }
+
+        if (!TextUtils.isEmpty(userInfo.getNickname())){
+            edit_nickname.setText(userInfo.getNickname());
+        }
+
+        if (userInfo.getXb().equals("女")){
+            rb_nv.setChecked(true);
+        }
+
+        if (!TextUtils.isEmpty(userInfo.getQm())){
+            et_qm.setText(userInfo.getQm());
+        }
+
+        if (!TextUtils.isEmpty(userInfo.getEmail())){
+            et_email.setText(userInfo.getEmail());
+        }
     }
 
     @Override
@@ -192,20 +223,13 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void sendUserInfo() {
-        userInfo.setEmail("");
-        userInfo.setNickname("");
-        userInfo.setQm("");
-        userInfo.setXb("");
-
         String nickname = edit_nickname.getText().toString();
-        String xb = et_xb.getText().toString();
         String qm = et_qm.getText().toString();
         String email = et_email.getText().toString();
 
         userInfo.setEmail(email);
         userInfo.setNickname(nickname);
         userInfo.setQm(qm);
-        userInfo.setXb(xb);
         userEditPresenter.userEdit(userInfo, files);
     }
 
@@ -234,5 +258,14 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     public void UserEditSuccess() {
         closeDialog();
         FrameManager.getInstance().toastPrompt("提交信息成功");
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (checkedId==R.id.rb_nan){
+            userInfo.setXb("男");
+        }else {
+            userInfo.setXb("女");
+        }
     }
 }

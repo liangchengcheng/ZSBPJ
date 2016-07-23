@@ -1,6 +1,6 @@
 package com.lcc.mvp.presenter.impl;
 
-import com.lcc.entity.UserInfo;
+import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.LoginModel;
@@ -28,7 +28,7 @@ public class UserEditPresenterImpl implements UserEditPresenter {
     }
 
     @Override
-    public void userEdit(UserInfo phone,List<File> files) {
+    public void userEdit(UserInfo phone, List<File> files) {
         view.showLoading();
         model.userEdit(phone, files,new ResultCallback<String>() {
             @Override
