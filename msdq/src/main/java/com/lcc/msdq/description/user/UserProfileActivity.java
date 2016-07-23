@@ -33,13 +33,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
 
-    public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
-    private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
-    private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
+    public static final String UserInfo = "UserInfo";
 
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
@@ -62,13 +61,12 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.iv_edit)
     ImageView iv_edit;
 
-
     private UserInfo userInfo;
 
-    public static void startUserProfileFromLocation(int[] startingLocation,
+    public static void startUserProfileActivity(UserInfo userInfo,
                                                     Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
-        intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
+        intent.putExtra(UserInfo, userInfo);
         startingActivity.startActivity(intent);
     }
 
@@ -76,15 +74,20 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        userInfo = (UserInfo) getIntent().getSerializableExtra("data");
+        userInfo = (UserInfo) getIntent().getSerializableExtra(UserInfo);
 
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
         iv_edit.setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
-        ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
-                userInfo.getUser_image(),
-                ivUserProfilePhoto);
+
+        String et = userInfo.getUser_image().toString();
+        if (!TextUtils.isEmpty(et)){
+            ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
+                    userInfo.getUser_image(),
+                    ivUserProfilePhoto);
+        }
+
         tv_nickname.setText(userInfo.getNickname());
         if (TextUtils.isEmpty(userInfo.getQm())) {
             tv_gxqm.setText("这个家伙很懒，什么也没留下");

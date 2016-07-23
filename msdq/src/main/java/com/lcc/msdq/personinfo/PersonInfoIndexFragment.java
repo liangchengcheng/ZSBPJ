@@ -92,7 +92,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.iv_more:
                 if (DataManager.getUserInfo() != null) {
                     Intent intent = new Intent(getActivity(), UserProfileActivity.class);
-                    intent.putExtra("data", DataManager.getUserInfo());
+                    intent.putExtra(UserProfileActivity.UserInfo, DataManager.getUserInfo());
                     startActivityForResult(intent, 200);
                 } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
@@ -150,8 +150,8 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             }
 
             String user_image = userInfo.getUser_image();
-            if (!TextUtils.isEmpty(user_image)){
-                ImageManager.getInstance().loadCircleImage(getActivity(),user_image ,
+            if (!TextUtils.isEmpty(user_image)) {
+                ImageManager.getInstance().loadCircleImage(getActivity(), user_image,
                         iv_more);
             }
         }
