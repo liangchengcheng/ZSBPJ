@@ -47,19 +47,17 @@ public class UserGoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final UserGood weekData = mList.get(position);
         NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
-        String title = weekData.getTitle();
-        String time = weekData.getCreated_time();
-        String gooder = weekData.getNickname();
+        String title = weekData.getTitle()+"";
+        String time = weekData.getCreated_time()+"";
+        String gooder = weekData.getNickname()+"";
 
         SpannableString styledText = new SpannableString(gooder +"赞了"+ title);
 
         styledText.setSpan(new TextAppearanceSpan(holder.tv_content.getContext(),
                 R.style.style0), 0, gooder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         styledText.setSpan(new TextAppearanceSpan(holder.tv_content.getContext(),
                 R.style.style1), gooder.length(), 2 + gooder.length()+title.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         holder.tv_content.setText(styledText, TextView.BufferType.SPANNABLE);
         holder.tv_time.setText(time);
 
@@ -71,7 +69,6 @@ public class UserGoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             });
         }
-
     }
 
     @Override

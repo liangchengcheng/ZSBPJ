@@ -15,9 +15,7 @@ import com.lcc.mvp.presenter.impl.LetterPresenterImpl;
 import com.lcc.mvp.presenter.impl.UserGoodPresenterImpl;
 import com.lcc.mvp.view.LetterView;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 
 /**

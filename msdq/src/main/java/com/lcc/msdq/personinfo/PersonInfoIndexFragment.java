@@ -81,12 +81,14 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         rl_qd = (RelativeLayout) view.findViewById(R.id.rl_qd);
         tv_qd = (TextView) view.findViewById(R.id.tv_qd);
         rl_qd.setOnClickListener(this);
+        view.findViewById(R.id.tv_username).setOnClickListener(this);
         setData();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_username:
             case R.id.iv_more:
                 if (DataManager.getUserInfo() != null) {
                     Intent intent = new Intent(getActivity(), UserProfileActivity.class);
@@ -106,10 +108,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
-                break;
-
-            case R.id.tv_username:
-                startActivity(new Intent(getActivity(), UserProfileActivity.class));
                 break;
 
             case R.id.ll_fav:
