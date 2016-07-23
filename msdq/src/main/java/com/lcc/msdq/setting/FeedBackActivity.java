@@ -1,6 +1,8 @@
 package com.lcc.msdq.setting;
 
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
@@ -21,13 +23,16 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 public class FeedBackActivity extends BaseActivity implements FeedBackView, View.OnClickListener {
 
     private FeedBackPresenter feedBackPresenter;
+
     private SimpleArcDialog mDialog;
+    private EditText et_message;
 
     @Override
     protected void initView() {
         feedBackPresenter = new FeedBackPresenterImpl(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.tv_post).setOnClickListener(this);
+        et_message = (EditText) findViewById(R.id.et_message);
     }
 
     @Override
@@ -68,7 +73,14 @@ public class FeedBackActivity extends BaseActivity implements FeedBackView, View
                 finish();
                 break;
             case R.id.tv_post:
-                feedBackPresenter.postMessage("");
+                String et = et_message.getText().toString();
+
+                if (TextUtils.isEmpty(et)){
+                    FrameManager.getInstance().toastPrompt("请填写完整信息");
+                    return;
+                }
+
+                feedBackPresenter.postMessage(et);
                 break;
         }
     }

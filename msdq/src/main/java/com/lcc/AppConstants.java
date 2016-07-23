@@ -75,6 +75,8 @@ public class AppConstants {
         public final static String getUserInfo = "/service/getUserInfo";
         //获取未读的私信的用户信息
         public final static String getSuperUserLetter = "/service/getSuperUserLetter";
+        //提交意见反馈
+        public final static String AddFeedBackService = "/service/AddFeedBackService";
 
     }
 

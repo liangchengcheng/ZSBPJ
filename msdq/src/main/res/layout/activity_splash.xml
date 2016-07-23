@@ -87,7 +87,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="登录注册"
+                    android:text="登录\注册"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:background="@color/first_color_register"

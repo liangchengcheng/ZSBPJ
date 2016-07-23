@@ -51,6 +51,7 @@
                         android:clipChildren="false">
 
                         <ImageView
+                            android:background="@drawable/default_user_logo"
                             android:id="@+id/ivUserProfilePhoto"
                             android:layout_width="72dp"
                             android:layout_height="72dp"
