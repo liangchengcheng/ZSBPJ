@@ -1,5 +1,7 @@
 package com.lcc.mvp.presenter.impl;
 
+import android.util.Log;
+
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
@@ -34,6 +36,7 @@ public class UserEditPresenterImpl implements UserEditPresenter {
             @Override
             public void onError(Request request, Exception e) {
                 view.UserEditFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                Log.e("lcc","666");
             }
 
             @Override

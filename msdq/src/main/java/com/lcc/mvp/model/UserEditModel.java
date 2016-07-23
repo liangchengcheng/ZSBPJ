@@ -16,12 +16,12 @@ public class UserEditModel {
     public OkHttpRequest userEdit(UserInfo userInfo, List<File> files,
                                   ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        paramsMap.put(AppConstants.ParamKey.AUTHOR, "13287878449");
         paramsMap.put("nickname", userInfo.getNickname());
         paramsMap.put("xb", userInfo.getXb());
         paramsMap.put("email", userInfo.getEmail());
         paramsMap.put("qm", userInfo.getQm());
-        return ApiClient.createWithFile(AppConstants.RequestPath.AddServiceAPI,
+        return ApiClient.createWithFile(AppConstants.RequestPath.EditServiceAPI,
                 paramsMap,files)
                 .upload(callback);
     }

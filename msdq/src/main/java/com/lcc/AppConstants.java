@@ -77,6 +77,8 @@ public class AppConstants {
         public final static String getSuperUserLetter = "/service/getSuperUserLetter";
         //提交意见反馈
         public final static String AddFeedBackService = "/service/AddFeedBackService";
+        //修改新的用户资料
+        public final static String EditServiceAPI = "/service/EditServiceAPI";
 
     }
 

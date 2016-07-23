@@ -227,9 +227,24 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         String qm = et_qm.getText().toString();
         String email = et_email.getText().toString();
 
-        userInfo.setEmail(email);
+        if (TextUtils.isEmpty(nickname)){
+            FrameManager.getInstance().toastPrompt("昵称不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(email)){
+            userInfo.setEmail("");
+        }else {
+            userInfo.setEmail(email);
+        }
+
+        if (TextUtils.isEmpty(qm)){
+            userInfo.setQm("");
+        }else {
+            userInfo.setQm(qm);
+        }
+
         userInfo.setNickname(nickname);
-        userInfo.setQm(qm);
         userEditPresenter.userEdit(userInfo, files);
     }
 
