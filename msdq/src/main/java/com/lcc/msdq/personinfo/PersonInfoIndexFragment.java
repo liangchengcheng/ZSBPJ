@@ -25,6 +25,7 @@ import com.lcc.msdq.login.ResetPasswordActivity;
 import com.lcc.msdq.fabu.FabuList;
 import com.lcc.msdq.setting.SettingActivity;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
@@ -154,6 +155,22 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 ImageManager.getInstance().loadCircleImage(getActivity(), user_image,
                         iv_more);
             }
+        }
+    }
+
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x02:
+
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
         }
     }
 

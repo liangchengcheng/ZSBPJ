@@ -33,6 +33,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
@@ -79,6 +80,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         userInfo = (UserInfo) getIntent().getSerializableExtra(UserInfo);
 
         tv_fs= (TextView) findViewById(R.id.tv_fs);
@@ -197,6 +199,20 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+    }
+
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x02:
+
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
 }

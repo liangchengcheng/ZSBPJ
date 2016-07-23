@@ -28,11 +28,15 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
@@ -65,6 +69,10 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initView() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
         rb_nan= (RadioButton) findViewById(R.id.rb_nan);
         rb_nv= (RadioButton) findViewById(R.id.rb_nv);
         radioSex= (RadioGroup) findViewById(R.id.radioSex);
@@ -235,7 +243,11 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         if (TextUtils.isEmpty(email)){
             userInfo.setEmail("");
         }else {
-            userInfo.setEmail(email);
+            if (checkEmail(email)){
+                userInfo.setEmail(email);
+            }else {
+                FrameManager.getInstance().toastPrompt("邮箱格式不正确");
+            }
         }
 
         if (TextUtils.isEmpty(qm)){
@@ -273,6 +285,8 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     public void UserEditSuccess() {
         closeDialog();
         FrameManager.getInstance().toastPrompt("提交信息成功");
+        EventBus.getDefault().post(0x02);
+        // TODO: 16/7/23 修改下本地数据库里面的数据 
     }
 
     @Override
@@ -281,6 +295,27 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
             userInfo.setXb("男");
         }else {
             userInfo.setXb("女");
+        }
+    }
+
+    public static boolean checkEmail(String email){
+        boolean flag = false;
+        try{
+            String check = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+            Pattern regex = Pattern.compile(check);
+            Matcher matcher = regex.matcher(email);
+            flag = matcher.matches();
+        }catch(Exception e){
+            flag = false;
+        }
+        return flag;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
         }
     }
 }
