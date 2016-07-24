@@ -72,7 +72,7 @@ public class LatterEntityPresenterImpl implements LatterEntityPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
-                    // TODO: 16/7/24 具体的错误信息 
+                    // TODO: 16/7/24 具体的错误信息
                     if (status == 1) {
                         view.replaySuccess();
                     } else {

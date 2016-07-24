@@ -1,6 +1,5 @@
 package com.lcc.mvp.model;
 
-
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
@@ -25,10 +24,10 @@ public class LatterEntityModel {
 
     public OkHttpRequest sendLetterByPhone(SendLatter latter, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put("from_w", latter.getFrom_w());
+        paramsMap.put("from_w", "18813149871");
         paramsMap.put("to_w", latter.getTo_w());
-        paramsMap.put("message_body", "18813149871");
-        return ApiClient.create(AppConstants.RequestPath.getLetterByPhone, paramsMap).tag("")
+        paramsMap.put("message_body", latter.getMessage_body());
+        return ApiClient.create(AppConstants.RequestPath.sendLetterByPhone, paramsMap).tag("")
                 .get(callback);
     }
 }

@@ -81,6 +81,8 @@ public class AppConstants {
         public final static String EditServiceAPI = "/service/EditServiceAPI";
         //获取对话的内容
         public final static String getLetterByPhone = "/service/getLetterByPhone";
+        //保存数据到sql
+        public final static String sendLetterByPhone = "/service/sendLetterByPhone";
 
     }
 
