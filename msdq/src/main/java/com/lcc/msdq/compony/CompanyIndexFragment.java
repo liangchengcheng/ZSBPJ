@@ -1,23 +1,13 @@
 package com.lcc.msdq.compony;
 
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,15 +21,19 @@ import com.lcc.entity.CompanyDescription;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.AreaSelectActivity;
+import com.lcc.msdq.choice.ChoiceAreaSelectActivity;
 import com.lcc.mvp.presenter.CompanyDescriptionPresenter;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.CompanyDescriptionView;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
@@ -59,6 +53,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     private CompanyDescriptionPresenter mPresenter;
     private CompanyAdapter mAdapter;
     private String company_name = "";
+    private String area = "";
 
     public static Fragment newInstance() {
         return new CompanyIndexFragment();
@@ -69,8 +64,10 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         currentPage = 1;
         super.onFragmentCreate();
         mPresenter = new CompanyDescriptionPresenterImpl(this);
+
+        area = SharePreferenceUtil.getAREA();
         View view = getView();
-        tv_tip= (TextView) view.findViewById(R.id.tv_tip);
+        tv_tip = (TextView) view.findViewById(R.id.tv_tip);
 
         RecyclerView mRecyclerView = getRecyclerView();
         mRecyclerView.setHasFixedSize(true);
@@ -89,14 +86,15 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
                 mSearchView.show(true);
             }
         });
+
         iv_more = view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
-        mPresenter.getData(currentPage, company_name);
+        mPresenter.getData(currentPage, company_name, area);
     }
 
     @Override
     protected void onFragmentLoadMore() {
-        mPresenter.loadMore(getCurrentPage(), company_name);
+        mPresenter.loadMore(getCurrentPage(), company_name, area);
     }
 
     @Override
@@ -106,7 +104,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onRefreshData() {
-        mPresenter.refresh(company_name);
+        mPresenter.refresh(company_name, area);
     }
 
     private void initSearchView(View view) {
@@ -170,11 +168,11 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         if (TextUtils.isEmpty(text) || text.equals("全部")) {
             company_name = "";
             currentPage = 1;
-            mPresenter.getData(currentPage, company_name);
+            mPresenter.getData(currentPage, company_name, area);
         } else {
             company_name = text;
             currentPage = 1;
-            mPresenter.getData(currentPage, company_name);
+            mPresenter.getData(currentPage, company_name, area);
         }
     }
 
@@ -228,11 +226,34 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_more:
-
+                Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
+                startActivityForResult(intent, 11);
                 break;
+
             case R.id.loading_layout:
-                AreaSelectActivity.startAreaSelectActivity(company_name,getActivity());
+                AreaSelectActivity.startAreaSelectActivity(company_name, getActivity());
                 break;
         }
+    }
+
+    private Pattern intPattern = Pattern.compile("^[-\\+]?[\\d]*\\.0*$");
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 11 && resultCode == 12 && data != null) {
+            final Map map = (Map) data.getSerializableExtra("addressInfo");
+            String areaName = String.format("%s", getString(map, "districtName", ""));
+            area = areaName;
+            SharePreferenceUtil.setAREA(areaName);
+            currentPage = 1;
+            mPresenter.getData(currentPage, company_name, area);
+        }
+    }
+
+    public String getString(Map map, String key, String defaultValue) {
+        Object obj = map.get(key);
+        return obj == null ? defaultValue : (obj instanceof Number && intPattern.matcher(obj.toString())
+                .matches() ? String.valueOf(Long.valueOf(((Number) obj).longValue())) : obj.toString());
     }
 }

@@ -33,12 +33,13 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
         model = new CompanyDescriptionModel();
     }
 
-    private void loadData(final int page, final String company_name, final boolean get_data) {
+    private void loadData(final int page, final String company_name, final String area,
+                          final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
         final long current_time = TimeUtils.getCurrentTime();
-        model.getCompanyDescriptionList(page, company_name, new ResultCallback<String>() {
+        model.getCompanyDescriptionList(page, company_name, area, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -100,17 +101,17 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
     }
 
     @Override
-    public void getData(int page, String company_name) {
-        loadData(page, company_name, true);
+    public void getData(int page, String company_name, String area) {
+        loadData(page, company_name, area, true);
     }
 
     @Override
-    public void loadMore(int page, String company_name) {
-        loadData(page, company_name, false);
+    public void loadMore(int page, String company_name, String area) {
+        loadData(page, company_name, area, false);
     }
 
     @Override
-    public void refresh(String company_name) {
-        loadData(1, company_name, false);
+    public void refresh(String company_name, String area) {
+        loadData(1, company_name, area, false);
     }
 }

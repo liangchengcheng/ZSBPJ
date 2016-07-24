@@ -187,5 +187,9 @@
         <activity
             android:name=".news.letternews.LetterDetailsActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".choice.ChoiceAreaSelectActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

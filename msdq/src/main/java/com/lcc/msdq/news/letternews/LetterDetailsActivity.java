@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.lcc.adapter.LatterEntityAdapter;
 import com.lcc.adapter.LetterAdapter;
@@ -39,8 +40,8 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2015年11月21日15:28:25
  * Description:  LetterActivity(个人的私信的界面)
  */
-public class LetterDetailsActivity extends BaseActivity implements LatterEntityView ,
-        SendCommentButton.OnSendClickListener{
+public class LetterDetailsActivity extends BaseActivity implements LatterEntityView,
+        SendCommentButton.OnSendClickListener {
 
     public static final String LETTER = "letter";
     private Letter letter;
@@ -53,8 +54,7 @@ public class LetterDetailsActivity extends BaseActivity implements LatterEntityV
     private SendCommentButton btnSendComment;
     private EditText etComment;
 
-    public static void startLetterDetailsActivity(Letter letter,
-                                                  Activity startingActivity) {
+    public static void startLetterDetailsActivity(Letter letter, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, LetterDetailsActivity.class);
         intent.putExtra(LETTER, letter);
         startingActivity.startActivity(intent);
@@ -64,13 +64,15 @@ public class LetterDetailsActivity extends BaseActivity implements LatterEntityV
     protected void initView() {
         letter = (Letter) getIntent().getSerializableExtra(LETTER);
 
-        etComment= (EditText) findViewById(R.id.etComment);
-        btnSendComment= (SendCommentButton) findViewById(R.id.btnSendComment);
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText(letter.getNickname());
+        etComment = (EditText) findViewById(R.id.etComment);
+        btnSendComment = (SendCommentButton) findViewById(R.id.btnSendComment);
         btnSendComment.setOnSendClickListener(this);
         initRecycleView();
         Presenter = new LatterEntityPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        Presenter.getData("1",letter.getFrom_w());
+        Presenter.getData("1", letter.getFrom_w());
     }
 
     private void initRecycleView() {
@@ -129,7 +131,7 @@ public class LetterDetailsActivity extends BaseActivity implements LatterEntityV
     public void replaySuccess() {
         KeyboardUtils.hide(LetterDetailsActivity.this);
         FrameManager.getInstance().toastPrompt("提交成功");
-        Presenter.getData("1",letter.getFrom_w());
+        Presenter.getData("1", letter.getFrom_w());
         etComment.setText(null);
         btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
     }
@@ -142,7 +144,7 @@ public class LetterDetailsActivity extends BaseActivity implements LatterEntityV
     @Override
     public void onSendClickListener(View v) {
         if (validateComment()) {
-            sendLatter=new SendLatter();
+            sendLatter = new SendLatter();
             sendLatter.setTo_w(letter.getFrom_w());
             sendLatter.setMessage_body(etComment.getText().toString().trim());
             Presenter.sendLatter(sendLatter);
