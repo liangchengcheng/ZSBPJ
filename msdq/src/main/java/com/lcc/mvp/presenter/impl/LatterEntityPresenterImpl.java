@@ -2,6 +2,7 @@ package com.lcc.mvp.presenter.impl;
 
 import com.lcc.entity.LatterEntity;
 import com.lcc.entity.Letter;
+import com.lcc.entity.SendLatter;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.LatterEntityModel;
 import com.lcc.mvp.model.LetterModel;
@@ -49,6 +50,33 @@ public class LatterEntityPresenterImpl implements LatterEntityPresenter {
                         view.getDataSuccess(weekDatas);
                     } else {
                         view.getDataFail(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void sendLatter(SendLatter replay) {
+        model.sendLetterByPhone(replay ,new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.replayFail();
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    // TODO: 16/7/24 具体的错误信息 
+                    if (status == 1) {
+                        view.replaySuccess();
+                    } else {
+                        view.replayFail();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

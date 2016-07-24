@@ -21,4 +21,10 @@ public interface LatterEntityView {
 
     void getDataSuccess(List<LatterEntity> list);
 
+    void rePlaying();
+
+    void replaySuccess();
+
+    void replayFail();
+
 }
