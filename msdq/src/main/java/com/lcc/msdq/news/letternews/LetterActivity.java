@@ -88,6 +88,6 @@ public class LetterActivity extends BaseActivity implements LetterView,
 
     @Override
     public void onItemClick(Letter data) {
-
+        LetterDetailsActivity.startLetterDetailsActivity(data,LetterActivity.this);
     }
 }

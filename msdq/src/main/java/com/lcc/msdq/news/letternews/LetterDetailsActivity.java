@@ -1,6 +1,10 @@
 package com.lcc.msdq.news.letternews;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.Letter;
 import com.lcc.msdq.R;
 
 /**
@@ -11,9 +15,19 @@ import com.lcc.msdq.R;
  */
 public class LetterDetailsActivity extends BaseActivity {
 
+    public static final String LETTER = "letter";
+    private Letter letter;
+
+    public static void startLetterDetailsActivity(Letter letter,
+                                                    Activity startingActivity) {
+        Intent intent = new Intent(startingActivity, LetterDetailsActivity.class);
+        intent.putExtra(LETTER, letter);
+        startingActivity.startActivity(intent);
+    }
+
     @Override
     protected void initView() {
-
+        letter= (Letter) getIntent().getSerializableExtra(LETTER);
     }
 
     @Override
@@ -23,6 +37,6 @@ public class LetterDetailsActivity extends BaseActivity {
 
     @Override
     protected int getLayoutView() {
-        return R.layout.message_one;
+        return R.layout.latter_edtails;
     }
 }
