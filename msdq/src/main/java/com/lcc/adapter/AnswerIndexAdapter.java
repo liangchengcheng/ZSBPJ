@@ -56,7 +56,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private static final int NORMAL_ITEM = 0;
     private static final int HEAD_ITEM = 1;
-    public static final int FOOTER_ITEM = 2;
+    private static final int FOOTER_ITEM = 2;
 
     private List<Object> mList = new ArrayList<>();
 

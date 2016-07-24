@@ -21,6 +21,7 @@ import com.lcc.mvp.presenter.impl.LetterPresenterImpl;
 import com.lcc.mvp.view.LatterEntityView;
 import com.lcc.view.loadview.LoadingLayout;
 
+import java.util.Collections;
 import java.util.List;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -97,6 +98,7 @@ public class LetterDetailsActivity extends BaseActivity implements LatterEntityV
     @Override
     public void getDataSuccess(List<LatterEntity> entities) {
         if (entities != null && entities.size() > 0) {
+            Collections.reverse(entities);
             mAdapter.bind(entities);
             loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
         } else {

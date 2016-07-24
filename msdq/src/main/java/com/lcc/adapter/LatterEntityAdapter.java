@@ -2,6 +2,7 @@ package com.lcc.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +36,9 @@ public class LatterEntityAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private UserInfo userInfo = new UserInfo();
     private Letter letter = new Letter();
 
+    private static final int YOU_ITEM = 0;
+    private static final int ME_ITEM = 1;
+
     public LatterEntityAdapter(UserInfo userInfo, Letter letter) {
         this.userInfo = userInfo;
         this.letter = letter;
@@ -45,38 +49,52 @@ public class LatterEntityAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
+
+    @Override
+    public int getItemViewType(int position) {
+        LatterEntity latterEntity = mList.get(position);
+        if (latterEntity.getFrom_w().equals(letter.getFrom_w())){
+            return YOU_ITEM;
+        }else{
+            return ME_ITEM;
+        }
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NormalViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.message_one, parent, false));
+
+        Log.e("lccx",viewType+"viewtype");
+        if (viewType == YOU_ITEM) {
+            return new YouViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.message_one, parent, false));
+        } else {
+            return new MeViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.message_two, parent, false));
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
-        final LatterEntity latterEntity = mList.get(position);
-        NormalViewHolder holder = (NormalViewHolder) viewHolder;
-        holder.ll_you.setVisibility(View.VISIBLE);
-        holder.rl_me.setVisibility(View.VISIBLE);
+        LatterEntity latterEntity = mList.get(position);
+        Log.e("lccx",position+"");
         String message_body = latterEntity.getMessage_body();
-        if (latterEntity.getFrom_w().equals(letter.getFrom_w())){
+        if (viewHolder instanceof YouViewHolder) {
+            YouViewHolder holder = (YouViewHolder) viewHolder;
             String URL = letter.getUser_image();
             if (!TextUtils.isEmpty(URL)) {
                 ImageManager.getInstance().loadCircleImage(holder.iv_you.getContext(),
                         URL, holder.iv_you);
             }
             holder.tv_you.setText(message_body);
-            holder.rl_me.setVisibility(View.GONE);
         }else {
-            String URL = letter.getUser_image();
+            MeViewHolder holder = (MeViewHolder) viewHolder;
+            String URL = userInfo.getUser_image();
             if (!TextUtils.isEmpty(URL)) {
                 ImageManager.getInstance().loadCircleImage(holder.iv_me.getContext(),
                         URL, holder.iv_me);
             }
             holder.tv_me.setText(message_body);
-            holder.ll_you.setVisibility(View.GONE);
         }
-
     }
 
     @Override
@@ -88,23 +106,27 @@ public class LatterEntityAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mList.size();
     }
 
-    class NormalViewHolder extends RecyclerView.ViewHolder {
+    class YouViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.tv_you)
         TextView tv_you;
-        @Bind(R.id.tv_me)
-        TextView tv_me;
         @Bind(R.id.iv_you)
         ImageView iv_you;
+
+        public YouViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    class MeViewHolder extends RecyclerView.ViewHolder {
+
+        @Bind(R.id.tv_me)
+        TextView tv_me;
         @Bind(R.id.iv_me)
         ImageView iv_me;
 
-        @Bind(R.id.ll_you)
-        LinearLayout ll_you;
-        @Bind(R.id.rl_me)
-        RelativeLayout rl_me;
-
-        public NormalViewHolder(View itemView) {
+        public MeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -121,13 +143,4 @@ public class LatterEntityAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mList;
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(Letter data);
-    }
-
-    private OnItemClickListener mListener;
-
-    public void setOnItemClickListener(OnItemClickListener li) {
-        this.mListener = li;
-    }
 }
