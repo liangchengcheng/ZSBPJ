@@ -14,6 +14,7 @@ import android.widget.GridView;
 import com.lcc.adapter.ColorsListAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.frame.data.DataCleanManager;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.utils.DialogUtils;
 import com.lcc.utils.PreferenceUtils;
@@ -32,6 +33,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         preferenceUtils = PreferenceUtils.getInstance(SettingActivity.this);
         activity = (BaseActivity) SettingActivity.this;
     }
@@ -42,6 +44,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.ml_yjfk).setOnClickListener(this);
         findViewById(R.id.ll_clear_cache).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        findViewById(R.id.tv_logout).setOnClickListener(this);
     }
 
     @Override
@@ -138,6 +141,25 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.guillotine_hamburger:
                 finish();
                 break;
+
+            //注销登录
+            case R.id.tv_logout:
+                logout();
+                break;
         }
+    }
+
+    /**
+     * 注销登录相关的功能
+     */
+    private void logout(){
+        DataManager.deleteAllUser();
+        EventBus.getDefault().post(0x02);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

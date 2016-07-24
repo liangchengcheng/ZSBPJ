@@ -13,7 +13,6 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
@@ -27,13 +26,11 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -49,7 +46,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  UserEditActivity
+ * Description:  UserEditActivity（更新用户的资料）
  */
 public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView,
         RadioGroup.OnCheckedChangeListener {

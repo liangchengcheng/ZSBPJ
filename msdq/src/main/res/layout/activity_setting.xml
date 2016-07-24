@@ -398,6 +398,7 @@
              android:layout_marginRight="10dp"
              android:background="#EDEDED" />
          <TextView
+             android:id="@+id/tv_logout"
              android:textSize="16sp"
              android:layout_margin="10dp"
              android:gravity="center"
