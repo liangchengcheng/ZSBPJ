@@ -3,13 +3,11 @@ package com.lcc.msdq.compony;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lapism.searchview.adapter.SearchAdapter;
 import com.lapism.searchview.adapter.SearchItem;
@@ -18,14 +16,11 @@ import com.lapism.searchview.view.SearchCodes;
 import com.lapism.searchview.view.SearchView;
 import com.lcc.adapter.CompanyAdapter;
 import com.lcc.entity.CompanyDescription;
-import com.lcc.entity.CompanyEntity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.AreaSelectActivity;
 import com.lcc.msdq.choice.ChoiceAreaSelectActivity;
 import com.lcc.mvp.presenter.CompanyDescriptionPresenter;
-import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
-import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.CompanyDescriptionView;
 import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
@@ -227,7 +222,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
         switch (v.getId()) {
             case R.id.iv_more:
                 Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
-                startActivityForResult(intent, 11);
+                this.startActivityForResult(intent, 11);
                 break;
 
             case R.id.loading_layout:
@@ -242,8 +237,9 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11 && resultCode == 12 && data != null) {
-            final Map map = (Map) data.getSerializableExtra("addressInfo");
-            String areaName = String.format("%s", getString(map, "districtName", ""));
+            Map map = (Map) data.getSerializableExtra("addressInfo");
+            String areaName = String.format("%s", getString(map, "cityName", ""));
+            FrameManager.getInstance().toastPrompt(areaName);
             area = areaName;
             SharePreferenceUtil.setAREA(areaName);
             currentPage = 1;

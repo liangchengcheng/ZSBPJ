@@ -38,6 +38,7 @@ public class CompanyDescriptionPresenterImpl implements CompanyDescriptionPresen
         if (get_data) {
             view.getLoading();
         }
+
         final long current_time = TimeUtils.getCurrentTime();
         model.getCompanyDescriptionList(page, company_name, area, new ResultCallback<String>() {
             @Override
