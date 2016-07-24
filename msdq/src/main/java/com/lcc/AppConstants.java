@@ -79,6 +79,8 @@ public class AppConstants {
         public final static String AddFeedBackService = "/service/AddFeedBackService";
         //修改新的用户资料
         public final static String EditServiceAPI = "/service/EditServiceAPI";
+        //获取对话的内容
+        public final static String getLetterByPhone = "/service/getLetterByPhone";
 
     }
 

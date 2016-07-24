@@ -18,6 +18,7 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.utils.DialogUtils;
 import com.lcc.utils.PreferenceUtils;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.utils.ThemeUtils;
 
 import java.util.Arrays;
@@ -155,6 +156,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private void logout(){
         DataManager.deleteAllUser();
         EventBus.getDefault().post(0x02);
+        FrameManager.getInstance().toastPrompt("注销登录成功");
     }
 
     @Override
