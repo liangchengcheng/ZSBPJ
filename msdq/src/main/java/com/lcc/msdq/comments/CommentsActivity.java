@@ -46,7 +46,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
         CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
-        CommentsDialog.onChoiceListener {
+        CommentsDialog.onChoiceListener,View.OnClickListener {
 
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
@@ -84,7 +84,8 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private String type = "面试感想";
     private String content_id;
 
-    public static void startUserProfileFromLocation(String id, String type, Activity startingActivity) {
+    public static void startUserProfileFromLocation(String id, String type,
+                                                    Activity startingActivity) {
         Intent intent = new Intent(startingActivity, CommentsActivity.class);
         intent.putExtra(ID, id);
         intent.putExtra(TYPE, type);
@@ -95,14 +96,15 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        mPresenter = new CommentsPresenterImpl(this);
 
+        mPresenter = new CommentsPresenterImpl(this);
         content_id = getIntent().getStringExtra(ID);
         type = getIntent().getStringExtra(TYPE);
         replay.setNid(content_id);
         replay.setType(type);
         replay.setAuthor("18813149871");
 
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
         initRecycleView();
@@ -110,16 +112,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
         mPresenter.getData(1, content_id);
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
-        if (savedInstanceState == null) {
-            contentRoot.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    contentRoot.getViewTreeObserver().removeOnPreDrawListener(this);
-                    startIntroAnimation();
-                    return true;
-                }
-            });
-        }
     }
 
     @Override
@@ -141,47 +133,10 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         btnSendComment.setOnSendClickListener(this);
     }
 
-    private void startIntroAnimation() {
-        ViewCompat.setElevation(toolbar, 0);
-        contentRoot.setScaleY(0.1f);
-        contentRoot.setPivotY(drawingStartLocation);
-        llAddComment.setTranslationY(200);
-
-        contentRoot.animate()
-                .scaleY(1)
-                .setDuration(200)
-                .setInterpolator(new AccelerateInterpolator())
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        ViewCompat.setElevation(toolbar, ScreenUtils.dpToPx(8));
-                        animateContent();
-                    }
-                })
-                .start();
-    }
-
-    private void animateContent() {
-        llAddComment.animate().translationY(0)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(200)
-                .start();
-    }
 
     @Override
     public void onBackPressed() {
-        ViewCompat.setElevation(toolbar, 0);
-        contentRoot.animate()
-                .translationY(ScreenUtils.getScreenHeight(this))
-                .setDuration(200)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        CommentsActivity.super.onBackPressed();
-                        overridePendingTransition(0, 0);
-                    }
-                })
-                .start();
+        finish();
     }
 
     @Override
@@ -346,6 +301,15 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private void closeDialog() {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
         }
     }
 }
