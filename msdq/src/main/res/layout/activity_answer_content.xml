@@ -140,11 +140,11 @@
                 android:id="@+id/floatingReport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_report"
+                android:src="@drawable/ic_reports"
                 app:fab_colorNormal="?attr/colorPrimary"
                 app:fab_colorPressed="?attr/colorPrimary"
                 app:fab_colorRipple="?attr/colorPrimary"
-                app:fab_label="举报"
+                app:fab_label="点赞"
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton

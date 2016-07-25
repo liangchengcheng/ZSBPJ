@@ -74,6 +74,7 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+
         if (viewHolder instanceof HeadViewHolder) {
             CompanyTest object = (CompanyTest) mList.get(0);
             HeadViewHolder holder = (HeadViewHolder) viewHolder;
@@ -82,17 +83,18 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
             holder.tv_title.setText(object.getTitle());
 
-            String image_url=object.getQuestion_image();
-            if (!TextUtils.isEmpty(image_url)){
+            String image_url = object.getQuestion_image();
+            if (!TextUtils.isEmpty(image_url)) {
                 holder.tv_phone.setVisibility(View.VISIBLE);
                 ImageManager.getInstance().loadUrlImage(holder.tv_phone.getContext(),
-                        image_url,holder.tv_phone);
-            }else {
+                        image_url, holder.tv_phone);
+            } else {
                 holder.tv_phone.setVisibility(View.GONE);
             }
-            String head_url=object.getUser_image();
+
+            String head_url = object.getUser_image();
             ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
-                    head_url,holder.iv_head);
+                    head_url, holder.iv_head);
             holder.tv_nickname.setText(object.getNickname());
             holder.tv_month.setText(object.getCreated_time());
             holder.tv_llsc.setText(object.getL_num());
@@ -132,10 +134,12 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(Html.fromHtml(answer.getAnswer_content()));
             holder.tv_name.setText(answer.getNickname());
+            holder.tv_znum.setText(answer.getZ_num());
+
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
 
-            if(mListener != null) {
+            if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -163,6 +167,9 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         @Bind(R.id.des_content)
         TextView des_content;
+
+        @Bind(R.id.tv_znum)
+        TextView tv_znum;
 
         @Bind(R.id.tv_name)
         TextView tv_name;

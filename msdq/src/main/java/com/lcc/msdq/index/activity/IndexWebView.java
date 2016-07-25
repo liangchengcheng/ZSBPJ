@@ -35,21 +35,14 @@ import com.lcc.view.loadview.LoadingLayout;
 public class IndexWebView extends BaseActivity implements IndexContentView {
 
     public static final String KEY_URL = "url";
-
     public static final String IMAGE_URL = "image";
-
     public static final String TITLE = "title";
 
     private Toolbar toolbar;
-
     private WebView webView;
-
     private ImageView ivZhihuStory;
-
     private CollapsingToolbarLayout ctl;
-
     private NestedScrollView nest;
-
     private FloatingActionButton fabButton;
     private LoadingLayout loading_layout;
 
@@ -85,6 +78,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
         nest= (NestedScrollView) findViewById(R.id.nest);
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
         fabButton.setOnClickListener(new View.OnClickListener() {
