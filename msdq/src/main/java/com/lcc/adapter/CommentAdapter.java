@@ -37,9 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private List<Comments> mList = new ArrayList<>();
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
 
@@ -64,7 +62,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .inflate(R.layout.item_comment, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.layout_foot_loading, parent, false));
+                    .inflate(R.layout.layout_foot_normal, parent, false));
         }
     }
 
@@ -74,9 +72,6 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             final Comments weekData = mList.get(position);

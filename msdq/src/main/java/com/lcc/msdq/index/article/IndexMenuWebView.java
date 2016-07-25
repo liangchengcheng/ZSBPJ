@@ -46,16 +46,15 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     private TextView tv_question,
             tv_source;
     private ImageView iv_state;
-    private TextView tv_favorite;
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
 
     private MenuContentPresenter indexContentPresenter;
     private Article article;
     private ArticleContent articleContent;
-    private String type="面试感想";
+    private String type = "面试感想";
 
-    public static void startIndexMenuWebView(Activity startingActivity, Article article,String type) {
+    public static void startIndexMenuWebView(Activity startingActivity, Article article, String type) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
         intent.putExtra(DATA, article);
         intent.putExtra(TYPE, type);
@@ -71,11 +70,11 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     }
 
     private void initData() {
-        articleContent=new ArticleContent();
+        articleContent = new ArticleContent();
         article = (Article) getIntent().getSerializableExtra(DATA);
         type = getIntent().getStringExtra(TYPE);
         indexContentPresenter = new MenuContentPresenterImpl(this);
-        if (!article.getL_num().equals("0")){
+        if (!article.getL_num().equals("0")) {
             tv_comments.setText(article.getL_num());
         }
     }
@@ -86,10 +85,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         findViewById(R.id.ll_comments).setOnClickListener(this);
         findViewById(R.id.tv_to_comments).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
-        tv_comments= (TextView) findViewById(R.id.tv_comments);
-        ll_bottom_state= (LinearLayout) findViewById(R.id.ll_bottom_state);
-        tv_favorite= (TextView) findViewById(R.id.tv_favorite);
-        iv_state= (ImageView) findViewById(R.id.iv_state);
+        tv_comments = (TextView) findViewById(R.id.tv_comments);
+        ll_bottom_state = (LinearLayout) findViewById(R.id.ll_bottom_state);
+        iv_state = (ImageView) findViewById(R.id.iv_state);
         tv_question = (TextView) findViewById(R.id.tv_question);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory = (ImageView) findViewById(R.id.user_head);
@@ -166,7 +164,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     public void getSuccess(ArticleContent result) {
         try {
-            articleContent=result;
+            articleContent = result;
             if (TextUtils.isEmpty(result.getContent())) {
                 loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             } else {
@@ -182,14 +180,12 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                             .centerCrop()
                             .into(ivZhihuStory);
                 }
+
                 //判断是否被我收藏了
-                if (result.getAuthor()==null){
-                    tv_favorite.setText("收藏");
-                }else {
-                    tv_favorite.setText("已收藏");
+                if (result.getAuthor() == null) {
+                    iv_state.setBackgroundResource(R.drawable.ic_heart_outline_grey);
+                } else {
                     iv_state.setBackgroundResource(R.drawable.ic_heart_red);
-//                    ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
-//                            R.drawable.ic_heart_red,iv_state);
                 }
 
                 webView.loadDataWithBaseURL("about:blank", result.getContent(),
@@ -207,12 +203,12 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_comments:
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),type,
+                CommentsActivity.startUserProfileFromLocation(article.getMid(), type,
                         IndexMenuWebView.this);
                 break;
 
             case R.id.tv_to_comments:
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),type,
+                CommentsActivity.startUserProfileFromLocation(article.getMid(), type,
                         IndexMenuWebView.this);
                 break;
 
@@ -222,11 +218,11 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
             case R.id.ll_issc:
                 // TODO: 16/6/14 type需要传入进来
-                if (articleContent.getAuthor()!=null){
+                if (articleContent.getAuthor() != null) {
                     indexContentPresenter.UnFav(article);
                 }
-                if (articleContent.getAuthor()==null){
-                    indexContentPresenter.Fav(article,"面试感想");
+                if (articleContent.getAuthor() == null) {
+                    indexContentPresenter.Fav(article, "面试感想");
                 }
                 break;
         }
@@ -235,10 +231,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     public void FavSuccess() {
         articleContent.setAuthor("18813149871");
-        tv_favorite.setText("已收藏");
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
-                R.drawable.ic_heart_red,iv_state);
-        FrameManager.getInstance().toastPrompt("收藏成功，然后进行操作");
+                R.drawable.ic_heart_red, iv_state);
+        FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
     @Override
@@ -249,10 +244,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     @Override
     public void UnFavSuccess() {
         articleContent.setAuthor(null);
-        FrameManager.getInstance().toastPrompt("取消收藏成功，然后进行操作");
-        tv_favorite.setText("收藏");
+        FrameManager.getInstance().toastPrompt("取消收藏成功");
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
-                R.drawable.ic_heart_outline_grey,iv_state);
+                R.drawable.ic_heart_outline_grey, iv_state);
     }
 
     @Override
