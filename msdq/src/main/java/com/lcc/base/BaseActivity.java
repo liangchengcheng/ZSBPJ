@@ -197,4 +197,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.finish();
         //showActivityExitAnim();
     }
+
 }

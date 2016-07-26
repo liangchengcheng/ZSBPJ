@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.frame.update.UpdateApkTask;
@@ -44,6 +46,7 @@ import zsbpj.lccpj.view.toast.SuperCustomToast;
 public class MainActivity extends BaseActivity {
 
     private BottomBar mBottomBar;
+    private long firstTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,9 +102,32 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
-    public void updateAPK(){
+
+    public void updateAPK() {
         UpdateApkTask task = new UpdateApkTask(MainActivity.this, false);
         task.detectionVersionInfo();
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 800) {
+                Toast.makeText(MainActivity.this, "再按一次退出程序",
+                        Toast.LENGTH_SHORT).show();
+                firstTime = secondTime;
+                return true;
+            } else {
+                exitApp();
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    public void exitApp() {
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
     }
 
 }
