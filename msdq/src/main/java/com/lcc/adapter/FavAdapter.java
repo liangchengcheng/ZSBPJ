@@ -41,10 +41,8 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
-
     private List<FavEntity> mList = new ArrayList<>();
 
     public void bind(List<FavEntity> messages) {
@@ -78,9 +76,6 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             final FavEntity weekData = mList.get(position);
@@ -120,7 +115,6 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ll_all)
         RelativeLayout ll_all;
         @Bind(R.id.tv_nickname)
@@ -133,7 +127,6 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
         @Bind(R.id.mTextView)

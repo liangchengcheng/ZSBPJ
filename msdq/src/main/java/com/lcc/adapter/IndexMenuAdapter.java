@@ -34,9 +34,7 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private List<Article> mList = new ArrayList<>();
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
 

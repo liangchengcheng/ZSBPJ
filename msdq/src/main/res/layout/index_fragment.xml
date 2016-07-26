@@ -48,6 +48,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:background="@drawable/loading12"
                 android:id="@+id/llAdvertiseBoard"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

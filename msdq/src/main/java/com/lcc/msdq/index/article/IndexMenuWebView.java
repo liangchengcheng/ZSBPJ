@@ -43,8 +43,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     private WebView webView;
     private ImageView ivZhihuStory;
     private LoadingLayout loading_layout;
-    private TextView tv_question,
-            tv_source;
+    private TextView tv_question, tv_source;
     private ImageView iv_state;
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
@@ -183,9 +182,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
                 //判断是否被我收藏了
                 if (result.getAuthor() == null) {
-                    iv_state.setBackgroundResource(R.drawable.ic_heart_outline_grey);
+                    iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_guanxin_normal);
                 } else {
-                    iv_state.setBackgroundResource(R.drawable.ic_heart_red);
+                    iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
                 }
 
                 webView.loadDataWithBaseURL("about:blank", result.getContent(),
@@ -232,7 +231,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     public void FavSuccess() {
         articleContent.setAuthor("18813149871");
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
-                R.drawable.ic_heart_red, iv_state);
+                R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
         FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
@@ -246,7 +245,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
         articleContent.setAuthor(null);
         FrameManager.getInstance().toastPrompt("取消收藏成功");
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
-                R.drawable.ic_heart_outline_grey, iv_state);
+                R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
     }
 
     @Override

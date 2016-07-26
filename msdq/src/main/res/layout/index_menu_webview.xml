@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:text="文章内容"
             android:textColor="#fff"
@@ -127,7 +127,6 @@
                 android:background="#eeeeee" />
 
             <LinearLayout
-
                 android:id="@+id/ll_bottom_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,10 +171,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -200,9 +199,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_marginRight="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="center"
                         android:orientation="vertical">
 

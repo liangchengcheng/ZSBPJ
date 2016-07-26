@@ -45,11 +45,11 @@
 
                     <TextView
                         android:id="@+id/tv_c_num"
-                        android:layout_below="@+id/iv_icon"
-                        android:layout_marginTop="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_icon"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/bg_android_blue_tag"
                         android:text="129"
                         android:textColor="@color/white" />
@@ -111,9 +111,11 @@
                 android:background="#ededed" />
 
             <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -126,37 +128,40 @@
 
                         <ImageButton
                             android:id="@+id/btnLike"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
-                            android:src="@drawable/ic_comment_outline_grey" />
+                            android:src="@drawable/detailspage_toolbar_icon_comment_blue_press" />
 
                         <TextView
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/tv_l_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/btnLike"
+                            android:text="1"
                             android:textColor="@color/article_des"
                             android:textSize="14sp" />
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp">
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp">
 
                         <ImageButton
                             android:id="@+id/btn_sc"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
-                            android:src="@drawable/ic_heart_outline_grey" />
+                            android:src="@drawable/details_page_toolbar_icon_guanxin_normal" />
 
                         <TextView
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/tv_sc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

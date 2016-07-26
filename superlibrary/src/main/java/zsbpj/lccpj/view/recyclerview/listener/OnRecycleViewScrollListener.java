@@ -4,6 +4,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 
 public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollListener {
 
@@ -32,7 +33,6 @@ public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollL
         super.onScrolled(recyclerView, dx, dy);
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-
         if (layoutManagerType == null) {
             if (layoutManager instanceof LinearLayoutManager) {
                 layoutManagerType = LayoutManagerType.LinearLayout;

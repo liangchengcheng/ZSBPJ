@@ -20,7 +20,9 @@ import com.lcc.mvp.presenter.impl.FavPresenterImpl;
 import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.FavView;
 import com.lcc.mvp.view.JSView;
+
 import java.util.List;
+
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -31,8 +33,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  ArticleFragment
  */
-public class ArticleFragment extends BaseLazyLoadFragment  implements
-        SwipeRefreshLayout.OnRefreshListener,FavView,FavAdapter.OnItemClickListener{
+public class ArticleFragment extends BaseLazyLoadFragment implements
+        SwipeRefreshLayout.OnRefreshListener, FavView, FavAdapter.OnItemClickListener {
 
     static final int ACTION_NONE = 0;
     protected static final int DEF_DELAY = 1000;
@@ -46,7 +48,7 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private FavPresenter mPresenter;
-    private String type="面试感想";
+    private String type = "面试感想";
 
     public static ArticleFragment newInstance(String type) {
         ArticleFragment mFragment = new ArticleFragment();
@@ -80,7 +82,7 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
     }
 
     private void initRecycleView(View view) {
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -97,7 +99,7 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
                     adapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,type);
+                    mPresenter.loadMore(currentPage, type);
                 }
             }
         });
@@ -105,8 +107,8 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
 
     @Override
     public void initData() {
-        currentPage=1;
-        mPresenter.getData(currentPage,type);
+        currentPage = 1;
+        mPresenter.getData(currentPage, type);
     }
 
     @Override
@@ -177,7 +179,7 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,type);
+                mPresenter.refresh(currentPage, type);
             }
         }, 500);
     }
@@ -185,7 +187,7 @@ public class ArticleFragment extends BaseLazyLoadFragment  implements
     @Override
     public void onReloadClicked() {
         currentPage = 1;
-        mPresenter.getData(currentPage,type);
+        mPresenter.getData(currentPage, type);
     }
 
 }

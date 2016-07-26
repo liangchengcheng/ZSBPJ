@@ -29,8 +29,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  IndexMenuActivity
  */
 public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
-        SwipeRefreshLayout.OnRefreshListener ,IndexMenuAdapter.OnFavClickListener
-,IndexMenuAdapter.OnItemClickListener{
+        SwipeRefreshLayout.OnRefreshListener ,IndexMenuAdapter.OnFavClickListener,
+        IndexMenuAdapter.OnItemClickListener{
 
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
