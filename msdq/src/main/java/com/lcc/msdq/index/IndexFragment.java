@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +19,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.PopupMenu;
+
 import com.lcc.adapter.WeekDataAdapter;
 import com.lcc.base.BaseFragment;
 import com.lcc.entity.ActivityEntity;
 import com.lcc.entity.WeekData;
 import com.lcc.frame.Advertisements;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
@@ -36,10 +39,13 @@ import com.lcc.mvp.view.IndexView;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.loadview.LoadingLayout;
 import com.lcc.view.menu.GuillotineAnimation;
+
 import java.util.List;
+
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
+
 import android.view.MenuItem;
 
 /**
@@ -49,7 +55,7 @@ import android.view.MenuItem;
  * Description: 第一页fragment
  */
 public class IndexFragment extends BaseFragment implements IndexView,
-        SwipeRefreshLayout.OnRefreshListener,View.OnClickListener ,
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
         PopupMenu.OnMenuItemClickListener {
 
     private LinearLayout llAdvertiseBoard;
@@ -77,7 +83,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.index_fragment, null);
-        iv_more= (ImageView) view.findViewById(R.id.iv_more);
+        iv_more = (ImageView) view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
         view.findViewById(R.id.ll_fav).setOnClickListener(this);
         view.findViewById(R.id.mszb).setOnClickListener(this);
@@ -180,45 +186,56 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        String user_name = DataManager.getUserName();
+        switch (v.getId()) {
             case R.id.mszb:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试准备");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试准备");
                 break;
 
             case R.id.msjl:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试简历");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试简历");
                 break;
 
             case R.id.msjq:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试技巧");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试技巧");
                 break;
 
             case R.id.mszz:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试着装");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试着装");
                 break;
 
             case R.id.msgx:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试感想");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试感想");
                 break;
 
             case R.id.msjz:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试举止");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试举止");
                 break;
 
             case R.id.msjt:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"面试交通");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试交通");
                 break;
 
             case R.id.qt:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(),"其他");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "其他");
                 break;
 
             //去我的消息的界面
             case R.id.ll_news:
+                if (TextUtils.isEmpty(user_name)){
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    return;
+                }
                 NewsIndex.startNewsIndex(getActivity());
                 break;
 
+            //去我的收藏的界面
             case R.id.ll_fav:
+                if (TextUtils.isEmpty(user_name)){
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    return;
+                }
+
                 startActivity(new Intent(getActivity(), FavoriteList.class));
                 break;
 
@@ -236,14 +253,19 @@ public class IndexFragment extends BaseFragment implements IndexView,
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.chnage_type:
-                startActivity(new Intent(getActivity(), ChoiceTypeoneActivity.class));
+                String user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)){
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                }else {
+                    startActivity(new Intent(getActivity(), ChoiceTypeoneActivity.class));
+                }
                 break;
 
             case R.id.author:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
         }
-        return  false;
+        return false;
     }
 
 

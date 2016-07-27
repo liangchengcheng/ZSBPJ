@@ -31,7 +31,7 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
 
     @Override
     public void getArticleContent(String id) {
-        model.getArticleContent(id,new ResultCallback<String>() {
+        model.getArticleContent(id, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.getFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -45,10 +45,11 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
                     String message = jsonObject.getString("message");
                     String result = jsonObject.getString("result");
                     if (status == 1) {
-                        List<ArticleContent> articleContents = GsonUtils.fromJsonArray(result, ArticleContent.class);
-                        if (articleContents!=null&&articleContents.size()>0){
+                        List<ArticleContent> articleContents = GsonUtils.fromJsonArray(result,
+                                ArticleContent.class);
+                        if (articleContents != null && articleContents.size() > 0) {
                             view.getSuccess(articleContents.get(0));
-                        }else {
+                        } else {
                             view.getFail("文章不存在");
                         }
 
@@ -64,7 +65,7 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
 
     @Override
     public void Fav(Article article, String type) {
-        model.favArticle(article,type, new ResultCallback<String>() {
+        model.favArticle(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));

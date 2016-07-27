@@ -5,6 +5,7 @@ import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
 import com.lcc.entity.Article;
+import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 
@@ -17,8 +18,9 @@ public class MenuContentModel {
     public OkHttpRequest getArticleContent(String id, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.FID, id);
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
-        return ApiClient.create(AppConstants.RequestPath.GET_MENU_CONTENT, paramsMap).tag("").get(callback);
+        //paramsMap.put(AppConstants.ParamKey.AUTHOR, DataManager.getUserName());
+        return ApiClient.create(AppConstants.RequestPath.GET_MENU_CONTENT, paramsMap).tag("")
+                .get(callback);
     }
 
     /**
@@ -28,7 +30,7 @@ public class MenuContentModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        //paramsMap.put(AppConstants.ParamKey.AUTHOR, DataManager.getUserName());
         paramsMap.put("fav_title",article.getTitle());
         return ApiClient.create(AppConstants.RequestPath.UserFavAdd, paramsMap).tag("").get(callback);
     }
@@ -39,7 +41,7 @@ public class MenuContentModel {
     public OkHttpRequest UnfavArticle(Article article, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        //paramsMap.put(AppConstants.ParamKey.AUTHOR, DataManager.getUserName());
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
 }

@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.entity.ArticleContent;
+import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.MenuContentPresenter;
@@ -200,13 +202,23 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
     @Override
     public void onClick(View v) {
+        String user=DataManager.getUserName();
         switch (v.getId()) {
             case R.id.ll_comments:
+
+                if (TextUtils.isEmpty(user)){
+                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    return;
+                }
                 CommentsActivity.startUserProfileFromLocation(article.getMid(), type,
                         IndexMenuWebView.this);
                 break;
 
             case R.id.tv_to_comments:
+                if (TextUtils.isEmpty(user)){
+                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    return;
+                }
                 CommentsActivity.startUserProfileFromLocation(article.getMid(), type,
                         IndexMenuWebView.this);
                 break;
@@ -216,12 +228,17 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                 break;
 
             case R.id.ll_issc:
-                // TODO: 16/6/14 type需要传入进来
+                if (TextUtils.isEmpty(user)){
+                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    return;
+                }
+
                 if (articleContent.getAuthor() != null) {
                     indexContentPresenter.UnFav(article);
                 }
+
                 if (articleContent.getAuthor() == null) {
-                    indexContentPresenter.Fav(article, "面试感想");
+                    indexContentPresenter.Fav(article, Propertity.Article.NAME+type);
                 }
                 break;
         }
