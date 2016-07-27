@@ -34,7 +34,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         preferenceUtils = PreferenceUtils.getInstance(SettingActivity.this);
         activity = (BaseActivity) SettingActivity.this;
     }
@@ -162,6 +161,5 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }

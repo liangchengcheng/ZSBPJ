@@ -139,11 +139,12 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     public void loginSuccess() {
         closeDialog();
         FrameManager.getInstance().toastPrompt("登录成功");
-        Intent intent=null;
+        Intent intent = null;
         if (!TextUtils.isEmpty(from)) {
-            String type= SharePreferenceUtil.getUserType();
+            String type = SharePreferenceUtil.getUserType();
             if (TextUtils.isEmpty(type)) {
                 intent = new Intent(LoginActivity.this, ChoiceTypeoneActivity.class);
+                intent.putExtra("flag", "login");
             } else {
                 intent = new Intent(LoginActivity.this, MainActivity.class);
             }
@@ -168,7 +169,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         switch (v.getId()) {
             case R.id.textView_create_account:
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                intent.putExtra("from","welcome");
+                intent.putExtra("from", "welcome");
                 startActivity(intent);
                 break;
 

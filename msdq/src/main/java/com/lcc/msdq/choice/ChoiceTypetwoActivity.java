@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
+import com.lcc.App;
 import com.lcc.adapter.ChoiceType1Adapter;
 import com.lcc.adapter.ChoiceType2Adapter;
 import com.lcc.base.BaseActivity;
@@ -40,24 +42,28 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         ChoiceType2Adapter.OnItemClickListener, View.OnClickListener {
 
     public static final String NID = "nid";
+    public static final String FLAG = "flag";
     private ChoiceTypePresenter choiceTypePresenter;
     private ChoiceType2Adapter mAdapter;
     private String nid;
     private String zy;
+    private String flag;
 
     private LoadingLayout loading_layout;
     private SimpleArcDialog mDialog;
     private RecyclerView mRecyclerView;
 
-    public static void startChoiceTypetwoActivity(Activity startingActivity, String nid) {
+    public static void startChoiceTypetwoActivity(Activity startingActivity, String nid, String flag) {
         Intent intent = new Intent(startingActivity, ChoiceTypetwoActivity.class);
         intent.putExtra(NID, nid);
+        intent.putExtra(FLAG, flag);
         startingActivity.startActivity(intent);
     }
 
     @Override
     protected void initView() {
         nid = getIntent().getStringExtra(NID);
+        flag = getIntent().getStringExtra(FLAG);
         findViewById(R.id.img_error).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
@@ -138,9 +144,14 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         UserInfo userInfo = DataManager.getUserInfo();
         userInfo.setZy(zy);
         DataManager.editUser(userInfo);
-        // TODO: 16/7/27 判断是从主页面进来的还是别的地方进来的 
-        startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));
-        finish();
+        // TODO: 16/7/27 判断是从主页面进来的还是别的地方进来的
+        App.exit();
+        if (TextUtils.isEmpty(flag)) {
+            finish();
+        } else {
+            startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     @Override

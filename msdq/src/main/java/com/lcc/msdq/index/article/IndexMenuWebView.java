@@ -238,7 +238,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
                 }
 
                 if (articleContent.getAuthor() == null) {
-                    indexContentPresenter.Fav(article, Propertity.Article.NAME+type);
+                    indexContentPresenter.Fav(article, Propertity.Article.NAME);
                 }
                 break;
         }

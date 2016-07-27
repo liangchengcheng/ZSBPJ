@@ -4,6 +4,7 @@ import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
 import com.lcc.entity.TestEntity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 import com.lcc.utils.SharePreferenceUtil;
@@ -17,7 +18,7 @@ public class TestModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put("options", options);
-        paramsMap.put("type", SharePreferenceUtil.getUserTypeId());
+        paramsMap.put("type", DataManager.getZY());
         paramsMap.put("start", startTime);
         paramsMap.put("end", endTime);
         return ApiClient.create(AppConstants.RequestPath.TEST_LIST, paramsMap).tag("").get(callback);

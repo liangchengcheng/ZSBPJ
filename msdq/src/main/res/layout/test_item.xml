@@ -111,7 +111,7 @@
                             android:layout_height="48dp"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
-                            android:src="@drawable/ic_comment_outline_grey" />
+                            android:src="@drawable/detailspage_toolbar_icon_comment_blue_press" />
 
                         <TextView
                             android:id="@+id/tv_ll"
@@ -136,7 +136,7 @@
                             android:layout_height="48dp"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
-                            android:src="@drawable/ic_heart_outline_grey" />
+                            android:src="@drawable/details_page_toolbar_icon_guanxin_normal" />
 
                         <TextView
                             android:id="@+id/tv_sc"

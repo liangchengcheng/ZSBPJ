@@ -42,6 +42,7 @@ import com.lcc.view.menu.GuillotineAnimation;
 
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -61,9 +62,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
 
-    private static final long RIPPLE_DURATION = 250;
     private IndexPresenter mPresenter;
-
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -81,7 +80,6 @@ public class IndexFragment extends BaseFragment implements IndexView,
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.index_fragment, null);
         iv_more = (ImageView) view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
@@ -222,7 +220,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
             //去我的消息的界面
             case R.id.ll_news:
-                if (TextUtils.isEmpty(user_name)){
+                if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("登录后操作~");
                     return;
                 }
@@ -231,7 +229,7 @@ public class IndexFragment extends BaseFragment implements IndexView,
 
             //去我的收藏的界面
             case R.id.ll_fav:
-                if (TextUtils.isEmpty(user_name)){
+                if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("登录后操作~");
                     return;
                 }
@@ -254,10 +252,11 @@ public class IndexFragment extends BaseFragment implements IndexView,
         switch (item.getItemId()) {
             case R.id.chnage_type:
                 String user_name = DataManager.getUserName();
-                if (TextUtils.isEmpty(user_name)){
+                if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("登录后操作~");
-                }else {
-                    startActivity(new Intent(getActivity(), ChoiceTypeoneActivity.class));
+                } else {
+                    Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                    startActivity(intent);
                 }
                 break;
 
@@ -268,5 +267,8 @@ public class IndexFragment extends BaseFragment implements IndexView,
         return false;
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

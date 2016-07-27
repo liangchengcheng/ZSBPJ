@@ -64,10 +64,22 @@ public class DataManager {
         return "";
     }
 
+    public static String getZY() {
+        Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder()
+                .build();
+        List<UserInfo> user = query.list();
+        if (user != null && user.size() > 0) {
+            return user.get(0).getZy();
+        }
+        return "";
+    }
+
+    /**
+     * 这个修改未测试
+     */
     public static void editUser(UserInfo userInfo) {
         UserInfoDao userInfoDao = getNoteDao(FrameManager.getAppContext());
-
-        Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder()
+        Query query = userInfoDao.queryBuilder()
                 .build();
         List<UserInfo> users = query.list();
         if (users != null && users.size() > 0) {

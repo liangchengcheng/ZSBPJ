@@ -17,7 +17,7 @@
     <string-array name="tiaojian3">
         <item>综合排序</item>
         <item>最多收藏</item>
-        <item>最多点赞</item>
+        <item>最新发布</item>
     </string-array>
 
     <string-array name="zhiye">

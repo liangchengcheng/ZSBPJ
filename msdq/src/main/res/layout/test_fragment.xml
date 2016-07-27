@@ -29,6 +29,14 @@
             android:text="面试题"
             android:textColor="#fff"
             android:textSize="20sp" />
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:id="@+id/iv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add_white_36dp" />
     </android.support.v7.widget.Toolbar>
     <RelativeLayout
         android:id="@+id/c"

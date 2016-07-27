@@ -144,6 +144,7 @@ public class ArticleFragment extends BaseLazyLoadFragment implements
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;
         }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.lcc.App;
 import com.lcc.adapter.ChoiceType1Adapter;
 import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.base.BaseActivity;
@@ -32,15 +33,18 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  ChoiceTypeoneActivity
  */
 public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeView,
-        ChoiceType1Adapter.OnItemClickListener ,View.OnClickListener{
+        ChoiceType1Adapter.OnItemClickListener, View.OnClickListener {
 
     private ChoiceTypePresenter choiceTypePresenter;
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private ChoiceType1Adapter mAdapter;
+    private String flag = "";
 
     @Override
     protected void initView() {
+        App.addActivity(this);
+        flag = getIntent().getStringExtra("flag");
         findViewById(R.id.img_error).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
@@ -88,7 +92,7 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
     public void getDataSuccess(String msg) {
         try {
             List<Type1> data = GsonUtils.fromJsonArray(msg, Type1.class);
-            if (data==null||data.size()==0){
+            if (data == null || data.size() == 0) {
                 getDataEmpty();
             }
             mAdapter.bind(data);
@@ -99,13 +103,29 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
     }
 
     @Override
+    public void setLoading() {
+
+    }
+
+    @Override
+    public void setDataFail(String msg) {
+
+    }
+
+    @Override
+    public void setDataSuccess(String msg) {
+
+    }
+
+    @Override
     public void onItemClick(Type1 data) {
-        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this,data.getN_id());
+        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this,
+                data.getN_id(),flag);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_error:
                 choiceTypePresenter.getType1();
                 break;
