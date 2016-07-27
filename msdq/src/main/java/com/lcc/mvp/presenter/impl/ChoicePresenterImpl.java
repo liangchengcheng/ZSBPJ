@@ -105,5 +105,38 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
     public void getType2(String nid) {
         loadData2(nid);
     }
+
+    @Override
+    public void setDataType(String type) {
+        view.setLoading();
+        model.getType2(type,new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.setDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        if (!TextUtils.isEmpty(result)) {
+                            view.setDataSuccess(result);
+                        } else {
+                            view.getDataEmpty();
+                        }
+                    } else {
+                        view.setDataFail(ApiException.getApiExceptionMessage(message));
+                    }
+                } catch (Exception e) {
+                    view.setDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }
 

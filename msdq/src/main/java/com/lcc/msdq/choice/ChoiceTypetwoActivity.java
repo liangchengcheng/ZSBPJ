@@ -10,8 +10,10 @@ import android.view.View;
 import com.lcc.adapter.ChoiceType1Adapter;
 import com.lcc.adapter.ChoiceType2Adapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.db.test.UserInfo;
 import com.lcc.entity.Type1;
 import com.lcc.entity.Type2;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.ChoiceTypePresenter;
@@ -22,8 +24,11 @@ import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.List;
 
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.CacheUtil;
 import zsbpj.lccpj.utils.GsonUtils;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 /**
  * Author:       梁铖城
@@ -32,14 +37,17 @@ import zsbpj.lccpj.utils.GsonUtils;
  * Description:  ChoiceTypeoneActivity
  */
 public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeView,
-        ChoiceType2Adapter.OnItemClickListener ,View.OnClickListener{
+        ChoiceType2Adapter.OnItemClickListener, View.OnClickListener {
 
     public static final String NID = "nid";
     private ChoiceTypePresenter choiceTypePresenter;
-    private LoadingLayout loading_layout;
-    private RecyclerView mRecyclerView;
     private ChoiceType2Adapter mAdapter;
     private String nid;
+    private String zy;
+
+    private LoadingLayout loading_layout;
+    private SimpleArcDialog mDialog;
+    private RecyclerView mRecyclerView;
 
     public static void startChoiceTypetwoActivity(Activity startingActivity, String nid) {
         Intent intent = new Intent(startingActivity, ChoiceTypetwoActivity.class);
@@ -110,19 +118,49 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     }
 
     @Override
-    public void onItemClick(Type2 data) {
-        SharePreferenceUtil.setUserType(data.getS_name());
-        SharePreferenceUtil.setUserTypeId(data.getS_id());
+    public void setLoading() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在设置你的职业类型...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
+    }
+
+    @Override
+    public void setDataFail(String msg) {
+        closeDialog();
+    }
+
+    @Override
+    public void setDataSuccess(String msg) {
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("设置成功");
+        UserInfo userInfo = DataManager.getUserInfo();
+        userInfo.setZy(zy);
+        DataManager.editUser(userInfo);
+        // TODO: 16/7/27 判断是从主页面进来的还是别的地方进来的 
         startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));
         finish();
     }
 
     @Override
+    public void onItemClick(Type2 data) {
+        zy = data.getS_name();
+        choiceTypePresenter.setDataType(zy);
+    }
+
+    @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_error:
                 choiceTypePresenter.getType2(nid);
                 break;
+        }
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
         }
     }
 }

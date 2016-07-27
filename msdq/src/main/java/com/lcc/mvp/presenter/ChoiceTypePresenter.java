@@ -6,4 +6,6 @@ public interface ChoiceTypePresenter {
 
     void getType2(String nid);
 
+    void setDataType(String type);
+
 }
