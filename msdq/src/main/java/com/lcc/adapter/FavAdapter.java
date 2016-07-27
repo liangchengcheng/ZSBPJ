@@ -42,7 +42,7 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
     private boolean hasFooter;
-    private boolean hasMoreData = true;
+    private boolean hasMoreData;
     private List<FavEntity> mList = new ArrayList<>();
 
     public void bind(List<FavEntity> messages) {

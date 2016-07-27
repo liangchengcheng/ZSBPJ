@@ -1,10 +1,14 @@
 package zsbpj.lccpj.view.recyclerview.listener;
 
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+
+import zsbpj.lccpj.view.recyclerview.RecyclerViewPositionHelper;
+import zsbpj.lccpj.view.recyclerview.ScrollDirection;
 
 public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollListener {
 
@@ -27,6 +31,7 @@ public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollL
      * 当前滑动的状态
      */
     private int currentScrollState = 0;
+
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -63,19 +68,23 @@ public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollL
                 lastVisibleItemPosition = findMax(lastPositions);
                 break;
         }
+
+        if (dy > 0 && lastVisibleItemPosition + 1 == layoutManager.getItemCount()) {
+            onLoadMore();
+        }
     }
 
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
-        currentScrollState = newState;
-        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        int visibleItemCount = layoutManager.getChildCount();
-        int totalItemCount = layoutManager.getItemCount();
-        if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE &&
-                (lastVisibleItemPosition) >= totalItemCount - 1)) {
-            onLoadMore();
-        }
+//        currentScrollState = newState;
+//        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+//        int visibleItemCount = layoutManager.getChildCount();
+//        int totalItemCount = layoutManager.getItemCount();
+//        if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE &&
+//                (lastVisibleItemPosition) >= totalItemCount - 1)) {
+//            onLoadMore();
+//        }
     }
 
     /**
