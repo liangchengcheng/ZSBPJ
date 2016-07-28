@@ -1,8 +1,5 @@
 package com.lcc.mvp.view;
 
-import com.lcc.entity.Answer;
-
-import java.util.List;
 
 public interface TestAnswerContentView {
 

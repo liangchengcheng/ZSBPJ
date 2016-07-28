@@ -27,7 +27,7 @@ public class TestAnswerModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         paramsMap.put("fav_title",article.getTitle());
         return ApiClient.create(AppConstants.RequestPath.UserFavAdd, paramsMap).tag("").get(callback);
     }
@@ -38,7 +38,7 @@ public class TestAnswerModel {
     public OkHttpRequest UnfavQuestion(TestEntity article, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
 }

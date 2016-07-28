@@ -25,6 +25,7 @@ import com.lcc.adapter.BaseRecyclerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.TestEntity;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
@@ -87,7 +88,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         currentPage = 1;
         tv_count= (TextView) findViewById(R.id.tv_count);
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
-        tv_count.setText("共"+entity.getAnswer_count()+"个回答");
+        tv_count.setText("共收到"+entity.getAnswer_count()+"个回答");
         fid=entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
@@ -184,6 +185,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;
         }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -285,13 +287,12 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     public void onItemClick(Answer data) {
         AnswerContentActivity.startAnswerContentActivity(entity,data,AnswerIndexActivity.this);
-        Log.e("lccx",data.getMid());
     }
 
     @Override
     public void onFavClick() {
         if (!isfavEntity) {
-            mPresenter.Fav(entity, "资料问题");
+            mPresenter.Fav(entity, Propertity.Test.QUESTION);
         } else {
             mPresenter.UnFav(entity);
         }

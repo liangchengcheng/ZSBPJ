@@ -99,6 +99,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         settings.setDatabaseEnabled(true);
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
         settings.setAppCacheEnabled(true);
+        settings.setDisplayZoomControls(false);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
         testAnswerContentPresenter.isFav(answer.getMid());
