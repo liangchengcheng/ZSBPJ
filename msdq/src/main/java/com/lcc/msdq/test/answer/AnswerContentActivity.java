@@ -111,6 +111,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         settings.setDisplayZoomControls(false);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
+        
+        testAnswerContentPresenter.getContent(answer.getMid());
         testAnswerContentPresenter.isFav(answer.getMid());
     }
 
@@ -182,12 +184,11 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
+        // TODO: 16/7/28 需要调整
         ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,
                 answer.getUser_image(), user_head);
         try {
-            webView.loadDataWithBaseURL("about:blank", answer.getAnswer(),
-                    "text/html", "utf-8", null);
-            // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
+            //webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -201,16 +202,18 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                         Propertity.Test.ANSWER, AnswerContentActivity.this);
                 break;
 
-            case R.id.floatingReport:
-                FrameManager.getInstance().toastPrompt("举报成功");
+            case R.id.floatingGood:
+                //FrameManager.getInstance().toastPrompt("举报成功");
                 break;
 
             case R.id.floatingCollect:
                 if (isFav) {
                     testAnswerContentPresenter.UnFav(answer);
                 } else {
-                    testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER, testEntity.getTitle());
+                    testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER,
+                            testEntity.getTitle());
                 }
+
                 break;
 
             case R.id.floatingShare:
@@ -236,6 +239,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void getDataSuccess(AnswerContent msg) {
+        webView.loadDataWithBaseURL("about:blank", msg.getA_content(),
+                "text/html", "utf-8", null);
         loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 

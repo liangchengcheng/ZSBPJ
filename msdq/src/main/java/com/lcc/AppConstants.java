@@ -85,6 +85,8 @@ public class AppConstants {
         public final static String sendLetterByPhone = "/service/sendLetterByPhone";
         //修改用户的职业
         public final static String EditTypeServiceAPI = "/service/EditTypeServiceAPI";
+        //获取内容的具体内容
+        public final static String getAnswerContent = "/getAnswerContent";
 
     }
 
