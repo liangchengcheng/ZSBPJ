@@ -2,6 +2,7 @@ package com.lcc.mvp.view;
 
 
 import com.lcc.entity.AnswerContent;
+import com.lcc.entity.FavAndGoodState;
 
 public interface TestAnswerContentView {
 
@@ -37,4 +38,8 @@ public interface TestAnswerContentView {
      * 取消收藏失败
      */
     void UnFavFail(String msg);
+
+    void getStateSuccess(FavAndGoodState msg);
+
+    void getStateFail(String msg);
 }

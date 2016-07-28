@@ -107,22 +107,27 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                         getActivity());
                 break;
 
+            //系统设置
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
 
+            //我的收藏
             case R.id.ll_fav:
                 startActivity(new Intent(getActivity(), FavoriteList.class));
                 break;
 
+            //我的发布
             case R.id.ll_fabu:
                 startActivity(new Intent(getActivity(), FabuList.class));
                 break;
 
+            //修改密码
             case R.id.ll_change_pwd:
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
                 break;
 
+            //常见问题
             case R.id.rl_help:
                 startActivity(new Intent(getActivity(), HelpActivity.class));
                 break;

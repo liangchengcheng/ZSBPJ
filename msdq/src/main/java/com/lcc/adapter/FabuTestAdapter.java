@@ -33,7 +33,6 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private List<TestEntity> mList = new ArrayList<>();
     private boolean hasFooter;
     private boolean hasMoreData = true;
@@ -56,7 +55,7 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
             return new NormalViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fav_item, parent, false));
+                    .inflate(R.layout.fabu_item, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fav_layout_foot_loading, parent, false));

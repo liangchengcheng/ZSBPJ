@@ -25,7 +25,9 @@ import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.AnswerContent;
+import com.lcc.entity.FavAndGoodState;
 import com.lcc.entity.TestEntity;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.IndexContentPresenter;
@@ -46,11 +48,12 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  答案的详情界面
  */
 public class AnswerContentActivity extends BaseActivity implements View.OnClickListener,
-        TestAnswerContentView{
+        TestAnswerContentView {
 
     private WebView webView;
     private ImageView user_head;
     private FloatingActionButton floatingCollect;
+    private FloatingActionButton floatingGood;
     private TextView tv_who;
     private LoadingLayout loading_layout;
 
@@ -61,8 +64,9 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     public static final String DATA = "data";
     public static final String ANSWER = "answer";
     private boolean isFav;
+    private boolean isGood;
 
-    public static void startAnswerContentActivity(TestEntity data,Answer answer, Activity startingActivity) {
+    public static void startAnswerContentActivity(TestEntity data, Answer answer, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, AnswerContentActivity.class);
         intent.putExtra(ANSWER, answer);
         intent.putExtra(DATA, data);
@@ -79,18 +83,19 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     private void initData() {
         answer = (Answer) getIntent().getSerializableExtra(ANSWER);
         testEntity = (TestEntity) getIntent().getSerializableExtra(DATA);
-        testAnswerContentPresenter=new TestAnswerContentPresenterImpl(this);
+        testAnswerContentPresenter = new TestAnswerContentPresenterImpl(this);
     }
 
     @Override
     protected void initView() {
         initData();
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        floatingCollect= (FloatingActionButton) findViewById(R.id.floatingCollect);
+        floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
+        floatingGood = (FloatingActionButton) findViewById(R.id.floatingGood);
         floatingCollect.setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
-        tv_who= (TextView) findViewById(R.id.tv_who);
-        tv_who.setText(answer.getNickname()+"的回答");
+        tv_who = (TextView) findViewById(R.id.tv_who);
+        tv_who.setText(answer.getNickname() + "的回答");
         user_head = (ImageView) findViewById(R.id.user_head);
         webView = (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
@@ -176,6 +181,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         if (answer == null) {
             return;
         }
+
         ImageManager.getInstance().loadCircleImage(AnswerContentActivity.this,
                 answer.getUser_image(), user_head);
         try {
@@ -191,8 +197,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(answer.getMid(),"资料答案",
-                        AnswerContentActivity.this);
+                CommentsActivity.startUserProfileFromLocation(answer.getMid(),
+                        Propertity.Test.ANSWER, AnswerContentActivity.this);
                 break;
 
             case R.id.floatingReport:
@@ -200,10 +206,10 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.floatingCollect:
-                if (isFav){
+                if (isFav) {
                     testAnswerContentPresenter.UnFav(answer);
-                }else {
-                    testAnswerContentPresenter.Fav(answer,"资料答案",testEntity.getTitle());
+                } else {
+                    testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER, testEntity.getTitle());
                 }
                 break;
 
@@ -235,12 +241,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void isHaveFav(boolean isfavEntity) {
-        this.isFav=isfavEntity;
-        if (isfavEntity){
-            floatingCollect.setLabelText("取消收藏");
-        }else {
-            floatingCollect.setLabelText("收藏");
-        }
+
     }
 
     @Override
@@ -263,5 +264,31 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     public void UnFavFail(String msg) {
         FrameManager.getInstance().toastPrompt("取消收藏失败");
+    }
+
+    @Override
+    public void getStateSuccess(FavAndGoodState msg) {
+        if (msg != null) {
+            if (msg.getFav().equals("1")) {
+                this.isFav = true;
+                floatingCollect.setLabelText("取消收藏");
+            } else {
+                this.isFav = false;
+                floatingCollect.setLabelText("收藏");
+            }
+
+            if (msg.getGood().equals("1")) {
+                this.isGood = true;
+                floatingGood.setLabelText("取消赞");
+            } else {
+                this.isGood = false;
+                floatingGood.setLabelText("赞");
+            }
+        }
+    }
+
+    @Override
+    public void getStateFail(String msg) {
+
     }
 }

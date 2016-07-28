@@ -36,6 +36,7 @@ public class FabuTestPresenterImpl implements FabuPresenter {
         if (get_data) {
             view.getLoading();
         }
+
         final long current_time = TimeUtils.getCurrentTime();
         model.getTestList(page, type, new ResultCallback<String>() {
             @Override

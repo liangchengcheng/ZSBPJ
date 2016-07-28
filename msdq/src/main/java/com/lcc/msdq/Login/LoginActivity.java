@@ -148,6 +148,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             } else {
                 intent = new Intent(LoginActivity.this, MainActivity.class);
             }
+
             startActivity(intent);
             finish();
             App.exit();

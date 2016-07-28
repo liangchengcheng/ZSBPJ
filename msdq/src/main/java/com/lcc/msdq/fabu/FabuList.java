@@ -51,7 +51,7 @@ public class FabuList extends BaseActivity{
 
     @Override
     protected int getLayoutView() {
-        return R.layout.favorite_list_activity;
+        return R.layout.fabu_list_activity;
     }
 
 

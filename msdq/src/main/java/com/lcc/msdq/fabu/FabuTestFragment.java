@@ -59,7 +59,7 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements
 
     @Override
     public int initContentView() {
-        return R.layout.fav_list_fragment;
+        return R.layout.fabu_list_fragment;
     }
 
     @Override
