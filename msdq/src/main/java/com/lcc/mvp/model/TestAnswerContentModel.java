@@ -37,4 +37,11 @@ public class TestAnswerContentModel {
         paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
+
+    public OkHttpRequest getContent(String mid, ResultCallback<String> callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("mid", mid);
+        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        return ApiClient.create(AppConstants.RequestPath.ISFAV, paramsMap).tag("").get(callback);
+    }
 }

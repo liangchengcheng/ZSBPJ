@@ -10,4 +10,6 @@ public interface TestAnswerContentPresenter {
     void Fav(Answer article, String type,String title);
 
     void UnFav(Answer article);
+
+    void getContent(String mid);
 }

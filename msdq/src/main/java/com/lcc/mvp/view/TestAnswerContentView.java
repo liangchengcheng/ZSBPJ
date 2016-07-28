@@ -1,6 +1,8 @@
 package com.lcc.mvp.view;
 
 
+import com.lcc.entity.AnswerContent;
+
 public interface TestAnswerContentView {
 
     void getLoading();
@@ -8,6 +10,8 @@ public interface TestAnswerContentView {
     void getDataEmpty();
 
     void getDataFail(String msg);
+
+    void getDataSuccess(AnswerContent msg);
 
     /**
      * 标识是否被收藏了

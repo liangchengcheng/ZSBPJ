@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.lcc.entity.Answer;
+import com.lcc.entity.AnswerContent;
 import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
@@ -108,6 +109,36 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     }
                 } catch (Exception e) {
                     view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getContent(String mid) {
+        model.getContent(mid, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        AnswerContent answerContent=GsonUtils
+                                .changeGsonToBean(result,AnswerContent.class);
+                        view.getDataSuccess(answerContent);
+                    } else {
+                        view.getDataFail(message);
+                    }
+                } catch (Exception e) {
+                    view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }

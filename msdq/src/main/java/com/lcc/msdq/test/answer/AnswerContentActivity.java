@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
+import com.lcc.entity.AnswerContent;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
@@ -221,6 +222,11 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void getDataSuccess(AnswerContent msg) {
 
     }
 
