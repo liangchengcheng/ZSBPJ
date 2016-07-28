@@ -14,13 +14,14 @@ import java.util.List;
 public class TestModel {
 
     public OkHttpRequest getTestList(int page,String options,String startTime,String endTime,
-                                     ResultCallback<String> callback) {
+                                     String orders, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put("options", options);
         paramsMap.put("type", DataManager.getZY());
         paramsMap.put("start", startTime);
         paramsMap.put("end", endTime);
+        paramsMap.put("orders", orders);
         return ApiClient.create(AppConstants.RequestPath.TEST_LIST, paramsMap).tag("").get(callback);
     }
 }

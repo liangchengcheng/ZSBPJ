@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private String start_time = "全部时间";
     private String end_time = "全部时间";
     private String options = "全部题型";
+    private String orders = "";
 
     private MyAdapter madapter;
     private TestAdapter mAdapter;
@@ -86,7 +88,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.getData(currentPage, options, start_time, end_time);
+        mPresenter.getData(currentPage, options, start_time, end_time, orders);
     }
 
     @Nullable
@@ -114,7 +116,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     protected void onFragmentLoadMore() {
-        mPresenter.loadMore(getCurrentPage(), options, start_time, end_time);
+        mPresenter.loadMore(getCurrentPage(), options, start_time, end_time, orders);
     }
 
     @Override
@@ -125,7 +127,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public void onRefreshData() {
         currentPage = 1;
-        mPresenter.refresh(currentPage, options, start_time, end_time);
+        mPresenter.refresh(currentPage, options, start_time, end_time, orders);
     }
 
     public void showPopupWindow(View anchor, int flag) {
@@ -187,19 +189,21 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                 start_time = TimeUtils.getStartTime(text);
                 end_time = TimeUtils.getEndTime();
                 currentPage = 1;
-                mPresenter.getData(currentPage, options, start_time, end_time);
+                mPresenter.getData(currentPage, options, start_time, end_time, orders);
                 break;
 
             case 2:
                 jiage.setText(text);
                 options = text;
                 currentPage = 1;
-                mPresenter.getData(currentPage, options, start_time, end_time);
+                mPresenter.getData(currentPage, options, start_time, end_time, orders);
                 break;
 
             case 3:
                 huxing.setText(text);
-                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                orders = getOrders(text);
+                currentPage = 1;
+                mPresenter.getData(currentPage, options, start_time, end_time, orders);
                 break;
         }
     }
@@ -298,6 +302,18 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Override
     public void onImageClick(String user_phone) {
-        OtherUserProfileActivity.starOtherUserProfileActivity(user_phone,getActivity());
+        OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, getActivity());
+    }
+
+    private String getOrders(String text) {
+        if (text.equals("综合排序")) {
+            return "";
+        } else if (text.equals("最多收藏")) {
+            return "fav";
+        } else if (text.equals("最新发布")) {
+            return "time";
+        } else {
+            return "";
+        }
     }
 }
