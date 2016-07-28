@@ -169,5 +169,11 @@
                 app:fab_label="分享"
                 app:fab_size="mini" />
         </com.github.clans.fab.FloatingActionMenu>
+
+        <com.lcc.view.loadview.LoadingLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:emptyView="@layout/empty_view" />
     </FrameLayout>
 </LinearLayout>

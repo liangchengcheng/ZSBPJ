@@ -34,6 +34,7 @@ import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestAnswerContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.TestAnswerContentView;
+import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
@@ -51,6 +52,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     private ImageView user_head;
     private FloatingActionButton floatingCollect;
     private TextView tv_who;
+    private LoadingLayout loading_layout;
 
     private Answer answer;
     private TestEntity testEntity;
@@ -83,6 +85,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initView() {
         initData();
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         floatingCollect= (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingCollect.setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
@@ -212,22 +215,22 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void getLoading() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
     public void getDataEmpty() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
     }
 
     @Override
     public void getDataFail(String msg) {
-
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
     public void getDataSuccess(AnswerContent msg) {
-
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override

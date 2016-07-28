@@ -117,6 +117,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
 
     @Override
     public void getContent(String mid) {
+        view.getLoading();
         model.getContent(mid, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
