@@ -30,12 +30,9 @@ import butterknife.ButterKnife;
  * Description:  FabuComAdapter
  */
 public class FabuComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private List<CompanyTest> mList = new ArrayList<>();
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
 
@@ -57,7 +54,7 @@ public class FabuComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
             return new NormalViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fav_item, parent, false));
+                    .inflate(R.layout.fabu_item, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fav_layout_foot_loading, parent, false));
@@ -70,9 +67,6 @@ public class FabuComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             final CompanyTest weekData = mList.get(position);
@@ -112,10 +106,8 @@ public class FabuComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ll_all)
         RelativeLayout ll_all;
-
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
 
@@ -126,10 +118,8 @@ public class FabuComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

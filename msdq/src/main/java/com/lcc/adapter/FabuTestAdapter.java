@@ -68,9 +68,6 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             final TestEntity weekData = mList.get(position);
@@ -122,10 +119,8 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

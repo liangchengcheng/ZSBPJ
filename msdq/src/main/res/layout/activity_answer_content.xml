@@ -34,6 +34,7 @@
             android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/iv_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -158,16 +159,7 @@
                 app:fab_label="收藏"
                 app:fab_size="mini" />
 
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/floatingShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu_share"
-                app:fab_colorNormal="?attr/colorPrimary"
-                app:fab_colorPressed="?attr/colorPrimary"
-                app:fab_colorRipple="?attr/colorPrimary"
-                app:fab_label="分享"
-                app:fab_size="mini" />
+
         </com.github.clans.fab.FloatingActionMenu>
 
         <com.lcc.view.loadview.LoadingLayout

@@ -92,8 +92,11 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingGood = (FloatingActionButton) findViewById(R.id.floatingGood);
+        floatingGood.setOnClickListener(this);
         floatingCollect.setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
+        findViewById(R.id.iv_share).setOnClickListener(this);
         tv_who = (TextView) findViewById(R.id.tv_who);
         tv_who.setText(answer.getNickname() + "的回答");
         user_head = (ImageView) findViewById(R.id.user_head);
@@ -203,7 +206,13 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.floatingGood:
-                //FrameManager.getInstance().toastPrompt("举报成功");
+                if (isGood) {
+                    testAnswerContentPresenter.UnGood(answer);
+                } else {
+                    testAnswerContentPresenter.Good(answer, Propertity.Test.ANSWER,
+                            testEntity.getTitle());
+                }
+
                 break;
 
             case R.id.floatingCollect:
@@ -216,7 +225,11 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
                 break;
 
-            case R.id.floatingShare:
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+
+            case R.id.iv_share:
                 FrameManager.getInstance().toastPrompt("分享成功");
                 break;
         }
