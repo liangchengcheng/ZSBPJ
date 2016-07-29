@@ -251,7 +251,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void FavSuccess() {
-        isHaveFav(true);
+        changeFav(true);
         FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
@@ -262,7 +262,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void UnFavSuccess() {
-        isHaveFav(false);
+        changeFav(false);
         FrameManager.getInstance().toastPrompt("取消收藏成功");
     }
 
@@ -295,5 +295,45 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     public void getStateFail(String msg) {
 
+    }
+
+    @Override
+    public void GoodSuccess() {
+        changeGood(true);
+        FrameManager.getInstance().toastPrompt("赞成功");
+    }
+
+    @Override
+    public void GoodFail(String msg) {
+        FrameManager.getInstance().toastPrompt("赞失败");
+    }
+
+    @Override
+    public void UnGoodSuccess() {
+        changeGood(false);
+        FrameManager.getInstance().toastPrompt("取消赞成功");
+    }
+
+    @Override
+    public void UnGoodFail(String msg) {
+        FrameManager.getInstance().toastPrompt("取消赞失败");
+    }
+
+    public void changeFav(boolean fav) {
+        this.isFav = fav;
+        if (fav){
+            floatingCollect.setLabelText("取消收藏");
+        }else {
+            floatingCollect.setLabelText("收藏");
+        }
+    }
+
+    public void changeGood(boolean good) {
+        this.isGood = good;
+        if (good){
+            floatingGood.setLabelText("取消赞");
+        }else {
+            floatingGood.setLabelText("赞");
+        }
     }
 }
