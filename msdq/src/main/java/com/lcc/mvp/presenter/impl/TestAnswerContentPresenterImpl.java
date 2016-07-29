@@ -148,4 +148,58 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
             }
         });
     }
+
+    @Override
+    public void Good(Answer article, String type, String title) {
+        model.GoodAnswer(article, type, title, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        view.FavSuccess();
+                    } else {
+                        view.FavFail(message);
+                    }
+                } catch (Exception e) {
+                    view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void UnGood(Answer article) {
+        model.UnGoodAnswer(article,  new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        view.FavSuccess();
+                    } else {
+                        view.FavFail(message);
+                    }
+                } catch (Exception e) {
+                    view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

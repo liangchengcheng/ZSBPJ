@@ -87,6 +87,10 @@ public class AppConstants {
         public final static String EditTypeServiceAPI = "/service/EditTypeServiceAPI";
         //获取内容的具体内容
         public final static String getAnswerContent = "/getAnswerContent";
+        //点赞
+        public final static String UserGoodAdd = "/service/UserGoodAdd";
+        //取消点赞
+        public final static String deleteUserGood = "/service/deleteUserGood";
 
     }
 

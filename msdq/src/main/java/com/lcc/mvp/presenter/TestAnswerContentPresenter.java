@@ -12,4 +12,8 @@ public interface TestAnswerContentPresenter {
     void UnFav(Answer article);
 
     void getContent(String mid);
+
+    void Good(Answer article, String type,String title);
+
+    void UnGood(Answer article);
 }

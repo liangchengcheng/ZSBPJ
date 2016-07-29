@@ -42,4 +42,12 @@ public interface TestAnswerContentView {
     void getStateSuccess(FavAndGoodState msg);
 
     void getStateFail(String msg);
+
+    void GoodSuccess();
+
+    void GoodFail(String msg);
+
+    void UnGoodSuccess();
+
+    void UnGoodFail(String msg);
 }
