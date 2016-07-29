@@ -1,19 +1,17 @@
 package com.lcc.mvp.presenter.impl;
 
-import com.lcc.entity.Answer;
+import com.lcc.entity.AnswerContent;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.ComAnswerContentModel;
-import com.lcc.mvp.model.TestAnswerContentModel;
 import com.lcc.mvp.presenter.ComAnswerContentPresenter;
-import com.lcc.mvp.presenter.TestAnswerContentPresenter;
 import com.lcc.mvp.view.ComAnswerContentView;
-import com.lcc.mvp.view.TestAnswerContentView;
 import com.squareup.okhttp.Request;
 
 import org.json.JSONObject;
 
 import zsbpj.lccpj.frame.ApiException;
+import zsbpj.lccpj.utils.GsonUtils;
 
 public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter {
 
@@ -38,8 +36,8 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    String result=jsonObject.getString("result");
-                    if (status == 1&&!result.equals("[]")) {
+                    String result = jsonObject.getString("result");
+                    if (status == 1 && !result.equals("[]")) {
                         view.isHaveFav(true);
                     } else {
                         view.isHaveFav(false);
@@ -54,7 +52,7 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
 
     @Override
     public void Fav(CompanyAnswer article, String type, String title) {
-        model.favAnswer(article,type,title, new ResultCallback<String>() {
+        model.favAnswer(article, type, title, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -100,6 +98,37 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     }
                 } catch (Exception e) {
                     view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getContent(String mid) {
+        view.getLoading();
+        model.getContent(mid, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        AnswerContent answerContent = GsonUtils
+                                .changeGsonToBean(result, AnswerContent.class);
+                        view.getDataSuccess(answerContent);
+                    } else {
+                        view.getDataFail(message);
+                    }
+                } catch (Exception e) {
+                    view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }

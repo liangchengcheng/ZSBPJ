@@ -38,4 +38,14 @@ public class ComAnswerContentModel {
         paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
+
+    /**
+     * 获取公司资料的答案的具体内容
+     */
+    public OkHttpRequest getContent(String mid, ResultCallback<String> callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("mid", mid);
+        return ApiClient.create(AppConstants.RequestPath.getComAnswerContent, paramsMap)
+                .tag("").get(callback);
+    }
 }

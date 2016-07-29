@@ -78,7 +78,7 @@
                             android:layout_marginTop="5dp"
                             android:text="百度科技网络有限公司"
                             android:textColor="@color/article_title"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                     </RelativeLayout>
 
@@ -97,11 +97,9 @@
                         android:lineSpacingMultiplier="1.2"
                         android:lines="3"
                         android:text="国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一国内三巨头之一，一家世界级的搜索公司，世界500强，工资福利很高"
-                        android:textColor="@color/article_des" />
-
-
+                        android:textColor="@color/article_des"
+                        android:textSize="14sp" />
                 </LinearLayout>
-
             </RelativeLayout>
 
             <TextView

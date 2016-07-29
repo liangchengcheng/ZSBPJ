@@ -16,11 +16,13 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
+import com.lcc.entity.AnswerContent;
 import com.lcc.entity.Article;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyEntity;
@@ -37,6 +39,7 @@ import com.lcc.mvp.view.ComAnswerContentView;
 import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
+
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
@@ -47,7 +50,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  【这个地方的答案需要单独的提炼到一个表里面去】
  */
 public class CompanyAnswerWebView extends BaseActivity implements
-        View.OnClickListener, MyWebView.OnScrollChangedCallback,ComAnswerContentView {
+        View.OnClickListener, MyWebView.OnScrollChangedCallback, ComAnswerContentView {
 
     private MyWebView webView;
     private ImageView user_head;
@@ -63,7 +66,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
     private CompanyTest entity;
 
     public static void startCompanyAnswerWebView(Activity startingActivity,
-                                                 CompanyAnswer type,CompanyTest test) {
+                                                 CompanyAnswer type, CompanyTest test) {
         Intent intent = new Intent(startingActivity, CompanyAnswerWebView.class);
         intent.putExtra(QUESTION, test);
         intent.putExtra(ANSWER, type);
@@ -78,7 +81,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
     }
 
     private void initData() {
-        comAnswerContentPresenter=new ComAnswerContentPresenterImpl(this);
+        comAnswerContentPresenter = new ComAnswerContentPresenterImpl(this);
         answer = (CompanyAnswer) getIntent().getSerializableExtra(ANSWER);
         entity = (CompanyTest) getIntent().getSerializableExtra(QUESTION);
     }
@@ -86,10 +89,10 @@ public class CompanyAnswerWebView extends BaseActivity implements
     @Override
     protected void initView() {
         initData();
-        floatingCollect= (FloatingActionButton) findViewById(R.id.floatingCollect);
+        floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingCollect.setOnClickListener(this);
-        ll_top= (LinearLayout) findViewById(R.id.ll_top);
-        floatingMenu= (FloatingActionMenu) findViewById(R.id.floatingMenu);
+        ll_top = (LinearLayout) findViewById(R.id.ll_top);
+        floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         user_head = (ImageView) findViewById(R.id.user_head);
         webView = (MyWebView) findViewById(R.id.webView);
         webView.setOnScrollChangedCallback(this);
@@ -107,6 +110,8 @@ public class CompanyAnswerWebView extends BaseActivity implements
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
         comAnswerContentPresenter.isFav(answer.getMid());
+        comAnswerContentPresenter.getContent(answer.getMid());
+
     }
 
     @Override
@@ -191,15 +196,15 @@ public class CompanyAnswerWebView extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(answer.getMid(),"资料答案",
+                CommentsActivity.startUserProfileFromLocation(answer.getMid(), "资料答案",
                         CompanyAnswerWebView.this);
                 break;
 
             case R.id.floatingCollect:
-                if (isFav){
+                if (isFav) {
                     comAnswerContentPresenter.UnFav(answer);
-                }else {
-                    comAnswerContentPresenter.Fav(answer, Propertity.COM.ANSWER,entity.getTitle());
+                } else {
+                    comAnswerContentPresenter.Fav(answer, Propertity.COM.ANSWER, entity.getTitle());
                 }
                 break;
 
@@ -233,11 +238,16 @@ public class CompanyAnswerWebView extends BaseActivity implements
     }
 
     @Override
+    public void getDataSuccess(AnswerContent msg) {
+
+    }
+
+    @Override
     public void isHaveFav(boolean isfavEntity) {
-        this.isFav=isfavEntity;
-        if (isfavEntity){
+        this.isFav = isfavEntity;
+        if (isfavEntity) {
             floatingCollect.setLabelText("取消收藏");
-        }else {
+        } else {
             floatingCollect.setLabelText("收藏");
         }
     }

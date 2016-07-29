@@ -91,6 +91,8 @@ public class AppConstants {
         public final static String UserGoodAdd = "/service/UserGoodAdd";
         //取消点赞
         public final static String deleteUserGood = "/service/deleteUserGood";
+        //获取具体的公司的答案的内容
+        public final static String getComAnswerContent = "/service/getComAnswerContent";
 
     }
 

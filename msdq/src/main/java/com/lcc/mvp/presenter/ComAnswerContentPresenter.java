@@ -10,4 +10,6 @@ public interface ComAnswerContentPresenter {
     void Fav(CompanyAnswer article, String type, String title);
 
     void UnFav(CompanyAnswer article);
+
+    void getContent(String mid);
 }
