@@ -57,6 +57,8 @@ public class CompanyAnswerWebView extends BaseActivity implements
     private FloatingActionMenu floatingMenu;
     private LinearLayout ll_top;
     private FloatingActionButton floatingCollect;
+    private LoadingLayout loading_layout;
+    private TextView tv_who;
 
     public static final String ANSWER = "answer";
     public static final String QUESTION = "question";
@@ -89,6 +91,9 @@ public class CompanyAnswerWebView extends BaseActivity implements
     @Override
     protected void initView() {
         initData();
+        tv_who= (TextView) findViewById(R.id.tv_who);
+        tv_who.setText(answer.getNickname()+"的回答");
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingCollect.setOnClickListener(this);
         ll_top = (LinearLayout) findViewById(R.id.ll_top);
@@ -109,7 +114,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
-        comAnswerContentPresenter.isFav(answer.getMid());
+        //comAnswerContentPresenter.isFav(answer.getMid());
         comAnswerContentPresenter.getContent(answer.getMid());
 
     }
@@ -184,12 +189,6 @@ public class CompanyAnswerWebView extends BaseActivity implements
         }
         ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,
                 answer.getUser_image(), user_head);
-        try {
-            webView.loadDataWithBaseURL("about:blank", answer.getAnswer_content(),
-                    "text/html", "utf-8", null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -224,22 +223,24 @@ public class CompanyAnswerWebView extends BaseActivity implements
 
     @Override
     public void getLoading() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
     public void getDataEmpty() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
     }
 
     @Override
     public void getDataFail(String msg) {
-
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
     public void getDataSuccess(AnswerContent msg) {
-
+        webView.loadDataWithBaseURL("about:blank", msg.getA_content(),
+                "text/html", "utf-8", null);
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
