@@ -1,8 +1,5 @@
 package com.lcc.mvp.presenter.impl;
 
-import android.os.Handler;
-import android.text.TextUtils;
-
 import com.lcc.entity.Answer;
 import com.lcc.entity.AnswerContent;
 import com.lcc.entity.FavAndGoodState;
@@ -16,11 +13,8 @@ import com.lcc.mvp.presenter.TestAnswerPresenter;
 import com.lcc.mvp.view.TestAnswerContentView;
 import com.lcc.mvp.view.TestAnswerView;
 import com.squareup.okhttp.Request;
-
 import org.json.JSONObject;
-
 import java.util.List;
-
 import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
@@ -154,7 +148,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
         model.GoodAnswer(article, type, title, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.GoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
@@ -164,12 +158,12 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     if (status == 1) {
-                        view.FavSuccess();
+                        view.GoodSuccess();
                     } else {
-                        view.FavFail(message);
+                        view.GoodFail(message);
                     }
                 } catch (Exception e) {
-                    view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.GoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }
@@ -181,7 +175,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
         model.UnGoodAnswer(article,  new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.UnGoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
@@ -191,12 +185,12 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     if (status == 1) {
-                        view.FavSuccess();
+                        view.UnGoodSuccess();
                     } else {
-                        view.FavFail(message);
+                        view.UnGoodFail(message);
                     }
                 } catch (Exception e) {
-                    view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.UnGoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }
