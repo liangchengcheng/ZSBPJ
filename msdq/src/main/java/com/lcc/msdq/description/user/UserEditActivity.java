@@ -2,6 +2,8 @@ package com.lcc.msdq.description.user;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -68,11 +70,15 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     private final int REQUEST_CODE_GALLERY = 1001;
 
     @Override
-    protected void initView() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+    }
 
+    @Override
+    protected void initView() {
         rb_nan = (RadioButton) findViewById(R.id.rb_nan);
         rb_nv = (RadioButton) findViewById(R.id.rb_nv);
         radioSex = (RadioGroup) findViewById(R.id.radioSex);
