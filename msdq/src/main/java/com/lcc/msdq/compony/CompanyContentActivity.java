@@ -19,15 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyContentActivity extends BaseActivity implements View.OnClickListener {
-
     public static final String ID = "id";
     private String fid;
     private CompanyDescription companyDescription;
 
-    public static void startCompanyContentActivity(CompanyDescription id, Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, CompanyContentActivity.class);
+    public static void startCompanyContentActivity(CompanyDescription id, Activity startActivity) {
+        Intent intent = new Intent(startActivity, CompanyContentActivity.class);
         intent.putExtra(ID, id);
-        startingActivity.startActivity(intent);
+        startActivity.startActivity(intent);
     }
 
     @Override
@@ -91,7 +90,6 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     }
 
     static class Adapter extends FragmentPagerAdapter {
-
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 
