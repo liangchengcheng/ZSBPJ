@@ -18,7 +18,7 @@ import com.lcc.msdq.description.com.CompanyDesMain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyContentActivity extends BaseActivity implements View.OnClickListener{
+public class CompanyContentActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String ID = "id";
     private String fid;
@@ -32,12 +32,13 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView() {
-        companyDescription= (CompanyDescription) getIntent()
+        companyDescription = (CompanyDescription) getIntent()
                 .getSerializableExtra(ID);
-        fid=companyDescription.getMid();
+        fid = companyDescription.getMid();
 
         findViewById(R.id.iv_q_add).setOnClickListener(this);
         findViewById(R.id.iv_com_des).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         setViewPager();
     }
 
@@ -52,11 +53,11 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955","技术面试"),
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955", "技术面试"),
                 "技术面试");
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955","人事面试"),
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955", "人事面试"),
                 "人事面试");
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955","其他/经验"),
+        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955", "其他/经验"),
                 "其他/经验");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
@@ -74,13 +75,17 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_q_add:
-                ComquestionAddActivity.startComquestionActivity(fid,CompanyContentActivity.this);
+                ComquestionAddActivity.startComquestionActivity(fid, CompanyContentActivity.this);
                 break;
 
             case R.id.iv_com_des:
-                CompanyDesMain.startCompanyDesMain(companyDescription,CompanyContentActivity.this);
+                CompanyDesMain.startCompanyDesMain(companyDescription, CompanyContentActivity.this);
+                break;
+
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }
