@@ -75,6 +75,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.ll_fav).setOnClickListener(this);
         view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
         view.findViewById(R.id.rl_help).setOnClickListener(this);
+        view.findViewById(R.id.rl_set).setOnClickListener(this);
         iv_more = (ImageView) view.findViewById(R.id.iv_more);
         tv_username = (TextView) view.findViewById(R.id.tv_username);
         tv_username.setOnClickListener(this);
@@ -130,6 +131,11 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             //常见问题
             case R.id.rl_help:
                 startActivity(new Intent(getActivity(), HelpActivity.class));
+                break;
+
+            //系统设置
+            case R.id.rl_set:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
         }
     }

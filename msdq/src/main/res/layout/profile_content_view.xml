@@ -30,11 +30,11 @@
                 android:background="#EDEDED" />
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_qd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_qd"
@@ -43,6 +43,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/wo_icon_jifen" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,6 +52,7 @@
                     android:padding="10dp"
                     android:text="每日签到"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/tv_qd"
                     android:layout_width="wrap_content"
@@ -61,46 +63,13 @@
                     android:text="连续签到0天"
                     android:textSize="16sp" />
             </RelativeLayout>
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EDEDED" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_qq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/settings_icon_lemall_order_center" />
-                <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv_qq"
-                    android:padding="10dp"
-                    android:text="我的积分"
-                    android:textSize="16sp" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/album_half_more"
-                    android:gravity="end" />
-            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:background="#EDEDED"
+                android:visibility="gone" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -111,7 +80,8 @@
                 android:id="@+id/ll_change_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_cpwd"
@@ -122,10 +92,10 @@
                     android:src="@drawable/icon_feedback" />
 
                 <TextView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_cpwd"
                     android:padding="10dp"
                     android:text="修改密码"
@@ -141,11 +111,11 @@
                     android:gravity="end" />
             </RelativeLayout>
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:background="#EDEDED"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:id="@+id/ll_fav"
@@ -162,10 +132,10 @@
                     android:src="@drawable/icon_myfollow" />
 
                 <TextView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_phone"
                     android:padding="10dp"
                     android:text="我的收藏"
@@ -201,10 +171,10 @@
                     android:src="@drawable/icon_my_points" />
 
                 <TextView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_weixin"
                     android:padding="10dp"
                     android:text="我的发布"
@@ -224,6 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#EDEDED" />
+
             <RelativeLayout
                 android:id="@+id/rl_help"
                 android:layout_width="match_parent"
@@ -239,10 +210,10 @@
                     android:src="@drawable/icon_play_record" />
 
                 <TextView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_question"
                     android:padding="10dp"
                     android:text="常见问题"
@@ -277,13 +248,52 @@
                     android:src="@drawable/icon_my_collect" />
 
                 <TextView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_weibo"
                     android:padding="10dp"
                     android:text="软件分享"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/album_half_more"
+                    android:gravity="end" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDEDED" />
+
+            <RelativeLayout
+                android:id="@+id/rl_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/icon_settings" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/iv_qq"
+                    android:padding="10dp"
+                    android:text="系统设置"
                     android:textSize="16sp" />
 
                 <ImageView

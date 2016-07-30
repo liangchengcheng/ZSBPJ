@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
@@ -28,11 +30,13 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -41,6 +45,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
@@ -53,17 +58,17 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView,
         RadioGroup.OnCheckedChangeListener {
 
+    //昵称 性别 签名 邮箱
+    private EditText edit_nickname, et_qm, et_email;
     private ImageView iv_question_des;
     private ImageView iv_save;
     private SimpleArcDialog mDialog;
-    //昵称 性别 签名 邮箱
-    private EditText edit_nickname, et_qm, et_email;
     private RadioButton rb_nan, rb_nv;
     private RadioGroup radioSex;
 
+    public FunctionConfig functionConfig;
     public static final String USERINFO = "userinfo";
     private List<File> files = new ArrayList<>();
-    public FunctionConfig functionConfig;
     private UserEditPresenter userEditPresenter;
     private UserInfo userInfo = new UserInfo();
     private final int REQUEST_CODE_CAMERA = 1000;
@@ -72,9 +77,6 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
     }
 
     @Override
@@ -321,8 +323,9 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
-        }
+    }
+
+    public void onEventMainThread() {
+        Log.e("lcc", "1");
     }
 }

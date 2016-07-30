@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.bumptech.glide.Glide;
+import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
@@ -36,6 +37,7 @@ import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestAnswerContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.TestAnswerContentView;
+import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -48,14 +50,15 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  答案的详情界面
  */
 public class AnswerContentActivity extends BaseActivity implements View.OnClickListener,
-        TestAnswerContentView {
+        TestAnswerContentView, MyWebView.OnScrollChangedCallback {
 
-    private WebView webView;
+    private MyWebView webView;
     private ImageView user_head;
     private FloatingActionButton floatingCollect;
     private FloatingActionButton floatingGood;
     private TextView tv_who;
     private LoadingLayout loading_layout;
+    private FloatingActionMenu floatingMenu;
 
     private Answer answer;
     private TestEntity testEntity;
@@ -89,18 +92,21 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initView() {
         initData();
+        floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingGood = (FloatingActionButton) findViewById(R.id.floatingGood);
+
         floatingGood.setOnClickListener(this);
         floatingCollect.setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
         findViewById(R.id.iv_share).setOnClickListener(this);
+
         tv_who = (TextView) findViewById(R.id.tv_who);
         tv_who.setText(answer.getNickname() + "的回答");
         user_head = (ImageView) findViewById(R.id.user_head);
-        webView = (WebView) findViewById(R.id.webView);
+        webView = (MyWebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -114,7 +120,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         settings.setDisplayZoomControls(false);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
-        
+        webView.setOnScrollChangedCallback(this);
+
         testAnswerContentPresenter.getContent(answer.getMid());
         testAnswerContentPresenter.isFav(answer.getMid());
     }
@@ -334,19 +341,30 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     public void changeFav(boolean fav) {
         this.isFav = fav;
-        if (fav){
+        if (fav) {
             floatingCollect.setLabelText("取消收藏");
-        }else {
+        } else {
             floatingCollect.setLabelText("收藏");
         }
     }
 
     public void changeGood(boolean good) {
         this.isGood = good;
-        if (good){
+        if (good) {
             floatingGood.setLabelText("取消赞");
-        }else {
+        } else {
             floatingGood.setLabelText("赞");
+        }
+    }
+
+    @Override
+    public void onScroll(int dx, int dy) {
+        if (Math.abs(dy) > 4) {
+            if (dy < 0) {
+                floatingMenu.showMenu(true);
+            } else {
+                floatingMenu.hideMenu(true);
+            }
         }
     }
 }
