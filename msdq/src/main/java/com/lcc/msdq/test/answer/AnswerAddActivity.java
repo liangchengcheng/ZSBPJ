@@ -25,10 +25,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.entity.AnswerAdd;
 import com.lcc.msdq.PhotoPickerActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
+import com.lcc.mvp.presenter.TestAnswerAddPresenter;
+import com.lcc.mvp.presenter.impl.TestAnswerAddPresenterImpl;
+import com.lcc.mvp.view.TestAnswerAddView;
 import com.lcc.rich.RichEditor;
 import com.lcc.utils.HTMLContentUtil;
 import com.lcc.utils.KeyboardUtils;
@@ -41,6 +45,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +54,9 @@ import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 /**
  * Author:       梁铖城
@@ -56,7 +64,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  * Date:         2015年11月21日15:28:25
  * Description:  AnswerAddActivity
  */
-public class AnswerAddActivity extends BaseActivity implements View.OnClickListener {
+public class AnswerAddActivity extends BaseActivity implements View.OnClickListener, TestAnswerAddView {
 
     public static final int REQUEST_CODE_PICK_IMAGE = 1023;
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
@@ -67,8 +75,14 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private SortRichEditor editor;
     private ImageView ivGallery, ivCamera;
     private Button btnPosts;
+    private SimpleArcDialog mDialog;
+
     // 照相机拍照得到的图片
     private File mCurrentPhotoFile;
+    private List<File> files = new ArrayList<>();
+    private TestAnswerAddPresenter presenter;
+    private AnswerAdd answerAdd = new AnswerAdd();
+    private String fid;
 
     public Intent getTakePickIntent(File f) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
@@ -79,7 +93,9 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        presenter = new TestAnswerAddPresenterImpl(this);
+        fid = getIntent().getStringExtra("fid");
+        answerAdd.setFid(fid);
         tvSort = (TextView) findViewById(R.id.tv_sort);
         editor = (SortRichEditor) findViewById(R.id.richEditor);
         ivGallery = (ImageView) findViewById(R.id.iv_gallery);
@@ -111,8 +127,17 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
      * 负责处理编辑数据提交等事宜，请自行实现
      */
     private void dealEditData(List<SEditorData> editList) {
-        String html= HTMLContentUtil.getContent(editList);
-        Log.e("lcc",html);
+        if (editList == null || editList.size() == 0) {
+            FrameManager.getInstance().toastPrompt("暂无数据");
+            return;
+        }
+
+        String html = HTMLContentUtil.getContent(editList);
+        answerAdd.setAnswer(html);
+        files = HTMLContentUtil.getFiles(editList);
+        //presenter.TestAnswerAdd(answerAdd,files);
+
+        Log.e("lcc", html);
         for (SEditorData itemData : editList) {
             if (itemData.getInputStr() != null) {
                 Log.e("RichEditor", "commit inputStr=" + itemData.getInputStr());
@@ -185,4 +210,28 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void adding() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在提交数据...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
+    }
+
+    @Override
+    public void addSuccess() {
+
+    }
+
+    @Override
+    public void addFail() {
+
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
 }

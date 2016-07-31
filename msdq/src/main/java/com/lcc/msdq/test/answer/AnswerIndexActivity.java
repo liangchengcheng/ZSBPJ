@@ -86,10 +86,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     protected void initView() {
         currentPage = 1;
-        tv_count= (TextView) findViewById(R.id.tv_count);
+        tv_count = (TextView) findViewById(R.id.tv_count);
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
-        tv_count.setText("共收到"+entity.getAnswer_count()+"个回答");
-        fid=entity.getMid();
+        tv_count.setText("共收到" + entity.getAnswer_count() + "个回答");
+        fid = entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
@@ -279,14 +279,16 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 break;
 
             case R.id.fabButton:
-                startActivity(new Intent(AnswerIndexActivity.this, AnswerAddActivity.class));
+                Intent intent = new Intent(AnswerIndexActivity.this, AnswerAddActivity.class);
+                intent.putExtra("fid",fid);
+                startActivity(intent);
                 break;
         }
     }
 
     @Override
     public void onItemClick(Answer data) {
-        AnswerContentActivity.startAnswerContentActivity(entity,data,AnswerIndexActivity.this);
+        AnswerContentActivity.startAnswerContentActivity(entity, data, AnswerIndexActivity.this);
     }
 
     @Override
@@ -308,7 +310,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     /**
      * 设置当前收到多少个回答
      */
-    private void setCount(){
+    private void setCount() {
 
     }
 }
