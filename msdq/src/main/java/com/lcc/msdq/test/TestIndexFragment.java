@@ -34,6 +34,7 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
+import com.lcc.msdq.test.choice.ChoiceA_Activity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
@@ -312,6 +313,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                 String zy = DataManager.getZY();
                 if(TextUtils.isEmpty(zy)){
                     FrameManager.getInstance().toastPrompt("请选择一个你要添加的职业类型");
+                    startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
                 }else {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("添加新问题")
@@ -319,14 +321,15 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                             .setPositiveButton("直接添加", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    startActivity(new Intent(getActivity(),TestAddActivity.class));
                                     dialog.dismiss();
                                 }
                             })
+
                             .setNegativeButton("其他职业", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
                                     dialog.dismiss();
                                 }
                             })

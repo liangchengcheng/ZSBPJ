@@ -6,6 +6,8 @@ import android.content.Intent;
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 
+import zsbpj.lccpj.frame.FrameManager;
+
 
 /**
  * Author:       梁铖城
@@ -16,6 +18,7 @@ import com.lcc.msdq.R;
 public class TestAddActivity extends BaseActivity {
 
     public static final String ZY = "zy";
+    private String zy = "";
 
     public static void startTestAddActivity(Activity startingActivity, String zy) {
         Intent intent = new Intent(startingActivity, TestAddActivity.class);
@@ -25,7 +28,8 @@ public class TestAddActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        zy = getIntent().getStringExtra(ZY);
+        FrameManager.getInstance().toastPrompt(zy);
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.lcc.entity.Type2;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.test.TestAddActivity;
 import com.lcc.mvp.presenter.ChoiceTypePresenter;
 import com.lcc.mvp.presenter.impl.ChoicePresenterImpl;
 import com.lcc.mvp.view.ChoiceTypeView;
@@ -115,16 +116,10 @@ public class ChoiceB_Activity extends BaseActivity implements ChoiceTypeView,
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void setLoading() {
-        mDialog = new SimpleArcDialog(this);
-        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
-        arcConfiguration.setText("正在设置你的职业类型...");
-        mDialog.setConfiguration(arcConfiguration);
-        mDialog.show();
     }
 
     @Override
@@ -134,24 +129,12 @@ public class ChoiceB_Activity extends BaseActivity implements ChoiceTypeView,
 
     @Override
     public void setDataSuccess(String msg) {
-        closeDialog();
-        FrameManager.getInstance().toastPrompt("设置成功");
-        UserInfo userInfo = DataManager.getUserInfo();
-        userInfo.setZy(zy);
-        DataManager.editUser(userInfo);
-        App.exit();
-        if (TextUtils.isEmpty(flag)) {
-            finish();
-        } else {
-            startActivity(new Intent(ChoiceB_Activity.this, MainActivity.class));
-            finish();
-        }
     }
 
     @Override
     public void onItemClick(Type2 data) {
         zy = data.getS_name();
-
+        TestAddActivity.startTestAddActivity(ChoiceB_Activity.this, zy);
     }
 
     @Override
