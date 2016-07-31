@@ -30,6 +30,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
 import com.lcc.rich.RichEditor;
+import com.lcc.utils.HTMLContentUtil;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.view.edit.editor.SEditorData;
 import com.lcc.view.edit.editor.SortRichEditor;
@@ -64,11 +65,8 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
 
     private TextView tvSort;
-
     private SortRichEditor editor;
-
     private ImageView ivGallery, ivCamera;
-
     private Button btnPosts;
     // 照相机拍照得到的图片
     private File mCurrentPhotoFile;
@@ -114,6 +112,9 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
      * 负责处理编辑数据提交等事宜，请自行实现
      */
     private void dealEditData(List<SEditorData> editList) {
+        String html= HTMLContentUtil.getContent(editList);
+        Log.e("lcc",html);
+
         for (SEditorData itemData : editList) {
             if (itemData.getInputStr() != null) {
                 Log.e("RichEditor", "commit inputStr=" + itemData.getInputStr());
@@ -137,18 +138,18 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     }
 
     /**
-     * 用当前时间给取得的图片命名
+     * 用当前时间给取得的图片命名(todo)
      */
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "'IMG'_yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(date) + ".jpg";
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) return;
+        if (resultCode != RESULT_OK)
+            return;
 
         if (editor.isSort()) tvSort.setText("排序");
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
@@ -169,12 +170,15 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
                     tvSort.setText("排序");
                 }
                 break;
+
             case R.id.iv_gallery:
                 startActivityForResult(new Intent(this, PhotoPickerActivity.class), REQUEST_CODE_PICK_IMAGE);
                 break;
+
             case R.id.iv_camera:
                 openCamera();
                 break;
+
             case R.id.btn_posts:
                 List<SEditorData> editList = editor.buildEditData();
                 // 下面的代码可以上传、或者保存，请自行实现
