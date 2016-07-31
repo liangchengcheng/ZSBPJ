@@ -30,4 +30,11 @@ public class Propertity {
 
     }
 
+    public final class OPTIONS {
+        public final static String ZYZS = "专业知识";
+        public final static String RSZS = "人事知识";
+        public final static String QT = "其他";
+
+    }
+
 }

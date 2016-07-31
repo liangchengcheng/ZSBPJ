@@ -70,6 +70,45 @@
                     android:hint="请输入问题的内容"
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
+           <TextView
+               android:layout_marginLeft="20dp"
+               android:text="请选择问题类型"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/rg_options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:checked="true"
+                        android:id="@+id/rb_js"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="技术" />
+
+                    <RadioButton
+                        android:id="@+id/rb_rs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="人事" />
+
+                    <RadioButton
+                        android:id="@+id/rb_qt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="其他" />
+
+                </RadioGroup>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/buttonSignUp"
