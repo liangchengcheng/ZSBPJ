@@ -60,7 +60,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
 
     public static final int REQUEST_CODE_PICK_IMAGE = 1023;
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
-
     private static final File PHOTO_DIR = new File(
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
 
@@ -114,7 +113,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private void dealEditData(List<SEditorData> editList) {
         String html= HTMLContentUtil.getContent(editList);
         Log.e("lcc",html);
-
         for (SEditorData itemData : editList) {
             if (itemData.getInputStr() != null) {
                 Log.e("RichEditor", "commit inputStr=" + itemData.getInputStr());

@@ -93,6 +93,8 @@ public class AppConstants {
         public final static String deleteUserGood = "/service/deleteUserGood";
         //获取具体的公司的答案的内容
         public final static String getComAnswerContent = "/service/getComAnswerContent";
+        //增加资料答案的具体内容
+        public final static String answerAddservice = "/answerAddservice";
 
     }
 
