@@ -1,12 +1,15 @@
 package com.lcc.msdq.test;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import com.lcc.adapter.TestAdapter;
 import com.lcc.base.BaseFragment;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
@@ -103,6 +107,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         view.findViewById(R.id.ll_quyu).setOnClickListener(this);
         view.findViewById(R.id.ll_jiage).setOnClickListener(this);
         view.findViewById(R.id.ll_huxing).setOnClickListener(this);
+        view.findViewById(R.id.iv_add).setOnClickListener(this);
 
         quyu = (TextView) view.findViewById(R.id.quyu);
         huxing = (TextView) view.findViewById(R.id.huxing);
@@ -297,6 +302,38 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                 icon3.setImageResource(R.drawable.icon_43343434);
                 showPopupWindow(ll_layout, 3);
                 break;
+            case R.id.iv_add:
+                String user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    return;
+                }
+
+                String zy = DataManager.getZY();
+                if(TextUtils.isEmpty(zy)){
+                    FrameManager.getInstance().toastPrompt("请选择一个你要添加的职业类型");
+                }else {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("添加新问题")
+                            .setMessage("你是"+zy+"是否重新选择添加别的职业的问题？")
+                            .setPositiveButton("直接添加", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setNegativeButton("其他职业", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+
+                break;
         }
     }
 
@@ -316,4 +353,5 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             return "";
         }
     }
+
 }

@@ -1,5 +1,8 @@
 package com.lcc.msdq.test;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 
@@ -11,6 +14,14 @@ import com.lcc.msdq.R;
  * Description:  TestAddActivity
  */
 public class TestAddActivity extends BaseActivity {
+
+    public static final String ZY = "zy";
+
+    public static void startTestAddActivity(Activity startingActivity, String zy) {
+        Intent intent = new Intent(startingActivity, TestAddActivity.class);
+        intent.putExtra(ZY, zy);
+        startingActivity.startActivity(intent);
+    }
 
     @Override
     protected void initView() {

@@ -230,5 +230,16 @@
             android:exported="true"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".test.choice.ChoiceA_Activity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".test.choice.ChoiceB_Activity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".test.TestAddActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>
