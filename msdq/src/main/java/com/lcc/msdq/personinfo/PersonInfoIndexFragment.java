@@ -24,6 +24,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.login.ResetPasswordActivity;
 import com.lcc.msdq.fabu.FabuList;
 import com.lcc.msdq.setting.SettingActivity;
+import com.lcc.utils.ShareUtil;
 
 import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.ImageManager;
@@ -76,6 +77,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.iv_sys_image).setOnClickListener(this);
         view.findViewById(R.id.rl_help).setOnClickListener(this);
         view.findViewById(R.id.rl_set).setOnClickListener(this);
+        view.findViewById(R.id.rl_share).setOnClickListener(this);
         iv_more = (ImageView) view.findViewById(R.id.iv_more);
         tv_username = (TextView) view.findViewById(R.id.tv_username);
         tv_username.setOnClickListener(this);
@@ -136,6 +138,12 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             //系统设置
             case R.id.rl_set:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+
+            //系统设置
+            case R.id.rl_share:
+                ShareUtil shareUtil=new ShareUtil();
+                shareUtil.showShare(getActivity());
                 break;
         }
     }
