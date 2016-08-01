@@ -196,7 +196,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             for (int i = 0; i < photoPaths.length; i++) {
                 String author = DataManager.getUserName();
                 Date date = new Date(System.currentTimeMillis());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMddHHmmss");
                 String new_file = newFile + author + dateFormat.format(date) + ".jpg";
                 FileUtil.copyFile(photoPaths[i], new_file);
                 new_photoPaths[i] = new_file;

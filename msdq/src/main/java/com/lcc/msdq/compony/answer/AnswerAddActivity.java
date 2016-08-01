@@ -28,16 +28,12 @@ public class AnswerAddActivity extends AppCompatActivity implements View.OnClick
 
     public static final int REQUEST_CODE_PICK_IMAGE = 1023;
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
-
     private static final File PHOTO_DIR = new File(
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
 
     private TextView tvSort;
-
     private SortRichEditor editor;
-
     private ImageView ivGallery, ivCamera;
-
     private Button btnPosts;
     // 照相机拍照得到的图片
     private File mCurrentPhotoFile;

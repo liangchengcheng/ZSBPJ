@@ -2,8 +2,11 @@ package com.lcc.mvp.presenter.impl;
 
 import com.lcc.entity.AnswerAdd;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
+import com.lcc.mvp.model.ComAnswerAddModel;
 import com.lcc.mvp.model.TestAnswerAddModel;
+import com.lcc.mvp.presenter.ComAnswerAddPresenter;
 import com.lcc.mvp.presenter.TestAnswerAddPresenter;
+import com.lcc.mvp.view.ComAnswerAddView;
 import com.lcc.mvp.view.TestAnswerAddView;
 import com.squareup.okhttp.Request;
 
@@ -12,19 +15,19 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.List;
 
-public class TestAnswerAddPresenterImpl implements TestAnswerAddPresenter {
+public class ComAnswerAddPresenterImpl implements ComAnswerAddPresenter {
 
-    private TestAnswerAddView view;
-    private TestAnswerAddModel model;
+    private ComAnswerAddView view;
+    private ComAnswerAddModel model;
 
-    public TestAnswerAddPresenterImpl(TestAnswerAddView view) {
+    public ComAnswerAddPresenterImpl(ComAnswerAddView view) {
         this.view = view;
-        model = new TestAnswerAddModel();
+        model = new ComAnswerAddModel();
     }
 
     @Override
-    public void TestAnswerAdd(AnswerAdd replay, List<File> files) {
-        model.TestAnswerAdd(replay,files, new ResultCallback<String>() {
+    public void ComAnswerAdd(AnswerAdd replay, List<File> files) {
+        model.ComAnswerAdd(replay,files, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.addFail();

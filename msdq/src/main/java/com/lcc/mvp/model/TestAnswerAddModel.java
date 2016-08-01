@@ -1,4 +1,4 @@
-package com.lcc.mvp;
+package com.lcc.mvp.model;
 
 
 import com.lcc.AppConstants;
