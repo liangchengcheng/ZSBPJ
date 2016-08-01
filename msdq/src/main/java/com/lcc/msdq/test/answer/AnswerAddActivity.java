@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.AnswerAdd;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.PhotoPickerActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
@@ -96,6 +97,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         presenter = new TestAnswerAddPresenterImpl(this);
         fid = getIntent().getStringExtra("fid");
         answerAdd.setFid(fid);
+
         tvSort = (TextView) findViewById(R.id.tv_sort);
         editor = (SortRichEditor) findViewById(R.id.richEditor);
         ivGallery = (ImageView) findViewById(R.id.iv_gallery);
@@ -166,7 +168,8 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyy-MM-dd HH:mm:ss");
-        return dateFormat.format(date) + ".jpg";
+        String author = DataManager.getUserName();
+        return author + dateFormat.format(date) + ".jpg";
     }
 
     @Override
@@ -195,7 +198,8 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.iv_gallery:
-                startActivityForResult(new Intent(this, PhotoPickerActivity.class), REQUEST_CODE_PICK_IMAGE);
+                startActivityForResult(new Intent(this,
+                        PhotoPickerActivity.class), REQUEST_CODE_PICK_IMAGE);
                 break;
 
             case R.id.iv_camera:
@@ -221,12 +225,14 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void addSuccess() {
-
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("提交成功");
     }
 
     @Override
     public void addFail() {
-
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("提交失败");
     }
 
     private void closeDialog() {

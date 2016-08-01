@@ -30,26 +30,18 @@ import java.util.concurrent.Executors;
 public class PhotoPickerActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String INTENT_PHOTO_PATHS = "photo_paths";
-    ;
-
     private static final int LATEST_PHOTO_NUM = 100;
-
     private static final String LATEST_PHOTO_STR = "最近照片";
 
     private View titleView;
-
     private TextView tvCacel, tvComplete, tvPicker;
-
     private GridView gvPhotoWall;
 
     private List<String> photoPathList;
-
     private List<String> latestPhotoPathList;
-
     private List<PhotoPack> photoPackList;
 
     private PhotoWallAdapter photoWallAdapter;
-
     private SelectPopupWindow photoPackSelectPopup;
 
 
@@ -80,7 +72,6 @@ public class PhotoPickerActivity extends AppCompatActivity implements View.OnCli
         tvComplete.setOnClickListener(this);
         tvPicker.setOnClickListener(this);
     }
-
 
     private void inflateViewData() {
 
@@ -182,6 +173,7 @@ public class PhotoPickerActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * 使用ContentProvider读取SD卡最近图片
+     *
      * @param maxCount 读取的最大张数
      */
     private List<String> getLatestPhotoPaths(int maxCount) {
