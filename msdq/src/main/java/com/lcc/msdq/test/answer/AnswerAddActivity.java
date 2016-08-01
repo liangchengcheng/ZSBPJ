@@ -35,6 +35,7 @@ import com.lcc.mvp.presenter.TestAnswerAddPresenter;
 import com.lcc.mvp.presenter.impl.TestAnswerAddPresenterImpl;
 import com.lcc.mvp.view.TestAnswerAddView;
 import com.lcc.rich.RichEditor;
+import com.lcc.utils.FileUtil;
 import com.lcc.utils.HTMLContentUtil;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.view.edit.editor.SEditorData;
@@ -71,6 +72,8 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
     private static final File PHOTO_DIR = new File(
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
+    private static final String newFile = Environment.getExternalStorageDirectory().getPath()
+            + "/com.lcc.mstdq/";
 
     private TextView tvSort;
     private SortRichEditor editor;
@@ -180,7 +183,25 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         if (editor.isSort()) tvSort.setText("排序");
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
             String[] photoPaths = data.getStringArrayExtra(PhotoPickerActivity.INTENT_PHOTO_PATHS);
-            editor.addImageArray(photoPaths);
+            File filepath = new File(newFile);
+            if (!filepath.exists()) {
+                try {
+                    filepath.mkdirs();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            String[] new_photoPaths = new String[photoPaths.length];
+            for (int i = 0; i < photoPaths.length; i++) {
+                String author = DataManager.getUserName();
+                Date date = new Date(System.currentTimeMillis());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyy-MM-dd HH:mm:ss");
+                String new_file = newFile + author + dateFormat.format(date) + ".jpg";
+                FileUtil.copyFile(photoPaths[i], new_file);
+                new_photoPaths[i] = new_file;
+            }
+            editor.addImageArray(new_photoPaths);
         } else if (requestCode == REQUEST_CODE_CAPTURE_CAMEIA) {
             editor.addImage(mCurrentPhotoFile.getAbsolutePath());
         }

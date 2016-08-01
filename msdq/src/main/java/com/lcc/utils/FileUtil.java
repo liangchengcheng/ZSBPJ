@@ -116,7 +116,7 @@ public class FileUtil {
      * @param oldname 原来的文件名
      * @param newname 新文件名
      */
-    public void renameFile(String path, String oldname, String newname) {
+    public static void renameFile(String path, String oldname, String newname) {
         //新的文件名和以前文件名不同时,才有必要进行重命名
         if (!oldname.equals(newname)) {
             File old_file = new File(path + "/" + oldname);

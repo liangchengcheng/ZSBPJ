@@ -1,6 +1,5 @@
 package com.lcc.utils;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import zsbpj.lccpj.frame.FrameManager;
