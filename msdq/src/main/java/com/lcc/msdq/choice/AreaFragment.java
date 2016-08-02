@@ -148,8 +148,6 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
         ButterKnife.unbind(this);
     }
 
-
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         AreaInfo areaInfo = (AreaInfo) parent.getAdapter().getItem(position);

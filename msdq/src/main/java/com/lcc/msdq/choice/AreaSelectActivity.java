@@ -123,7 +123,6 @@ public class AreaSelectActivity extends BaseActivity implements
                 nextPage(map);
                 break;
         }
-
     }
 
     private void nextPage(Map map) {

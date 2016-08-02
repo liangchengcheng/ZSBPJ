@@ -1,7 +1,7 @@
 package com.lcc.msdq.choice;
 
-
 public class JsonResult<T> {
+
     private int code;
     private String message;
     private T result;

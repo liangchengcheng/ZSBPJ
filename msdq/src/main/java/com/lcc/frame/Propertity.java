@@ -37,4 +37,16 @@ public class Propertity {
 
     }
 
+    public final class ArticleType{
+        public final static String MSZB = "面试准备";
+        public final static String MSJL = "面试简历";
+        public final static String MSJQ = "面试技巧";
+        public final static String MSZZ = "面试着装";
+        public final static String MSGX = "面试感想";
+        public final static String MSJZ = "面试举止";
+        public final static String MSJT = "面试交通";
+        public final static String QT = "其他";
+
+    }
+
 }
