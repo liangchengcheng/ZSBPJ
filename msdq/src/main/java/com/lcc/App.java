@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import com.lcc.db.test.DaoMaster;
 import com.lcc.db.test.DaoSession;
 import com.lcc.frame.net.okhttp.OkHttpClientManager;
+import com.lcc.msdq.BuildConfig;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.LinkedList;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.LogUtils;
 
 
 public class App extends Application {
@@ -36,6 +38,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LogUtils.init(BuildConfig.LOG_DEBUG);
         FrameManager.setAppContext(this);
         FrameManager.getInstance().init();
 

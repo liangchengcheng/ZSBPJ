@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CC睡眠助手</string>
+    <string name="app_name">抽抽面试助手</string>
     <string name="popular">Popular</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
@@ -23,7 +23,6 @@
     <string name="spread">展开</string>
     <item name="tag_position" type="id" />
     <item name="tag_photo" type="id" />
-
 
     <string-array name="user_photos">
         <item>http://scontent-a-fra.cdninstagram.com/hphotos-xpf1/t51.2885-15/s306x306/e15/10665483_429615813855717_1490926670_n.jpg</item>
@@ -49,4 +48,5 @@
         <item>http://scontent-a-fra.cdninstagram.com/hphotos-xaf1/t51.2885-15/s306x306/e15/10899123_922231267802027_1123900984_n.jpg</item>
         <item>http://scontent-b-fra.cdninstagram.com/hphotos-xaf1/t51.2885-15/s306x306/e15/10899087_405295322969722_20422376_n.jpg</item>
     </string-array>
+
 </resources>

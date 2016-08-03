@@ -27,7 +27,6 @@ import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class LoginActivity extends BaseActivity implements LoginView, View.OnClickListener {
-
     //MVP结构的 P层的实现
     private LoginPresenter mPresenter;
     //用户名和密码

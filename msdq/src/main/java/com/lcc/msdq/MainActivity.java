@@ -67,9 +67,7 @@ public class MainActivity extends BaseActivity {
             if ((Long.parseLong(localtime) - Long.parseLong(updateTime)) / (60 * 60 * 24) > 7) {
                 updateAPK();
             }
-        }
-
-        if (updateTime == null) {
+        }else {
             updateAPK();
         }
     }
