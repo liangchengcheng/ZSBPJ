@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.lcc.base.BaseActivity;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
@@ -40,10 +41,11 @@ public class FavoriteList extends BaseActivity implements View.OnClickListener {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        // TODO: 16/8/4 此处界面的属性和下个界面的属性
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的文章");
-        adapter.addFragment(ArticleFragment.newInstance("收藏的资料"), "收藏的资料");
-        adapter.addFragment(ArticleFragment.newInstance("收藏的真题"), "收藏的真题");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Article.NAME), "收藏的文章");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Test.QUESTION), "收藏的资料");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.COM.QUESTION), "收藏的真题");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

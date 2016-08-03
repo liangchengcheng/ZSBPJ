@@ -1,5 +1,6 @@
 package com.lcc.msdq.favorite;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,8 +13,10 @@ import com.lcc.adapter.FavAdapter;
 import com.lcc.adapter.JSAdapter;
 import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavEntity;
+import com.lcc.frame.Propertity;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.FavPresenter;
 import com.lcc.mvp.presenter.JSPresenter;
 import com.lcc.mvp.presenter.impl.FavPresenterImpl;
@@ -184,6 +187,19 @@ public class ArticleFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void onItemClick(FavEntity data) {
+        Intent intent = null;
+        //我好像得重新写界面
+        if (type.equals(Propertity.Article.NAME)){
+            //去文章的界面
+             intent=new Intent(getActivity(), AnswerIndexActivity.class);
+        }else if (type.equals(Propertity.Test.QUESTION)){
+            //去资料的问题
+             intent=new Intent(getActivity(), AnswerIndexActivity.class);
+        }else {
+            //去公司的问题
+             intent=new Intent(getActivity(), AnswerIndexActivity.class);
+        }
+        startActivity(intent);
 
     }
 
