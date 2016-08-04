@@ -4,6 +4,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.lcc.adapter.ReplayAdapter;
 import com.lcc.adapter.UserGoodAdapter;
@@ -42,6 +43,8 @@ public class ReplayActivity extends BaseActivity implements ReplayView,
         xtNewsPresenter = new ReplayPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("未读评论");
         xtNewsPresenter.getData();
     }
 

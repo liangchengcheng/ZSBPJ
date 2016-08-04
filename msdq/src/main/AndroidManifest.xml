@@ -241,5 +241,9 @@
         <activity
             android:name=".test.TestAddActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".news.replaynews.ReplayActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>
