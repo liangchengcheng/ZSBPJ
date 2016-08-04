@@ -3,6 +3,7 @@ package com.lcc.msdq.news.znews;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.lcc.adapter.UserGoodAdapter;
 import com.lcc.adapter.XtNewsAdapter;
@@ -24,11 +25,10 @@ import zsbpj.lccpj.frame.FrameManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  ZNewsActivity
+ * Description:  ZNewsActivity（赞的列表）
  */
 public class ZNewsActivity extends BaseActivity implements UserGoodView,
-        UserGoodAdapter.OnItemClickListener{
-
+        UserGoodAdapter.OnItemClickListener , View.OnClickListener{
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private UserGoodAdapter mAdapter;
@@ -39,6 +39,7 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView,
         initRecycleView();
         xtNewsPresenter=new UserGoodPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         xtNewsPresenter.getData();
     }
 
@@ -91,5 +92,14 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView,
     @Override
     public void onItemClick(UserGood entities) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
     }
 }

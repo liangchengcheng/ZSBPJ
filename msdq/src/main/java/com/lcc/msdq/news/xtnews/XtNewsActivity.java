@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.adapter.XtNewsAdapter;
@@ -28,8 +29,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  XtNewsActivity
  */
 public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItemClickListener,
-        XtNewsView {
-
+        XtNewsView, View.OnClickListener {
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private XtNewsAdapter mAdapter;
@@ -38,8 +38,9 @@ public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItem
     @Override
     protected void initView() {
         initRecycleView();
-        xtNewsPresenter=new XtNewsPresenterImpl(this);
+        xtNewsPresenter = new XtNewsPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         xtNewsPresenter.getData();
     }
 
@@ -59,7 +60,7 @@ public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItem
     }
 
     private void initRecycleView() {
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(XtNewsActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -89,6 +90,16 @@ public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItem
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
         }
+
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
     }
 }
