@@ -23,10 +23,9 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  开始或者结束轮训器
+ * Description:  NewsIndex
  */
 public class NewsIndex extends BaseActivity implements View.OnClickListener, NewsInfoView {
-
     private SimpleArcDialog mDialog;
     private TextView tv_replay_count, tv_latter_count, tv_z_count, tv_xt_count;
 
@@ -67,6 +66,7 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
             case R.id.guillotine_hamburger:
                 finish();
                 break;
+
             case R.id.rl_xt:
                 startActivity(new Intent(NewsIndex.this, XtNewsActivity.class));
                 break;

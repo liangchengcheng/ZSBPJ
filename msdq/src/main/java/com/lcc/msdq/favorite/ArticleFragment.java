@@ -168,6 +168,7 @@ public class ArticleFragment extends BaseLazyLoadFragment implements
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;
         }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -195,12 +196,12 @@ public class ArticleFragment extends BaseLazyLoadFragment implements
         }else if (type.equals(Propertity.Test.QUESTION)){
             //去资料的问题
              intent=new Intent(getActivity(), AnswerIndexActivity.class);
-        }else {
+        } else {
             //去公司的问题
              intent=new Intent(getActivity(), AnswerIndexActivity.class);
         }
-        startActivity(intent);
 
+        startActivity(intent);
     }
 
     @Override

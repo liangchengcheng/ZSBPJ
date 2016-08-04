@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/iv_head"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
@@ -67,11 +67,13 @@
     </RelativeLayout>
 
     <TextView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#ededed" />
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_latter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -121,8 +123,8 @@
 
         <ImageView
             android:id="@+id/iv_head_z"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
@@ -164,8 +166,8 @@
 
         <ImageView
             android:id="@+id/iv_head_xt"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
