@@ -31,7 +31,6 @@ import butterknife.ButterKnife;
  * Description:  FavAdapter(收藏的适配器)
  */
 public class XtNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private List<XtNewsEntity> mList = new ArrayList<>();
 
     public void bind(List<XtNewsEntity> messages) {
@@ -47,7 +46,6 @@ public class XtNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         final XtNewsEntity weekData = mList.get(position);
         NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
@@ -55,7 +53,7 @@ public class XtNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         String time = weekData.getCreated_time();
         String content = weekData.getMessage_body();
 
-        holder.tv_time.setText(title);
+        holder.tv_title.setText(title);
         holder.tv_content.setText(content);
         holder.tv_time.setText(time);
         if (mListener != null) {
@@ -79,7 +77,6 @@ public class XtNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ll_all)
         LinearLayout ll_all;
         @Bind(R.id.tv_title)
