@@ -1,12 +1,9 @@
 package com.lcc.msdq;
 
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
-
 import zsbpj.lccpj.frame.ImageManager;
 
 /**
@@ -15,14 +12,14 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  AboutActivity(关于作者)
  */
-public class AboutActivity extends BaseActivity  {
-
+public class AboutActivity extends BaseActivity implements View.OnClickListener {
     private ImageView about_avatar_iv;
 
     @Override
     protected void initView() {
-        about_avatar_iv= (ImageView) findViewById(R.id.about_avatar_iv);
-        ImageManager.getInstance().loadCircleResImage(AboutActivity.this,R.drawable.lcctx,
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        about_avatar_iv = (ImageView) findViewById(R.id.about_avatar_iv);
+        ImageManager.getInstance().loadCircleResImage(AboutActivity.this, R.drawable.lcctx,
                 about_avatar_iv);
     }
 
@@ -34,5 +31,14 @@ public class AboutActivity extends BaseActivity  {
     @Override
     protected int getLayoutView() {
         return R.layout.activity_about;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
     }
 }
