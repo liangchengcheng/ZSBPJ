@@ -47,7 +47,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
         CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
         CommentsDialog.onChoiceListener,View.OnClickListener {
-
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
     @Bind(R.id.recyclerView)
@@ -84,12 +83,11 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private String type = "面试感想";
     private String content_id;
 
-    public static void startUserProfileFromLocation(String id, String type,
-                                                    Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, CommentsActivity.class);
+    public static void startUserProfileFromLocation(String id, String type, Activity startActivity) {
+        Intent intent = new Intent(startActivity, CommentsActivity.class);
         intent.putExtra(ID, id);
         intent.putExtra(TYPE, type);
-        startingActivity.startActivity(intent);
+        startActivity.startActivity(intent);
     }
 
     @Override
@@ -132,7 +130,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private void setupSendCommentButton() {
         btnSendComment.setOnSendClickListener(this);
     }
-
 
     @Override
     public void onBackPressed() {

@@ -97,6 +97,8 @@ public class AppConstants {
         public final static String answerAddservice = "/answerAddservice";
         //增加公司答案的具体内容
         public final static String ComAnswerAddservice = "/service/ComAnswerAddservice";
+        //获取最新的评论
+        public final static String getSuperComments = "/service/getSuperComments";
 
     }
 

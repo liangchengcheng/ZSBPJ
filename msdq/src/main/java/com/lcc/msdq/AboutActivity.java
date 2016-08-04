@@ -13,6 +13,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  AboutActivity(关于作者)
  */
 public class AboutActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView about_avatar_iv;
 
     @Override
