@@ -16,7 +16,7 @@ public class Comments implements Serializable {
      * content : 你这写的确实是不错的呢。哈哈
      * author : 18813149872
      * z_num : 0
-     * created_time : 16-06-14 20:02:01
+     * created_time : 2016年05月07日12:53:37
      * type : 0
      * nid : 46f337bddcb925c166bfac9acf96dea6
      * pid :
@@ -51,6 +51,15 @@ public class Comments implements Serializable {
     private String qm;
     private String zy;
     private String user_image;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getId() {
         return id;

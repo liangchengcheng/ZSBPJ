@@ -1,41 +1,31 @@
-package com.lcc.msdq.test.answer;
+package com.lcc.msdq.look.good;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
-import com.bumptech.glide.Glide;
 import com.github.clans.fab.FloatingActionMenu;
-import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.AnswerContent;
 import com.lcc.entity.FavAndGoodState;
 import com.lcc.entity.TestEntity;
+import com.lcc.entity.UserGood;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
-import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.TestAnswerContentPresenter;
-import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestAnswerContentPresenterImpl;
-import com.lcc.mvp.view.IndexContentView;
 import com.lcc.mvp.view.TestAnswerContentView;
 import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
@@ -47,33 +37,21 @@ import zsbpj.lccpj.frame.ImageManager;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  答案的详情界面
+ * Description:  (赞)答案的详情界面
  */
-public class AnswerContentActivity extends BaseActivity implements View.OnClickListener,
+public class LookAnswerContentActivity extends BaseActivity implements View.OnClickListener,
         TestAnswerContentView, MyWebView.OnScrollChangedCallback {
     private MyWebView webView;
-    private ImageView user_head;
     private FloatingActionButton floatingCollect;
     private FloatingActionButton floatingGood;
     private TextView tv_who;
     private LoadingLayout loading_layout;
     private FloatingActionMenu floatingMenu;
+    private UserGood userGood;
 
-    private Answer answer;
-    private TestEntity testEntity;
     private TestAnswerContentPresenter testAnswerContentPresenter;
-
-    public static final String DATA = "data";
-    public static final String ANSWER = "answer";
     private boolean isFav;
     private boolean isGood;
-
-    public static void startAnswerContentActivity(TestEntity data, Answer answer, Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, AnswerContentActivity.class);
-        intent.putExtra(ANSWER, answer);
-        intent.putExtra(DATA, data);
-        startingActivity.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,9 +60,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initData() {
-        answer = (Answer) getIntent().getSerializableExtra(ANSWER);
-        testEntity = (TestEntity) getIntent().getSerializableExtra(DATA);
         testAnswerContentPresenter = new TestAnswerContentPresenterImpl(this);
+        userGood = (UserGood) getIntent().getSerializableExtra("usergood");
     }
 
     @Override
@@ -102,8 +79,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         findViewById(R.id.iv_share).setOnClickListener(this);
 
         tv_who = (TextView) findViewById(R.id.tv_who);
-        tv_who.setText(answer.getNickname() + "的回答");
-        user_head = (ImageView) findViewById(R.id.user_head);
+        tv_who.setText("我的回答");
         webView = (MyWebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -120,8 +96,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         webView.setWebChromeClient(new WebChromeClient());
         webView.setOnScrollChangedCallback(this);
 
-        testAnswerContentPresenter.getContent(answer.getMid());
-        testAnswerContentPresenter.isFav(answer.getMid());
+        testAnswerContentPresenter.getContent(userGood.getNid());
+        testAnswerContentPresenter.isFav(userGood.getNid());
     }
 
     @Override
@@ -146,12 +122,6 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " +
-                        "wwww.baidu.com" + getString(R.string.share_tail));
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -191,8 +161,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(answer.getMid(),
-                        Propertity.Test.ANSWER, AnswerContentActivity.this);
+//                CommentsActivity.startUserProfileFromLocation(answer.getMid(),
+//                        Propertity.Test.ANSWER, LookAnswerContentActivity.this);
                 break;
 
             case R.id.floatingGood:

@@ -1,5 +1,6 @@
 package com.lcc.msdq.news.znews;
 
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,10 @@ import com.lcc.adapter.UserGoodAdapter;
 import com.lcc.adapter.XtNewsAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.UserGood;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.look.good.LookAnswerContentActivity;
+import com.lcc.msdq.test.answer.AnswerContentActivity;
 import com.lcc.mvp.presenter.UserGoodPresenter;
 import com.lcc.mvp.presenter.XtNewsPresenter;
 import com.lcc.mvp.presenter.impl.UserGoodPresenterImpl;
@@ -28,7 +32,7 @@ import zsbpj.lccpj.frame.FrameManager;
  * Description:  ZNewsActivity（赞的列表）
  */
 public class ZNewsActivity extends BaseActivity implements UserGoodView,
-        UserGoodAdapter.OnItemClickListener , View.OnClickListener{
+        UserGoodAdapter.OnItemClickListener, View.OnClickListener {
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private UserGoodAdapter mAdapter;
@@ -37,14 +41,14 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView,
     @Override
     protected void initView() {
         initRecycleView();
-        xtNewsPresenter=new UserGoodPresenterImpl(this);
+        xtNewsPresenter = new UserGoodPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         xtNewsPresenter.getData();
     }
 
     private void initRecycleView() {
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(ZNewsActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -84,19 +88,29 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView,
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
             loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-        }else {
+        } else {
             getDataEmpty();
         }
     }
 
     @Override
     public void onItemClick(UserGood entities) {
+        if (entities != null) {
+            Intent intent = null;
+            if (entities.getType().equals(Propertity.Test.ANSWER)) {
+                intent = new Intent(ZNewsActivity.this, LookAnswerContentActivity.class);
+            } else if (entities.getType().equals(Propertity.COM.ANSWER)) {
+
+            }
+
+            startActivity(intent);
+        }
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.guillotine_hamburger:
                 finish();
                 break;
