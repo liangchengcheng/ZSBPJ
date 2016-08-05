@@ -24,8 +24,11 @@ import com.lcc.entity.UserGood;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
+import com.lcc.mvp.presenter.LookPresenter;
 import com.lcc.mvp.presenter.TestAnswerContentPresenter;
+import com.lcc.mvp.presenter.impl.LookPresenterImpl;
 import com.lcc.mvp.presenter.impl.TestAnswerContentPresenterImpl;
+import com.lcc.mvp.view.LookView;
 import com.lcc.mvp.view.TestAnswerContentView;
 import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
@@ -40,16 +43,16 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  (赞)答案的详情界面
  */
 public class LookAnswerContentActivity extends BaseActivity implements View.OnClickListener,
-        TestAnswerContentView, MyWebView.OnScrollChangedCallback {
+        LookView, MyWebView.OnScrollChangedCallback {
     private MyWebView webView;
     private FloatingActionButton floatingCollect;
     private FloatingActionButton floatingGood;
     private TextView tv_who;
     private LoadingLayout loading_layout;
     private FloatingActionMenu floatingMenu;
-    private UserGood userGood;
 
-    private TestAnswerContentPresenter testAnswerContentPresenter;
+    private UserGood userGood;
+    private LookPresenter lookPresenter;
     private boolean isFav;
     private boolean isGood;
 
@@ -60,7 +63,7 @@ public class LookAnswerContentActivity extends BaseActivity implements View.OnCl
     }
 
     private void initData() {
-        testAnswerContentPresenter = new TestAnswerContentPresenterImpl(this);
+        lookPresenter = new LookPresenterImpl(this);
         userGood = (UserGood) getIntent().getSerializableExtra("usergood");
     }
 
@@ -77,7 +80,6 @@ public class LookAnswerContentActivity extends BaseActivity implements View.OnCl
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.floatingComment).setOnClickListener(this);
         findViewById(R.id.iv_share).setOnClickListener(this);
-
         tv_who = (TextView) findViewById(R.id.tv_who);
         tv_who.setText("我的回答");
         webView = (MyWebView) findViewById(R.id.webView);
@@ -95,9 +97,8 @@ public class LookAnswerContentActivity extends BaseActivity implements View.OnCl
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setOnScrollChangedCallback(this);
-
-        testAnswerContentPresenter.getContent(userGood.getNid());
-        testAnswerContentPresenter.isFav(userGood.getNid());
+        lookPresenter.getContent(userGood.getNid());
+        lookPresenter.isFav(userGood.getNid());
     }
 
     @Override
@@ -167,20 +168,20 @@ public class LookAnswerContentActivity extends BaseActivity implements View.OnCl
 
             case R.id.floatingGood:
                 if (isGood) {
-                    testAnswerContentPresenter.UnGood(answer);
+                    lookPresenter.UnGood(userGood.getNid());
                 } else {
-                    testAnswerContentPresenter.Good(answer, Propertity.Test.ANSWER,
-                            testEntity.getTitle());
+                    lookPresenter.Good(userGood, Propertity.Test.ANSWER,
+                            userGood.getTitle());
                 }
 
                 break;
 
             case R.id.floatingCollect:
                 if (isFav) {
-                    testAnswerContentPresenter.UnFav(answer);
+                    lookPresenter.UnFav(userGood.getNid());
                 } else {
-                    testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER,
-                            testEntity.getTitle());
+                    lookPresenter.Fav(userGood.getNid(), Propertity.Test.ANSWER,
+                            userGood.getTitle());
                 }
 
                 break;
