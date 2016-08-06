@@ -36,11 +36,10 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  ChoiceTypeoneActivity
+ * Description:  选择职业
  */
 public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeView,
         ChoiceType2Adapter.OnItemClickListener, View.OnClickListener {
-
     public static final String NID = "nid";
     public static final String FLAG = "flag";
     private ChoiceTypePresenter choiceTypePresenter;

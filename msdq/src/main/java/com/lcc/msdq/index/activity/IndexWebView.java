@@ -26,17 +26,21 @@ import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 
 import com.lcc.view.loadview.LoadingLayout;
+
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  先暂时先弄个页面
+ * Description:  活动的内容的界面
  */
 public class IndexWebView extends BaseActivity implements IndexContentView {
-
     public static final String KEY_URL = "url";
     public static final String IMAGE_URL = "image";
     public static final String TITLE = "title";
+    private String id;
+    private String image_url;
+    private String title;
+    private IndexContentPresenter indexContentPresenter;
 
     private Toolbar toolbar;
     private WebView webView;
@@ -45,12 +49,6 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     private NestedScrollView nest;
     private FloatingActionButton fabButton;
     private LoadingLayout loading_layout;
-
-    private String id;
-    private String image_url;
-    private String title;
-
-    private IndexContentPresenter indexContentPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,8 +68,8 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     @Override
     protected void initView() {
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        ivZhihuStory= (ImageView) findViewById(R.id.ivZhihuStory);
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        ivZhihuStory = (ImageView) findViewById(R.id.ivZhihuStory);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -79,7 +77,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        nest= (NestedScrollView) findViewById(R.id.nest);
+        nest = (NestedScrollView) findViewById(R.id.nest);
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +85,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
                 nest.smoothScrollTo(0, 0);
             }
         });
-        webView= (WebView) findViewById(R.id.webView);
+        webView = (WebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -100,7 +98,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setWebChromeClient(new WebChromeClient());
-        ctl= (CollapsingToolbarLayout) findViewById(R.id.ctl);
+        ctl = (CollapsingToolbarLayout) findViewById(R.id.ctl);
     }
 
     @Override
@@ -184,17 +182,17 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     @Override
     public void getSuccess(String result) {
 
-        try{
-            webView.loadDataWithBaseURL("about:blank",result, "text/html", "utf-8", null);
-           // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
-            String head_img = AppConstants.RequestPath.BASE_URL+image_url;
+        try {
+            webView.loadDataWithBaseURL("about:blank", result, "text/html", "utf-8", null);
+            // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
+            String head_img = AppConstants.RequestPath.BASE_URL + image_url;
             Glide.with(IndexWebView.this)
                     .load(head_img)
                     .placeholder(R.drawable.loading1)
                     .error(R.drawable.bg_ps)
                     .centerCrop()
                     .into(ivZhihuStory);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);

@@ -27,6 +27,7 @@ import com.lcc.msdq.setting.SettingActivity;
 import com.lcc.utils.ShareUtil;
 
 import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
@@ -91,6 +92,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        String user_name;
         switch (v.getId()) {
             case R.id.tv_username:
             case R.id.iv_more:
@@ -117,16 +119,31 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
             //我的收藏
             case R.id.ll_fav:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    return;
+                }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
                 break;
 
             //我的发布
             case R.id.ll_fabu:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    return;
+                }
                 startActivity(new Intent(getActivity(), FabuList.class));
                 break;
 
             //修改密码
             case R.id.ll_change_pwd:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    return;
+                }
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
                 break;
 
@@ -142,7 +159,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
             //系统设置
             case R.id.rl_share:
-                ShareUtil shareUtil=new ShareUtil();
+                ShareUtil shareUtil = new ShareUtil();
                 shareUtil.showShare(getActivity());
                 break;
         }

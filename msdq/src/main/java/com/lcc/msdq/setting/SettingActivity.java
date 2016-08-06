@@ -28,7 +28,6 @@ import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
-
     protected BaseActivity activity;
 
     @Override
@@ -120,7 +119,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             //弹出界面样式选择弹窗
             case R.id.tx_changetheme:
                 showThemeDialog();

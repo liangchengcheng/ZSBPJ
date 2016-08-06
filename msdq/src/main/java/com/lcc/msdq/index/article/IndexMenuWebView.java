@@ -41,6 +41,10 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
 
     public static final String DATA = "data";
     public static final String TYPE = "type";
+    private MenuContentPresenter indexContentPresenter;
+    private Article article;
+    private ArticleContent articleContent;
+    private String type = "面试感想";
 
     private WebView webView;
     private ImageView ivZhihuStory;
@@ -49,11 +53,6 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView,
     private ImageView iv_state;
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
-
-    private MenuContentPresenter indexContentPresenter;
-    private Article article;
-    private ArticleContent articleContent;
-    private String type = "面试感想";
 
     public static void startIndexMenuWebView(Activity startingActivity, Article article, String type) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);

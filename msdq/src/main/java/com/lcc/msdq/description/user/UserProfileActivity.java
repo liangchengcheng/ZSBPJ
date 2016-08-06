@@ -40,7 +40,7 @@ import zsbpj.lccpj.frame.ImageManager;
 public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String UserInfo = "UserInfo";
-
+    private UserInfo userInfo;
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
     @Bind(R.id.ivUserProfilePhoto)
@@ -61,14 +61,10 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     LinearLayout tv_you;
     @Bind(R.id.iv_edit)
     ImageView iv_edit;
-
     @Bind(R.id.tv_fs)
     TextView tv_fs;
-
     @Bind(R.id.tv_gz)
     TextView tv_gz;
-
-    private UserInfo userInfo;
 
     public static void startUserProfileActivity(UserInfo userInfo, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
