@@ -153,7 +153,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             App.exit();
         } else {
             intent = new Intent();
-            setResult(RESULT_OK, intent);
+            setResult(101, intent);
             finish();
         }
     }

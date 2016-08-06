@@ -101,7 +101,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.test_fragment, null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         ll_layout = view.findViewById(R.id.ll_layout);

@@ -317,9 +317,9 @@ public class SortRichEditor extends ScrollView implements SEditorDataI {
         editTitleLayoutParams.rightMargin = DEFAULT_MARGING;
         etTitle.setLayoutParams(editTitleLayoutParams);
 
-        titleLayout.addView(etTitle);
-
-        titleLayout.addView(tvTextLimit);
+        //titleLayout.addView(etTitle);
+        // TODO: 16/8/6 在这里暂时隐藏
+       // titleLayout.addView(tvTextLimit);
     }
 
     /**
@@ -388,7 +388,7 @@ public class SortRichEditor extends ScrollView implements SEditorDataI {
         containerLayout = createContaniner();
         parentLayout.addView(containerLayout);
 
-        EditText firstEdit = createEditText("请输入帖子内容");
+        EditText firstEdit = createEditText("请输入内容");
         editTextHeightArray.put(Integer.parseInt(firstEdit.getTag().toString()), ViewGroup.LayoutParams.WRAP_CONTENT);
         editTextBackground = firstEdit.getBackground();
         containerLayout.addView(firstEdit);

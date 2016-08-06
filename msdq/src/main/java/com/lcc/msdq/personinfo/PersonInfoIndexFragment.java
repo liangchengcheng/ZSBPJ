@@ -103,7 +103,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                     intent.putExtra(UserProfileActivity.UserInfo, DataManager.getUserInfo());
                     startActivityForResult(intent, 200);
                 } else {
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
                 }
                 break;
 
@@ -169,7 +169,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 100 && resultCode == 100) {
+        if (requestCode == 101 && resultCode == 101) {
             setData();
         }
     }
@@ -181,7 +181,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         UserInfo userInfo = DataManager.getUserInfo();
         if (userInfo != null) {
             tv_username.setText(userInfo.getNickname());
-
             if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");
             } else {

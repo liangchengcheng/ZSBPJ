@@ -67,26 +67,24 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Description:  AnswerAddActivity
  */
 public class AnswerAddActivity extends BaseActivity implements View.OnClickListener, TestAnswerAddView {
-
     public static final int REQUEST_CODE_PICK_IMAGE = 1023;
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
     private static final File PHOTO_DIR = new File(
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
     private static final String newFile = Environment.getExternalStorageDirectory().getPath()
             + "/com.lcc.mstdq/";
-
-    private TextView tvSort;
-    private SortRichEditor editor;
-    private ImageView ivGallery, ivCamera;
-    private Button btnPosts;
-    private SimpleArcDialog mDialog;
-
     // 照相机拍照得到的图片
     private File mCurrentPhotoFile;
     private List<File> files = new ArrayList<>();
     private TestAnswerAddPresenter presenter;
     private AnswerAdd answerAdd = new AnswerAdd();
     private String fid;
+
+    private TextView tvSort;
+    private SortRichEditor editor;
+    private ImageView ivGallery, ivCamera;
+    private Button btnPosts;
+    private SimpleArcDialog mDialog;
 
     public Intent getTakePickIntent(File f) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
@@ -179,7 +177,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK)
             return;
-
         if (editor.isSort()) tvSort.setText("排序");
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
             String[] photoPaths = data.getStringArrayExtra(PhotoPickerActivity.INTENT_PHOTO_PATHS);
