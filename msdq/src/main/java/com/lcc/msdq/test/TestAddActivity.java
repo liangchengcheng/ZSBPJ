@@ -34,7 +34,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  */
 public class TestAddActivity extends BaseActivity implements QuestionAddView ,View.OnClickListener,
         RadioGroup.OnCheckedChangeListener{
-
     public static final String ZY = "zy";
     private String zy = "";
     private List<File> files = new ArrayList<>();

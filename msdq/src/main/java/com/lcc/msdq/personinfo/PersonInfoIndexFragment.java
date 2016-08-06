@@ -189,8 +189,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
             String user_image = userInfo.getUser_image();
             if (!TextUtils.isEmpty(user_image)) {
-                ImageManager.getInstance().loadCircleImage(getActivity(), user_image,
-                        iv_more);
+                ImageManager.getInstance().loadCircleImage(getActivity(), user_image, iv_more);
             }
         }
     }

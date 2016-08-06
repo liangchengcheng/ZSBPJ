@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:hint="请输入问题的内容"
-                    android:inputType="phone" />
+                    />
             </android.support.design.widget.TextInputLayout>
            <TextView
                android:layout_marginLeft="20dp"

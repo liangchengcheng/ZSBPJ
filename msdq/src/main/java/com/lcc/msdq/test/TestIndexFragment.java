@@ -310,7 +310,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                     return;
                 }
 
-                String zy = DataManager.getZY();
+                final String zy = DataManager.getZY();
                 if(TextUtils.isEmpty(zy)){
                     CoCoinToast.getInstance().showToast("请选选择一个要添加的职业类型", SuperToast.Background.RED);
                     startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
@@ -321,7 +321,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                             .setPositiveButton("直接添加", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    startActivity(new Intent(getActivity(),TestAddActivity.class));
+                                    TestAddActivity.startTestAddActivity(getActivity(),zy);
                                     dialog.dismiss();
                                 }
                             })

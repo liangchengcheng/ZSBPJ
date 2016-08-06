@@ -23,10 +23,10 @@ public class QuestionAddModel {
         paramsMap.put("option", questionAdd.getOptions());
         paramsMap.put("title", questionAdd.getTitle());
         paramsMap.put("summary", questionAdd.getSummary());
-        paramsMap.put("source", questionAdd.getSource());
-        paramsMap.put("keyword", questionAdd.getKeyword());
+        paramsMap.put("source", "");
+        paramsMap.put("keyword", "");
 
-        return ApiClient.createWithFile(AppConstants.RequestPath.saveCompanyForAndroid,
+        return ApiClient.createWithFile(AppConstants.RequestPath.addQuestionservice,
                 paramsMap,files)
                 .upload(callback);
     }

@@ -470,8 +470,6 @@ public class SortRichEditor extends ScrollView implements SEditorDataI {
                 }
                 return super.dispatchTouchEvent(ev);
             }
-
-
         };
         containerLayout.setPadding(0, DEFAULT_MARGING, 0, DEFAULT_MARGING);
         containerLayout.setOrientation(LinearLayout.VERTICAL);

@@ -99,6 +99,7 @@ public class AppConstants {
         public final static String ComAnswerAddservice = "/service/ComAnswerAddservice";
         //获取最新的评论
         public final static String getSuperComments = "/service/getSuperComments";
+        public final static String addQuestionservice = "/addQuestionservice";
 
     }
 
