@@ -178,8 +178,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/music_icon"
                             android:scaleType="centerCrop" />
@@ -191,7 +191,7 @@
                             android:padding="8dp"
                             android:text="面试准备"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -203,8 +203,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/partner_icon"
                             android:scaleType="centerCrop" />
@@ -216,7 +216,7 @@
                             android:padding="8dp"
                             android:text="面试简历"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -228,8 +228,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/snack_icon"
                             android:scaleType="centerCrop" />
@@ -241,7 +241,7 @@
                             android:padding="8dp"
                             android:text="面试技巧"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -253,8 +253,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/sport_icon"
                             android:scaleType="centerCrop" />
@@ -266,7 +266,7 @@
                             android:padding="8dp"
                             android:text="面试着装"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -289,8 +289,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/telephone_bill_icon"
                             android:scaleType="centerCrop" />
@@ -302,7 +302,7 @@
                             android:padding="8dp"
                             android:text="面试感想"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -314,8 +314,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/sum_pie_icon"
                             android:scaleType="centerCrop" />
@@ -327,7 +327,7 @@
                             android:padding="8dp"
                             android:text="面试举止"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -339,8 +339,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/traffic_icon"
                             android:scaleType="centerCrop" />
@@ -352,7 +352,7 @@
                             android:padding="8dp"
                             android:text="面试交通"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -364,8 +364,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/fruit_icon"
                             android:scaleType="centerCrop" />
@@ -377,7 +377,7 @@
                             android:padding="8dp"
                             android:text="其他"
                             android:textColor="#585858"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
