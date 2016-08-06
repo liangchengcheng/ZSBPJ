@@ -7,6 +7,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.widget.Toast;
 
+import zsbpj.lccpj.R;
+
 /**
  * Author:  梁铖城
  * Email:   1038127753@qq.com
@@ -125,5 +127,7 @@ public class FrameManager {
         msg.obj = prompt;
         mHandler.sendMessage(msg);
     }
+
+
 
 }

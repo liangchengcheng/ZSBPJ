@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,18 +21,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.BaseRecyclerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestAnswerPresenterImpl;
 import com.lcc.mvp.view.TestAnswerView;
+import com.lcc.utils.CoCoinToast;
+import com.lcc.utils.ShareUtil;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.LoadMoreRecyclerView;
 import com.lcc.view.ObservableScrollView;
@@ -68,7 +73,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private TestEntity entity;
     private TestAnswerPresenter mPresenter;
     private AnswerIndexAdapter mAdapter;
-
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -92,6 +96,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         fid = entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        findViewById(R.id.iv_share).setOnClickListener(this);
         initRefreshView();
         initRecycleView();
         mPresenter.getData(currentPage, fid);
@@ -279,10 +284,21 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 break;
 
             case R.id.fabButton:
+                String user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    return;
+                }
+
                 Intent intent = new Intent(AnswerIndexActivity.this, AnswerAddActivity.class);
-                intent.putExtra("fid",fid);
+                intent.putExtra("fid", fid);
                 startActivity(intent);
                 break;
+
+            case R.id.iv_share:
+                shareThis();
+                break;
+
         }
     }
 
@@ -312,5 +328,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
      */
     private void setCount() {
 
+    }
+
+    private void shareThis() {
+        ShareUtil shareUtil = new ShareUtil();
+        shareUtil.showShare(AnswerIndexActivity.this);
     }
 }

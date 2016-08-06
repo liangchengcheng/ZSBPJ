@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.description.user.UserProfileActivity;
@@ -24,6 +25,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.login.ResetPasswordActivity;
 import com.lcc.msdq.fabu.FabuList;
 import com.lcc.msdq.setting.SettingActivity;
+import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.ShareUtil;
 
 import de.greenrobot.event.EventBus;
@@ -121,7 +123,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_fav:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
                     return;
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
@@ -131,7 +133,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_fabu:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
                     return;
                 }
                 startActivity(new Intent(getActivity(), FabuList.class));
@@ -141,7 +143,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_change_pwd:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
                     return;
                 }
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));

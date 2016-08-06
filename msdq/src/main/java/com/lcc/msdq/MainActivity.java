@@ -42,6 +42,7 @@ import com.lcc.view.menu.GuillotineAnimation;
 import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
@@ -115,9 +116,7 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 800) {
-                CoCoinToast.getInstance().showToast(R.string.toast_press_again_to_exit,
-                        SuperToast.Background.BLUE);
-                firstTime = secondTime;
+                CoCoinToast.getInstance().showToast(R.string.toast_press_again_to_exit, SuperToast.Background.BLUE);                firstTime = secondTime;
                 return true;
             } else {
                 exitApp();

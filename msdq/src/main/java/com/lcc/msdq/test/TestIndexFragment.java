@@ -23,6 +23,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.CompanyAdapter;
 import com.lcc.adapter.MyAdapter;
 import com.lcc.adapter.SubAdapter;
@@ -38,6 +39,7 @@ import com.lcc.msdq.test.choice.ChoiceA_Activity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
+import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
 
@@ -69,7 +71,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private String end_time = "全部时间";
     private String options = "全部题型";
     private String orders = "";
-
     private MyAdapter madapter;
     private TestAdapter mAdapter;
     private TestPresenter mPresenter;
@@ -264,7 +265,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             getSwipeRefreshWidget().setRefreshing(false);
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
-            FrameManager.getInstance().toastPrompt(msg);
+            CoCoinToast.getInstance().showToast(msg, SuperToast.Background.RED);
         }
     }
 
@@ -306,13 +307,13 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             case R.id.iv_add:
                 String user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
                     return;
                 }
 
                 String zy = DataManager.getZY();
                 if(TextUtils.isEmpty(zy)){
-                    FrameManager.getInstance().toastPrompt("请选择一个你要添加的职业类型");
+                    CoCoinToast.getInstance().showToast("请选选择一个要添加的职业类型", SuperToast.Background.RED);
                     startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
                 }else {
                     new AlertDialog.Builder(getActivity())
