@@ -14,14 +14,12 @@ public class CoCoinUtil {
     public static Typeface typefaceLatoLight = null;
 
     public static void init(Context context) {
-
         typefaceLatoRegular = Typeface.createFromAsset(
                 context.getAssets(), "fonts/Lato-Regular.ttf");
         typefaceLatoHairline = Typeface.createFromAsset(
                 context.getAssets(), "fonts/Lato-Hairline.ttf");
         typefaceLatoLight = Typeface.createFromAsset(
                 context.getAssets(), "fonts/LatoLatin-Light.ttf");
-
     }
 
     private static CoCoinUtil ourInstance = new CoCoinUtil();
