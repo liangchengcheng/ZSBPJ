@@ -25,12 +25,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.base.BaseActivity;
 import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.compony.CompanyIndexFragment;
 import com.lcc.msdq.index.IndexFragment;
 import com.lcc.msdq.personinfo.PersonInfoIndexFragment;
 import com.lcc.msdq.test.TestIndexFragment;
+import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.LivingTabsLayout;
 import com.lcc.view.bottombar.BottomBar;
@@ -70,6 +72,8 @@ public class MainActivity extends BaseActivity {
         }else {
             updateAPK();
         }
+
+
     }
 
     @Override
@@ -111,8 +115,8 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 800) {
-                Toast.makeText(MainActivity.this, "再按一次退出程序",
-                        Toast.LENGTH_SHORT).show();
+                CoCoinToast.getInstance().showToast(R.string.toast_press_again_to_exit,
+                        SuperToast.Background.BLUE);
                 firstTime = secondTime;
                 return true;
             } else {

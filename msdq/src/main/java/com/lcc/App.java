@@ -9,6 +9,7 @@ import com.lcc.db.test.DaoMaster;
 import com.lcc.db.test.DaoSession;
 import com.lcc.frame.net.okhttp.OkHttpClientManager;
 import com.lcc.msdq.BuildConfig;
+import com.lcc.utils.CoCoinUtil;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.LinkedList;
@@ -41,7 +42,7 @@ public class App extends Application {
         LogUtils.init(BuildConfig.LOG_DEBUG);
         FrameManager.setAppContext(this);
         FrameManager.getInstance().init();
-
+        CoCoinUtil.init(this);
         initTypeface();
         setupDatabase();
         initOkHttp();

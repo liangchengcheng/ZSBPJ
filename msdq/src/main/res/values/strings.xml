@@ -25,6 +25,7 @@
     <string name="sbgg">随便逛逛</string>
     <string name="xmjs">这个项目是我用的下班的业余的时间写的一个项目，目的是为了收集面试题相关的资料，方便大家为面试做准备。如果你有什么好的建议可以联系我</string>
     <string name="zwjs">我是一名android开发者，从事android开发2年多了，我特别喜欢编程，不单单是android，我要努力成为一名全桟开发者。</string>
+    <string name="toast_press_again_to_exit">再按一次退出程序</string>
     <item name="tag_position" type="id" />
     <item name="tag_photo" type="id" />
 
