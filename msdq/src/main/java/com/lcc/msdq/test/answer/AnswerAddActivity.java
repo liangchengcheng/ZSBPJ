@@ -24,6 +24,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.AnswerAdd;
 import com.lcc.frame.data.DataManager;
@@ -59,6 +60,8 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
+import zsbpj.lccpj.yasuo.Luban;
+import zsbpj.lccpj.yasuo.OnCompressListener;
 
 /**
  * Author:       梁铖城
@@ -66,7 +69,8 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Date:         2015年11月21日15:28:25
  * Description:  AnswerAddActivity
  */
-public class AnswerAddActivity extends BaseActivity implements View.OnClickListener, TestAnswerAddView {
+public class AnswerAddActivity extends BaseActivity implements View.OnClickListener, TestAnswerAddView,
+        OnCompressListener {
     public static final int REQUEST_CODE_PICK_IMAGE = 1023;
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
     private static final File PHOTO_DIR = new File(
@@ -79,6 +83,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private TestAnswerAddPresenter presenter;
     private AnswerAdd answerAdd = new AnswerAdd();
     private String fid;
+    private int pic_num = 0;
 
     private TextView tvSort;
     private SortRichEditor editor;
@@ -138,15 +143,12 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         String html = HTMLContentUtil.getContent(editList);
         answerAdd.setAnswer(html);
         files = HTMLContentUtil.getFiles(editList);
-        //presenter.TestAnswerAdd(answerAdd,files);
 
-        Log.e("lcc", html);
-        for (SEditorData itemData : editList) {
-            if (itemData.getInputStr() != null) {
-                Log.e("RichEditor", "commit inputStr=" + itemData.getInputStr());
-            } else if (itemData.getImagePath() != null) {
-                Log.e("RichEditor", "commit imgePath=" + itemData.getImagePath());
-            }
+        if (files != null && files.size() > 0) {
+            pic_num = files.size();
+            compressWithLs(files);
+        } else {
+            //presenter.TestAnswerAdd(answerAdd,files);
         }
     }
 
@@ -194,7 +196,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
                 String author = DataManager.getUserName();
                 Date date = new Date(System.currentTimeMillis());
                 SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMddHHmmss");
-                String new_file = newFile + author + dateFormat.format(date) + ".jpg";
+                String new_file = newFile + author + dateFormat.format(date) + i + ".jpg";
                 FileUtil.copyFile(photoPaths[i], new_file);
                 new_photoPaths[i] = new_file;
             }
@@ -257,5 +259,32 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
+    }
+
+
+    private void compressWithLs(List<File> files) {
+        for (int i = 0; i < files.size(); i++) {
+            Luban.get(this).load(files.get(i)).putGear(Luban.THIRD_GEAR).setCompressListener(this).launch();
+        }
+    }
+
+    @Override
+    public void onComStart() {
+
+    }
+
+    @Override
+    public void onSuccess(File file) {
+        pic_num --;
+        Log.e("lcc",file.getName());
+        FrameManager.getInstance().toastPrompt(pic_num+"");
+        if (pic_num==0){
+            FrameManager.getInstance().toastPrompt("开始上传");
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
     }
 }

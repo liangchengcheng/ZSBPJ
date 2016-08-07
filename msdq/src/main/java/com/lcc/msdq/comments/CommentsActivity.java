@@ -49,8 +49,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         CommentsDialog.onChoiceListener,View.OnClickListener {
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
-    @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
     @Bind(R.id.llAddComment)
     LinearLayout llAddComment;
     @Bind(R.id.etComment)
@@ -71,7 +69,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
     public static final String ID = "id";
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
@@ -276,9 +273,10 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void onItemClick(Comments data) {
-        dialog = new CommentsDialog(CommentsActivity.this, data);
-        dialog.setOnChoiceListener(this);
-        dialog.show();
+//        暂时注释。
+//        dialog = new CommentsDialog(CommentsActivity.this, data);
+//        dialog.setOnChoiceListener(this);
+//        dialog.show();
     }
 
     @Override

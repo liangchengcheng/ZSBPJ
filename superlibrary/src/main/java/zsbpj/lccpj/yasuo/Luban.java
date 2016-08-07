@@ -82,7 +82,7 @@ public class Luban {
     public Luban launch() {
         Preconditions.checkNotNull(mFile, "the image file cannot be null, please call .load() before this method!");
 
-        if (compressListener != null) compressListener.onStart();
+        if (compressListener != null) compressListener.onComStart();
 
         if (gear == Luban.FIRST_GEAR)
             Observable.just(firstCompress(mFile))
@@ -158,6 +158,9 @@ public class Luban {
     }
 
     private File thirdCompress(@NonNull String filePath) {
+        Log.e("lcc",filePath);
+        ///storage/emulated/0/com.lcc.mstdq/13287878449IMG_201608072212380.jpg
+        Log.e("lcc",filePath);
         String thumb = mCacheDir.getAbsolutePath() + "/" + System.currentTimeMillis();
 
         double size;
@@ -208,7 +211,7 @@ public class Luban {
             size = size < 100 ? 100 : size;
         }
 
-        return compress(filePath, thumb, thumbW, thumbH, angle, (long) size);
+        return compress(filePath, filePath, thumbW, thumbH, angle, (long) size);
     }
 
     private File firstCompress(@NonNull File file) {

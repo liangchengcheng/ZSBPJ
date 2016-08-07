@@ -27,7 +27,7 @@ public class HTMLContentUtil {
             } else if (itemData.getImagePath() != null) {
                 sb.append("<br/>");
                 sb.append("<img src=");
-                sb.append(AppConstants.RequestPath.BASE_URL+"/images/");
+                sb.append(AppConstants.RequestPath.BASE_URL+"/images");
                 sb.append(getImageName(itemData.getImagePath()));
                 sb.append("/>");
                 sb.append("<br/>");

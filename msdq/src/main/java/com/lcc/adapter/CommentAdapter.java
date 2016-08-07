@@ -21,11 +21,13 @@ import com.lcc.entity.Comments;
 import com.lcc.msdq.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -95,6 +97,12 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         weekData.getUser_image(), holder.ivUserAvatar);
             }
 
+            String time = weekData.getCreated_time();
+            if (!TextUtils.isEmpty(time)){
+                String current= TimeUtils.fromToday(time);
+                holder.tv_time.setText(current);
+            }
+
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
@@ -120,7 +128,6 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ivUserAvatar)
         ImageView ivUserAvatar;
         @Bind(R.id.tvComment)
