@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.AnswerAdd;
 import com.lcc.frame.data.DataManager;
@@ -36,6 +37,7 @@ import com.lcc.mvp.presenter.TestAnswerAddPresenter;
 import com.lcc.mvp.presenter.impl.TestAnswerAddPresenterImpl;
 import com.lcc.mvp.view.TestAnswerAddView;
 import com.lcc.rich.RichEditor;
+import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.FileUtil;
 import com.lcc.utils.HTMLContentUtil;
 import com.lcc.utils.KeyboardUtils;
@@ -83,7 +85,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private TestAnswerAddPresenter presenter;
     private AnswerAdd answerAdd = new AnswerAdd();
     private String fid;
-    private int pic_num = 0;
+    private int pic_num;
 
     private TextView tvSort;
     private SortRichEditor editor;
@@ -139,7 +141,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             FrameManager.getInstance().toastPrompt("暂无数据");
             return;
         }
-
+        adding();
         String html = HTMLContentUtil.getContent(editList);
         answerAdd.setAnswer(html);
         files = HTMLContentUtil.getFiles(editList);
@@ -148,7 +150,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             pic_num = files.size();
             compressWithLs(files);
         } else {
-            //presenter.TestAnswerAdd(answerAdd,files);
+            presenter.TestAnswerAdd(answerAdd, files);
         }
     }
 
@@ -246,13 +248,13 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void addSuccess() {
         closeDialog();
-        FrameManager.getInstance().toastPrompt("提交成功");
+        CoCoinToast.getInstance().showToast("提交成功", SuperToast.Background.BLUE);
     }
 
     @Override
     public void addFail() {
         closeDialog();
-        FrameManager.getInstance().toastPrompt("提交失败");
+        CoCoinToast.getInstance().showToast("提交失败", SuperToast.Background.BLUE);
     }
 
     private void closeDialog() {
@@ -275,11 +277,12 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onSuccess(File file) {
-        pic_num --;
-        Log.e("lcc",file.getName());
-        FrameManager.getInstance().toastPrompt(pic_num+"");
-        if (pic_num==0){
-            FrameManager.getInstance().toastPrompt("开始上传");
+        pic_num--;
+        Log.e("lcc", file.getName());
+        FrameManager.getInstance().toastPrompt(pic_num + "");
+        if (pic_num == 0) {
+            CoCoinToast.getInstance().showToast("开始上传", SuperToast.Background.BLUE);
+            presenter.TestAnswerAdd(answerAdd, files);
         }
     }
 
