@@ -28,7 +28,7 @@ public class TimeUtils {
     }
 
     public static String getAWeek(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateNow = new Date();
         Calendar cl = Calendar.getInstance();
         cl.setTime(dateNow);
@@ -39,7 +39,7 @@ public class TimeUtils {
     }
 
     public static String getAMonth(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateNow = new Date();
         Calendar cl = Calendar.getInstance();
         cl.setTime(dateNow);
@@ -50,7 +50,7 @@ public class TimeUtils {
     }
 
     public static String getAYear(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateNow = new Date();
         Calendar cl = Calendar.getInstance();
         cl.setTime(dateNow);
@@ -61,7 +61,7 @@ public class TimeUtils {
     }
 
     public static String getEndTime(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateNow = new Date();
         Calendar cl = Calendar.getInstance();
         cl.setTime(dateNow);
