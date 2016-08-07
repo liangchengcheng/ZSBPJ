@@ -49,9 +49,8 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  【这个地方的答案需要单独的提炼到一个表里面去】
  */
-public class CompanyAnswerWebView extends BaseActivity implements
-        View.OnClickListener, MyWebView.OnScrollChangedCallback, ComAnswerContentView {
-
+public class CompanyAnswerWebView extends BaseActivity implements View.OnClickListener,
+        MyWebView.OnScrollChangedCallback, ComAnswerContentView {
     private MyWebView webView;
     private ImageView user_head;
     private FloatingActionMenu floatingMenu;
@@ -67,8 +66,8 @@ public class CompanyAnswerWebView extends BaseActivity implements
     private ComAnswerContentPresenter comAnswerContentPresenter;
     private CompanyTest entity;
 
-    public static void startCompanyAnswerWebView(Activity startingActivity,
-                                                 CompanyAnswer type, CompanyTest test) {
+    public static void startCompanyAnswerWebView(Activity startingActivity, CompanyAnswer type,
+                                                 CompanyTest test) {
         Intent intent = new Intent(startingActivity, CompanyAnswerWebView.class);
         intent.putExtra(QUESTION, test);
         intent.putExtra(ANSWER, type);
@@ -195,7 +194,7 @@ public class CompanyAnswerWebView extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(answer.getMid(), "资料答案",
+                CommentsActivity.startUserProfileFromLocation(answer.getMid(), Propertity.Test.ANSWER,
                         CompanyAnswerWebView.this);
                 break;
 

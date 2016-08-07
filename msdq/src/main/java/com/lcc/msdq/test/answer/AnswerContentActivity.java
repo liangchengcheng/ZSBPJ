@@ -62,7 +62,6 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     private Answer answer;
     private TestEntity testEntity;
     private TestAnswerContentPresenter testAnswerContentPresenter;
-
     public static final String DATA = "data";
     public static final String ANSWER = "answer";
     private boolean isFav;
@@ -197,22 +196,18 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
             case R.id.floatingGood:
                 if (isGood) {
-                    testAnswerContentPresenter.UnGood(answer);
+                    testAnswerContentPresenter.UnGood(answer,Propertity.Test.ANSWER);
                 } else {
-                    testAnswerContentPresenter.Good(answer, Propertity.Test.ANSWER,
-                            testEntity.getTitle());
+                    testAnswerContentPresenter.Good(answer, Propertity.Test.ANSWER, testEntity.getTitle());
                 }
-
                 break;
 
             case R.id.floatingCollect:
                 if (isFav) {
-                    testAnswerContentPresenter.UnFav(answer);
+                    testAnswerContentPresenter.UnFav(answer,Propertity.Test.ANSWER);
                 } else {
-                    testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER,
-                            testEntity.getTitle());
+                    testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER, testEntity.getTitle());
                 }
-
                 break;
 
             case R.id.guillotine_hamburger:

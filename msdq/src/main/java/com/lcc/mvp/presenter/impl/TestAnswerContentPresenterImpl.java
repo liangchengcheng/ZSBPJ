@@ -86,8 +86,8 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
     }
 
     @Override
-    public void UnFav(Answer article) {
-        model.UnfavAnswer(article, new ResultCallback<String>() {
+    public void UnFav(Answer article,String type) {
+        model.UnfavAnswer(article,type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -171,8 +171,8 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
     }
 
     @Override
-    public void UnGood(Answer article) {
-        model.UnGoodAnswer(article,  new ResultCallback<String>() {
+    public void UnGood(Answer article,String type) {
+        model.UnGoodAnswer(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.UnGoodFail(ApiException.getApiExceptionMessage(e.getMessage()));

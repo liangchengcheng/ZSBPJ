@@ -9,11 +9,11 @@ public interface TestAnswerContentPresenter {
 
     void Fav(Answer article, String type,String title);
 
-    void UnFav(Answer article);
+    void UnFav(Answer article,String type);
 
     void getContent(String mid);
 
     void Good(Answer article, String type,String title);
 
-    void UnGood(Answer article);
+    void UnGood(Answer article,String type);
 }

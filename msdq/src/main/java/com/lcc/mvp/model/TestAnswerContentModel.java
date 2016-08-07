@@ -32,9 +32,10 @@ public class TestAnswerContentModel {
     /**
      * 取消收藏的原生资料的问题
      */
-    public OkHttpRequest UnfavAnswer(Answer article, ResultCallback<String> callback) {
+    public OkHttpRequest UnfavAnswer(Answer article,String type ,ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
+        paramsMap.put("type", type);
         //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
@@ -63,10 +64,11 @@ public class TestAnswerContentModel {
         return ApiClient.create(AppConstants.RequestPath.UserGoodAdd, paramsMap).tag("").get(callback);
     }
 
-    public OkHttpRequest UnGoodAnswer(Answer article, ResultCallback<String>
+    public OkHttpRequest UnGoodAnswer(Answer article,String type, ResultCallback<String>
             callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
+        paramsMap.put("type",type);
         return ApiClient.create(AppConstants.RequestPath.deleteUserGood, paramsMap).tag("").get(callback);
     }
 }
