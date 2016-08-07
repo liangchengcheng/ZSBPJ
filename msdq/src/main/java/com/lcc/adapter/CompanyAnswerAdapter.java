@@ -100,7 +100,6 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             holder.tv_llsc.setText(object.getL_num());
             holder.tv_llrs.setText(object.getL_num());
 
-
             if (isFav) {
                 holder.tv_sc.setText("取消收藏");
                 holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()

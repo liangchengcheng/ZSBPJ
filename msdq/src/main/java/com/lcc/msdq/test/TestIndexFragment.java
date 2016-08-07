@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -21,15 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.github.johnpersano.supertoasts.SuperToast;
-import com.lcc.adapter.CompanyAdapter;
 import com.lcc.adapter.MyAdapter;
-import com.lcc.adapter.SubAdapter;
 import com.lcc.adapter.TestAdapter;
-import com.lcc.base.BaseFragment;
-import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
@@ -40,23 +33,16 @@ import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
 import com.lcc.utils.CoCoinToast;
-import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
-import zsbpj.lccpj.frame.FrameManager;
-import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         PopupWindow.OnDismissListener, TestAdapter.OnImageClickListener,
         TestAdapter.OnItemClickListener, TestView, View.OnClickListener {
-
     private LinearLayout lv1_layout;
     private ListView lv1, lv2;
     private TextView quyu, huxing, jiage;
@@ -145,16 +131,13 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         lv1_layout = (LinearLayout) contentView.findViewById(R.id.lv_layout);
         switch (flag) {
             case 1:
-                madapter = new MyAdapter(getActivity(),
-                        initArrayData(R.array.tiaojian1));
+                madapter = new MyAdapter(getActivity(), initArrayData(R.array.tiaojian1));
                 break;
             case 2:
-                madapter = new MyAdapter(getActivity(),
-                        initArrayData(R.array.tiaojian2));
+                madapter = new MyAdapter(getActivity(), initArrayData(R.array.tiaojian2));
                 break;
             case 3:
-                madapter = new MyAdapter(getActivity(),
-                        initArrayData(R.array.tiaojian3));
+                madapter = new MyAdapter(getActivity(), initArrayData(R.array.tiaojian3));
                 break;
         }
         lv1.setAdapter(madapter);

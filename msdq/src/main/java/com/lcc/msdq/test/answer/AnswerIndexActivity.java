@@ -61,7 +61,6 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
         AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener {
-
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -177,6 +176,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
             for (int i = 0; i < entities.size(); i++) {
                 objects.add(entities.get(i));
             }
+
             mAdapter.bind(objects);
             mAdapter.setFav(isfavEntity);
         }
@@ -218,6 +218,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     public void FavSuccess() {
         changeFavState(true);
+        entity.setZ_num((Integer.parseInt(entity.getZ_num()) + 1) + "");
+        mAdapter.notifyDataSetChanged();
         FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
@@ -229,6 +231,11 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     public void UnFavSuccess() {
         changeFavState(false);
+        int count = Integer.parseInt(entity.getZ_num());
+        if (count > 0) {
+            entity.setZ_num((count - 1) + "");
+            mAdapter.notifyDataSetChanged();
+        }
         FrameManager.getInstance().toastPrompt("取消收藏成功");
     }
 
@@ -312,7 +319,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         if (!isfavEntity) {
             mPresenter.Fav(entity, Propertity.Test.QUESTION);
         } else {
-            mPresenter.UnFav(entity);
+            mPresenter.UnFav(entity, Propertity.Test.QUESTION);
         }
     }
 
@@ -321,13 +328,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         if (mAdapter != null) {
             mAdapter.setFav(isfavEntity);
         }
-    }
-
-    /**
-     * 设置当前收到多少个回答
-     */
-    private void setCount() {
-
     }
 
     private void shareThis() {

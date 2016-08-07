@@ -35,9 +35,10 @@ public class TestAnswerModel {
     /**
      * 取消收藏的原生资料的问题
      */
-    public OkHttpRequest UnfavQuestion(TestEntity article, ResultCallback<String> callback) {
+    public OkHttpRequest UnfavQuestion(TestEntity article, String type,ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
+        paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }

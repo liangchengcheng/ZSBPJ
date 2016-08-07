@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  AnswerIndexAdapter
  */
 public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     private static final int HEAD_ITEM = 1;
     private static final int FOOTER_ITEM = 2;
@@ -103,8 +103,11 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
 
             holder.tv_title.setText(object.getTitle());
-            holder.tv_llrs.setText("浏览:" + object.getL_num());
-            holder.tv_llsc.setText("收藏" + object.getZ_num());
+
+            String s_num = object.getZ_num();
+            if (!TextUtils.isEmpty(s_num) || s_num.equals("0")) {
+                holder.tv_llsc.setText("共有" + s_num + "人收藏了这个问题");
+            }
 
             if (isFav) {
                 holder.tv_sc.setText("取消收藏");
@@ -167,19 +170,14 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.des_content)
         TextView des_content;
-
         @Bind(R.id.tv_name)
         TextView tv_name;
-
         @Bind(R.id.tv_znum)
         TextView tv_znum;
-
         @Bind(R.id.iv_image)
         ImageView iv_image;
-
         @Bind(R.id.ll_all)
         CardView ll_all;
 
@@ -193,19 +191,14 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      * 头部的布局
      */
     class HeadViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.tv_title)
         TextView tv_title;
-
         @Bind(R.id.spread_textview)
         StretchyTextView tv_name;
-
         @Bind(R.id.tv_llrs)
         TextView tv_llrs;
-
         @Bind(R.id.tv_llsc)
         TextView tv_llsc;
-
         @Bind(R.id.tv_sc)
         TextView tv_sc;
 
@@ -216,10 +209,8 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

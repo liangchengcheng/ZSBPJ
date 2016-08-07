@@ -158,8 +158,8 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
     }
 
     @Override
-    public void UnFav(TestEntity article) {
-        model.UnfavQuestion(article, new ResultCallback<String>() {
+    public void UnFav(TestEntity article,String type) {
+        model.UnfavQuestion(article,type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));

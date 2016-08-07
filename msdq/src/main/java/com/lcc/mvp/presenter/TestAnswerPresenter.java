@@ -13,5 +13,5 @@ public interface TestAnswerPresenter {
 
     void Fav(TestEntity article, String type);
 
-    void UnFav(TestEntity article);
+    void UnFav(TestEntity article,String type);
 }
