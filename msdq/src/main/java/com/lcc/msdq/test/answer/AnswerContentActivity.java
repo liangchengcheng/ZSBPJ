@@ -189,11 +189,13 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //评论
             case R.id.floatingComment:
                 CommentsActivity.startUserProfileFromLocation(answer.getMid(),
                         Propertity.Test.ANSWER, AnswerContentActivity.this);
                 break;
 
+            //赞
             case R.id.floatingGood:
                 if (isGood) {
                     testAnswerContentPresenter.UnGood(answer,Propertity.Test.ANSWER);
@@ -201,7 +203,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                     testAnswerContentPresenter.Good(answer, Propertity.Test.ANSWER, testEntity.getTitle());
                 }
                 break;
-
+            //收藏
             case R.id.floatingCollect:
                 if (isFav) {
                     testAnswerContentPresenter.UnFav(answer,Propertity.Test.ANSWER);

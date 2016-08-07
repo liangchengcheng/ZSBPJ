@@ -158,8 +158,6 @@
                 app:fab_colorRipple="?attr/colorPrimary"
                 app:fab_label="收藏"
                 app:fab_size="mini" />
-
-
         </com.github.clans.fab.FloatingActionMenu>
 
         <com.lcc.view.loadview.LoadingLayout

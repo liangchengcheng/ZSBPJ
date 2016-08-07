@@ -57,17 +57,13 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     EditText etComment;
     @Bind(R.id.btnSendComment)
     SendCommentButton btnSendComment;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-
-    private CommentAdapter commentsAdapter;
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private CommentsDialog dialog;
     private SimpleArcDialog mDialog;
 
-    private int drawingStartLocation;
+    private CommentAdapter commentsAdapter;
     public static final String TYPE = "type";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -77,10 +73,9 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected int currentPage = 1;
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
     public static final String ID = "id";
-
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
-    private String type = "面试感想";
+    private String type = "";
     private String content_id;
 
     public static void startUserProfileFromLocation(String id, String type, Activity startActivity) {
@@ -100,16 +95,14 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         type = getIntent().getStringExtra(TYPE);
         replay.setNid(content_id);
         replay.setType(type);
-        replay.setAuthor("18813149871");
+        replay.setAuthor("");
 
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRefreshView();
         initRecycleView();
         setupSendCommentButton();
-
         mPresenter.getData(1, content_id);
-        drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
     }
 
     @Override
@@ -213,9 +206,12 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     public void refreshDataSuccess(List<Comments> entities) {
         if (entities != null && entities.size() > 0) {
             commentsAdapter.bind(entities);
+            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }else {
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
         }
         mSwipeRefreshWidget.setRefreshing(false);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+
     }
 
     @Override

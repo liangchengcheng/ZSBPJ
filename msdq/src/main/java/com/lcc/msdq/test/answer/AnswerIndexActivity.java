@@ -108,7 +108,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     private void initRecycleView() {
-        findViewById(R.id.fabButton).setOnClickListener(this);
+        findViewById(R.id.floatingfabu).setOnClickListener(this);
+        findViewById(R.id.floatingComment).setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -285,25 +286,38 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void onClick(View v) {
+        String user_name = null;
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.tv_sc:
                 startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
                 break;
 
-            case R.id.fabButton:
-                String user_name = DataManager.getUserName();
+            case R.id.floatingfabu:
+                user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
                     return;
                 }
 
-                Intent intent = new Intent(AnswerIndexActivity.this, AnswerAddActivity.class);
+                intent = new Intent(AnswerIndexActivity.this, AnswerAddActivity.class);
                 intent.putExtra("fid", fid);
                 startActivity(intent);
                 break;
 
             case R.id.iv_share:
                 shareThis();
+                break;
+
+            case R.id.floatingComment:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    return;
+                }
+
+                CommentsActivity.startUserProfileFromLocation(entity.getMid(), Propertity.Test.QUESTION,
+                        AnswerIndexActivity.this);
                 break;
 
         }

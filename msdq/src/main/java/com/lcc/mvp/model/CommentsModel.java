@@ -27,7 +27,7 @@ public class CommentsModel {
     public OkHttpRequest sendComments(Replay replay, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("content", replay.getContent());
-        paramsMap.put("author", replay.getAuthor());
+        //paramsMap.put("author", replay.getAuthor());
         paramsMap.put("nid", replay.getNid());
         paramsMap.put("pid", replay.getPid());
         paramsMap.put("type", replay.getType());

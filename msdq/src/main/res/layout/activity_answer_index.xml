@@ -67,19 +67,39 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabButton"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/floatingMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_border_color_white_24dp"
-        app:backgroundTint="?attr/colorPrimary"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:layout_behavior="com.lcc.view.ScrollAwareFABBehavior"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        app:rippleColor="#33728dff" />
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp"
+        app:menu_colorNormal="?attr/colorPrimary"
+        app:menu_colorPressed="?attr/colorPrimary"
+        app:menu_colorRipple="?attr/colorPrimary">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_comment"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_colorPressed="?attr/colorPrimary"
+            app:fab_colorRipple="?attr/colorPrimary"
+            app:fab_label="评论"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingfabu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_border_color_white_24dp"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_colorPressed="?attr/colorPrimary"
+            app:fab_colorRipple="?attr/colorPrimary"
+            app:fab_label="回答"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
 </FrameLayout>

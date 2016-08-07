@@ -51,7 +51,6 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView,Vi
     public static final String NAME = "name";
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
-
     private String name;
     private Pattern intPattern = Pattern.compile("^[-\\+]?[\\d]*\\.0*$");
     private String pro, city, dis;
