@@ -20,7 +20,10 @@ import com.lcc.entity.AnswerAdd;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.PhotoPickerActivity;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.ComAnswerAddPresenter;
 import com.lcc.mvp.presenter.TestAnswerAddPresenter;
+import com.lcc.mvp.presenter.impl.ComAnswerAddPresenterImpl;
+import com.lcc.mvp.presenter.impl.TestAnswerAddPresenterImpl;
 import com.lcc.mvp.view.ComAnswerAddView;
 import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.FileUtil;
@@ -40,7 +43,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 import zsbpj.lccpj.yasuo.Luban;
 import zsbpj.lccpj.yasuo.OnCompressListener;
 
-public class AnswerAddActivity extends BaseActivity implements View.OnClickListener ,OnCompressListener ,
+public class AnswerAddActivity extends BaseActivity implements View.OnClickListener, OnCompressListener,
         ComAnswerAddView {
     public static final int REQUEST_CODE_PICK_IMAGE = 1023;
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 1022;
@@ -50,7 +53,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     // 照相机拍照得到的图片
     private File mCurrentPhotoFile;
     private List<File> files = new ArrayList<>();
-    private TestAnswerAddPresenter presenter;
+    private ComAnswerAddPresenter presenter;
     private AnswerAdd answerAdd = new AnswerAdd();
     private String fid;
     private int pic_num;
@@ -70,8 +73,9 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.answer_add_activity);
+        presenter = new ComAnswerAddPresenterImpl(this);
+        fid = getIntent().getStringExtra("fid");
+        answerAdd.setFid(fid);
 
         tvSort = (TextView) findViewById(R.id.tv_sort);
         editor = (SortRichEditor) findViewById(R.id.richEditor);
@@ -113,12 +117,11 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         String html = HTMLContentUtil.getContent(editList);
         answerAdd.setAnswer(html);
         files = HTMLContentUtil.getFiles(editList);
-
         if (files != null && files.size() > 0) {
             pic_num = files.size();
             compressWithLs(files);
         } else {
-            presenter.TestAnswerAdd(answerAdd, files);
+            presenter.ComAnswerAdd(answerAdd, files);
         }
     }
 
@@ -244,7 +247,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         pic_num--;
         if (pic_num == 0) {
             CoCoinToast.getInstance().showToast("开始上传", SuperToast.Background.BLUE);
-            presenter.TestAnswerAdd(answerAdd, files);
+            presenter.ComAnswerAdd(answerAdd, files);
         }
     }
 

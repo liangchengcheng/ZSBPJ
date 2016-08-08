@@ -33,12 +33,9 @@ import java.util.regex.Pattern;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
-public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements
-        SearchView.OnQueryTextListener, SearchView.SearchViewListener,
-        SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,
-        CompanyDescriptionView,
-        View.OnClickListener {
-
+public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements SearchView.OnQueryTextListener,
+        SearchView.SearchViewListener, SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,
+        CompanyDescriptionView, View.OnClickListener {
     private SearchView mSearchView;
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
