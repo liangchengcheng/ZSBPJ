@@ -1,8 +1,10 @@
 package com.lcc.msdq.compony;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,6 +21,8 @@ import com.lcc.entity.CompanyDescription;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.AreaSelectActivity;
 import com.lcc.msdq.choice.ChoiceAreaSelectActivity;
+import com.lcc.msdq.test.TestAddActivity;
+import com.lcc.msdq.test.choice.ChoiceA_Activity;
 import com.lcc.mvp.presenter.CompanyDescriptionPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
 import com.lcc.mvp.view.CompanyDescriptionView;
@@ -56,7 +60,6 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
         currentPage = 1;
         super.onFragmentCreate();
         mPresenter = new CompanyDescriptionPresenterImpl(this);
-
         area = SharePreferenceUtil.getAREA();
         View view = getView();
         tv_tip = (TextView) view.findViewById(R.id.tv_tip);
@@ -218,6 +221,45 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_more:
+                if (TextUtils.isEmpty(area)){
+                    new AlertDialog.Builder(getActivity()).setTitle("添加地址")
+                            .setMessage("暂时没有地址，默认搜索全部数据，你确定要添加先的地址？")
+                            .setPositiveButton("添加", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
+                                    getActivity().startActivityForResult(intent, 11);
+                                    dialog.dismiss();
+                                }
+                            })
+
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }else {
+                    new AlertDialog.Builder(getActivity()).setTitle("更换地址")
+                            .setMessage("你现在的地址是"+area+",你确定要更换之其他区域吗？")
+                            .setPositiveButton("更换", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
+                                    getActivity().startActivityForResult(intent, 11);
+                                }
+                            })
+
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+
                 Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
                 this.startActivityForResult(intent, 11);
                 break;
@@ -249,4 +291,5 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
         return obj == null ? defaultValue : (obj instanceof Number && intPattern.matcher(obj.toString())
                 .matches() ? String.valueOf(Long.valueOf(((Number) obj).longValue())) : obj.toString());
     }
+
 }
