@@ -139,9 +139,10 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private void dealEditData(List<SEditorData> editList) {
         if (editList == null || editList.size() == 0) {
             FrameManager.getInstance().toastPrompt("暂无数据");
+            closeDialog();
             return;
         }
-        adding();
+
         String html = HTMLContentUtil.getContent(editList);
         answerAdd.setAnswer(html);
         files = HTMLContentUtil.getFiles(editList);
@@ -229,6 +230,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_posts:
+                adding();
                 List<SEditorData> editList = editor.buildEditData();
                 // 下面的代码可以上传、或者保存，请自行实现
                 dealEditData(editList);
@@ -262,7 +264,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             mDialog.dismiss();
         }
     }
-
 
     private void compressWithLs(List<File> files) {
         for (int i = 0; i < files.size(); i++) {

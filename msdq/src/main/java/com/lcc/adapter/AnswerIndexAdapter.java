@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -140,7 +141,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             Object object = mList.get(position);
             final Answer answer = (Answer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.des_content.setText(answer.getAnswer());
+            holder.des_content.setText(Html.fromHtml(answer.getAnswer()));
             holder.tv_name.setText(answer.getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
