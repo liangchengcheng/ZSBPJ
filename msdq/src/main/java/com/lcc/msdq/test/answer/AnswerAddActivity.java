@@ -278,8 +278,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onSuccess(File file) {
         pic_num--;
-        Log.e("lcc", file.getName());
-        FrameManager.getInstance().toastPrompt(pic_num + "");
         if (pic_num == 0) {
             CoCoinToast.getInstance().showToast("开始上传", SuperToast.Background.BLUE);
             presenter.TestAnswerAdd(answerAdd, files);

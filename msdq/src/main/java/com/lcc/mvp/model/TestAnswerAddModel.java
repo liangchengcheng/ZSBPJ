@@ -21,7 +21,12 @@ public class TestAnswerAddModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("answer", replay.getAnswer());
         paramsMap.put("fid", replay.getFid());
-        return ApiClient.createWithFile(AppConstants.RequestPath.answerAddservice,
+        if (files!=null){
+            paramsMap.put("num",files.size());
+        }else {
+            paramsMap.put("num", 0);
+        }
+        return ApiClient.createWithFiles(AppConstants.RequestPath.answerAddservice,
                 paramsMap, files)
                 .upload(callback);
     }

@@ -25,10 +25,23 @@ public class ApiClient {
     }
 
     public static OkHttpRequest.Builder createWithFile(String path, Map paramsMap, List<File>files) {
-
         Pair[] pairs = new Pair[files.size()];
         for (int i = 0; i < files.size(); i++) {
             Pair pair = new Pair("file", files.get(i));
+            pairs[i] = pair;
+        }
+
+        return new OkHttpRequest.Builder()
+                .url(AppConstants.RequestPath.BASE_URL + path)
+                .params(paramsMap)
+                .files(pairs)
+                .headers(null);
+    }
+
+    public static OkHttpRequest.Builder createWithFiles(String path, Map paramsMap, List<File>files) {
+        Pair[] pairs = new Pair[files.size()];
+        for (int i = 0; i < files.size(); i++) {
+            Pair pair = new Pair("file"+i, files.get(i));
             pairs[i] = pair;
         }
 

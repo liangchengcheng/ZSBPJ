@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.List;
 
 public class TestAnswerAddPresenterImpl implements TestAnswerAddPresenter {
-
     private TestAnswerAddView view;
     private TestAnswerAddModel model;
 
