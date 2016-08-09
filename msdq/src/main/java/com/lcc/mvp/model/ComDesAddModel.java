@@ -22,11 +22,11 @@ public class ComDesAddModel {
         paramsMap.put("company_name", replay.getCompany_name());
         paramsMap.put("company_phone", replay.getCompany_phone());
         paramsMap.put("description", replay.getCompany_description());
-        paramsMap.put("author", "18813149871");
         paramsMap.put("location", replay.getLocation());
         paramsMap.put("provinces", replay.getProvince());
         paramsMap.put("citys", replay.getCity());
         paramsMap.put("areas", replay.getArea());
+        paramsMap.put("imagepath", replay.getCompany_image());
 
         return ApiClient.createWithFile(AppConstants.RequestPath.saveCompanyForAndroid,
                 paramsMap,files)

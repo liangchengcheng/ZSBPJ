@@ -221,8 +221,8 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.iv_gallery:
-                startActivityForResult(new Intent(this,
-                        PhotoPickerActivity.class), REQUEST_CODE_PICK_IMAGE);
+                startActivityForResult(new Intent(this, PhotoPickerActivity.class),
+                        REQUEST_CODE_PICK_IMAGE);
                 break;
 
             case R.id.iv_camera:
@@ -232,7 +232,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             case R.id.btn_posts:
                 adding();
                 List<SEditorData> editList = editor.buildEditData();
-                // 下面的代码可以上传、或者保存，请自行实现
                 dealEditData(editList);
                 break;
         }

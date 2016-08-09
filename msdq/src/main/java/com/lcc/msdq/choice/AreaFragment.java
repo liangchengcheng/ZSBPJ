@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.lcc.entity.AreaInfo;
 import com.lcc.msdq.R;
@@ -21,6 +22,7 @@ import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -78,13 +80,13 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
         mRefreshListView.setOnItemClickListener(this);
 
         FormEncodingBuilder builder = new FormEncodingBuilder();
-        builder.add(ARG_PARAM1,mParam1);
+        builder.add(ARG_PARAM1, mParam1);
         mLoadingBar.setVisibility(View.VISIBLE);
         final Request request = new Request.Builder()
                 .url("http://123.184.16.19:8008/area/list")
                 .post(builder.build())
                 .build();
-        mOkHttpClient.newCall(request).enqueue(new Callback(){
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 Looper.prepare();
@@ -95,21 +97,21 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
             @Override
             public void onResponse(Response response) throws IOException {
                 final String res = response.body().string();
-                if (res!=null){
+                if (res != null) {
                     Gson gson = new Gson();
-                    JsonResult jsonResult =  gson.fromJson(res, JsonResult.class);
-                    if (jsonResult.isSuccess()){
+                    JsonResult jsonResult = gson.fromJson(res, JsonResult.class);
+                    if (jsonResult.isSuccess()) {
                         List list = (List) jsonResult.getResult();
 
                         List newList = new ArrayList();
                         Iterator iterator = list.iterator();
-                        while (iterator.hasNext()){
+                        while (iterator.hasNext()) {
                             Map map = (Map) iterator.next();
-                            AreaInfo areaInfo = gson.fromJson(gson.toJson(map),AreaInfo.class);
+                            AreaInfo areaInfo = gson.fromJson(gson.toJson(map), AreaInfo.class);
                             newList.add(areaInfo);
                         }
 
-                        adapter = new AreaAdapter(getContext(),newList);
+                        adapter = new AreaAdapter(getContext(), newList);
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -151,8 +153,8 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         AreaInfo areaInfo = (AreaInfo) parent.getAdapter().getItem(position);
-        if (areaInfo==null) return;
-        if (mListener!=null){
+        if (areaInfo == null) return;
+        if (mListener != null) {
             mListener.onFragmentInteraction(areaInfo);
         }
     }
@@ -171,7 +173,6 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(AreaInfo areaInfo);
     }
-
 
     class AreaAdapter extends BaseAdapter {
 
@@ -202,8 +203,9 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = null;
-            if (convertView==null){
-               convertView =  LayoutInflater.from(getContext()).inflate(R.layout.area_list_item,parent,false);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.area_list_item,
+                        parent, false);
                 viewHolder = new ViewHolder();
                 viewHolder.textView = (TextView) convertView.findViewById(android.R.id.text1);
                 convertView.setTag(viewHolder);
@@ -211,15 +213,15 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemClickLis
             viewHolder = (ViewHolder) convertView.getTag();
             AreaInfo item = (AreaInfo) list.get(position);
             viewHolder.textView.setText(item.getAreaName());
-            if (lastPosition<position&&lastPosition!=0){
-                ObjectAnimator.ofFloat(convertView,"translationY",convertView.getHeight()*2,0)
+            if (lastPosition < position && lastPosition != 0) {
+                ObjectAnimator.ofFloat(convertView, "translationY", convertView.getHeight() * 2, 0)
                         .setDuration(500).start();
             }
             lastPosition = position;
             return convertView;
         }
 
-        class ViewHolder{
+        class ViewHolder {
             TextView textView;
         }
     }

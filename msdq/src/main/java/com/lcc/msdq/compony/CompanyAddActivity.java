@@ -3,6 +3,7 @@ package com.lcc.msdq.compony;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,23 +14,31 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
 import com.lcc.mvp.presenter.ComDesAddPresenter;
 import com.lcc.mvp.presenter.impl.ComDesAddPresenterImpl;
 import com.lcc.mvp.view.ComDesAddView;
+import com.lcc.utils.FileUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -37,8 +46,11 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
+import zsbpj.lccpj.yasuo.Luban;
+import zsbpj.lccpj.yasuo.OnCompressListener;
 
 /**
  * Author:       梁铖城
@@ -46,7 +58,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Date:         2015年11月21日15:28:25
  * Description:  CompanyAddActivity
  */
-public class CompanyAddActivity extends BaseActivity implements ComDesAddView,View.OnClickListener {
+public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener, OnCompressListener {
 
     public static final String NAME = "name";
     private final int REQUEST_CODE_CAMERA = 1000;
@@ -57,9 +69,11 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView,Vi
     public FunctionConfig functionConfig;
     private List<File> files = new ArrayList<>();
     private ComDesAddPresenter presenter;
+    private static final String newFile = Environment.getExternalStorageDirectory().getPath()
+            + "/com.lcc.mstdq/";
 
     private TextView tv_position;
-    private EditText editText_name,editText_phone,editText_add,editText_summary;
+    private EditText editText_name, editText_phone, editText_add, editText_summary;
     private SimpleArcDialog mDialog;
     private ImageView iv_question_des;
     private CompanyDescription companyDescription;
@@ -71,8 +85,8 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView,Vi
 
     @Override
     protected void initView() {
-        presenter=new ComDesAddPresenterImpl(this);
-        companyDescription=new CompanyDescription();
+        presenter = new ComDesAddPresenterImpl(this);
+        companyDescription = new CompanyDescription();
         iv_question_des = (ImageView) findViewById(R.id.iv_question_des);
         iv_question_des.setOnClickListener(this);
         findViewById(R.id.tv_add_pic).setOnClickListener(this);
@@ -212,12 +226,10 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView,Vi
                 @Override
                 public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
                     if (resultList != null && resultList.size() > 0) {
-                        ImageManager.getInstance().loadLocalImage(CompanyAddActivity.this,
-                                resultList.get(0).getPhotoPath(), iv_question_des);
-                        for (int i = 0; i < resultList.size(); i++) {
-                            File file = new File(resultList.get(i).getPhotoPath());
-                            files.add(file);
-                        }
+                        files = new ArrayList<>();
+                        File file = new File(resultList.get(0).getPhotoPath());
+                        files.add(file);
+                        compressWithLs(files);
                     }
                 }
 
@@ -236,15 +248,16 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView,Vi
                 break;
 
             case R.id.buttonSignUp:
-                if (TextUtils.isEmpty(editText_name.getText().toString())||
-                        TextUtils.isEmpty(editText_phone.getText().toString())||
-                        TextUtils.isEmpty(editText_add.getText().toString())||
-                        TextUtils.isEmpty(editText_summary.getText().toString())){
+                if (TextUtils.isEmpty(editText_name.getText().toString()) ||
+                        TextUtils.isEmpty(editText_phone.getText().toString()) ||
+                        TextUtils.isEmpty(editText_add.getText().toString()) ||
+                        TextUtils.isEmpty(editText_summary.getText().toString())) {
                     FrameManager.getInstance().toastPrompt("有未填写的数据");
                     return;
                 }
+
                 adding();
-                companyDescription.setAuthor("18813149871");
+                companyDescription.setAuthor("");
                 companyDescription.setCompany_name(editText_name.getText().toString());
                 companyDescription.setCompany_phone(editText_phone.getText().toString());
                 companyDescription.setLocation(editText_add.getText().toString());
@@ -252,5 +265,38 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView,Vi
                 presenter.ComDesAdd(companyDescription, files);
                 break;
         }
+    }
+
+    /**
+     * 压缩图片
+     */
+    private void compressWithLs(List<File> files) {
+        Luban.get(this).load(files.get(0)).putGear(Luban.THIRD_GEAR).setCompressListener(this).launch();
+    }
+
+    @Override
+    public void onComStart() {
+
+    }
+
+    @Override
+    public void onSuccess(File file) {
+        String author = DataManager.getUserName();
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMddHHmmss");
+        String filename = author + dateFormat.format(date) + ".jpg";
+        String new_file = newFile + filename;
+        FileUtil.copyFile(file.getAbsolutePath(), new_file);
+
+        String server_image = AppConstants.ImagePath + filename;
+        LogUtils.e("hehe", server_image);
+        companyDescription.setCompany_phone(server_image);
+        ImageManager.getInstance().loadLocalImage(CompanyAddActivity.this,
+                file.getAbsolutePath(), iv_question_des);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
     }
 }

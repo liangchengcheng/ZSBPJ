@@ -238,8 +238,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }
-                            })
-                            .show();
+                            }).show();
                 }else {
                     new AlertDialog.Builder(getActivity()).setTitle("更换地址")
                             .setMessage("你现在的地址是"+area+",你确定要更换之其他区域吗？")
@@ -256,12 +255,8 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }
-                            })
-                            .show();
+                            }).show();
                 }
-
-                Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
-                this.startActivityForResult(intent, 11);
                 break;
 
             case R.id.loading_layout:
