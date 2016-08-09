@@ -60,7 +60,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     private boolean isfavEntity;
 
     private CompanyTest companyTest;
-    private String fid = "00f2c2cd7816689923b41694baaa1ff5";
+    private String fid = "";
 
     @Override
     protected void initView() {
@@ -79,7 +79,6 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     }
 
     private void initRecycleView() {
-        findViewById(R.id.fabButton).setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

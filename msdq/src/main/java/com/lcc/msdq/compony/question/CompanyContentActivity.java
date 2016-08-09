@@ -1,4 +1,4 @@
-package com.lcc.msdq.compony;
+package com.lcc.msdq.compony.question;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,10 +31,8 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView() {
-        companyDescription = (CompanyDescription) getIntent()
-                .getSerializableExtra(ID);
+        companyDescription = (CompanyDescription) getIntent().getSerializableExtra(ID);
         fid = companyDescription.getMid();
-
         findViewById(R.id.iv_q_add).setOnClickListener(this);
         findViewById(R.id.iv_com_des).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
@@ -52,12 +50,9 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955", "技术面试"),
-                "技术面试");
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955", "人事面试"),
-                "人事面试");
-        adapter.addFragment(CodeFragment.newInstance("1cddd741560e7d90ebf9112b989ba955", "其他/经验"),
-                "其他/经验");
+        adapter.addFragment(CodeFragment.newInstance(fid, "技术面试"), "技术面试");
+        adapter.addFragment(CodeFragment.newInstance(fid, "人事面试"), "人事面试");
+        adapter.addFragment(CodeFragment.newInstance(fid, "其他/经验"), "其他/经验");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

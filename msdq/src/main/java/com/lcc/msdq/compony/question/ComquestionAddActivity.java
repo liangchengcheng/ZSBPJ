@@ -1,4 +1,4 @@
-package com.lcc.msdq.compony;
+package com.lcc.msdq.compony.question;
 
 import android.app.Activity;
 import android.content.Context;
