@@ -281,6 +281,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
 
     @Override
     public void onSuccess(File file) {
+        files = new ArrayList<>();
         String author = DataManager.getUserName();
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMddHHmmss");
@@ -289,8 +290,10 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
         FileUtil.copyFile(file.getAbsolutePath(), new_file);
 
         String server_image = AppConstants.ImagePath + filename;
-        LogUtils.e("hehe", server_image);
-        companyDescription.setCompany_phone(server_image);
+        File file1 = new File(new_file);
+        files.add(file1);
+        companyDescription.setCompany_image(server_image);
+
         ImageManager.getInstance().loadLocalImage(CompanyAddActivity.this,
                 file.getAbsolutePath(), iv_question_des);
     }
