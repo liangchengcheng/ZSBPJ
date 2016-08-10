@@ -22,8 +22,8 @@ public class ComQuesAddModel {
         paramsMap.put("type", replay.getType());
         paramsMap.put("com", replay.getCom_id());
         paramsMap.put("title", replay.getTitle());
-        paramsMap.put("author", "18813149871");
         paramsMap.put("summary", replay.getSummary());
+        paramsMap.put("img_url", replay.getImg_url());
         return ApiClient.createWithFile(AppConstants.RequestPath.AddServiceAPI,
                 paramsMap, files)
                 .upload(callback);

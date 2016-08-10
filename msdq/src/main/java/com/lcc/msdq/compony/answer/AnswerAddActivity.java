@@ -50,7 +50,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     private static final File PHOTO_DIR = new File(
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
     private static final String newFile = Environment.getExternalStorageDirectory().getPath() + "/com.lcc.mstdq/";
-    // 照相机拍照得到的图片
     private File mCurrentPhotoFile;
     private List<File> files = new ArrayList<>();
     private ComAnswerAddPresenter presenter;
@@ -82,7 +81,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
         ivGallery = (ImageView) findViewById(R.id.iv_gallery);
         ivCamera = (ImageView) findViewById(R.id.iv_camera);
         btnPosts = (Button) findViewById(R.id.btn_posts);
-
         tvSort.setOnClickListener(this);
         ivGallery.setOnClickListener(this);
         ivCamera.setOnClickListener(this);
@@ -121,15 +119,14 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             pic_num = files.size();
             compressWithLs(files);
         } else {
+            answerAdd.setAnswer(html);
             presenter.ComAnswerAdd(answerAdd, files);
         }
     }
 
     private void openCamera() {
         try {
-            // 创建照片的存储目录
             PHOTO_DIR.mkdirs();
-            // 给新照的照片文件命名
             mCurrentPhotoFile = new File(PHOTO_DIR, getPhotoFileName());
             final Intent intent = getTakePickIntent(mCurrentPhotoFile);
             startActivityForResult(intent, REQUEST_CODE_CAPTURE_CAMEIA);
@@ -152,6 +149,7 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK)
             return;
+
         if (editor.isSort()) tvSort.setText("排序");
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
             String[] photoPaths = data.getStringArrayExtra(PhotoPickerActivity.INTENT_PHOTO_PATHS);

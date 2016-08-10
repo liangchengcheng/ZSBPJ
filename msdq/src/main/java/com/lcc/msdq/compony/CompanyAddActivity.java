@@ -58,8 +58,8 @@ import zsbpj.lccpj.yasuo.OnCompressListener;
  * Date:         2015年11月21日15:28:25
  * Description:  CompanyAddActivity
  */
-public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener, OnCompressListener {
-
+public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener,
+        OnCompressListener {
     public static final String NAME = "name";
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;

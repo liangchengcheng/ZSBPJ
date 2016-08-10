@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.description.com.CompanyDesMain;
@@ -50,9 +51,12 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(CodeFragment.newInstance(fid, "技术面试"), "技术面试");
-        adapter.addFragment(CodeFragment.newInstance(fid, "人事面试"), "人事面试");
-        adapter.addFragment(CodeFragment.newInstance(fid, "其他/经验"), "其他/经验");
+        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.ZYZS),
+                Propertity.OPTIONS.ZYZS);
+        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.RSZS),
+                Propertity.OPTIONS.RSZS);
+        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.QT),
+                Propertity.OPTIONS.QT);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

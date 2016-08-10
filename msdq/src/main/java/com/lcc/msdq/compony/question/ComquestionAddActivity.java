@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,14 +17,18 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.ComTestAdd;
+import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
 import com.lcc.mvp.presenter.ComQuesAddPresenter;
 import com.lcc.mvp.presenter.impl.ComQuesAddPresenterImpl;
 import com.lcc.mvp.view.ComQuesAddView;
+import com.lcc.utils.FileUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -32,8 +37,10 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import org.angmarch.views.NiceSpinner;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,6 +53,8 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
+import zsbpj.lccpj.yasuo.Luban;
+import zsbpj.lccpj.yasuo.OnCompressListener;
 
 /**
  * Author:       梁铖城
@@ -54,12 +63,12 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Description:  添加公司问题的界面
  */
 public class ComquestionAddActivity extends BaseActivity implements View.OnClickListener,
-        AdapterView.OnItemSelectedListener, ComQuesAddView {
-
+        AdapterView.OnItemSelectedListener, ComQuesAddView ,OnCompressListener {
     public static final String ID = "id";
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
-
+    private static final String newFile = Environment.getExternalStorageDirectory().getPath()
+            + "/com.lcc.mstdq/";
     public FunctionConfig functionConfig;
     private ComTestAdd comTestAdd = new ComTestAdd();
     private List<String> dataset;
@@ -87,14 +96,14 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
         iv_question_des = (ImageView) findViewById(R.id.iv_question_des);
         NiceSpinner niceSpinner = (NiceSpinner) findViewById(R.id.nice_spinner);
-        dataset = new LinkedList<>(Arrays.asList("技术", "人事", "其他"));
+        dataset = new LinkedList<>(Arrays.asList(Propertity.OPTIONS.ZYZS, Propertity.OPTIONS.RSZS,
+                Propertity.OPTIONS.QT));
         comTestAdd.setType(dataset.get(0));
 
         niceSpinner.attachDataSource(dataset);
         niceSpinner.setTextColor(Color.BLACK);
         niceSpinner.setLinkTextColor(Color.BLACK);
         niceSpinner.setOnItemSelectedListener(this);
-
         findViewById(R.id.tv_add_pic).setOnClickListener(this);
         findViewById(R.id.iv_question_des).setOnClickListener(this);
 
@@ -139,6 +148,7 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
                     FrameManager.getInstance().toastPrompt("有未填写的数据");
                     return;
                 }
+
                 adding();
                 comTestAdd.setAuthor("18813149871");
                 comTestAdd.setCom_id(fid);
@@ -216,11 +226,11 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
                 @Override
                 public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
                     if (resultList != null && resultList.size() > 0) {
-                        ImageManager.getInstance().loadLocalImage(ComquestionAddActivity.this,
-                                resultList.get(0).getPhotoPath(), iv_question_des);
-                        for (int i = 0; i < resultList.size(); i++) {
-                            File file = new File(resultList.get(i).getPhotoPath());
+                        if (resultList != null && resultList.size() > 0) {
+                            files = new ArrayList<>();
+                            File file = new File(resultList.get(0).getPhotoPath());
                             files.add(file);
+                            compressWithLs(files);
                         }
                     }
                 }
@@ -258,4 +268,36 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    @Override
+    public void onComStart() {
+
+    }
+
+    @Override
+    public void onSuccess(File file) {
+        files = new ArrayList<>();
+        String author = DataManager.getUserName();
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMddHHmmss");
+        String filename = author + dateFormat.format(date) + ".jpg";
+        String new_file = newFile + filename;
+        FileUtil.copyFile(file.getAbsolutePath(), new_file);
+
+        String server_image = AppConstants.ImagePath + filename;
+        File file1 = new File(new_file);
+        files.add(file1);
+        comTestAdd.setImg_url(server_image);
+
+        ImageManager.getInstance().loadLocalImage(ComquestionAddActivity.this,
+                file.getAbsolutePath(), iv_question_des);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    private void compressWithLs(List<File> files) {
+        Luban.get(this).load(files.get(0)).putGear(Luban.THIRD_GEAR).setCompressListener(this).launch();
+    }
 }

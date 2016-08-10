@@ -99,7 +99,6 @@ public class OkHttpClientManager {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(final Request request, final IOException e) {
-                //TODO when cancel , should do?
                 sendFailResultCallback(request, e, resCallBack);
             }
 

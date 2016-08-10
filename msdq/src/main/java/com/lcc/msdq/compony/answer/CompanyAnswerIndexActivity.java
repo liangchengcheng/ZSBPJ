@@ -10,22 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.CompanyAnswerAdapter;
 import com.lcc.base.BaseActivity;
-import com.lcc.entity.Answer;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyTest;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
-import com.lcc.msdq.test.answer.AnswerAddActivity;
-import com.lcc.msdq.test.answer.AnswerContentActivity;
 import com.lcc.mvp.presenter.CompanyAnswerPresenter;
-import com.lcc.mvp.presenter.TestAnswerPresenter;
 import com.lcc.mvp.presenter.impl.CompanyAnswerPresenterImpl;
-import com.lcc.mvp.presenter.impl.TestAnswerPresenterImpl;
 import com.lcc.mvp.view.CompanyAnswerView;
-import com.lcc.mvp.view.TestAnswerView;
 import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
@@ -42,8 +36,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  AnswerIndexActivity
  */
 public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
-        CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, CompanyAnswerAdapter.OnImageClickListener
+        , CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CompanyAnswerAdapter mAdapter;
@@ -66,10 +60,10 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     protected void initView() {
         mPresenter = new CompanyAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        companyTest= (CompanyTest) getIntent().getSerializableExtra("data");
+        companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
         initRefreshView();
         initRecycleView();
-        mPresenter.getData(currentPage,fid);
+        mPresenter.getData(currentPage, fid);
     }
 
     private void initRefreshView() {
@@ -86,6 +80,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mAdapter = new CompanyAnswerAdapter();
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnFavClickListener(this);
+        findViewById(R.id.floatingfabu).setOnClickListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
@@ -236,12 +231,6 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " " +
-                        "wwww.baidu.com" + getString(R.string.share_tail));
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
 
             case R.id.action_use_browser:
@@ -260,13 +249,16 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
             case R.id.fabButton:
                 startActivity(new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class));
                 break;
+            case R.id.floatingfabu:
+                startActivity(new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class));
+                break;
         }
     }
 
     @Override
     public void onFavClick() {
         if (!isfavEntity) {
-            mPresenter.Fav(companyTest, "公司问题");
+            mPresenter.Fav(companyTest, Propertity.COM.QUESTION);
         } else {
             mPresenter.UnFav(companyTest);
         }
@@ -274,7 +266,14 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
 
     @Override
     public void onItemClick(CompanyAnswer data) {
-        CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this,data,
+        CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this, data,
                 companyTest);
+    }
+
+    @Override
+    public void OnImageClick(String url) {
+        Intent intent = new Intent(CompanyAnswerIndexActivity.this, PhotoActivity.class);
+        intent.putExtra(PhotoActivity.url, url);
+        startActivity(intent);
     }
 }

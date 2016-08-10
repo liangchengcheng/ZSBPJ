@@ -33,7 +33,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  CompanyAnswerAdapter
  */
 public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     private static final int HEAD_ITEM = 1;
     public static final int FOOTER_ITEM = 2;
@@ -76,8 +75,8 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
         if (viewHolder instanceof HeadViewHolder) {
-            CompanyTest object = (CompanyTest) mList.get(0);
-            HeadViewHolder holder = (HeadViewHolder) viewHolder;
+            final CompanyTest object = (CompanyTest) mList.get(0);
+            final HeadViewHolder holder = (HeadViewHolder) viewHolder;
             holder.tv_name.setMaxLineCount(3);
             holder.tv_name.setContent(object.getSummary());
             holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
@@ -91,7 +90,12 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             } else {
                 holder.tv_phone.setVisibility(View.GONE);
             }
-
+            holder.tv_phone.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onImageClickListener.OnImageClick(object.getQuestion_image());
+                }
+            });
             String head_url = object.getUser_image();
             ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
                     head_url, holder.iv_head);
@@ -163,19 +167,14 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.des_content)
         TextView des_content;
-
         @Bind(R.id.tv_znum)
         TextView tv_znum;
-
         @Bind(R.id.tv_name)
         TextView tv_name;
-
         @Bind(R.id.iv_image)
         ImageView iv_image;
-
         @Bind(R.id.ll_all)
         CardView ll_all;
 
@@ -189,31 +188,22 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
      * 头部的布局
      */
     class HeadViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.tv_title)
         TextView tv_title;
-
         @Bind(R.id.spread_textview)
         StretchyTextView tv_name;
-
         @Bind(R.id.tv_phone)
         ImageView tv_phone;
-
         @Bind(R.id.iv_head)
         ImageView iv_head;
-
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
-
         @Bind(R.id.tv_month)
         TextView tv_month;
-
         @Bind(R.id.tv_llrs)
         TextView tv_llrs;
-
         @Bind(R.id.tv_llsc)
         TextView tv_llsc;
-
         @Bind(R.id.tv_sc)
         TextView tv_sc;
 
@@ -224,10 +214,8 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 
@@ -297,5 +285,15 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void setFav(boolean isFav) {
         this.isFav = isFav;
         notifyDataSetChanged();
+    }
+
+    public interface OnImageClickListener {
+        void OnImageClick(String url);
+    }
+
+    private OnImageClickListener onImageClickListener;
+
+    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
+        this.onImageClickListener = onImageClickListener;
     }
 }

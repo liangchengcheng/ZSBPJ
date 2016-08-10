@@ -14,6 +14,15 @@ public class ComTestAdd implements Serializable {
     private String title;
     private String author;
     private String summary;
+    private String img_url;
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 
     public String getCom_id() {
         return com_id;

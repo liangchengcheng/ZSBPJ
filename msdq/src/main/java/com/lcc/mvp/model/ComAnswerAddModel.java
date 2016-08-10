@@ -25,7 +25,7 @@ public class ComAnswerAddModel {
         }else {
             paramsMap.put("num", 0);
         }
-        return ApiClient.createWithFiles(AppConstants.RequestPath.answerAddservice,
+        return ApiClient.createWithFiles(AppConstants.RequestPath.ComAnswerAddservice,
                 paramsMap, files)
                 .upload(callback);
     }
