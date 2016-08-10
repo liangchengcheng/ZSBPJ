@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.lcc.adapter.CompanyAnswerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyAnswer;
@@ -21,10 +20,8 @@ import com.lcc.mvp.presenter.CompanyAnswerPresenter;
 import com.lcc.mvp.presenter.impl.CompanyAnswerPresenterImpl;
 import com.lcc.mvp.view.CompanyAnswerView;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -80,6 +77,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mAdapter = new CompanyAnswerAdapter();
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnFavClickListener(this);
+        mAdapter.setOnImageClickListener(this);
         findViewById(R.id.floatingfabu).setOnClickListener(this);
 
         mRecyclerView.setAdapter(mAdapter);

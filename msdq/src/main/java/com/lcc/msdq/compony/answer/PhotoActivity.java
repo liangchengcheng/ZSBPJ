@@ -1,6 +1,11 @@
 package com.lcc.msdq.compony.answer;
 
+import android.widget.ImageView;
+
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.R;
+
+import zsbpj.lccpj.frame.ImageManager;
 
 /**
  * Author:       梁铖城
@@ -12,10 +17,13 @@ public class PhotoActivity extends BaseActivity {
 
     public static final String url = "url";
     private String URL;
+    private  ImageView iv_content;
 
     @Override
     protected void initView() {
         URL = getIntent().getStringExtra(url);
+        iv_content= (ImageView) findViewById(R.id.iv_content);
+        ImageManager.getInstance().loadUrlImage(PhotoActivity.this, URL, iv_content);
     }
 
     @Override
@@ -25,6 +33,6 @@ public class PhotoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutView() {
-        return 0;
+        return R.layout.layout_photo;
     }
 }
