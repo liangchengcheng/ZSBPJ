@@ -90,7 +90,7 @@
 
                 <TextView
                     android:drawablePadding="5dp"
-                    android:drawableLeft="@drawable/ic_comment_outline_grey"
+                    android:drawableLeft="@drawable/detailspage_toolbar_icon_comment_blue_press"
                     android:textSize="16sp"
                     android:paddingLeft="5dp"
                     android:id="@+id/tv_llrs"
@@ -102,7 +102,7 @@
                 <TextView
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
-                    android:drawableLeft="@drawable/ic_heart_outline_grey"
+                    android:drawableLeft="@drawable/details_page_toolbar_icon_guanxin_normal"
                     android:textSize="16sp"
                     android:id="@+id/tv_llsc"
                     android:layout_width="wrap_content"

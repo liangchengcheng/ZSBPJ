@@ -79,7 +79,6 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mAdapter.setOnFavClickListener(this);
         mAdapter.setOnImageClickListener(this);
         findViewById(R.id.floatingfabu).setOnClickListener(this);
-
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override

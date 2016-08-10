@@ -40,8 +40,8 @@ import java.util.List;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
-public class TestIndexFragment extends S_RefreshAndLoadFragment implements
-        PopupWindow.OnDismissListener, TestAdapter.OnImageClickListener,
+public class TestIndexFragment extends S_RefreshAndLoadFragment implements PopupWindow.OnDismissListener,
+        TestAdapter.OnImageClickListener,
         TestAdapter.OnItemClickListener, TestView, View.OnClickListener {
     private LinearLayout lv1_layout;
     private ListView lv1, lv2;
