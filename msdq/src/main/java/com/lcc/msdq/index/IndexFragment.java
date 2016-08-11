@@ -55,12 +55,11 @@ import android.view.MenuItem;
  * Date:    2016年04月21日07:17:52
  * Description: 第一页fragment
  */
-public class IndexFragment extends BaseFragment implements IndexView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
-        PopupMenu.OnMenuItemClickListener {
-
+public class IndexFragment extends BaseFragment implements IndexView, SwipeRefreshLayout.OnRefreshListener,
+        View.OnClickListener, PopupMenu.OnMenuItemClickListener {
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater inflaters;
+    private ImageView iv_more;
 
     private IndexPresenter mPresenter;
     protected static final int DEF_DELAY = 1000;
@@ -70,7 +69,6 @@ public class IndexFragment extends BaseFragment implements IndexView,
     protected long currentTime = 0;
     protected int currentPage = 1;
     private WeekDataAdapter mAdapter;
-    private ImageView iv_more;
 
     public static Fragment newInstance() {
         return new IndexFragment();

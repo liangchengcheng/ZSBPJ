@@ -18,6 +18,7 @@ public class Propertity {
     }
 
     public final class COM {
+        public final static String DESCRIPTION = "公司介绍";
         public final static String QUESTION = "公司问题";
         public final static String ANSWER = "公司答案";
     }
