@@ -8,14 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.description.com.CompanyDesMain;
-
 import java.util.ArrayList;
 import java.util.List;
 

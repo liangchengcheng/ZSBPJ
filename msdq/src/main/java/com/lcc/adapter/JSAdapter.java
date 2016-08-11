@@ -30,10 +30,8 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  JSAdapter
  */
 public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private List<CompanyTest> mList = new ArrayList<>();
     private boolean hasFooter;
     private boolean hasMoreData = true;
@@ -81,6 +79,7 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.tv_summary.setText(weekData.getSummary());
             holder.tv_month.setText(weekData.getCreated_time());
             holder.tv_nickname.setText(weekData.getNickname());
+            holder.tv_shoucang.setText(weekData.getL_num());
             String image_url= weekData.getUser_image();
             if (!TextUtils.isEmpty(image_url)){
                 ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
@@ -112,24 +111,20 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.iv_head)
         ImageView iv_head;
-
         @Bind(R.id.tv_title)
         TextView tv_title;
-
         @Bind(R.id.tv_summary)
         TextView tv_summary;
-
         @Bind(R.id.ll_all)
         CardView ll_all;
-
         @Bind(R.id.tv_month)
         TextView tv_month;
-
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
+        @Bind(R.id.tv_shoucang)
+        TextView tv_shoucang;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
@@ -141,10 +136,8 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * 头部的布局
      */
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

@@ -32,23 +32,6 @@
                 android:textColor="#fff"
                 android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/iv_q_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/ic_border_color_white_24dp"
-                android:textColor="#fff" />
-
-            <ImageView
-                android:id="@+id/iv_com_des"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/ic_store_white_24dp"
-                android:textColor="#fff" />
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
@@ -65,7 +48,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/floatingMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        app:menu_colorNormal="?attr/colorPrimary"
+        app:menu_colorPressed="?attr/colorPrimary"
+        app:menu_colorRipple="?attr/colorPrimary">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingCollect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_star"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_colorPressed="?attr/colorPrimary"
+            app:fab_colorRipple="?attr/colorPrimary"
+            app:fab_label="收藏"
+            app:fab_size="mini" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/iv_com_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_store_white_24dp"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_colorPressed="?attr/colorPrimary"
+            app:fab_colorRipple="?attr/colorPrimary"
+            app:fab_label="公司简介"
+            app:fab_size="mini" />
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/iv_q_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_border_color_white_24dp"
+            app:fab_colorNormal="?attr/colorPrimary"
+            app:fab_colorPressed="?attr/colorPrimary"
+            app:fab_colorRipple="?attr/colorPrimary"
+            app:fab_label="发布问题"
+            app:fab_size="mini" />
+
+
+
+    </com.github.clans.fab.FloatingActionMenu>
 </android.support.design.widget.CoordinatorLayout>
 
 

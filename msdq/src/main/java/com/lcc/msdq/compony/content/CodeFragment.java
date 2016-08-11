@@ -24,25 +24,23 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
-public class CodeFragment extends BaseLazyLoadFragment implements
-        SwipeRefreshLayout.OnRefreshListener,JSView ,JSAdapter.OnItemClickListener{
-
+public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener,
+        JSView, JSAdapter.OnItemClickListener {
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-
     private JSAdapter adapter;
+    private String fid = "";
+    private String type = "";
+
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private JSPresenter mPresenter;
 
-    private String fid="1cddd741560e7d90ebf9112b989ba955";
-    private String type="技术";
-
-    public static CodeFragment newInstance(String fid,String type) {
+    public static CodeFragment newInstance(String fid, String type) {
         CodeFragment mFragment = new CodeFragment();
         Bundle bundle = new Bundle();
         bundle.putString("fid", fid);
@@ -59,7 +57,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     @Override
     public void getBundle(Bundle bundle) {
         fid = bundle.getString("fid");
-        type=bundle.getString("type");
+        type = bundle.getString("type");
     }
 
     @Override
@@ -76,7 +74,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
     }
 
     private void initRecycleView(View view) {
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -93,7 +91,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
                     adapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,fid,type);
+                    mPresenter.loadMore(currentPage, fid, type);
                 }
             }
         });
@@ -101,7 +99,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void initData() {
-        mPresenter.getData(1,fid,type);
+        mPresenter.getData(1, fid, type);
     }
 
     @Override
@@ -111,7 +109,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,fid,type);
+                mPresenter.refresh(currentPage, fid, type);
             }
         }, 500);
     }
@@ -128,7 +126,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void getDataFail(String msg) {
-       showError(true);
+        showError(true);
     }
 
     @Override
@@ -180,8 +178,8 @@ public class CodeFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void onItemClick(CompanyTest data) {
-        Intent intent=new Intent(getActivity(), CompanyAnswerIndexActivity.class);
-        intent.putExtra("data",data);
+        Intent intent = new Intent(getActivity(), CompanyAnswerIndexActivity.class);
+        intent.putExtra("data", data);
         startActivity(intent);
     }
 }

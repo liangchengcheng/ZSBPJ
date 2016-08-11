@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.adapter.CompanyAnswerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyAnswer;
@@ -41,6 +43,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     private CompanyAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private LoadingLayout loading_layout;
+    private FloatingActionMenu floatingMenu;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -49,7 +52,6 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     protected long currentTime = 0;
     protected int currentPage = 1;
     private boolean isfavEntity;
-
     private CompanyTest companyTest;
     private String fid = "";
 
@@ -58,6 +60,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mPresenter = new CompanyAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
+        floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         initRefreshView();
         initRecycleView();
         mPresenter.getData(currentPage, fid);
@@ -248,6 +251,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 break;
             case R.id.floatingfabu:
                 startActivity(new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class));
+                floatingMenu.close(false);
                 break;
         }
     }
