@@ -8,12 +8,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.description.com.CompanyDesMain;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,8 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     public static final String ID = "id";
     private String fid;
     private CompanyDescription companyDescription;
+
+    private FloatingActionMenu floatingMenu;
 
     public static void startCompanyContentActivity(CompanyDescription id, Activity startActivity) {
         Intent intent = new Intent(startActivity, CompanyContentActivity.class);
@@ -32,9 +38,12 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     protected void initView() {
         companyDescription = (CompanyDescription) getIntent().getSerializableExtra(ID);
         fid = companyDescription.getMid();
+
+        floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         findViewById(R.id.iv_q_add).setOnClickListener(this);
         findViewById(R.id.iv_com_des).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        findViewById(R.id.floating_comments).setOnClickListener(this);
         setViewPager();
     }
 
@@ -72,17 +81,32 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //发布问题
             case R.id.iv_q_add:
                 ComquestionAddActivity.startComquestionActivity(fid, CompanyContentActivity.this);
                 break;
-
+            //公司介绍
             case R.id.iv_com_des:
                 CompanyDesMain.startCompanyDesMain(companyDescription, CompanyContentActivity.this);
                 break;
-
+            //返回
             case R.id.guillotine_hamburger:
                 finish();
                 break;
+            //发布评论
+            case R.id.floating_comments:
+                CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.DESCRIPTION,
+                        CompanyContentActivity.this);
+                break;
+            //收藏公司
+            case R.id.floatingCollect:
+                CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.DESCRIPTION,
+                        CompanyContentActivity.this);
+                break;
+        }
+
+        if (floatingMenu.isOpened()) {
+            floatingMenu.close(false);
         }
     }
 
