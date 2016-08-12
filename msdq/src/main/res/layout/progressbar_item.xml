@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:padding="10dp"
-                android:text="正在下载..."
+                android:text="正在下载,当前进度"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="18sp" />
             <TextView
