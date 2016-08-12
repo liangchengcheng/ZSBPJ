@@ -11,6 +11,7 @@ import android.os.Environment;
 public class Propertity {
     public static final String newFile = Environment.getExternalStorageDirectory().getPath()
             + "/com.lcc.mstdq/";
+
     public final class Article {
         public final static String NAME = "文章";
     }

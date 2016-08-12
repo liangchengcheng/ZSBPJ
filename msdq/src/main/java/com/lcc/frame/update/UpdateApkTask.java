@@ -13,7 +13,9 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.lcc.AppConstants;
 import com.lcc.entity.UpdateInfo;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.UpdateDialog;
@@ -39,22 +41,18 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class UpdateApkTask {
-
-
-    public static final String UPDATE_APK_URL = "http://www.tengxungame.pub:8080/service/getupdateinfo";
-    public static final String APK_NAME = "nmjkvedio.apk";
-    public static final String APKPAKEG_NAME = "com.hdsx.nmjkvedio";
+    public static final String UPDATE_APK_URL = AppConstants.RequestPath.BASE_URL + "/service/getupdateinfo";
+    public static final String APK_NAME = "msdq.apk";
+    public static final String APKPAKEG_NAME = "com.lcc.msdq";
     private static final int DOWNLOAD = 1;
     private static final int DOWNLOAD_FINISH = 2;
-    private String mXMLPath;
     private UpdateDialog mDialog;
     private Context mContext;
-    private boolean mIsShowToast;
-    public static final String HDSX_NMJK = Environment.getExternalStorageDirectory() + "/com.hdsx.nmjkvedio/";
+
+    public static final String HDSX_NMJK = Propertity.newFile;
 
     public UpdateApkTask(Context mContext, boolean mIsShowToast) {
         this.mContext = mContext;
-        this.mIsShowToast = mIsShowToast;
     }
 
     public void detectionVersionInfo() {
