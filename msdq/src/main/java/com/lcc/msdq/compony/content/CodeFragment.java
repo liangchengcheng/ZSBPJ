@@ -180,6 +180,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
     public void onItemClick(CompanyTest data) {
         Intent intent = new Intent(getActivity(), CompanyAnswerIndexActivity.class);
         intent.putExtra("data", data);
+        intent.putExtra("fid", fid);
         startActivity(intent);
     }
 }

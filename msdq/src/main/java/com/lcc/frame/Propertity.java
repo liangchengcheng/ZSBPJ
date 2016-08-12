@@ -1,5 +1,7 @@
 package com.lcc.frame;
 
+import android.os.Environment;
+
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
@@ -7,7 +9,8 @@ package com.lcc.frame;
  * Description:  Propertity
  */
 public class Propertity {
-
+    public static final String newFile = Environment.getExternalStorageDirectory().getPath()
+            + "/com.lcc.mstdq/";
     public final class Article {
         public final static String NAME = "文章";
     }

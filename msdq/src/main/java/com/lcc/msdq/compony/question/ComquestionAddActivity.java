@@ -63,12 +63,11 @@ import zsbpj.lccpj.yasuo.OnCompressListener;
  * Description:  添加公司问题的界面
  */
 public class ComquestionAddActivity extends BaseActivity implements View.OnClickListener,
-        AdapterView.OnItemSelectedListener, ComQuesAddView ,OnCompressListener {
+        AdapterView.OnItemSelectedListener, ComQuesAddView, OnCompressListener {
     public static final String ID = "id";
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
-    private static final String newFile = Environment.getExternalStorageDirectory().getPath()
-            + "/com.lcc.mstdq/";
+    private static final String newFile = Propertity.newFile;
     public FunctionConfig functionConfig;
     private ComTestAdd comTestAdd = new ComTestAdd();
     private List<String> dataset;
@@ -81,7 +80,7 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
     private EditText editText_title;
     private EditText editText_summary;
 
-    public static void startComquestionActivity(String id,Activity startingActivity) {
+    public static void startComquestionActivity(String id, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, ComquestionAddActivity.class);
         intent.putExtra(ID, id);
         startingActivity.startActivity(intent);
@@ -89,7 +88,7 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView() {
-        fid=getIntent().getStringExtra(ID);
+        fid = getIntent().getStringExtra(ID);
         editText_title = (EditText) findViewById(R.id.editText_title);
         editText_summary = (EditText) findViewById(R.id.editText_summary);
         presenter = new ComQuesAddPresenterImpl(this);
@@ -143,8 +142,8 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
                 break;
 
             case R.id.buttonSignUp:
-                if (TextUtils.isEmpty(editText_title.getText().toString())||
-                TextUtils.isEmpty(editText_summary.getText().toString())){
+                if (TextUtils.isEmpty(editText_title.getText().toString()) ||
+                        TextUtils.isEmpty(editText_summary.getText().toString())) {
                     FrameManager.getInstance().toastPrompt("有未填写的数据");
                     return;
                 }

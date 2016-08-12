@@ -22,8 +22,10 @@ import com.lcc.mvp.presenter.CompanyAnswerPresenter;
 import com.lcc.mvp.presenter.impl.CompanyAnswerPresenterImpl;
 import com.lcc.mvp.view.CompanyAnswerView;
 import com.lcc.view.loadview.LoadingLayout;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -53,13 +55,14 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     protected int currentPage = 1;
     private boolean isfavEntity;
     private CompanyTest companyTest;
-    private String fid = "";
+    private String fid;
 
     @Override
     protected void initView() {
         mPresenter = new CompanyAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
+        fid =companyTest.getMid();
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         initRefreshView();
         initRecycleView();
@@ -242,15 +245,20 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.tv_sc:
                 startActivity(new Intent(CompanyAnswerIndexActivity.this, CommentsActivity.class));
                 break;
             case R.id.fabButton:
-                startActivity(new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class));
+                intent = new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class);
+                intent.putExtra("fid",fid);
+                startActivity(intent);
                 break;
             case R.id.floatingfabu:
-                startActivity(new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class));
+                intent = new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class);
+                intent.putExtra("fid",fid);
+                startActivity(intent);
                 floatingMenu.close(false);
                 break;
         }
@@ -267,8 +275,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
 
     @Override
     public void onItemClick(CompanyAnswer data) {
-        CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this, data,
-                companyTest);
+        CompanyAnswerWebView.startCompanyAnswerWebView(CompanyAnswerIndexActivity.this, data, companyTest);
     }
 
     @Override
