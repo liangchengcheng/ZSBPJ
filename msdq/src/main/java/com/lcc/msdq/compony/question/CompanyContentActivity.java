@@ -17,14 +17,18 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.description.com.CompanyDesMain;
+import com.lcc.mvp.presenter.ComStatePresenter;
+import com.lcc.mvp.presenter.impl.ComStatePresenterImpl;
+import com.lcc.mvp.view.ComStateView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyContentActivity extends BaseActivity implements View.OnClickListener {
+public class CompanyContentActivity extends BaseActivity implements View.OnClickListener, ComStateView {
     public static final String ID = "id";
     private String fid;
     private CompanyDescription companyDescription;
+    private ComStatePresenter presenter;
 
     private FloatingActionMenu floatingMenu;
 
@@ -36,6 +40,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView() {
+        presenter = new ComStatePresenterImpl(this);
         companyDescription = (CompanyDescription) getIntent().getSerializableExtra(ID);
         fid = companyDescription.getMid();
 
@@ -45,6 +50,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.floating_comments).setOnClickListener(this);
         setViewPager();
+        presenter.getData(companyDescription.getMid());
     }
 
     private void setViewPager() {
@@ -137,6 +143,31 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+    }
+
+    @Override
+    public void isHaveFav(boolean isfav) {
+
+    }
+
+    @Override
+    public void FavSuccess() {
+
+    }
+
+    @Override
+    public void FavFail(String msg) {
+
+    }
+
+    @Override
+    public void UnFavSuccess() {
+
+    }
+
+    @Override
+    public void UnFavFail(String msg) {
+
     }
 
 

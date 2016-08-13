@@ -24,7 +24,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class TestAnswerPresenterImpl implements TestAnswerPresenter {
-
     private static final int DEF_DELAY = (int) (1 * 1000);
     private TestAnswerModel model;
     private TestAnswerView view;
@@ -62,7 +61,6 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
     }
 
     private void updateView(final String entities, int delay, final int page, final boolean get_data) {
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

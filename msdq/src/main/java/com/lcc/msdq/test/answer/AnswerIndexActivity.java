@@ -59,10 +59,9 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  AnswerIndexActivity
  */
-public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
-        AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
-        AnswerIndexAdapter.OnImageClickListener{
+public class AnswerIndexActivity extends BaseActivity implements TestAnswerView, SwipeRefreshLayout.OnRefreshListener,
+        View.OnClickListener, AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
+        AnswerIndexAdapter.OnImageClickListener {
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
