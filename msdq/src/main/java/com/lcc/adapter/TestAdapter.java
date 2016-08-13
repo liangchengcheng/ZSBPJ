@@ -20,7 +20,6 @@ import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
 public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.ViewHolder>{
-
     private  OnItemClickListener onItemClickListener;
     private Activity mActivity;
 

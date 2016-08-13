@@ -22,6 +22,7 @@ import com.lcc.msdq.R;
 import com.lcc.msdq.choice.AreaSelectActivity;
 import com.lcc.msdq.choice.ChoiceAreaSelectActivity;
 import com.lcc.msdq.compony.question.CompanyContentActivity;
+import com.lcc.msdq.description.com.CompanyDesMain;
 import com.lcc.mvp.presenter.CompanyDescriptionPresenter;
 import com.lcc.mvp.presenter.impl.CompanyDescriptionPresenterImpl;
 import com.lcc.mvp.view.CompanyDescriptionView;
@@ -38,7 +39,7 @@ import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements SearchView.OnQueryTextListener,
         SearchView.SearchViewListener, SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,
-        CompanyDescriptionView, View.OnClickListener {
+        CompanyDescriptionView, View.OnClickListener,CompanyAdapter.OnImageClickListener {
     private SearchView mSearchView;
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
@@ -68,6 +69,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
         mAdapter = new CompanyAdapter(getActivity());
         setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnImageClickListener(this);
         mAdapter.setHasMoreData(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -286,4 +288,8 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
                 .matches() ? String.valueOf(Long.valueOf(((Number) obj).longValue())) : obj.toString());
     }
 
+    @Override
+    public void onImageClick(CompanyDescription companyDescription) {
+        CompanyDesMain.startCompanyDesMain(companyDescription, getActivity());
+    }
 }

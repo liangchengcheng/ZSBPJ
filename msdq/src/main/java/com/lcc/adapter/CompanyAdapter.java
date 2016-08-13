@@ -40,7 +40,7 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
 
     @Override
     public void onBindItemViewHolder(ViewHolder holder, final int position) {
-        CompanyDescription entity = getItem(position);
+        final CompanyDescription entity = getItem(position);
         holder.ll_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +62,12 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
         //String url = "http://b.hiphotos.baidu.com/image/h%3D200/sign=954a2073cfef7609230b9e9f1edfa301/810a19d8bc3eb135aa449355a21ea8d3fc1f4458.jpg";
         ImageManager.getInstance().loadCircleImage(holder.iv_icon.getContext()
                 , url, holder.iv_icon);
+        holder.iv_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageListener.onImageClick(entity);
+            }
+        });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -87,6 +93,16 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
 
     public interface OnItemClickListener {
         void OnItemClick(CompanyDescription entity);
+    }
+
+    public interface OnImageClickListener {
+        void onImageClick(CompanyDescription  user_phone);
+    }
+
+    private OnImageClickListener ImageListener;
+
+    public void setOnImageClickListener(OnImageClickListener ImageListener) {
+        this.ImageListener = ImageListener;
     }
 
 }

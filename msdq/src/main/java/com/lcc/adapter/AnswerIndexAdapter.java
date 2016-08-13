@@ -154,6 +154,13 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
                 });
             }
+
+            holder.iv_image.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageListener.onImageClick(answer.getPhone());
+                }
+            });
         }
     }
 
@@ -281,6 +288,16 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void setOnFavClickListener(OnFavClickListener favListener) {
         this.favListener = favListener;
+    }
+
+    public interface OnImageClickListener {
+        void onImageClick(String  user_phone);
+    }
+
+    private OnImageClickListener ImageListener;
+
+    public void setOnImageClickListener(OnImageClickListener ImageListener) {
+        this.ImageListener = ImageListener;
     }
 
 

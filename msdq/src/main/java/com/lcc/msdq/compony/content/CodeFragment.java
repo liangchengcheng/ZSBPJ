@@ -14,6 +14,7 @@ import com.lcc.entity.CompanyTest;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.answer.CompanyAnswerIndexActivity;
+import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.mvp.presenter.JSPresenter;
 import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.JSView;
@@ -25,7 +26,7 @@ import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
 public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener,
-        JSView, JSAdapter.OnItemClickListener {
+        JSView, JSAdapter.OnItemClickListener ,JSAdapter.OnImageClickListener{
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -81,6 +82,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new JSAdapter();
         adapter.setOnItemClickListener(this);
+        adapter.setOnImageClickListener(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -144,6 +146,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
         if (entities != null && entities.size() > 0) {
             adapter.bind(entities);
         }
+
         mSwipeRefreshWidget.setRefreshing(false);
         showContent(true);
     }
@@ -182,5 +185,10 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
         intent.putExtra("data", data);
         intent.putExtra("fid", fid);
         startActivity(intent);
+    }
+
+    @Override
+    public void onImageClick(String user_phone) {
+        OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, getActivity());
     }
 }

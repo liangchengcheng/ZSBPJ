@@ -94,6 +94,13 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                 });
             }
+
+            holder.iv_head.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageListener.onImageClick(weekData.getPhone());
+                }
+            });
         }
     }
 
@@ -202,5 +209,15 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setOnFavClickListener(OnFavClickListener favListener) {
         this.favListener = favListener;
+    }
+
+    public interface OnImageClickListener {
+        void onImageClick(String  user_phone);
+    }
+
+    private OnImageClickListener ImageListener;
+
+    public void setOnImageClickListener(OnImageClickListener ImageListener) {
+        this.ImageListener = ImageListener;
     }
 }

@@ -31,6 +31,7 @@ import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
+import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestAnswerPresenterImpl;
@@ -60,7 +61,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
-        AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener {
+        AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
+        AnswerIndexAdapter.OnImageClickListener{
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -118,6 +120,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mAdapter = new AnswerIndexAdapter();
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnFavClickListener(this);
+        mAdapter.setOnImageClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -347,5 +350,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private void shareThis() {
         ShareUtil shareUtil = new ShareUtil();
         shareUtil.showShare(AnswerIndexActivity.this);
+    }
+
+    @Override
+    public void onImageClick(String user_phone) {
+        OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, AnswerIndexActivity.this);
     }
 }
