@@ -64,6 +64,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
         fid =companyTest.getMid();
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
+        findViewById(R.id.floatingComment).setOnClickListener(this);
         initRefreshView();
         initRecycleView();
         mPresenter.getData(currentPage, fid);
@@ -261,6 +262,12 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 startActivity(intent);
                 floatingMenu.close(false);
                 break;
+            //发布评论
+            case R.id.floating_comments:
+                CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.QUESTION,
+                        CompanyAnswerIndexActivity.this);
+                break;
+
         }
     }
 

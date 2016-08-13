@@ -45,7 +45,7 @@ public class ComAnswerContentModel {
     public OkHttpRequest getContent(String mid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         // TODO: 16/7/29 此处记得修改时间
-        paramsMap.put("mid", "00f2c2cd7816689923b41694baaa1ff1");
+        paramsMap.put("mid", mid);
         return ApiClient.create(AppConstants.RequestPath.getComAnswerContent, paramsMap).tag("")
                 .get(callback);
     }
