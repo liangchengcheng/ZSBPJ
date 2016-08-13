@@ -43,9 +43,8 @@ public class ComStatePresenterImpl implements ComStatePresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String fav = jsonObject.getString("fav");
-
-                    if (!TextUtils.isEmpty(fav)) {
+                    String status = jsonObject.getString("status");
+                    if (!TextUtils.isEmpty(status)) {
                         view.isHaveFav(true);
                     } else {
                         view.isHaveFav(false);

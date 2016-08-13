@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
@@ -24,13 +25,17 @@ import com.lcc.mvp.view.ComStateView;
 import java.util.ArrayList;
 import java.util.List;
 
+import zsbpj.lccpj.frame.FrameManager;
+
 public class CompanyContentActivity extends BaseActivity implements View.OnClickListener, ComStateView {
     public static final String ID = "id";
     private String fid;
     private CompanyDescription companyDescription;
     private ComStatePresenter presenter;
+    private boolean isfavEntity;
 
     private FloatingActionMenu floatingMenu;
+    private FloatingActionButton floatingCollect;
 
     public static void startCompanyContentActivity(CompanyDescription id, Activity startActivity) {
         Intent intent = new Intent(startActivity, CompanyContentActivity.class);
@@ -49,6 +54,8 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.iv_com_des).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.floating_comments).setOnClickListener(this);
+        floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
+        findViewById(R.id.floatingCollect).setOnClickListener(this);
         setViewPager();
         presenter.getData(companyDescription.getMid());
     }
@@ -106,8 +113,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
                 break;
             //收藏公司
             case R.id.floatingCollect:
-                CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.DESCRIPTION,
-                        CompanyContentActivity.this);
+                favClick();
                 break;
         }
 
@@ -147,28 +153,46 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void isHaveFav(boolean isfav) {
-
+        changeFavState(isfav);
     }
 
     @Override
     public void FavSuccess() {
-
+        changeFavState(true);
+        FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
     @Override
     public void FavFail(String msg) {
-
+        FrameManager.getInstance().toastPrompt("收藏失败");
     }
 
     @Override
     public void UnFavSuccess() {
-
+        changeFavState(false);
+        FrameManager.getInstance().toastPrompt("取消收藏成功");
     }
 
     @Override
     public void UnFavFail(String msg) {
-
+        FrameManager.getInstance().toastPrompt("取消收藏失败");
     }
 
+    public void changeFavState(boolean fav) {
+        this.isfavEntity = fav;
+        if (fav) {
+            floatingCollect.setLabelText("取消收藏");
+        } else {
+            floatingCollect.setLabelText("收藏");
+        }
+    }
+
+    private void favClick() {
+        if (!isfavEntity) {
+            presenter.Fav(companyDescription, Propertity.COM.DESCRIPTION);
+        } else {
+            presenter.UnFav(companyDescription, Propertity.COM.DESCRIPTION);
+        }
+    }
 
 }
