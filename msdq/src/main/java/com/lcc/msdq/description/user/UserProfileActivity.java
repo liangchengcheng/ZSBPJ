@@ -38,7 +38,6 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
-
     public static final String UserInfo = "UserInfo";
     private UserInfo userInfo;
     @Bind(R.id.tlUserProfileTabs)

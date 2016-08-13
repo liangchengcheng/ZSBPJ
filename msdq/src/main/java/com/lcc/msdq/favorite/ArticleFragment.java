@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.FavAdapter;
 import com.lcc.adapter.JSAdapter;
 import com.lcc.entity.CompanyTest;
@@ -23,6 +24,7 @@ import com.lcc.mvp.presenter.impl.FavPresenterImpl;
 import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.FavView;
 import com.lcc.mvp.view.JSView;
+import com.lcc.utils.CoCoinToast;
 
 import java.util.List;
 
@@ -36,9 +38,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  ArticleFragment
  */
-public class ArticleFragment extends BaseLazyLoadFragment implements
-        SwipeRefreshLayout.OnRefreshListener, FavView, FavAdapter.OnItemClickListener {
-
+public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener,
+        FavView, FavAdapter.OnItemClickListener {
     protected final static int STATE_REFRESH = 2;
     static final int ACTION_NONE = 0;
     protected static final int DEF_DELAY = 1000;
@@ -188,17 +189,22 @@ public class ArticleFragment extends BaseLazyLoadFragment implements
 
     @Override
     public void onItemClick(FavEntity data) {
+        if (data != null) {
+            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
+            return;
+        }
+
         Intent intent = null;
         //我好像得重新写界面
-        if (type.equals(Propertity.Article.NAME)){
+        if (type.equals(Propertity.Article.NAME)) {
             //去文章的界面
-             intent=new Intent(getActivity(), AnswerIndexActivity.class);
-        }else if (type.equals(Propertity.Test.QUESTION)){
+            intent = new Intent(getActivity(), AnswerIndexActivity.class);
+        } else if (type.equals(Propertity.Test.QUESTION)) {
             //去资料的问题
-             intent=new Intent(getActivity(), AnswerIndexActivity.class);
+            intent = new Intent(getActivity(), AnswerIndexActivity.class);
         } else {
             //去公司的问题
-             intent=new Intent(getActivity(), AnswerIndexActivity.class);
+            intent = new Intent(getActivity(), AnswerIndexActivity.class);
         }
 
         startActivity(intent);

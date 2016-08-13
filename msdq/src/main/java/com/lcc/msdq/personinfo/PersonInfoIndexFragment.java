@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.db.test.UserInfo;
@@ -31,10 +32,10 @@ import com.lcc.utils.ShareUtil;
 import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.view.glide.GlideCircleTransform;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {
-
     //头像
     private ImageView iv_more;
     //用户名
@@ -110,8 +111,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.rl_qd:
                 SuperCustomToast toast = SuperCustomToast.getInstance(getActivity());
                 toast.setDefaultTextColor(Color.WHITE);
-                toast.show("签到成功。", R.layout.layout_qd, R.id.content_toast,
-                        getActivity());
+                toast.show("签到成功。", R.layout.layout_qd, R.id.content_toast, getActivity());
                 break;
 
             //系统设置
@@ -189,8 +189,15 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
             String user_image = userInfo.getUser_image();
             if (!TextUtils.isEmpty(user_image)) {
-                ImageManager.getInstance().loadCircleImage(getActivity(), user_image, iv_more);
+                Glide.with(getActivity()).load(user_image).placeholder(zsbpj.lccpj.R.drawable.loading)
+                        .error(R.drawable.default_user_logo).crossFade()
+                        .transform(new GlideCircleTransform(getActivity())).into(iv_more);
+            }else {
+                ImageManager.getInstance().loadResImage(getActivity(), R.drawable.default_user_logo,
+                        iv_more);
             }
+        }else {
+            ImageManager.getInstance().loadResImage(getActivity(), R.drawable.default_user_logo, iv_more);
         }
     }
 

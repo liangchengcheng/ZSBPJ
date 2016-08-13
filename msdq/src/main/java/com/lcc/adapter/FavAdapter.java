@@ -30,6 +30,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -38,7 +39,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  FavAdapter(收藏的适配器)
  */
 public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
     private boolean hasFooter;
@@ -82,7 +82,7 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
             String title = weekData.getFav_title();
-            String time = weekData.getC_time();
+            String time = TimeUtils.fromToday(weekData.getC_time());
 
             SpannableString styledText = new SpannableString("收藏了" + title + time);
             styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
