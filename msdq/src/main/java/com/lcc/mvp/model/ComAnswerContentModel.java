@@ -13,7 +13,6 @@ public class ComAnswerContentModel {
     public OkHttpRequest isfavAnswer(String nid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, nid);
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.ISFAV, paramsMap).tag("").get(callback);
     }
     /**
@@ -24,7 +23,6 @@ public class ComAnswerContentModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         paramsMap.put("fav_title",title);
         return ApiClient.create(AppConstants.RequestPath.UserFavAdd, paramsMap).tag("").get(callback);
     }
@@ -35,7 +33,6 @@ public class ComAnswerContentModel {
     public OkHttpRequest UnfavAnswer(CompanyAnswer article, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
 
@@ -44,7 +41,6 @@ public class ComAnswerContentModel {
      */
     public OkHttpRequest getContent(String mid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        // TODO: 16/7/29 此处记得修改时间
         paramsMap.put("mid", mid);
         return ApiClient.create(AppConstants.RequestPath.getComAnswerContent, paramsMap).tag("")
                 .get(callback);
