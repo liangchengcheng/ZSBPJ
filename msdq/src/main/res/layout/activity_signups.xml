@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="50dp"
                     android:text="注册密码"
                     android:textColor="#fff"
@@ -67,8 +67,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:paddingEnd="30dp"
-                    android:paddingStart="50dp">
+                    android:paddingRight="30dp"
+                    android:paddingLeft="50dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputLayout_username"
@@ -94,8 +94,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
-                    android:paddingEnd="30dp"
-                    android:paddingStart="50dp">
+                    android:paddingRight="30dp"
+                    android:paddingLeft="50dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputLayout_phone"
@@ -120,8 +120,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
-                    android:paddingEnd="30dp"
-                    android:paddingStart="50dp">
+                    android:paddingRight="30dp"
+                    android:paddingLeft="50dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputLayout_password"

@@ -33,9 +33,7 @@ import cn.smssdk.SMSSDK;
 import zsbpj.lccpj.frame.FrameManager;
 
 public class SignUpActivity extends BaseActivity implements SignUpView, View.OnClickListener {
-
     private static final int DELAY_MILLIS = 1 * 1000;
-
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout textInputLayout_username;
     private TextInputLayout mTextInputLayoutPassword;
@@ -47,7 +45,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     private int verifyCodeCountdown = 30;
     protected Handler taskHandler = new Handler();
     private String phone, password, verify_code,username;
-
     private String from;
 
     @Override
@@ -135,7 +132,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     @Override
     protected int getLayoutView() {
-        return R.layout.activity_signup;
+        return R.layout.activity_signups;
     }
 
     @Override

@@ -51,15 +51,15 @@
                 <View
                     android:layout_width="8dp"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:background="#2fa881" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:text="登录"
+                    android:layout_marginLeft="50dp"
+                    android:text="登录界面"
                     android:textColor="#FFCC00"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -70,8 +70,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:paddingEnd="30dp"
-                android:paddingStart="50dp">
+                android:paddingRight="30dp"
+                android:paddingLeft="50dp">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputLayout_phone"
@@ -97,8 +97,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
-                android:paddingEnd="30dp"
-                android:paddingStart="50dp">
+                android:paddingRight="30dp"
+                android:paddingLeft="50dp">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputLayout_password"
@@ -132,7 +132,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/bt_shape"
                     android:text="登录"
-                    android:textColor="#d3d3d3"></Button>
+                    android:textColor="#d3d3d3" />
             </RelativeLayout>
 
             <TextView
@@ -146,15 +146,15 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:textColor="#9a9a9a"
+                android:textSize="12sp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/textView_create_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/button_login"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="注册新帐号" />
+                android:text="注册帐号" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
