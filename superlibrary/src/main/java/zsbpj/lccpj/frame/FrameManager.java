@@ -16,8 +16,6 @@ import zsbpj.lccpj.R;
  * Description: Py
  */
 public class FrameManager {
-
-    private static final String LOG_TAG = "FrameManager";
     private static final int MSG_TOAST = 1;
     private static FrameManager self = null;
     private static Toast mToast;

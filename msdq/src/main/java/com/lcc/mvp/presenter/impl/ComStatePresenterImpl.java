@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.lcc.entity.Answer;
 import com.lcc.entity.CompanyDescription;
+import com.lcc.entity.FavAndGoodState;
 import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
@@ -33,18 +34,20 @@ public class ComStatePresenterImpl implements ComStatePresenter {
         model = new ComStateModel();
     }
 
-    private void loadData(final String fid) {
+    private void loadData(String fid) {
         model.isfavAnswer(fid, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
+                view.isHaveFav(false);
             }
 
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("status");
-                    if (!TextUtils.isEmpty(status)) {
+                    String fav = jsonObject.getString("result");
+                    List<FavAndGoodState> favAndGoodStates = GsonUtils.fromJsonArray(fav, FavAndGoodState.class);
+                    if (favAndGoodStates != null && favAndGoodStates.size() > 0) {
                         view.isHaveFav(true);
                     } else {
                         view.isHaveFav(false);
