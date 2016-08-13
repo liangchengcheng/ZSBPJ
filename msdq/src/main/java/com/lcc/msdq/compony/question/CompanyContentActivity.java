@@ -138,4 +138,6 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
             return mFragmentTitles.get(position);
         }
     }
+
+
 }

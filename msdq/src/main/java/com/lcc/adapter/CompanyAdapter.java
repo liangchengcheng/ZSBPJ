@@ -19,7 +19,6 @@ import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
 public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, CompanyAdapter.ViewHolder> {
-
     private OnItemClickListener onItemClickListener;
     private Activity mActivity;
 

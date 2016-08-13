@@ -101,6 +101,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
 
     @Override
     public void initData() {
+        currentPage = 1;
         mPresenter.getData(1, fid, type);
     }
 
@@ -175,8 +176,7 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
 
     @Override
     public void onReloadClicked() {
-        super.onReloadClicked();
-        onRefresh();
+        initData();
     }
 
     @Override
@@ -191,4 +191,5 @@ public class CodeFragment extends BaseLazyLoadFragment implements SwipeRefreshLa
     public void onImageClick(String user_phone) {
         OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, getActivity());
     }
+
 }
