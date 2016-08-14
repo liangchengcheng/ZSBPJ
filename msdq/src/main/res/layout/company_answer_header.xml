@@ -45,7 +45,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_head"
-                    android:text="nicheng" />
+                    android:textColor="@color/article_title"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/tv_sc"

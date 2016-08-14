@@ -48,7 +48,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_image"
-                    android:text="梁铖城"
                     android:textColor="@color/article_title"
                     android:textSize="16sp" />
                 <LinearLayout
