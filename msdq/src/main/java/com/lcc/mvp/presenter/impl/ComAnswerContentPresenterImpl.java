@@ -1,7 +1,9 @@
 package com.lcc.mvp.presenter.impl;
 
+import com.lcc.entity.Answer;
 import com.lcc.entity.AnswerContent;
 import com.lcc.entity.CompanyAnswer;
+import com.lcc.entity.FavAndGoodState;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.ComAnswerContentModel;
 import com.lcc.mvp.presenter.ComAnswerContentPresenter;
@@ -28,7 +30,7 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
         model.isfavAnswer(nid, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.getStateFail("获取状态失败");
             }
 
             @Override
@@ -38,12 +40,13 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     int status = jsonObject.getInt("status");
                     String result = jsonObject.getString("result");
                     if (status == 1 && !result.equals("[]")) {
-                        view.isHaveFav(true);
+                        FavAndGoodState fav = GsonUtils.changeGsonToBean(result, FavAndGoodState.class);
+                        view.getStateSuccess(fav);
                     } else {
-                        view.isHaveFav(false);
+                        view.getStateFail("获取状态失败");
                     }
                 } catch (Exception e) {
-                    view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.getStateFail("获取状态失败");
                     e.printStackTrace();
                 }
             }
@@ -129,6 +132,61 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     }
                 } catch (Exception e) {
                     view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void Good(CompanyAnswer article, String type, String title) {
+        model.GoodAnswer(article, type, title, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.GoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        view.GoodSuccess();
+                    } else {
+                        view.GoodFail(message);
+                    }
+                } catch (Exception e) {
+                    view.GoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void UnGood(CompanyAnswer article,String type) {
+        model.UnGoodAnswer(article, type, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.UnGoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        view.UnGoodSuccess();
+                    } else {
+                        view.UnGoodFail(message);
+                    }
+                } catch (Exception e) {
+                    view.UnGoodFail(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }

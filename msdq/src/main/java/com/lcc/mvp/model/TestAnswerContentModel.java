@@ -12,7 +12,6 @@ public class TestAnswerContentModel {
     public OkHttpRequest isfavAnswer(String nid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, nid);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.ISFAV, paramsMap).tag("").get(callback);
     }
 

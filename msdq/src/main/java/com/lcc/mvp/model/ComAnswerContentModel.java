@@ -45,4 +45,26 @@ public class ComAnswerContentModel {
         return ApiClient.create(AppConstants.RequestPath.getComAnswerContent, paramsMap).tag("")
                 .get(callback);
     }
+
+    /**
+     * 给资料的答案点赞
+     */
+    public OkHttpRequest GoodAnswer(CompanyAnswer article, String type, String title, ResultCallback<String>
+            callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("true_author", article.getPhone());
+        paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
+        paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
+        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
+        paramsMap.put("good_title", title);
+        return ApiClient.create(AppConstants.RequestPath.UserGoodAdd, paramsMap).tag("").get(callback);
+    }
+
+    public OkHttpRequest UnGoodAnswer(CompanyAnswer article,String type, ResultCallback<String>
+            callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
+        paramsMap.put("type",type);
+        return ApiClient.create(AppConstants.RequestPath.deleteUserGood, paramsMap).tag("").get(callback);
+    }
 }

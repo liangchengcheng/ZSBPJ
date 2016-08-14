@@ -12,4 +12,8 @@ public interface ComAnswerContentPresenter {
     void UnFav(CompanyAnswer article);
 
     void getContent(String mid);
+
+    void Good(CompanyAnswer article, String type,String title);
+
+    void UnGood(CompanyAnswer article,String type);
 }

@@ -266,11 +266,11 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 break;
 
             //发布评论
-            case R.id.floating_comments:
+            case R.id.floatingComment:
                 CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.QUESTION,
                         CompanyAnswerIndexActivity.this);
+                floatingMenu.close(false);
                 break;
-
         }
     }
 

@@ -27,6 +27,7 @@ import com.lcc.entity.Article;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.CompanyTest;
+import com.lcc.entity.FavAndGoodState;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
@@ -49,13 +50,14 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  【这个地方的答案需要单独的提炼到一个表里面去】
  */
-public class CompanyAnswerWebView extends BaseActivity implements View.OnClickListener,
-        MyWebView.OnScrollChangedCallback, ComAnswerContentView {
+public class CompanyAnswerWebView extends BaseActivity implements View.OnClickListener, ComAnswerContentView,
+        MyWebView.OnScrollChangedCallback {
     private MyWebView webView;
     private ImageView user_head;
     private FloatingActionMenu floatingMenu;
     private LinearLayout ll_top;
     private FloatingActionButton floatingCollect;
+    private FloatingActionButton floatingGood;
     private LoadingLayout loading_layout;
     private TextView tv_who;
 
@@ -65,6 +67,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
     private boolean isFav;
     private ComAnswerContentPresenter comAnswerContentPresenter;
     private CompanyTest entity;
+    private boolean isGood;
 
     public static void startCompanyAnswerWebView(Activity startingActivity, CompanyAnswer type,
                                                  CompanyTest test) {
@@ -90,11 +93,14 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
     @Override
     protected void initView() {
         initData();
-        tv_who= (TextView) findViewById(R.id.tv_who);
-        tv_who.setText(answer.getNickname()+"的回答");
+        tv_who = (TextView) findViewById(R.id.tv_who);
+        tv_who.setText(answer.getNickname() + "的回答");
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         floatingCollect = (FloatingActionButton) findViewById(R.id.floatingCollect);
         floatingCollect.setOnClickListener(this);
+        findViewById(R.id.floatingComment).setOnClickListener(this);
+        floatingGood = (FloatingActionButton) findViewById(R.id.floatingGood);
+        findViewById(R.id.floatingGood).setOnClickListener(this);
         ll_top = (LinearLayout) findViewById(R.id.ll_top);
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         user_head = (ImageView) findViewById(R.id.user_head);
@@ -115,6 +121,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
         webView.setWebChromeClient(new WebChromeClient());
         //comAnswerContentPresenter.isFav(answer.getMid());
         comAnswerContentPresenter.getContent(answer.getMid());
+        comAnswerContentPresenter.isFav(answer.getMid());
 
     }
 
@@ -199,6 +206,13 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
                 }
                 break;
 
+            case R.id.floatingGood:
+                if (isGood) {
+                    comAnswerContentPresenter.UnGood(answer,Propertity.COM.ANSWER);
+                } else {
+                    comAnswerContentPresenter.Good(answer, Propertity.COM.ANSWER, entity.getTitle());
+                }
+                break;
         }
     }
 
@@ -237,17 +251,12 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
 
     @Override
     public void isHaveFav(boolean isfavEntity) {
-        this.isFav = isfavEntity;
-        if (isfavEntity) {
-            floatingCollect.setLabelText("取消收藏");
-        } else {
-            floatingCollect.setLabelText("收藏");
-        }
+
     }
 
     @Override
     public void FavSuccess() {
-        isHaveFav(true);
+        changeFav(true);
         FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
@@ -258,12 +267,78 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
 
     @Override
     public void UnFavSuccess() {
-        isHaveFav(false);
+        changeFav(false);
         FrameManager.getInstance().toastPrompt("取消收藏成功");
     }
 
     @Override
     public void UnFavFail(String msg) {
         FrameManager.getInstance().toastPrompt("取消收藏失败");
+    }
+
+    @Override
+    public void getStateSuccess(FavAndGoodState msg) {
+        if (msg != null) {
+            if (msg.getFav().equals("1")) {
+                this.isFav = true;
+                floatingCollect.setLabelText("取消收藏");
+            } else {
+                this.isFav = false;
+                floatingCollect.setLabelText("收藏");
+            }
+
+            if (msg.getGood().equals("1")) {
+                this.isGood = true;
+                floatingGood.setLabelText("取消赞");
+            } else {
+                this.isGood = false;
+                floatingGood.setLabelText("赞");
+            }
+        }
+    }
+
+    @Override
+    public void getStateFail(String msg) {
+
+    }
+
+    @Override
+    public void GoodSuccess() {
+        changeGood(true);
+        FrameManager.getInstance().toastPrompt("赞成功");
+    }
+
+    @Override
+    public void GoodFail(String msg) {
+        FrameManager.getInstance().toastPrompt("赞失败");
+    }
+
+    @Override
+    public void UnGoodSuccess() {
+        changeGood(false);
+        FrameManager.getInstance().toastPrompt("取消赞成功");
+    }
+
+    @Override
+    public void UnGoodFail(String msg) {
+        FrameManager.getInstance().toastPrompt("取消赞失败");
+    }
+
+    public void changeGood(boolean good) {
+        this.isGood = good;
+        if (good) {
+            floatingGood.setLabelText("取消赞");
+        } else {
+            floatingGood.setLabelText("赞");
+        }
+    }
+
+    public void changeFav(boolean fav) {
+        this.isFav = fav;
+        if (fav) {
+            floatingCollect.setLabelText("取消收藏");
+        } else {
+            floatingCollect.setLabelText("收藏");
+        }
     }
 }
