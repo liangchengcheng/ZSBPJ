@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.lcc.adapter.JSAdapter;
 import com.lcc.entity.CompanyTest;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
@@ -18,9 +17,7 @@ import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.mvp.presenter.JSPresenter;
 import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.JSView;
-
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;

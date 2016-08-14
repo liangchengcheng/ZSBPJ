@@ -85,7 +85,7 @@
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:lineSpacingMultiplier="1.2"
-                    android:lines="3"
+                    android:maxLines="3"
                     android:text=""
                     android:textColor="@color/article_des"
                     android:textSize="13sp" />

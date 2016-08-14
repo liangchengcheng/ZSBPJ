@@ -62,7 +62,6 @@ public class CompanyAnswerPresenterImpl implements CompanyAnswerPresenter {
     }
 
     private void updateView(final String entities, int delay, final int page, final boolean get_data) {
-
            new Handler().postDelayed(new Runnable() {
                @Override
                public void run() {

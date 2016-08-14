@@ -73,7 +73,6 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         if (viewHolder instanceof HeadViewHolder) {
             final CompanyTest object = (CompanyTest) mList.get(0);
             final HeadViewHolder holder = (HeadViewHolder) viewHolder;
@@ -101,17 +100,11 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     head_url, holder.iv_head);
             holder.tv_nickname.setText(object.getNickname());
             holder.tv_month.setText(object.getCreated_time());
-            holder.tv_llsc.setText(object.getL_num());
-            holder.tv_llrs.setText(object.getL_num());
 
             if (isFav) {
-                holder.tv_sc.setText("取消收藏");
-                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
-                        .getColor(R.color.retry_button_background_stroke));
+                holder.tv_sc.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
             } else {
-                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
-                        .getColor(R.color.common_android_tag_bg));
-                holder.tv_sc.setText("收藏");
+                holder.tv_sc.setBackgroundResource(R.drawable.details_page_toolbar_icon_guanxin_normal);
             }
 
             if (favListener != null) {
@@ -127,9 +120,6 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             Object object = mList.get(position);
@@ -200,12 +190,8 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView tv_nickname;
         @Bind(R.id.tv_month)
         TextView tv_month;
-        @Bind(R.id.tv_llrs)
-        TextView tv_llrs;
-        @Bind(R.id.tv_llsc)
-        TextView tv_llsc;
         @Bind(R.id.tv_sc)
-        TextView tv_sc;
+        ImageView tv_sc;
 
         public HeadViewHolder(View itemView) {
             super(itemView);

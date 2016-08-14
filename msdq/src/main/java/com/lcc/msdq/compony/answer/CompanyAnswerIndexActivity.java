@@ -251,17 +251,20 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
             case R.id.tv_sc:
                 startActivity(new Intent(CompanyAnswerIndexActivity.this, CommentsActivity.class));
                 break;
+
             case R.id.fabButton:
                 intent = new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class);
                 intent.putExtra("fid",fid);
                 startActivity(intent);
                 break;
+
             case R.id.floatingfabu:
                 intent = new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class);
                 intent.putExtra("fid",fid);
                 startActivity(intent);
                 floatingMenu.close(false);
                 break;
+
             //发布评论
             case R.id.floating_comments:
                 CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.QUESTION,
