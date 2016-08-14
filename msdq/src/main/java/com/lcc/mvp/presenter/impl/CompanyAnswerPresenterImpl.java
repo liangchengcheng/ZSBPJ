@@ -6,6 +6,7 @@ import com.lcc.entity.Answer;
 import com.lcc.entity.Article;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyTest;
+import com.lcc.entity.FavEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.CompanyAnswerModel;
 import com.lcc.mvp.model.TestAnswerModel;
@@ -70,6 +71,16 @@ public class CompanyAnswerPresenterImpl implements CompanyAnswerPresenter {
                        int status = jsonObject.getInt("status");
                        String message = jsonObject.getString("message");
                        String result = jsonObject.getString("result");
+
+                       String fav = jsonObject.getString("fav");
+                       List<FavEntity> favEntityList = GsonUtils.fromJsonArray(fav, FavEntity.class);
+
+                       if (favEntityList != null && favEntityList.size() > 0) {
+                           view.isHaveFav(true);
+                       } else {
+                           view.isHaveFav(false);
+                       }
+
                        if (status == 1) {
                            List<CompanyAnswer> weekDatas = GsonUtils.fromJsonArray(result, CompanyAnswer.class);
                            if (page == 1) {
