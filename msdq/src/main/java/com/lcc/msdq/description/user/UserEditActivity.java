@@ -57,7 +57,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  */
 public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView,
         RadioGroup.OnCheckedChangeListener {
-
     //昵称 性别 签名 邮箱
     private EditText edit_nickname, et_qm, et_email;
     private ImageView iv_question_des;
@@ -117,6 +116,10 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         if (!TextUtils.isEmpty(et)) {
             ImageManager.getInstance().loadCircleImage(UserEditActivity.this,
                     userInfo.getUser_image(),
+                    iv_question_des);
+        }else {
+            ImageManager.getInstance().loadResImage(UserEditActivity.this,
+                    R.drawable.default_user_logo,
                     iv_question_des);
         }
 

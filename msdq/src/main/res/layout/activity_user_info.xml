@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootview"
     android:background="#fff"
     android:focusable="true"
     android:focusableInTouchMode="true">
@@ -98,8 +98,7 @@
                             android:layout_height="80dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/default_user_logo" />
+                            android:layout_margin="5dp" />
                     </RelativeLayout>
 
                     <TextView
@@ -132,8 +131,8 @@
                             android:layout_toRightOf="@+id/tv_nickname"
                             android:background="@null"
                             android:gravity="end"
-                            android:padding="10dp"
                             android:hint="输入昵称"
+                            android:padding="10dp"
                             android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
@@ -159,13 +158,13 @@
                             android:textSize="16sp" />
 
                         <RadioGroup
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="20dp"
                             android:id="@+id/radioSex"
-                            android:orientation="horizontal"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" >
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/rb_nan"
@@ -175,10 +174,10 @@
                                 android:text="男" />
 
                             <RadioButton
-                                android:layout_marginLeft="10dp"
                                 android:id="@+id/rb_nv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
                                 android:text="女" />
                         </RadioGroup>
 
@@ -304,8 +303,8 @@
                             android:layout_toRightOf="@+id/tv_email"
                             android:background="@null"
                             android:gravity="end"
-                            android:padding="10dp"
                             android:hint="请输入邮箱"
+                            android:padding="10dp"
                             android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>

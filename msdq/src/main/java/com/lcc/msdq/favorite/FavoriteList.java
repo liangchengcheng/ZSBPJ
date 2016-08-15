@@ -41,11 +41,10 @@ public class FavoriteList extends BaseActivity implements View.OnClickListener {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        // TODO: 16/8/4 此处界面的属性和下个界面的属性
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(ArticleFragment.newInstance(Propertity.Article.NAME), "收藏的文章");
-        adapter.addFragment(ArticleFragment.newInstance(Propertity.Test.QUESTION), "收藏的资料");
-        adapter.addFragment(ArticleFragment.newInstance(Propertity.COM.QUESTION), "收藏的真题");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Article.NAME), "收藏文章");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Test.QUESTION), "收藏资料");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.COM.QUESTION), "收藏真题");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

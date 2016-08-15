@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
@@ -40,6 +41,7 @@ import zsbpj.lccpj.frame.ImageManager;
 public class UserProfileActivity extends BaseActivity implements View.OnClickListener {
     public static final String UserInfo = "UserInfo";
     private UserInfo userInfo;
+
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
     @Bind(R.id.ivUserProfilePhoto)
@@ -90,6 +92,10 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
             ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
                     userInfo.getUser_image(),
                     ivUserProfilePhoto);
+        }else {
+            ImageManager.getInstance().loadResImage(UserProfileActivity.this,
+                    R.drawable.default_user_logo,
+                    ivUserProfilePhoto);
         }
 
         tv_gz.setText(userInfo.getGz_num()+"/关注");
@@ -135,9 +141,9 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏文章");
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏资料");
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的公司");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Article.NAME), "收藏文章");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Test.QUESTION), "收藏资料");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.COM.QUESTION), "收藏真题");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }
@@ -145,13 +151,13 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            // TODO: 16/8/15 这里需要修改
             case R.id.tv_me:
-                FlowIndex.startUserProfileFromLocation("me", "18813149871", UserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("me", userInfo.getPhone(), UserProfileActivity.this);
                 break;
 
             case R.id.tv_you:
-                FlowIndex.startUserProfileFromLocation("you", "18813149871", UserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("you", userInfo.getPhone(), UserProfileActivity.this);
                 break;
 
             case R.id.iv_edit:
