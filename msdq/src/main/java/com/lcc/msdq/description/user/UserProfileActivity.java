@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
 import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.msdq.compony.content.HrFragment;
@@ -80,33 +81,35 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         EventBus.getDefault().register(this);
         userInfo = (UserInfo) getIntent().getSerializableExtra(UserInfo);
 
-        tv_fs= (TextView) findViewById(R.id.tv_fs);
-        tv_gz= (TextView) findViewById(R.id.tv_gz);
+        tv_fs = (TextView) findViewById(R.id.tv_fs);
+        tv_gz = (TextView) findViewById(R.id.tv_gz);
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
         iv_edit.setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        setData();
+        setViewPager();
+    }
 
+    private void setData() {
         String et = userInfo.getUser_image().toString();
-        if (!TextUtils.isEmpty(et)){
-            ImageManager.getInstance().loadCircleImage(UserProfileActivity.this,
-                    userInfo.getUser_image(),
+        if (!TextUtils.isEmpty(et)) {
+            ImageManager.getInstance().loadCircleImage(UserProfileActivity.this, userInfo.getUser_image(),
                     ivUserProfilePhoto);
-        }else {
+        } else {
             ImageManager.getInstance().loadResImage(UserProfileActivity.this,
                     R.drawable.default_user_logo,
                     ivUserProfilePhoto);
         }
 
-        tv_gz.setText(userInfo.getGz_num()+"/关注");
-        tv_fs.setText(userInfo.getFs_num()+"/粉丝");
+        tv_gz.setText(userInfo.getGz_num() + "/关注");
+        tv_fs.setText(userInfo.getFs_num() + "/粉丝");
         tv_nickname.setText(userInfo.getNickname());
         if (TextUtils.isEmpty(userInfo.getQm())) {
             tv_gxqm.setText("这个家伙很懒，什么也没留下");
         } else {
             tv_gxqm.setText(userInfo.getQm());
         }
-        setViewPager();
     }
 
     @Override
@@ -151,7 +154,6 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            // TODO: 16/8/15 这里需要修改
             case R.id.tv_me:
                 FlowIndex.startUserProfileFromLocation("me", userInfo.getPhone(), UserProfileActivity.this);
                 break;
@@ -161,9 +163,9 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.iv_edit:
-                Intent intent=new Intent(UserProfileActivity.this, UserEditActivity.class);
-                intent.putExtra(UserEditActivity.USERINFO,userInfo);
-                startActivity(intent);
+                Intent intent = new Intent(UserProfileActivity.this, UserEditActivity.class);
+                intent.putExtra(UserEditActivity.USERINFO, userInfo);
+                startActivityForResult(intent, 101);
                 break;
 
             case R.id.guillotine_hamburger:
@@ -173,7 +175,6 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
     }
 
     static class Adapter extends FragmentPagerAdapter {
-
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 
@@ -207,6 +208,14 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
             case 0x02:
 
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 101 && resultCode == 101) {
+            userInfo = DataManager.getUserInfo();
+            setData();
         }
     }
 

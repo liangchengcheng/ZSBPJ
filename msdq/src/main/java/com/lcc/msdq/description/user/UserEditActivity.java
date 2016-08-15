@@ -1,6 +1,7 @@
 package com.lcc.msdq.description.user;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,8 +18,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
+import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
@@ -26,13 +29,16 @@ import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
 import com.lcc.mvp.presenter.UserEditPresenter;
 import com.lcc.mvp.presenter.impl.UserEditPresenterImpl;
 import com.lcc.mvp.view.UserEditView;
+import com.lcc.utils.FileUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,6 +54,8 @@ import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
+import zsbpj.lccpj.yasuo.Luban;
+import zsbpj.lccpj.yasuo.OnCompressListener;
 
 /**
  * Author:       梁铖城
@@ -56,7 +64,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Description:  UserEditActivity（更新用户的资料）
  */
 public class UserEditActivity extends BaseActivity implements View.OnClickListener, UserEditView,
-        RadioGroup.OnCheckedChangeListener {
+        RadioGroup.OnCheckedChangeListener,OnCompressListener {
     //昵称 性别 签名 邮箱
     private EditText edit_nickname, et_qm, et_email;
     private ImageView iv_question_des;
@@ -72,6 +80,8 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     private UserInfo userInfo = new UserInfo();
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
+    private static final String newFile = Propertity.newFile;
+    private boolean edit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +113,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
 
         userInfo = (UserInfo) getIntent().getSerializableExtra(USERINFO);
 
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         edit_nickname = (EditText) findViewById(R.id.edit_nickname);
         et_qm = (EditText) findViewById(R.id.et_qm);
         et_email = (EditText) findViewById(R.id.et_email);
@@ -166,12 +177,10 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
                 @Override
                 public void onHanlderSuccess(int requestCode, List<PhotoInfo> resultList) {
                     if (resultList != null && resultList.size() > 0) {
-                        ImageManager.getInstance().loadLocalImage(UserEditActivity.this,
-                                resultList.get(0).getPhotoPath(), iv_question_des);
-                        for (int i = 0; i < resultList.size(); i++) {
-                            File file = new File(resultList.get(i).getPhotoPath());
-                            files.add(file);
-                        }
+                        files = new ArrayList<>();
+                        File file = new File(resultList.get(0).getPhotoPath());
+                        files.add(file);
+                        compressWithLs(files);
                     }
                 }
 
@@ -238,6 +247,10 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
             case R.id.iv_save:
                 sendUserInfo();
                 break;
+
+            case R.id.guillotine_hamburger:
+                close();
+                break;
         }
     }
 
@@ -258,6 +271,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
                 userInfo.setEmail(email);
             } else {
                 FrameManager.getInstance().toastPrompt("邮箱格式不正确");
+                return;
             }
         }
 
@@ -297,8 +311,8 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         closeDialog();
         FrameManager.getInstance().toastPrompt("提交信息成功");
         EventBus.getDefault().post(0x02);
-        // TODO: 16/7/23 修改下本地数据库里面的数据(此处我没验证可能会崩溃)
         DataManager.editUser(userInfo);
+        edit = true;
     }
 
     @Override
@@ -311,16 +325,14 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     }
 
     public static boolean checkEmail(String email) {
-        boolean flag = false;
         try {
             String check = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
             Pattern regex = Pattern.compile(check);
             Matcher matcher = regex.matcher(email);
-            flag = matcher.matches();
+            return matcher.matches();
         } catch (Exception e) {
-            flag = false;
+           return false;
         }
-        return flag;
     }
 
     @Override
@@ -330,5 +342,53 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
 
     public void onEventMainThread() {
         Log.e("lcc", "1");
+    }
+
+    private void compressWithLs(List<File> files) {
+        Luban.get(this).load(files.get(0)).putGear(Luban.THIRD_GEAR).setCompressListener(this).launch();
+    }
+
+    @Override
+    public void onComStart() {
+
+    }
+
+    @Override
+    public void onSuccess(File file) {
+        files = new ArrayList<>();
+        String author = DataManager.getUserName();
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMddHHmmss");
+        String filename = author + dateFormat.format(date) + ".jpg";
+        String new_file = newFile + filename;
+        FileUtil.copyFile(file.getAbsolutePath(), new_file);
+
+        String server_image = AppConstants.ImagePath + filename;
+        File file1 = new File(new_file);
+        files.add(file1);
+        userInfo.setUser_image(server_image);
+
+        ImageManager.getInstance().loadCircleLocalImage(UserEditActivity.this,
+                file.getAbsolutePath(), iv_question_des);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        close();
+    }
+
+    private void close(){
+        if (edit){
+            Intent intent =new Intent();
+            this.setResult(101, intent);
+            finish();
+        }else {
+            finish();
+        }
     }
 }

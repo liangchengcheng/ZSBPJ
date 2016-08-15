@@ -225,12 +225,11 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
                 @Override
                 public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
                     if (resultList != null && resultList.size() > 0) {
-                        if (resultList != null && resultList.size() > 0) {
-                            files = new ArrayList<>();
-                            File file = new File(resultList.get(0).getPhotoPath());
-                            files.add(file);
-                            compressWithLs(files);
-                        }
+                        files = new ArrayList<>();
+                        File file = new File(resultList.get(0).getPhotoPath());
+                        files.add(file);
+                        compressWithLs(files);
+
                     }
                 }
 

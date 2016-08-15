@@ -21,6 +21,7 @@ public class UserEditModel {
         paramsMap.put("xb", userInfo.getXb());
         paramsMap.put("email", userInfo.getEmail());
         paramsMap.put("qm", userInfo.getQm());
+        paramsMap.put("user_image", userInfo.getUser_image());
         return ApiClient.createWithFile(AppConstants.RequestPath.EditServiceAPI,
                 paramsMap,files)
                 .upload(callback);
