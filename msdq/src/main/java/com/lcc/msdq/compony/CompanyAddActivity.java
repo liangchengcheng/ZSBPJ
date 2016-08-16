@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.lcc.AppConstants;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyDescription;
+import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
@@ -58,19 +59,17 @@ import zsbpj.lccpj.yasuo.OnCompressListener;
  * Date:         2015年11月21日15:28:25
  * Description:  CompanyAddActivity
  */
-public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener,
-        OnCompressListener {
+public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener, OnCompressListener {
+    public FunctionConfig functionConfig;
     public static final String NAME = "name";
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
     private String name;
     private Pattern intPattern = Pattern.compile("^[-\\+]?[\\d]*\\.0*$");
     private String pro, city, dis;
-    public FunctionConfig functionConfig;
     private List<File> files = new ArrayList<>();
     private ComDesAddPresenter presenter;
-    private static final String newFile = Environment.getExternalStorageDirectory().getPath()
-            + "/com.lcc.mstdq/";
+    private static final String newFile = Propertity.newFile;
 
     private TextView tv_position;
     private EditText editText_name, editText_phone, editText_add, editText_summary;
@@ -109,24 +108,18 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
         city = getString(map, "cityName", "");
         dis = getString(map, "districtName", "");
         String areaName = String.format("%s %s %s", pro, city, dis);
+
         tv_position.setText(areaName);
     }
 
     private void initPic() {
         ThemeConfig themeConfig = ThemeConfig.GREEN;
-        functionConfig = new FunctionConfig.Builder()
-                .setEnableCamera(true)
-                .setEnableEdit(true)
-                .setEnableCrop(true)
-                .setEnableRotate(true)
-                .setCropSquare(true)
-                .setEnablePreview(true)
-                .setMutiSelectMaxSize(8)
-                .build();
+        functionConfig = new FunctionConfig.Builder().setEnableCamera(true).setEnableEdit(true)
+                .setEnableCrop(true).setEnableRotate(true).setCropSquare(true).setEnablePreview(true)
+                .setMutiSelectMaxSize(1).build();
         CoreConfig coreConfig = new CoreConfig.Builder(this, new UILImageLoader(), themeConfig)
                 .setFunctionConfig(functionConfig)
-                .setPauseOnScrollListener(new UILPauseOnScrollListener(false, true))
-                .build();
+                .setPauseOnScrollListener(new UILPauseOnScrollListener(false, true)).build();
         GalleryFinal.init(coreConfig);
     }
 
@@ -188,12 +181,14 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
             public void onDismiss() {
             }
         });
+
         view.findViewById(R.id.ll_qx).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 window.dismiss();
             }
         });
+
         view.findViewById(R.id.ll_xc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,6 +196,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
                 window.dismiss();
             }
         });
+
         view.findViewById(R.id.ll_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

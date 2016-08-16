@@ -133,6 +133,7 @@
                             android:gravity="end"
                             android:hint="输入昵称"
                             android:padding="10dp"
+                            android:paddingRight="20dp"
                             android:textColor="@color/article_des"
                             android:textSize="16sp" />
                     </RelativeLayout>
@@ -164,6 +165,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="20dp"
+                            android:paddingRight="10dp"
                             android:orientation="horizontal">
 
                             <RadioButton
@@ -279,6 +281,7 @@
                         android:background="#EDEDED" />
 
                     <RelativeLayout
+                        android:paddingRight="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
