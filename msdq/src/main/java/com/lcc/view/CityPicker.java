@@ -60,7 +60,6 @@ public class CityPicker extends LinearLayout {
 		getAddressInfo();
 	}
 
-	// 获取城市信息
 	private void getAddressInfo() {
 		JSONParser parser = new JSONParser();
 		String area_str = FileUtils.readAssets(context, "area.json");
@@ -191,6 +190,7 @@ public class CityPicker extends LinearLayout {
 
 			}
 		});
+
 		counyPicker.setOnSelectListener(new ScrollerNumberPicker.OnSelectListener() {
 
 			@Override

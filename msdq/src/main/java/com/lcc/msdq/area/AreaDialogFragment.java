@@ -14,16 +14,15 @@ import com.lcc.msdq.R;
 import com.lcc.view.CityPicker;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class AreaDialogFragment extends DialogFragment implements CityPicker.OnSelectingListener {
+public class AreaDialogFragment extends DialogFragment  {
 	private CityPicker cityPicker;
 
-	@Override
-	public void selected(boolean selected) {
-
+	public interface StringListener {
+		void onStringInputComplete(String message);
 	}
 
-	public interface LoginInputListener {
-		void onLoginInputComplete(String username);
+	public interface CodeListener {
+		void onCodeInputComplete(String message);
 	}
 	
 	@Override
@@ -32,14 +31,14 @@ public class AreaDialogFragment extends DialogFragment implements CityPicker.OnS
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View view = inflater.inflate(R.layout.fragment_area_dialog, null);
 		cityPicker = (CityPicker) view.findViewById(R.id.citypicker);
-		builder.setView(view).setPositiveButton("确定",
-						new DialogInterface.OnClickListener()
-						{
+		builder.setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(DialogInterface dialog, int id)
-							{
-								LoginInputListener listener = (LoginInputListener) getActivity();
-								listener.onLoginInputComplete(cityPicker.getCity_string());
+							public void onClick(DialogInterface dialog, int id) {
+								StringListener listener = (StringListener) getActivity();
+								listener.onStringInputComplete(cityPicker.getCity_string());
+
+								CodeListener codelistener = (CodeListener) getActivity();
+								codelistener.onCodeInputComplete(cityPicker.getCity_code_string());
 							}
 						}).setNegativeButton("取消", null);
 		return builder.create();
