@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  开始或者结束轮训器
+ * Description:  CompanyDescription(公司的简介)
  */
 public class CompanyDescription implements Serializable {
 
@@ -25,7 +25,6 @@ public class CompanyDescription implements Serializable {
      * look_num : 0
      * z_num : 0
      */
-
     private int id;
     private String mid;
     private String company_name;
@@ -40,6 +39,15 @@ public class CompanyDescription implements Serializable {
     private String l_num;
     private String z_num;
     private String c_num;
+    private String areaid;
+
+    public String getAreaid() {
+        return areaid;
+    }
+
+    public void setAreaid(String areaid) {
+        this.areaid = areaid;
+    }
 
     public String getL_num() {
         return l_num;

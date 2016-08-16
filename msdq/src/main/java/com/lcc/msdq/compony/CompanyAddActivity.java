@@ -173,8 +173,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        window.showAtLocation(CompanyAddActivity.this.findViewById(R.id.rootview),
-                Gravity.BOTTOM, 0, 0);
+        window.showAtLocation(CompanyAddActivity.this.findViewById(R.id.rootview), Gravity.BOTTOM, 0, 0);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override
@@ -248,7 +247,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
                         TextUtils.isEmpty(editText_phone.getText().toString()) ||
                         TextUtils.isEmpty(editText_add.getText().toString()) ||
                         TextUtils.isEmpty(editText_summary.getText().toString())) {
-                    FrameManager.getInstance().toastPrompt("有未填写的数据");
+                    FrameManager.getInstance().toastPrompt("请将数据补充完整");
                     return;
                 }
 
