@@ -1,8 +1,10 @@
 package com.lcc.msdq.compony;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -21,6 +23,7 @@ import com.lcc.entity.CompanyDescription;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.AreaDialogFragment;
 import com.lcc.msdq.test.answer.photo.UILImageLoader;
 import com.lcc.msdq.test.answer.photo.UILPauseOnScrollListener;
 import com.lcc.mvp.presenter.ComDesAddPresenter;
@@ -59,7 +62,8 @@ import zsbpj.lccpj.yasuo.OnCompressListener;
  * Date:         2015年11月21日15:28:25
  * Description:  CompanyAddActivity
  */
-public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener, OnCompressListener {
+public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener,
+        OnCompressListener ,AreaDialogFragment.CodeListener,AreaDialogFragment.StringListener{
     public FunctionConfig functionConfig;
     public static final String NAME = "name";
     private final int REQUEST_CODE_CAMERA = 1000;
@@ -71,7 +75,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
     private ComDesAddPresenter presenter;
     private static final String newFile = Propertity.newFile;
 
-    private TextView tv_position;
+    private EditText tv_position;
     private EditText editText_name, editText_phone, editText_add, editText_summary;
     private SimpleArcDialog mDialog;
     private ImageView iv_question_des;
@@ -90,7 +94,8 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
         iv_question_des.setOnClickListener(this);
         findViewById(R.id.tv_add_pic).setOnClickListener(this);
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
-        tv_position = (TextView) findViewById(R.id.tv_position);
+        findViewById(R.id.btn_search).setOnClickListener(this);
+        tv_position = (EditText) findViewById(R.id.tv_position);
         editText_name = (EditText) findViewById(R.id.editText_name);
         editText_phone = (EditText) findViewById(R.id.editText_phone);
         editText_add = (EditText) findViewById(R.id.editText_add);
@@ -102,14 +107,6 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
         name = getIntent().getStringExtra(NAME);
         editText_name.setText(name);
         initPic();
-
-        final Map map = (Map) getIntent().getSerializableExtra("addressInfo");
-        pro = getString(map, "provName", "");
-        city = getString(map, "cityName", "");
-        dis = getString(map, "districtName", "");
-        String areaName = String.format("%s %s %s", pro, city, dis);
-
-        tv_position.setText(areaName);
     }
 
     private void initPic() {
@@ -259,6 +256,10 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
                 companyDescription.setCompany_description(editText_summary.getText().toString());
                 presenter.ComDesAdd(companyDescription, files);
                 break;
+
+            case R.id.btn_search:
+                showLoginDialog();
+                break;
         }
     }
 
@@ -296,5 +297,21 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
     @Override
     public void onError(Throwable e) {
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void showLoginDialog() {
+        AreaDialogFragment dialog = new AreaDialogFragment();
+        dialog.show(getFragmentManager(), "loginDialog");
+    }
+
+    @Override
+    public void onCodeInputComplete(String message) {
+        FrameManager.getInstance().toastPrompt(message);
+    }
+
+    @Override
+    public void onStringInputComplete(String message) {
+        FrameManager.getInstance().toastPrompt(message);
     }
 }

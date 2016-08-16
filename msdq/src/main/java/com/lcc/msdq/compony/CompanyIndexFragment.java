@@ -29,6 +29,7 @@ import com.lcc.mvp.view.CompanyDescriptionView;
 import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -261,7 +262,9 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
                 break;
 
             case R.id.loading_layout:
-                AreaSelectActivity.startAreaSelectActivity(company_name, getActivity());
+                Intent intent = new Intent(getActivity(), CompanyAddActivity.class);
+                intent.putExtra(CompanyAddActivity.NAME, company_name);
+                startActivity(intent);
                 break;
         }
     }
