@@ -224,7 +224,6 @@ public class CityPicker extends LinearLayout {
 		});
 	}
 
-	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler() {
 
 		@Override

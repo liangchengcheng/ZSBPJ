@@ -1,19 +1,15 @@
 package com.lcc.msdq.area;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import com.lcc.msdq.R;
 import com.lcc.view.CityPicker;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class AreaDialogFragment extends DialogFragment  {
 	private CityPicker cityPicker;
 
@@ -34,13 +30,23 @@ public class AreaDialogFragment extends DialogFragment  {
 		builder.setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
-								StringListener listener = (StringListener) getActivity();
-								listener.onStringInputComplete(cityPicker.getCity_string());
-
-								CodeListener codelistener = (CodeListener) getActivity();
-								codelistener.onCodeInputComplete(cityPicker.getCity_code_string());
+								dcodeListener.onStringInputComplete(cityPicker.getCity_string());
+								scodeListener.onCodeInputComplete(cityPicker.getCity_code_string());
 							}
 						}).setNegativeButton("取消", null);
 		return builder.create();
 	}
+
+	private CodeListener scodeListener;
+
+	public void setOnCodeListener(CodeListener scodeListener) {
+		this.scodeListener = scodeListener;
+	}
+
+	private StringListener dcodeListener;
+
+	public void setOnStringListener(StringListener dcodeListener) {
+		this.dcodeListener = dcodeListener;
+	}
+
 }

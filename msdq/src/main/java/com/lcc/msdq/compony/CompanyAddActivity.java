@@ -70,7 +70,6 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
     private final int REQUEST_CODE_GALLERY = 1001;
     private String name;
     private Pattern intPattern = Pattern.compile("^[-\\+]?[\\d]*\\.0*$");
-    private String pro, city, dis;
     private List<File> files = new ArrayList<>();
     private ComDesAddPresenter presenter;
     private static final String newFile = Propertity.newFile;
@@ -302,16 +301,18 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void showLoginDialog() {
         AreaDialogFragment dialog = new AreaDialogFragment();
+        dialog.setOnCodeListener(this);
+        dialog.setOnStringListener(this);
         dialog.show(getFragmentManager(), "loginDialog");
     }
 
     @Override
     public void onCodeInputComplete(String message) {
-        FrameManager.getInstance().toastPrompt(message);
+        companyDescription.setAreaid(message);
     }
 
     @Override
     public void onStringInputComplete(String message) {
-        FrameManager.getInstance().toastPrompt(message);
+        tv_position.setText(message);
     }
 }

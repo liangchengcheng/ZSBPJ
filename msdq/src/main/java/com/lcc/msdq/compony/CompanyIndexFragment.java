@@ -19,6 +19,7 @@ import com.lapism.searchview.view.SearchView;
 import com.lcc.adapter.CompanyAdapter;
 import com.lcc.entity.CompanyDescription;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.AreaDialogFragment;
 import com.lcc.msdq.choice.AreaSelectActivity;
 import com.lcc.msdq.choice.ChoiceAreaSelectActivity;
 import com.lcc.msdq.compony.question.CompanyContentActivity;
@@ -40,7 +41,8 @@ import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
 public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements SearchView.OnQueryTextListener,
         SearchView.SearchViewListener, SearchAdapter.OnItemClickListener, CompanyAdapter.OnItemClickListener,
-        CompanyDescriptionView, View.OnClickListener,CompanyAdapter.OnImageClickListener {
+        CompanyDescriptionView, View.OnClickListener,CompanyAdapter.OnImageClickListener ,
+        AreaDialogFragment.CodeListener ,AreaDialogFragment.StringListener{
     private SearchView mSearchView;
     private SearchHistoryTable mHistoryDatabase;
     private View iv_more;
@@ -61,7 +63,6 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
         currentPage = 1;
         super.onFragmentCreate();
         mPresenter = new CompanyDescriptionPresenterImpl(this);
-        area = SharePreferenceUtil.getAREA();
         View view = getView();
         tv_tip = (TextView) view.findViewById(R.id.tv_tip);
 
@@ -223,42 +224,7 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_more:
-                if (TextUtils.isEmpty(area)){
-                    new AlertDialog.Builder(getActivity()).setTitle("添加地址")
-                            .setMessage("暂时没有地址，默认搜索全部数据，你确定要添加先的地址？")
-                            .setPositiveButton("添加", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
-                                    getActivity().startActivityForResult(intent, 11);
-                                    dialog.dismiss();
-                                }
-                            })
-
-                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
-                }else {
-                    new AlertDialog.Builder(getActivity()).setTitle("更换地址")
-                            .setMessage("你现在的地址是"+area+",你确定要更换之其他区域吗？")
-                            .setPositiveButton("更换", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(getActivity(), ChoiceAreaSelectActivity.class);
-                                    getActivity().startActivityForResult(intent, 11);
-                                }
-                            })
-
-                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
-                }
+                showLoginDialog();
                 break;
 
             case R.id.loading_layout:
@@ -271,20 +237,6 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
 
     private Pattern intPattern = Pattern.compile("^[-\\+]?[\\d]*\\.0*$");
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 11 && resultCode == 12 && data != null) {
-            Map map = (Map) data.getSerializableExtra("addressInfo");
-            String areaName = String.format("%s", getString(map, "cityName", ""));
-            FrameManager.getInstance().toastPrompt(areaName);
-            area = areaName;
-            SharePreferenceUtil.setAREA(areaName);
-            currentPage = 1;
-            mPresenter.getData(currentPage, company_name, area);
-        }
-    }
-
     public String getString(Map map, String key, String defaultValue) {
         Object obj = map.get(key);
         return obj == null ? defaultValue : (obj instanceof Number && intPattern.matcher(obj.toString())
@@ -294,5 +246,24 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
     @Override
     public void onImageClick(CompanyDescription companyDescription) {
         CompanyDesMain.startCompanyDesMain(companyDescription, getActivity());
+    }
+
+    public void showLoginDialog() {
+        AreaDialogFragment dialog = new AreaDialogFragment();
+        dialog.setOnCodeListener(this);
+        dialog.setOnStringListener(this);
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
+    }
+
+    @Override
+    public void onCodeInputComplete(String message) {
+        area = message;
+        currentPage = 1;
+        mPresenter.getData(currentPage, company_name, area);
+    }
+
+    @Override
+    public void onStringInputComplete(String message) {
+
     }
 }

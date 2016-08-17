@@ -27,6 +27,7 @@ public class ComDesAddModel {
         paramsMap.put("citys", replay.getCity());
         paramsMap.put("areas", replay.getArea());
         paramsMap.put("imagepath", replay.getCompany_image());
+        paramsMap.put("areaid", replay.getAreaid());
 
         return ApiClient.createWithFile(AppConstants.RequestPath.saveCompanyForAndroid,
                 paramsMap,files)
