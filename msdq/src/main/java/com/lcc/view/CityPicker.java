@@ -250,7 +250,11 @@ public class CityPicker extends LinearLayout {
 	}
 
 	public String getCity_string() {
-		city_string = provincePicker.getSelectedText() + cityPicker.getSelectedText() + counyPicker.getSelectedText();
+		city_string = provincePicker.getSelectedText()
+				+"="
+				+ cityPicker.getSelectedText()
+				+"="
+				+ counyPicker.getSelectedText();
 		return city_string;
 	}
 

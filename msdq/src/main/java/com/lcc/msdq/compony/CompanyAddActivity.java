@@ -63,7 +63,7 @@ import zsbpj.lccpj.yasuo.OnCompressListener;
  * Description:  CompanyAddActivity
  */
 public class CompanyAddActivity extends BaseActivity implements ComDesAddView, View.OnClickListener,
-        OnCompressListener ,AreaDialogFragment.CodeListener,AreaDialogFragment.StringListener{
+        OnCompressListener, AreaDialogFragment.CodeListener, AreaDialogFragment.StringListener {
     public FunctionConfig functionConfig;
     public static final String NAME = "name";
     private final int REQUEST_CODE_CAMERA = 1000;
@@ -73,6 +73,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
     private List<File> files = new ArrayList<>();
     private ComDesAddPresenter presenter;
     private static final String newFile = Propertity.newFile;
+    private String location;
 
     private EditText tv_position;
     private EditText editText_name, editText_phone, editText_add, editText_summary;
@@ -251,7 +252,7 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
                 companyDescription.setAuthor("");
                 companyDescription.setCompany_name(editText_name.getText().toString());
                 companyDescription.setCompany_phone(editText_phone.getText().toString());
-                companyDescription.setLocation(editText_add.getText().toString());
+                companyDescription.setLocation(location + editText_add.getText().toString());
                 companyDescription.setCompany_description(editText_summary.getText().toString());
                 presenter.ComDesAdd(companyDescription, files);
                 break;
@@ -313,6 +314,13 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
 
     @Override
     public void onStringInputComplete(String message) {
-        tv_position.setText(message);
+        if (!TextUtils.isEmpty(message)) {
+            String[] location_str = message.split("=");
+            companyDescription.setProvince(location_str[0]);
+            companyDescription.setCity(location_str[1]);
+            companyDescription.setArea(location_str[2]);
+            location = message.replace("=", "");
+            tv_position.setText(message.replace("=", ""));
+        }
     }
 }

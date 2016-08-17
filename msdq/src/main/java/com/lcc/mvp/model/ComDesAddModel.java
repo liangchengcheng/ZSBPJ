@@ -23,9 +23,11 @@ public class ComDesAddModel {
         paramsMap.put("company_phone", replay.getCompany_phone());
         paramsMap.put("description", replay.getCompany_description());
         paramsMap.put("location", replay.getLocation());
+
         paramsMap.put("provinces", replay.getProvince());
         paramsMap.put("citys", replay.getCity());
         paramsMap.put("areas", replay.getArea());
+
         paramsMap.put("imagepath", replay.getCompany_image());
         paramsMap.put("areaid", replay.getAreaid());
 
