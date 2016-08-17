@@ -28,9 +28,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuActivity
  */
-public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
-        SwipeRefreshLayout.OnRefreshListener ,IndexMenuAdapter.OnFavClickListener,
-        IndexMenuAdapter.OnItemClickListener{
+public class IndexMenuActivity extends BaseActivity implements IndexMenuView, SwipeRefreshLayout.OnRefreshListener,
+        IndexMenuAdapter.OnFavClickListener, IndexMenuAdapter.OnItemClickListener{
 
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
@@ -44,7 +43,6 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView,
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-
     private IndexMenuPresenter mPresenter;
     private String type="面试准备";
 

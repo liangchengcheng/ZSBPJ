@@ -97,6 +97,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.iv_share).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         initRefreshView();
         initRecycleView();
         mPresenter.getData(currentPage, fid);
@@ -271,12 +272,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " "
-                        + "wwww.baidu.com" + getString(R.string.share_tail));
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
 
             case R.id.action_use_browser:
@@ -320,6 +315,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
                 CommentsActivity.startUserProfileFromLocation(entity.getMid(), Propertity.Test.QUESTION,
                         AnswerIndexActivity.this);
+                break;
+
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
 
         }

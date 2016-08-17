@@ -102,7 +102,6 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tv_name.setMaxLineCount(3);
             holder.tv_name.setContent(object.getSummary());
             holder.tv_name.setContentTextColor(Color.parseColor("#6D6D6D"));
-
             holder.tv_title.setText(object.getTitle());
 
             String s_num = object.getZ_num();
@@ -133,9 +132,6 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             Object object = mList.get(position);

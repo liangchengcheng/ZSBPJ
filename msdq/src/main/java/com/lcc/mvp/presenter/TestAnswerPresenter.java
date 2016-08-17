@@ -1,6 +1,5 @@
 package com.lcc.mvp.presenter;
 
-import com.lcc.entity.Article;
 import com.lcc.entity.TestEntity;
 
 public interface TestAnswerPresenter {

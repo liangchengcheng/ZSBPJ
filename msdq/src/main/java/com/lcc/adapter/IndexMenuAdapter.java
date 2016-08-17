@@ -31,7 +31,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  IndexMenuAdapter
  */
 public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
     private List<Article> mList = new ArrayList<>();
