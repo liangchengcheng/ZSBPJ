@@ -33,6 +33,24 @@ public class otherUserInfo implements Serializable {
     private String qm;
     private String zy;
     private String user_image;
+    private String gz_num;
+    private String fs_num;
+
+    public String getGz_num() {
+        return gz_num;
+    }
+
+    public void setGz_num(String gz_num) {
+        this.gz_num = gz_num;
+    }
+
+    public String getFs_num() {
+        return fs_num;
+    }
+
+    public void setFs_num(String fs_num) {
+        this.fs_num = fs_num;
+    }
 
     public String getId() {
         return id;

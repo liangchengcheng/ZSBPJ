@@ -60,6 +60,10 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     LinearLayout tv_me;
     @Bind(R.id.tv_you)
     LinearLayout tv_you;
+    @Bind(R.id.tv_fs)
+    TextView tv_fs;
+    @Bind(R.id.tv_gz)
+    TextView tv_gz;
 
     public static void starOtherUserProfileActivity(String phone, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, OtherUserProfileActivity.class);
@@ -155,6 +159,10 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
             } else {
                 tv_gxqm.setText(otherUserInfo.getQm());
             }
+
+            tv_gz.setText(otherUserInfo.getGz_num() + "/关注");
+            tv_fs.setText(otherUserInfo.getFs_num() + "/粉丝");
+
             setViewPager();
         } else {
 

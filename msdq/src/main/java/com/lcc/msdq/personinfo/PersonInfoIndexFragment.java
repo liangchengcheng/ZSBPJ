@@ -1,6 +1,5 @@
 package com.lcc.msdq.personinfo;
 
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -44,7 +43,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     private TextView tv_qm;
     //签到
     private RelativeLayout rl_qd;
-    //
     private TextView tv_qd;
 
     public static Fragment newInstance() {

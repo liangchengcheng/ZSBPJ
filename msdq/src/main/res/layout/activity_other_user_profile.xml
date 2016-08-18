@@ -58,7 +58,7 @@
 
                         <LinearLayout
                             android:id="@+id/vUserDetails"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -67,7 +67,6 @@
                                 android:id="@+id/tv_nickname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="用户名字"
                                 android:textColor="#ffffff"
                                 android:textSize="20sp" />
 
@@ -76,7 +75,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="用户的个性签名"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
 
@@ -96,9 +94,9 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_fs"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="396/粉"
                                         android:textColor="#ffffff"
                                         android:textSize="14sp" />
 
@@ -113,9 +111,9 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_gz"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="485/关注"
                                         android:textColor="#ffffff"
                                         android:textSize="14sp" />
 
@@ -123,7 +121,6 @@
 
                                 <LinearLayout
                                     android:layout_gravity="center_vertical"
-                                    android:id="@+id/tv_gz"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"

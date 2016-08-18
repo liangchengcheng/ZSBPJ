@@ -32,7 +32,7 @@
                 android:padding="10dp"
                 android:text="请先登录"
                 android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_qm"
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                 android:padding="10dp"
                 android:text="这个家伙很懒，什么也没留下"
                 android:textColor="#fff"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
