@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
 import com.lcc.entity.otherUserInfo;
+import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.description.user.UserEditActivity;
 import com.lcc.msdq.description.user.UserProfileAdapter;
@@ -36,10 +37,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
 
-public class OtherUserProfileActivity extends BaseActivity implements View.OnClickListener
-        , GetUserInfoView {
-
+public class OtherUserProfileActivity extends BaseActivity implements View.OnClickListener, GetUserInfoView {
     public static final String PHONE = "phone";
+    private String phone;
+    private GetUserInfoPresenter getUserInfoPresenter;
 
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
@@ -62,11 +63,7 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     @Bind(R.id.tv_you)
     LinearLayout tv_you;
 
-    private String phone;
-    private GetUserInfoPresenter getUserInfoPresenter;
-
-    public static void starOtherUserProfileActivity(String phone,
-                                                    Activity startingActivity) {
+    public static void starOtherUserProfileActivity(String phone, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, OtherUserProfileActivity.class);
         intent.putExtra(PHONE, phone);
         startingActivity.startActivity(intent);
@@ -110,9 +107,9 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏文章");
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏资料");
-        adapter.addFragment(ArticleFragment.newInstance("面试感想"), "收藏的公司");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Article.NAME), "收藏文章");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.Test.QUESTION), "收藏资料");
+        adapter.addFragment(ArticleFragment.newInstance(Propertity.COM.QUESTION), "收藏的公司");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }
@@ -120,21 +117,17 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.tv_me:
-                FlowIndex.startUserProfileFromLocation("me", "18813149871",
-                        OtherUserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("me", phone, OtherUserProfileActivity.this);
                 break;
 
             case R.id.tv_you:
-                FlowIndex.startUserProfileFromLocation("you", "18813149871",
-                        OtherUserProfileActivity.this);
+                FlowIndex.startUserProfileFromLocation("you", phone, OtherUserProfileActivity.this);
                 break;
 
             case R.id.guillotine_hamburger:
                 finish();
                 break;
-
         }
     }
 
@@ -157,8 +150,7 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     public void getDataSuccess(otherUserInfo otherUserInfo) {
         if (otherUserInfo != null) {
             ImageManager.getInstance().loadCircleImage(OtherUserProfileActivity.this,
-                    otherUserInfo.getUser_image(),
-                    ivUserProfilePhoto);
+                    otherUserInfo.getUser_image(), ivUserProfilePhoto);
             tv_nickname.setText(otherUserInfo.getNickname());
             if (TextUtils.isEmpty(otherUserInfo.getQm())) {
                 tv_gxqm.setText("这个家伙很懒，什么也没留下");

@@ -187,6 +187,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
             case R.id.floatingComment:
                 CommentsActivity.startUserProfileFromLocation(answer.getMid(),
                         Propertity.Test.ANSWER, AnswerContentActivity.this);
+                floatingMenu.close(false);
                 break;
 
             //赞
@@ -196,6 +197,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 } else {
                     testAnswerContentPresenter.Good(answer, Propertity.Test.ANSWER, testEntity.getTitle());
                 }
+                floatingMenu.close(false);
                 break;
             //收藏
             case R.id.floatingCollect:
@@ -204,6 +206,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 } else {
                     testAnswerContentPresenter.Fav(answer, Propertity.Test.ANSWER, testEntity.getTitle());
                 }
+                floatingMenu.close(false);
                 break;
 
             case R.id.guillotine_hamburger:

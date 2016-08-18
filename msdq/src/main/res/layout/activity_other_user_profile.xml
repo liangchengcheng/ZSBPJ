@@ -205,7 +205,7 @@
                     android:background="?attr/colorAccent"
                     app:tabGravity="fill"
                     app:tabIndicatorColor="#5be5ad"
-                    app:tabIndicatorHeight="4dp"
+                    app:tabIndicatorHeight="1dp"
                     app:tabMode="fixed" />
             </FrameLayout>
         </android.support.design.widget.AppBarLayout>
