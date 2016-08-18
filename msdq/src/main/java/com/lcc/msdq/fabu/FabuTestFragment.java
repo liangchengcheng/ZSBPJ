@@ -33,9 +33,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  ArticleFragment
  */
-public class FabuTestFragment extends BaseLazyLoadFragment  implements
-        SwipeRefreshLayout.OnRefreshListener,FabuTestView,FabuTestAdapter.OnItemClickListener{
-
+public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefreshLayout.OnRefreshListener,
+        FabuTestView,FabuTestAdapter.OnItemClickListener{
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;

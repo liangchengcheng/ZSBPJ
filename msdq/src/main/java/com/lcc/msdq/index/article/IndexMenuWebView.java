@@ -36,9 +36,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class IndexMenuWebView extends BaseActivity implements MenuContentView,
-        View.OnClickListener {
-
+public class IndexMenuWebView extends BaseActivity implements MenuContentView, View.OnClickListener {
     public static final String DATA = "data";
     public static final String TYPE = "type";
     private MenuContentPresenter indexContentPresenter;

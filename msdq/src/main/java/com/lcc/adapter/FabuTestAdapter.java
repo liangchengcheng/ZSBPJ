@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
  * Description:  FabuTestAdapter
  */
 public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
     private List<TestEntity> mList = new ArrayList<>();

@@ -48,8 +48,6 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     ImageView ivUserProfilePhoto;
     @Bind(R.id.vUserDetails)
     View vUserDetails;
-    @Bind(R.id.btnFollow)
-    Button btnFollow;
     @Bind(R.id.vUserStats)
     View vUserStats;
     @Bind(R.id.vUserProfileRoot)

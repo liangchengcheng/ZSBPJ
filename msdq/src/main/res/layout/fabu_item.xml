@@ -16,23 +16,23 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/focus_head" />
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_feed_share_entry" />
 
         <TextView
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:layout_toRightOf="@+id/iv_head"
             android:lineSpacingMultiplier="1.3"
-            android:text="钢铁他是怎么炼成的呢钢铁他是怎么炼成的呢钢铁他是怎么炼成的呢钢铁他是怎么炼成的呢钢铁他是怎么炼成的呢？"
+            android:text="测试数据"
             android:textColor="@color/article_title"
             android:textSize="14sp" />
     </RelativeLayout>
