@@ -263,16 +263,16 @@
     </style>
 
     <style name="style0">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">#585858</item>
     </style>
 
     <style name="style1">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">#40517A</item>
     </style>
     <style name="style2">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">#585858</item>
     </style>
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
