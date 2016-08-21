@@ -209,6 +209,5 @@
                     android:layout_height="1dp" />
             </FrameLayout>
         </android.support.design.widget.AppBarLayout>
-
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -62,16 +62,12 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             final Article weekData = mList.get(position);
@@ -137,28 +133,20 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.iv_head)
         ImageView iv_head;
-
         @Bind(R.id.tv_title)
         TextView tv_title;
-
         @Bind(R.id.tv_summary)
         TextView tv_summary;
-
         @Bind(R.id.ll_all)
         CardView ll_all;
-
         @Bind(R.id.state)
         TextView state;
-
         @Bind(R.id.state_red)
         TextView state_red;
-
         @Bind(R.id.l_num)
         TextView l_num;
-
         @Bind(R.id.ll_sc)
         LinearLayout ll_sc;
 
@@ -175,7 +163,6 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 
