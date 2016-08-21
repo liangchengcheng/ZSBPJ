@@ -189,8 +189,7 @@ public class Advertisements implements OnPageChangeListener {
 			final int POSITION = position;
 			View view = views.get(position);
 			try {
-				//图片的下载地址在json里面- [x] http://www.tengxungame.pub:8080
-				String head_img = AppConstants.RequestPath.BASE_URL+list.get(position).getActivity_pic();
+				String head_img =list.get(position).getActivity_pic();
 				ImageView ivAdvertise = (ImageView) view.findViewById(R.id.ivAdvertise);
 				Glide.with(ivAdvertise.getContext())
 						.load(head_img)

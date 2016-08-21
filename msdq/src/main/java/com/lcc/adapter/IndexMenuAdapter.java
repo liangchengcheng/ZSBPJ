@@ -160,7 +160,6 @@ public class IndexMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * 头部的布局
      */
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
         @Bind(R.id.mTextView)

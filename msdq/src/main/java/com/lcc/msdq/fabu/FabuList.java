@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
@@ -20,11 +21,12 @@ import java.util.List;
  * Date:         2015年11月21日15:28:25
  * Description:  FavoriteList
  */
-public class FabuList extends BaseActivity{
+public class FabuList extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
         setViewPager();
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
 
     private void setViewPager() {
@@ -54,6 +56,14 @@ public class FabuList extends BaseActivity{
         return R.layout.fabu_list_activity;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
+    }
 
     static class Adapter extends FragmentPagerAdapter {
 
