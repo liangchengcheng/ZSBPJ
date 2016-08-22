@@ -1,4 +1,4 @@
-package com.lcc.msdq.index.article;
+package com.lcc.msdq.look.fav;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.entity.ArticleContent;
+import com.lcc.entity.FavEntity;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
@@ -36,7 +37,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class IndexMenuWebView extends BaseActivity implements MenuContentView, View.OnClickListener {
+public class ArticlesWebView extends BaseActivity implements MenuContentView, View.OnClickListener {
     public static final String DATA = "data";
     private MenuContentPresenter indexContentPresenter;
     private Article article;
@@ -50,9 +51,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
 
-    public static void startIndexMenuWebView(Activity startingActivity, Article article) {
-        Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
-        intent.putExtra(DATA, article);
+    public static void startIndexMenuWebView(Activity startingActivity, FavEntity favEntity) {
+        Intent intent = new Intent(startingActivity, ArticlesWebView.class);
+        intent.putExtra(DATA, favEntity);
         startingActivity.startActivity(intent);
     }
 
@@ -168,7 +169,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     ivZhihuStory.setVisibility(View.GONE);
                 } else {
                     ivZhihuStory.setVisibility(View.VISIBLE);
-                    Glide.with(IndexMenuWebView.this)
+                    Glide.with(ArticlesWebView.this)
                             .load(head_img)
                             .placeholder(R.drawable.loading1)
                             .centerCrop()
@@ -202,7 +203,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     return;
                 }
                 CommentsActivity.startUserProfileFromLocation(article.getMid(),
-                        Propertity.Article.NAME, IndexMenuWebView.this);
+                        Propertity.Article.NAME, ArticlesWebView.this);
                 break;
 
             case R.id.tv_to_comments:
@@ -211,7 +212,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     return;
                 }
                 CommentsActivity.startUserProfileFromLocation(article.getMid(),
-                        Propertity.Article.NAME, IndexMenuWebView.this);
+                        Propertity.Article.NAME, ArticlesWebView.this);
                 break;
 
             case R.id.guillotine_hamburger:
@@ -239,7 +240,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     public void FavSuccess() {
         // TODO: 16/8/23
         articleContent.setAuthor("18813149871");
-        ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
+        ImageManager.getInstance().loadResImage(ArticlesWebView.this,
                 R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
         FrameManager.getInstance().toastPrompt("收藏成功");
     }
@@ -253,7 +254,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     public void UnFavSuccess() {
         articleContent.setAuthor(null);
         FrameManager.getInstance().toastPrompt("取消收藏成功");
-        ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
+        ImageManager.getInstance().loadResImage(ArticlesWebView.this,
                 R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
     }
 

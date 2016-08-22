@@ -264,7 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试着装"
+                            android:text="常问问题"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -350,7 +350,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试交通"
+                            android:text="面试流程"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>

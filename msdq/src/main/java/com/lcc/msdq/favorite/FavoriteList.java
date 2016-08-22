@@ -69,7 +69,6 @@ public class FavoriteList extends BaseActivity implements View.OnClickListener {
     }
 
     static class Adapter extends FragmentPagerAdapter {
-
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 

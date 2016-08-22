@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.FavAdapter;
 import com.lcc.adapter.JSAdapter;
@@ -17,6 +16,8 @@ import com.lcc.entity.FavEntity;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.index.article.IndexMenuWebView;
+import com.lcc.msdq.look.fav.ArticlesWebView;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.FavPresenter;
 import com.lcc.mvp.presenter.JSPresenter;
@@ -25,9 +26,7 @@ import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.FavView;
 import com.lcc.mvp.view.JSView;
 import com.lcc.utils.CoCoinToast;
-
 import java.util.List;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -189,25 +188,22 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
 
     @Override
     public void onItemClick(FavEntity data) {
-        if (data != null) {
-            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
-            return;
-        }
-
         Intent intent = null;
         //我好像得重新写界面
         if (type.equals(Propertity.Article.NAME)) {
             //去文章的界面
-            intent = new Intent(getActivity(), AnswerIndexActivity.class);
+            ArticlesWebView.startIndexMenuWebView(getActivity(),data);
         } else if (type.equals(Propertity.Test.QUESTION)) {
             //去资料的问题
             intent = new Intent(getActivity(), AnswerIndexActivity.class);
+            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
         } else {
             //去公司的问题
             intent = new Intent(getActivity(), AnswerIndexActivity.class);
+            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
         }
 
-        startActivity(intent);
+
     }
 
     @Override

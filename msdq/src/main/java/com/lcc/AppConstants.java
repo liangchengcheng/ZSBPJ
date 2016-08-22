@@ -1,6 +1,5 @@
 package com.lcc;
 
-
 public class AppConstants {
 
     public final static String ImagePath = "http://114.215.164.168:8080/images/";

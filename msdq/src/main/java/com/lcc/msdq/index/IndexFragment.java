@@ -76,8 +76,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.index_fragment, null);
         iv_more = (ImageView) view.findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this);
@@ -197,7 +196,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                 break;
 
             case R.id.mszz:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试着装");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "常问问题");
                 break;
 
             case R.id.msgx:
@@ -209,7 +208,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                 break;
 
             case R.id.msjt:
-                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试交通");
+                IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试流程");
                 break;
 
             case R.id.qt:

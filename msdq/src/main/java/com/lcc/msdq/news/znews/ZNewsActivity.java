@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.UserGoodAdapter;
 import com.lcc.adapter.XtNewsAdapter;
 import com.lcc.base.BaseActivity;
@@ -19,6 +20,7 @@ import com.lcc.mvp.presenter.XtNewsPresenter;
 import com.lcc.mvp.presenter.impl.UserGoodPresenterImpl;
 import com.lcc.mvp.presenter.impl.XtNewsPresenterImpl;
 import com.lcc.mvp.view.UserGoodView;
+import com.lcc.utils.CoCoinToast;
 import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.List;
@@ -31,8 +33,7 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2015年11月21日15:28:25
  * Description:  ZNewsActivity（赞的列表）
  */
-public class ZNewsActivity extends BaseActivity implements UserGoodView,
-        UserGoodAdapter.OnItemClickListener, View.OnClickListener {
+public class ZNewsActivity extends BaseActivity implements UserGoodView, UserGoodAdapter.OnItemClickListener, View.OnClickListener {
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private UserGoodAdapter mAdapter;
@@ -95,6 +96,11 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView,
 
     @Override
     public void onItemClick(UserGood entities) {
+        if (entities != null) {
+            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
+            return;
+        }
+
         if (entities != null) {
             Intent intent = null;
             if (entities.getType().equals(Propertity.Test.ANSWER)) {
