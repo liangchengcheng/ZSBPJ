@@ -47,6 +47,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         initWindow(Open());
         setContentView(getLayoutView());
         initView();
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("收藏成功。", R.layout.fav_toast_item,R.id.content_toast,
+                BaseActivity.this);
+
         if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)){
             SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
             toast.setDefaultTextColor(Color.WHITE);
