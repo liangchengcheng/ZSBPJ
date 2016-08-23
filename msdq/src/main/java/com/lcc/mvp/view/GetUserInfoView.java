@@ -1,9 +1,7 @@
 package com.lcc.mvp.view;
 
-import com.lcc.entity.FavEntity;
+import com.lcc.entity.GzBean;
 import com.lcc.entity.otherUserInfo;
-
-import java.util.List;
 
 /**
  * Author:       梁铖城
@@ -20,5 +18,18 @@ public interface GetUserInfoView {
     void getDataFail(String msg);
 
     void getDataSuccess(otherUserInfo otherUserInfo);
+
+    /**
+     * 标识是否被关注
+     */
+    void HaveGz(GzBean bean);
+
+    void GzSuccess();
+
+    void GzFail(String msg);
+
+    void unGzSuccess();
+
+    void unGzFail(String msg);
 
 }

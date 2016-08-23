@@ -224,7 +224,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         changeFavState(true);
         entity.setZ_num((Integer.parseInt(entity.getZ_num()) + 1) + "");
         mAdapter.notifyDataSetChanged();
-        FrameManager.getInstance().toastPrompt("收藏成功");
+        Fav();
     }
 
     @Override
@@ -240,7 +240,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
             entity.setZ_num((count - 1) + "");
             mAdapter.notifyDataSetChanged();
         }
-        FrameManager.getInstance().toastPrompt("取消收藏成功");
+        UnFav();
     }
 
     @Override

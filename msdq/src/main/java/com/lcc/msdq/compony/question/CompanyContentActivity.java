@@ -159,7 +159,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     @Override
     public void FavSuccess() {
         changeFavState(true);
-        FrameManager.getInstance().toastPrompt("收藏成功");
+        Fav();
     }
 
     @Override
@@ -170,7 +170,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
     @Override
     public void UnFavSuccess() {
         changeFavState(false);
-        FrameManager.getInstance().toastPrompt("取消收藏成功");
+        UnFav();
     }
 
     @Override
@@ -187,6 +187,9 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    /**
+     * 收藏和取消收藏的点击事件
+     */
     private void favClick() {
         if (!isfavEntity) {
             presenter.Fav(companyDescription, Propertity.COM.DESCRIPTION);

@@ -2,6 +2,7 @@ package com.lcc.msdq.description.other;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.db.test.UserInfo;
+import com.lcc.entity.GzBean;
 import com.lcc.entity.otherUserInfo;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
@@ -35,12 +37,17 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 public class OtherUserProfileActivity extends BaseActivity implements View.OnClickListener, GetUserInfoView {
     public static final String PHONE = "phone";
     private String phone;
     private GetUserInfoPresenter getUserInfoPresenter;
+    private GzBean gzBean;
+    private boolean state;
+    private otherUserInfo otherUserInfo = new otherUserInfo();
 
     @Bind(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
@@ -64,6 +71,8 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     TextView tv_fs;
     @Bind(R.id.tv_gz)
     TextView tv_gz;
+    @Bind(R.id.display)
+    TextView display;
 
     public static void starOtherUserProfileActivity(String phone, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, OtherUserProfileActivity.class);
@@ -80,6 +89,7 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        findViewById(R.id.display).setOnClickListener(this);
         getUserInfoPresenter.getData(phone);
 
     }
@@ -130,6 +140,10 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
             case R.id.guillotine_hamburger:
                 finish();
                 break;
+
+            case R.id.display:
+                GzClick();
+                break;
         }
     }
 
@@ -151,6 +165,7 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
     @Override
     public void getDataSuccess(otherUserInfo otherUserInfo) {
         if (otherUserInfo != null) {
+            this.otherUserInfo = otherUserInfo;
             ImageManager.getInstance().loadCircleImage(OtherUserProfileActivity.this,
                     otherUserInfo.getUser_image(), ivUserProfilePhoto);
             tv_nickname.setText(otherUserInfo.getNickname());
@@ -160,17 +175,15 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
                 tv_gxqm.setText(otherUserInfo.getQm());
             }
 
+            display.setVisibility(View.VISIBLE);
             tv_gz.setText(otherUserInfo.getGz_num() + "/关注");
             tv_fs.setText(otherUserInfo.getFs_num() + "/粉丝");
 
             setViewPager();
-        } else {
-
         }
     }
 
     static class Adapter extends FragmentPagerAdapter {
-
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 
@@ -198,5 +211,75 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
             return mFragmentTitles.get(position);
         }
     }
+
+    @Override
+    public void HaveGz(GzBean bean) {
+        this.gzBean = bean;
+        changeState(gzBean);
+    }
+
+    private void changeState(GzBean gzBean) {
+        if (gzBean != null) {
+            state = true;
+        } else {
+            state = false;
+        }
+        changeSate(state);
+    }
+
+    @Override
+    public void GzSuccess() {
+        state = true;
+        Fav();
+        changeSate(state);
+    }
+
+    @Override
+    public void unGzSuccess() {
+        state = false;
+        UnFav();
+        changeSate(state);
+    }
+
+    @Override
+    public void GzFail(String msg) {
+        FrameManager.getInstance().toastPrompt("关注失败");
+    }
+
+    @Override
+    public void unGzFail(String msg) {
+        FrameManager.getInstance().toastPrompt("取消关注失败");
+    }
+
+    private void changeSate(boolean isState) {
+        if (isState) {
+            display.setText("已关注");
+        } else {
+            display.setText("+关注");
+        }
+    }
+
+    private void GzClick() {
+        if (state) {
+            getUserInfoPresenter.Gz(otherUserInfo.getPhone());
+        } else {
+            getUserInfoPresenter.UnGz(otherUserInfo.getPhone());
+        }
+    }
+
+
+    public void Fav() {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("关注成功", R.layout.fav_toast_item, R.id.content_toast, OtherUserProfileActivity.this);
+    }
+
+
+    public void UnFav() {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("取消成功", R.layout.unfav_toast_item, R.id.content_toast, OtherUserProfileActivity.this);
+    }
+
 
 }

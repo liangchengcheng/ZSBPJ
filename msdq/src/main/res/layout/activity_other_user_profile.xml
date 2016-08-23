@@ -28,7 +28,7 @@
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/other"
+                android:background="@drawable/beijing2"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -39,7 +39,7 @@
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:orientation="vertical"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="20dp"
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
                     android:paddingTop="64dp"
@@ -126,6 +126,7 @@
                                     android:layout_weight="1"
                                     android:orientation="vertical">
                                     <TextView
+                                        android:visibility="gone"
                                         android:paddingTop="3dp"
                                         android:paddingBottom="3dp"
                                         android:paddingLeft="7dp"
@@ -135,7 +136,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="5dp"
-                                        android:text="+ 关注"
+                                        android:text="+关注"
                                         android:textColor="#fff"
                                         android:textSize="14sp" />
                                 </LinearLayout>
