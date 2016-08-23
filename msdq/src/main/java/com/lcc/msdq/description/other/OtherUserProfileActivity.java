@@ -261,9 +261,9 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
 
     private void GzClick() {
         if (state) {
-            getUserInfoPresenter.Gz(otherUserInfo.getPhone());
-        } else {
             getUserInfoPresenter.UnGz(otherUserInfo.getPhone());
+        } else {
+            getUserInfoPresenter.Gz(otherUserInfo.getPhone());
         }
     }
 

@@ -28,6 +28,6 @@ public class GetUserInfoModel {
     public OkHttpRequest unGzUser(String you, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("you", you);
-        return ApiClient.create(AppConstants.RequestPath.addQuestionservice, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.deleteUserFlow, paramsMap).tag("").get(callback);
     }
 }
