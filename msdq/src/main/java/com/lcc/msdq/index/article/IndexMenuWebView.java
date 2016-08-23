@@ -194,10 +194,10 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     public void onClick(View v) {
-        String user=DataManager.getUserName();
+        String user = DataManager.getUserName();
         switch (v.getId()) {
             case R.id.ll_comments:
-                if (TextUtils.isEmpty(user)){
+                if (TextUtils.isEmpty(user)) {
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
@@ -206,7 +206,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                 break;
 
             case R.id.tv_to_comments:
-                if (TextUtils.isEmpty(user)){
+                if (TextUtils.isEmpty(user)) {
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
@@ -219,7 +219,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                 break;
 
             case R.id.ll_issc:
-                if (TextUtils.isEmpty(user)){
+                if (TextUtils.isEmpty(user)) {
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
@@ -241,7 +241,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         articleContent.setAuthor("18813149871");
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
                 R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
-        FrameManager.getInstance().toastPrompt("收藏成功");
+        Fav();
     }
 
     @Override
@@ -252,7 +252,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     @Override
     public void UnFavSuccess() {
         articleContent.setAuthor(null);
-        FrameManager.getInstance().toastPrompt("取消收藏成功");
+        UnFav();
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
                 R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
     }

@@ -30,7 +30,6 @@ import zsbpj.lccpj.view.toast.SuperCustomToast;
  * Description:    BaseActivity
  */
 public abstract class BaseActivity extends AppCompatActivity {
-
     protected PreferenceUtils preferenceUtils;
     protected boolean isStartAnim = true;
     protected boolean isCloseAnim = true;
@@ -47,15 +46,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         initWindow(Open());
         setContentView(getLayoutView());
         initView();
-        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
-        toasts.setDefaultTextColor(Color.WHITE);
-        toasts.show("收藏成功。", R.layout.fav_toast_item,R.id.content_toast,
-                BaseActivity.this);
-
-        if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)){
+        if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)) {
             SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
             toast.setDefaultTextColor(Color.WHITE);
-            toast.show("你的手机已经失去网络连接。", R.layout.toast_item,R.id.content_toast,
+            toast.show("你的手机已经失去网络连接。", R.layout.toast_item, R.id.content_toast,
                     BaseActivity.this);
         }
     }
@@ -178,19 +172,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    protected void showActivityInAnim(){
+    protected void showActivityInAnim() {
         if (isStartAnim) {
             overridePendingTransition(R.anim.activity_left_right_anim, R.anim.activity_right_left_anim);
         }
     }
 
-    protected void showActivityExitAnim(){
+    protected void showActivityExitAnim() {
         if (isCloseAnim) {
             overridePendingTransition(R.anim.activity_right_left_anim, R.anim.activity_left_right_anim);
         }
     }
 
-    private void parseIntent(Intent intent){
+    private void parseIntent(Intent intent) {
         if (intent != null) {
             isStartAnim = intent.getBooleanExtra(IS_START_ANIM, true);
             isCloseAnim = intent.getBooleanExtra(IS_CLOSE_ANIM, true);
@@ -201,6 +195,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         //showActivityExitAnim();
+    }
+
+    public void Fav() {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("收藏成功", R.layout.fav_toast_item, R.id.content_toast, BaseActivity.this);
+    }
+
+
+    public void UnFav() {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("取消成功", R.layout.unfav_toast_item, R.id.content_toast, BaseActivity.this);
     }
 
 }

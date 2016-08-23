@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/icon_myfollow" />
+                    android:src="@drawable/unfdav" />
 
                 <TextView
                     android:layout_width="wrap_content"
