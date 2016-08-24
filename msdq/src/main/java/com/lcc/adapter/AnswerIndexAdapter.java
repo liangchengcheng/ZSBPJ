@@ -110,13 +110,13 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
 
             if (isFav) {
-                holder.tv_sc.setText("取消收藏");
-                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
-                        .getColor(R.color.retry_button_background_stroke));
+                holder.tv_sc.setText("已收藏");
+                holder.tv_sc.setBackgroundResource(R.drawable.bg_cop);
+                holder.tv_sc.setTextColor(Color.parseColor("#000000"));
             } else {
-                holder.tv_sc.setBackgroundColor(holder.tv_sc.getContext().getResources()
-                        .getColor(R.color.common_android_tag_bg));
+                holder.tv_sc.setBackgroundResource(R.drawable.bg_con);
                 holder.tv_sc.setText("收藏");
+                holder.tv_sc.setTextColor(Color.parseColor("#006FCB"));
             }
 
             if (favListener != null) {
