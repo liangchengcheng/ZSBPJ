@@ -62,9 +62,10 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         mPresenter = new CompanyAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
-        fid =companyTest.getMid();
+        fid = companyTest.getMid();
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         findViewById(R.id.floatingComment).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         initRefreshView();
         initRecycleView();
         mPresenter.getData(currentPage, fid);
@@ -254,13 +255,13 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
 
             case R.id.fabButton:
                 intent = new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class);
-                intent.putExtra("fid",fid);
+                intent.putExtra("fid", fid);
                 startActivity(intent);
                 break;
 
             case R.id.floatingfabu:
                 intent = new Intent(CompanyAnswerIndexActivity.this, AnswerAddActivity.class);
-                intent.putExtra("fid",fid);
+                intent.putExtra("fid", fid);
                 startActivity(intent);
                 floatingMenu.close(false);
                 break;
@@ -270,6 +271,11 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.QUESTION,
                         CompanyAnswerIndexActivity.this);
                 floatingMenu.close(false);
+                break;
+
+
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }

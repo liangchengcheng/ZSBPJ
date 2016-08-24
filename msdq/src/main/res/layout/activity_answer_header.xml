@@ -30,9 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="那些去年刚毕业的前端们现在都在干什么？"
                 android:textColor="@color/article_title"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <com.lcc.view.StretchyTextView
                 android:id="@+id/spread_textview"

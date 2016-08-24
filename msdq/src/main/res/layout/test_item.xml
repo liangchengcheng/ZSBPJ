@@ -34,13 +34,13 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:layout_marginTop="3dp"
                     android:id="@+id/iv_image"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:padding="3dp"
                     android:src="@color/font_black_4" />
 
                 <TextView

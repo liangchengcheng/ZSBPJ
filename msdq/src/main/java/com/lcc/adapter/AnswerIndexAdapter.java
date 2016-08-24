@@ -141,7 +141,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.tv_name.setText(answer.getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
-            holder.tv_znum.setText(answer.getZ_num());
+            holder.tv_znum.setText(answer.getZ_num()+"赞");
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new View.OnClickListener() {
                     @Override

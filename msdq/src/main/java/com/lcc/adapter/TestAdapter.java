@@ -19,16 +19,16 @@ import org.w3c.dom.Text;
 import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
-public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.ViewHolder>{
-    private  OnItemClickListener onItemClickListener;
+public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity, TestAdapter.ViewHolder> {
+    private OnItemClickListener onItemClickListener;
     private Activity mActivity;
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener=onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
-    public TestAdapter(Activity activity){
-        this.mActivity=activity;
+    public TestAdapter(Activity activity) {
+        this.mActivity = activity;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
 
     @Override
     public void onBindItemViewHolder(ViewHolder holder, final int position) {
-        final TestEntity entity=getItem(position);
+        final TestEntity entity = getItem(position);
         holder.ll_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,9 +52,9 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         holder.tv_ll.setText(entity.getL_num());
         holder.tv_sc.setText(entity.getL_num());
 
-        ImageManager.getInstance().loadCircleImage(mActivity,entity.getUser_image(),holder.iv_image);
+        ImageManager.getInstance().loadCircleImage(mActivity, entity.getUser_image(), holder.iv_image);
 
-        if (ImageListener!=null){
+        if (ImageListener != null) {
             holder.iv_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -64,7 +64,7 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView tv_title;
         public final TextView tv_content;
         public final TextView tv_time;
@@ -85,12 +85,12 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity,TestAdapter.
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void OnItemClick(TestEntity entity);
     }
 
     public interface OnImageClickListener {
-        void onImageClick(String  user_phone);
+        void onImageClick(String user_phone);
     }
 
     private OnImageClickListener ImageListener;
