@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.github.clans.fab.FloatingActionMenu;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.BaseRecyclerAdapter;
@@ -68,6 +69,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private TextView tv_count;
+    private FloatingActionMenu floatingMenu;
 
     private String fid;
     private TestEntity entity;
@@ -90,6 +92,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     protected void initView() {
         currentPage = 1;
+        floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         tv_count = (TextView) findViewById(R.id.tv_count);
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
         tv_count.setText("共收到" + entity.getAnswer_count() + "个回答");
@@ -288,6 +291,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         switch (v.getId()) {
             case R.id.tv_sc:
                 startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
+                floatingMenu.close(false);
                 break;
 
             case R.id.floatingfabu:
@@ -300,6 +304,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 intent = new Intent(AnswerIndexActivity.this, AnswerAddActivity.class);
                 intent.putExtra("fid", fid);
                 startActivity(intent);
+                floatingMenu.close(false);
                 break;
 
             case R.id.iv_share:
@@ -315,6 +320,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
                 CommentsActivity.startUserProfileFromLocation(entity.getMid(), Propertity.Test.QUESTION,
                         AnswerIndexActivity.this);
+                floatingMenu.close(false);
                 break;
 
             case R.id.guillotine_hamburger:

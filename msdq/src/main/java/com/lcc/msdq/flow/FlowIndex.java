@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lcc.adapter.FlowMenuAdapter;
@@ -32,9 +33,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  FlowIndex
  */
-public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLayout.OnRefreshListener
-        ,FlowMenuAdapter.OnItemClickListener{
-
+public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLayout.OnRefreshListener,
+        FlowMenuAdapter.OnItemClickListener ,View.OnClickListener{
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
@@ -47,11 +47,9 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-
     private FlowPresenter mPresenter;
     private String state="me";
     private String value;
-
     public static final String STATE = "state";
     public static final String VALUE = "value";
 
@@ -60,6 +58,27 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
         intent.putExtra(STATE, id);
         intent.putExtra(VALUE, value);
         startingActivity.startActivity(intent);
+    }
+
+    @Override
+    protected void initView() {
+        value=getIntent().getStringExtra(VALUE);
+        state=getIntent().getStringExtra(STATE);
+
+        tv_title= (TextView) findViewById(R.id.tv_title);
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
+        mPresenter = new FlowPresenterImpl(this);
+        initRefreshView();
+        initRecycleView();
+
+        if (state.equals("me")){
+            tv_title.setText("我关注的人");
+            mPresenter.getMyData(1,value);
+        }else {
+            tv_title.setText("我的粉丝");
+            mPresenter.getYouData(1,value);
+        }
     }
 
 
@@ -96,26 +115,6 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
                 }
             }
         });
-    }
-
-    @Override
-    protected void initView() {
-        value=getIntent().getStringExtra(VALUE);
-        state=getIntent().getStringExtra(STATE);
-
-        tv_title= (TextView) findViewById(R.id.tv_title);
-        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        mPresenter = new FlowPresenterImpl(this);
-        initRefreshView();
-        initRecycleView();
-
-        if (state.equals("me")){
-            tv_title.setText("我关注的人");
-            mPresenter.getMyData(1,value);
-        }else {
-            tv_title.setText("我的粉丝");
-            mPresenter.getYouData(1,value);
-        }
     }
 
     @Override
@@ -203,5 +202,14 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
     @Override
     public void onItemClick(FlowIEntity data) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
     }
 }

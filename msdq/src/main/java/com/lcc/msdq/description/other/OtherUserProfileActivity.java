@@ -281,5 +281,4 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         toasts.show("取消成功", R.layout.unfav_toast_item, R.id.content_toast, OtherUserProfileActivity.this);
     }
 
-
 }

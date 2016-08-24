@@ -1,17 +1,13 @@
 package com.lcc.msdq.comments;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -20,7 +16,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
 import com.lcc.adapter.CommentAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Comments;
@@ -30,12 +25,9 @@ import com.lcc.mvp.presenter.CommentsPresenter;
 import com.lcc.mvp.presenter.impl.CommentsPresenterImpl;
 import com.lcc.mvp.view.CommentsView;
 import com.lcc.utils.KeyboardUtils;
-import com.lcc.utils.ScreenUtils;
 import com.lcc.view.SendCommentButton;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.FrameManager;

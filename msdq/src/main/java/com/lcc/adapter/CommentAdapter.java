@@ -36,7 +36,6 @@ import zsbpj.lccpj.utils.TimeUtils;
  * Description:  CommentAdapter
  */
 public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
     private List<Comments> mList = new ArrayList<>();
