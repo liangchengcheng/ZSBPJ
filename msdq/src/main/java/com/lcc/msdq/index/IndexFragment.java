@@ -114,10 +114,6 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                 advertisements.setOnPictureClickListener(new Advertisements.onPictrueClickListener() {
                     @Override
                     public void onClick(int position) {
-                        //Intent intent=new Intent(getActivity(),IndexContentActivity.class);
-                        //intent.putExtra(IndexContentActivity.KEY_URL,list.get(position).getMid());
-                        //intent.putExtra(IndexContentActivity.IMAGE_URL,list.get(position).getActivity_pic());
-                        //startActivity(intent);
                         Intent intent = new Intent(getActivity(), IndexWebView.class);
                         intent.putExtra(IndexWebView.KEY_URL, list.get(position).getMid());
                         intent.putExtra(IndexWebView.IMAGE_URL, list.get(position).getActivity_pic());

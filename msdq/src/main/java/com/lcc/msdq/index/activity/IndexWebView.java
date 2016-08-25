@@ -185,7 +185,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         try {
             webView.loadDataWithBaseURL("about:blank", result, "text/html", "utf-8", null);
             // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
-            String head_img = AppConstants.RequestPath.BASE_URL + image_url;
+            String head_img =  image_url;
             Glide.with(IndexWebView.this)
                     .load(head_img)
                     .placeholder(R.drawable.loading1)

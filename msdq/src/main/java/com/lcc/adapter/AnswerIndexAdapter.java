@@ -296,5 +296,4 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.ImageListener = ImageListener;
     }
 
-
 }
