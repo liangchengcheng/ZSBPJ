@@ -3,6 +3,7 @@ package com.lcc.adapter;
 import android.app.Activity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.lcc.msdq.R;
 import org.w3c.dom.Text;
 
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
 public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity, TestAdapter.ViewHolder> {
@@ -48,7 +50,11 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity, TestAdapter
         });
         holder.tv_title.setText(entity.getTitle());
         holder.tv_content.setText(entity.getSummary());
-        holder.tv_time.setText(entity.getUpdated_time());
+        String time = entity.getUpdated_time();
+        if (!TextUtils.isEmpty(time)){
+            holder.tv_time.setText(TimeUtils.getTimeFormatText(time));
+        }
+
         holder.tv_ll.setText(entity.getL_num());
         holder.tv_sc.setText(entity.getL_num());
 

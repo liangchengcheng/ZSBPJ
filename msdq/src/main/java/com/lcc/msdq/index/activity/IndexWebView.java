@@ -33,7 +33,7 @@ import com.lcc.view.loadview.LoadingLayout;
  * Date:         2015年11月21日15:28:25
  * Description:  活动的内容的界面
  */
-public class IndexWebView extends BaseActivity implements IndexContentView {
+public class IndexWebView extends BaseActivity implements IndexContentView, Toolbar.OnMenuItemClickListener {
     public static final String KEY_URL = "url";
     public static final String IMAGE_URL = "image";
     public static final String TITLE = "title";
@@ -75,7 +75,15 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            toolbar.setOnMenuItemClickListener(this);
         }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
+            }
+        });
 
         nest = (NestedScrollView) findViewById(R.id.nest);
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
@@ -127,13 +135,6 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "梁铖城" + " "
-                        + "wwww.baidu.com" + getString(R.string.share_tail));
-                shareIntent.setType("text/plain");
-                //设置分享列表的标题，并且每次都显示分享列表
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -185,7 +186,7 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
         try {
             webView.loadDataWithBaseURL("about:blank", result, "text/html", "utf-8", null);
             // webView.loadData(URLEncoder.encode(result, "utf-8"), "text/html", "utf-8");
-            String head_img =  image_url;
+            String head_img = image_url;
             Glide.with(IndexWebView.this)
                     .load(head_img)
                     .placeholder(R.drawable.loading1)
@@ -196,5 +197,15 @@ public class IndexWebView extends BaseActivity implements IndexContentView {
             e.printStackTrace();
         }
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }
