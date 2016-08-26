@@ -186,7 +186,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     @Override
     public void FavSuccess() {
         changeFavState(true);
-        FrameManager.getInstance().toastPrompt("收藏成功");
+        Fav();
     }
 
     @Override
@@ -197,7 +197,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     @Override
     public void UnFavSuccess() {
         changeFavState(false);
-        FrameManager.getInstance().toastPrompt("取消收藏成功");
+        UnFav();
     }
 
     @Override

@@ -52,7 +52,7 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private FavPresenter mPresenter;
-    private String type = "面试感想";
+    private String type = "文章";
 
     public static ArticleFragment newInstance(String type) {
         ArticleFragment mFragment = new ArticleFragment();

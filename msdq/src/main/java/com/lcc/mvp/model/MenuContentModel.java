@@ -1,6 +1,5 @@
 package com.lcc.mvp.model;
 
-
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
@@ -9,7 +8,6 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 
-// TODO: 16/6/14 获取文章的时候动态的获取作者和token
 public class MenuContentModel {
 
     /**
@@ -18,7 +16,6 @@ public class MenuContentModel {
     public OkHttpRequest getArticleContent(String id, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.FID, id);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, DataManager.getUserName());
         return ApiClient.create(AppConstants.RequestPath.GET_MENU_CONTENT, paramsMap).tag("")
                 .get(callback);
     }
@@ -30,7 +27,6 @@ public class MenuContentModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, DataManager.getUserName());
         paramsMap.put("fav_title",article.getTitle());
         return ApiClient.create(AppConstants.RequestPath.UserFavAdd, paramsMap).tag("").get(callback);
     }
@@ -41,7 +37,16 @@ public class MenuContentModel {
     public OkHttpRequest UnfavArticle(Article article, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, DataManager.getUserName());
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
+    }
+
+    /**
+     * 获取文章的具体内容
+     */
+    public OkHttpRequest getArticleContentAndFav(String id, ResultCallback<String> callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put(AppConstants.ParamKey.FID, id);
+        return ApiClient.create(AppConstants.RequestPath.GET_MENU_CONTENT, paramsMap).tag("")
+                .get(callback);
     }
 }

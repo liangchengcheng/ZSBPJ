@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -99,7 +100,11 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             ImageManager.getInstance().loadCircleImage(holder.iv_head.getContext(),
                     head_url, holder.iv_head);
             holder.tv_nickname.setText(object.getNickname());
-            holder.tv_month.setText(object.getCreated_time());
+
+            String time = object.getCreated_time();
+            if (!TextUtils.isEmpty(time)) {
+                holder.tv_month.setText(TimeUtils.getTimeFormatText(time));
+            }
 
             if (isFav) {
                 holder.tv_sc.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
@@ -127,7 +132,7 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(Html.fromHtml(answer.getAnswer_content()));
             holder.tv_name.setText(answer.getNickname());
-            holder.tv_znum.setText(answer.getZ_num());
+            holder.tv_znum.setText(answer.getZ_num()+"赞");
 
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);

@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -74,7 +75,11 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getTitle());
             holder.tv_summary.setText(weekData.getSummary());
-            holder.tv_month.setText(weekData.getCreated_time());
+            String time =weekData.getCreated_time();
+            if (!TextUtils.isEmpty(time)){
+                holder.tv_month.setText(TimeUtils.getTimeFormatText(time));
+            }
+
             holder.tv_nickname.setText(weekData.getNickname());
             holder.tv_shoucang.setText(weekData.getL_num());
             String image_url= weekData.getUser_image();

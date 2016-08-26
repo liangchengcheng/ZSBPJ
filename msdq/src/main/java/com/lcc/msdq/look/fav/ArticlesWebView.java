@@ -46,7 +46,7 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
     private WebView webView;
     private ImageView ivZhihuStory;
     private LoadingLayout loading_layout;
-    private TextView tv_question, tv_source;
+    private TextView tv_question;
     private ImageView iv_state;
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
@@ -238,11 +238,9 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
 
     @Override
     public void FavSuccess() {
-        // TODO: 16/8/23
-        articleContent.setAuthor("18813149871");
+        articleContent.setAuthor("作者");
         ImageManager.getInstance().loadResImage(ArticlesWebView.this,
                 R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
-        FrameManager.getInstance().toastPrompt("收藏成功");
     }
 
     @Override
@@ -253,7 +251,6 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
     @Override
     public void UnFavSuccess() {
         articleContent.setAuthor(null);
-        FrameManager.getInstance().toastPrompt("取消收藏成功");
         ImageManager.getInstance().loadResImage(ArticlesWebView.this,
                 R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
     }

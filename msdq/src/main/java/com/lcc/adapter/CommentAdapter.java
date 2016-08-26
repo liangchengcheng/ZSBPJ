@@ -98,7 +98,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             String time = weekData.getCreated_time();
             if (!TextUtils.isEmpty(time)){
-                String current= TimeUtils.fromToday(time);
+                String current= TimeUtils.getTimeFormatText(time);
                 holder.tv_time.setText(current);
             }
 

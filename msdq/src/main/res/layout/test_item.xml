@@ -36,8 +36,8 @@
                 <ImageView
                     android:layout_marginTop="3dp"
                     android:id="@+id/iv_image"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
@@ -53,12 +53,6 @@
                     android:textColor="@color/article_title"
                     android:textSize="16sp" />
             </RelativeLayout>
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:background="#ededed" />-->
 
             <TextView
                 android:id="@+id/tv_content"
