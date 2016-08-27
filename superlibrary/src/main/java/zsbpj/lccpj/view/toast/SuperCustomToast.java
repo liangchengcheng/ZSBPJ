@@ -285,35 +285,36 @@ public class SuperCustomToast {
      */
     public final void show(final View v, Long duration, Animation startAnim, final Animation endAnim) {
         //反射过程异常时则使用源生Toast
-        if (hasReflectException) {
+//        if (hasReflectException) {
             Toast t = new Toast(mContext);
             t.setView(v);
-            t.setDuration(Toast.LENGTH_LONG);
+            t.setDuration(Toast.LENGTH_SHORT);
+            t.setGravity(Gravity.CENTER, 0, 0);
             t.show();
-            //重新获取反射对象
-            initTN();
-            return;
-        }
+//            //重新获取反射对象
+//            initTN();
+//            return;
+//        }
 
-        //显示顶层容器控件
-        if (mView.getChildCount() == 1) showToast();
-
-        //获得入场动画
-        if (startAnim == null) {
-            startAnim = getStartAnimation();
-        }
-        v.clearAnimation();
-        v.startAnimation(startAnim);
-        //把传入的toast显示出来
-        mView.addView(v, 0);
-
-        //延迟后隐藏传入toast
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                hide(v, endAnim);
-            }
-        }, duration == null ? TIME_DURATION : duration);
+//        //显示顶层容器控件
+//        if (mView.getChildCount() == 1) showToast();
+//
+//        //获得入场动画
+//        if (startAnim == null) {
+//            startAnim = getStartAnimation();
+//        }
+//        v.clearAnimation();
+//        v.startAnimation(startAnim);
+//        //把传入的toast显示出来
+//        mView.addView(v, 0);
+//
+//        //延迟后隐藏传入toast
+//        mHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                hide(v, endAnim);
+//            }
+//        }, duration == null ? TIME_DURATION : duration);
 
     }
 
