@@ -19,12 +19,16 @@ import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.entity.ArticleContent;
 import com.lcc.entity.FavEntity;
+import com.lcc.entity.LookArticle;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
+import com.lcc.mvp.presenter.LookMenuContentPresenter;
 import com.lcc.mvp.presenter.MenuContentPresenter;
+import com.lcc.mvp.presenter.impl.LookMenuContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
+import com.lcc.mvp.view.LookMenuContentView;
 import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.loadview.LoadingLayout;
 
@@ -37,12 +41,14 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class ArticlesWebView extends BaseActivity implements MenuContentView, View.OnClickListener {
+public class ArticlesWebView extends BaseActivity implements LookMenuContentView, View.OnClickListener {
+    //变量
     public static final String DATA = "data";
-    private MenuContentPresenter indexContentPresenter;
-    private Article article;
-    private ArticleContent articleContent;
-
+    private LookMenuContentPresenter lookPresenter;
+    private FavEntity favEntity;
+    private boolean isFav;
+    private LookArticle lookArticle;
+    //控件
     private WebView webView;
     private ImageView ivZhihuStory;
     private LoadingLayout loading_layout;
@@ -66,12 +72,8 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
     }
 
     private void initData() {
-        articleContent = new ArticleContent();
-        article = (Article) getIntent().getSerializableExtra(DATA);
-        indexContentPresenter = new MenuContentPresenterImpl(this);
-        if (!article.getL_num().equals("0")) {
-            tv_comments.setText(article.getL_num());
-        }
+        favEntity = (FavEntity) getIntent().getSerializableExtra(DATA);
+        lookPresenter = new LookMenuContentPresenterImpl(this);
     }
 
     @Override
@@ -113,7 +115,7 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
 
     private void getData() {
         Loading();
-        indexContentPresenter.getArticleContent(article.getMid());
+        lookPresenter.getArticleContentAndFav(favEntity.getNid());
     }
 
     @Override
@@ -157,14 +159,14 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
     }
 
     @Override
-    public void getSuccess(ArticleContent result) {
+    public void getSuccess(LookArticle result) {
         try {
-            articleContent = result;
+            this.lookArticle = result;
             if (TextUtils.isEmpty(result.getContent())) {
                 loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             } else {
                 //判断是否有介绍的图片
-                String head_img = article.getImage_url();
+                String head_img = result.getImage_url();
                 if (TextUtils.isEmpty(head_img)) {
                     ivZhihuStory.setVisibility(View.GONE);
                 } else {
@@ -176,15 +178,11 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
                             .into(ivZhihuStory);
                 }
 
-                //判断是否被我收藏了
-                if (result.getAuthor() == null) {
-                    iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_guanxin_normal);
-                } else {
-                    iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
-                }
-
                 webView.loadDataWithBaseURL("about:blank", result.getContent(), "text/html", "utf-8", null);
-                tv_question.setText(article.getTitle());
+                tv_question.setText(result.getTitle());
+                if (!result.getL_num().equals("0")) {
+                    tv_comments.setText(result.getL_num());
+                }
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             }
             ll_bottom_state.setVisibility(View.VISIBLE);
@@ -194,24 +192,39 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
     }
 
     @Override
+    public void setFavState(boolean isFav) {
+        //判断是否被我收藏了
+        this.isFav = isFav;
+        changeState(isFav);
+    }
+
+    private void changeState(boolean m_isFav){
+        if (m_isFav) {
+            iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_guanxin_normal);
+        } else {
+            iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
-        String user=DataManager.getUserName();
+        String user = DataManager.getUserName();
         switch (v.getId()) {
             case R.id.ll_comments:
-                if (TextUtils.isEmpty(user)){
+                if (TextUtils.isEmpty(user)) {
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                CommentsActivity.startUserProfileFromLocation(favEntity.getNid(),
                         Propertity.Article.NAME, ArticlesWebView.this);
                 break;
 
             case R.id.tv_to_comments:
-                if (TextUtils.isEmpty(user)){
+                if (TextUtils.isEmpty(user)) {
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                CommentsActivity.startUserProfileFromLocation(favEntity.getNid(),
                         Propertity.Article.NAME, ArticlesWebView.this);
                 break;
 
@@ -219,18 +232,21 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
                 finish();
                 break;
 
+            //收藏或者取消收藏
             case R.id.ll_issc:
-                if (TextUtils.isEmpty(user)){
+                if (TextUtils.isEmpty(user)) {
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
 
-                if (articleContent.getAuthor() != null) {
-                    indexContentPresenter.UnFav(article);
+                if (lookArticle == null){
+                    return;
                 }
 
-                if (articleContent.getAuthor() == null) {
-                    indexContentPresenter.Fav(article, Propertity.Article.NAME);
+                if (isFav) {
+                    lookPresenter.UnFav(lookArticle);
+                }else {
+                    lookPresenter.Fav(lookArticle, Propertity.Article.NAME);
                 }
                 break;
         }
@@ -238,7 +254,6 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
 
     @Override
     public void FavSuccess() {
-        articleContent.setAuthor("作者");
         ImageManager.getInstance().loadResImage(ArticlesWebView.this,
                 R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
     }
@@ -250,7 +265,6 @@ public class ArticlesWebView extends BaseActivity implements MenuContentView, Vi
 
     @Override
     public void UnFavSuccess() {
-        articleContent.setAuthor(null);
         ImageManager.getInstance().loadResImage(ArticlesWebView.this,
                 R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
     }

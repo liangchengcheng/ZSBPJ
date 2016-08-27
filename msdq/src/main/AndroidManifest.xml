@@ -253,5 +253,9 @@
         <activity
             android:name=".compony.answer.PhotoActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".look.fav.ArticlesWebView"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

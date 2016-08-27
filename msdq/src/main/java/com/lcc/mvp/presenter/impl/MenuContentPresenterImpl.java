@@ -5,10 +5,10 @@ import com.lcc.entity.ArticleContent;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.MenuContentModel;
 import com.lcc.mvp.presenter.MenuContentPresenter;
+import com.lcc.mvp.view.LookMenuContentView;
 import com.lcc.mvp.view.MenuContentView;
 import com.squareup.okhttp.Request;
 import org.json.JSONObject;
-import java.util.List;
 import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 

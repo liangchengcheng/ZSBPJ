@@ -103,8 +103,9 @@ public class AppConstants {
         public final static String deleteUserFlow = "/service/deleteUserFlow";
         //关注
         public final static String MeLikeAdd = "/service/MeLikeAdd";
-
+        // TODO: 16/8/27 这个有问题啊
         public final static String addQuestionservice = "/service/";
+        public final static String getContentAndFavByID = "/service/getContentAndFavByID";
 
     }
 
