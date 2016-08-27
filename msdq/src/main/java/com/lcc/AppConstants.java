@@ -105,7 +105,10 @@ public class AppConstants {
         public final static String MeLikeAdd = "/service/MeLikeAdd";
         // TODO: 16/8/27 这个有问题啊
         public final static String addQuestionservice = "/service/";
+        //我的收藏的文章
         public final static String getContentAndFavByID = "/service/getContentAndFavByID";
+        //我的收藏的资料
+        public final static String LOOK_TEST_ANSWER_LIST = "/getTestanswerforLook";
 
     }
 

@@ -4,16 +4,15 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.lcc.entity.Answer;
-import com.lcc.entity.Article;
 import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
+import com.lcc.mvp.model.LookTestAnswerModel;
 import com.lcc.mvp.model.TestAnswerModel;
-import com.lcc.mvp.model.TestModel;
+import com.lcc.mvp.presenter.LookTestAnswerPresenter;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
-import com.lcc.mvp.presenter.TestPresenter;
+import com.lcc.mvp.view.LookTestAnswerView;
 import com.lcc.mvp.view.TestAnswerView;
-import com.lcc.mvp.view.TestView;
 import com.squareup.okhttp.Request;
 
 import org.json.JSONObject;
@@ -24,14 +23,14 @@ import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
-public class TestAnswerPresenterImpl implements TestAnswerPresenter {
+public class LookTestAnswerPresenterImpl implements LookTestAnswerPresenter {
     private static final int DEF_DELAY = (int) (1 * 1000);
-    private TestAnswerModel model;
-    private TestAnswerView view;
+    private LookTestAnswerModel model;
+    private LookTestAnswerView view;
 
-    public TestAnswerPresenterImpl(TestAnswerView view) {
+    public LookTestAnswerPresenterImpl(LookTestAnswerView view) {
         this.view = view;
-        model = new TestAnswerModel();
+        model = new LookTestAnswerModel();
     }
 
     private void loadData(final int page, final String fid, final boolean get_data) {
@@ -72,7 +71,7 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                     String result = jsonObject.getString("result");
 
                     String fav = jsonObject.getString("fav");
-                    FavEntity favEntity= GsonUtils.changeGsonToBean(fav, FavEntity.class);
+                    FavEntity favEntity = GsonUtils.changeGsonToBean(fav, FavEntity.class);
 
                     if (favEntity != null && !TextUtils.isEmpty(favEntity.getFav_title())) {
                         view.isHaveFav(true);
@@ -82,9 +81,10 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
 
                     if (status == 1) {
                         List<Answer> weekDatas = GsonUtils.fromJsonArray(result, Answer.class);
+                        TestEntity entity = GsonUtils.changeGsonToBean(message, TestEntity.class);
                         if (page == 1) {
-                            if (weekDatas != null && weekDatas.size() > 0) {
-                                view.refreshView(weekDatas);
+                            if (weekDatas != null && weekDatas.size() > 0 && entity != null) {
+                                view.refreshView(weekDatas, entity);
                             } else {
                                 view.getDataEmpty();
                             }
@@ -131,7 +131,7 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
 
     @Override
     public void Fav(TestEntity article, String type) {
-        model.favQuestion(article,type, new ResultCallback<String>() {
+        model.favQuestion(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -157,8 +157,8 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
     }
 
     @Override
-    public void UnFav(TestEntity article,String type) {
-        model.UnfavQuestion(article,type, new ResultCallback<String>() {
+    public void UnFav(TestEntity article, String type) {
+        model.UnfavQuestion(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));

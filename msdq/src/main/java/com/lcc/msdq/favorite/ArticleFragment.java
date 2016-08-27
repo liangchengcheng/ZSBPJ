@@ -18,6 +18,7 @@ import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
 import com.lcc.msdq.index.article.IndexMenuWebView;
 import com.lcc.msdq.look.fav.ArticlesWebView;
+import com.lcc.msdq.look.fav.LookQuestionsActivity;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.FavPresenter;
 import com.lcc.mvp.presenter.JSPresenter;
@@ -189,14 +190,12 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
     @Override
     public void onItemClick(FavEntity data) {
         Intent intent = null;
-        //我好像得重新写界面
         if (type.equals(Propertity.Article.NAME)) {
             //去文章的界面
             ArticlesWebView.startIndexMenuWebView(getActivity(),data);
         } else if (type.equals(Propertity.Test.QUESTION)) {
-            //去资料的问题
-            intent = new Intent(getActivity(), AnswerIndexActivity.class);
-            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
+            //资料的界面
+            LookQuestionsActivity.startLookQuestionsActivity(data,getActivity());
         } else {
             //去公司的问题
             intent = new Intent(getActivity(), AnswerIndexActivity.class);

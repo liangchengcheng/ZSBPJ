@@ -257,5 +257,9 @@
         <activity
             android:name=".look.fav.ArticlesWebView"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".look.fav.LookQuestionsActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>

@@ -3,21 +3,21 @@ package com.lcc.mvp.model;
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
-import com.lcc.entity.Article;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 
-public class TestAnswerModel {
+public class LookTestAnswerModel {
 
     /**
-     * 获取答案的列表
+     * 我的收藏的资料
      */
     public OkHttpRequest getTestAnswer(int page,String fid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.FID, fid);
-        return ApiClient.create(AppConstants.RequestPath.TEST_ANSWER_LIST, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.LOOK_TEST_ANSWER_LIST, paramsMap).tag("")
+                .get(callback);
     }
 
     /**
