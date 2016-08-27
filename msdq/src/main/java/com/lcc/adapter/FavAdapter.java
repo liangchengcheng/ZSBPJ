@@ -82,7 +82,7 @@ public class FavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
             String title = weekData.getFav_title();
-            String time = TimeUtils.fromToday(weekData.getC_time());
+            String time = TimeUtils.getTimeFormatText(weekData.getC_time());
 
             SpannableString styledText = new SpannableString("收藏了" + title + time);
             styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),

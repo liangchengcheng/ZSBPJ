@@ -195,14 +195,15 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
     public void setFavState(boolean isFav) {
         //判断是否被我收藏了
         this.isFav = isFav;
-        changeState(isFav);
+        changeState();
     }
 
-    private void changeState(boolean m_isFav){
-        if (m_isFav) {
-            iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_guanxin_normal);
-        } else {
+    private void changeState(){
+        if (isFav) {
             iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
+        } else {
+            iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_guanxin_normal);
+
         }
     }
 
