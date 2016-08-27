@@ -3,13 +3,17 @@ package com.lcc.mvp.presenter.impl;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavEntity;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.CompanyAnswerModel;
+import com.lcc.mvp.model.LookCompanyAnswerModel;
 import com.lcc.mvp.presenter.CompanyAnswerPresenter;
+import com.lcc.mvp.presenter.LookCompanyAnswerPresenter;
 import com.lcc.mvp.view.CompanyAnswerView;
+import com.lcc.mvp.view.LookCompanyAnswerView;
 import com.squareup.okhttp.Request;
 
 import org.json.JSONObject;
@@ -20,23 +24,23 @@ import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
-public class LookCompanyAnswerPresenterImpl implements CompanyAnswerPresenter {
+public class LookCompanyAnswerPresenterImpl implements LookCompanyAnswerPresenter {
     private static final int DEF_DELAY = (int) (1 * 1000);
-    private CompanyAnswerModel model;
-    private CompanyAnswerView view;
+    private LookCompanyAnswerModel model;
+    private LookCompanyAnswerView view;
 
-    public LookCompanyAnswerPresenterImpl(CompanyAnswerView view) {
+    public LookCompanyAnswerPresenterImpl(LookCompanyAnswerView view) {
         this.view = view;
-        model = new CompanyAnswerModel();
+        model = new LookCompanyAnswerModel();
     }
 
-    private void loadData(final int page,final String fid,final boolean get_data) {
+    private void loadData(final int page, final String fid, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
 
         final long current_time = TimeUtils.getCurrentTime();
-        model.getCompanyAnswer(page,fid, new ResultCallback<String>() {
+        model.getCompanyAnswer(page, fid, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -52,62 +56,63 @@ public class LookCompanyAnswerPresenterImpl implements CompanyAnswerPresenter {
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
                 }
-                updateView(response, delay, page,get_data);
+                updateView(response, delay, page, get_data);
             }
         });
     }
 
     private void updateView(final String entities, int delay, final int page, final boolean get_data) {
-           new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   try {
-                       JSONObject jsonObject = new JSONObject(entities);
-                       int status = jsonObject.getInt("status");
-                       String message = jsonObject.getString("message");
-                       String result = jsonObject.getString("result");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject(entities);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    String result = jsonObject.getString("result");
 
-                       String fav = jsonObject.getString("fav");
-                       FavEntity favEntityList = GsonUtils.changeGsonToBean(fav, FavEntity.class);
+                    String fav = jsonObject.getString("fav");
+                    FavEntity favEntity = GsonUtils.changeGsonToBean(fav, FavEntity.class);
 
-                       if (favEntityList != null && !TextUtils.isEmpty(favEntityList.getMid())) {
-                           view.isHaveFav(true);
-                       } else {
-                           view.isHaveFav(false);
-                       }
+                    if (favEntity != null && !TextUtils.isEmpty(favEntity.getMid())) {
+                        view.isHaveFav(true);
+                    } else {
+                        view.isHaveFav(false);
+                    }
 
-                       if (status == 1) {
-                           List<CompanyAnswer> weekDatas = GsonUtils.fromJsonArray(result, CompanyAnswer.class);
-                           if (page == 1) {
-                               if (weekDatas != null && weekDatas.size() > 0) {
-                                   view.refreshView(weekDatas);
-                               } else {
-                                   view.getDataEmpty();
-                               }
-                           } else {
-                               view.loadMoreView(weekDatas);
-                           }
-                       } else {
-                           if (message.equals("数据为空") && page == 1) {
-                               view.getDataEmpty();
-                           } else {
-                               if (get_data) {
-                                   view.getDataFail(ApiException.getApiExceptionMessage(message));
-                               } else {
-                                   view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
-                               }
-                           }
-                       }
-                   } catch (Exception e) {
-                       if (get_data) {
-                           view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
-                       } else {
-                           view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
-                       }
-                       e.printStackTrace();
-                   }
-               }
-           }, delay);
+                    if (status == 1) {
+                        List<CompanyAnswer> weekDatas = GsonUtils.fromJsonArray(result, CompanyAnswer.class);
+                        CompanyTest test = GsonUtils.changeGsonToBean(message, CompanyTest.class);
+                        if (page == 1) {
+                            if (weekDatas != null && weekDatas.size() > 0) {
+                                view.refreshView(weekDatas, test);
+                            } else {
+                                view.getDataEmpty();
+                            }
+                        } else {
+                            view.loadMoreView(weekDatas);
+                        }
+                    } else {
+                        if (message.equals("数据为空") && page == 1) {
+                            view.getDataEmpty();
+                        } else {
+                            if (get_data) {
+                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                            } else {
+                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    if (get_data) {
+                        view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    } else {
+                        view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    }
+                    e.printStackTrace();
+                }
+            }
+        }, delay);
     }
 
     @Override
@@ -116,18 +121,18 @@ public class LookCompanyAnswerPresenterImpl implements CompanyAnswerPresenter {
     }
 
     @Override
-    public void loadMore(int page,String fid) {
-        loadData(page,fid,false);
+    public void loadMore(int page, String fid) {
+        loadData(page, fid, false);
     }
 
     @Override
-    public void refresh(int page,String fid) {
-        loadData(page,fid,false);
+    public void refresh(int page, String fid) {
+        loadData(page, fid, false);
     }
 
     @Override
     public void Fav(CompanyTest article, String type) {
-        model.favQuestion(article,type, new ResultCallback<String>() {
+        model.favQuestion(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.FavFail(ApiException.getApiExceptionMessage(e.getMessage()));

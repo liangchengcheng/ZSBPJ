@@ -109,6 +109,8 @@ public class AppConstants {
         public final static String getContentAndFavByID = "/service/getContentAndFavByID";
         //我的收藏的资料
         public final static String LOOK_TEST_ANSWER_LIST = "/getTestanswerforLook";
+        //我的收藏的公司的资料
+        public final static String getTestanswerforLook = "service/getTestanswerforLook";
 
     }
 

@@ -12,7 +12,7 @@ public class LookCompanyAnswerModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.FID, fid);
-        return ApiClient.create(AppConstants.RequestPath.COMPANY_ANSWER_LIST, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getTestanswerforLook, paramsMap).tag("").get(callback);
     }
 
     /**

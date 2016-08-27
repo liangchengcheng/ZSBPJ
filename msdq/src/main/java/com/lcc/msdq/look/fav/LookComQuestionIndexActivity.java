@@ -1,5 +1,6 @@
 package com.lcc.msdq.look.fav;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +16,7 @@ import com.lcc.adapter.CompanyAnswerAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyTest;
+import com.lcc.entity.FavEntity;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
@@ -22,8 +24,11 @@ import com.lcc.msdq.compony.answer.AnswerAddActivity;
 import com.lcc.msdq.compony.answer.CompanyAnswerWebView;
 import com.lcc.msdq.compony.answer.PhotoActivity;
 import com.lcc.mvp.presenter.CompanyAnswerPresenter;
+import com.lcc.mvp.presenter.LookCompanyAnswerPresenter;
 import com.lcc.mvp.presenter.impl.CompanyAnswerPresenterImpl;
+import com.lcc.mvp.presenter.impl.LookCompanyAnswerPresenterImpl;
 import com.lcc.mvp.view.CompanyAnswerView;
+import com.lcc.mvp.view.LookCompanyAnswerView;
 import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
@@ -37,19 +42,20 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  AnswerIndexActivity
+ * Description:  收藏的公司的问题
  */
-public class LookComQuestionIndexActivity extends BaseActivity implements CompanyAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, CompanyAnswerAdapter.OnImageClickListener
-        , CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
+public class LookComQuestionIndexActivity extends BaseActivity implements LookCompanyAnswerView,
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, CompanyAnswerAdapter.OnImageClickListener,
+        CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
+
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CompanyAnswerAdapter mAdapter;
-    private CompanyAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private LoadingLayout loading_layout;
     private FloatingActionMenu floatingMenu;
 
+    private LookCompanyAnswerPresenter mPresenter;
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -58,14 +64,23 @@ public class LookComQuestionIndexActivity extends BaseActivity implements Compan
     protected int currentPage = 1;
     private boolean isfavEntity;
     private CompanyTest companyTest;
+    public static final String ID = "id";
+    private FavEntity favEntity;
     private String fid;
+
+    public static void startLookQuestionsActivity(FavEntity favEntity, Activity startingActivity) {
+        Intent intent = new Intent(startingActivity, LookQuestionsActivity.class);
+        intent.putExtra(ID, favEntity);
+        startingActivity.startActivity(intent);
+    }
 
     @Override
     protected void initView() {
-        mPresenter = new CompanyAnswerPresenterImpl(this);
+        mPresenter = new LookCompanyAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
-        fid = companyTest.getMid();
+        favEntity = (FavEntity) getIntent().getSerializableExtra(ID);
+        fid = favEntity.getNid();
+
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         findViewById(R.id.floatingComment).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
@@ -142,7 +157,12 @@ public class LookComQuestionIndexActivity extends BaseActivity implements Compan
     }
 
     @Override
-    public void refreshView(List<CompanyAnswer> entities) {
+    public void refreshView(List<CompanyAnswer> entities, CompanyTest companyTest) {
+        if (companyTest == null) {
+          return;
+        }
+
+        this.companyTest = companyTest;
         if (entities != null && entities.size() > 0) {
             List<Object> objects = new ArrayList<>();
             objects.add(companyTest);
@@ -276,7 +296,7 @@ public class LookComQuestionIndexActivity extends BaseActivity implements Compan
                 floatingMenu.close(false);
                 break;
 
-
+            //关闭
             case R.id.guillotine_hamburger:
                 finish();
                 break;

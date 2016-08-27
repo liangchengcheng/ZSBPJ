@@ -1,6 +1,7 @@
 package com.lcc.mvp.view;
 
 import com.lcc.entity.CompanyAnswer;
+import com.lcc.entity.CompanyTest;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface LookCompanyAnswerView {
 
     void refreshOrLoadFail(String msg);
 
-    void refreshView(List<CompanyAnswer> entities);
+    void refreshView(List<CompanyAnswer> entities,CompanyTest companyTest);
 
     void loadMoreView(List<CompanyAnswer> entities);
 
