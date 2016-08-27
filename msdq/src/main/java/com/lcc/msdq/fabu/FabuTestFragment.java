@@ -14,6 +14,7 @@ import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.FabuPresenter;
 import com.lcc.mvp.presenter.FavPresenter;
 import com.lcc.mvp.presenter.impl.FabuTestPresenterImpl;
@@ -165,8 +166,8 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
     }
 
     @Override
-    public void onItemClick(TestEntity data) {
-
+    public void onItemClick(TestEntity entity) {
+        AnswerIndexActivity.startAnswerIndexActivity(entity, getActivity());
     }
 
     @Override

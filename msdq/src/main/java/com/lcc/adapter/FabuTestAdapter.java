@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import zsbpj.lccpj.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -73,8 +74,7 @@ public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
             String title = weekData.getTitle();
-            String time = weekData.getCreated_time();
-
+            String time = TimeUtils.getTimeFormatText(weekData.getCreated_time());
             SpannableString styledText = new SpannableString("发布了" + title + time);
             styledText.setSpan(new TextAppearanceSpan(holder.tv_nickname.getContext(),
                     R.style.style0), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

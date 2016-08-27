@@ -110,7 +110,7 @@ public class AppConstants {
         //我的收藏的资料
         public final static String LOOK_TEST_ANSWER_LIST = "/getTestanswerforLook";
         //我的收藏的公司的资料
-        public final static String getTestanswerforLook = "service/getTestanswerforLook";
+        public final static String getTestanswerforLook = "/service/getTestanswerforLook";
 
     }
 

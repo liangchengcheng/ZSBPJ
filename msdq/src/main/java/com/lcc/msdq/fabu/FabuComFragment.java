@@ -1,5 +1,6 @@
 package com.lcc.msdq.fabu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,6 +15,7 @@ import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavEntity;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.compony.answer.CompanyAnswerIndexActivity;
 import com.lcc.mvp.presenter.FabuPresenter;
 import com.lcc.mvp.presenter.FavPresenter;
 import com.lcc.mvp.presenter.impl.FabuComPresenterImpl;
@@ -167,7 +169,9 @@ public class FabuComFragment extends BaseLazyLoadFragment  implements
 
     @Override
     public void onItemClick(CompanyTest data) {
-
+        Intent intent = new Intent(getActivity(), CompanyAnswerIndexActivity.class);
+        intent.putExtra("data", data);
+        startActivity(intent);
     }
 
     @Override

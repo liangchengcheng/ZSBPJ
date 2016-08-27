@@ -69,7 +69,7 @@ public class LookComQuestionIndexActivity extends BaseActivity implements LookCo
     private String fid;
 
     public static void startLookQuestionsActivity(FavEntity favEntity, Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, LookQuestionsActivity.class);
+        Intent intent = new Intent(startingActivity, LookComQuestionIndexActivity.class);
         intent.putExtra(ID, favEntity);
         startingActivity.startActivity(intent);
     }
@@ -159,7 +159,7 @@ public class LookComQuestionIndexActivity extends BaseActivity implements LookCo
     @Override
     public void refreshView(List<CompanyAnswer> entities, CompanyTest companyTest) {
         if (companyTest == null) {
-          return;
+           return;
         }
 
         this.companyTest = companyTest;

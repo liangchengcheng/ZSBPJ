@@ -37,8 +37,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  AnswerIndexActivity
  */
 public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyAnswerView,
-        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, CompanyAnswerAdapter.OnImageClickListener
-        , CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, CompanyAnswerAdapter.OnImageClickListener,
+        CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CompanyAnswerAdapter mAdapter;
