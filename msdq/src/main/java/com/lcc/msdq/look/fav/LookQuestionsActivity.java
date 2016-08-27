@@ -89,7 +89,7 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         tv_count = (TextView) findViewById(R.id.tv_count);
         entity = (FavEntity) getIntent().getSerializableExtra(ID);
-        fid = entity.getMid();
+        fid = entity.getNid();
         mPresenter = new LookTestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.iv_share).setOnClickListener(this);
