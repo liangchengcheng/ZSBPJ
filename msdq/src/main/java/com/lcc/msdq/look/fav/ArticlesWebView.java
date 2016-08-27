@@ -255,8 +255,11 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
 
     @Override
     public void FavSuccess() {
-        ImageManager.getInstance().loadResImage(ArticlesWebView.this,
-                R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
+//        ImageManager.getInstance().loadResImage(ArticlesWebView.this,
+//                R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
+        this.isFav = true;
+        changeState();
+        Fav();
     }
 
     @Override
@@ -266,8 +269,11 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
 
     @Override
     public void UnFavSuccess() {
-        ImageManager.getInstance().loadResImage(ArticlesWebView.this,
-                R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
+//        ImageManager.getInstance().loadResImage(ArticlesWebView.this,
+//                R.drawable.details_page_toolbar_icon_guanxin_normal, iv_state);
+        this.isFav = false;
+        changeState();
+        UnFav();
     }
 
     @Override
