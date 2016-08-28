@@ -46,6 +46,25 @@ public class CompanyAnswer implements Serializable {
     private String qm;
     private String zy;
     private String user_image;
+    private String l_num;
+    private String c_num;
+
+    public String getC_num() {
+        return c_num;
+    }
+
+    public void setC_num(String c_num) {
+        this.c_num = c_num;
+    }
+
+    public String getL_num() {
+
+        return l_num;
+    }
+
+    public void setL_num(String l_num) {
+        this.l_num = l_num;
+    }
 
     public String getId() {
         return id;

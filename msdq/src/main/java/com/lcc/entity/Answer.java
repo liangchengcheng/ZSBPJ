@@ -39,7 +39,7 @@ public class Answer implements Serializable {
     private String updated_time;
     private String author;
     private String answer;
-    private String l_number;
+    private String l_num;
     private String z_num;
     private String p_num;
     private String fid;
@@ -95,12 +95,12 @@ public class Answer implements Serializable {
         this.answer = answer;
     }
 
-    public String getL_number() {
-        return l_number;
+    public String getL_num() {
+        return l_num;
     }
 
-    public void setL_number(String l_number) {
-        this.l_number = l_number;
+    public void setL_num(String l_num) {
+        this.l_num = l_num;
     }
 
     public String getZ_num() {

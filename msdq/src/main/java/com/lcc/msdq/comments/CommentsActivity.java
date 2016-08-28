@@ -39,6 +39,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
         CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
         CommentsDialog.onChoiceListener,View.OnClickListener {
+
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
     @Bind(R.id.llAddComment)
@@ -53,15 +54,15 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private CommentsDialog dialog;
     private SimpleArcDialog mDialog;
 
-    private CommentAdapter commentsAdapter;
     public static final String TYPE = "type";
+    public static final String ID = "id";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    public static final String ID = "id";
+    private CommentAdapter commentsAdapter;
     private Replay replay = new Replay();
     private CommentsPresenter mPresenter;
     private String type = "";

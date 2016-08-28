@@ -85,7 +85,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
-                    android:text="8小时前"
                     android:textColor="@color/article_des"
                     android:textSize="14sp" />
 

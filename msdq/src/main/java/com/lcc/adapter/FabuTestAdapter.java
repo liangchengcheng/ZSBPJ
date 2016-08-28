@@ -27,8 +27,8 @@ import zsbpj.lccpj.utils.TimeUtils;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
- * Description:  FabuTestAdapter
+ * Date:         2016年08月27日22:35:39
+ * Description:  发布的资料的问题
  */
 public class FabuTestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int NORMAL_ITEM = 0;

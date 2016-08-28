@@ -71,16 +71,16 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private TextView tv_count;
     private FloatingActionMenu floatingMenu;
 
-    private String fid;
-    private TestEntity entity;
-    private TestAnswerPresenter mPresenter;
-    private AnswerIndexAdapter mAdapter;
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+    private String fid;
+    private TestEntity entity;
+    private TestAnswerPresenter mPresenter;
+    private AnswerIndexAdapter mAdapter;
     private boolean isfavEntity;
 
     public static void startAnswerIndexActivity(TestEntity entity, Activity startingActivity) {
@@ -289,10 +289,6 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         String user_name = null;
         Intent intent = null;
         switch (v.getId()) {
-            case R.id.tv_sc:
-                startActivity(new Intent(AnswerIndexActivity.this, CommentsActivity.class));
-                floatingMenu.close(false);
-                break;
 
             case R.id.floatingfabu:
                 user_name = DataManager.getUserName();

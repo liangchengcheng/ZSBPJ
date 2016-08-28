@@ -54,8 +54,9 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity, TestAdapter
         if (!TextUtils.isEmpty(time)){
             holder.tv_time.setText(TimeUtils.getTimeFormatText(time));
         }
-
+        //评论
         holder.tv_ll.setText(entity.getL_num());
+        //收藏
         holder.tv_sc.setText(entity.getL_num());
 
         ImageManager.getInstance().loadCircleImage(mActivity, entity.getUser_image(), holder.iv_image);
