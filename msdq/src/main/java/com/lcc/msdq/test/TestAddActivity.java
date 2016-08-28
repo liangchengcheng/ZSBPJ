@@ -34,6 +34,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  */
 public class TestAddActivity extends BaseActivity implements QuestionAddView ,View.OnClickListener,
         RadioGroup.OnCheckedChangeListener{
+
     public static final String ZY = "zy";
     private String zy = "";
     private List<File> files = new ArrayList<>();
@@ -66,6 +67,7 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
         editText_title= (EditText) findViewById(R.id.editText_title);
         FrameManager.getInstance().toastPrompt(zy);
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +122,9 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
                 questionAdd.setSummary(editText_summary.getText().toString());
                 questionAdd.setType(zy);
                 presenter.QuestionAdd(questionAdd, files);
+                break;
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }
