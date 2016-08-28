@@ -176,7 +176,7 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
 
         if (entities != null && entities.size() > 0) {
             this.testEntity = entity;
-            tv_count.setText("共" + testEntity.getAnswer_count() + "个回答");
+            tv_count.setText("共" + testEntity.getC_num() + "个回答");
             List<Object> objects = new ArrayList<>();
             objects.add(entity);
             for (int i = 0; i < entities.size(); i++) {

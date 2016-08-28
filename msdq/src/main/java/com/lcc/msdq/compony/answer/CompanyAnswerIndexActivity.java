@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.adapter.CompanyAnswerAdapter;
@@ -46,6 +47,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private LoadingLayout loading_layout;
     private FloatingActionMenu floatingMenu;
+    private TextView tv_count;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -60,8 +62,10 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
     @Override
     protected void initView() {
         mPresenter = new CompanyAnswerPresenterImpl(this);
+        tv_count= (TextView) findViewById(R.id.tv_count);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         companyTest = (CompanyTest) getIntent().getSerializableExtra("data");
+        tv_count.setText("共"+companyTest.getC_num()+"个问题");
         fid = companyTest.getMid();
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         findViewById(R.id.floatingComment).setOnClickListener(this);

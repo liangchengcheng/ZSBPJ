@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lcc.entity.Article;
@@ -31,12 +32,9 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  IndexMenuAdapter
  */
 public class FlowMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-
     private List<FlowIEntity> mList = new ArrayList<>();
-
     private boolean hasFooter;
     private boolean hasMoreData = true;
 
@@ -65,16 +63,12 @@ public class FlowMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof FootViewHolder) {
             if (hasMoreData) {
                 ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.VISIBLE);
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
-            } else {
-                ((FootViewHolder) viewHolder).mProgressView.setVisibility(View.GONE);
-                ((FootViewHolder) viewHolder).mTextView.setText("没有更多数据...");
             }
         } else {
             final FlowIEntity weekData = mList.get(position);
@@ -114,15 +108,12 @@ public class FlowMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.iv_head)
         ImageView iv_head;
-
         @Bind(R.id.tv_nickname)
         TextView tv_nickname;
-
         @Bind(R.id.ll_all)
-        CardView ll_all;
+        RelativeLayout ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
@@ -134,10 +125,8 @@ public class FlowMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * 头部的布局
      */
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

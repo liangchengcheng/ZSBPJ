@@ -95,7 +95,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         floatingMenu = (FloatingActionMenu) findViewById(R.id.floatingMenu);
         tv_count = (TextView) findViewById(R.id.tv_count);
         entity = (TestEntity) getIntent().getSerializableExtra(ID);
-        tv_count.setText("共" + entity.getAnswer_count() + "个回答");
+        tv_count.setText("共" + entity.getC_num() + "个回答");
         fid = entity.getMid();
         mPresenter = new TestAnswerPresenterImpl(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);

@@ -98,8 +98,7 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
                     ivUserProfilePhoto);
         } else {
             ImageManager.getInstance().loadResImage(UserProfileActivity.this,
-                    R.drawable.default_user_logo,
-                    ivUserProfilePhoto);
+                    R.drawable.default_user_logo, ivUserProfilePhoto);
         }
 
         tv_gz.setText(userInfo.getGz_num() + "/关注");

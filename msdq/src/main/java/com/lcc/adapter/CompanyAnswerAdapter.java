@@ -132,7 +132,7 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.des_content.setText(Html.fromHtml(answer.getAnswer_content()));
             holder.tv_name.setText(answer.getNickname());
-            holder.tv_znum.setText(answer.getZ_num()+"赞");
+            holder.tv_znum.setText(answer.getP_num()+"赞");
 
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);

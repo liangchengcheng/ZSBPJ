@@ -71,7 +71,6 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
         mPresenter = new FlowPresenterImpl(this);
         initRefreshView();
         initRecycleView();
-
         if (state.equals("me")){
             tv_title.setText("我关注的人");
             mPresenter.getMyData(1,value);
@@ -80,7 +79,6 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
             mPresenter.getYouData(1,value);
         }
     }
-
 
     private void initRefreshView() {
         mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
