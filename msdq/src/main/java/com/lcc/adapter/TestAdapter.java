@@ -57,7 +57,7 @@ public class TestAdapter extends LoadMoreRecyclerAdapter<TestEntity, TestAdapter
         //评论
         holder.tv_ll.setText(entity.getL_num());
         //收藏
-        holder.tv_sc.setText(entity.getL_num());
+        holder.tv_sc.setText(entity.getZ_num());
 
         ImageManager.getInstance().loadCircleImage(mActivity, entity.getUser_image(), holder.iv_image);
 

@@ -273,7 +273,6 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
                 floatingMenu.close(false);
                 break;
 
-
             case R.id.guillotine_hamburger:
                 finish();
                 break;
