@@ -79,7 +79,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
             Environment.getExternalStorageDirectory() + "/DCIM/Camera");
     private static final String newFile = Environment.getExternalStorageDirectory().getPath()
             + "/com.lcc.mstdq/";
-    // 照相机拍照得到的图片
     private File mCurrentPhotoFile;
     private List<File> files = new ArrayList<>();
     private TestAnswerAddPresenter presenter;
@@ -136,23 +135,27 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     /**
      * 负责处理编辑数据提交等事宜，请自行实现
      */
-    private void dealEditData(List<SEditorData> editList) {
+    private void dealEditData(final List<SEditorData> editList) {
         if (editList == null || editList.size() == 0) {
-            FrameManager.getInstance().toastPrompt("暂无数据");
             closeDialog();
             return;
         }
 
-        String html = HTMLContentUtil.getContent(editList);
-        answerAdd.setAnswer(html);
-        files = HTMLContentUtil.getFiles(editList);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String html = HTMLContentUtil.getContent(editList);
+                answerAdd.setAnswer(html);
+                files = HTMLContentUtil.getFiles(editList);
 
-        if (files != null && files.size() > 0) {
-            pic_num = files.size();
-            compressWithLs(files);
-        } else {
-            presenter.TestAnswerAdd(answerAdd, files);
-        }
+                if (files != null && files.size() > 0) {
+                    pic_num = files.size();
+                    compressWithLs(files);
+                } else {
+                    presenter.TestAnswerAdd(answerAdd, files);
+                }
+            }
+        }).start();
     }
 
     private void openCamera() {
@@ -279,7 +282,6 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     public void onSuccess(File file) {
         pic_num--;
         if (pic_num == 0) {
-            CoCoinToast.getInstance().showToast("开始上传", SuperToast.Background.BLUE);
             presenter.TestAnswerAdd(answerAdd, files);
         }
     }

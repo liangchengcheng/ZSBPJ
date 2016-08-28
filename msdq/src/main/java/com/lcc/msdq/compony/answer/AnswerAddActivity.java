@@ -105,23 +105,28 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     /**
      * 负责处理编辑数据提交等事宜，请自行实现
      */
-    private void dealEditData(List<SEditorData> editList) {
+    private void dealEditData(final List<SEditorData> editList) {
         if (editList == null || editList.size() == 0) {
             FrameManager.getInstance().toastPrompt("暂无数据");
             closeDialog();
             return;
         }
 
-        String html = HTMLContentUtil.getContent(editList);
-        answerAdd.setAnswer(html);
-        files = HTMLContentUtil.getFiles(editList);
-        if (files != null && files.size() > 0) {
-            pic_num = files.size();
-            compressWithLs(files);
-        } else {
-            answerAdd.setAnswer(html);
-            presenter.ComAnswerAdd(answerAdd, files);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String html = HTMLContentUtil.getContent(editList);
+                answerAdd.setAnswer(html);
+                files = HTMLContentUtil.getFiles(editList);
+                if (files != null && files.size() > 0) {
+                    pic_num = files.size();
+                    compressWithLs(files);
+                } else {
+                    answerAdd.setAnswer(html);
+                    presenter.ComAnswerAdd(answerAdd, files);
+                }
+            }
+        }).start();
     }
 
     private void openCamera() {
