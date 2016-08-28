@@ -16,6 +16,7 @@ import com.lcc.base.BaseActivity;
 import com.lcc.entity.Article;
 import com.lcc.entity.FlowIEntity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.mvp.presenter.FlowPresenter;
 import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.impl.FlowPresenterImpl;
@@ -199,7 +200,7 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
 
     @Override
     public void onItemClick(FlowIEntity data) {
-
+        OtherUserProfileActivity.starOtherUserProfileActivity(data.getPhone(),FlowIndex.this);
     }
 
     @Override
