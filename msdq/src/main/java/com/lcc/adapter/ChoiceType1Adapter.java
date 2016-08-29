@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
  * Description:  ChoiceType1Adapter
  */
 public class ChoiceType1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private List<Type1> mList = new ArrayList<>();
 
     public void bind(List<Type1> messages) {
@@ -46,14 +45,10 @@ public class ChoiceType1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         final Type1 weekData = mList.get(position);
         NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
         String title = weekData.getN_name();
-
-
-
         holder.tv_nickname.setText(title);
         if (mListener != null) {
             holder.rl_choice.setOnClickListener(new OnClickListener() {
@@ -63,7 +58,6 @@ public class ChoiceType1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
             });
         }
-
     }
 
     @Override

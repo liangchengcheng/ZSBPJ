@@ -2,6 +2,7 @@ package com.lcc.msdq.choice;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ import zsbpj.lccpj.utils.CacheUtil;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
+import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 /**
  * Author:       梁铖城
@@ -68,6 +70,7 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         initRecycleView();
         choiceTypePresenter = new ChoicePresenterImpl(this);
         choiceTypePresenter.getType2(nid);
+        setSuccess();
     }
 
     private void initRecycleView() {
@@ -173,4 +176,11 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
             mDialog.dismiss();
         }
     }
+
+    public void setSuccess() {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("设置成功", R.layout.choice_toast_item, R.id.content_toast, ChoiceTypetwoActivity.this);
+    }
+
 }
