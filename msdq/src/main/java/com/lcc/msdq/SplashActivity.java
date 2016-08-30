@@ -18,7 +18,6 @@ import java.util.Calendar;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class SplashActivity extends Activity implements View.OnClickListener {
-
     private boolean have_set;
     private LinearLayout ll_bottom_view;
     private String user_tk;

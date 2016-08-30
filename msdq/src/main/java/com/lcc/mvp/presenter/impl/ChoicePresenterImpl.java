@@ -109,7 +109,7 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
     @Override
     public void setDataType(String type) {
         view.setLoading();
-        model.getType2(type,new ResultCallback<String>() {
+        model.editType(type,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.setDataFail(ApiException.getApiExceptionMessage(e.getMessage()));

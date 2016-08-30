@@ -29,7 +29,7 @@ public class ChoiceTypeModel {
 
 
     /**
-     * 获取二级目录列表
+     * 编辑职业
      */
     public OkHttpRequest editType(String type, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();

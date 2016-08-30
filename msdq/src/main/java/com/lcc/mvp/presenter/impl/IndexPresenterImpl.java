@@ -27,7 +27,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class IndexPresenterImpl implements IndexPresenter {
-
     private IndexView view;
     private IndexModel model;
     private static final int DEF_DELAY = (int) (1 * 1000);
@@ -96,7 +95,6 @@ public class IndexPresenterImpl implements IndexPresenter {
     }
 
     private void updateView(final String entities, int delay, final int page) {
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
