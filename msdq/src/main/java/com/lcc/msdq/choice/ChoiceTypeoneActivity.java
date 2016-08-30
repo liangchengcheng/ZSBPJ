@@ -34,7 +34,6 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeView,
         ChoiceType1Adapter.OnItemClickListener, View.OnClickListener {
-
     private ChoiceTypePresenter choiceTypePresenter;
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;

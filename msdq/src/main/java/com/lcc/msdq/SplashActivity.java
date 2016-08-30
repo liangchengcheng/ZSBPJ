@@ -18,7 +18,7 @@ import java.util.Calendar;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class SplashActivity extends Activity implements View.OnClickListener {
-    private boolean have_set;
+
     private LinearLayout ll_bottom_view;
     private String user_tk;
 
@@ -27,8 +27,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         App.addActivity(this);
-
-        have_set = SharePreferenceUtil.getGuide();
         user_tk = SharePreferenceUtil.getUserTk();
 
         ImageView ly = (ImageView) findViewById(R.id.ly);
@@ -37,9 +35,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.tv_tologin).setOnClickListener(this);
         FrameLayout reveal = (FrameLayout) findViewById(R.id.reveal);
         changePic(ly);
-        if (!have_set || TextUtils.isEmpty(user_tk)) {
+        if (TextUtils.isEmpty(user_tk)) {
             ll_bottom_view.setVisibility(View.VISIBLE);
-            SharePreferenceUtil.setGuide();
         } else {
             ll_bottom_view.setVisibility(View.GONE);
         }

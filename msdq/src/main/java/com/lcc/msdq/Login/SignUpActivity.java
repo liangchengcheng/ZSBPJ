@@ -107,11 +107,9 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
                     }
             }
         });
-
     }
 
     public boolean valid(String phone, String password) {
-
         if (!FormValidation.isMobile(phone)) {
             WidgetUtils.requestFocus(mTextInputLayoutPhone.getEditText());
             setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
@@ -222,7 +220,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-
             super.handleMessage(msg);
             int event = msg.arg1;
             int result = msg.arg2;

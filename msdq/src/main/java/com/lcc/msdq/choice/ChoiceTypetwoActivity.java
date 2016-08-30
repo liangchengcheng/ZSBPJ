@@ -142,11 +142,10 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     @Override
     public void setDataSuccess(String msg) {
         closeDialog();
-        FrameManager.getInstance().toastPrompt("设置成功");
+        setSuccess();
         UserInfo userInfo = DataManager.getUserInfo();
         userInfo.setZy(zy);
         DataManager.editUser(userInfo);
-        // TODO: 16/7/27 判断是从主页面进来的还是别的地方进来的
         App.exit();
         if (TextUtils.isEmpty(flag)) {
             finish();
