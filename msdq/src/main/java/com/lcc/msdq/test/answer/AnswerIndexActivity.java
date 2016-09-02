@@ -1,8 +1,10 @@
 package com.lcc.msdq.test.answer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -62,7 +66,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
-        AnswerIndexAdapter.OnImageClickListener {
+        AnswerIndexAdapter.OnImageClickListener ,AnswerIndexAdapter.OnAnswerClickListener{
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -124,6 +128,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnFavClickListener(this);
         mAdapter.setOnImageClickListener(this);
+        mAdapter.setOnAnswerClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -355,5 +360,91 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     @Override
     public void onImageClick(String user_phone) {
         OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, AnswerIndexActivity.this);
+    }
+
+    @Override
+    public void OnAnswerClick(TestEntity object) {
+        FrameManager.getInstance().toastPrompt(object.getMid());
+        showBSDialog();
+    }
+
+    private static final String shareStr[] = {
+            "微信","QQ","空间","微博","GitHub","CJJ测试\nRecyclerView自适应","微信朋友圈","短信","推特","遇见"
+    };
+
+    private void showBSDialog() {
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog_layout, null);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.bs_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        SimpleStringRecyclerViewAdapter adapter = new SimpleStringRecyclerViewAdapter(this);
+        adapter.setItemClickListener(new SimpleStringRecyclerViewAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+                dialog.dismiss();
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        dialog.setContentView(view);
+        dialog.show();
+    }
+
+    public static class SimpleStringRecyclerViewAdapter
+            extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
+
+        public ItemClickListener mItemClickListener;
+
+        public void setItemClickListener(ItemClickListener listener) {
+            mItemClickListener = listener;
+        }
+
+        public interface ItemClickListener {
+            public void onItemClick(int pos);
+        }
+
+        private Context mContext;
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+
+            public final ImageView mImageView;
+            public final TextView mTextView;
+
+            public ViewHolder(View view) {
+                super(view);
+                mImageView = (ImageView) view.findViewById(R.id.avatar);
+                mTextView = (TextView) view.findViewById(R.id.tv);
+            }
+
+
+        }
+
+        public SimpleStringRecyclerViewAdapter(Context context) {
+            super();
+            mContext = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.sheet_list_item, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+            holder.mTextView.setText(shareStr[position]);
+            holder.mTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItemClickListener.onItemClick(position);
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return shareStr.length;
+        }
     }
 }

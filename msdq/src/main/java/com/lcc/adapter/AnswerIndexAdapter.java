@@ -1,51 +1,25 @@
 package com.lcc.adapter;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.lcc.entity.Answer;
 import com.lcc.entity.TestEntity;
 import com.lcc.msdq.R;
 import com.lcc.view.StretchyTextView;
-
-import android.view.View.MeasureSpec;
-import android.view.ViewGroup.LayoutParams;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import android.util.TypedValue;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.View.MeasureSpec;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewParent;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import rx.functions.Action1;
 import zsbpj.lccpj.frame.ImageManager;
 
 /**
@@ -97,7 +71,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof HeadViewHolder) {
-            TestEntity object = (TestEntity) mList.get(position);
+            final TestEntity object = (TestEntity) mList.get(position);
             HeadViewHolder holder = (HeadViewHolder) viewHolder;
             holder.tv_name.setMaxLineCount(3);
             holder.tv_name.setContent(object.getSummary());
@@ -107,6 +81,12 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             String s_num = object.getZ_num();
             if (!TextUtils.isEmpty(s_num) || s_num.equals("0")) {
                 holder.tv_llsc.setText("共有" + s_num + "人收藏了这个问题");
+                holder.tv_llsc.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        answerClickListener.OnAnswerClick(object);
+                    }
+                });
             }
 
             if (isFav) {
@@ -294,6 +274,16 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void setOnImageClickListener(OnImageClickListener ImageListener) {
         this.ImageListener = ImageListener;
+    }
+
+    public interface OnAnswerClickListener {
+        void OnAnswerClick(TestEntity object);
+    }
+
+    private OnAnswerClickListener answerClickListener;
+
+    public void setOnAnswerClickListener(OnAnswerClickListener answerClickListener) {
+        this.answerClickListener = answerClickListener;
     }
 
 }
