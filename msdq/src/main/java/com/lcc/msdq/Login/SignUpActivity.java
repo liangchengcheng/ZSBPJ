@@ -38,7 +38,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     private TextInputLayout textInputLayout_username;
     private TextInputLayout mTextInputLayoutPassword;
     private EditText mEditTextVerifyCode;
-    private Button mButtonSendVerifyCode;
+    private TextView mButtonSendVerifyCode;
     private Button mButtonSignUp;
 
     private SignUpPresenter mPresenter;
@@ -72,7 +72,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
         mEditTextVerifyCode = (EditText) findViewById(R.id.editText_verify_code);
-        mButtonSendVerifyCode = (Button) findViewById(R.id.button_send_verify_code);
+        mButtonSendVerifyCode = (TextView) findViewById(R.id.button_send_verify_code);
         mButtonSendVerifyCode.setOnClickListener(this);
         mButtonSignUp = (Button) findViewById(R.id.buttonSignUp);
         mButtonSignUp.setOnClickListener(this);

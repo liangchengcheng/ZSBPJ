@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import com.lcc.App;
 import com.lcc.base.BaseActivity;
+import com.lcc.db.test.UserInfo;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
@@ -140,8 +142,8 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         FrameManager.getInstance().toastPrompt("登录成功");
         Intent intent = null;
         if (!TextUtils.isEmpty(from)) {
-            String type = SharePreferenceUtil.getUserType();
-            if (TextUtils.isEmpty(type)) {
+            UserInfo userInfo = DataManager.getUserInfo();
+            if (userInfo == null || TextUtils.isEmpty(userInfo.getZy())) {
                 intent = new Intent(LoginActivity.this, ChoiceTypeoneActivity.class);
                 intent.putExtra("flag", "login");
             } else {

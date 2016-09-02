@@ -15,7 +15,7 @@
     <string name="layout_str_hint_phone"> 手机</string>
     <string name="layout_str_hint_password">密码</string>
     <string name="layout_str_hint_input_code">请输入验证码</string>
-    <string name="msg_get_verify_code">获取验证码</string>
+    <string name="msg_get_verify_code">点击获取</string>
     <string name="msg_verify_code_point">秒后获取</string>
     <string name="share_tail">\r\n(分享自小城面试助手！)</string>
     <string name="share">分享到</string>
