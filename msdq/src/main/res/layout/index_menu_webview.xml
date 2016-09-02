@@ -137,9 +137,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="2"
                     android:orientation="horizontal">
 
@@ -161,56 +161,59 @@
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/ll_comments"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="12dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:layout_centerVertical="true"
+                            android:id="@+id/iv_pic"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/detailspage_toolbar_icon_comment_blue_press" />
 
                         <TextView
+
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_pic"
                             android:id="@+id/tv_comments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:layout_marginTop="3dp"
-                            android:gravity="center_vertical"
                             android:textSize="12sp" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/ll_issc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginBottom="12dp"
                         android:layout_marginRight="20dp"
-                        android:layout_marginTop="12dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
+
                             android:id="@+id/iv_state"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical" />
                     </LinearLayout>
                 </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
