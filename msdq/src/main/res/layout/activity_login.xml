@@ -85,11 +85,10 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/selector_bg_edit"
                         android:hint="输入用户名"
-                        android:inputType="textPersonName"
                         android:paddingBottom="2dp"
                         android:textColor="#2fa881"
                         android:textCursorDrawable="@drawable/bg_input_cursor"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -116,7 +115,7 @@
                         android:paddingBottom="2dp"
                         android:textColor="#2fa881"
                         android:textCursorDrawable="@drawable/bg_input_cursor"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -141,13 +140,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="忘记密码？"
+                android:text="忘记密码"
                 android:textColor="#9a9a9a"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:textColor="#9a9a9a"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/textView_create_account"
                 android:layout_width="wrap_content"

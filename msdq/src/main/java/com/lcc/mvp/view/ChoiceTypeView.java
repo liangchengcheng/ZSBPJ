@@ -24,6 +24,6 @@ public interface ChoiceTypeView {
 
     void setDataFail(String msg);
 
-    void setDataSuccess(String msg);
+    void setDataSuccess();
 
 }

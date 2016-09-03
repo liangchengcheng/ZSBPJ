@@ -152,6 +152,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
      */
     private void logout(){
         DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
         EventBus.getDefault().post(0x02);
         FrameManager.getInstance().toastPrompt("注销登录成功");
     }

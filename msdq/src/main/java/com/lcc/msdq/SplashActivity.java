@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -20,6 +21,12 @@ import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.login.SignUpActivity;
 import com.lcc.utils.SharePreferenceUtil;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import zsbpj.lccpj.frame.ImageManager;
 
 public class SplashActivity extends Activity implements View.OnClickListener {
@@ -91,12 +98,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     }
 
     public void JumpNextPage() {
-        if (TextUtils.isEmpty(user_tk)){
-            return;
-        }
-        Intent intent  = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 
     @Override
@@ -137,7 +139,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 if (fraction >= 0.8 && !isShowingRubberEffect) {
                     isShowingRubberEffect = true;
                     startShowAppName();
-                    JumpNextPage();
+                    finishActivity();
                 } else if (fraction >= 0.95) {
                     valueAnimator.cancel();
                     startLogoInner2();
@@ -154,6 +156,25 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     private void startLogoInner2() {
         YoYo.with(Techniques.RubberBand).duration(1000).playOn(logo_inner_iv);
+    }
+
+
+    private void finishActivity() {
+        Observable.timer(1000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        if (TextUtils.isEmpty(user_tk)){
+                            return;
+                        }
+                        SystemClock.sleep(1500);
+                        Intent intent  = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
     }
 
 }

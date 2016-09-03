@@ -68,7 +68,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class AnswerIndexActivity extends BaseActivity implements TestAnswerView, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
-        AnswerIndexAdapter.OnImageClickListener ,AnswerIndexAdapter.OnAnswerClickListener{
+        AnswerIndexAdapter.OnImageClickListener, AnswerIndexAdapter.OnAnswerClickListener {
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -377,7 +377,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void OnAnswerClick(final TestEntity object) {
-        mPresenter.getUserListData(favPage,object.getMid());
+        favPage = 1;
+        mPresenter.getUserListData(favPage, object.getMid());
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog_layout, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.bs_rv);

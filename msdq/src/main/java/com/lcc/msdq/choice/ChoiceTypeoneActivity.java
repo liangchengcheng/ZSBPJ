@@ -112,7 +112,7 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
     }
 
     @Override
-    public void setDataSuccess(String msg) {
+    public void setDataSuccess() {
 
     }
 

@@ -41,6 +41,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     private TextView tv_username;
     //签名
     private TextView tv_qm;
+    private TextView tv_zy;
     //签到
     private RelativeLayout rl_qd;
     private TextView tv_qd;
@@ -84,6 +85,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         tv_username = (TextView) view.findViewById(R.id.tv_username);
         tv_username.setOnClickListener(this);
         tv_qm = (TextView) view.findViewById(R.id.tv_qm);
+        tv_zy = (TextView) view.findViewById(R.id.tv_zy);
         rl_qd = (RelativeLayout) view.findViewById(R.id.rl_qd);
         tv_qd = (TextView) view.findViewById(R.id.tv_qd);
         rl_qd.setOnClickListener(this);
@@ -179,6 +181,13 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         UserInfo userInfo = DataManager.getUserInfo();
         if (userInfo != null) {
             tv_username.setText(userInfo.getNickname());
+
+            if (!TextUtils.isEmpty(userInfo.getZy())){
+                tv_zy.setText(userInfo.getZy());
+            }else {
+                tv_zy.setText("");
+            }
+
             if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");
             } else {
@@ -191,8 +200,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                         .error(R.drawable.default_user_logo).crossFade()
                         .transform(new GlideCircleTransform(getActivity())).into(iv_more);
             }else {
-                ImageManager.getInstance().loadResImage(getActivity(), R.drawable.default_user_logo,
-                        iv_more);
+                ImageManager.getInstance().loadResImage(getActivity(), R.drawable.default_user_logo, iv_more);
             }
         }else {
             ImageManager.getInstance().loadResImage(getActivity(), R.drawable.default_user_logo, iv_more);

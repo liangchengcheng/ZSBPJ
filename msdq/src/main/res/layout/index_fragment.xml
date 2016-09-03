@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20sp"
             android:gravity="center_vertical"
-            android:text="面试大全"
+            android:text="面试助手"
             android:textColor="#fff"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>

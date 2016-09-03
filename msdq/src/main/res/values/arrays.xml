@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+
+<resources
+    xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string-array name="tiaojian1">
         <item>全部时间</item>
         <item>最近一周</item>

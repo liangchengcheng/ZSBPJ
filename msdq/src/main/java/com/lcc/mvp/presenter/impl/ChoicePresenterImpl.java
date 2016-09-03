@@ -122,12 +122,7 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     if (status == 1) {
-                        String result = jsonObject.getString("result");
-                        if (!TextUtils.isEmpty(result)) {
-                            view.setDataSuccess(result);
-                        } else {
-                            view.getDataEmpty();
-                        }
+                        view.setDataSuccess();
                     } else {
                         view.setDataFail(ApiException.getApiExceptionMessage(message));
                     }

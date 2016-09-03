@@ -45,8 +45,7 @@ public class DataManager {
      * 获取所有用户的信息
      */
     public static UserInfo getUserInfo() {
-        Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder()
-                .build();
+        Query query = getNoteDao(FrameManager.getAppContext()).queryBuilder().build();
         List<UserInfo> userInfos = query.list();
         if (userInfos != null && userInfos.size() > 0) {
             return userInfos.get(0);

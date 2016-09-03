@@ -36,7 +36,7 @@ public class SharePreferenceUtil {
     public static void setUserTk(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(FrameManager.getAppContext());
-        sharedPreferences.edit().putString(USER_TK,value).apply();
+        sharedPreferences.edit().putString(USER_TK,value).commit();
     }
 
     /**

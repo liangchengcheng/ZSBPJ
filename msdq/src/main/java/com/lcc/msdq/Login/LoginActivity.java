@@ -51,35 +51,6 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
 
-        EditText editText_name = mTextInputLayoutPhone.getEditText();
-        if (editText_name != null) {
-            editText_name.addTextChangedListener(new TextWatcher(mTextInputLayoutPhone) {
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (getEditString().length() > 10)
-                        if (FormValidation.isMobile(getEditString())) {
-                            mTextInputLayoutPhone.setErrorEnabled(false);
-                        } else {
-                            setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
-                        }
-                }
-            });
-        }
-
-        EditText editText_psd = mTextInputLayoutPassword.getEditText();
-        if (editText_psd != null) {
-            editText_psd.addTextChangedListener(new TextWatcher(mTextInputLayoutPassword) {
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (getEditString().length() > 5)
-                        if (FormValidation.isSimplePassword(getEditString())) {
-                            mTextInputLayoutPassword.setErrorEnabled(false);
-                        } else {
-                            setEditTextError(mTextInputLayoutPassword, R.string.msg_error_password);
-                        }
-                }
-            });
-        }
     }
 
     /**
@@ -88,12 +59,12 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     public boolean valid(String phone, String password) {
         if (!FormValidation.isMobile(phone)) {
             WidgetUtils.requestFocus(mTextInputLayoutPhone.getEditText());
-            setEditTextError(mTextInputLayoutPhone, R.string.msg_error_phone);
+            FrameManager.getInstance().toastPrompt(getResources().getString( R.string.msg_error_phone));
             return true;
         }
         if (!FormValidation.isSimplePassword(password)) {
             WidgetUtils.requestFocus(mTextInputLayoutPassword.getEditText());
-            setEditTextError(mTextInputLayoutPassword, R.string.msg_error_password);
+            FrameManager.getInstance().toastPrompt(getResources().getString( R.string.msg_error_password));
             return true;
         }
         return false;

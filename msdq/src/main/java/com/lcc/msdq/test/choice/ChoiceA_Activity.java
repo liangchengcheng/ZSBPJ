@@ -105,7 +105,7 @@ public class ChoiceA_Activity extends BaseActivity implements ChoiceTypeView,
     }
 
     @Override
-    public void setDataSuccess(String msg) {
+    public void setDataSuccess() {
 
     }
 

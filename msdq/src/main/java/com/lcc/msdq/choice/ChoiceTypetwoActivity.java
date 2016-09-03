@@ -70,7 +70,6 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         initRecycleView();
         choiceTypePresenter = new ChoicePresenterImpl(this);
         choiceTypePresenter.getType2(nid);
-        setSuccess();
     }
 
     private void initRecycleView() {
@@ -140,12 +139,12 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     }
 
     @Override
-    public void setDataSuccess(String msg) {
+    public void setDataSuccess() {
         closeDialog();
-        setSuccess();
         UserInfo userInfo = DataManager.getUserInfo();
         userInfo.setZy(zy);
         DataManager.editUser(userInfo);
+        setSuccess();
         App.exit();
         if (TextUtils.isEmpty(flag)) {
             finish();
