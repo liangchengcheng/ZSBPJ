@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -122,6 +123,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
             holder.tv_znum.setText(answer.getP_num()+"赞");
+            holder.tv_c_time.setText(TimeUtils.getTimeFormatText(answer.getCreated_time()));
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -156,6 +158,8 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class NormalViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.des_content)
         TextView des_content;
+        @Bind(R.id.tv_c_time)
+        TextView tv_c_time;
         @Bind(R.id.tv_name)
         TextView tv_name;
         @Bind(R.id.tv_znum)

@@ -32,22 +32,34 @@
 
                 <ImageView
                     android:id="@+id/iv_image"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:padding="3dp"
                     android:src="@color/font_black_4" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                <LinearLayout
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_image"
-                    android:textColor="@color/article_title"
-                    android:textSize="16sp" />
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/article_des"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_c_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/article_des"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
