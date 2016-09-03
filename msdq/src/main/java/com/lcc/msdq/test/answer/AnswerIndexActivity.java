@@ -29,9 +29,11 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.AnswerIndexAdapter;
 import com.lcc.adapter.BaseRecyclerAdapter;
+import com.lcc.adapter.UserListFavAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.TestEntity;
+import com.lcc.entity.UserListFav;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
@@ -86,6 +88,17 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private TestAnswerPresenter mPresenter;
     private AnswerIndexAdapter mAdapter;
     private boolean isfavEntity;
+    //收藏的页码表示
+    protected int favPage = 1;
+    //收藏用户列表
+    private RecyclerView recyclerView;
+    //收藏用户适配器
+    private UserListFavAdapter adapter;
+    //收藏用户的标示
+    protected static final int UDEF_DELAY = 1000;
+    protected final static int USTATE_LOAD = 0;
+    protected final static int USTATE_NORMAL = 1;
+    protected int UcurrentState = USTATE_NORMAL;
 
     public static void startAnswerIndexActivity(TestEntity entity, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, AnswerIndexActivity.class);
@@ -319,7 +332,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                     return;
                 }
 
-                CommentsActivity.startUserProfileFromLocation(entity.getMid(), Propertity.Test.QUESTION,
+                CommentsActivity.startCommentsActivity(entity.getMid(), Propertity.Test.QUESTION,
                         AnswerIndexActivity.this);
                 floatingMenu.close(false);
                 break;
@@ -363,88 +376,64 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     @Override
-    public void OnAnswerClick(TestEntity object) {
-        FrameManager.getInstance().toastPrompt(object.getMid());
-        showBSDialog();
-    }
-
-    private static final String shareStr[] = {
-            "微信","QQ","空间","微博","GitHub","CJJ测试\nRecyclerView自适应","微信朋友圈","短信","推特","遇见"
-    };
-
-    private void showBSDialog() {
+    public void OnAnswerClick(final TestEntity object) {
+        mPresenter.getUserListData(favPage,object.getMid());
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog_layout, null);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.bs_rv);
+        recyclerView = (RecyclerView) view.findViewById(R.id.bs_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        SimpleStringRecyclerViewAdapter adapter = new SimpleStringRecyclerViewAdapter(this);
-        adapter.setItemClickListener(new SimpleStringRecyclerViewAdapter.ItemClickListener() {
+        adapter = new UserListFavAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
-            public void onItemClick(int pos) {
-                dialog.dismiss();
+            public void onLoadMore() {
+                if (UcurrentState == USTATE_NORMAL) {
+                    UcurrentState = USTATE_LOAD;
+                    currentTime = TimeUtils.getCurrentTime();
+                    adapter.setHasFooter(true);
+                    recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+                    favPage++;
+                    mPresenter.getUserListData(favPage, object.getMid());
+                }
             }
         });
-        recyclerView.setAdapter(adapter);
         dialog.setContentView(view);
         dialog.show();
     }
 
-    public static class SimpleStringRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
-
-        public ItemClickListener mItemClickListener;
-
-        public void setItemClickListener(ItemClickListener listener) {
-            mItemClickListener = listener;
-        }
-
-        public interface ItemClickListener {
-            public void onItemClick(int pos);
-        }
-
-        private Context mContext;
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-
-            public final ImageView mImageView;
-            public final TextView mTextView;
-
-            public ViewHolder(View view) {
-                super(view);
-                mImageView = (ImageView) view.findViewById(R.id.avatar);
-                mTextView = (TextView) view.findViewById(R.id.tv);
-            }
-
-
-        }
-
-        public SimpleStringRecyclerViewAdapter(Context context) {
-            super();
-            mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.sheet_list_item, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, final int position) {
-
-            holder.mTextView.setText(shareStr[position]);
-            holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onItemClick(position);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return shareStr.length;
-        }
+    private void showBSDialog(List<UserListFav> entities) {
+        adapter.bind(entities);
     }
+
+    @Override
+    public void getUserListLoading() {
+
+    }
+
+    @Override
+    public void getUserListEmpty() {
+
+    }
+
+    @Override
+    public void getUserListFail(String msg) {
+
+    }
+
+    @Override
+    public void UserListLoadFail(String msg) {
+
+    }
+
+    @Override
+    public void refreshUserListView(List<UserListFav> entities) {
+        showBSDialog(entities);
+    }
+
+    @Override
+    public void loadMoreUserListView(List<UserListFav> entities) {
+
+    }
+
+
 }

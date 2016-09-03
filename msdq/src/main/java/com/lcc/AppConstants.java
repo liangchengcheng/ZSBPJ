@@ -111,6 +111,8 @@ public class AppConstants {
         public final static String LOOK_TEST_ANSWER_LIST = "/getTestanswerforLook";
         //我的收藏的公司的资料
         public final static String getTestanswerforLook = "/service/getTestanswerforLook";
+        //获取收藏的用户的列表
+        public final static String getUserList = "/service/getUserList";
 
     }
 

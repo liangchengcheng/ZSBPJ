@@ -68,7 +68,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private String type = "";
     private String content_id;
 
-    public static void startUserProfileFromLocation(String id, String type, Activity startActivity) {
+    public static void startCommentsActivity(String id, String type, Activity startActivity) {
         Intent intent = new Intent(startActivity, CommentsActivity.class);
         intent.putExtra(ID, id);
         intent.putExtra(TYPE, type);

@@ -13,4 +13,7 @@ public interface TestAnswerPresenter {
     void Fav(TestEntity article, String type);
 
     void UnFav(TestEntity article,String type);
+
+    void getUserListData(int page,String nid);
+
 }
