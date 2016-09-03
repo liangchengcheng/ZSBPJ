@@ -118,7 +118,7 @@ public class AnswerIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             Object object = mList.get(position);
             final Answer answer = (Answer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.des_content.setText(Html.fromHtml(answer.getAnswer()));
+            holder.des_content.setText(Html.fromHtml(answer.getAnswer()).toString().trim());
             holder.tv_name.setText(answer.getNickname());
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);

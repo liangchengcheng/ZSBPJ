@@ -41,14 +41,14 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, CompanyAnswerAdapter.OnImageClickListener,
         CompanyAnswerAdapter.OnFavClickListener, CompanyAnswerAdapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
-    private CompanyAnswerAdapter mAdapter;
     private CompanyAnswerPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private LoadingLayout loading_layout;
     private FloatingActionMenu floatingMenu;
     private TextView tv_count;
 
+    private LinearLayoutManager mLayoutManager;
+    private CompanyAnswerAdapter mAdapter;
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;

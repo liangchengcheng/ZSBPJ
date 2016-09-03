@@ -130,9 +130,10 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
             Object object = mList.get(position);
             final CompanyAnswer answer = (CompanyAnswer) object;
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.des_content.setText(Html.fromHtml(answer.getAnswer_content()));
+            holder.des_content.setText(Html.fromHtml(answer.getAnswer_content()).toString().trim());
             holder.tv_name.setText(answer.getNickname());
             holder.tv_znum.setText(answer.getP_num()+"赞");
+            holder.tv_c_time.setText(TimeUtils.getTimeFormatText(answer.getAnswer_time()));
 
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
@@ -168,6 +169,8 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView tv_znum;
         @Bind(R.id.tv_name)
         TextView tv_name;
+        @Bind(R.id.tv_c_time)
+        TextView tv_c_time;
         @Bind(R.id.iv_image)
         ImageView iv_image;
         @Bind(R.id.ll_all)
