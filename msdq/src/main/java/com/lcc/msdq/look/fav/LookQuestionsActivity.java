@@ -3,11 +3,13 @@ package com.lcc.msdq.look.fav;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +18,12 @@ import android.widget.TextView;
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.AnswerIndexAdapter;
+import com.lcc.adapter.UserListFavAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Answer;
 import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
+import com.lcc.entity.UserListFav;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
@@ -52,7 +56,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class LookQuestionsActivity extends BaseActivity implements LookTestAnswerView, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
-        AnswerIndexAdapter.OnImageClickListener {
+        AnswerIndexAdapter.OnImageClickListener ,AnswerIndexAdapter.OnAnswerClickListener{
 
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
@@ -76,6 +80,18 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
     protected long currentTime = 0;
     protected int currentPage = 1;
     private boolean isfavEntity;
+    //我的收藏的列表
+    //收藏的页码表示
+    protected int favPage = 1;
+    //收藏用户列表
+    private RecyclerView recyclerView;
+    //收藏用户适配器
+    private UserListFavAdapter adapter;
+    //收藏用户的标示
+    protected static final int UDEF_DELAY = 1000;
+    protected final static int USTATE_LOAD = 0;
+    protected final static int USTATE_NORMAL = 1;
+    protected int UcurrentState = USTATE_NORMAL;
 
     public static void startLookQuestionsActivity(FavEntity favEntity, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, LookQuestionsActivity.class);
@@ -117,6 +133,7 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnFavClickListener(this);
         mAdapter.setOnImageClickListener(this);
+        mAdapter.setOnAnswerClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -358,5 +375,84 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
     @Override
     public void onImageClick(String user_phone) {
         OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, LookQuestionsActivity.this);
+    }
+
+    @Override
+    public void OnAnswerClick(final TestEntity object) {
+        favPage = 1;
+        mPresenter.getUserListData(favPage, object.getMid());
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog_layout, null);
+        recyclerView = (RecyclerView) view.findViewById(R.id.bs_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new UserListFavAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
+            @Override
+            public void onLoadMore() {
+                if (UcurrentState == USTATE_NORMAL) {
+                    UcurrentState = USTATE_LOAD;
+                    currentTime = TimeUtils.getCurrentTime();
+                    adapter.setHasFooter(true);
+                    recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+                    favPage++;
+                    mPresenter.getUserListData(favPage, object.getMid());
+                }
+            }
+        });
+        dialog.setContentView(view);
+        dialog.show();
+    }
+
+    private void showBSDialog(List<UserListFav> entities) {
+        adapter.bind(entities);
+    }
+
+    @Override
+    public void getUserListLoading() {
+
+    }
+
+    @Override
+    public void getUserListEmpty() {
+
+    }
+
+    @Override
+    public void getUserListFail(String msg) {
+        FrameManager.getInstance().toastPrompt("获取数据失败...");
+    }
+
+    @Override
+    public void UserListLoadFail(String msg) {
+        FrameManager.getInstance().toastPrompt("加载更多数据失败...");
+    }
+
+    @Override
+    public void refreshUserListView(List<UserListFav> entities) {
+        showBSDialog(entities);
+    }
+
+    @Override
+    public void loadMoreUserListView(final List<UserListFav> entities) {
+        int delay = 0;
+        if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
+            delay = DEF_DELAY;
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UcurrentState = USTATE_NORMAL;
+                if (entities.isEmpty()) {
+                    adapter.setHasMoreDataAndFooter(false, false);
+                    FrameManager.getInstance().toastPrompt("没有更多数据...");
+                } else {
+                    adapter.appendToList(entities);
+                    adapter.setHasMoreDataAndFooter(true, false);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }, delay);
     }
 }

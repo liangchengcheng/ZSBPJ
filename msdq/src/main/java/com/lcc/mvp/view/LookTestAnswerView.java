@@ -2,6 +2,7 @@ package com.lcc.mvp.view;
 
 import com.lcc.entity.Answer;
 import com.lcc.entity.TestEntity;
+import com.lcc.entity.UserListFav;
 
 import java.util.List;
 
@@ -43,4 +44,18 @@ public interface LookTestAnswerView {
      * 取消收藏失败
      */
     void UnFavFail(String msg);
+
+    //获取收藏用户列表
+
+    void getUserListLoading();
+
+    void getUserListEmpty();
+
+    void getUserListFail(String msg);
+
+    void UserListLoadFail(String msg);
+
+    void refreshUserListView(List<UserListFav> entities);
+
+    void loadMoreUserListView(List<UserListFav> entities);
 }

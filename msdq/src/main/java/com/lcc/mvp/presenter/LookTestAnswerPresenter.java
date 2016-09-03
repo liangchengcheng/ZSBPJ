@@ -13,4 +13,6 @@ public interface LookTestAnswerPresenter {
     void Fav(TestEntity article, String type);
 
     void UnFav(TestEntity article, String type);
+
+    void getUserListData(int page,String nid);
 }

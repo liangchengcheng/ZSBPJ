@@ -40,4 +40,16 @@ public class LookTestAnswerModel {
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
+
+
+    /**
+     * 收藏的原生资料的问题
+     */
+    public OkHttpRequest getUserList(String nid,int page, ResultCallback<String> callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put(AppConstants.ParamKey.NID, nid);
+        paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
+        return ApiClient.create(AppConstants.RequestPath.getUserList, paramsMap).tag("").get(callback);
+    }
+
 }
