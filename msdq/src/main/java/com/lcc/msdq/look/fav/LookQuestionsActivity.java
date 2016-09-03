@@ -317,7 +317,7 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
                     return;
                 }
 
-                CommentsActivity.startUserProfileFromLocation(entity.getMid(), Propertity.Test.QUESTION,
+                CommentsActivity.startCommentsActivity(entity.getMid(), Propertity.Test.QUESTION,
                         LookQuestionsActivity.this);
                 floatingMenu.close(false);
                 break;

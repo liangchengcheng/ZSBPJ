@@ -417,12 +417,12 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void getUserListFail(String msg) {
-
+        FrameManager.getInstance().toastPrompt("获取数据失败...");
     }
 
     @Override
     public void UserListLoadFail(String msg) {
-
+        FrameManager.getInstance().toastPrompt("加载更多数据失败...");
     }
 
     @Override
@@ -431,8 +431,26 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     @Override
-    public void loadMoreUserListView(List<UserListFav> entities) {
+    public void loadMoreUserListView(final List<UserListFav> entities) {
+        int delay = 0;
+        if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
+            delay = DEF_DELAY;
+        }
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UcurrentState = USTATE_NORMAL;
+                if (entities.isEmpty()) {
+                    adapter.setHasMoreDataAndFooter(false, false);
+                    FrameManager.getInstance().toastPrompt("没有更多数据...");
+                } else {
+                    adapter.appendToList(entities);
+                    adapter.setHasMoreDataAndFooter(true, false);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }, delay);
     }
 
 

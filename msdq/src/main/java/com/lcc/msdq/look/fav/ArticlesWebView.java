@@ -216,7 +216,7 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
-                CommentsActivity.startUserProfileFromLocation(favEntity.getNid(),
+                CommentsActivity.startCommentsActivity(favEntity.getNid(),
                         Propertity.Article.NAME, ArticlesWebView.this);
                 break;
 
@@ -225,7 +225,7 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
-                CommentsActivity.startUserProfileFromLocation(favEntity.getNid(),
+                CommentsActivity.startCommentsActivity(favEntity.getNid(),
                         Propertity.Article.NAME, ArticlesWebView.this);
                 break;
 

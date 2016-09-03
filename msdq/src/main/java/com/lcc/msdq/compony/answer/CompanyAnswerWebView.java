@@ -194,7 +194,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(answer.getMid(), Propertity.COM.ANSWER,
+                CommentsActivity.startCommentsActivity(answer.getMid(), Propertity.COM.ANSWER,
                         CompanyAnswerWebView.this);
                 break;
 

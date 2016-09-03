@@ -185,7 +185,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             //评论
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(answer.getMid(),
+                CommentsActivity.startCommentsActivity(answer.getMid(),
                         Propertity.Test.ANSWER, AnswerContentActivity.this);
                 floatingMenu.close(false);
                 break;

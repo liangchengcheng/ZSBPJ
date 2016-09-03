@@ -272,7 +272,7 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
 
             //发布评论
             case R.id.floatingComment:
-                CommentsActivity.startUserProfileFromLocation(fid, Propertity.COM.QUESTION,
+                CommentsActivity.startCommentsActivity(fid, Propertity.COM.QUESTION,
                         CompanyAnswerIndexActivity.this);
                 floatingMenu.close(false);
                 break;

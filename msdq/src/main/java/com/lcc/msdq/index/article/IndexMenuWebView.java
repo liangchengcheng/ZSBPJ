@@ -201,7 +201,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                CommentsActivity.startCommentsActivity(article.getMid(),
                         Propertity.Article.NAME, IndexMenuWebView.this);
                 break;
 
@@ -210,7 +210,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     FrameManager.getInstance().toastPrompt("登录后才能操作~");
                     return;
                 }
-                CommentsActivity.startUserProfileFromLocation(article.getMid(),
+                CommentsActivity.startCommentsActivity(article.getMid(),
                         Propertity.Article.NAME, IndexMenuWebView.this);
                 break;
 
