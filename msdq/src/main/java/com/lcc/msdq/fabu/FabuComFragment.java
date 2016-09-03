@@ -37,7 +37,6 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class FabuComFragment extends BaseLazyLoadFragment  implements
         SwipeRefreshLayout.OnRefreshListener,FabuComView,FabuComAdapter.OnItemClickListener{
-
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;

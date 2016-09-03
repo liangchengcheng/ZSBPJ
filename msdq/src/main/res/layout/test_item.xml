@@ -100,8 +100,8 @@
 
                         <ImageButton
                             android:id="@+id/btnLike"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
                             android:src="@drawable/detailspage_toolbar_icon_comment_blue_press" />
@@ -113,7 +113,6 @@
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/btnLike"
                             android:text="22"
-
                             android:textColor="@color/article_des"
                             android:textSize="14sp" />
                     </RelativeLayout>
@@ -125,8 +124,8 @@
 
                         <ImageButton
                             android:id="@+id/btn_sc"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
                             android:src="@drawable/details_page_toolbar_icon_guanxin_normal" />
@@ -137,7 +136,6 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/btn_sc"
-                            android:text="22"
                             android:textColor="@color/article_des"
                             android:textSize="14sp" />
                     </RelativeLayout>
