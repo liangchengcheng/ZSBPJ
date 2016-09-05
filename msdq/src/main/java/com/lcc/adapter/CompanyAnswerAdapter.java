@@ -137,7 +137,6 @@ public class CompanyAnswerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             ImageManager.getInstance().loadCircleImage(holder.iv_image.getContext(),
                     answer.getUser_image(), holder.iv_image);
-
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override

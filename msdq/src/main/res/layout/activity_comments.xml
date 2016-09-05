@@ -91,7 +91,9 @@
                 <com.lcc.view.SendCommentButton
                     android:id="@+id/btnSendComment"
                     android:layout_width="72dp"
-                    android:layout_height="match_parent"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="8dp"
                     android:background="?attr/colorPrimary"
@@ -107,4 +109,5 @@
                 app:emptyView="@layout/empty_view" />
         </FrameLayout>
     </LinearLayout>
+
 </RelativeLayout>

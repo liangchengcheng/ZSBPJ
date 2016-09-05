@@ -33,7 +33,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class AreaFragment extends Fragment implements AdapterView.OnItemClickListener {
-
     private static final String ARG_PARAM1 = "parentCode";
     @Bind(R.id.refresh_list_view)
     ListView mRefreshListView;

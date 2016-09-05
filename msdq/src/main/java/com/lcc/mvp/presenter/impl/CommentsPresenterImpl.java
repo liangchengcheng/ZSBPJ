@@ -23,7 +23,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class CommentsPresenterImpl implements CommentsPresenter {
-
     private CommentsView view;
     private CommentsModel model;
     private static final int DEF_DELAY = (int) (1 * 1000);
@@ -60,7 +59,6 @@ public class CommentsPresenterImpl implements CommentsPresenter {
     }
 
     private void updateView(final String entities, int delay, final int page, final boolean get_data) {
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

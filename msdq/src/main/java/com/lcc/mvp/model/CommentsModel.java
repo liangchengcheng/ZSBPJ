@@ -1,6 +1,5 @@
 package com.lcc.mvp.model;
 
-
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
@@ -17,8 +16,7 @@ public class CommentsModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.NID, nid);
-        return ApiClient.create(AppConstants.RequestPath.COMMENTS_URL, paramsMap).tag("")
-                .get(callback);
+        return ApiClient.create(AppConstants.RequestPath.COMMENTS_URL, paramsMap).tag("").get(callback);
     }
 
     /**
@@ -27,12 +25,10 @@ public class CommentsModel {
     public OkHttpRequest sendComments(Replay replay, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("content", replay.getContent());
-        //paramsMap.put("author", replay.getAuthor());
         paramsMap.put("nid", replay.getNid());
         paramsMap.put("pid", replay.getPid());
         paramsMap.put("type", replay.getType());
         paramsMap.put("replay_author", replay.getReplay_author());
-        return ApiClient.create(AppConstants.RequestPath.CommentsAdd, paramsMap).tag("")
-                .get(callback);
+        return ApiClient.create(AppConstants.RequestPath.CommentsAdd, paramsMap).tag("").get(callback);
     }
 }

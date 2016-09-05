@@ -39,7 +39,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
         CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
         CommentsDialog.onChoiceListener,View.OnClickListener {
-
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
     @Bind(R.id.llAddComment)

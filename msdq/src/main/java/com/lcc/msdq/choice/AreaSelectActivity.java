@@ -20,9 +20,7 @@ import java.util.Map;
 
 import butterknife.ButterKnife;
 
-public class AreaSelectActivity extends BaseActivity implements
-        AreaFragment.OnFragmentInteractionListener {
-
+public class AreaSelectActivity extends BaseActivity implements AreaFragment.OnFragmentInteractionListener {
     private Fragment oneFragment;
     private Fragment twoFragment;
     private Map map = new HashMap();
