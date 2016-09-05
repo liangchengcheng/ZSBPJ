@@ -1,6 +1,8 @@
 package com.lcc.msdq.login;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -37,6 +39,12 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     //简单的登录时候的等待的对话框
     private SimpleArcDialog mDialog;
     private String from;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        App.addActivity(this);
+    }
 
     @Override
     protected void initView() {

@@ -28,7 +28,6 @@ import cn.smssdk.SMSSDK;
 
 public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView,
         View.OnClickListener {
-
     private static final int DELAY_MILLIS = 1000;
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout mTextInputLayoutPassword;
@@ -38,7 +37,7 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
     private Button mButtonSignUp;
 
     private ResetPasswordPresenter mPresenter;
-    private int verifyCodeCountdown = 30;
+    private int verifyCodeCountdown = 60;
     protected Handler taskHandler = new Handler();
     private String phone,password,new_password,verify_code;
 
