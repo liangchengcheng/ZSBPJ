@@ -16,7 +16,6 @@ public class FavModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        paramsMap.put(AppConstants.ParamKey.AUTHOR , "18813149871");
         return ApiClient.create(AppConstants.RequestPath.getUserFavList, paramsMap).tag("").get(callback);
     }
 }

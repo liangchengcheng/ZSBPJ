@@ -519,4 +519,5 @@
     <color name="first_color_register">#656465</color>
 
     <color name="photoPackDivider">#DDDDDD</color>
+    <color name="grey_300">#ffe0e0e0</color>
 </resources>

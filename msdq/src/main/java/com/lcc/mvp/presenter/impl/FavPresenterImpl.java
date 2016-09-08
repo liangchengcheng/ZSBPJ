@@ -22,7 +22,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class FavPresenterImpl implements FavPresenter {
-
     private FavView view;
     private FavModel model;
     private static final int DEF_DELAY = (int) (1 * 1000);

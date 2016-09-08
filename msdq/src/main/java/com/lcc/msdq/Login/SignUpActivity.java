@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.lcc.App;
 import com.lcc.base.BaseActivity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
@@ -42,7 +43,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     private Button mButtonSignUp;
 
     private SignUpPresenter mPresenter;
-    private int verifyCodeCountdown = 30;
+    private int verifyCodeCountdown = 60;
     protected Handler taskHandler = new Handler();
     private String phone, password, verify_code,username;
     private String from;
@@ -108,22 +109,29 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
         phone = mTextInputLayoutPhone.getEditText().getText().toString();
         password = mTextInputLayoutPassword.getEditText().getText().toString();
         username = textInputLayout_username.getEditText().getText().toString();
+        if (TextUtils.isEmpty(username)){
+            FrameManager.getInstance().toastPrompt("昵称不能为空");
+            return;
+        }
         if (valid(phone, password))
             return;
         switch (v.getId()) {
             case R.id.button_send_verify_code:
-                //mPresenter.getVerifySMS(phone, password);
                 SMSSDK.getVerificationCode("86", phone);
                 break;
             case R.id.buttonSignUp:
-                verify_code = mEditTextVerifyCode.getText().toString();
-                mPresenter.signUp(phone, password, verify_code,username);
-                if (FormValidation.isVerifyCode(verify_code)) {
-                    SMSSDK.submitVerificationCode("86", phone, verify_code);
-                } else {
-                    WidgetUtils.requestFocus(mEditTextVerifyCode);
-                }
+                submitMessage();
                 break;
+        }
+    }
+
+    private void submitMessage(){
+        verify_code = mEditTextVerifyCode.getText().toString();
+        mPresenter.signUp(phone, password, verify_code,username);
+        if (FormValidation.isVerifyCode(verify_code)) {
+            SMSSDK.submitVerificationCode("86", phone, verify_code);
+        } else {
+            WidgetUtils.requestFocus(mEditTextVerifyCode);
         }
     }
 
@@ -160,7 +168,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     public void signUpSuccess() {
         FrameManager.getInstance().toastPrompt("账号注册成功");
         if (!TextUtils.isEmpty(from)) {
-            String type= SharePreferenceUtil.getUserType();
+            String type= DataManager.getUserInfo().getZy();
             Intent intent=null;
             if (TextUtils.isEmpty(type)) {
                 intent = new Intent(SignUpActivity.this, ChoiceTypeoneActivity.class);
@@ -174,17 +182,11 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
             finish();
         }
-
     }
 
     @Override
     public void showMsg(String msg) {
         FrameManager.getInstance().toastPrompt(msg);
-    }
-
-    private void setEditTextError(TextInputLayout layout, int msgId) {
-        layout.setErrorEnabled(true);
-        layout.setError(getString(msgId));
     }
 
     Handler mHandler = new Handler() {
@@ -198,7 +200,17 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
                     showMsg("验证成功");
                     mPresenter.signUp(phone, password, verify_code,username);
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    showVerifySuccess();
+                    if(result == SMSSDK.RESULT_COMPLETE) {
+                        boolean smart = (Boolean)data;
+                        if(smart) {
+                            // 通过智能验证
+                            // TODO: 16/9/5 账号已经注册
+                            mPresenter.signUp(phone, password, verify_code,username);
+                        } else {
+                            //依然走短信验证
+                            showVerifySuccess();
+                        }
+                    }
                 }
             } else {
                 int status = 0;

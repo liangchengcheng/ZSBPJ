@@ -16,7 +16,6 @@ public class UserEditModel {
     public OkHttpRequest userEdit(UserInfo userInfo, List<File> files,
                                   ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "13287878449");
         paramsMap.put("nickname", userInfo.getNickname());
         paramsMap.put("xb", userInfo.getXb());
         paramsMap.put("email", userInfo.getEmail());

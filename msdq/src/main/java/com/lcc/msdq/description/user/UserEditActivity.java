@@ -194,8 +194,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         initImageLoader(UserEditActivity.this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_layout, null);
-        final PopupWindow window = new PopupWindow(view,
-                WindowManager.LayoutParams.MATCH_PARENT,
+        final PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
         window.setFocusable(true);
         ColorDrawable dw = new ColorDrawable(0xb0000000);
@@ -203,7 +202,6 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
         window.showAtLocation(UserEditActivity.this.findViewById(R.id.rootview),
                 Gravity.BOTTOM, 0, 0);
-
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override

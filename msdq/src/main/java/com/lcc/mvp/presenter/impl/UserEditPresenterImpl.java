@@ -36,7 +36,6 @@ public class UserEditPresenterImpl implements UserEditPresenter {
             @Override
             public void onError(Request request, Exception e) {
                 view.UserEditFail(ApiException.getApiExceptionMessage(e.getMessage()));
-                Log.e("lcc","666");
             }
 
             @Override
