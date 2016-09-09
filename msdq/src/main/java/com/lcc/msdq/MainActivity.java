@@ -7,12 +7,15 @@ import android.view.KeyEvent;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.base.BaseActivity;
 import com.lcc.frame.update.UpdateApkTask;
+import com.lcc.msdq.area.AreaDialogFragment;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.compony.CompanyIndexFragment;
 import com.lcc.msdq.index.IndexFragment;
 import com.lcc.msdq.personinfo.PersonInfoIndexFragment;
 import com.lcc.msdq.test.TestIndexFragment;
 import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.SharePreferenceUtil;
+import com.lcc.view.LoginDialog;
 import com.lcc.view.bottombar.BottomBar;
 import com.lcc.view.bottombar.BottomBarFragment;
 import de.greenrobot.event.EventBus;
@@ -26,7 +29,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-
         mBottomBar = BottomBar.attach(MainActivity.this, savedInstanceState);
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
                 new BottomBarFragment(IndexFragment.newInstance(), R.drawable.ic_home_black_24dp, "主页"),
@@ -44,6 +46,9 @@ public class MainActivity extends BaseActivity {
         }else {
             updateAPK();
         }
+
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(MainActivity.this.getFragmentManager(), "loginDialog");
     }
 
     @Override
