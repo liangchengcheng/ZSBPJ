@@ -23,7 +23,6 @@ public class TestAnswerContentModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         paramsMap.put("fav_title", title);
         return ApiClient.create(AppConstants.RequestPath.UserFavAdd, paramsMap).tag("").get(callback);
     }
@@ -35,7 +34,6 @@ public class TestAnswerContentModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put("type", type);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         return ApiClient.create(AppConstants.RequestPath.DDELETEFAV, paramsMap).tag("").get(callback);
     }
 
@@ -45,8 +43,7 @@ public class TestAnswerContentModel {
     public OkHttpRequest getContent(String mid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("mid", mid);
-        return ApiClient.create(AppConstants.RequestPath.getAnswerContent, paramsMap).tag("")
-                .get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getAnswerContent, paramsMap).tag("").get(callback);
     }
 
     /**
@@ -58,7 +55,6 @@ public class TestAnswerContentModel {
         paramsMap.put("true_author", article.getPhone());
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         paramsMap.put("good_title", title);
         return ApiClient.create(AppConstants.RequestPath.UserGoodAdd, paramsMap).tag("").get(callback);
     }

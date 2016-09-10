@@ -8,6 +8,7 @@ import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.frame.net.okhttp.request.OkHttpRequest;
 import java.io.File;
 import java.util.List;
+
 public class UserEditModel {
 
     /**

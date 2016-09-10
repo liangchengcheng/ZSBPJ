@@ -55,7 +55,6 @@ public class ComAnswerContentModel {
         paramsMap.put("true_author", article.getPhone());
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put(AppConstants.ParamKey.TYPE_KEY, type);
-        //paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         paramsMap.put("good_title", title);
         return ApiClient.create(AppConstants.RequestPath.UserGoodAdd, paramsMap).tag("").get(callback);
     }

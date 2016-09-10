@@ -1,6 +1,5 @@
 package com.lcc.mvp.model;
 
-
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
@@ -26,8 +25,6 @@ public class TestAnswerAddModel {
         }else {
             paramsMap.put("num", 0);
         }
-        return ApiClient.createWithFiles(AppConstants.RequestPath.answerAddservice,
-                paramsMap, files)
-                .upload(callback);
+        return ApiClient.createWithFiles(AppConstants.RequestPath.answerAddservice, paramsMap, files).upload(callback);
     }
 }

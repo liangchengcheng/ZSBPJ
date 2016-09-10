@@ -47,8 +47,7 @@ public class MenuContentModel {
     public OkHttpRequest getArticleContentAndFav(String id, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.FID, id);
-        return ApiClient.create(AppConstants.RequestPath.getContentAndFavByID, paramsMap).tag("")
-                .get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getContentAndFavByID, paramsMap).tag("").get(callback);
     }
 
 

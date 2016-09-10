@@ -1,6 +1,5 @@
 package com.lcc.mvp.model;
 
-
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
@@ -14,7 +13,6 @@ public class FeedBackModel {
      */
     public OkHttpRequest PostMessage(String word, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.AUTHOR, "18813149871");
         paramsMap.put("content_body", word);
         return ApiClient.create(AppConstants.RequestPath.AddFeedBackService, paramsMap).tag("").
                 get(callback);

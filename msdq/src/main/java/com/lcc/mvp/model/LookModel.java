@@ -43,8 +43,7 @@ public class LookModel {
     public OkHttpRequest getContent(String mid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("mid", mid);
-        return ApiClient.create(AppConstants.RequestPath.getAnswerContent, paramsMap).tag("")
-                .get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getAnswerContent, paramsMap).tag("").get(callback);
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.lcc.mvp.model;
 
-import com.google.gson.JsonElement;
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
