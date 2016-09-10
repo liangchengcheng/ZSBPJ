@@ -197,6 +197,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             String user_image = userInfo.getUser_image();
             if (!TextUtils.isEmpty(user_image)) {
                 Glide.with(getActivity()).load(user_image)
+                        .placeholder(R.drawable.default_user_logo)
                         .error(R.drawable.default_user_logo).crossFade()
                         .transform(new GlideCircleTransform(getActivity())).into(iv_more);
             }else {

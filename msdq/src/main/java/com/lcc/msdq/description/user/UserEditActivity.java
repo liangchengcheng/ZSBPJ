@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lcc.AppConstants;
@@ -72,6 +73,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     private SimpleArcDialog mDialog;
     private RadioButton rb_nan, rb_nv;
     private RadioGroup radioSex;
+    private TextView tv_phone;
 
     public FunctionConfig functionConfig;
     public static final String USERINFO = "userinfo";
@@ -90,6 +92,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initView() {
+        tv_phone = (TextView) findViewById(R.id.tv_phone);
         rb_nan = (RadioButton) findViewById(R.id.rb_nan);
         rb_nv = (RadioButton) findViewById(R.id.rb_nv);
         radioSex = (RadioGroup) findViewById(R.id.radioSex);
@@ -149,6 +152,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         if (!TextUtils.isEmpty(userInfo.getEmail())) {
             et_email.setText(userInfo.getEmail());
         }
+        tv_phone.setText(userInfo.getPhone());
     }
 
     @Override
