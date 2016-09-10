@@ -35,9 +35,8 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 	//用户名和密码
 	private TextInputLayout mTextInputLayoutPhone;
 	private TextInputLayout mTextInputLayoutPassword;
-	//简单的登录时候的等待的对话框
-	private SimpleArcDialog mDialog;
-	private String from;
+	//等待
+	private View loading;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -50,15 +49,12 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 	}
 
 	private void initView(View view){
-		Button mButtonSign = (Button) view.findViewById(R.id.button_sign);
-		if (mButtonSign != null) {
-			mButtonSign.setOnClickListener(this);
-		}
 		mPresenter = new LoginPresenterImpl(this);
-		view.findViewById(R.id.textView_create_account).setOnClickListener(this);
-		view.findViewById(R.id.textView_reset_password).setOnClickListener(this);
+		loading = view.findViewById(R.id.loading);
 		mTextInputLayoutPhone = (TextInputLayout) view.findViewById(R.id.textInputLayout_phone);
 		mTextInputLayoutPassword = (TextInputLayout) view.findViewById(R.id.textInputLayout_password);
+		view.findViewById(R.id.buttonSignUp).setOnClickListener(this);
+		view.findViewById(R.id.btn_login).setOnClickListener(this);
 	}
 
 	/**
@@ -92,32 +88,33 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 
 	@Override
 	public void showLoading() {
-
+		loading.setVisibility(View.VISIBLE);
 	}
 
 	@Override
 	public void showLoginFail(String msg) {
+		loading.setVisibility(View.GONE);
 		FrameManager.getInstance().toastPrompt("登录失败" + msg);
 		dismiss();
 	}
 
 	@Override
 	public void loginSuccess() {
+		loading.setVisibility(View.GONE);
 		FrameManager.getInstance().toastPrompt("登录成功");
 		dismiss();
 	}
 
 	@Override
 	public void onClick(View v) {
+		switch (v.getId()){
+			case R.id.buttonSignUp:
+				break;
 
-	}
-
-	public interface StringListener {
-		void onStringInputComplete(String message);
-	}
-
-	public interface CodeListener {
-		void onCodeInputComplete(String message);
+			case R.id.btn_login:
+				login();
+				break;
+		}
 	}
 
 }
