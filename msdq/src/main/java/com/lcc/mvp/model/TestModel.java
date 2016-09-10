@@ -1,5 +1,7 @@
 package com.lcc.mvp.model;
 
+import android.text.TextUtils;
+
 import com.lcc.AppConstants;
 import com.lcc.api.ApiClient;
 import com.lcc.api.ParamsMap;
@@ -18,7 +20,14 @@ public class TestModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PAGE_KEY, page);
         paramsMap.put("options", options);
-        paramsMap.put("type", DataManager.getZY());
+        String zy = DataManager.getZY();
+        if (TextUtils.isEmpty(zy)){
+            // TODO: 16/9/10 这里写“”没有测试
+            paramsMap.put("type", "");
+        }else {
+            String z = zy.substring(0,zy.length()-33);
+            paramsMap.put("type", z);
+        }
         paramsMap.put("start", startTime);
         paramsMap.put("end", endTime);
         paramsMap.put("orders", orders);

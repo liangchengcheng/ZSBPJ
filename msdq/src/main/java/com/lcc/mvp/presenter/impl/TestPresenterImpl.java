@@ -18,7 +18,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class TestPresenterImpl implements TestPresenter {
-
     private static final int DEF_DELAY = (int) (1 * 1000);
     private TestModel model;
     private TestView view;

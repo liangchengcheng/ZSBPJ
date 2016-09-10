@@ -136,6 +136,7 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     @Override
     public void setDataFail(String msg) {
         closeDialog();
+        FrameManager.getInstance().toastPrompt("设置失败");
     }
 
     @Override
@@ -156,7 +157,7 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
 
     @Override
     public void onItemClick(Type2 data) {
-        zy = data.getS_name();
+        zy = data.getS_name()+"."+data.getS_id();
         choiceTypePresenter.setDataType(zy);
     }
 

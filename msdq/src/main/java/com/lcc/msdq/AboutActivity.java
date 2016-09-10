@@ -19,7 +19,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     protected void initView() {
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         about_avatar_iv = (ImageView) findViewById(R.id.about_avatar_iv);
-        ImageManager.getInstance().loadCircleResImage(AboutActivity.this, R.drawable.lcctx,
+        ImageManager.getInstance().loadCircleResImage(AboutActivity.this, R.drawable.touxs,
                 about_avatar_iv);
     }
 

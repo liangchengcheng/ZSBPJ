@@ -183,11 +183,11 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             tv_username.setText(userInfo.getNickname());
 
             if (!TextUtils.isEmpty(userInfo.getZy())){
-                tv_zy.setText(userInfo.getZy());
+                String z = userInfo.getZy().substring(0,userInfo.getZy().length()-33);
+                tv_zy.setText(z);
             }else {
                 tv_zy.setText("");
             }
-
             if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");
             } else {
