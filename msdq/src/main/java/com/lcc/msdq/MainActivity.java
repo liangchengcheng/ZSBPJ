@@ -47,10 +47,8 @@ public class MainActivity extends BaseActivity {
             updateAPK();
         }
 
-        LoginDialogFragment dialog = new LoginDialogFragment();
-        dialog.show(MainActivity.this.getFragmentManager(), "loginDialog");
-//        LoginDialog dialog =new LoginDialog(MainActivity.this);
-//        dialog.show();
+//      LoginDialog dialog =new LoginDialog(MainActivity.this);
+//      dialog.show();
     }
 
     @Override

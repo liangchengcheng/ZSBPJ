@@ -25,7 +25,6 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
-
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
@@ -34,7 +33,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  */
 public class TestAddActivity extends BaseActivity implements QuestionAddView ,View.OnClickListener,
         RadioGroup.OnCheckedChangeListener{
-
     public static final String ZY = "zy";
     private String zy = "";
     private List<File> files = new ArrayList<>();

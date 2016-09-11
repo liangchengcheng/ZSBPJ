@@ -28,6 +28,7 @@ import com.lcc.frame.Advertisements;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
 import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.index.article.IndexMenuActivity;
@@ -214,7 +215,8 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             //去我的消息的界面
             case R.id.ll_news:
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
                     return;
                 }
                 NewsIndex.startNewsIndex(getActivity());
@@ -223,7 +225,8 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             //去我的收藏的界面
             case R.id.ll_fav:
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
                     return;
                 }
 
@@ -246,7 +249,8 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             case R.id.chnage_type:
                 String user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt("登录后操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
                 } else {
                     Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
                     startActivity(intent);

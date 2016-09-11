@@ -21,6 +21,7 @@ import com.lcc.entity.ArticleContent;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.MenuContentPresenter;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
@@ -198,7 +199,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         switch (v.getId()) {
             case R.id.ll_comments:
                 if (TextUtils.isEmpty(user)) {
-                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(IndexMenuWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
                 CommentsActivity.startCommentsActivity(article.getMid(),
@@ -207,7 +209,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
             case R.id.tv_to_comments:
                 if (TextUtils.isEmpty(user)) {
-                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(IndexMenuWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
                 CommentsActivity.startCommentsActivity(article.getMid(),
@@ -220,7 +223,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
             case R.id.ll_issc:
                 if (TextUtils.isEmpty(user)) {
-                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(IndexMenuWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
 

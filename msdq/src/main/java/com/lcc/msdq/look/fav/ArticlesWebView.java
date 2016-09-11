@@ -23,6 +23,7 @@ import com.lcc.entity.LookArticle;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.LookMenuContentPresenter;
 import com.lcc.mvp.presenter.MenuContentPresenter;
@@ -213,7 +214,8 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
         switch (v.getId()) {
             case R.id.ll_comments:
                 if (TextUtils.isEmpty(user)) {
-                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(ArticlesWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
                 CommentsActivity.startCommentsActivity(favEntity.getNid(),
@@ -222,7 +224,8 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
 
             case R.id.tv_to_comments:
                 if (TextUtils.isEmpty(user)) {
-                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(ArticlesWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
                 CommentsActivity.startCommentsActivity(favEntity.getNid(),
@@ -236,7 +239,8 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
             //收藏或者取消收藏
             case R.id.ll_issc:
                 if (TextUtils.isEmpty(user)) {
-                    FrameManager.getInstance().toastPrompt("登录后才能操作~");
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(ArticlesWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
 

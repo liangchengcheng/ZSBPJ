@@ -9,6 +9,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,9 @@ import com.lcc.entity.AnswerContent;
 import com.lcc.entity.FavAndGoodState;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.TestAnswerContentPresenter;
@@ -182,9 +185,18 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        String user_name;
         switch (v.getId()) {
             //评论
             case R.id.floatingComment:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(AnswerContentActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
+                    return;
+                }
+
                 CommentsActivity.startCommentsActivity(answer.getMid(),
                         Propertity.Test.ANSWER, AnswerContentActivity.this);
                 floatingMenu.close(false);
@@ -192,6 +204,14 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
             //赞
             case R.id.floatingGood:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(AnswerContentActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
+                    return;
+                }
+
                 if (isGood) {
                     testAnswerContentPresenter.UnGood(answer,Propertity.Test.ANSWER);
                 } else {
@@ -201,6 +221,13 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 break;
             //收藏
             case R.id.floatingCollect:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(AnswerContentActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
+                    return;
+                }
                 if (isFav) {
                     testAnswerContentPresenter.UnFav(answer,Propertity.Test.ANSWER);
                 } else {

@@ -37,7 +37,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  */
 public class ChoiceB_Activity extends BaseActivity implements ChoiceTypeView,
         ChoiceType2Adapter.OnItemClickListener, View.OnClickListener {
-
     public static final String NID = "nid";
     public static final String FLAG = "flag";
     private ChoiceTypePresenter choiceTypePresenter;
@@ -133,7 +132,7 @@ public class ChoiceB_Activity extends BaseActivity implements ChoiceTypeView,
 
     @Override
     public void onItemClick(Type2 data) {
-        zy = data.getS_name();
+        zy = data.getS_id();
         TestAddActivity.startTestAddActivity(ChoiceB_Activity.this, zy);
     }
 

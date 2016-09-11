@@ -28,7 +28,6 @@ import zsbpj.lccpj.utils.GsonUtils;
  */
 public class ChoiceA_Activity extends BaseActivity implements ChoiceTypeView,
         ChoiceType1Adapter.OnItemClickListener, View.OnClickListener {
-
     private ChoiceTypePresenter choiceTypePresenter;
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;

@@ -58,7 +58,6 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         findViewById(R.id.textView_reset_password).setOnClickListener(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
-
     }
 
     /**

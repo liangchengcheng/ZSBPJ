@@ -3,31 +3,20 @@ package com.lcc.msdq.area;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-
-import com.lcc.App;
-import com.lcc.db.test.UserInfo;
-import com.lcc.frame.data.DataManager;
-import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
-import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.login.SignUpActivity;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
 import com.lcc.mvp.view.LoginView;
 import com.lcc.utils.FormValidation;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.WidgetUtils;
-import com.lcc.view.CityPicker;
-
 import zsbpj.lccpj.frame.FrameManager;
-import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class LoginDialogFragment extends DialogFragment implements LoginView, View.OnClickListener {
 	//MVP结构的 P层的实现
@@ -109,6 +98,10 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 	public void onClick(View v) {
 		switch (v.getId()){
 			case R.id.buttonSignUp:
+				Intent intent = new Intent(getActivity(), SignUpActivity.class);
+				intent.putExtra("fragment","flag");
+				startActivity(intent);
+				dismiss();
 				break;
 
 			case R.id.btn_login:

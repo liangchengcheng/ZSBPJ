@@ -37,6 +37,7 @@ import com.lcc.entity.UserListFav;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.mvp.presenter.TestAnswerPresenter;
@@ -311,7 +312,9 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
             case R.id.floatingfabu:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(AnswerIndexActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
                     return;
                 }
 
@@ -328,7 +331,9 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
             case R.id.floatingComment:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(AnswerIndexActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
                     return;
                 }
 
@@ -351,6 +356,14 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void onFavClick() {
+        String user_name = DataManager.getUserName();
+        if (TextUtils.isEmpty(user_name)) {
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(AnswerIndexActivity.this.getFragmentManager(), "loginDialog");
+            floatingMenu.close(false);
+            return;
+        }
+
         if (!isfavEntity) {
             mPresenter.Fav(entity, Propertity.Test.QUESTION);
         } else {

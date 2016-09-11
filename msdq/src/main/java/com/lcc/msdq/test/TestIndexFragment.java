@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.adapter.MyAdapter;
 import com.lcc.adapter.TestAdapter;
@@ -34,9 +35,11 @@ import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
 import com.lcc.utils.CoCoinToast;
 import com.lcc.view.loadview.LoadingLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
@@ -293,21 +296,22 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
                 }
 
                 final String zy = DataManager.getZY();
-                if(TextUtils.isEmpty(zy)){
+                if (TextUtils.isEmpty(zy)) {
                     CoCoinToast.getInstance().showToast("请选选择一个要添加的职业类型", SuperToast.Background.RED);
                     startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
-                }else {
+                } else {
+                    final String q = zy.substring(zy.length() - 32, zy.length());
+                    final String z = zy.substring(0, zy.length() - 33);
                     new AlertDialog.Builder(getActivity())
                             .setTitle("添加新问题")
-                            .setMessage("你是"+zy+"是否重新选择添加别的职业的问题？")
+                            .setMessage("你是" + z + "是否重新选择添加别的职业的问题？")
                             .setPositiveButton("直接添加", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    TestAddActivity.startTestAddActivity(getActivity(),zy);
+                                    TestAddActivity.startTestAddActivity(getActivity(), q);
                                     dialog.dismiss();
                                 }
                             })
-
                             .setNegativeButton("其他职业", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
