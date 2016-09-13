@@ -70,18 +70,22 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
                 break;
 
             case R.id.rl_xt:
+                tv_xt_count.setVisibility(View.GONE);
                 startActivity(new Intent(NewsIndex.this, XtNewsActivity.class));
                 break;
 
             case R.id.rl_z:
+                tv_z_count.setVisibility(View.GONE);
                 startActivity(new Intent(NewsIndex.this, ZNewsActivity.class));
                 break;
 
             case R.id.rl_latter:
+                tv_latter_count.setVisibility(View.GONE);
                 startActivity(new Intent(NewsIndex.this, LetterActivity.class));
                 break;
 
             case R.id.rl_comments:
+                tv_replay_count.setVisibility(View.GONE);
                 startActivity(new Intent(NewsIndex.this, ReplayActivity.class));
                 break;
         }

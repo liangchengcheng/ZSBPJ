@@ -38,7 +38,7 @@ public class XtNewsPresenterImpl implements XtNewsPresenter {
     @Override
     public void getData() {
         view.getLoading();
-        model.getXtNews( new ResultCallback<String>() {
+        model.getXtNews(new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -53,7 +53,7 @@ public class XtNewsPresenterImpl implements XtNewsPresenter {
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         List<XtNewsEntity> weekDatas = GsonUtils.fromJsonArray(result, XtNewsEntity.class);
-                      view.getDataSuccess(weekDatas);
+                        view.getDataSuccess(weekDatas);
                     } else {
                         view.getDataFail(message);
                     }

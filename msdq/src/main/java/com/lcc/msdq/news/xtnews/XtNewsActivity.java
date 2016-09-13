@@ -89,9 +89,10 @@ public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItem
     public void getDataSuccess(List<XtNewsEntity> entities) {
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
+            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }else {
+            getDataEmpty();
         }
-
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
