@@ -59,8 +59,7 @@ public class TestAnswerContentModel {
         return ApiClient.create(AppConstants.RequestPath.UserGoodAdd, paramsMap).tag("").get(callback);
     }
 
-    public OkHttpRequest UnGoodAnswer(Answer article,String type, ResultCallback<String>
-            callback) {
+    public OkHttpRequest UnGoodAnswer(Answer article,String type, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.NID, article.getMid());
         paramsMap.put("type",type);

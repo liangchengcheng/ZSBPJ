@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lcc.adapter.IndexMenuAdapter;
@@ -29,7 +30,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Description:  IndexMenuActivity
  */
 public class IndexMenuActivity extends BaseActivity implements IndexMenuView, SwipeRefreshLayout.OnRefreshListener,
-        IndexMenuAdapter.OnFavClickListener, IndexMenuAdapter.OnItemClickListener{
+        IndexMenuAdapter.OnFavClickListener, IndexMenuAdapter.OnItemClickListener,View.OnClickListener{
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
@@ -57,6 +58,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
         TextView tv_title= (TextView) findViewById(R.id.tv_title);
         tv_title.setText(type);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         mPresenter = new IndexMenuPresenterImpl(this);
         initRefreshView();
         initRecycleView();
@@ -76,7 +78,6 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new IndexMenuAdapter();
-
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnFavClickListener(this);
 
@@ -182,5 +183,14 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
     @Override
     public void onItemClick(Article data) {
         IndexMenuWebView.startIndexMenuWebView(IndexMenuActivity.this,data);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
     }
 }
