@@ -138,9 +138,12 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
     public void refreshDataSuccess(List<TestEntity> entities) {
         if (entities != null && entities.size() > 0) {
             adapter.bind(entities);
+            showContent(true);
+        }else {
+            showEmpty(true);
         }
         mSwipeRefreshWidget.setRefreshing(false);
-        showContent(true);
+
     }
 
     @Override
@@ -180,5 +183,6 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
                 mPresenter.refresh(currentPage,type);
             }
         }, 500);
+
     }
 }

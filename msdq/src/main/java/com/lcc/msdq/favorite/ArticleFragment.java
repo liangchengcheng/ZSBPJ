@@ -41,8 +41,6 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener,
         FavView, FavAdapter.OnItemClickListener {
-    protected final static int STATE_REFRESH = 2;
-    static final int ACTION_NONE = 0;
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -104,7 +102,8 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
                     currentTime = TimeUtils.getCurrentTime();
                     adapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
-                    mPresenter.loadMore(currentPage, type);
+                    currentPage++;
+                    mPresenter.loadMore(currentPage,type);
                 }
             }
         });
@@ -133,44 +132,32 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
 
     @Override
     public void refreshOrLoadFail(String msg) {
-        currentState = ACTION_NONE;
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
             showError(true);
         } else {
-            adapter.setHasFooter(false);
             FrameManager.getInstance().toastPrompt(msg);
         }
     }
 
     @Override
     public void refreshDataSuccess(final List<FavEntity> entities) {
-        int delay = 0;
-        if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
-            delay = DEF_DELAY;
+        if (entities != null && entities.size() > 0) {
+            adapter.bind(entities);
+            showContent(true);
+        }else {
+            showEmpty(true);
         }
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                currentState = STATE_NORMAL;
-                mSwipeRefreshWidget.setRefreshing(false);
-                currentPage = 2;
-                if (entities != null && entities.size() > 0) {
-                    adapter.bind(entities);
-                }
-            }
-        }, delay);
-        showContent(true);
+        mSwipeRefreshWidget.setRefreshing(false);
     }
 
     @Override
     public void loadMoreWeekDataSuccess(final List<FavEntity> entities) {
+
         int delay = 0;
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;
         }
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -180,7 +167,6 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
                     FrameManager.getInstance().toastPrompt("没有更多数据...");
                 } else {
                     adapter.appendToList(entities);
-                    currentPage++;
                     adapter.setHasMoreDataAndFooter(true, false);
                 }
                 adapter.notifyDataSetChanged();
@@ -206,14 +192,14 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
 
     @Override
     public void onRefresh() {
-        if (currentState == STATE_NORMAL) {
-            currentState = STATE_REFRESH;
-            currentPage = 1;
-            mSwipeRefreshWidget.setRefreshing(true);
-            currentTime = TimeUtils.getCurrentTime();
-            adapter.setHasFooter(true);
-            mPresenter.refresh(currentPage, type);
-        }
+        mSwipeRefreshWidget.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentPage = 1;
+                mSwipeRefreshWidget.setRefreshing(true);
+                mPresenter.refresh(currentPage,type);
+            }
+        }, 500);
     }
 
     @Override
