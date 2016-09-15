@@ -26,11 +26,13 @@ import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.MenuContentPresenter;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.MenuContentView;
+import com.lcc.view.MyScrollView;
 import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
+import zsbpj.lccpj.utils.LogUtils;
 
 /**
  * Author:       梁铖城
@@ -39,7 +41,7 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  IndexMenuWebView
  */
 public class IndexMenuWebView extends BaseActivity implements MenuContentView, View.OnClickListener,
-        MyWebView.OnScrollChangedCallback {
+        MyWebView.OnScrollChangedCallback, View.OnScrollChangeListener {
     public static final String DATA = "data";
     private MenuContentPresenter indexContentPresenter;
     private Article article;
@@ -54,6 +56,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
     private View llDetailBottom;
+    private MyScrollView nest;
 
     public static void startIndexMenuWebView(Activity startingActivity, Article article) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
@@ -80,6 +83,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     protected void initView() {
+        nest = (MyScrollView) findViewById(R.id.nest);
+        nest.setOnScrollChangeListener(this);
         llDetailBottom = findViewById(R.id.llDetailBottom);
         findViewById(R.id.ll_issc).setOnClickListener(this);
         findViewById(R.id.ll_comments).setOnClickListener(this);
@@ -91,19 +96,20 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         tv_question = (TextView) findViewById(R.id.tv_question);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory = (ImageView) findViewById(R.id.user_head);
+
         webView = (MyWebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true);
-        settings.setDisplayZoomControls(false);
+        //settings.setUseWideViewPort(true);造成文字太小
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
         settings.setAppCacheEnabled(true);
+        settings.setDisplayZoomControls(false);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-
         webView.setWebChromeClient(new WebChromeClient());
         webView.setOnScrollChangedCallback(this);
     }
@@ -176,11 +182,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     ivZhihuStory.setVisibility(View.GONE);
                 } else {
                     ivZhihuStory.setVisibility(View.VISIBLE);
-                    Glide.with(IndexMenuWebView.this)
-                            .load(head_img)
-                            .placeholder(R.drawable.loading1)
-                            .centerCrop()
-                            .into(ivZhihuStory);
+                    Glide.with(IndexMenuWebView.this).load(head_img)
+                            .placeholder(R.drawable.loading1).centerCrop().into(ivZhihuStory);
                 }
 
                 //判断是否被我收藏了
@@ -189,7 +192,6 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                 } else {
                     iv_state.setBackgroundResource(R.drawable.details_page_toolbar_icon_red_guanxin_selected);
                 }
-
                 webView.loadDataWithBaseURL("about:blank", result.getContent(), "text/html", "utf-8", null);
                 tv_question.setText(article.getTitle());
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
@@ -274,9 +276,10 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     public void onScroll(int dx, int dy) {
-        FrameManager.getInstance().toastPrompt("滑动");
+        LogUtils.e("xxx", "滑动了");
         if (Math.abs(dy) > 4) {
             if (dy < 0 && isBottomShow) {
+                LogUtils.e("xxx", "隐藏了");
                 FrameManager.getInstance().toastPrompt("隐藏了");
                 isBottomShow = false;
                 llDetailBottom.animate().translationY(llDetailBottom.getHeight());
@@ -285,5 +288,20 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                 llDetailBottom.animate().translationY(0);
             }
         }
+    }
+
+    @Override
+    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        LogUtils.e("xxx", "onScrollChange滑动了");
+        //下移隐藏
+        if (scrollY - oldScrollY > 0 && isBottomShow) {
+            isBottomShow = false;
+            llDetailBottom.animate().translationY(llDetailBottom.getHeight());
+            //上移出现
+        } else if (scrollY - oldScrollY < 0 && !isBottomShow) {
+            isBottomShow = true;
+            llDetailBottom.animate().translationY(0);
+        }
+
     }
 }

@@ -263,8 +263,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void getDataSuccess(AnswerContent msg) {
-        webView.loadDataWithBaseURL("about:blank", msg.getA_content(),
-                "text/html", "utf-8", null);
+        webView.loadDataWithBaseURL("about:blank", msg.getA_content(), "text/html", "utf-8", null);
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
