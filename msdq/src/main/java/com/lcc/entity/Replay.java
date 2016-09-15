@@ -16,6 +16,24 @@ public class Replay implements Serializable {
     private String nid;
     private String pid;
     private String replay_author;
+    private String author_code;
+    private String replay_nickname;
+
+    public String getReplay_nickname() {
+        return replay_nickname;
+    }
+
+    public void setReplay_nickname(String replay_nickname) {
+        this.replay_nickname = replay_nickname;
+    }
+
+    public String getAuthor_code() {
+        return author_code;
+    }
+
+    public void setAuthor_code(String author_code) {
+        this.author_code = author_code;
+    }
 
     public String getContent() {
         return content;

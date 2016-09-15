@@ -212,8 +212,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     dialog.show(IndexMenuWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
-                CommentsActivity.startCommentsActivity(article.getMid(),
-                        Propertity.Article.NAME, IndexMenuWebView.this);
+                CommentsActivity.startCommentsActivity(article.getMid(), Propertity.Article.NAME,"",
+                        IndexMenuWebView.this);
                 break;
 
             case R.id.tv_to_comments:
@@ -222,8 +222,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
                     dialog.show(IndexMenuWebView.this.getFragmentManager(), "loginDialog");
                     return;
                 }
-                CommentsActivity.startCommentsActivity(article.getMid(),
-                        Propertity.Article.NAME, IndexMenuWebView.this);
+                CommentsActivity.startCommentsActivity(article.getMid(), Propertity.Article.NAME, "",
+                        IndexMenuWebView.this);
                 break;
 
             case R.id.guillotine_hamburger:
@@ -276,11 +276,8 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     public void onScroll(int dx, int dy) {
-        LogUtils.e("xxx", "滑动了");
         if (Math.abs(dy) > 4) {
             if (dy < 0 && isBottomShow) {
-                LogUtils.e("xxx", "隐藏了");
-                FrameManager.getInstance().toastPrompt("隐藏了");
                 isBottomShow = false;
                 llDetailBottom.animate().translationY(llDetailBottom.getHeight());
             } else {
@@ -292,7 +289,6 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        LogUtils.e("xxx", "onScrollChange滑动了");
         //下移隐藏
         if (scrollY - oldScrollY > 0 && isBottomShow) {
             isBottomShow = false;

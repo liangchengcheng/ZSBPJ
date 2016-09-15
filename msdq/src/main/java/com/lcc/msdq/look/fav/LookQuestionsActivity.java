@@ -27,6 +27,7 @@ import com.lcc.entity.UserListFav;
 import com.lcc.frame.Propertity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.msdq.test.answer.AnswerAddActivity;
@@ -56,7 +57,7 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  */
 public class LookQuestionsActivity extends BaseActivity implements LookTestAnswerView, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, AnswerIndexAdapter.OnItemClickListener, AnswerIndexAdapter.OnFavClickListener,
-        AnswerIndexAdapter.OnImageClickListener ,AnswerIndexAdapter.OnAnswerClickListener{
+        AnswerIndexAdapter.OnImageClickListener, AnswerIndexAdapter.OnAnswerClickListener {
 
     public static final String ID = "id";
     private RecyclerView mRecyclerView;
@@ -186,8 +187,8 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
     }
 
     @Override
-    public void refreshView(List<Answer> entities,TestEntity entity) {
-        if (entity == null){
+    public void refreshView(List<Answer> entities, TestEntity entity) {
+        if (entity == null) {
             return;
         }
 
@@ -313,7 +314,9 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
             case R.id.floatingfabu:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(LookQuestionsActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
                     return;
                 }
 
@@ -330,11 +333,13 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
             case R.id.floatingComment:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(LookQuestionsActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
                     return;
                 }
 
-                CommentsActivity.startCommentsActivity(entity.getMid(), Propertity.Test.QUESTION,
+                CommentsActivity.startCommentsActivity(entity.getMid(), Propertity.Test.QUESTION, testEntity.getAuthor(),
                         LookQuestionsActivity.this);
                 floatingMenu.close(false);
                 break;

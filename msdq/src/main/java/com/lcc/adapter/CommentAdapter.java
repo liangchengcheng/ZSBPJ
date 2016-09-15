@@ -79,16 +79,25 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_nickname.setText(weekData.getNickname());
 
-            String aite=weekData.getReplay_author();
-            if (!TextUtils.isEmpty(aite)){
-                holder.tvComment.setText("@"+aite+weekData.getContent());
-                SpannableStringBuilder builder = new SpannableStringBuilder( holder.tvComment.getText().toString());
+//            String aite=weekData.getReplay_author();
+//            if (!TextUtils.isEmpty(aite)){
+//                holder.tvComment.setText("@"+ aite+weekData.getContent());
+//                SpannableStringBuilder builder = new SpannableStringBuilder( holder.tvComment.getText().toString());
+//                ForegroundColorSpan blueSpan = new ForegroundColorSpan(Color.BLUE);
+//                builder.setSpan(blueSpan, 0, aite.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                holder.tvComment.setText(builder);
+//            }else {
+            if (weekData.getContent().contains("@")) {
+                holder.tvComment.setText(weekData.getContent());
+                SpannableStringBuilder builder = new SpannableStringBuilder(holder.tvComment.getText().toString());
                 ForegroundColorSpan blueSpan = new ForegroundColorSpan(Color.BLUE);
-                builder.setSpan(blueSpan, 0, aite.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                builder.setSpan(blueSpan, 0, weekData.getReplay_nickname().length()+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 holder.tvComment.setText(builder);
-            }else {
+            } else {
                 holder.tvComment.setText(weekData.getContent());
             }
+
+            //}
 
             if (!TextUtils.isEmpty(weekData.getUser_image())) {
                 holder.ivUserAvatar.setVisibility(View.VISIBLE);
@@ -97,8 +106,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
 
             String time = weekData.getCreated_time();
-            if (!TextUtils.isEmpty(time)){
-                String current= TimeUtils.getTimeFormatText(time);
+            if (!TextUtils.isEmpty(time)) {
+                String current = TimeUtils.getTimeFormatText(time);
                 holder.tv_time.setText(current);
             }
 

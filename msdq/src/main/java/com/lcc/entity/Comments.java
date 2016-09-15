@@ -52,6 +52,15 @@ public class Comments implements Serializable {
     private String zy;
     private String user_image;
     private String title;
+    private String replay_nickname;
+
+    public String getReplay_nickname() {
+        return replay_nickname;
+    }
+
+    public void setReplay_nickname(String replay_nickname) {
+        this.replay_nickname = replay_nickname;
+    }
 
     public String getTitle() {
         return title;

@@ -16,18 +16,23 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
 import com.lcc.adapter.CommentAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Comments;
 import com.lcc.entity.Replay;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.mvp.presenter.CommentsPresenter;
 import com.lcc.mvp.presenter.impl.CommentsPresenterImpl;
 import com.lcc.mvp.view.CommentsView;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.view.SendCommentButton;
 import com.lcc.view.loadview.LoadingLayout;
+
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.FrameManager;
@@ -38,7 +43,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class CommentsActivity extends BaseActivity implements SendCommentButton.OnSendClickListener,
         CommentsView, SwipeRefreshLayout.OnRefreshListener, CommentAdapter.OnItemClickListener,
-        CommentsDialog.onChoiceListener,View.OnClickListener {
+        CommentsDialog.onChoiceListener, View.OnClickListener {
     @Bind(R.id.contentRoot)
     LinearLayout contentRoot;
     @Bind(R.id.llAddComment)
@@ -54,6 +59,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private SimpleArcDialog mDialog;
 
     public static final String TYPE = "type";
+    public static final String R_AUTHOR = "replay_author";
     public static final String ID = "id";
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -66,10 +72,12 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     private CommentsPresenter mPresenter;
     private String type = "";
     private String content_id;
+    private String replay_at = "";
 
-    public static void startCommentsActivity(String id, String type, Activity startActivity) {
+    public static void startCommentsActivity(String id, String type, String replay_author, Activity startActivity) {
         Intent intent = new Intent(startActivity, CommentsActivity.class);
         intent.putExtra(ID, id);
+        intent.putExtra(R_AUTHOR, replay_author);
         intent.putExtra(TYPE, type);
         startActivity.startActivity(intent);
     }
@@ -78,10 +86,13 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
         mPresenter = new CommentsPresenterImpl(this);
         content_id = getIntent().getStringExtra(ID);
         type = getIntent().getStringExtra(TYPE);
+        replay_at = getIntent().getStringExtra(R_AUTHOR);
+        if (!TextUtils.isEmpty(replay_at)) {
+            replay.setReplay_author(replay_at);
+        }
         replay.setNid(content_id);
         replay.setType(type);
         replay.setAuthor("");
@@ -120,6 +131,13 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void onSendClickListener(View v) {
+        String user_name = DataManager.getUserName();
+        if (TextUtils.isEmpty(user_name)) {
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(CommentsActivity.this.getFragmentManager(), "loginDialog");
+            return;
+        }
+
         if (validateComment()) {
             replay.setContent(etComment.getText().toString().trim());
             mPresenter.sendComments(replay);
@@ -196,11 +214,10 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
         if (entities != null && entities.size() > 0) {
             commentsAdapter.bind(entities);
             loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-        }else {
+        } else {
             loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
         }
         mSwipeRefreshWidget.setRefreshing(false);
-
     }
 
     @Override
@@ -265,16 +282,17 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void onItemClick(Comments data) {
-//        暂时注释。
-//        dialog = new CommentsDialog(CommentsActivity.this, data);
-//        dialog.setOnChoiceListener(this);
-//        dialog.show();
+        //暂时注释。
+        dialog = new CommentsDialog(CommentsActivity.this, data);
+        dialog.setOnChoiceListener(this);
+        dialog.show();
     }
 
     @Override
     public void onChoice(Comments data) {
-        etComment.setHint("@" + data.getAuthor() + " ");
-        replay.setReplay_author(data.getAuthor());
+        etComment.setText("@" + data.getNickname() + " ");
+        replay.setAuthor_code(data.getAuthor());
+        replay.setReplay_nickname(data.getNickname());
         replay.setPid(data.getMid());
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
@@ -289,7 +307,7 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.guillotine_hamburger:
                 finish();
                 break;

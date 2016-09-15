@@ -24,11 +24,18 @@ public class CommentsModel {
      */
     public OkHttpRequest sendComments(Replay replay, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
+
         paramsMap.put("content", replay.getContent());
         paramsMap.put("nid", replay.getNid());
         paramsMap.put("pid", replay.getPid());
         paramsMap.put("type", replay.getType());
-        paramsMap.put("replay_author", replay.getReplay_author());
+        if (replay.getContent().contains("@")){
+            paramsMap.put("replay_author", replay.getAuthor_code());
+            paramsMap.put("replay_nickname",replay.getReplay_nickname());
+        }else {
+            paramsMap.put("replay_author", replay.getReplay_author());
+            paramsMap.put("replay_nickname","");
+        }
         return ApiClient.create(AppConstants.RequestPath.CommentsAdd, paramsMap).tag("").get(callback);
     }
 }

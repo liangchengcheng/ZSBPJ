@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +19,9 @@ import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavEntity;
 import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.msdq.compony.answer.AnswerAddActivity;
 import com.lcc.msdq.compony.answer.CompanyAnswerWebView;
@@ -271,18 +274,35 @@ public class LookComQuestionIndexActivity extends BaseActivity implements LookCo
     @Override
     public void onClick(View v) {
         Intent intent = null;
+        String user_name = null;
         switch (v.getId()) {
             case R.id.tv_sc:
                 startActivity(new Intent(LookComQuestionIndexActivity.this, CommentsActivity.class));
                 break;
 
             case R.id.fabButton:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(LookComQuestionIndexActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
+                    return;
+                }
+
                 intent = new Intent(LookComQuestionIndexActivity.this, AnswerAddActivity.class);
                 intent.putExtra("fid", fid);
                 startActivity(intent);
                 break;
 
             case R.id.floatingfabu:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(LookComQuestionIndexActivity.this.getFragmentManager(), "loginDialog");
+                    floatingMenu.close(false);
+                    return;
+                }
+
                 intent = new Intent(LookComQuestionIndexActivity.this, AnswerAddActivity.class);
                 intent.putExtra("fid", fid);
                 startActivity(intent);
@@ -291,7 +311,7 @@ public class LookComQuestionIndexActivity extends BaseActivity implements LookCo
 
             //发布评论
             case R.id.floatingComment:
-                CommentsActivity.startCommentsActivity(fid, Propertity.COM.QUESTION,
+                CommentsActivity.startCommentsActivity(fid, Propertity.COM.QUESTION,companyTest.getAuthor(),
                         LookComQuestionIndexActivity.this);
                 floatingMenu.close(false);
                 break;
@@ -305,6 +325,14 @@ public class LookComQuestionIndexActivity extends BaseActivity implements LookCo
 
     @Override
     public void onFavClick() {
+        String user_name = DataManager.getUserName();
+        if (TextUtils.isEmpty(user_name)) {
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(LookComQuestionIndexActivity.this.getFragmentManager(), "loginDialog");
+            floatingMenu.close(false);
+            return;
+        }
+
         if (!isfavEntity) {
             mPresenter.Fav(companyTest, Propertity.COM.QUESTION);
         } else {

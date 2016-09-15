@@ -338,7 +338,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
                 }
 
                 CommentsActivity.startCommentsActivity(entity.getMid(), Propertity.Test.QUESTION,
-                        AnswerIndexActivity.this);
+                        entity.getAuthor(), AnswerIndexActivity.this);
                 floatingMenu.close(false);
                 break;
 

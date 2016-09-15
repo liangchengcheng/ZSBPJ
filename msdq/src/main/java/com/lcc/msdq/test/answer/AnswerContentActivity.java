@@ -197,8 +197,8 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                     return;
                 }
 
-                CommentsActivity.startCommentsActivity(answer.getMid(),
-                        Propertity.Test.ANSWER, AnswerContentActivity.this);
+                CommentsActivity.startCommentsActivity(answer.getMid(), Propertity.Test.ANSWER,
+                        answer.getAuthor(),AnswerContentActivity.this);
                 floatingMenu.close(false);
                 break;
 

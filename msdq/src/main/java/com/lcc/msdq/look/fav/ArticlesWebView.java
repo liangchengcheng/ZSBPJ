@@ -219,7 +219,7 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
                     return;
                 }
                 CommentsActivity.startCommentsActivity(favEntity.getNid(),
-                        Propertity.Article.NAME, ArticlesWebView.this);
+                        Propertity.Article.NAME,"", ArticlesWebView.this);
                 break;
 
             case R.id.tv_to_comments:
@@ -229,7 +229,7 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
                     return;
                 }
                 CommentsActivity.startCommentsActivity(favEntity.getNid(),
-                        Propertity.Article.NAME, ArticlesWebView.this);
+                        Propertity.Article.NAME, "",ArticlesWebView.this);
                 break;
 
             case R.id.guillotine_hamburger:

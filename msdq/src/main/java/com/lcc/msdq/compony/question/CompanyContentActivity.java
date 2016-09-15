@@ -108,7 +108,7 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
                 break;
             //发布评论
             case R.id.floating_comments:
-                CommentsActivity.startCommentsActivity(fid, Propertity.COM.DESCRIPTION,
+                CommentsActivity.startCommentsActivity(fid, Propertity.COM.DESCRIPTION,"",
                         CompanyContentActivity.this);
                 break;
             //收藏公司

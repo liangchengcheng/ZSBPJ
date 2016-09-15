@@ -4,43 +4,30 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.lcc.base.BaseActivity;
-import com.lcc.entity.Answer;
 import com.lcc.entity.AnswerContent;
-import com.lcc.entity.Article;
 import com.lcc.entity.CompanyAnswer;
-import com.lcc.entity.CompanyEntity;
 import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavAndGoodState;
 import com.lcc.frame.Propertity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.ComAnswerContentPresenter;
-import com.lcc.mvp.presenter.MenuContentPresenter;
-import com.lcc.mvp.presenter.TestAnswerContentPresenter;
 import com.lcc.mvp.presenter.impl.ComAnswerContentPresenterImpl;
-import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.ComAnswerContentView;
-import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
-
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.frame.ImageManager;
 
@@ -186,8 +173,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
         if (answer == null) {
             return;
         }
-        ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this,
-                answer.getUser_image(), user_head);
+        ImageManager.getInstance().loadCircleImage(CompanyAnswerWebView.this, answer.getUser_image(), user_head);
     }
 
     @Override
@@ -195,7 +181,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.floatingComment:
                 CommentsActivity.startCommentsActivity(answer.getMid(), Propertity.COM.ANSWER,
-                        CompanyAnswerWebView.this);
+                        answer.getAuthor() ,CompanyAnswerWebView.this);
                 break;
 
             case R.id.floatingCollect:

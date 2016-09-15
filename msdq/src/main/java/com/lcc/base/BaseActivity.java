@@ -49,8 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (!NetWorkUtils.isNetworkConnected(BaseActivity.this)) {
             SuperCustomToast toast = SuperCustomToast.getInstance(getApplicationContext());
             toast.setDefaultTextColor(Color.WHITE);
-            toast.show("你的手机已经失去网络连接。", R.layout.toast_item, R.id.content_toast,
-                    BaseActivity.this);
+            toast.show("你的手机已经失去网络连接。", R.layout.toast_item, R.id.content_toast, BaseActivity.this);
         }
     }
 
@@ -72,7 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected ThemeUtils.Theme getCurrentTheme() {
-        int value = preferenceUtils.getIntParam(getString(R.string.change_theme_key), 0);
+        int value = preferenceUtils.getIntParam(getString(R.string.change_theme_key), 4);
         return ThemeUtils.Theme.mapValueToTheme(value);
     }
 
