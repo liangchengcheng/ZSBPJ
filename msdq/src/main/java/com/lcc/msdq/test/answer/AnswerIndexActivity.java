@@ -388,12 +388,19 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
         OtherUserProfileActivity.starOtherUserProfileActivity(user_phone, AnswerIndexActivity.this);
     }
 
+    private View loading;
+    private TextView tv_result;
+
     @Override
     public void OnAnswerClick(final TestEntity object) {
         favPage = 1;
         mPresenter.getUserListData(favPage, object.getMid());
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog_layout, null);
+        loading = view.findViewById(R.id.loading);
+        loading.setVisibility(View.VISIBLE);
+        tv_result = (TextView) view.findViewById(R.id.tv_result);
+        tv_result.setVisibility(View.GONE);
         recyclerView = (RecyclerView) view.findViewById(R.id.bs_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserListFavAdapter();
@@ -416,6 +423,10 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
     private void showBSDialog(List<UserListFav> entities) {
+        if (entities == null || entities.size() == 0) {
+            tv_result.setText("暂无数据");
+            tv_result.setVisibility(View.VISIBLE);
+        }
         adapter.bind(entities);
     }
 
@@ -431,7 +442,9 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void getUserListFail(String msg) {
-        FrameManager.getInstance().toastPrompt("获取数据失败...");
+        loading.setVisibility(View.GONE);
+        tv_result.setText("获取数据失败");
+        tv_result.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -441,6 +454,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void refreshUserListView(List<UserListFav> entities) {
+        loading.setVisibility(View.GONE);
         showBSDialog(entities);
     }
 
