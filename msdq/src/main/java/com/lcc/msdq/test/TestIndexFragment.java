@@ -155,8 +155,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
                     if (lv2.getVisibility() == View.INVISIBLE) {
                         lv2.setVisibility(View.VISIBLE);
                         lv1_layout.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-                        String name = (String) parent.getAdapter().getItem(
-                                position);
+                        String name = (String) parent.getAdapter().getItem(position);
                         setHeadText(idx, name);
                         popupWindow.dismiss();
                     }

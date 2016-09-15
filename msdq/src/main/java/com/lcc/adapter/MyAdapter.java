@@ -14,7 +14,6 @@ import com.lcc.msdq.R;
 
 @SuppressLint({"ResourceAsColor", "InflateParams"})
 public class MyAdapter extends BaseAdapter {
-
     private List<String> l;
     private Context context;
     private int selectItem = -1;
@@ -44,8 +43,7 @@ public class MyAdapter extends BaseAdapter {
         Holder holder = null;
         if (convertView == null) {
             holder = new Holder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.items,
-                    null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.items, null);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             convertView.setTag(holder);
         } else {

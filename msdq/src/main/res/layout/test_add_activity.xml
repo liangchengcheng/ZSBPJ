@@ -52,7 +52,7 @@
                     android:id="@+id/editText_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="请输入面试题的题目" />
+                    android:hint="请输入面试题的题目(6~16个字)" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -67,7 +67,7 @@
                     android:id="@+id/editText_summary"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:hint="请输入问题的内容"
+                    android:hint="请输入问题的内容，具体描述下问题"
                     />
             </android.support.design.widget.TextInputLayout>
            <TextView
@@ -89,19 +89,22 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:layout_weight="1"
                         android:checked="true"
                         android:id="@+id/rb_js"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="技术" />
+                        android:text="专业知识" />
 
                     <RadioButton
+                        android:layout_weight="1"
                         android:id="@+id/rb_rs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="人事" />
+                        android:text="人事知识" />
 
                     <RadioButton
+                        android:layout_weight="1"
                         android:id="@+id/rb_qt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

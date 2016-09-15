@@ -26,6 +26,7 @@ import com.lcc.msdq.comments.CommentsActivity;
 import com.lcc.mvp.presenter.MenuContentPresenter;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.MenuContentView;
+import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -37,19 +38,22 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class IndexMenuWebView extends BaseActivity implements MenuContentView, View.OnClickListener {
+public class IndexMenuWebView extends BaseActivity implements MenuContentView, View.OnClickListener,
+        MyWebView.OnScrollChangedCallback {
     public static final String DATA = "data";
     private MenuContentPresenter indexContentPresenter;
     private Article article;
     private ArticleContent articleContent;
+    boolean isBottomShow = true;
 
-    private WebView webView;
+    private MyWebView webView;
     private ImageView ivZhihuStory;
     private LoadingLayout loading_layout;
     private TextView tv_question, tv_source;
     private ImageView iv_state;
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
+    private View llDetailBottom;
 
     public static void startIndexMenuWebView(Activity startingActivity, Article article) {
         Intent intent = new Intent(startingActivity, IndexMenuWebView.class);
@@ -76,6 +80,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     protected void initView() {
+        llDetailBottom = findViewById(R.id.llDetailBottom);
         findViewById(R.id.ll_issc).setOnClickListener(this);
         findViewById(R.id.ll_comments).setOnClickListener(this);
         findViewById(R.id.tv_to_comments).setOnClickListener(this);
@@ -86,7 +91,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         tv_question = (TextView) findViewById(R.id.tv_question);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory = (ImageView) findViewById(R.id.user_head);
-        webView = (WebView) findViewById(R.id.webView);
+        webView = (MyWebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -98,7 +103,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
         settings.setAppCacheEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
         webView.setWebChromeClient(new WebChromeClient());
+        webView.setOnScrollChangedCallback(this);
     }
 
     @Override
@@ -241,8 +248,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
 
     @Override
     public void FavSuccess() {
-        // TODO: 16/8/23
-        articleContent.setAuthor("18813149871");
+        articleContent.setAuthor("");
         ImageManager.getInstance().loadResImage(IndexMenuWebView.this,
                 R.drawable.details_page_toolbar_icon_red_guanxin_selected, iv_state);
         Fav();
@@ -266,4 +272,18 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         FrameManager.getInstance().toastPrompt("取消收藏失败," + msg);
     }
 
+    @Override
+    public void onScroll(int dx, int dy) {
+        FrameManager.getInstance().toastPrompt("滑动");
+        if (Math.abs(dy) > 4) {
+            if (dy < 0 && isBottomShow) {
+                FrameManager.getInstance().toastPrompt("隐藏了");
+                isBottomShow = false;
+                llDetailBottom.animate().translationY(llDetailBottom.getHeight());
+            } else {
+                isBottomShow = true;
+                llDetailBottom.animate().translationY(0);
+            }
+        }
+    }
 }

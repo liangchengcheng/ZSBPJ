@@ -63,7 +63,6 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
         rg_options.setOnCheckedChangeListener(this);
         editText_summary= (EditText) findViewById(R.id.editText_summary);
         editText_title= (EditText) findViewById(R.id.editText_title);
-        FrameManager.getInstance().toastPrompt(zy);
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
@@ -113,6 +112,11 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
                         TextUtils.isEmpty(editText_summary.getText().toString())){
                     FrameManager.getInstance().toastPrompt("有未填写的数据");
                     return;
+                }
+
+                if (editText_title.getText().toString().trim().length()<6||
+                        editText_title.getText().toString().length()>16){
+                    FrameManager.getInstance().toastPrompt("标题的长度不合法");
                 }
 
                 adding();
