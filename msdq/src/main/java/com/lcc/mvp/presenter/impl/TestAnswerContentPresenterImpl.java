@@ -20,7 +20,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class TestAnswerContentPresenterImpl implements TestAnswerContentPresenter {
-
     private TestAnswerContentModel model;
     private TestAnswerContentView view;
 
@@ -127,6 +126,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
+                    String fav_str = jsonObject.getString("fav");
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         AnswerContent answerContent = GsonUtils
@@ -135,8 +135,16 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     } else {
                         view.getDataFail(message);
                     }
+
+                    if (status == 1 && !fav_str.equals("[]")) {
+                        FavAndGoodState fav = GsonUtils.changeGsonToBean(fav_str, FavAndGoodState.class);
+                        view.getStateSuccess(fav);
+                    } else {
+                        view.getStateFail("获取状态失败");
+                    }
                 } catch (Exception e) {
                     view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.getStateFail("获取状态失败");
                     e.printStackTrace();
                 }
             }

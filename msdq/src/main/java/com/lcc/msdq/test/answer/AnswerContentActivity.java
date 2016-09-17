@@ -123,7 +123,6 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         webView.setOnScrollChangedCallback(this);
 
         testAnswerContentPresenter.getContent(answer.getMid());
-        testAnswerContentPresenter.isFav(answer.getMid());
     }
 
     @Override
