@@ -18,24 +18,25 @@
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
+    <!--<TextView-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="10dp"-->
+        <!--android:text="赞他" />-->
+
+    <!--<TextView-->
+        <!--android:background="#ededed"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp" />-->
+
     <TextView
+        android:id="@+id/tv_jb"
         android:textSize="16sp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="赞他" />
-
-    <TextView
-        android:background="#ededed"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-
-    <TextView
-        android:textSize="16sp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="投诉" />
+        android:text="举报" />
 </LinearLayout>

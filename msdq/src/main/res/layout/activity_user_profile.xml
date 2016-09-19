@@ -138,12 +138,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+
                         <ImageView
                             android:id="@+id/guillotine_hamburger"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:background="@drawable/ic_arrow_back_white_24dp" />
+                            android:background="@android:color/transparent"
+                            android:paddingBottom="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/ic_arrow_back_white_24dp" />
+
 
                         <TextView
                             android:layout_width="wrap_content"

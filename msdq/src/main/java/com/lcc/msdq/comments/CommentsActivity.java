@@ -10,13 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
 import com.lcc.adapter.CommentAdapter;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.Comments;
@@ -30,9 +26,7 @@ import com.lcc.mvp.view.CommentsView;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.view.SendCommentButton;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zsbpj.lccpj.frame.FrameManager;
@@ -282,7 +276,6 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
 
     @Override
     public void onItemClick(Comments data) {
-        //暂时注释。
         dialog = new CommentsDialog(CommentsActivity.this, data);
         dialog.setOnChoiceListener(this);
         dialog.show();

@@ -9,6 +9,7 @@ import android.view.Window;
 import com.lcc.entity.Comments;
 import com.lcc.msdq.R;
 
+import zsbpj.lccpj.frame.FrameManager;
 
 /**
  * Author:  梁铖城
@@ -17,7 +18,6 @@ import com.lcc.msdq.R;
  * Description:  dialog
  */
 public class CommentsDialog extends Dialog{
-
     private Context context;
     private Comments data;
 
@@ -25,7 +25,6 @@ public class CommentsDialog extends Dialog{
         super(context);
         this.context=context;
         this.data=data;
-
     }
 
     @Override
@@ -37,6 +36,13 @@ public class CommentsDialog extends Dialog{
             @Override
             public void onClick(View v) {
                 listener.onChoice(data);
+            }
+        });
+        findViewById(R.id.tv_jb).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FrameManager.getInstance().toastPrompt("待开发");
+                dismiss();
             }
         });
     }

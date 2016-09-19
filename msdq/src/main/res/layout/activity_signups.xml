@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bga">
@@ -18,16 +17,21 @@
             android:id="@+id/guillotine_hamburger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_arrow_back_white_24dp" />
+            android:background="@android:color/transparent"
+            android:paddingBottom="10dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_arrow_back_white_24dp" />
+
 
         <TextView
             android:id="@+id/iv_head"
-            android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:textColor="#fff"
-            android:text="注册账号"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:text="注册账号"
+            android:textColor="#fff"
+            android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
@@ -66,8 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="50dp">
+                    android:paddingLeft="50dp"
+                    android:paddingRight="30dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputLayout_username"
@@ -94,8 +98,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="50dp">
+                    android:paddingLeft="50dp"
+                    android:paddingRight="30dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputLayout_phone"
@@ -120,8 +124,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="50dp">
+                    android:paddingLeft="50dp"
+                    android:paddingRight="30dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputLayout_password"
@@ -147,14 +151,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="50dp">
+                    android:paddingLeft="50dp"
+                    android:paddingRight="30dp">
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_weight="2"
                         android:id="@+id/textInputLayout_yzm"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="2"
                         android:textColorHint="#f0f7f4">
 
                         <EditText
@@ -172,16 +176,16 @@
 
 
                     <TextView
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:textSize="13sp"
                         android:id="@+id/button_send_verify_code"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bt_shape_2"
+                        android:gravity="center"
+                        android:padding="5dp"
                         android:text="@string/msg_get_verify_code"
-                        android:textColor="#2fa881"  />
+                        android:textColor="#2fa881"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <Button
