@@ -70,10 +70,12 @@
                     android:layout_height="wrap_content">
                     <!--android:background="@drawable/bg_android_blue_tag"-->
                     <TextView
+                        android:drawableLeft="@drawable/post_item_like"
+                        android:drawablePadding="5dp"
                         android:id="@+id/tv_znum"
+                        android:textColor="@color/common_h2"
                         android:layout_gravity="center_vertical"
-                        android:textColor="?attr/colorPrimary"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

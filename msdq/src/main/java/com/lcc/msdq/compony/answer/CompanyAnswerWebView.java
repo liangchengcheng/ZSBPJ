@@ -56,8 +56,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
     private CompanyTest entity;
     private boolean isGood;
 
-    public static void startCompanyAnswerWebView(Activity startingActivity, CompanyAnswer type,
-                                                 CompanyTest test) {
+    public static void startCompanyAnswerWebView(Activity startingActivity, CompanyAnswer type, CompanyTest test) {
         Intent intent = new Intent(startingActivity, CompanyAnswerWebView.class);
         intent.putExtra(QUESTION, test);
         intent.putExtra(ANSWER, type);
@@ -109,7 +108,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
         //comAnswerContentPresenter.isFav(answer.getMid());
         comAnswerContentPresenter.getContent(answer.getMid());
         comAnswerContentPresenter.isFav(answer.getMid());
-
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
 
     @Override
@@ -198,6 +197,10 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
                 } else {
                     comAnswerContentPresenter.Good(answer, Propertity.COM.ANSWER, entity.getTitle());
                 }
+                break;
+
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }

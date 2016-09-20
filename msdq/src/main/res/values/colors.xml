@@ -521,4 +521,6 @@
     <color name="photoPackDivider">#DDDDDD</color>
     <color name="grey_300">#ffe0e0e0</color>
     <color name="trans">#33000000</color>
+
+    <color name="common_h2">#727272</color>
 </resources>
