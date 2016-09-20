@@ -82,35 +82,33 @@
                 android:layout_marginTop="25dp"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <com.lcc.view.DrawableCenterButton
+                    android:gravity="center"
+                    android:id="@+id/tv_toregister"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/first_color_login"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/sbgg"
+                    android:textColor="@color/white" />
 
-                    <TextView
-                        android:id="@+id/tv_toregister"
-                        android:layout_width="145dp"
-                        android:layout_height="45dp"
-                        android:background="@color/first_color_login"
-                        android:gravity="center"
-                        android:text="@string/sbgg"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                </android.support.v7.widget.CardView>
+                <com.lcc.view.DrawableCenterButton
+                    android:gravity="center"
+                    android:id="@+id/tv_tologin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/first_color_register"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="@string/login"
+                    android:textColor="@color/white" />
 
-                <android.support.v7.widget.CardView
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/tv_tologin"
-                        android:layout_width="145dp"
-                        android:layout_height="45dp"
-                        android:background="@color/first_color_register"
-                        android:gravity="center"
-                        android:text="@string/login"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                </android.support.v7.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

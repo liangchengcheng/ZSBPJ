@@ -88,60 +88,43 @@
                     android:textColor="@color/article_des"
                     android:textSize="14sp" />
 
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:orientation="horizontal">
 
-                    <RelativeLayout
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_gravity="center_vertical"
+                        android:id="@+id/tv_ll"
+                        android:drawableLeft="@drawable/ic_notif_post"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/article_des"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/tv_sc"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="20dp"
 
-                        <ImageView
-                            android:id="@+id/btnLike"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/detailspage_toolbar_icon_comment_blue_press" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/tv_ll"
+                        android:drawableLeft="@drawable/ic_book_review_like"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/article_des"
+                        android:textSize="13dp" />
 
-                        <TextView
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/tv_ll"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btnLike"
-                            android:textColor="@color/article_des"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
 
-                    <RelativeLayout
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp">
-
-                        <ImageView
-                            android:id="@+id/btn_sc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/details_page_toolbar_icon_guanxin_normal" />
-
-                        <TextView
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/tv_sc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btn_sc"
-                            android:textColor="@color/article_des"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
