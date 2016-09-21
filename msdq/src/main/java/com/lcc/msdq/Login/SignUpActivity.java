@@ -79,6 +79,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
         mButtonSendVerifyCode.setOnClickListener(this);
         mButtonSignUp = (Button) findViewById(R.id.buttonSignUp);
         mButtonSignUp.setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public boolean valid(String phone, String password) {

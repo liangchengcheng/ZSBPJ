@@ -91,7 +91,6 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         findViewById(R.id.display).setOnClickListener(this);
         getUserInfoPresenter.getData(phone);
-
     }
 
     @Override

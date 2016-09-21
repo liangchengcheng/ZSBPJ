@@ -56,6 +56,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         mPresenter = new LoginPresenterImpl(this);
         findViewById(R.id.textView_create_account).setOnClickListener(this);
         findViewById(R.id.textView_reset_password).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_password);
     }
@@ -159,6 +160,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
             case R.id.textView_reset_password:
                 startActivity(new Intent(this, ResetPasswordActivity.class));
+                finish();
+                break;
+            case R.id.guillotine_hamburger:
                 finish();
                 break;
         }
