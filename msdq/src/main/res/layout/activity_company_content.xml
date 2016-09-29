@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -69,30 +70,27 @@
             android:id="@+id/floating_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_comment"
-            app:fab_colorNormal="?attr/colorPrimary"
-            app:fab_colorPressed="?attr/colorPrimary"
-            app:fab_colorRipple="?attr/colorPrimary"
+            android:src="@drawable/textmsg"
+            fab:backgroundTint="#ff9800"
+            fab:fab_colorNormal="#ff9800"
             app:fab_label="评论"
             app:fab_size="mini" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/floatingCollect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_star"
-            app:fab_colorNormal="?attr/colorPrimary"
-            app:fab_colorPressed="?attr/colorPrimary"
-            app:fab_colorRipple="?attr/colorPrimary"
+            android:src="@drawable/concern"
+            fab:fab_colorNormal="#818aa7"
+            fab:backgroundTint="#818aa7"
             app:fab_label="收藏"
             app:fab_size="mini" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/iv_com_des"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_store_white_24dp"
-            app:fab_colorNormal="?attr/colorPrimary"
-            app:fab_colorPressed="?attr/colorPrimary"
-            app:fab_colorRipple="?attr/colorPrimary"
+            android:src="@drawable/imgemsg"
+            fab:backgroundTint="#4284E4"
+            fab:fab_colorNormal="#4284E4"
             app:fab_label="公司简介"
             app:fab_size="mini" />
 
@@ -100,10 +98,9 @@
             android:id="@+id/iv_q_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_border_color_white_24dp"
-            app:fab_colorNormal="?attr/colorPrimary"
-            app:fab_colorPressed="?attr/colorPrimary"
-            app:fab_colorRipple="?attr/colorPrimary"
+            android:src="@drawable/sign"
+            fab:backgroundTint="#4BB7A7"
+            fab:fab_colorNormal="#4BB7A7"
             app:fab_label="发布问题"
             app:fab_size="mini" />
 

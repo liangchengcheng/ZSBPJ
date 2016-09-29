@@ -71,12 +71,9 @@ public class CompanyContentActivity extends BaseActivity implements View.OnClick
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.ZYZS),
-                Propertity.OPTIONS.ZYZS);
-        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.RSZS),
-                Propertity.OPTIONS.RSZS);
-        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.QT),
-                Propertity.OPTIONS.QT);
+        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.ZYZS), Propertity.OPTIONS.ZYZS);
+        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.RSZS), Propertity.OPTIONS.RSZS);
+        adapter.addFragment(CodeFragment.newInstance(fid, Propertity.OPTIONS.QT), Propertity.OPTIONS.QT);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

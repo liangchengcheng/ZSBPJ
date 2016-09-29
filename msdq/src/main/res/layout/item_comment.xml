@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="仇朝雷"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="#BBAC8A"
                     android:textSize="16sp" />
             </RelativeLayout>
 

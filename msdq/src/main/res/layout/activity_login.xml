@@ -85,6 +85,7 @@
                     android:textColorHint="#c5c5c5">
 
                     <EditText
+                        android:inputType="phone"
                         android:id="@+id/editText_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

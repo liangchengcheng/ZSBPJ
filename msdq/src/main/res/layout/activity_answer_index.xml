@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical">
@@ -86,10 +87,9 @@
             android:id="@+id/floatingComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_comment"
-            app:fab_colorNormal="?attr/colorPrimary"
-            app:fab_colorPressed="?attr/colorPrimary"
-            app:fab_colorRipple="?attr/colorPrimary"
+            android:src="@drawable/textmsg"
+            fab:backgroundTint="#ff9800"
+            fab:fab_colorNormal="#ff9800"
             app:fab_label="评论"
             app:fab_size="mini" />
 
@@ -97,10 +97,9 @@
             android:id="@+id/floatingfabu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_border_color_white_24dp"
-            app:fab_colorNormal="?attr/colorPrimary"
-            app:fab_colorPressed="?attr/colorPrimary"
-            app:fab_colorRipple="?attr/colorPrimary"
+            android:src="@drawable/imgemsg"
+            fab:backgroundTint="#4284E4"
+            fab:fab_colorNormal="#4284E4"
             app:fab_label="回答"
             app:fab_size="mini" />
 
