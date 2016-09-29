@@ -156,7 +156,6 @@
                 android:src="@drawable/concern"
                 fab:fab_colorNormal="#818aa7"
                 fab:backgroundTint="#818aa7"
-                fab:fab_size="mini"
                 app:fab_label="收藏"
                 app:fab_size="mini" />
         </com.github.clans.fab.FloatingActionMenu>
