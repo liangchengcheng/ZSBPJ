@@ -117,6 +117,7 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
                 if (editText_title.getText().toString().trim().length()<6||
                         editText_title.getText().toString().length()>16){
                     FrameManager.getInstance().toastPrompt("标题的长度不合法");
+                    return;
                 }
 
                 adding();

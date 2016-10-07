@@ -1,5 +1,6 @@
 package com.lcc.msdq;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.base.BaseActivity;
+import com.lcc.frame.Propertity;
 import com.lcc.frame.update.UpdateApkTask;
 import com.lcc.msdq.area.AreaDialogFragment;
 import com.lcc.msdq.area.LoginDialogFragment;
@@ -20,7 +22,12 @@ import com.lcc.view.LoginDialog;
 import com.lcc.view.bottombar.BottomBar;
 import com.lcc.view.bottombar.BottomBarFragment;
 
+import java.io.File;
+
 import de.greenrobot.event.EventBus;
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 
@@ -52,8 +59,25 @@ public class MainActivity extends BaseActivity {
             updateAPK();
         }
 
+        //申请6.0的权限
+        PermissionGen.with(MainActivity.this)
+                .addRequestCode(100)
+                .permissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_CONTACTS,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.WRITE_CONTACTS)
+                .request();
+
 //      LoginDialog dialog =new LoginDialog(MainActivity.this);
 //      dialog.show();
+
+        File file_dir = new File(Propertity.newFile);
+        if (!file_dir.exists()) {
+            file_dir.mkdirs();
+        }
     }
 
     @Override
@@ -110,5 +134,6 @@ public class MainActivity extends BaseActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);
     }
+
 
 }

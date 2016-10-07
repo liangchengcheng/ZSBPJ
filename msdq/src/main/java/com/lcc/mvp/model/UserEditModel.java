@@ -14,8 +14,7 @@ public class UserEditModel {
     /**
      * 提交用户的个人信息
      */
-    public OkHttpRequest userEdit(UserInfo userInfo, List<File> files,
-                                  ResultCallback<String> callback) {
+    public OkHttpRequest userEdit(UserInfo userInfo, List<File> files, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("nickname", userInfo.getNickname());
         paramsMap.put("xb", userInfo.getXb());

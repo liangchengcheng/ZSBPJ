@@ -204,8 +204,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        window.showAtLocation(UserEditActivity.this.findViewById(R.id.rootview),
-                Gravity.BOTTOM, 0, 0);
+        window.showAtLocation(UserEditActivity.this.findViewById(R.id.rootview), Gravity.BOTTOM, 0, 0);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override
