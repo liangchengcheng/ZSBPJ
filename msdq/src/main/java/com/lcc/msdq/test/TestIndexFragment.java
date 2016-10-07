@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
@@ -248,7 +249,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
             getSwipeRefreshWidget().setRefreshing(false);
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
-            CoCoinToast.getInstance().showToast(msg, SuperToast.Background.RED);
+            FrameManager.getInstance().toastPrompt(msg);
         }
     }
 
@@ -290,13 +291,13 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
             case R.id.iv_add:
                 String user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    FrameManager.getInstance().toastPrompt(getActivity().getString(R.string.login_end));
                     return;
                 }
 
                 final String zy = DataManager.getZY();
                 if (TextUtils.isEmpty(zy)) {
-                    CoCoinToast.getInstance().showToast("请选选择一个要添加的职业类型", SuperToast.Background.RED);
+                    FrameManager.getInstance().toastPrompt("请选选择一个要添加的职业类型");
                     startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
                 } else {
                     final String q = zy.substring(zy.length() - 32, zy.length());

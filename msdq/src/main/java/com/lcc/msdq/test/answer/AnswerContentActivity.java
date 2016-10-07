@@ -309,7 +309,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
                 floatingGood.setLabelText("取消赞");
             } else {
                 this.isGood = false;
-                floatingGood.setLabelText("赞");
+                floatingGood.setLabelText("点赞");
             }
         }
     }
@@ -322,12 +322,12 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
     @Override
     public void GoodSuccess() {
         changeGood(true);
-        FrameManager.getInstance().toastPrompt("赞成功");
+        FrameManager.getInstance().toastPrompt("点赞成功");
     }
 
     @Override
     public void GoodFail(String msg) {
-        FrameManager.getInstance().toastPrompt("赞失败");
+        FrameManager.getInstance().toastPrompt("点赞失败");
     }
 
     @Override
@@ -355,7 +355,7 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
         if (good) {
             floatingGood.setLabelText("取消赞");
         } else {
-            floatingGood.setLabelText("赞");
+            floatingGood.setLabelText("点赞");
         }
     }
 

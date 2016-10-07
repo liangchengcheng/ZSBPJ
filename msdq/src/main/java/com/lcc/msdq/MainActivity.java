@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.lcc.base.BaseActivity;
 import com.lcc.frame.update.UpdateApkTask;
@@ -18,12 +19,15 @@ import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.LoginDialog;
 import com.lcc.view.bottombar.BottomBar;
 import com.lcc.view.bottombar.BottomBarFragment;
+
 import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class MainActivity extends BaseActivity {
     private BottomBar mBottomBar;
     private long firstTime;
+    private static final int DAY = 60 * 60 * 24;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,17 +37,18 @@ public class MainActivity extends BaseActivity {
         mBottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
                 new BottomBarFragment(IndexFragment.newInstance(), R.drawable.ic_home_black_24dp, "主页"),
                 new BottomBarFragment(TestIndexFragment.newInstance(), R.drawable.ic_receipt_black_24dp, "面试资料"),
-                new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司真题"),
+
                 new BottomBarFragment(PersonInfoIndexFragment.newInstance(), R.drawable.ic_perm_identity_black_24dp, "个人中心")
         );
 
+        //new BottomBarFragment(CompanyIndexFragment.newInstance(), R.drawable.ic_search_black_24dp, "公司真题"),
         String updateTime = SharePreferenceUtil.getUpdateTime();
         if (!TextUtils.isEmpty(updateTime)) {
             String localtime = TimeUtils.StrTime(System.currentTimeMillis());
             if ((Long.parseLong(localtime) - Long.parseLong(updateTime)) / (60 * 60 * 24) > 7) {
                 updateAPK();
             }
-        }else {
+        } else {
             updateAPK();
         }
 
@@ -90,7 +95,8 @@ public class MainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 800) {
-                CoCoinToast.getInstance().showToast(R.string.toast_press_again_to_exit, SuperToast.Background.BLUE);                firstTime = secondTime;
+                FrameManager.getInstance().toastPrompt("再按一次退出程序");
+                firstTime = secondTime;
                 return true;
             } else {
                 exitApp();

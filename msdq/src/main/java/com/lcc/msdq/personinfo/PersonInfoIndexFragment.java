@@ -123,7 +123,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_fav:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    FrameManager.getInstance().toastPrompt("请先登录");
                     return;
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
@@ -133,7 +133,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_fabu:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    FrameManager.getInstance().toastPrompt("请先登录");
                     return;
                 }
                 startActivity(new Intent(getActivity(), FabuList.class));
@@ -143,7 +143,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             case R.id.ll_change_pwd:
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    CoCoinToast.getInstance().showToast(R.string.login_end, SuperToast.Background.RED);
+                    FrameManager.getInstance().toastPrompt("请先登录");
                     return;
                 }
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));

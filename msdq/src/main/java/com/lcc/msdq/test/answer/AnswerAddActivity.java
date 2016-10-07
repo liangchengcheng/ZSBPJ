@@ -252,13 +252,13 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void addSuccess() {
         closeDialog();
-        CoCoinToast.getInstance().showToast("提交成功", SuperToast.Background.BLUE);
+        FrameManager.getInstance().toastPrompt("提交成功");
     }
 
     @Override
     public void addFail() {
         closeDialog();
-        CoCoinToast.getInstance().showToast("提交失败", SuperToast.Background.BLUE);
+        FrameManager.getInstance().toastPrompt("提交失败");
     }
 
     private void closeDialog() {

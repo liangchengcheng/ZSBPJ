@@ -281,7 +281,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
                 floatingGood.setLabelText("取消赞");
             } else {
                 this.isGood = false;
-                floatingGood.setLabelText("赞");
+                floatingGood.setLabelText("点赞");
             }
         }
     }
@@ -294,7 +294,7 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
     @Override
     public void GoodSuccess() {
         changeGood(true);
-        FrameManager.getInstance().toastPrompt("赞成功");
+        FrameManager.getInstance().toastPrompt("点赞成功");
     }
 
     @Override

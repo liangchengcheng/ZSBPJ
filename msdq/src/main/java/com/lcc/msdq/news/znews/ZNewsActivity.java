@@ -97,20 +97,19 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView, UserGoo
     @Override
     public void onItemClick(UserGood entities) {
         if (entities != null) {
-            CoCoinToast.getInstance().showToast("查看功能正在开发...", SuperToast.Background.BLUE);
+            FrameManager.getInstance().toastPrompt("查看功能正在开发...");
             return;
         }
 
-        if (entities != null) {
-            Intent intent = null;
-            if (entities.getType().equals(Propertity.Test.ANSWER)) {
-                intent = new Intent(ZNewsActivity.this, LookAnswerContentActivity.class);
-            } else if (entities.getType().equals(Propertity.COM.ANSWER)) {
+        Intent intent = null;
+        if (entities.getType().equals(Propertity.Test.ANSWER)) {
+            intent = new Intent(ZNewsActivity.this, LookAnswerContentActivity.class);
+        } else if (entities.getType().equals(Propertity.COM.ANSWER)) {
 
-            }
-
-            startActivity(intent);
         }
+
+        startActivity(intent);
+
 
     }
 
