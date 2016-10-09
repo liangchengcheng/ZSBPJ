@@ -51,7 +51,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_image"
-                    android:textColor="#BBAC8A"
+                    android:textColor="@color/article_title"
                     android:textSize="16sp" />
             </RelativeLayout>
 

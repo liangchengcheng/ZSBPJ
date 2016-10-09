@@ -84,11 +84,7 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                     if (status == 1) {
                         List<Answer> weekDatas = GsonUtils.fromJsonArray(result, Answer.class);
                         if (page == 1) {
-                            if (weekDatas != null && weekDatas.size() > 0) {
-                                view.refreshView(weekDatas);
-                            } else {
-                                view.getDataEmpty();
-                            }
+                            view.refreshView(weekDatas);
                         } else {
                             view.loadMoreView(weekDatas);
                         }

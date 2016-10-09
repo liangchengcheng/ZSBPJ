@@ -196,16 +196,16 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
 
     @Override
     public void refreshView(List<Answer> entities) {
+        List<Object> objects = new ArrayList<>();
+        objects.add(entity);
         if (entities != null && entities.size() > 0) {
-            List<Object> objects = new ArrayList<>();
-            objects.add(entity);
             for (int i = 0; i < entities.size(); i++) {
                 objects.add(entities.get(i));
             }
-
-            mAdapter.bind(objects);
-            mAdapter.setFav(isfavEntity);
         }
+
+        mAdapter.bind(objects);
+        mAdapter.setFav(isfavEntity);
         mSwipeRefreshWidget.setRefreshing(false);
         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }

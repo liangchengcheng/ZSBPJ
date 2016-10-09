@@ -48,7 +48,6 @@ import de.greenrobot.event.EventBus;
 public class MainActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
