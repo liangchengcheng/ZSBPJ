@@ -146,10 +146,11 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.textView_create_account:
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                intent.putExtra("from", "welcome");
+                intent = new Intent(LoginActivity.this, PhoneActivity.class);
+                intent.putExtra("from", "r");
                 startActivity(intent);
                 break;
 
@@ -158,8 +159,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 break;
 
             case R.id.textView_reset_password:
-                startActivity(new Intent(this, ResetPasswordActivity.class));
-                finish();
+                intent = new Intent(LoginActivity.this, PhoneActivity.class);
+                intent.putExtra("from", "c");
+                startActivity(intent);
                 break;
 
             case R.id.guillotine_hamburger:

@@ -268,5 +268,13 @@
         <activity
             android:name=".look.fav.LookComQuestionIndexActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".login.PhoneActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".login.CodeActivity"
+            android:theme="@style/AppTheme" />
     </application>
 </manifest>
