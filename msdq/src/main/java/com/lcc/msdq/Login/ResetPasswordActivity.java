@@ -26,8 +26,7 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView,
-        View.OnClickListener {
+public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView, View.OnClickListener {
     private static final int DELAY_MILLIS = 1000;
     private TextInputLayout mTextInputLayoutPhone;
     private TextInputLayout mTextInputLayoutPassword;

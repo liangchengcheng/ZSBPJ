@@ -31,7 +31,6 @@ import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class LoginActivity extends BaseActivity implements LoginView, View.OnClickListener {
-    //MVP结构的 P层的实现
     private LoginPresenter mPresenter;
     //用户名和密码
     private TextInputLayout mTextInputLayoutPhone;
@@ -162,6 +161,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 startActivity(new Intent(this, ResetPasswordActivity.class));
                 finish();
                 break;
+
             case R.id.guillotine_hamburger:
                 finish();
                 break;
