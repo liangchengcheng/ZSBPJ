@@ -53,7 +53,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     protected void initView() {
         from = getIntent().getStringExtra("from");
         fragment = getIntent().getStringExtra("fragment");
-        SMSSDK.initSDK(this, "11cc5d753865c", "3c6cdfb8371e181a03f8a27f217e2043", true);
+
         EventHandler eh = new EventHandler() {
 
             @Override
