@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="50dp"
-                    android:text="注册账号"
+                    android:text="请输入你的手机号码"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -70,33 +70,32 @@
                 <LinearLayout
                     android:layout_marginTop="40dp"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:orientation="horizontal"
                     android:paddingLeft="50dp"
                     android:paddingRight="30dp">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/textInputLayout_password"
+                        android:id="@+id/textInputLayout_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="#f0f7f4">
 
                         <EditText
-                            android:id="@+id/editText_pwd"
+                            android:id="@+id/editText_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/selector_bg_edit_2"
                             android:hint="请输入手机号"
-                            android:inputType="textPassword"
                             android:paddingBottom="2dp"
                             android:textColor="#f0f7f4"
                             android:textCursorDrawable="@drawable/bg_input_cursor_2"
-                            android:textSize="13sp" />
+                            android:textSize="14sp" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/buttonSignUp"
+                    android:id="@+id/button_send_verify_code"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"

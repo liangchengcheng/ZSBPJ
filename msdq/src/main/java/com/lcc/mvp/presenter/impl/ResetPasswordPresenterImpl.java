@@ -18,8 +18,8 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
     }
 
     @Override
-    public void resetPassword(String verify_code, String phone, String pwd,String new_pwd) {
-        model.resetPassword(verify_code,phone, pwd, new_pwd,new ResultCallback<String>() {
+    public void resetPassword(String pwd,String new_pwd) {
+        model.resetPassword( pwd, new_pwd,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.showResetError(e.getMessage());
