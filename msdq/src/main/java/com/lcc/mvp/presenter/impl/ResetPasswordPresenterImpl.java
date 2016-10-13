@@ -1,11 +1,21 @@
 package com.lcc.mvp.presenter.impl;
 
+import android.util.Log;
+
 import com.google.gson.JsonElement;
+import com.lcc.db.test.UserInfo;
+import com.lcc.frame.data.DataManager;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.ResetPasswordModel;
 import com.lcc.mvp.presenter.ResetPasswordPresenter;
 import com.lcc.mvp.view.ResetPasswordView;
+import com.lcc.utils.SharePreferenceUtil;
 import com.squareup.okhttp.Request;
+
+import org.json.JSONObject;
+
+import zsbpj.lccpj.utils.GsonUtils;
+import zsbpj.lccpj.utils.LogUtils;
 
 public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
 
@@ -28,7 +38,26 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
 
             @Override
             public void onResponse(String response) {
-                view.showSuccess();
+                LogUtils.e("flag","success");
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        JSONObject json_result = new JSONObject(result);
+                        SharePreferenceUtil.setUserTk(json_result.getString("tk"));
+                        String user_info=json_result.getString("userinfo");
+                        UserInfo userInfo = GsonUtils.changeGsonToBean(user_info, UserInfo.class);
+                        DataManager.saveUserInfo(userInfo);
+                        view.showSuccess();
+                    } else {
+                        view.showResetError(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

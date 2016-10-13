@@ -14,11 +14,13 @@ import com.lcc.utils.FormValidation;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.WidgetUtils;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class ResetPasswordActivity extends BaseActivity implements ResetPasswordView, View.OnClickListener {
-
     private Button mButtonSignUp;
     private EditText editText_pwd, editText_pwd2;
+    private SimpleArcDialog mDialog;
 
     private ResetPasswordPresenter mPresenter;
     private String  password, new_password;
@@ -55,6 +57,7 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
             return;
         switch (v.getId()) {
             case R.id.buttonSignUp:
+                showDialog();
                 mPresenter.resetPassword(phone,password, new_password);
                 break;
         }
@@ -62,12 +65,14 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
 
     @Override
     public void showSuccess() {
-
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("修改密码成功");
     }
 
     @Override
     public void showResetError(String msg) {
-
+        closeDialog();
+        FrameManager.getInstance().toastPrompt("修改密码失败");
     }
 
     @Override
@@ -102,6 +107,20 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
             return true;
         }
         return false;
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
+
+    private void showDialog() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在注册...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
     }
 
 }

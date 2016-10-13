@@ -32,12 +32,15 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class SignUpActivity extends BaseActivity implements SignUpView, View.OnClickListener {
 
     private TextInputLayout textInputLayout_username;
     private TextInputLayout mTextInputLayoutPassword;
     private Button mButtonSignUp;
+    private SimpleArcDialog mDialog;
 
     private SignUpPresenter mPresenter;
     private String phone, password, username;
@@ -98,6 +101,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
             return;
         switch (v.getId()) {
             case R.id.buttonSignUp:
+                showDialog();
                 mPresenter.signUp(phone, password, "", username);
                 break;
         }
@@ -115,11 +119,13 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     @Override
     public void showSignUpError(String msg) {
+        closeDialog();
         FrameManager.getInstance().toastPrompt("账号注册失败" + msg);
     }
 
     @Override
     public void signUpSuccess() {
+        closeDialog();
         FrameManager.getInstance().toastPrompt("账号注册成功");
         if (!TextUtils.isEmpty(from)) {
             String type = DataManager.getUserInfo().getZy();
@@ -143,6 +149,20 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     @Override
     public void showMsg(String msg) {
         FrameManager.getInstance().toastPrompt(msg);
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
+
+    private void showDialog() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在注册...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
     }
 
 }

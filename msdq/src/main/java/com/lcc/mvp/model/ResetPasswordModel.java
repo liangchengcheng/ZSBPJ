@@ -30,7 +30,7 @@ public class ResetPasswordModel {
         paramsMap.put("phone", phone);
         paramsMap.put("o_password", pwd);
         paramsMap.put(AppConstants.ParamKey.VERIFY_CODE_KEY, "");
-        paramsMap.put("new_pwd",new_pwd);
+        paramsMap.put("n_password",new_pwd);
         return ApiClient.create(AppConstants.RequestPath.RESET_PASSWORD, paramsMap).tag("").post(callback);
     }
 
