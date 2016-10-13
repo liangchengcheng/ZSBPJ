@@ -290,7 +290,7 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
     public void showLoading() {
         mDialog = new SimpleArcDialog(this);
         ArcConfiguration arcConfiguration = new ArcConfiguration(this);
-        arcConfiguration.setText("正在登录...");
+        arcConfiguration.setText("正在修改身份信息...");
         mDialog.setConfiguration(arcConfiguration);
         mDialog.show();
     }

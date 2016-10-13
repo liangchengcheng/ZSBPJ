@@ -22,9 +22,11 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
 
     private ResetPasswordPresenter mPresenter;
     private String  password, new_password;
+    private String phone;
 
     @Override
     protected void initView() {
+        phone = getIntent().getStringExtra("phone");
         TextView iv_head = (TextView) findViewById(R.id.iv_head);
         iv_head.setText("重置密码");
         mPresenter = new ResetPasswordPresenterImpl(this);
@@ -49,13 +51,11 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
         KeyboardUtils.hide(this);
         password = editText_pwd.getText().toString();
         new_password = editText_pwd2.getText().toString();
-
         if (valid( password, new_password))
             return;
-
         switch (v.getId()) {
             case R.id.buttonSignUp:
-                mPresenter.resetPassword(password, new_password);
+                mPresenter.resetPassword(phone,password, new_password);
                 break;
         }
     }

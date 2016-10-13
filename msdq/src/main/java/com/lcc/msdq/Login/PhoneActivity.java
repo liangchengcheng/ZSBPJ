@@ -1,10 +1,12 @@
 package com.lcc.msdq.login;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
@@ -18,6 +20,8 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 /**
  * Author:       梁铖城
@@ -28,6 +32,9 @@ import zsbpj.lccpj.frame.FrameManager;
 public class PhoneActivity extends BaseActivity implements View.OnClickListener {
 
     private TextInputLayout mTextInputLayoutPhone;
+    private TextView iv_head;
+    private String flag;
+    private SimpleArcDialog mDialog;
 
     @Override
     protected void initView() {
@@ -45,8 +52,15 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
 
         };
         SMSSDK.registerEventHandler(eh);
+        flag = getIntent().getStringExtra("from");
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
-
+        findViewById(R.id.button_send_verify_code).setOnClickListener(this);
+        iv_head = (TextView) findViewById(R.id.iv_head);
+        if (flag.equals("r")) {
+            iv_head.setText("注册账号");
+        } else {
+            iv_head.setText("忘记密码");
+        }
     }
 
     @Override
@@ -76,12 +90,13 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
             FrameManager.getInstance().toastPrompt("手机号不能为空");
             return;
         }
-        if (valid(phone)){
+        if (valid(phone)) {
             FrameManager.getInstance().toastPrompt("手机号格式不正确");
             return;
         }
         switch (v.getId()) {
             case R.id.button_send_verify_code:
+                showDialog();
                 SMSSDK.getVerificationCode("86", phone);
                 break;
         }
@@ -97,12 +112,26 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
                 if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         boolean smart = (Boolean) data;
+                        Intent intent = null;
                         if (smart) {
                             // 通过智能验证
+                            if (!TextUtils.isEmpty(flag)) {
+                                if (flag.equals("r")) {
+                                    intent = new Intent(PhoneActivity.this, SignUpActivity.class);
+                                } else {
+                                    intent = new Intent(PhoneActivity.this, ResetPasswordActivity.class);
+                                }
+                                intent.putExtra("from", flag);
+                            }
                         } else {
-                            // 依然走短信验证
-                            FrameManager.getInstance().toastPrompt("短信发送成功");
+                            if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                                FrameManager.getInstance().toastPrompt("获取验证码成功");
+                                intent = new Intent(PhoneActivity.this, CodeActivity.class);
+                            }
                         }
+                        intent.putExtra("phone", mTextInputLayoutPhone.getEditText().getText().toString());
+                        startActivity(intent);
+                        finish();
                     }
                 }
             } else {
@@ -121,6 +150,7 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
                     e.printStackTrace();
                 }
             }
+            closeDialog();
         }
     };
 
@@ -128,5 +158,19 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
+
+    private void showDialog() {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText("正在发送验证码...");
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
     }
 }

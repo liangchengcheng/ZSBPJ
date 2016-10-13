@@ -1,10 +1,12 @@
 package com.lcc.msdq.login;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
+import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 /**
  * Author:       梁铖城
@@ -26,12 +30,15 @@ import zsbpj.lccpj.frame.FrameManager;
  * Date:         2016年10月11日08:08:36
  * Description:  CodeActivity
  */
-public class CodeActivity extends BaseActivity implements View.OnClickListener{
+public class CodeActivity extends BaseActivity implements View.OnClickListener {
     private int verifyCodeCountdown = 60;
     protected Handler taskHandler = new Handler();
     private TextView mButtonSendVerifyCode;
     private static final int DELAY_MILLIS = 1 * 1000;
-    private TextInputLayout mTextInputLayoutPhone;
+    private EditText mEditTextVerifyCode;
+    private String flag;
+    private String phone;
+    private SimpleArcDialog mDialog;
 
     @Override
     protected void initView() {
@@ -48,9 +55,12 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener{
             }
         };
         SMSSDK.registerEventHandler(eh);
+        flag = getIntent().getStringExtra("from");
+        phone = getIntent().getStringExtra("phone");
         mButtonSendVerifyCode = (TextView) findViewById(R.id.button_send_verify_code);
         mButtonSendVerifyCode.setOnClickListener(this);
-        mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
+        mEditTextVerifyCode = (EditText) findViewById(R.id.mEditTextVerifyCode);
+        findViewById(R.id.buttonSignUp).setOnClickListener(this);
     }
 
     @Override
@@ -70,17 +80,35 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener{
             int result = msg.arg2;
             Object data = msg.obj;
             if (result == SMSSDK.RESULT_COMPLETE) {
-                if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    if (result == SMSSDK.RESULT_COMPLETE) {
-                        boolean smart = (Boolean) data;
-                        if (smart) {
-                            // 通过智能验证
+                Intent intent =null;
+                boolean smart = (Boolean) data;
+                //是不是智能验证
+                if (smart) {
+                    if (!TextUtils.isEmpty(flag)) {
+                        if (flag.equals("r")) {
+                            intent = new Intent(CodeActivity.this, SignUpActivity.class);
                         } else {
-                            // 依然走短信验证
-                            FrameManager.getInstance().toastPrompt("短信发送成功");
+                            intent = new Intent(CodeActivity.this, ResetPasswordActivity.class);
                         }
                     }
+                }else {
+                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                        Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_SHORT).show();
+                        if (!TextUtils.isEmpty(flag)) {
+                            if (flag.equals("r")) {
+                                intent = new Intent(CodeActivity.this, SignUpActivity.class);
+                            } else {
+                                intent = new Intent(CodeActivity.this, ResetPasswordActivity.class);
+                            }
+                        }
+                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                        Toast.makeText(getApplicationContext(), "获取验证码成功", Toast.LENGTH_SHORT).show();
+                        showVerifySuccess();
+                    }
                 }
+                intent.putExtra("phone", phone);
+                startActivity(intent);
+                finish();
             } else {
                 int status = 0;
                 try {
@@ -97,11 +125,11 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener{
                     e.printStackTrace();
                 }
             }
+            closeDialog();
         }
     };
 
     public void showVerifySuccess() {
-
         mButtonSendVerifyCode.setClickable(false);
         taskHandler.postDelayed(new Runnable() {
             @Override
@@ -121,28 +149,40 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         KeyboardUtils.hide(this);
-        String phone = mTextInputLayoutPhone.getEditText().getText().toString();
         if (TextUtils.isEmpty(phone)) {
             FrameManager.getInstance().toastPrompt("手机号不能为空");
             return;
         }
-        if (valid(phone)){
-            FrameManager.getInstance().toastPrompt("手机号格式不正确");
-            return;
-        }
         switch (v.getId()) {
             case R.id.button_send_verify_code:
+                showDialog("获取验证码");
                 SMSSDK.getVerificationCode("86", phone);
+                break;
+
+            case R.id.buttonSignUp:
+                String verify_code = mEditTextVerifyCode.getText().toString();
+                if (FormValidation.isVerifyCode(verify_code)) {
+                    showDialog("提交验证码");
+                    SMSSDK.submitVerificationCode("86", phone, verify_code);
+                }else {
+                    WidgetUtils.requestFocus(mEditTextVerifyCode);
+                }
                 break;
         }
     }
 
-    public boolean valid(String phone) {
-        if (!FormValidation.isMobile(phone)) {
-            WidgetUtils.requestFocus(mTextInputLayoutPhone.getEditText());
-            FrameManager.getInstance().toastPrompt(getResources().getString(R.string.msg_error_phone));
-            return true;
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
         }
-        return false;
     }
+
+    private void showDialog(String msg) {
+        mDialog = new SimpleArcDialog(this);
+        ArcConfiguration arcConfiguration = new ArcConfiguration(this);
+        arcConfiguration.setText(msg);
+        mDialog.setConfiguration(arcConfiguration);
+        mDialog.show();
+    }
+
 }
