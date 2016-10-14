@@ -118,7 +118,7 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
     private void showDialog() {
         mDialog = new SimpleArcDialog(this);
         ArcConfiguration arcConfiguration = new ArcConfiguration(this);
-        arcConfiguration.setText("正在注册...");
+        arcConfiguration.setText("重置密码...");
         mDialog.setConfiguration(arcConfiguration);
         mDialog.show();
     }

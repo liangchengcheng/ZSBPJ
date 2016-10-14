@@ -46,17 +46,14 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
 
                     if (status == 1) {
                         String result = jsonObject.getString("result");
-                        JSONObject json_result = new JSONObject(result);
-                        SharePreferenceUtil.setUserTk(json_result.getString("tk"));
-                        String user_info=json_result.getString("userinfo");
-                        UserInfo userInfo = GsonUtils.changeGsonToBean(user_info, UserInfo.class);
-                        DataManager.saveUserInfo(userInfo);
+                        SharePreferenceUtil.setUserTk(result);
                         view.showSuccess();
                     } else {
                         view.showResetError(message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    view.showResetError("重置密码失败");
                 }
             }
         });

@@ -117,7 +117,6 @@ public class AppConstants {
     }
 
     public final class ParamKey {
-
         //grant_type
         public final static String GRANT_TYPE_KEY = "grant_type";
         //client_id
@@ -150,7 +149,6 @@ public class AppConstants {
     }
 
     public final class ParamDefaultValue {
-
         //client_secret
         public final static String CLIENT_SECRET = "38e8c5aet76d5c012e32";
         //client_id

@@ -37,7 +37,6 @@ public class OkHttpUploadRequest extends OkHttpPostRequest {
             for (String key : params.keySet()) {
                 builder.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + key + "\""),
                         RequestBody.create(null, params.get(key)));
-
             }
         }
     }
