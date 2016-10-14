@@ -62,7 +62,6 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof FootViewHolder) {
@@ -109,7 +108,6 @@ public class JSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() {
         return getBasicItemCount() + (hasFooter ? 1 : 0);
-
     }
 
     public int getBasicItemCount() {

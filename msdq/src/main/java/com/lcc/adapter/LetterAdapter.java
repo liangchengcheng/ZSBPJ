@@ -29,7 +29,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  FavAdapter(收藏的适配器)
  */
 public class LetterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private List<Letter> mList = new ArrayList<>();
 
     public void bind(List<Letter> messages) {
@@ -45,7 +44,6 @@ public class LetterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         final Letter weekData = mList.get(position);
         NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
@@ -66,7 +64,6 @@ public class LetterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 }
             });
         }
-
     }
 
     @Override
@@ -79,7 +76,6 @@ public class LetterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     class NormalViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.ll_all)
         RelativeLayout ll_all;
         @Bind(R.id.iv_head)

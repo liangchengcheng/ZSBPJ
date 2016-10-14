@@ -33,17 +33,14 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
             @Override
             public void onError(Request request, Exception e) {
                 view.showResetError(e.getMessage());
-
             }
 
             @Override
             public void onResponse(String response) {
-                LogUtils.e("flag","success");
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
-
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         SharePreferenceUtil.setUserTk(result);
@@ -52,8 +49,8 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
                         view.showResetError(message);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                     view.showResetError("重置密码失败");
+                    e.printStackTrace();
                 }
             }
         });

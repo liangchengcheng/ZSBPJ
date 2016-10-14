@@ -15,7 +15,6 @@ import java.util.List;
 
 @SuppressLint("InflateParams")
 public class ChoiceAdapter extends BaseAdapter {
-
 	private int  selectItem=-1;
 	private Context context;
 	private LayoutInflater layoutInflater;
@@ -49,8 +48,7 @@ public class ChoiceAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = layoutInflater.inflate(R.layout.choice_item, null);
 			viewHolder = new ViewHolder();
-			viewHolder.btn_name = (TextView) convertView
-					.findViewById(R.id.btn_name);
+			viewHolder.btn_name = (TextView) convertView.findViewById(R.id.btn_name);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();

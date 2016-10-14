@@ -43,7 +43,6 @@ public class PhotoWallAdapter extends BaseAdapterHelper <String> {
     public void convert(ViewHolder viewHolder, final String item, int position) {
         ImageView ivPhoto = viewHolder.getView(R.id.iv_photo);
         CheckBox checkBox = viewHolder.getView(R.id.checkbox);
-
         // 先设置为默认图片
         ivPhoto.setImageResource(R.mipmap.icon_empty_photo);
         // 再根据路径异步加载相册中的照片

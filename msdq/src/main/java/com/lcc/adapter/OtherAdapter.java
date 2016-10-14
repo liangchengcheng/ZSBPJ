@@ -15,7 +15,6 @@ import com.lcc.msdq.R;
 import zsbpj.lccpj.view.recyclerview.adapter.LoadMoreRecyclerAdapter;
 
 public class OtherAdapter extends LoadMoreRecyclerAdapter<OtherEntity,OtherAdapter.ViewHolder>{
-
     private  OnItemClickListener onItemClickListener;
     private Activity mActivity;
 

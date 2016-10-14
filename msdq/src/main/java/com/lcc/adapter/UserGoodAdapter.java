@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
  * Description:  FavAdapter(收藏的适配器)
  */
 public class UserGoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private List<UserGood> mList = new ArrayList<>();
 
     public void bind(List<UserGood> messages) {

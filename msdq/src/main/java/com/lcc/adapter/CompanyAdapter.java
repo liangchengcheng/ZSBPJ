@@ -32,8 +32,7 @@ public class CompanyAdapter extends LoadMoreRecyclerAdapter<CompanyDescription, 
 
     @Override
     public ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent,
-                false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent, false);
         return new ViewHolder(view);
     }
 

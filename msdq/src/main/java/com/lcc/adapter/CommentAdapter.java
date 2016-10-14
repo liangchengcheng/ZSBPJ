@@ -157,10 +157,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      * 头部的布局
      */
     class FootViewHolder extends RecyclerView.ViewHolder {
-
         @Bind(R.id.mProgressView)
         ProgressBar mProgressView;
-
         @Bind(R.id.mTextView)
         TextView mTextView;
 

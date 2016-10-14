@@ -31,7 +31,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  FavAdapter(收藏的适配器)
  */
 public class LatterEntityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private List<LatterEntity> mList = new ArrayList<>();
     private UserInfo userInfo = new UserInfo();
     private Letter letter = new Letter();
@@ -48,7 +47,6 @@ public class LatterEntityAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mList = messages;
         notifyDataSetChanged();
     }
-
 
     @Override
     public int getItemViewType(int position) {

@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
  * Description:  ChoiceType2Adapter
  */
 public class ChoiceType2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private List<Type2> mList = new ArrayList<>();
 
     public void bind(List<Type2> messages) {
@@ -42,14 +41,10 @@ public class ChoiceType2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         final Type2 weekData = mList.get(position);
         NormalViewHolder holder = (NormalViewHolder) viewHolder;
 
         String title = weekData.getS_name();
-
-
-
         holder.tv_nickname.setText(title);
         if (mListener != null) {
             holder.rl_choice.setOnClickListener(new OnClickListener() {
@@ -59,7 +54,6 @@ public class ChoiceType2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
             });
         }
-
     }
 
     @Override

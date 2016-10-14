@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @SuppressLint("UseSparseArrays")
 public abstract class BaseListAdapter<E> extends BaseAdapter {
 
@@ -88,15 +87,13 @@ public abstract class BaseListAdapter<E> extends BaseAdapter {
 					inView.setOnClickListener(new OnClickListener() {
 
 						public void onClick(View v) {
-							listener.OnClickListener(itemV, v, position,
-                                    valuesMap);
+							listener.OnClickListener(itemV, v, position, valuesMap);
 						}
 					});
                     inView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-                            listener.OnLongClickListener(itemV, v, position,
-                                    valuesMap);
+                            listener.OnLongClickListener(itemV, v, position, valuesMap);
                             return true;
                         }
                     });
@@ -113,10 +110,8 @@ public abstract class BaseListAdapter<E> extends BaseAdapter {
 	}
 
 	public interface onInternalClickListener<T> {
-		void OnClickListener(View parentV, View v, Integer position,
-							 T values);
-		void OnLongClickListener(View parentV, View v, Integer position,
-								 T values);
+		void OnClickListener(View parentV, View v, Integer position, T values);
+		void OnLongClickListener(View parentV, View v, Integer position, T values);
 	}
 
     public static class onInternalClickListenerImpl<T> implements onInternalClickListener<T>{

@@ -30,7 +30,6 @@ import zsbpj.lccpj.frame.ImageManager;
  * Description:  WeekDataAdapter
  */
 public class WeekDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
 

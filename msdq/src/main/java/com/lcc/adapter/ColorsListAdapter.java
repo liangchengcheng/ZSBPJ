@@ -11,7 +11,6 @@ import com.lcc.msdq.R;
 import java.util.List;
 
 public class ColorsListAdapter extends BaseListAdapter<Integer>{
-
     private int checkItem;
 
     public ColorsListAdapter(Context context, List<Integer> list) {
