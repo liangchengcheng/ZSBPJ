@@ -44,12 +44,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     private SignUpPresenter mPresenter;
     private String phone, password, username;
     private String flag;
-    private String fragment;
+    private String code;
 
     @Override
     protected void initView() {
         flag = getIntent().getStringExtra("from");
-        fragment = getIntent().getStringExtra("fragment");
+        code = getIntent().getStringExtra("code");
         phone = getIntent().getStringExtra("phone");
         mPresenter = new SignUpPresenterImpl(this);
 
@@ -100,7 +100,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
         switch (v.getId()) {
             case R.id.buttonSignUp:
                 showDialog();
-                mPresenter.signUp(phone, password, "", username);
+                mPresenter.signUp(phone, password, code, username);
                 break;
         }
     }
