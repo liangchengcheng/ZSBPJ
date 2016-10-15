@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
+import com.lcc.mvp.presenter.CheckVcodePresenter;
+
+import com.lcc.mvp.presenter.impl.CheckVcodePresenterImpl;
+import com.lcc.mvp.view.CheckVcodeView;
 import com.lcc.utils.FormValidation;
 import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.WidgetUtils;
@@ -21,6 +25,7 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import zsbpj.lccpj.frame.FrameManager;
+import zsbpj.lccpj.utils.LogUtils;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
@@ -30,7 +35,7 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Date:         2016年10月11日08:08:36
  * Description:  CodeActivity
  */
-public class CodeActivity extends BaseActivity implements View.OnClickListener {
+public class CodeActivity extends BaseActivity implements View.OnClickListener ,CheckVcodeView{
     private int verifyCodeCountdown = 60;
     protected Handler taskHandler = new Handler();
     private TextView mButtonSendVerifyCode;
@@ -38,8 +43,10 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
     private EditText mEditTextVerifyCode;
     private String flag;
     private String phone;
+    private String code;
     private SimpleArcDialog mDialog;
     private TextInputLayout mTextInputLayoutPhone;
+    private CheckVcodePresenter presenter;
 
     @Override
     protected void initView() {
@@ -57,6 +64,7 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
         };
         SMSSDK.registerEventHandler(eh2);
         flag = getIntent().getStringExtra("from");
+        presenter = new CheckVcodePresenterImpl(this);
         mTextInputLayoutPhone = (TextInputLayout) findViewById(R.id.textInputLayout_phone);
         mButtonSendVerifyCode = (TextView) findViewById(R.id.button_send_verify_code);
         mButtonSendVerifyCode.setOnClickListener(this);
@@ -102,7 +110,6 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
                     startActivity(intent);
                     finish();
                 }
-
             } else {
                 int status = 0;
                 try {
@@ -113,11 +120,13 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
                     status = object.optInt("status");
                     if (!TextUtils.isEmpty(des)) {
                         Toast.makeText(CodeActivity.this, des, Toast.LENGTH_SHORT).show();
+                        closeDialog();
                         return;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
             closeDialog();
         }
@@ -143,7 +152,7 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         KeyboardUtils.hide(this);
-        String phone = mTextInputLayoutPhone.getEditText().getText().toString();
+        phone = mTextInputLayoutPhone.getEditText().getText().toString();
         if (TextUtils.isEmpty(phone)) {
             FrameManager.getInstance().toastPrompt("手机号不能为空");
             return;
@@ -155,10 +164,14 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonSignUp:
-                String verify_code = mEditTextVerifyCode.getText().toString();
-                if (FormValidation.isVerifyCode(verify_code)) {
+                code = mEditTextVerifyCode.getText().toString();
+                if (TextUtils.isEmpty(code)||code.length()!=4){
+                    FrameManager.getInstance().toastPrompt("验证码的长度不合法");
+                    return;
+                }
+                if (FormValidation.isVerifyCode(code)) {
                     showDialog("提交验证码");
-                    SMSSDK.submitVerificationCode("86", phone, verify_code);
+                    CheckVerifyCode(phone,code);
                 } else {
                     WidgetUtils.requestFocus(mEditTextVerifyCode);
                 }
@@ -186,4 +199,31 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener {
         SMSSDK.unregisterAllEventHandler();
     }
 
+    @Override
+    public void CheckVerifyCode(String phone, String code) {
+        presenter.checkVerifySMS(phone,code);
+    }
+
+    @Override
+    public void CheckVerifyCodeSuccess() {
+        Intent intent = null;
+        if (!TextUtils.isEmpty(flag)) {
+            if (flag.equals("r")) {
+                intent = new Intent(CodeActivity.this, SignUpActivity.class);
+            } else {
+                intent = new Intent(CodeActivity.this, ResetPasswordActivity.class);
+            }
+        }
+        intent.putExtra("phone", phone);
+        intent.putExtra("code", code);
+        startActivity(intent);
+        finish();
+        closeDialog();
+    }
+
+    @Override
+    public void CheckVerifyCodeError(String msg) {
+        FrameManager.getInstance().toastPrompt("短信验证失败"+msg);
+        closeDialog();
+    }
 }
