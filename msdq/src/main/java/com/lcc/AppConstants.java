@@ -113,6 +113,8 @@ public class AppConstants {
         public final static String getTestanswerforLook = "/service/getTestanswerforLook";
         //获取收藏的用户的列表
         public final static String getUserList = "/service/getUserList";
+        //手机
+        public final static String checkVcode = "/service/checkVcode";
 
     }
 
