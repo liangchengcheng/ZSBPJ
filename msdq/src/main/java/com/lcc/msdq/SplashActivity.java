@@ -65,14 +65,11 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         if (hour > 6 && hour <= 12) {
-            ImageManager.getInstance().loadResImage(SplashActivity.this,
-                    R.drawable.morning, ly);
+            ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.morning, ly);
         } else if (hour > 12 && hour <= 18) {
-            ImageManager.getInstance().loadResImage(SplashActivity.this,
-                    R.drawable.afternoon, ly);
+            ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.afternoon, ly);
         } else {
-            ImageManager.getInstance().loadResImage(SplashActivity.this,
-                    R.drawable.night, ly);
+            ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.night, ly);
         }
     }
 

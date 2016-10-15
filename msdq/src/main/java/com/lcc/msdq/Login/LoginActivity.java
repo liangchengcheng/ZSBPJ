@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         Intent intent = null;
         switch (v.getId()) {
             case R.id.textView_create_account:
-                intent = new Intent(LoginActivity.this, PhoneActivity.class);
+                intent = new Intent(LoginActivity.this, CodeActivity.class);
                 intent.putExtra("from", "r");
                 startActivity(intent);
                 break;
@@ -159,7 +159,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 break;
 
             case R.id.textView_reset_password:
-                intent = new Intent(LoginActivity.this, PhoneActivity.class);
+                intent = new Intent(LoginActivity.this, CodeActivity.class);
                 intent.putExtra("from", "c");
                 startActivity(intent);
                 break;

@@ -121,7 +121,6 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

@@ -97,6 +97,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         String user_name;
         switch (v.getId()) {
+            //登录
             case R.id.tv_username:
             case R.id.iv_more:
                 if (DataManager.getUserInfo() != null) {
@@ -107,18 +108,15 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
                 }
                 break;
-
             case R.id.rl_qd:
                 SuperCustomToast toast = SuperCustomToast.getInstance(getActivity());
                 toast.setDefaultTextColor(Color.WHITE);
                 toast.show("签到成功。", R.layout.layout_qd, R.id.content_toast, getActivity());
                 break;
-
             //系统设置
             case R.id.iv_sys_image:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
-
             //我的收藏
             case R.id.ll_fav:
                 user_name = DataManager.getUserName();
@@ -128,7 +126,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
                 break;
-
             //我的发布
             case R.id.ll_fabu:
                 user_name = DataManager.getUserName();
@@ -138,7 +135,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 }
                 startActivity(new Intent(getActivity(), FabuList.class));
                 break;
-
             //修改密码
             case R.id.ll_change_pwd:
                 user_name = DataManager.getUserName();
@@ -148,17 +144,14 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 }
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
                 break;
-
             //常见问题
             case R.id.rl_help:
                 startActivity(new Intent(getActivity(), HelpActivity.class));
                 break;
-
             //系统设置
             case R.id.rl_set:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
-
             //系统设置
             case R.id.rl_share:
                 ShareUtil shareUtil = new ShareUtil();
@@ -181,12 +174,11 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         UserInfo userInfo = DataManager.getUserInfo();
         if (userInfo != null) {
             tv_username.setText(userInfo.getNickname());
-
             if (!TextUtils.isEmpty(userInfo.getZy())){
                 String z = userInfo.getZy().substring(0,userInfo.getZy().length()-33);
                 tv_zy.setText(z);
             }else {
-                tv_zy.setText("");
+                tv_zy.setText("暂未设置");
             }
             if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");

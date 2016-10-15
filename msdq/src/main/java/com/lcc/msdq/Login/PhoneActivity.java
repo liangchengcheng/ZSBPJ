@@ -30,7 +30,6 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Description:  PhoneActivity
  */
 public class PhoneActivity extends BaseActivity implements View.OnClickListener {
-
     private TextInputLayout mTextInputLayoutPhone;
     private TextView iv_head;
     private String flag;
@@ -110,29 +109,14 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
             Object data = msg.obj;
             if (result == SMSSDK.RESULT_COMPLETE) {
                 if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    if (result == SMSSDK.RESULT_COMPLETE) {
-                        boolean smart = (Boolean) data;
-                        Intent intent = null;
-                        if (smart) {
-                            // 通过智能验证
-                            if (!TextUtils.isEmpty(flag)) {
-                                if (flag.equals("r")) {
-                                    intent = new Intent(PhoneActivity.this, SignUpActivity.class);
-                                } else {
-                                    intent = new Intent(PhoneActivity.this, ResetPasswordActivity.class);
-                                }
-                                intent.putExtra("from", flag);
-                            }
-                        } else {
-                            if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                                FrameManager.getInstance().toastPrompt("获取验证码成功");
-                                intent = new Intent(PhoneActivity.this, CodeActivity.class);
-                            }
-                        }
-                        intent.putExtra("phone", mTextInputLayoutPhone.getEditText().getText().toString());
-                        startActivity(intent);
-                        finish();
-                    }
+                    FrameManager.getInstance().toastPrompt("获取验证码成功");
+                    Intent intent = new Intent(PhoneActivity.this, CodeActivity.class);
+                    intent.putExtra("from", flag);
+                    intent.putExtra("phone", mTextInputLayoutPhone.getEditText().getText().toString());
+                    startActivity(intent);
+                    finish();
+
+
                 }
             } else {
                 int status = 0;
@@ -157,7 +141,7 @@ public class PhoneActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SMSSDK.unregisterAllEventHandler();
+        //SMSSDK.unregisterAllEventHandler();
     }
 
     private void closeDialog() {

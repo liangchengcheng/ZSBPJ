@@ -1,30 +1,20 @@
 package com.lcc.msdq.choice;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.lcc.App;
 import com.lcc.adapter.ChoiceType1Adapter;
-import com.lcc.adapter.IndexMenuAdapter;
 import com.lcc.base.BaseActivity;
-import com.lcc.entity.CompanyDescription;
 import com.lcc.entity.Type1;
 import com.lcc.msdq.R;
 import com.lcc.mvp.presenter.ChoiceTypePresenter;
 import com.lcc.mvp.presenter.impl.ChoicePresenterImpl;
 import com.lcc.mvp.view.ChoiceTypeView;
 import com.lcc.view.loadview.LoadingLayout;
-
 import java.util.List;
-
 import zsbpj.lccpj.utils.GsonUtils;
-import zsbpj.lccpj.utils.TimeUtils;
-import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 
 /**
  * Author:       梁铖城
@@ -118,8 +108,7 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
 
     @Override
     public void onItemClick(Type1 data) {
-        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this,
-                data.getN_id(),flag);
+        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this, data.getN_id(),flag);
     }
 
     @Override

@@ -36,7 +36,6 @@ import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
 public class SignUpActivity extends BaseActivity implements SignUpView, View.OnClickListener {
-
     private TextInputLayout textInputLayout_username;
     private TextInputLayout mTextInputLayoutPassword;
     private Button mButtonSignUp;
@@ -44,12 +43,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
 
     private SignUpPresenter mPresenter;
     private String phone, password, username;
-    private String from;
+    private String flag;
     private String fragment;
 
     @Override
     protected void initView() {
-        from = getIntent().getStringExtra("from");
+        flag = getIntent().getStringExtra("from");
         fragment = getIntent().getStringExtra("fragment");
         phone = getIntent().getStringExtra("phone");
         mPresenter = new SignUpPresenterImpl(this);
@@ -90,7 +89,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     @Override
     public void onClick(View v) {
         KeyboardUtils.hide(this);
-
         password = mTextInputLayoutPassword.getEditText().getText().toString();
         username = textInputLayout_username.getEditText().getText().toString();
         if (TextUtils.isEmpty(username)) {
@@ -127,21 +125,19 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     public void signUpSuccess() {
         closeDialog();
         FrameManager.getInstance().toastPrompt("账号注册成功");
-        if (!TextUtils.isEmpty(from)) {
+        if (!TextUtils.isEmpty(flag)) {
             String type = DataManager.getUserInfo().getZy();
             Intent intent = null;
             if (TextUtils.isEmpty(type)) {
                 intent = new Intent(SignUpActivity.this, ChoiceTypeoneActivity.class);
+                intent.putExtra("flag", "SignUpActivity");
             } else {
                 intent = new Intent(SignUpActivity.this, MainActivity.class);
             }
             App.exit();
             startActivity(intent);
             finish();
-        } else if (!TextUtils.isEmpty(fragment)) {
-            finish();
         } else {
-            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             finish();
         }
     }
