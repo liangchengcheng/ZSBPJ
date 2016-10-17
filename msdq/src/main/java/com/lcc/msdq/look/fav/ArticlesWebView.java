@@ -31,6 +31,8 @@ import com.lcc.mvp.presenter.impl.LookMenuContentPresenterImpl;
 import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.LookMenuContentView;
 import com.lcc.mvp.view.MenuContentView;
+import com.lcc.view.MyScrollView;
+import com.lcc.view.MyWebView;
 import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -42,21 +44,26 @@ import zsbpj.lccpj.frame.ImageManager;
  * Date:         2015年11月21日15:28:25
  * Description:  IndexMenuWebView
  */
-public class ArticlesWebView extends BaseActivity implements LookMenuContentView, View.OnClickListener {
-    //变量
+public class ArticlesWebView extends BaseActivity implements LookMenuContentView, View.OnClickListener ,
+        MyWebView.OnScrollChangedCallback, View.OnScrollChangeListener{
     public static final String DATA = "data";
     private LookMenuContentPresenter lookPresenter;
     private FavEntity favEntity;
     private boolean isFav;
     private LookArticle lookArticle;
-    //控件
-    private WebView webView;
+    boolean isBottomShow = true;
+
+
+    private MyWebView webView;
     private ImageView ivZhihuStory;
     private LoadingLayout loading_layout;
     private TextView tv_question;
     private ImageView iv_state;
     private LinearLayout ll_bottom_state;
     private TextView tv_comments;
+
+    private View llDetailBottom;
+    private MyScrollView nest;
 
     public static void startIndexMenuWebView(Activity startingActivity, FavEntity favEntity) {
         Intent intent = new Intent(startingActivity, ArticlesWebView.class);
@@ -79,6 +86,10 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
 
     @Override
     protected void initView() {
+        nest = (MyScrollView) findViewById(R.id.nest);
+        nest.setOnScrollChangeListener(this);
+        llDetailBottom = findViewById(R.id.llDetailBottom);
+
         findViewById(R.id.ll_issc).setOnClickListener(this);
         findViewById(R.id.ll_comments).setOnClickListener(this);
         findViewById(R.id.tv_to_comments).setOnClickListener(this);
@@ -89,7 +100,7 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
         tv_question = (TextView) findViewById(R.id.tv_question);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory = (ImageView) findViewById(R.id.user_head);
-        webView = (WebView) findViewById(R.id.webView);
+        webView = (MyWebView) findViewById(R.id.webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -285,4 +296,30 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
         FrameManager.getInstance().toastPrompt("取消收藏失败," + msg);
     }
 
+    @Override
+    public void onScroll(int dx, int dy) {
+        if (Math.abs(dy) > 4) {
+            if (dy < 0 && isBottomShow) {
+                isBottomShow = false;
+                llDetailBottom.animate().translationY(llDetailBottom.getHeight());
+            } else {
+                isBottomShow = true;
+                llDetailBottom.animate().translationY(0);
+            }
+        }
+    }
+
+    @Override
+    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        //下移隐藏
+        if (scrollY - oldScrollY > 0 && isBottomShow) {
+            isBottomShow = false;
+            llDetailBottom.animate().translationY(llDetailBottom.getHeight());
+            //上移出现
+        } else if (scrollY - oldScrollY < 0 && !isBottomShow) {
+            isBottomShow = true;
+            llDetailBottom.animate().translationY(0);
+        }
+
+    }
 }

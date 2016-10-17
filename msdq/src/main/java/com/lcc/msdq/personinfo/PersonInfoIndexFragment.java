@@ -122,6 +122,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
                     return;
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
@@ -131,6 +132,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
                     return;
                 }
                 startActivity(new Intent(getActivity(), FabuList.class));
@@ -140,6 +142,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
                     return;
                 }
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
@@ -178,7 +181,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 String z = userInfo.getZy().substring(0,userInfo.getZy().length()-33);
                 tv_zy.setText(z);
             }else {
-                tv_zy.setText("暂未设置");
+                tv_zy.setText("职业/暂未设置");
             }
             if (TextUtils.isEmpty(userInfo.getQm())) {
                 tv_qm.setText("这个家伙很懒，什么也没留下");

@@ -42,7 +42,6 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 		loading = view.findViewById(R.id.loading);
 		mTextInputLayoutPhone = (TextInputLayout) view.findViewById(R.id.textInputLayout_phone);
 		mTextInputLayoutPassword = (TextInputLayout) view.findViewById(R.id.textInputLayout_password);
-		view.findViewById(R.id.buttonSignUp).setOnClickListener(this);
 		view.findViewById(R.id.btn_login).setOnClickListener(this);
 	}
 
@@ -84,7 +83,6 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 	public void showLoginFail(String msg) {
 		loading.setVisibility(View.GONE);
 		FrameManager.getInstance().toastPrompt("登录失败" + msg);
-		dismiss();
 	}
 
 	@Override

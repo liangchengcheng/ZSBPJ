@@ -155,6 +155,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         SharePreferenceUtil.setUserTk("");
         EventBus.getDefault().post(0x02);
         FrameManager.getInstance().toastPrompt("注销登录成功");
+
+        finish();
     }
 
     @Override

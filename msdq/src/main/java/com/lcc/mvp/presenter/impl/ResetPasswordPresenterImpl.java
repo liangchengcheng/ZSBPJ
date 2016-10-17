@@ -1,5 +1,6 @@
 package com.lcc.mvp.presenter.impl;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
@@ -42,8 +43,11 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     if (status == 1) {
-                        String result = jsonObject.getString("result");
-                        SharePreferenceUtil.setUserTk(result);
+                        String tk = SharePreferenceUtil.getUserTk();
+                        if (!TextUtils.isEmpty(tk)){
+                            String result = jsonObject.getString("result");
+                            SharePreferenceUtil.setUserTk(result);
+                        }
                         view.showSuccess();
                     } else {
                         view.showResetError(message);

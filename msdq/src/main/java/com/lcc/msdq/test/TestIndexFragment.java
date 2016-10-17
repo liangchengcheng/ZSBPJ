@@ -27,6 +27,7 @@ import com.lcc.adapter.TestAdapter;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.description.other.OtherUserProfileActivity;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.msdq.test.choice.ChoiceA_Activity;
@@ -291,7 +292,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
             case R.id.iv_add:
                 String user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
-                    FrameManager.getInstance().toastPrompt(getActivity().getString(R.string.login_end));
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
                     return;
                 }
 
