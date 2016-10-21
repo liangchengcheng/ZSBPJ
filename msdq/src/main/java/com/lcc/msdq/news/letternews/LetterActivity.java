@@ -90,4 +90,9 @@ public class LetterActivity extends BaseActivity implements LetterView,
     public void onItemClick(Letter data) {
         LetterDetailsActivity.startLetterDetailsActivity(data,LetterActivity.this);
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

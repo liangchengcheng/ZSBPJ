@@ -109,14 +109,17 @@ public class FlowPresenterImpl implements FlowPresenter {
                         } else {
                             view.loadMoreDataSuccess(weekDatas);
                         }
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
                         } else {
                             if (get_data) {
-                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                                view.getDataFail(message);
                             } else {
-                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                                view.refreshOrLoadFail(message);
                             }
                         }
                     }
@@ -179,14 +182,17 @@ public class FlowPresenterImpl implements FlowPresenter {
                         } else {
                             view.loadMoreDataSuccess(weekDatas);
                         }
-                    } else {
+                    }else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
+                    }  else {
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
                         } else {
                             if (get_data) {
-                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                                view.getDataFail(message);
                             } else {
-                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                                view.refreshOrLoadFail(message);
                             }
                         }
                     }

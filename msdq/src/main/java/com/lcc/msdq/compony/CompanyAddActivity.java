@@ -323,4 +323,9 @@ public class CompanyAddActivity extends BaseActivity implements ComDesAddView, V
             tv_position.setText(message.replace("=", ""));
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

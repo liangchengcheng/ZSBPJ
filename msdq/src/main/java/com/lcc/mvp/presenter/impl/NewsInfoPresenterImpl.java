@@ -47,7 +47,10 @@ public class NewsInfoPresenterImpl implements NewsInfoPresenter {
                         String result = jsonObject.getString("result");
                         NewsInfo userInfo = GsonUtils.changeGsonToBean(result, NewsInfo.class);
                         view.NewsInfoSuccess(userInfo);
-                    } else {
+                    }else if (status == 2) {
+                        view.NewsInfoFail(message);
+                        view.checkToken();
+                    }  else {
                         view.NewsInfoFail(message);
                     }
                 } catch (Exception e) {

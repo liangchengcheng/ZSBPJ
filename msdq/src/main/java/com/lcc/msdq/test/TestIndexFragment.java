@@ -35,6 +35,7 @@ import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
 import com.lcc.utils.CoCoinToast;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
 
 import java.util.ArrayList;
@@ -345,4 +346,12 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
         }
     }
 
+    @Override
+    public void checkToken() {
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
+    }
 }

@@ -13,8 +13,11 @@ import com.lcc.mvp.presenter.TestAnswerPresenter;
 import com.lcc.mvp.view.TestAnswerContentView;
 import com.lcc.mvp.view.TestAnswerView;
 import com.squareup.okhttp.Request;
+
 import org.json.JSONObject;
+
 import java.util.List;
+
 import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
@@ -42,9 +45,13 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
                     String result = jsonObject.getString("result");
+                    // TODO: 2016/10/18 此处需要修改 
                     if (status == 1 && !result.equals("[]")) {
                         FavAndGoodState fav = GsonUtils.changeGsonToBean(result, FavAndGoodState.class);
                         view.getStateSuccess(fav);
+                    } else if (status == 2) {
+                        view.getStateFail("获取状态失败");
+                        view.checkToken();
                     } else {
                         view.getStateFail("获取状态失败");
                     }
@@ -73,6 +80,9 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    }else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -85,8 +95,8 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
     }
 
     @Override
-    public void UnFav(Answer article,String type) {
-        model.UnfavAnswer(article,type, new ResultCallback<String>() {
+    public void UnFav(Answer article, String type) {
+        model.UnfavAnswer(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -100,7 +110,10 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
-                    } else {
+                    } else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
+                    }else {
                         view.UnFavFail(message);
                     }
                 } catch (Exception e) {
@@ -127,6 +140,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
                     String fav_str = jsonObject.getString("fav");
+                    //这个是内容
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         AnswerContent answerContent = GsonUtils
@@ -136,6 +150,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                         view.getDataFail(message);
                     }
 
+                    //这个是获取是否收藏
                     if (status == 1 && !fav_str.equals("[]")) {
                         FavAndGoodState fav = GsonUtils.changeGsonToBean(fav_str, FavAndGoodState.class);
                         view.getStateSuccess(fav);
@@ -179,7 +194,7 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
     }
 
     @Override
-    public void UnGood(Answer article,String type) {
+    public void UnGood(Answer article, String type) {
         model.UnGoodAnswer(article, type, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

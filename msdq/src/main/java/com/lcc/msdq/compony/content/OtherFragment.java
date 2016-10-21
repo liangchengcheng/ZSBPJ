@@ -17,7 +17,6 @@ import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
 public class OtherFragment extends RefreshAndLoadFragment implements OtherAdapter.OnItemClickListener{
 
-
     private OtherAdapter mAdapter;
     static final int ACTION_NONE = 0;
 

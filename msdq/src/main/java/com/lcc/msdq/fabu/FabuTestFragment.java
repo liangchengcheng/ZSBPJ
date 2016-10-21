@@ -12,8 +12,10 @@ import com.lcc.adapter.FabuTestAdapter;
 import com.lcc.adapter.FavAdapter;
 import com.lcc.entity.FavEntity;
 import com.lcc.entity.TestEntity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.test.answer.AnswerIndexActivity;
 import com.lcc.mvp.presenter.FabuPresenter;
 import com.lcc.mvp.presenter.FavPresenter;
@@ -21,6 +23,7 @@ import com.lcc.mvp.presenter.impl.FabuTestPresenterImpl;
 import com.lcc.mvp.presenter.impl.FavPresenterImpl;
 import com.lcc.mvp.view.FabuTestView;
 import com.lcc.mvp.view.FavView;
+import com.lcc.utils.SharePreferenceUtil;
 
 import java.util.List;
 
@@ -184,5 +187,14 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
             }
         }, 500);
 
+    }
+
+    @Override
+    public void checkToken() {
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
     }
 }

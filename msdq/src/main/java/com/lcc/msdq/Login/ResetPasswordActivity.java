@@ -125,4 +125,8 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
         mDialog.show();
     }
 
+    @Override
+    public void checkToken() {
+
+    }
 }

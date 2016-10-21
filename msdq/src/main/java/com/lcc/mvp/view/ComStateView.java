@@ -6,7 +6,7 @@ package com.lcc.mvp.view;
  * Date:         2015年11月21日15:28:25
  * Description:  ComStateView(看这个公司是否被收藏)
  */
-public interface ComStateView {
+public interface ComStateView extends BaseView{
 
     /**
      * 标识是否被收藏了

@@ -121,4 +121,9 @@ public class ZNewsActivity extends BaseActivity implements UserGoodView, UserGoo
                 break;
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

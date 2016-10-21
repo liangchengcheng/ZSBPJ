@@ -48,6 +48,9 @@ public class LatterEntityPresenterImpl implements LatterEntityPresenter {
                         String result = jsonObject.getString("result");
                         List<LatterEntity> weekDatas = GsonUtils.fromJsonArray(result, LatterEntity.class);
                         view.getDataSuccess(weekDatas);
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         view.getDataFail(message);
                     }
@@ -75,7 +78,10 @@ public class LatterEntityPresenterImpl implements LatterEntityPresenter {
                     // TODO: 16/7/24 具体的错误信息
                     if (status == 1) {
                         view.replaySuccess();
-                    } else {
+                    }else if (status == 2) {
+                        view.replayFail();
+                        view.checkToken();
+                    }  else {
                         view.replayFail();
                     }
                 } catch (Exception e) {

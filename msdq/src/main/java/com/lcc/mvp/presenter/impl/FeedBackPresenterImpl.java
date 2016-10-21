@@ -42,6 +42,9 @@ public class FeedBackPresenterImpl implements FeedBackPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FeekSuccess();
+                    } else if (status == 2) {
+                        view.FeekFail(message);
+                        view.checkToken();
                     } else {
                         view.FeekFail(message);
                     }

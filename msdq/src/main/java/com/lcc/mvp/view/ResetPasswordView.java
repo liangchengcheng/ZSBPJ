@@ -1,7 +1,7 @@
 package com.lcc.mvp.view;
 
 
-public interface ResetPasswordView {
+public interface ResetPasswordView extends BaseView{
 
     /**
      * 重置密码成功

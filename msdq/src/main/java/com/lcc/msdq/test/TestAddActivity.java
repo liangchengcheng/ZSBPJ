@@ -142,4 +142,9 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
             questionAdd.setOptions(Propertity.OPTIONS.QT);
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

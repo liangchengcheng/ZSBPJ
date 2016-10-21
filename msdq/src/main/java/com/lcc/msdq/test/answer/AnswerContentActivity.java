@@ -369,4 +369,9 @@ public class AnswerContentActivity extends BaseActivity implements View.OnClickL
             }
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

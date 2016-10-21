@@ -482,4 +482,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     }
 
 
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

@@ -45,9 +45,11 @@ public class ReplayPresenterImpl implements ReplayPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         String result = jsonObject.getString("result");
-                        List<Comments> weekDatas = GsonUtils.fromJsonArray(result,
-                                Comments.class);
+                        List<Comments> weekDatas = GsonUtils.fromJsonArray(result, Comments.class);
                         view.getDataSuccess(weekDatas);
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         view.getDataFail(message);
                     }

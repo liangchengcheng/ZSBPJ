@@ -9,7 +9,7 @@ import com.lcc.entity.LookArticle;
  * Date:         2015年11月21日15:28:25
  * Description:  MenuContentView
  */
-public interface LookMenuContentView {
+public interface LookMenuContentView extends BaseView{
 
     void Loading();
 

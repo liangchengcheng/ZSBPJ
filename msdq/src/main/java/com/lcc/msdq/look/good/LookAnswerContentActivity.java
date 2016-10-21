@@ -321,4 +321,9 @@ public class LookAnswerContentActivity extends BaseActivity implements View.OnCl
             }
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

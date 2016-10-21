@@ -322,4 +322,9 @@ public class ArticlesWebView extends BaseActivity implements LookMenuContentView
         }
 
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

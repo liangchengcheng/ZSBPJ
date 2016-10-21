@@ -11,7 +11,7 @@ import java.util.List;
  * Date:         2016年07月24日12:06:21
  * Description:  LatterEntityView
  */
-public interface LatterEntityView {
+public interface LatterEntityView extends BaseView{
 
     void getLoading();
 

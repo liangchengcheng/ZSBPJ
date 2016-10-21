@@ -53,7 +53,10 @@ public class LoginPresenterImpl implements LoginPresenter {
                         UserInfo userInfo = GsonUtils.changeGsonToBean(user_info, UserInfo.class);
                         DataManager.saveUserInfo(userInfo);
                         view.loginSuccess();
-                    } else {
+                    }else if (status == 2) {
+                        view.showLoginFail(message);
+                        view.checkToken();
+                    }  else {
                         view.showLoginFail(message);
                     }
                 } catch (Exception e) {

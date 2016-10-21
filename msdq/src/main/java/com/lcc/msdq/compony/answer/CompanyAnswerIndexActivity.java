@@ -303,4 +303,9 @@ public class CompanyAnswerIndexActivity extends BaseActivity implements CompanyA
         intent.putExtra(PhotoActivity.url, url);
         startActivity(intent);
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.lcc.App;
 import com.lcc.base.BaseActivity;
 import com.lcc.frame.data.DataManager;
@@ -161,4 +159,8 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
         mDialog.show();
     }
 
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

@@ -290,4 +290,9 @@ public class AnswerAddActivity extends BaseActivity implements View.OnClickListe
     public void onError(Throwable e) {
 
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

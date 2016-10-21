@@ -52,6 +52,8 @@ public class GetUserInfoPresenterImpl implements GetUserInfoPresenter {
                         String result = jsonObject.getString("result");
                         otherUserInfo userInfo = GsonUtils.changeGsonToBean(result, otherUserInfo.class);
                         view.getDataSuccess(userInfo);
+                    } else if (status == 2) {
+                        view.checkToken();
                     } else {
                         view.getDataFail(message);
                     }
@@ -82,6 +84,8 @@ public class GetUserInfoPresenterImpl implements GetUserInfoPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.GzSuccess();
+                    } else if (status == 2) {
+                        view.checkToken();
                     } else {
                         view.GzFail(message);
                     }
@@ -108,7 +112,9 @@ public class GetUserInfoPresenterImpl implements GetUserInfoPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.unGzSuccess();
-                    } else {
+                    }else if (status == 2) {
+                        view.checkToken();
+                    }  else {
                         view.unGzFail(message);
                     }
                 } catch (Exception e) {

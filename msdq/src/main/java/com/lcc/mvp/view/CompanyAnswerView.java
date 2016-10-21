@@ -5,7 +5,7 @@ import com.lcc.entity.CompanyAnswer;
 
 import java.util.List;
 
-public interface CompanyAnswerView {
+public interface CompanyAnswerView extends BaseView{
 
     void getLoading();
 

@@ -16,7 +16,6 @@ import java.io.File;
 import java.util.List;
 
 public class ComAnswerAddPresenterImpl implements ComAnswerAddPresenter {
-
     private ComAnswerAddView view;
     private ComAnswerAddModel model;
 
@@ -27,7 +26,7 @@ public class ComAnswerAddPresenterImpl implements ComAnswerAddPresenter {
 
     @Override
     public void ComAnswerAdd(AnswerAdd replay, List<File> files) {
-        model.ComAnswerAdd(replay,files, new ResultCallback<String>() {
+        model.ComAnswerAdd(replay, files, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.addFail();
@@ -40,6 +39,9 @@ public class ComAnswerAddPresenterImpl implements ComAnswerAddPresenter {
                     int status = jsonObject.getInt("status");
                     if (status == 1) {
                         view.addSuccess();
+                    } else if (status == 2) {
+                        view.addFail();
+                        view.checkToken();
                     } else {
                         view.addFail();
                     }

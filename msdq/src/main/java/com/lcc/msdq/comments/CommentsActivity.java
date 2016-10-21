@@ -306,4 +306,9 @@ public class CommentsActivity extends BaseActivity implements SendCommentButton.
                 break;
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

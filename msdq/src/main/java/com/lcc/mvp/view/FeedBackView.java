@@ -1,6 +1,6 @@
 package com.lcc.mvp.view;
 
-public interface FeedBackView {
+public interface FeedBackView extends BaseView{
 
     /**
      * 等待

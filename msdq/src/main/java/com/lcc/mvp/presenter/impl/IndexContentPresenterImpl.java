@@ -47,6 +47,9 @@ public class IndexContentPresenterImpl implements IndexContentPresenter {
                         JSONObject json_result = new JSONObject(result);
                         String content=json_result.getString("content");
                         view.getSuccess(content);
+                    } else if (status == 2) {
+                        view.getLoginFail(message);
+                        view.checkToken();
                     } else {
                         view.getLoginFail(message);
                     }

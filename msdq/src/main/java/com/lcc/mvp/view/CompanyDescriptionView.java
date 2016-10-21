@@ -5,7 +5,7 @@ import com.lcc.entity.TestEntity;
 
 import java.util.List;
 
-public interface CompanyDescriptionView {
+public interface CompanyDescriptionView extends BaseView{
 
     void getLoading();
 

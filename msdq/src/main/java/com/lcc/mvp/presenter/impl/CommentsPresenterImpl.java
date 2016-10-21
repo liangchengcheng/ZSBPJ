@@ -78,14 +78,18 @@ public class CommentsPresenterImpl implements CommentsPresenter {
                         } else {
                             view.loadMoreWeekDataSuccess(weekDatas);
                         }
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
+                        // TODO: 2016/10/18 此处需要修改
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
                         } else {
                             if (get_data) {
-                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                                view.getDataFail(message);
                             } else {
-                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                                view.refreshOrLoadFail(message);
                             }
                         }
                     }
@@ -131,6 +135,9 @@ public class CommentsPresenterImpl implements CommentsPresenter {
                     int status = jsonObject.getInt("status");
                     if (status == 1) {
                         view.replaySuccess();
+                    }else if (status == 2) {
+                        view.replayFail();
+                        view.checkToken();
                     } else {
                         view.replayFail();
                     }

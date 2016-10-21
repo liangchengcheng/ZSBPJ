@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="登录界面"
+            android:text="用户登录"
             android:textColor="#fff"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
@@ -67,7 +67,7 @@
                     android:text="登录界面"
                     android:textColor="#FFCC00"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                     />
             </RelativeLayout>
 
             <LinearLayout
@@ -75,7 +75,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:paddingLeft="50dp"
+                android:paddingLeft="30dp"
                 android:paddingRight="30dp">
 
                 <android.support.design.widget.TextInputLayout
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
-                android:paddingLeft="50dp"
+                android:paddingLeft="30dp"
                 android:paddingRight="30dp">
 
                 <android.support.design.widget.TextInputLayout
@@ -128,6 +128,8 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="25dp"
@@ -135,33 +137,42 @@
 
                 <Button
                     android:id="@+id/button_sign"
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bt_shape"
                     android:text="登录"
                     android:textColor="#d3d3d3" />
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/textView_reset_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:text="忘记密码"
-                android:textColor="#9a9a9a"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textView_create_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+            <RelativeLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="注册帐号"
-                android:textColor="#9a9a9a"
-                android:textSize="14sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_reset_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:text="忘记密码"
+                    android:padding="10dp"
+                    android:textColor="#9a9a9a"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/textView_create_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:padding="10dp"
+                    android:text="注册帐号"
+                    android:textColor="#9a9a9a"
+                    android:textSize="14sp" />
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

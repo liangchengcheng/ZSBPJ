@@ -11,7 +11,7 @@ import java.util.List;
  * Date:         2015年11月21日15:28:25
  * Description:  FabuComView
  */
-public interface FabuComView {
+public interface FabuComView extends BaseView {
 
     void getLoading();
 

@@ -9,7 +9,7 @@ import com.lcc.entity.otherUserInfo;
  * Date:         2015年11月21日15:28:25
  * Description:  GetUserInfoView(获取用户的简单的个人资料)
  */
-public interface GetUserInfoView {
+public interface GetUserInfoView extends BaseView{
 
     void getLoading();
 

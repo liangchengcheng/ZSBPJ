@@ -193,4 +193,9 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
                 break;
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

@@ -89,17 +89,20 @@ public class LookTestAnswerPresenterImpl implements LookTestAnswerPresenter {
                             } else {
                                 view.getDataEmpty();
                             }
-                        } else {
+                        }else {
                             view.loadMoreView(weekDatas);
                         }
+                    }  else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
                         } else {
                             if (get_data) {
-                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                                view.getDataFail(message);
                             } else {
-                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                                view.refreshOrLoadFail(message);
                             }
                         }
                     }
@@ -146,6 +149,9 @@ public class LookTestAnswerPresenterImpl implements LookTestAnswerPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    } else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -173,6 +179,9 @@ public class LookTestAnswerPresenterImpl implements LookTestAnswerPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    } else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }
@@ -206,6 +215,9 @@ public class LookTestAnswerPresenterImpl implements LookTestAnswerPresenter {
                         } else {
                             view.loadMoreUserListView(userListFavs);
                         }
+                    } else if (status == 2) {
+                        view.getUserListFail(message);
+                        view.checkToken();
                     } else {
                         view.getUserListFail(message);
                     }

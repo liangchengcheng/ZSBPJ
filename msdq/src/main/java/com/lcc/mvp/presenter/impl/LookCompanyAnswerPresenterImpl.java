@@ -92,6 +92,8 @@ public class LookCompanyAnswerPresenterImpl implements LookCompanyAnswerPresente
                         } else {
                             view.loadMoreView(weekDatas);
                         }
+                    } else if (status == 2) {
+                        view.checkToken();
                     } else {
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
@@ -146,6 +148,8 @@ public class LookCompanyAnswerPresenterImpl implements LookCompanyAnswerPresente
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    } else if (status == 2) {
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -173,6 +177,9 @@ public class LookCompanyAnswerPresenterImpl implements LookCompanyAnswerPresente
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    } else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }

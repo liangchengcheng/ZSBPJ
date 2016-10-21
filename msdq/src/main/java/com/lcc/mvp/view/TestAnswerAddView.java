@@ -6,7 +6,7 @@ package com.lcc.mvp.view;
  * Date:         2015年11月21日15:28:25
  * Description:  TestQuestionAddView
  */
-public interface TestAnswerAddView {
+public interface TestAnswerAddView extends BaseView{
 
     void adding();
 

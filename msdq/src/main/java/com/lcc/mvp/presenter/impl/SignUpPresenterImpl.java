@@ -51,6 +51,9 @@ public class SignUpPresenterImpl implements SignUpPresenter {
                         UserInfo userInfo = GsonUtils.changeGsonToBean(user_info, UserInfo.class);
                         DataManager.saveUserInfo(userInfo);
                         view.signUpSuccess();
+                    } else if (status == 2) {
+                        view.showSignUpError(message);
+                        view.checkToken();
                     } else {
                         view.showSignUpError(message);
                     }

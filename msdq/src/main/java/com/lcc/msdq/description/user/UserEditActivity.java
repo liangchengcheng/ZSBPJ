@@ -392,4 +392,9 @@ public class UserEditActivity extends BaseActivity implements View.OnClickListen
             finish();
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

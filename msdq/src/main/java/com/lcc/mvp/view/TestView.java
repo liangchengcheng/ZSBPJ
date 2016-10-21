@@ -4,7 +4,7 @@ import com.lcc.entity.TestEntity;
 
 import java.util.List;
 
-public interface TestView {
+public interface TestView extends BaseView {
 
     void getLoading();
 

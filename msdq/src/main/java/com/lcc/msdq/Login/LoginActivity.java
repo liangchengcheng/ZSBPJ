@@ -174,4 +174,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
         layout.setErrorEnabled(true);
         layout.setError(getString(msgId));
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

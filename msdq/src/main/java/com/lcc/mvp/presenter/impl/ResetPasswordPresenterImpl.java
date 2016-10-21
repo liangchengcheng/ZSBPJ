@@ -49,6 +49,9 @@ public class ResetPasswordPresenterImpl implements ResetPasswordPresenter {
                             SharePreferenceUtil.setUserTk(result);
                         }
                         view.showSuccess();
+                    } else if (status == 2) {
+                        view.showResetError(message);
+                        view.checkToken();
                     } else {
                         view.showResetError(message);
                     }

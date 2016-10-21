@@ -1,6 +1,6 @@
 package com.lcc.mvp.view;
 
-public interface SignUpView {
+public interface SignUpView extends BaseView{
 
     void showVerifyError(String errorMsg);
 

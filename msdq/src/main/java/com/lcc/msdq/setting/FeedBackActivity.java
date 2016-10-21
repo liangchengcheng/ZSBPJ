@@ -90,4 +90,9 @@ public class FeedBackActivity extends BaseActivity implements FeedBackView, View
             mDialog.dismiss();
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

@@ -2,6 +2,7 @@ package com.lcc.mvp.presenter.impl;
 
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 
 import com.lcc.entity.Answer;
 import com.lcc.entity.Article;
@@ -88,14 +89,17 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                         } else {
                             view.loadMoreView(weekDatas);
                         }
-                    } else {
+                    }else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
+                    }  else {
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
                         } else {
                             if (get_data) {
-                                view.getDataFail(ApiException.getApiExceptionMessage(message));
+                                view.getDataFail(message);
                             } else {
-                                view.refreshOrLoadFail(ApiException.getApiExceptionMessage(message));
+                                view.refreshOrLoadFail(message);
                             }
                         }
                     }
@@ -142,6 +146,9 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    } else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -169,6 +176,9 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    } else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }
@@ -202,7 +212,10 @@ public class TestAnswerPresenterImpl implements TestAnswerPresenter {
                         } else {
                             view.loadMoreUserListView(userListFavs);
                         }
-                    } else {
+                    }else if (status == 2) {
+                        view.getUserListFail(message);
+                        view.checkToken();
+                    }  else {
                       view.getUserListFail(message);
                     }
                 } catch (Exception e) {

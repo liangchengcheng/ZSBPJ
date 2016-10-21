@@ -2,7 +2,7 @@ package com.lcc.mvp.view;
 
 import com.lcc.entity.NewsInfo;
 
-public interface NewsInfoView {
+public interface NewsInfoView extends BaseView{
 
     /**
      * 等待

@@ -211,4 +211,9 @@ public class FlowIndex extends BaseActivity implements FlowView, SwipeRefreshLay
                 break;
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

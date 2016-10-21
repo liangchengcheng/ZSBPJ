@@ -1,6 +1,5 @@
 package com.lcc.mvp.presenter.impl;
 
-import com.lcc.entity.Answer;
 import com.lcc.entity.AnswerContent;
 import com.lcc.entity.CompanyAnswer;
 import com.lcc.entity.FavAndGoodState;
@@ -9,14 +8,11 @@ import com.lcc.mvp.model.ComAnswerContentModel;
 import com.lcc.mvp.presenter.ComAnswerContentPresenter;
 import com.lcc.mvp.view.ComAnswerContentView;
 import com.squareup.okhttp.Request;
-
 import org.json.JSONObject;
-
 import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 
 public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter {
-
     private ComAnswerContentModel model;
     private ComAnswerContentView view;
 
@@ -42,7 +38,10 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     if (status == 1 && !result.equals("[]")) {
                         FavAndGoodState fav = GsonUtils.changeGsonToBean(result, FavAndGoodState.class);
                         view.getStateSuccess(fav);
-                    } else {
+                    }else if (status == 2) {
+                        view.checkToken();
+                        view.getStateFail("获取状态失败");
+                    }  else {
                         view.getStateFail("获取状态失败");
                     }
                 } catch (Exception e) {
@@ -69,6 +68,9 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    }else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -96,6 +98,9 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    }else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }
@@ -127,7 +132,10 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                         AnswerContent answerContent = GsonUtils
                                 .changeGsonToBean(result, AnswerContent.class);
                         view.getDataSuccess(answerContent);
-                    } else {
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
+                    }else {
                         view.getDataFail(message);
                     }
                 } catch (Exception e) {
@@ -155,7 +163,10 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.GoodSuccess();
-                    } else {
+                    } else if (status == 2) {
+                        view.GoodFail(message);
+                        view.checkToken();
+                    }else {
                         view.GoodFail(message);
                     }
                 } catch (Exception e) {
@@ -182,7 +193,10 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnGoodSuccess();
-                    } else {
+                    } else if (status == 2) {
+                        view.UnGoodFail(message);
+                        view.checkToken();
+                    }else {
                         view.UnGoodFail(message);
                     }
                 } catch (Exception e) {

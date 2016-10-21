@@ -159,4 +159,9 @@ public class LetterDetailsActivity extends BaseActivity implements LatterEntityV
 
         return true;
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

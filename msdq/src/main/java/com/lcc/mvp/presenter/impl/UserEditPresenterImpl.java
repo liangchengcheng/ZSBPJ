@@ -46,7 +46,10 @@ public class UserEditPresenterImpl implements UserEditPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UserEditSuccess();
-                    } else {
+                    }else if (status == 2) {
+                        view.UserEditFail(message);
+                        view.checkToken();
+                    }  else {
                         view.UserEditFail(message);
                     }
                 } catch (Exception e) {

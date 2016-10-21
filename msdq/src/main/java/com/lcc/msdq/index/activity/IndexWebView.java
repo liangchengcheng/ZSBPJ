@@ -208,4 +208,9 @@ public class IndexWebView extends BaseActivity implements IndexContentView, Tool
         }
         return true;
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

@@ -1,6 +1,6 @@
 package com.lcc.mvp.view;
 
-public interface UserEditView {
+public interface UserEditView extends BaseView{
 
     /**
      * 提交信息等待

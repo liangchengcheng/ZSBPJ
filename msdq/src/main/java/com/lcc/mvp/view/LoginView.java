@@ -1,6 +1,6 @@
 package com.lcc.mvp.view;
 
-public interface LoginView {
+public interface LoginView extends BaseView{
 
     /**
      * 等待

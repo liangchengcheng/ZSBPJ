@@ -18,8 +18,10 @@ import com.lapism.searchview.view.SearchCodes;
 import com.lapism.searchview.view.SearchView;
 import com.lcc.adapter.CompanyAdapter;
 import com.lcc.entity.CompanyDescription;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
 import com.lcc.msdq.area.AreaDialogFragment;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.choice.AreaSelectActivity;
 import com.lcc.msdq.choice.ChoiceAreaSelectActivity;
 import com.lcc.msdq.compony.question.CompanyContentActivity;
@@ -265,5 +267,14 @@ public class CompanyIndexFragment extends S_RefreshAndLoadFragment implements Se
     @Override
     public void onStringInputComplete(String message) {
 
+    }
+
+    @Override
+    public void checkToken() {
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
     }
 }

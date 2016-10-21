@@ -14,8 +14,10 @@ import com.lcc.adapter.JSAdapter;
 import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavEntity;
 import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.index.article.IndexMenuWebView;
 import com.lcc.msdq.look.fav.ArticlesWebView;
 import com.lcc.msdq.look.fav.LookComQuestionIndexActivity;
@@ -28,6 +30,8 @@ import com.lcc.mvp.presenter.impl.JSPresenterImpl;
 import com.lcc.mvp.view.FavView;
 import com.lcc.mvp.view.JSView;
 import com.lcc.utils.CoCoinToast;
+import com.lcc.utils.SharePreferenceUtil;
+
 import java.util.List;
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
@@ -208,4 +212,12 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
         mPresenter.getData(currentPage, type);
     }
 
+    @Override
+    public void checkToken() {
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
+    }
 }

@@ -7,7 +7,7 @@ import com.lcc.entity.UserListFav;
 
 import java.util.List;
 
-public interface TestAnswerView {
+public interface TestAnswerView extends BaseView {
 
     void getLoading();
 

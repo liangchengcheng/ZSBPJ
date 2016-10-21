@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by lcc on 16/5/5.
  */
-public interface CompanyView {
+public interface CompanyView extends BaseView{
     /**
      * 重置密码成功
      */

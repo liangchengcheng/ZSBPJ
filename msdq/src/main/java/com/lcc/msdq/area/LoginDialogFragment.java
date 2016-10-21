@@ -108,4 +108,8 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 		}
 	}
 
+	@Override
+	public void checkToken() {
+
+	}
 }

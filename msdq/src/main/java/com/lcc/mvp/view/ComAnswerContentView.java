@@ -3,7 +3,7 @@ package com.lcc.mvp.view;
 import com.lcc.entity.AnswerContent;
 import com.lcc.entity.FavAndGoodState;
 
-public interface ComAnswerContentView {
+public interface ComAnswerContentView extends BaseView{
 
     void getLoading();
 

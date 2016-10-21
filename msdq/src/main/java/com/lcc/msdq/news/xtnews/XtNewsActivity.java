@@ -103,4 +103,9 @@ public class XtNewsActivity extends BaseActivity implements XtNewsAdapter.OnItem
                 break;
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

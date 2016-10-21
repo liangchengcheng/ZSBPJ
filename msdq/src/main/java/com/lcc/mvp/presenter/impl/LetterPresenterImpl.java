@@ -47,6 +47,9 @@ public class LetterPresenterImpl implements LetterPresenter {
                         String result = jsonObject.getString("result");
                         List<Letter> weekDatas = GsonUtils.fromJsonArray(result, Letter.class);
                         view.getDataSuccess(weekDatas);
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         view.getDataFail(message);
                     }

@@ -8,7 +8,7 @@ import com.lcc.entity.ArticleContent;
  * Date:         2015年11月21日15:28:25
  * Description:  MenuContentView
  */
-public interface MenuContentView {
+public interface MenuContentView extends BaseView {
 
     void Loading();
 

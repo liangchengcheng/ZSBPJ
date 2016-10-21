@@ -45,6 +45,9 @@ public class LookMenuContentPresenterImpl implements LookMenuContentPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    } else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -72,6 +75,8 @@ public class LookMenuContentPresenterImpl implements LookMenuContentPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    } else if (status == 2) {
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }
@@ -113,7 +118,9 @@ public class LookMenuContentPresenterImpl implements LookMenuContentPresenter {
                         }else {
                             view.setFavState(false);
                         }
-                    } else {
+                    }else if (status == 2) {
+                        view.checkToken();
+                    }  else {
                         view.getFail(message);
                     }
                 } catch (Exception e) {

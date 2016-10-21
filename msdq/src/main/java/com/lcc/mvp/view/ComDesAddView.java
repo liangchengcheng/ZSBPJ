@@ -6,7 +6,7 @@ package com.lcc.mvp.view;
  * Date:         2015年11月21日15:28:25
  * Description:  ComQuesAddView
  */
-public interface ComDesAddView {
+public interface ComDesAddView extends BaseView{
 
     void adding();
 

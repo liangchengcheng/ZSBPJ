@@ -28,13 +28,13 @@ public class TestPresenterImpl implements TestPresenter {
     }
 
     private void loadData(final int page, final String options, final String startTime,
-                          final String endTime, String orders,final boolean get_data) {
+                          final String endTime, String orders, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
 
         final long current_time = TimeUtils.getCurrentTime();
-        model.getTestList(page, options, startTime, endTime,orders, new ResultCallback<String>() {
+        model.getTestList(page, options, startTime, endTime, orders, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -72,6 +72,9 @@ public class TestPresenterImpl implements TestPresenter {
                         } else {
                             view.loadMoreView(weekDatas);
                         }
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         if (message.equals("数据为空") && page == 1) {
                             view.getDataEmpty();
@@ -96,17 +99,17 @@ public class TestPresenterImpl implements TestPresenter {
     }
 
     @Override
-    public void getData(int page, String options, String startTime, String endTime,String orders) {
-        loadData(page, options, startTime, endTime,orders, true);
+    public void getData(int page, String options, String startTime, String endTime, String orders) {
+        loadData(page, options, startTime, endTime, orders, true);
     }
 
     @Override
-    public void loadMore(int page, String options, String startTime, String endTime,String orders) {
-        loadData(page, options, startTime, endTime,orders, false);
+    public void loadMore(int page, String options, String startTime, String endTime, String orders) {
+        loadData(page, options, startTime, endTime, orders, false);
     }
 
     @Override
-    public void refresh(int page, String options, String startTime, String endTime,String orders) {
-        loadData(1, options, startTime, endTime,orders, false);
+    public void refresh(int page, String options, String startTime, String endTime, String orders) {
+        loadData(1, options, startTime, endTime, orders, false);
     }
 }

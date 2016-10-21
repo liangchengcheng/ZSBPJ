@@ -13,7 +13,6 @@ import zsbpj.lccpj.frame.ApiException;
 import zsbpj.lccpj.utils.GsonUtils;
 
 public class MenuContentPresenterImpl implements MenuContentPresenter {
-
     private MenuContentView view;
     private MenuContentModel model;
 
@@ -44,7 +43,10 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
                         } else {
                             view.getFail("文章不存在");
                         }
-                    } else {
+                    }else if (status == 2) {
+                        view.getFail(message);
+                        view.checkToken();
+                    }  else {
                         view.getFail(message);
                     }
                 } catch (Exception e) {
@@ -70,7 +72,10 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
-                    } else {
+                    }else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
+                    }  else {
                         view.FavFail(message);
                     }
                 } catch (Exception e) {
@@ -97,6 +102,9 @@ public class MenuContentPresenterImpl implements MenuContentPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    } else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }

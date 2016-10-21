@@ -107,4 +107,9 @@ public class ReplayActivity extends BaseActivity implements ReplayView,
                 break;
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

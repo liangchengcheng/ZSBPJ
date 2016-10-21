@@ -330,4 +330,9 @@ public class CompanyAnswerWebView extends BaseActivity implements View.OnClickLi
             floatingCollect.setLabelText("收藏");
         }
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

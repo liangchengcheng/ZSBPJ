@@ -351,4 +351,9 @@ public class LookComQuestionIndexActivity extends BaseActivity implements LookCo
         intent.putExtra(PhotoActivity.url, url);
         startActivity(intent);
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

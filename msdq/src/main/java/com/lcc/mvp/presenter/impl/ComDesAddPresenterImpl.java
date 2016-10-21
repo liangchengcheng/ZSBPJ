@@ -41,6 +41,9 @@ public class ComDesAddPresenterImpl implements ComDesAddPresenter {
                     int status = jsonObject.getInt("status");
                     if (status == 1) {
                         view.addSuccess();
+                    } else if (status == 2) {
+                        view.addFail();
+                        view.checkToken();
                     } else {
                         view.addFail();
                     }

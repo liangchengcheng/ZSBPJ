@@ -45,6 +45,9 @@ public class LookPresenterImpl implements LookPresenter {
                     if (status == 1 && !result.equals("[]")) {
                         FavAndGoodState fav = GsonUtils.changeGsonToBean(result, FavAndGoodState.class);
                         view.getStateSuccess(fav);
+                    } else if (status == 2) {
+                        view.getStateFail("获取状态失败");
+                        view.checkToken();
                     } else {
                         view.getStateFail("获取状态失败");
                     }
@@ -73,6 +76,9 @@ public class LookPresenterImpl implements LookPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.FavSuccess();
+                    } else if (status == 2) {
+                        view.FavFail(message);
+                        view.checkToken();
                     } else {
                         view.FavFail(message);
                     }
@@ -100,6 +106,9 @@ public class LookPresenterImpl implements LookPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnFavSuccess();
+                    } else if (status == 2) {
+                        view.UnFavFail(message);
+                        view.checkToken();
                     } else {
                         view.UnFavFail(message);
                     }
@@ -131,7 +140,10 @@ public class LookPresenterImpl implements LookPresenter {
                         AnswerContent answerContent = GsonUtils
                                 .changeGsonToBean(result, AnswerContent.class);
                         view.getDataSuccess(answerContent);
-                    } else {
+                    }else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
+                    }  else {
                         view.getDataFail(message);
                     }
                 } catch (Exception e) {
@@ -158,6 +170,9 @@ public class LookPresenterImpl implements LookPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.GoodSuccess();
+                    } else if (status == 2) {
+                        view.GoodFail(message);
+                        view.checkToken();
                     } else {
                         view.GoodFail(message);
                     }
@@ -185,6 +200,9 @@ public class LookPresenterImpl implements LookPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         view.UnGoodSuccess();
+                    } else if (status == 2) {
+                        view.UnGoodFail(message);
+                        view.checkToken();
                     } else {
                         view.UnGoodFail(message);
                     }

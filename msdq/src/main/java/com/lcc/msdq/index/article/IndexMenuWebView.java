@@ -300,4 +300,9 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
         }
 
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

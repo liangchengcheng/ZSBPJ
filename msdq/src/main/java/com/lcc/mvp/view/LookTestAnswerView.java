@@ -6,7 +6,7 @@ import com.lcc.entity.UserListFav;
 
 import java.util.List;
 
-public interface LookTestAnswerView {
+public interface LookTestAnswerView extends BaseView{
 
     void getLoading();
 

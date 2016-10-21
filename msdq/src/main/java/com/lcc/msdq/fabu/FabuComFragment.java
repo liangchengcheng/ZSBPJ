@@ -13,8 +13,10 @@ import com.lcc.adapter.FabuComAdapter;
 import com.lcc.adapter.FavAdapter;
 import com.lcc.entity.CompanyTest;
 import com.lcc.entity.FavEntity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.frame.fragment.base.BaseLazyLoadFragment;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.compony.answer.CompanyAnswerIndexActivity;
 import com.lcc.mvp.presenter.FabuPresenter;
 import com.lcc.mvp.presenter.FavPresenter;
@@ -22,6 +24,7 @@ import com.lcc.mvp.presenter.impl.FabuComPresenterImpl;
 import com.lcc.mvp.presenter.impl.FavPresenterImpl;
 import com.lcc.mvp.view.FabuComView;
 import com.lcc.mvp.view.FavView;
+import com.lcc.utils.SharePreferenceUtil;
 
 import java.util.List;
 
@@ -183,5 +186,14 @@ public class FabuComFragment extends BaseLazyLoadFragment  implements
                 mPresenter.refresh(currentPage,type);
             }
         }, 500);
+    }
+
+    @Override
+    public void checkToken() {
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
     }
 }

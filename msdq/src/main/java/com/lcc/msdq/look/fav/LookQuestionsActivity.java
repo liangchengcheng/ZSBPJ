@@ -460,4 +460,9 @@ public class LookQuestionsActivity extends BaseActivity implements LookTestAnswe
             }
         }, delay);
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

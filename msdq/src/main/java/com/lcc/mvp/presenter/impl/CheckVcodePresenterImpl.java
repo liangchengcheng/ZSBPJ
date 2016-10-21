@@ -12,8 +12,8 @@ import org.json.JSONObject;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
- * Description:  开始或者结束轮训器
+ * Date:         2016年10月18日21:34:19
+ * Description:  验证码的校验
  */
 public class CheckVcodePresenterImpl implements CheckVcodePresenter {
     private CheckVcodeView view;
@@ -35,14 +35,12 @@ public class CheckVcodePresenterImpl implements CheckVcodePresenter {
             @Override
             public void onResponse(String response) {
                 try {
-
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
                     String message = jsonObject.getString("message");
-
                     if (status == 1) {
                         view.CheckVerifyCodeSuccess();
-                    } else {
+                    }  else {
                         view.CheckVerifyCodeError(message);
                     }
                 } catch (Exception e) {

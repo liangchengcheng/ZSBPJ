@@ -45,10 +45,12 @@ public class UserGoodPresenterImpl implements UserGoodPresenter {
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         String result = jsonObject.getString("result");
-                        List<UserGood> weekDatas = GsonUtils.fromJsonArray(result,
-                                UserGood.class);
+                        List<UserGood> weekDatas = GsonUtils.fromJsonArray(result, UserGood.class);
                         view.getDataSuccess(weekDatas);
-                    } else {
+                    }else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
+                    }  else {
                         view.getDataFail(message);
                     }
                 } catch (Exception e) {

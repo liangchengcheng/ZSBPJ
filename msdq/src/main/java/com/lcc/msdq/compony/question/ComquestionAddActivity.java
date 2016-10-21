@@ -298,4 +298,9 @@ public class ComquestionAddActivity extends BaseActivity implements View.OnClick
     private void compressWithLs(List<File> files) {
         Luban.get(this).load(files.get(0)).putGear(Luban.THIRD_GEAR).setCompressListener(this).launch();
     }
+
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

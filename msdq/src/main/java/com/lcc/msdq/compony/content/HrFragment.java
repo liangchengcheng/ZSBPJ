@@ -1,6 +1,5 @@
 package com.lcc.msdq.compony.content;
 
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -16,7 +15,6 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.recyclerview.RefreshAndLoadFragment;
 
 public class HrFragment extends RefreshAndLoadFragment implements HrAdapter.OnItemClickListener{
-
 
     private HrAdapter mAdapter;
     static final int ACTION_NONE = 0;

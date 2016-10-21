@@ -54,6 +54,9 @@ public class IndexPresenterImpl implements IndexPresenter {
                     List<ActivityEntity> userInfo = GsonUtils.fromJsonArray(result, ActivityEntity.class);
                     if (status == 1) {
                         view.getSuccess(userInfo);
+                    } else if (status == 2) {
+                        view.getFail(message);
+                        view.checkToken();
                     } else {
                         view.getFail(message);
                     }
@@ -116,6 +119,8 @@ public class IndexPresenterImpl implements IndexPresenter {
                         } else {
                             view.loadMoreWeekDataSuccess(weekDatas);
                         }
+                    } else if (status == 2) {
+                        view.checkToken();
                     } else {
                         view.getWeekDataFail(message);
                     }

@@ -15,12 +15,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
+import com.lcc.msdq.area.LoginDialogFragment;
+import com.lcc.mvp.view.BaseView;
 import com.lcc.utils.NetWorkUtils;
 import com.lcc.utils.PreferenceUtils;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.utils.SystemBarTintManager;
 import com.lcc.utils.ThemeUtils;
 
+import de.greenrobot.event.EventBus;
+import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
 /**
@@ -208,5 +214,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         toasts.setDefaultTextColor(Color.WHITE);
         toasts.show("取消成功", R.layout.unfav_toast_item, R.id.content_toast, BaseActivity.this);
     }
+
+    public void getToken(){
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getFragmentManager(), "loginDialog");
+    }
+
 
 }

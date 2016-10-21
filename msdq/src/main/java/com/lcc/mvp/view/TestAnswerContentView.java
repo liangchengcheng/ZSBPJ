@@ -4,7 +4,7 @@ package com.lcc.mvp.view;
 import com.lcc.entity.AnswerContent;
 import com.lcc.entity.FavAndGoodState;
 
-public interface TestAnswerContentView {
+public interface TestAnswerContentView extends BaseView{
 
     void getLoading();
 

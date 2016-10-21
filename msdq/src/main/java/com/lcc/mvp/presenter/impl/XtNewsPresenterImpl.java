@@ -54,6 +54,9 @@ public class XtNewsPresenterImpl implements XtNewsPresenter {
                         String result = jsonObject.getString("result");
                         List<XtNewsEntity> weekDatas = GsonUtils.fromJsonArray(result, XtNewsEntity.class);
                         view.getDataSuccess(weekDatas);
+                    } else if (status == 2) {
+                        view.getDataFail(message);
+                        view.checkToken();
                     } else {
                         view.getDataFail(message);
                     }

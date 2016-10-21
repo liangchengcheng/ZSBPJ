@@ -138,4 +138,8 @@ public class NewsIndex extends BaseActivity implements View.OnClickListener, New
         }
     }
 
+    @Override
+    public void checkToken() {
+        getToken();
+    }
 }

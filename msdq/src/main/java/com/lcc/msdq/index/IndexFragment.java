@@ -37,6 +37,7 @@ import com.lcc.msdq.news.NewsIndex;
 import com.lcc.mvp.presenter.IndexPresenter;
 import com.lcc.mvp.presenter.impl.IndexPresenterImpl;
 import com.lcc.mvp.view.IndexView;
+import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.FullyLinearLayoutManager;
 import com.lcc.view.loadview.LoadingLayout;
 import com.lcc.view.menu.GuillotineAnimation;
@@ -267,5 +268,14 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void checkToken() {
+        DataManager.deleteAllUser();
+        SharePreferenceUtil.setUserTk("");
+        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getActivity().getFragmentManager(), "loginDialog");
     }
 }

@@ -182,6 +182,11 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         }
     }
 
+    @Override
+    public void checkToken() {
+        getToken();
+    }
+
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();

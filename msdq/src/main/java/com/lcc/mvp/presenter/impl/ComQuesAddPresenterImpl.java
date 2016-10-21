@@ -20,7 +20,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class ComQuesAddPresenterImpl implements ComQuesAddPresenter {
-
     private ComQuesAddView view;
     private ComQuesAddModel model;
 
@@ -44,7 +43,10 @@ public class ComQuesAddPresenterImpl implements ComQuesAddPresenter {
                     int status = jsonObject.getInt("status");
                     if (status == 1) {
                         view.addSuccess();
-                    } else {
+                    }else if (status == 2) {
+                        view.addFail();
+                        view.checkToken();
+                    }  else {
                         view.addFail();
                     }
                 } catch (Exception e) {
