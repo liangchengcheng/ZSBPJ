@@ -57,6 +57,19 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
     private RecyclerView mRecyclerView;
     private FavPresenter mPresenter;
     private String type = "文章";
+    private boolean isOpen=false;
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isOpen=true;
+        }else {
+            if (isOpen) {
+                isOpen = false;
+            }
+        }
+    }
 
     public static ArticleFragment newInstance(String type) {
         ArticleFragment mFragment = new ArticleFragment();
@@ -214,10 +227,12 @@ public class ArticleFragment extends BaseLazyLoadFragment implements SwipeRefres
 
     @Override
     public void checkToken() {
-        DataManager.deleteAllUser();
-        SharePreferenceUtil.setUserTk("");
-        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
-        LoginDialogFragment dialog = new LoginDialogFragment();
-        dialog.show(getActivity().getFragmentManager(), "loginDialog");
+        if (isOpen){
+            DataManager.deleteAllUser();
+            SharePreferenceUtil.setUserTk("");
+            FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(getActivity().getFragmentManager(), "loginDialog");
+        }
     }
 }

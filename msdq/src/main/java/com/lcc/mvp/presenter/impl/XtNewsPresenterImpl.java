@@ -26,7 +26,6 @@ import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.utils.TimeUtils;
 
 public class XtNewsPresenterImpl implements XtNewsPresenter {
-
     private XtNewsView view;
     private XtNewsModel model;
 

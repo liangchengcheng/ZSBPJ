@@ -6,6 +6,7 @@ import android.view.View;
 public abstract class BaseLazyLoadFragment extends BaseFragment {
     //这里暂时取消第一次加载的标记
     private boolean isFirstLoad = true;
+    private boolean hasStarted = false;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -22,14 +23,17 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
 //        }
 //    }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
 //        if (isVisibleToUser) {
-//            onVisible();
+//            hasStarted=true;
+//        }else {
+//            if (hasStarted) {
+//                hasStarted = false;
+//            }
 //        }
-    }
+//    }
 //
 //    private void onVisible() {
 //        if (isFirstLoad && isPrepare) {

@@ -37,8 +37,8 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
  * Date:         2015年11月21日15:28:25
  * Description:  ArticleFragment
  */
-public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefreshLayout.OnRefreshListener,
-        FabuTestView,FabuTestAdapter.OnItemClickListener{
+public class FabuTestFragment extends BaseLazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener,
+        FabuTestView, FabuTestAdapter.OnItemClickListener {
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
     protected final static int STATE_NORMAL = 1;
@@ -50,7 +50,20 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
     private FabuPresenter mPresenter;
-    private String type="面试感想";
+    private String type = "面试感想";
+    private boolean isOpen = false;
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isOpen = true;
+        } else {
+            if (isOpen) {
+                isOpen = false;
+            }
+        }
+    }
 
     public static FabuTestFragment newInstance() {
         FabuTestFragment mFragment = new FabuTestFragment();
@@ -76,6 +89,7 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
         initRefreshView(view);
         initRecycleView(view);
     }
+
     private void initRefreshView(View view) {
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
@@ -83,7 +97,7 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
     }
 
     private void initRecycleView(View view) {
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -100,7 +114,7 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
                     adapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,type);
+                    mPresenter.loadMore(currentPage, type);
                 }
             }
         });
@@ -108,8 +122,8 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
 
     @Override
     public void initData() {
-        currentPage=1;
-        mPresenter.getData(currentPage,type);
+        currentPage = 1;
+        mPresenter.getData(currentPage, type);
     }
 
     @Override
@@ -142,7 +156,7 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
         if (entities != null && entities.size() > 0) {
             adapter.bind(entities);
             showContent(true);
-        }else {
+        } else {
             showEmpty(true);
         }
         mSwipeRefreshWidget.setRefreshing(false);
@@ -183,7 +197,7 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,type);
+                mPresenter.refresh(currentPage, type);
             }
         }, 500);
 
@@ -191,10 +205,18 @@ public class FabuTestFragment extends BaseLazyLoadFragment  implements SwipeRefr
 
     @Override
     public void checkToken() {
-        DataManager.deleteAllUser();
-        SharePreferenceUtil.setUserTk("");
-        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
-        LoginDialogFragment dialog = new LoginDialogFragment();
-        dialog.show(getActivity().getFragmentManager(), "loginDialog");
+        if (isOpen) {
+            DataManager.deleteAllUser();
+            SharePreferenceUtil.setUserTk("");
+            FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(getActivity().getFragmentManager(), "loginDialog");
+        }
+    }
+
+    @Override
+    public void onReloadClicked() {
+        super.onReloadClicked();
+        initData();
     }
 }

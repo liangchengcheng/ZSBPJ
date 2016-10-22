@@ -129,8 +129,7 @@ public class ComAnswerContentPresenterImpl implements ComAnswerContentPresenter 
                     String message = jsonObject.getString("message");
                     if (status == 1) {
                         String result = jsonObject.getString("result");
-                        AnswerContent answerContent = GsonUtils
-                                .changeGsonToBean(result, AnswerContent.class);
+                        AnswerContent answerContent = GsonUtils.changeGsonToBean(result, AnswerContent.class);
                         view.getDataSuccess(answerContent);
                     } else if (status == 2) {
                         view.getDataFail(message);

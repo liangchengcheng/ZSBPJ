@@ -1,28 +1,15 @@
 package com.lcc.mvp.presenter.impl;
 
-import android.os.Handler;
 import android.text.TextUtils;
-
-import com.lcc.entity.CompanyTest;
 import com.lcc.frame.net.okhttp.callback.ResultCallback;
 import com.lcc.mvp.model.ChoiceTypeModel;
-import com.lcc.mvp.model.JSModel;
 import com.lcc.mvp.presenter.ChoiceTypePresenter;
-import com.lcc.mvp.presenter.JSPresenter;
 import com.lcc.mvp.view.ChoiceTypeView;
-import com.lcc.mvp.view.JSView;
 import com.squareup.okhttp.Request;
-
 import org.json.JSONObject;
-
-import java.util.List;
-
 import zsbpj.lccpj.frame.ApiException;
-import zsbpj.lccpj.utils.GsonUtils;
-import zsbpj.lccpj.utils.TimeUtils;
 
 public class ChoicePresenterImpl implements ChoiceTypePresenter {
-
     private ChoiceTypeView view;
     private ChoiceTypeModel model;
 
@@ -53,7 +40,7 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
                             view.getDataEmpty();
                         }
                     } else {
-                        view.getDataFail(ApiException.getApiExceptionMessage(message));
+                        view.getDataFail(message);
                     }
                 } catch (Exception e) {
                     view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -85,7 +72,7 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
                             view.getDataEmpty();
                         }
                     } else {
-                        view.getDataFail(ApiException.getApiExceptionMessage(message));
+                        view.getDataFail(message);
                     }
                 } catch (Exception e) {
                     view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -124,7 +111,7 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
                     if (status == 1) {
                         view.setDataSuccess();
                     } else {
-                        view.setDataFail(ApiException.getApiExceptionMessage(message));
+                        view.setDataFail(message);
                     }
                 } catch (Exception e) {
                     view.setDataFail(ApiException.getApiExceptionMessage(e.getMessage()));

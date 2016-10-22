@@ -52,6 +52,19 @@ public class FabuComFragment extends BaseLazyLoadFragment  implements
     private RecyclerView mRecyclerView;
     private FabuPresenter mPresenter;
     private String type="面试感想";
+    private boolean isOpen=false;
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isOpen=true;
+        }else {
+            if (isOpen) {
+                isOpen = false;
+            }
+        }
+    }
 
     public static FabuComFragment newInstance() {
         FabuComFragment mFragment = new FabuComFragment();
@@ -142,9 +155,11 @@ public class FabuComFragment extends BaseLazyLoadFragment  implements
     public void refreshDataSuccess(List<CompanyTest> entities) {
         if (entities != null && entities.size() > 0) {
             adapter.bind(entities);
+        }else {
+            showEmpty(true);
         }
         mSwipeRefreshWidget.setRefreshing(false);
-        showContent(true);
+
     }
 
     @Override
@@ -190,10 +205,18 @@ public class FabuComFragment extends BaseLazyLoadFragment  implements
 
     @Override
     public void checkToken() {
-        DataManager.deleteAllUser();
-        SharePreferenceUtil.setUserTk("");
-        FrameManager.getInstance().toastPrompt("身份失效请重现登录");
-        LoginDialogFragment dialog = new LoginDialogFragment();
-        dialog.show(getActivity().getFragmentManager(), "loginDialog");
+        if (isOpen){
+            DataManager.deleteAllUser();
+            SharePreferenceUtil.setUserTk("");
+            FrameManager.getInstance().toastPrompt("身份失效请重现登录");
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(getActivity().getFragmentManager(), "loginDialog");
+        }
+    }
+
+    @Override
+    public void onReloadClicked() {
+        super.onReloadClicked();
+        initData();
     }
 }

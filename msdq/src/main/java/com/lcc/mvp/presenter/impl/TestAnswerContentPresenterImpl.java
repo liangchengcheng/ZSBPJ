@@ -143,18 +143,13 @@ public class TestAnswerContentPresenterImpl implements TestAnswerContentPresente
                     //这个是内容
                     if (status == 1) {
                         String result = jsonObject.getString("result");
-                        AnswerContent answerContent = GsonUtils
-                                .changeGsonToBean(result, AnswerContent.class);
+                        AnswerContent answerContent = GsonUtils.changeGsonToBean(result, AnswerContent.class);
                         view.getDataSuccess(answerContent);
-                    } else {
-                        view.getDataFail(message);
-                    }
 
-                    //这个是获取是否收藏
-                    if (status == 1 && !fav_str.equals("[]")) {
                         FavAndGoodState fav = GsonUtils.changeGsonToBean(fav_str, FavAndGoodState.class);
                         view.getStateSuccess(fav);
                     } else {
+                        view.getDataFail(message);
                         view.getStateFail("获取状态失败");
                     }
                 } catch (Exception e) {

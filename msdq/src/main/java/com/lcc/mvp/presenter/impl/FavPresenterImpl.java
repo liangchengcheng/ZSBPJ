@@ -82,14 +82,10 @@ public class FavPresenterImpl implements FavPresenter {
                         view.getDataFail(message);
                         view.checkToken();
                     } else {
-                        if (message.equals("数据为空") && page == 1) {
-                            view.getDataEmpty();
+                        if (get_data) {
+                            view.getDataFail(message);
                         } else {
-                            if (get_data) {
-                                view.getDataFail(message);
-                            } else {
-                                view.refreshOrLoadFail(message);
-                            }
+                            view.refreshOrLoadFail(message);
                         }
                     }
                 } catch (Exception e) {
@@ -110,7 +106,7 @@ public class FavPresenterImpl implements FavPresenter {
     }
 
     @Override
-    public void loadMore(int page,  String type) {
+    public void loadMore(int page, String type) {
         loadData(page, type, false);
     }
 
