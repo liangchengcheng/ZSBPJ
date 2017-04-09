@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/dropdownlayout/DropDownLayout.iml" filepath="$PROJECT_DIR$/dropdownlayout/DropDownLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/SMSSDK/SMSSDK.iml" filepath="$PROJECT_DIR$/SMSSDK/SMSSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZSBPJ.iml" filepath="$PROJECT_DIR$/ZSBPJ.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dxjnzgz/dxjnzgz.iml" filepath="$PROJECT_DIR$/dxjnzgz/dxjnzgz.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmentlibrary/fragmentlibrary.iml" filepath="$PROJECT_DIR$/fragmentlibrary/fragmentlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjdxm-ijkplayer/jjdxm-ijkplayer.iml" filepath="$PROJECT_DIR$/jjdxm-ijkplayer/jjdxm-ijkplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/msdq/msdq.iml" filepath="$PROJECT_DIR$/msdq/msdq.iml" />
       <module fileurl="file://$PROJECT_DIR$/nice-spinner/nice-spinner.iml" filepath="$PROJECT_DIR$/nice-spinner/nice-spinner.iml" />
       <module fileurl="file://$PROJECT_DIR$/richText/richText.iml" filepath="$PROJECT_DIR$/richText/richText.iml" />
       <module fileurl="file://$PROJECT_DIR$/superlibrary/superlibrary.iml" filepath="$PROJECT_DIR$/superlibrary/superlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/vitamio/vitamio.iml" filepath="$PROJECT_DIR$/vitamio/vitamio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wyzsb/wyzsb.iml" filepath="$PROJECT_DIR$/wyzsb/wyzsb.iml" />
     </modules>
   </component>
 </project>

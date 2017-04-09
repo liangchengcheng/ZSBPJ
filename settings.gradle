@@ -1,1 +1,1 @@
-include ':app', ':vitamio', ':superlibrary', ':msdq', ':SMSSDK', ':dxjnzgz', ':richText', ':fragmentlibrary', ':nice-spinner'
+include ':app', ':vitamio', ':superlibrary', ':msdq', ':SMSSDK', ':dxjnzgz', ':richText', ':fragmentlibrary', ':nice-spinner', ':wyzsb','jjdxm-ijkplayer', ':DropDownLayout'
