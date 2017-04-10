@@ -2,7 +2,6 @@ package com.lcc.msdq.test;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,20 +9,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
-import com.github.johnpersano.supertoasts.SuperToast;
-import com.lcc.adapter.MyAdapter;
 import com.lcc.adapter.TestAdapter;
+import com.lcc.entity.TabEntity;
 import com.lcc.entity.TestEntity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
@@ -34,9 +25,18 @@ import com.lcc.msdq.test.choice.ChoiceA_Activity;
 import com.lcc.mvp.presenter.TestPresenter;
 import com.lcc.mvp.presenter.impl.TestPresenterImpl;
 import com.lcc.mvp.view.TestView;
-import com.lcc.utils.CoCoinToast;
 import com.lcc.utils.SharePreferenceUtil;
 import com.lcc.view.loadview.LoadingLayout;
+import com.lcc.view.tab.CommonTabLayout;
+import com.lcc.view.tab.adapter.ShopAdapter;
+import com.lcc.view.tab.fragment.FragmentCategory;
+import com.lcc.view.tab.fragment.FragmentFloor;
+import com.lcc.view.tab.fragment.FragmentSort;
+import com.lcc.view.tab.listener.CustomTabEntity;
+import com.lcc.view.tab.listener.OnTabSelectListener;
+
+import org.net.sunger.widget.DropDownLayout;
+import org.net.sunger.widget.MenuLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,25 +46,28 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.S_RefreshAndLoadFragment;
 
-public class TestIndexFragment extends S_RefreshAndLoadFragment implements PopupWindow.OnDismissListener,
+public class TestIndexFragment extends S_RefreshAndLoadFragment implements
         TestAdapter.OnImageClickListener, TestAdapter.OnItemClickListener, TestView, View.OnClickListener {
-    private LinearLayout lv1_layout;
-    private ListView lv1, lv2;
-    private TextView quyu, huxing, jiage;
-    private ImageView icon1, icon2, icon3;
     private LoadingLayout loading_layout;
-    private View ll_layout;
-
-    private int screenWidth;
-    private int screenHeight;
-    private int idx;
     private String start_time = "全部时间";
     private String end_time = "全部时间";
     private String options = "全部题型";
     private String orders = "";
-    private MyAdapter madapter;
     private TestAdapter mAdapter;
     private TestPresenter mPresenter;
+
+    //添加了新的筛选的控件
+    private CommonTabLayout tabs;
+    private String[] mTitles = {"选择时间", "选择类型", "智能排序"};
+    private int[] mIconUnselectIds = {
+            R.drawable.tab_floor_unselected, R.drawable.tab_category_unseleted,
+            R.drawable.tab_sort_unseleted};
+    private int[] mIconSelectIds = {
+            R.drawable.tab_floor_selected, R.drawable.tab_category_seleted,
+            R.drawable.tab_sort_selected};
+    private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
+    private DropDownLayout dropDownLayout;
+    private MenuLayout menuLayout;
 
     public static Fragment newInstance() {
         return new TestIndexFragment();
@@ -93,21 +96,35 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_fragment, null);
+        menuLayout = (MenuLayout) view.findViewById(R.id.menuLayout);
+        dropDownLayout = (DropDownLayout) view.findViewById(R.id.dropdown);
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new FragmentFloor(TestIndexFragment.this));
+        fragments.add(new FragmentCategory(TestIndexFragment.this));
+        fragments.add(new FragmentSort(TestIndexFragment.this));
+        menuLayout.setFragmentManager(getActivity().getSupportFragmentManager());
+        menuLayout.bindFragments(fragments);
+        tabs = (CommonTabLayout) view.findViewById(R.id.tabs);
+        updateTabData();
+
+        tabs.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                dropDownLayout.showMenuAt(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+                if (menuLayout.isShow()) {
+                    dropDownLayout.closeMenu();
+                } else {
+                    dropDownLayout.showMenuAt(position);
+                }
+
+            }
+        });
+
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
-        ll_layout = view.findViewById(R.id.ll_layout);
-
-        view.findViewById(R.id.ll_quyu).setOnClickListener(this);
-        view.findViewById(R.id.ll_jiage).setOnClickListener(this);
-        view.findViewById(R.id.ll_huxing).setOnClickListener(this);
-        view.findViewById(R.id.iv_add).setOnClickListener(this);
-
-        quyu = (TextView) view.findViewById(R.id.quyu);
-        huxing = (TextView) view.findViewById(R.id.huxing);
-        jiage = (TextView) view.findViewById(R.id.jiage);
-        icon1 = (ImageView) view.findViewById(R.id.icon1);
-        icon2 = (ImageView) view.findViewById(R.id.icon2);
-        icon3 = (ImageView) view.findViewById(R.id.icon3);
-        initScreenWidth();
         return view;
     }
 
@@ -127,87 +144,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
         mPresenter.refresh(currentPage, options, start_time, end_time, orders);
     }
 
-    public void showPopupWindow(View anchor, int flag) {
-        final PopupWindow popupWindow = new PopupWindow(getActivity());
-        View contentView = LayoutInflater.from(getActivity()).inflate(
-                R.layout.windows_popupwindow, null);
-        lv1 = (ListView) contentView.findViewById(R.id.lv1);
-        lv2 = (ListView) contentView.findViewById(R.id.lv2);
-        lv1_layout = (LinearLayout) contentView.findViewById(R.id.lv_layout);
-        switch (flag) {
-            case 1:
-                madapter = new MyAdapter(getActivity(), initArrayData(R.array.tiaojian1));
-                break;
-            case 2:
-                madapter = new MyAdapter(getActivity(), initArrayData(R.array.tiaojian2));
-                break;
-            case 3:
-                madapter = new MyAdapter(getActivity(), initArrayData(R.array.tiaojian3));
-                break;
-        }
-        lv1.setAdapter(madapter);
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                if (parent.getAdapter() instanceof MyAdapter) {
-                    madapter.setSelectItem(position);
-                    madapter.notifyDataSetChanged();
-                    lv2.setVisibility(View.INVISIBLE);
-                    if (lv2.getVisibility() == View.INVISIBLE) {
-                        lv2.setVisibility(View.VISIBLE);
-                        lv1_layout.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-                        String name = (String) parent.getAdapter().getItem(position);
-                        setHeadText(idx, name);
-                        popupWindow.dismiss();
-                    }
-                }
-            }
-        });
-        popupWindow.setOnDismissListener(this);
-        popupWindow.setWidth(screenWidth);
-        popupWindow.setHeight(screenHeight);
-        popupWindow.setContentView(contentView);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new PaintDrawable());
-        popupWindow.showAsDropDown(anchor);
-    }
-
-    private void setHeadText(int idx, String text) {
-        switch (idx) {
-            case 1:
-                quyu.setText(text);
-                start_time = TimeUtils.getStartTime(text);
-                end_time = TimeUtils.getEndTime();
-                currentPage = 1;
-                mPresenter.getData(currentPage, options, start_time, end_time, orders);
-                break;
-
-            case 2:
-                jiage.setText(text);
-                options = text;
-                currentPage = 1;
-                mPresenter.getData(currentPage, options, start_time, end_time, orders);
-                break;
-
-            case 3:
-                huxing.setText(text);
-                orders = getOrders(text);
-                currentPage = 1;
-                mPresenter.getData(currentPage, options, start_time, end_time, orders);
-                break;
-        }
-    }
-
-    private void initScreenWidth() {
-        DisplayMetrics dm = new DisplayMetrics();
-        dm = getResources().getDisplayMetrics();
-        screenHeight = dm.heightPixels;
-        screenWidth = dm.widthPixels;
-    }
-
     private List<String> initArrayData(int id) {
         List<String> list = new ArrayList<String>();
         String[] array = this.getResources().getStringArray(id);
@@ -216,13 +152,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
             list.add(result);
         }
         return list;
-    }
-
-    @Override
-    public void onDismiss() {
-        icon1.setImageResource(R.drawable.icon_435);
-        icon2.setImageResource(R.drawable.icon_435);
-        icon3.setImageResource(R.drawable.icon_435);
     }
 
     @Override
@@ -273,23 +202,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_quyu:
-                idx = 1;
-                icon1.setImageResource(R.drawable.icon_43343434);
-                showPopupWindow(ll_layout, 1);
-                break;
-
-            case R.id.ll_jiage:
-                idx = 2;
-                icon2.setImageResource(R.drawable.icon_43343434);
-                showPopupWindow(ll_layout, 2);
-                break;
-
-            case R.id.ll_huxing:
-                idx = 3;
-                icon3.setImageResource(R.drawable.icon_43343434);
-                showPopupWindow(ll_layout, 3);
-                break;
             case R.id.iv_add:
                 String user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
@@ -353,5 +265,39 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements Popup
         FrameManager.getInstance().toastPrompt("身份失效请重现登录");
         LoginDialogFragment dialog = new LoginDialogFragment();
         dialog.show(getActivity().getFragmentManager(), "loginDialog");
+    }
+
+    private void updateTabData() {
+        mTabEntities.clear();
+        for (int i = 0; i < mTitles.length; i++) {
+            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
+        }
+        tabs.setTabData(mTabEntities);
+    }
+
+    public void onFilter(int type, String tag) {
+        dropDownLayout.closeMenu();
+        switch (type) {
+            case 0:
+                mTitles[0] = tag;
+                start_time = TimeUtils.getStartTime(tag);
+                end_time = TimeUtils.getEndTime();
+                currentPage = 1;
+                mPresenter.getData(currentPage, options, start_time, end_time, orders);
+                break;
+            case 1:
+                mTitles[1] = tag;
+                options = tag;
+                currentPage = 1;
+                mPresenter.getData(currentPage, options, start_time, end_time, orders);
+                break;
+            case 2:
+                mTitles[2] = tag;
+                orders = getOrders(tag);
+                currentPage = 1;
+                mPresenter.getData(currentPage, options, start_time, end_time, orders);
+                break;
+        }
+        updateTabData();
     }
 }

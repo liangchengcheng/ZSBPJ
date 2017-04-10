@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">抽抽面试助手</string>
+    <string name="app_name">面试题库</string>
     <string name="popular">Popular</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
@@ -24,9 +24,9 @@
     <string name="login">登录注册</string>
     <string name="sbgg">随便逛逛</string>
     <string name="xmjs">这个项目是我用的下班的业余的时间写的一个项目，目的是为了收集面试题相关的资料，方便大家为面试做准备，后续将不断优化和完善相关的功能。</string>
-    <string name="zwjs">我是一名android开发者，从事android开发2年多了，我特别喜欢编程，不单单是android，我要努力成为一名全桟开发者。</string>
+    <string name="zwjs">我是一名android开发者，从事android开发3年多了，我特别喜欢编程，不单单是android，我要努力成为一名全桟开发者。</string>
     <string name="toast_press_again_to_exit">再按一次退出程序</string>
-    <string name="login_end">请登录后操作~</string>
+    <string name="login_end">请登录后操作</string>
     <item name="tag_position" type="id" />
     <item name="tag_photo" type="id" />
 

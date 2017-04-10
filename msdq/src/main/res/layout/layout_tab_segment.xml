@@ -21,7 +21,7 @@
             android:singleLine="true"/>
     </LinearLayout>
 
-    <sunger.net.org.dropmenu.tab.widget.MsgView
+    <com.lcc.view.tab.widget.MsgView
         android:layout_toRightOf="@+id/ll_tap"
         android:id="@+id/rtv_msg_tip"
         xmlns:mv="http://schemas.android.com/apk/res-auto"

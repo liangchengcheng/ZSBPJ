@@ -64,9 +64,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     private void changePic(ImageView ly){
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 6 && hour <= 12) {
-            ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.morning, ly);
-        } else if (hour > 12 && hour <= 18) {
+        if (hour > 12 && hour <= 18) {
             ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.afternoon, ly);
         } else {
             ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.night, ly);
@@ -155,7 +153,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         YoYo.with(Techniques.RubberBand).duration(1000).playOn(logo_inner_iv);
     }
 
-
     private void finishActivity() {
         Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
@@ -173,5 +170,4 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                     }
                 });
     }
-
 }
