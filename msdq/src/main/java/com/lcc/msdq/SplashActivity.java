@@ -105,7 +105,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 intent.putExtra("from","welcome");
                 startActivity(intent);
                 break;
-
             case R.id.tv_toregister:
                 intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);

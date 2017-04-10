@@ -85,6 +85,7 @@
                         android:background="#EDEDED" />
 
                     <RelativeLayout
+                        android:layout_marginRight="25dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">

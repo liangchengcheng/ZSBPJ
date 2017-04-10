@@ -96,6 +96,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_fragment, null);
+        view.findViewById(R.id.iv_add).setOnClickListener(this);
         menuLayout = (MenuLayout) view.findViewById(R.id.menuLayout);
         dropDownLayout = (DropDownLayout) view.findViewById(R.id.dropdown);
         List<Fragment> fragments = new ArrayList<>();
@@ -142,16 +143,6 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     public void onRefreshData() {
         currentPage = 1;
         mPresenter.refresh(currentPage, options, start_time, end_time, orders);
-    }
-
-    private List<String> initArrayData(int id) {
-        List<String> list = new ArrayList<String>();
-        String[] array = this.getResources().getStringArray(id);
-        List<String> results = Arrays.asList(array);
-        for (String result : results) {
-            list.add(result);
-        }
-        return list;
     }
 
     @Override
