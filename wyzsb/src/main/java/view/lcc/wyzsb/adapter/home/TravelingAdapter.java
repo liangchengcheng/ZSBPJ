@@ -85,7 +85,7 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
             convertView.setTag(holder);
         }
 
-        TravelingEntity entity = getItem(position);
+        final TravelingEntity entity = getItem(position);
 
         holder.llRootView.setVisibility(View.VISIBLE);
         if (TextUtils.isEmpty(entity.getType())) {
@@ -105,10 +105,9 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.show(mContext, title);
+                listener.click(entity);
             }
         });
-
         return convertView;
     }
 
@@ -124,5 +123,15 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
             tvTitle = (TextView) view.findViewById(R.id.tv_title);
             tvRank = (TextView) view.findViewById(R.id.tv_rank);
         }
+    }
+
+    ItemClickListener listener;
+
+    public void setOnItemClickListener(ItemClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface ItemClickListener{
+        void click(TravelingEntity entity);
     }
 }

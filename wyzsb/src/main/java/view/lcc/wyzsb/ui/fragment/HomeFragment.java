@@ -31,6 +31,7 @@ import view.lcc.wyzsb.mvp.param.HomeParams;
 import view.lcc.wyzsb.mvp.presenter.HomeFragmentPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
 import view.lcc.wyzsb.mvp.view.HomeFragmentView;
+import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
 import view.lcc.wyzsb.utils.ColorUtil;
 import view.lcc.wyzsb.utils.DensityUtil;
 import view.lcc.wyzsb.utils.ModelUtil;
@@ -49,7 +50,8 @@ import view.lcc.wyzsb.view.home.SmoothListView.SmoothListView;
  * Date:         2017年04月08日15:38:09
  * Description:  主页
  */
-public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener,HomeFragmentView{
+public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener
+        ,HomeFragmentView,TravelingAdapter.ItemClickListener{
 
     private SmoothListView smoothListView;
 
@@ -188,7 +190,9 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         HomeParams homeParams = new HomeParams();
         homeParams.setPage(1);
         homeFragmentPresenter.getListData(homeParams);
-
+        mAdapter = new TravelingAdapter(getActivity(), travelingList);
+        mAdapter.setOnItemClickListener(this);
+        smoothListView.setAdapter(mAdapter);
         filterViewPosition = smoothListView.getHeaderViewsCount() - 1;
     }
 
@@ -375,8 +379,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     @Override
     public void getDataSuccess(List<TravelingEntity> entities) {
-        mAdapter = new TravelingAdapter(getActivity(), entities);
-        smoothListView.setAdapter(mAdapter);
+        fillAdapter(entities);
     }
 
     @Override
@@ -389,6 +392,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     }
 
+    // TODO: 2017/4/11  fillAdapter
     /**
      * 填充数据（ListView的数据）
      */
@@ -400,5 +404,11 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         } else {
             mAdapter.setData(list);
         }
+    }
+
+    @Override
+    public void click(TravelingEntity entity) {
+        Intent intent = new Intent(getActivity(), VideoDetailsActivity.class);
+        startActivity(intent);
     }
 }
