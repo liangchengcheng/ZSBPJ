@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFAD5B</color>
+    <color name="colorPrimaryDark">#FFAD5B</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="text_red">#ffff5b3b</color>
+    <color name="line_bg">#ffbababa</color>
+    <color name="main_bg_color">#ed4444</color>
+    <color name="layout_bg_color">#f8f8f8</color>
+    <color name="main_font_color">#9a9a9a</color>
+    <color name="header_color">#798279</color>
+    <color name="bg_item_normal_color">#ffffff</color>
+    <color name="bg_item_press_color">#e3e3e3</color>
+    <color name="bg_btn_normal_color">#ed4444</color>
+    <color name="bg_btn_press_color">#d81e06</color>
+    <color name="bg_btn_normal_color_hui">#d2d2d2</color>
+    <color name="bg_btn_press_color_hui">#c1c1c1</color>
+    <color name="bg_head_color">#F8F8F8</color>
+    <color name="province_line_border">#C7C7C7</color>
+    <color name="main_textcolormore">#63564B</color>
+    <!-- 白色 -->
+    <color name="bg_White">#FFFFFF</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <!-- 纯白-->
+    <color name="white">#ffffff</color>
+    <!-- 黑色 -->
+    <color name="black">#ff000000</color>
+    <!-- 深绿 -->
+    <color name="m29c741">#29c741</color>
+    <!-- 灰色 -->
+    <color name="green">#146621</color>
+    <!-- 红色 -->
+    <color name="red">#ff0000</color>
+    <!--桔黄色 -->
+    <color name="bisque">#ffe4c4</color>
+    <!--鹿皮色 -->
+    <color name="moccasin">#ffe4b5</color>
+    <!--中紫罗兰色 -->
+    <color name="mediumvioletred">#c71585</color>
+    <color name="maingold">#cba162</color>
+    <color name="alphmaingold">#90cba162</color>
+    <!-- 黑色 -->
+    <color name="bg_Black">#ff000000</color>
+    <color name="bg_textmy">#c7c6cb</color>
+    <!-- 灰色 -->
+    <color name="mainred">#772322</color>
+    <color name="rb_select">#eeede8</color>
+    <color name="titlecolor">#969696</color>
+    <color name="bg_Gray">#CCCCCC</color>
+    <color name="header_Gray">#515151</color>
+    <color name="header_litteGray">#969696</color>
+    <color name="homepage_Gray">#F5F5F5</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="float_transparent">#66000000</color>
+    <color name="button_text_color">#FFFFFF</color>
+
+    <color name="half_transparent">#8f000000</color>
+
+    <!-- background -->
+    <color name="bg">#FFF5F5F5</color>
+    <color name="bg_pressed">#FFF2F2F2</color>
+
+    <!-- material design black font color -->
+    <color name="font_black_0">#212121</color>
+    <color name="font_black_1">#424242</color>
+    <color name="font_black_2">#616161</color>
+    <color name="font_black_3">#757575</color>
+    <color name="font_black_4">#9e9e9e</color>
+    <color name="font_black_5">#bdbdbd</color>
+    <color name="font_black_6">#e0e0e0</color>
+
+    <!-- divider -->
+    <color name="divider_1">#e2e2e2</color>
+    <color name="divider_2">#e6e6e6</color>
+
+    <!-- 这里是文字的颜色和app的主题色 -->
+    <color name="login_text_color">#BDBDBD</color>
+    <color name="codeGary">#9e9e9e</color>
+    <color name="main_textcolor">#717272</color>
+    <color name="maincolor">#ff7474</color>
+    <color name="maincutalph">#50ff7474</color>
+    <!-- 横细线的颜色  -->
+    <color name="viewcolor">#d2d2d2</color>
+
+    <color name="background_half_transparent">#96000000</color>
+
+    <color name="retry_button_background">#30000000</color>
+    <color name="retry_button_background_stroke">#50000000</color>
+
+    <color name="divider_high">#ffe6edf0</color>
+    <color name="login_title_color">#ffffffff</color>
+    <color name="divider_low">#fff5f8fa</color>
+
+    <color name="item_bg">#fff3f4f9</color>
+
+    <color name="assist_blue">#ff35aaf6</color>
+    <color name="assist_blue_pressed">#ff1388d3</color>
+    <color name="login_forget_pw_color">#ff666666</color>
+    <color name="main_back">#fff6fcff</color>
+
+    <color name="bg_comments">#ffffff</color>
+    <color name="article_title">#2E2E2E</color>
+    <color name="article_des">#6D6D6D</color>
+
+    <color name="common_android_tag_bg">#ff388E3C</color>
+    <color name="common_ios_tag_bg">#ff0377BC</color>
+    <color name="common_js_tag_bg">#ffEF6C02</color>
+    <color name="base_color">#E5E9F1</color>
+
+    <color name="dark_main_list_item_title">#C7C9C9</color>
+    <color name="dark_main_list_item_content">#83898C</color>
+    <color name="dark_main_list_item_username">#339933</color>
+    <color name="dark_main_list_item_time">#83898C</color>
+    <color name="dark_main_list_item_unselected">#293339</color>
+    <color name="dark_main_list_item_selected">#242e35</color>
+    <color name="dark_main_list_item_ripple">#576c79</color>
+    <color name="dark_main_list_item_comment_count">#83898C</color>
+
+</resources>

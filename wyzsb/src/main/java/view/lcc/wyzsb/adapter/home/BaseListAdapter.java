@@ -25,11 +25,16 @@ public abstract class BaseListAdapter<E> extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mList.size();
+        if (mList != null) {
+            return mList.size();
+        }
+        return 0;
     }
 
     public void clearAll() {
-        mList.clear();
+        if (mList != null) {
+            mList.clear();
+        }
     }
 
     public List<E> getData() {

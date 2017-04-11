@@ -26,6 +26,11 @@ import view.lcc.wyzsb.bean.model.FilterEntity;
 import view.lcc.wyzsb.bean.model.FilterTwoEntity;
 import view.lcc.wyzsb.bean.model.OperationEntity;
 import view.lcc.wyzsb.bean.model.TravelingEntity;
+import view.lcc.wyzsb.frame.Frame;
+import view.lcc.wyzsb.mvp.param.HomeParams;
+import view.lcc.wyzsb.mvp.presenter.HomeFragmentPresenter;
+import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
+import view.lcc.wyzsb.mvp.view.HomeFragmentView;
 import view.lcc.wyzsb.utils.ColorUtil;
 import view.lcc.wyzsb.utils.DensityUtil;
 import view.lcc.wyzsb.utils.ModelUtil;
@@ -44,7 +49,7 @@ import view.lcc.wyzsb.view.home.SmoothListView.SmoothListView;
  * Date:         2017年04月08日15:38:09
  * Description:  主页
  */
-public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener{
+public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener,HomeFragmentView{
 
     private SmoothListView smoothListView;
 
@@ -107,6 +112,8 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     private boolean isSmooth = false;
     // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
     private int filterPosition = -1;
+    //Presenter
+    private HomeFragmentPresenter homeFragmentPresenter;
 
     @Override
     public int initContentView() {
@@ -141,6 +148,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     }
 
     public void initData() {
+        homeFragmentPresenter = new HomeFragmentPresenterImpl(this);
         mContext = getActivity();
         mActivity = getActivity();
         mScreenHeight = DensityUtil.getWindowHeight(getActivity());
@@ -155,8 +163,6 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         channelList = ModelUtil.getChannelData();
         // 运营数据
         operationList = ModelUtil.getOperationData();
-        // ListView数据
-        travelingList = ModelUtil.getTravelingData();
     }
 
     private void initView() {
@@ -179,14 +185,15 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         realFilterView.setFilterData(mActivity, filterData);
         realFilterView.setVisibility(View.GONE);
         // 设置ListView数据
-        mAdapter = new TravelingAdapter(getActivity(), travelingList);
-        smoothListView.setAdapter(mAdapter);
+        HomeParams homeParams = new HomeParams();
+        homeParams.setPage(1);
+        homeFragmentPresenter.getListData(homeParams);
 
         filterViewPosition = smoothListView.getHeaderViewsCount() - 1;
     }
 
     private void initListener() {
-        // 关于
+        // 关于项目
         flActionMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,24 +222,26 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         realFilterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
             @Override
             public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
-                fillAdapter(ModelUtil.getCategoryTravelingData(leftEntity, rightEntity));
+                HomeParams params = new HomeParams();
+                homeFragmentPresenter.getListData(params);
             }
         });
         // 排序Item点击
         realFilterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
             @Override
             public void onItemSortClick(FilterEntity entity) {
-                fillAdapter(ModelUtil.getSortTravelingData(entity));
+                HomeParams params = new HomeParams();
+                homeFragmentPresenter.getListData(params);
             }
         });
         // 筛选Item点击
         realFilterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
             @Override
             public void onItemFilterClick(FilterEntity entity) {
-                fillAdapter(ModelUtil.getFilterTravelingData(entity));
+                HomeParams params = new HomeParams();
+                homeFragmentPresenter.getListData(params);
             }
         });
-
         smoothListView.setRefreshEnable(true);
         smoothListView.setLoadMoreEnable(true);
         smoothListView.setSmoothListViewListener(this);
@@ -249,7 +258,6 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (isScrollIdle && bannerViewTopMargin < 0) return;
-
                 // 获取广告头部View、自身的高度、距离顶部的高度
                 if (itemHeaderBannerView == null) {
                     itemHeaderBannerView = smoothListView.getChildAt(1);
@@ -286,18 +294,9 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         });
     }
 
-    // 填充数据
-    private void fillAdapter(List<TravelingEntity> list) {
-        if (list == null || list.size() == 0) {
-            // 95 = 标题栏高度 ＋ FilterView的高度
-            int height = mScreenHeight - DensityUtil.dip2px(mContext, 95);
-            mAdapter.setData(ModelUtil.getNoDataEntity(height));
-        } else {
-            mAdapter.setData(list);
-        }
-    }
-
-    // 处理标题栏颜色渐变
+    /**
+     * 处理标题栏颜色渐变
+     */
     private void handleTitleBarColorEvaluate() {
         float fraction;
         if (bannerViewTopMargin > 0) {
@@ -337,15 +336,6 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         headerBannerView.removeBannerLoopMessage();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (realFilterView.isShowing()) {
-//            realFilterView.resetAllStatus();
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
-
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
@@ -359,6 +349,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     @Override
     public void onLoadMore() {
+        //加载更多数据。
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -367,4 +358,47 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         }, 2000);
     }
 
+    @Override
+    public void getLoading() {
+        Frame.getInstance().toastPrompt("开始加载数据");
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void getDataSuccess(List<TravelingEntity> entities) {
+        mAdapter = new TravelingAdapter(getActivity(), entities);
+        smoothListView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void loadMoreDataSuccess(List<TravelingEntity> entities) {
+
+    }
+
+    @Override
+    public void loadMoreDataFail(String msg) {
+
+    }
+
+    /**
+     * 填充数据（ListView的数据）
+     */
+    private void fillAdapter(List<TravelingEntity> list) {
+        if (list == null || list.size() == 0) {
+            // 95 = 标题栏高度 ＋ FilterView的高度
+            int height = mScreenHeight - DensityUtil.dip2px(mContext, 95);
+            mAdapter.setData(ModelUtil.getNoDataEntity(height));
+        } else {
+            mAdapter.setData(list);
+        }
+    }
 }

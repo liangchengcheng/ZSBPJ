@@ -20,7 +20,6 @@ import view.lcc.wyzsb.view.home.GildeImageView.GlideImageView;
  * Created by sunfusheng on 16/4/20.
  */
 public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
-
     private boolean isNoData;
     private int mHeight;
     // 一屏能显示的个数，这个根据屏幕高度和各自的需求定
@@ -94,11 +93,15 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
             return convertView;
         }
 
-        final String title = entity.getFrom() + entity.getTitle() + entity.getType();
+        final String title = entity.getDesc() ;
         holder.tvTitle.setText(title);
-        holder.tvRank.setText("排名：" + entity.getRank());
-        holder.givImage.loadNetImage(entity.getImage_url(), R.color.font_black_6);
-
+        holder.tvRank.setText("排名:" + entity.getSource());
+        String url = null;
+        List<String> images = entity.getImages();
+        if (images!=null && images.size()>0){
+            url =images.get(0);
+        }
+        holder.givImage.loadNetImage(url, R.color.font_black_6);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

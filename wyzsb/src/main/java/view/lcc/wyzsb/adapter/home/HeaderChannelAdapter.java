@@ -33,7 +33,7 @@ public class HeaderChannelAdapter extends BaseListAdapter<ChannelEntity> {
         ChannelEntity entity = getItem(position);
 
         holder.tvTitle.setText(entity.getTitle());
-        holder.givImage.loadNetCircleImage(entity.getImage_url(), R.color.font_black_6);
+        holder.givImage.loadResImage(entity.getImage_url(), R.color.font_black_6);
 
         if (TextUtils.isEmpty(entity.getTips())) {
             holder.tvTips.setVisibility(View.INVISIBLE);

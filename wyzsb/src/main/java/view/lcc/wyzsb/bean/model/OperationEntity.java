@@ -6,7 +6,7 @@ public class OperationEntity implements Serializable {
 
     private String title;
     private String subtitle;
-    private String image_url;
+    private int image_url;
 
     public OperationEntity() {
     }
@@ -19,7 +19,7 @@ public class OperationEntity implements Serializable {
         this.subtitle = subtitle;
     }
 
-    public OperationEntity(String title, String subtitle, String image_url) {
+    public OperationEntity(String title, String subtitle, int image_url) {
         this.title = title;
         this.subtitle = subtitle;
         this.image_url = image_url;
@@ -33,11 +33,11 @@ public class OperationEntity implements Serializable {
         this.title = title;
     }
 
-    public String getImage_url() {
+    public int getImage_url() {
         return image_url;
     }
 
-    public void setImage_url(String image_url) {
+    public void setImage_url(int image_url) {
         this.image_url = image_url;
     }
 }

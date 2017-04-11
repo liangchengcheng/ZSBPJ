@@ -36,21 +36,36 @@
                 android:textColor="@color/font_black_0"
                 android:textSize="15sp"/>
 
-            <TextView
-                android:id="@+id/tv_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:layout_alignBottom="@+id/giv_image"
                 android:layout_below="@+id/tv_title"
-                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/giv_image"
-                android:text="排名：23"
-                android:textColor="@color/font_black_5"
-                android:textSize="12sp"/>
-        </RelativeLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/tv_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="作者:lcc"
+                    android:textColor="@color/font_black_5"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="时长:23"
+                    android:textColor="@color/font_black_5"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/font_black_5"/>
-
 </LinearLayout>
