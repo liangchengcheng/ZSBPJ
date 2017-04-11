@@ -6,6 +6,7 @@ import view.lcc.wyzsb.base.ApiClient;
 import view.lcc.wyzsb.base.AppConstants;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
+import view.lcc.wyzsb.mvp.param.ArticleParams;
 import view.lcc.wyzsb.mvp.param.HomeParams;
 
 /**
@@ -14,12 +15,12 @@ import view.lcc.wyzsb.mvp.param.HomeParams;
  * Date:         2015年11月21日15:28:25
  * Description:
  */
-public class HomeFragmentModel {
+public class ArticleModel {
 
     /**
      * 获取我的订单详情
      */
-    public OkHttpRequest getHomeFragment(HomeParams homeParams, ResultCallback<String> callback) {
+    public OkHttpRequest getArticle(ArticleParams articleParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
         return ApiClient.create(AppConstants.RequestPath.GET_USER_ORDER, map).tag("").get(callback);
     }

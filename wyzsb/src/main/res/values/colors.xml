@@ -120,4 +120,7 @@
     <color name="dark_main_list_item_ripple">#576c79</color>
     <color name="dark_main_list_item_comment_count">#83898C</color>
 
+
+    <color name="light_main_list_item_unselected">#FFFFFF</color>
+    <color name="light_main_list_item_selected">#f4f4f4</color>
 </resources>

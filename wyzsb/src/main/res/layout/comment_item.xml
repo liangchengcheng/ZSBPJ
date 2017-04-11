@@ -9,6 +9,7 @@
     android:descendantFocusability="blocksDescendants"
     android:elevation="5dp"
     android:focusable="true"
+    android:id="@+id/cd_all"
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="horizontal"
     app:cardCornerRadius="1dp"

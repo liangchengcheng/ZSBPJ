@@ -5,25 +5,43 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.dou361.ijkplayer.bean.VideoijkBean;
 import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.adapter.CommentAdapter;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.bean.Comments;
+import view.lcc.wyzsb.frame.Frame;
+import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
+import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
+import view.lcc.wyzsb.mvp.presenter.impl.CommentsPresenterImpl;
+import view.lcc.wyzsb.mvp.view.CommentsView;
+import view.lcc.wyzsb.ui.fragment.CommentFragment;
+import view.lcc.wyzsb.ui.fragment.JianjieFragment;
 import view.lcc.wyzsb.utils.MediaUtils;
+import view.lcc.wyzsb.utils.TimeUtils;
+import view.lcc.wyzsb.view.LoadingLayout;
 
 /**
  * Author:       梁铖城
@@ -31,19 +49,22 @@ import view.lcc.wyzsb.utils.MediaUtils;
  * Date:         2017年04月11日13:46:31
  * Description:
  */
-public class VideoDetailsActivity extends BaseActivity{
+public class VideoDetailsActivity extends BaseActivity {
     private PlayerView player;
     private Context mContext;
     private List<VideoijkBean> list;
     private PowerManager.WakeLock wakeLock;
     View rootView;
-
+    private TabLayout tlUserProfileTabs;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mContext = this;
         rootView = getLayoutInflater().from(this).inflate(R.layout.video_details, null);
         setContentView(rootView);
+        tlUserProfileTabs = (TabLayout) findViewById(R.id.tlUserProfileTabs);
+        tlUserProfileTabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+        setViewPager();
         //虚拟按键的隐藏方法
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -155,4 +176,51 @@ public class VideoDetailsActivity extends BaseActivity{
             wakeLock.release();
         }
     }
+
+    private void setViewPager() {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        if (viewPager != null) {
+            setupViewPager(viewPager);
+            tlUserProfileTabs.setupWithViewPager(viewPager);
+        }
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new JianjieFragment(), "简介");
+        adapter.addFragment(new CommentFragment(), "评论");
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(0);
+    }
+
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragments = new ArrayList<>();
+        private final List<String> mFragmentTitles = new ArrayList<>();
+
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitles.get(position);
+        }
+    }
+
+
 }

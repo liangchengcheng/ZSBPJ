@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/cd_all"
+    android:padding="10dp"
+    android:background="@drawable/selector_light_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--user portrait-->
+    <ImageView
+        android:id="@+id/iv_portrait"
+        android:background="#EEE"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@null"/>
+
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_marginBottom="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="lcc"
+                android:id="@+id/tv_username"
+                android:textSize="@dimen/item_title"
+                android:textColor="#339933"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="04月11日"
+                android:id="@+id/tv_time"
+                android:textSize="@dimen/item_time"
+                android:textColor="#83898C"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:text="这里是文章的内容的介绍的地址"
+            android:id="@+id/tv_content"
+            android:textColor="#232323"
+            android:textSize="@dimen/item_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#ededed"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+</LinearLayout>

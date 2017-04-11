@@ -77,7 +77,6 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
         rlBanner.setLayoutParams(layoutParams);
 
         createImageViews(list);
-
         HeaderBannerAdapter adapter = new HeaderBannerAdapter(ivList);
         vpBanner.setAdapter(adapter);
 
