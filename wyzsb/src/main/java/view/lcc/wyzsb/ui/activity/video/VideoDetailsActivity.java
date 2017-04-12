@@ -90,7 +90,8 @@ public class VideoDetailsActivity extends BaseActivity {
         // 有部分视频加载有问题，这个视频是有声音显示不出图像的，
         // 没有解决http://fzkt-biz.oss-cn-hangzhou.aliyuncs.com/vedio/2f58be65f43946c588ce43ea08491515.mp4
         // 这里模拟一个本地视频的播放，视频需要将testvideo文件夹的视频放到安卓设备的内置sd卡根目录中
-        String url1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
+        //String url1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
+        String url1 = "http://player.youku.com/player.php/sid/XODQxMjMyMzQ4/v.swf";
         VideoijkBean m1 = new VideoijkBean();
         m1.setStream("标清");
         m1.setUrl(url1);

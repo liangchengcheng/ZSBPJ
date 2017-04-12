@@ -2,6 +2,7 @@ package view.lcc.wyzsb.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,25 +15,7 @@ import view.lcc.wyzsb.base.BaseFragment;
  * Date:
  * Description:
  */
-public class ArticleFragment extends BaseFragment {
+public class ArticleFragment extends Fragment {
 
-    @Override
-    public int initContentView() {
-        return R.layout.home_fragment;
-    }
 
-    @Override
-    public void getBundle(Bundle bundle) {
-
-    }
-
-    @Override
-    public void initUI(View view) {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
 }
