@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimaryDark"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--universal container-->
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app bar layout-->
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
+            <!--toolbar-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_scrollFlags="scroll" />
+            <!--post's title-->
+            <TextView
+                android:text="56个民族是一家"
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EBFAEB"
+                android:padding="10dp"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_scrollFlags="scroll" />
+            <!--the person info layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--horizontal line-->
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="#EEE"/>
+                <!--the person info-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:padding="10dp">
+                    <!--person portrait-->
+                    <ImageView
+                        android:background="@drawable/ic_nodata"
+                        android:id="@+id/img_portrait"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="@null" />
+                    <!--person name-->
+                    <TextView
+                        android:text="管理员的故事"
+                        android:id="@+id/tv_person_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/img_portrait"
+                        android:layout_toRightOf="@id/img_portrait"
+                        android:paddingTop="4dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="16sp" />
+                    <!--user's summary-->
+                    <TextView
+                        android:text="222222"
+                        android:id="@+id/tv_publish_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_person_name"
+                        android:layout_marginTop="3dp"
+                        android:layout_toEndOf="@id/img_portrait"
+                        android:layout_toRightOf="@id/img_portrait"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+                    <!--belong to topic-->
+                    <TextView
+                        android:visibility="gone"
+                        android:text="11111"
+                        android:id="@+id/tv_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                         />
+                    <!--the post's published time-->
+                    <TextView
+                        android:visibility="gone"
+                        android:text="2222"
+                        android:id="@+id/tv_extend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/tv_type"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        />
+                </RelativeLayout>
+                <!--horizontal line-->
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="#EEE"/>
+            </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <!--Frame Container-->
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/layout_scroller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F6F6F6"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <WebView
+                android:id="@+id/layout_web_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--&lt;!&ndash;bottom panel&ndash;&gt;-->
+    <!--<include-->
+        <!--layout="@layout/view_detail_bottom_widget"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true" />-->
+
+</RelativeLayout>

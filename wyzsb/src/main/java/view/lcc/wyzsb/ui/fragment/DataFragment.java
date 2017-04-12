@@ -52,9 +52,9 @@ public class DataFragment extends BaseFragment {
 
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter.addFrag(new NewsFragment(), "安全新闻");
         adapter.addFrag(new ArticleFragment(), "文字教程");
         adapter.addFrag(new VideoFragment(), "视频教程");
-        adapter.addFrag(new UtilsFragment(), "工具下载");
         viewPager.setAdapter(adapter);
     }
 

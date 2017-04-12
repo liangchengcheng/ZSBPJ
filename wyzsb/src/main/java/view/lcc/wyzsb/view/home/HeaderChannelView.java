@@ -7,7 +7,9 @@ import android.widget.ListView;
 import java.util.List;
 
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.adapter.ArticleAdapter;
 import view.lcc.wyzsb.adapter.home.HeaderChannelAdapter;
+import view.lcc.wyzsb.bean.Article;
 import view.lcc.wyzsb.bean.model.ChannelEntity;
 import view.lcc.wyzsb.utils.ToastUtil;
 
@@ -51,8 +53,19 @@ public class HeaderChannelView extends AbsHeaderView<List<ChannelEntity>> {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ToastUtil.show(mActivity, adapter.getItem(position).getTitle());
+                listener.Channel( adapter.getItem(position).getTitle());
             }
         });
+    }
+
+    public interface OnChannelClickListener {
+        void Channel(String title);
+    }
+
+    private OnChannelClickListener listener;
+
+    public void setOnChannelClickListener(OnChannelClickListener listener) {
+        this.listener = listener;
     }
 
 }

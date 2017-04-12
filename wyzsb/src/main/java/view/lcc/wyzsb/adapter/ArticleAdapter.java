@@ -1,14 +1,11 @@
 package view.lcc.wyzsb.adapter;
 
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,22 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import view.lcc.wyzsb.R;
-import view.lcc.wyzsb.bean.Comments;
+import view.lcc.wyzsb.bean.Article;
+
 
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:
+ * Description:  IndexMenuAdapter
  */
-public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-    private List<Comments> mList = new ArrayList<>();
+    private List<Article> mList = new ArrayList<>();
     private boolean hasFooter;
     private boolean hasMoreData = true;
 
-    public void bind(List<Comments> messages) {
+    public void bind(List<Article> messages) {
         this.mList = messages;
         notifyDataSetChanged();
     }
@@ -51,10 +49,10 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
             return new NormalViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.comment_item2, parent, false));
+                    .inflate(R.layout.article_item2, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.layout_foot_normal, parent, false));
+                    .inflate(R.layout.layout_foot_loading, parent, false));
         }
     }
 
@@ -66,11 +64,12 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
             }
         } else {
-            final Comments weekData = mList.get(position);
+            final Article weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
+            holder.tv_title.setText("请问如何才能把自己的学习成绩提高呢？");
 
             if (mListener != null) {
-                holder.cd_all.setOnClickListener(new View.OnClickListener() {
+                holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mListener.onItemClick(weekData);
@@ -83,6 +82,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return getBasicItemCount() + (hasFooter ? 1 : 0);
+
     }
 
     public int getBasicItemCount() {
@@ -93,16 +93,19 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_title;
+        CardView ll_all;
 
-        LinearLayout cd_all;
-
-        public NormalViewHolder(View view) {
-            super(view);
-            cd_all = (LinearLayout) view.findViewById(R.id.cd_all);
+        public NormalViewHolder(View itemView) {
+            super(itemView);
+            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
+            ll_all = (CardView) itemView.findViewById(R.id.ll_all);
         }
     }
 
-
+    /**
+     * 头部的布局
+     */
     class FootViewHolder extends RecyclerView.ViewHolder {
         ProgressBar mProgressView;
         TextView mTextView;
@@ -114,14 +117,14 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public void appendToList(List<Comments> list) {
+    public void appendToList(List<Article> list) {
         if (list == null) {
             return;
         }
         mList.addAll(list);
     }
 
-    public List<Comments> getList() {
+    public List<Article> getList() {
         return mList;
     }
 
@@ -152,7 +155,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Comments data);
+        void onItemClick(Article data);
     }
 
     private OnItemClickListener mListener;
@@ -160,4 +163,16 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void setOnItemClickListener(OnItemClickListener li) {
         this.mListener = li;
     }
+
+    public interface OnFavClickListener {
+        void onOnFavClick(Article data);
+    }
+
+    private OnFavClickListener favListener;
+
+    public void setOnFavClickListener(OnFavClickListener li) {
+        this.favListener = li;
+    }
+
+
 }

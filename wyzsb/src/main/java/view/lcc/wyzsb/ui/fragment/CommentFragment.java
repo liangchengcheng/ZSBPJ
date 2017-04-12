@@ -61,6 +61,7 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
     protected long currentTime = 0;
     protected int currentPage = 1;
     private SwipeRefreshLayout mSwipeRefreshWidget;
+
     private void initRefreshView(View view) {
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);

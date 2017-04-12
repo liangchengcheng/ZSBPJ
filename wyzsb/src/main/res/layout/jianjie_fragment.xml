@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="#000"
         android:textSize="16sp"
         android:text="3分钟教你给自己化一个原宿妆" />
 
@@ -32,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:text="简介3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆" />
 </LinearLayout>

@@ -1,27 +1,31 @@
-package view.lcc.wyzsb.ui.activity.article;
+package view.lcc.wyzsb.ui.fragment;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-
+import android.view.ViewGroup;
 import java.util.List;
-
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.ArticleAdapter;
-import view.lcc.wyzsb.base.BaseActivity;
-import view.lcc.wyzsb.bean.Article;
+import view.lcc.wyzsb.adapter.NewsAdapter;
+import view.lcc.wyzsb.base.BaseFragment;
+import view.lcc.wyzsb.bean.News;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
 import view.lcc.wyzsb.mvp.presenter.ArticlePresenter;
+import view.lcc.wyzsb.mvp.presenter.NewsPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.ArticlePresenterImpl;
+import view.lcc.wyzsb.mvp.presenter.impl.NewsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.ArticleView;
+import view.lcc.wyzsb.mvp.view.NewsView;
+import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
 
@@ -31,15 +35,14 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:
  * Description:
  */
-public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout.OnRefreshListener,
-        ArticleAdapter.OnFavClickListener, ArticleAdapter.OnItemClickListener,View.OnClickListener,ArticleView{
+public class NewsFragment extends Fragment implements NewsView,SwipeRefreshLayout.OnRefreshListener,
+        NewsAdapter.OnFavClickListener, NewsAdapter.OnItemClickListener,View.OnClickListener {
 
-    public static final String TYPE = "type";
     private LoadingLayout loading_layout;
+    private NewsAdapter mAdapter;
+    private NewsPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
-    private ArticleAdapter mAdapter;
-    private ArticlePresenter mPresenter;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -47,40 +50,32 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    private String type="面试准备";
 
-    public static void startArticleActivity(Activity startingActivity, String type) {
-        Intent intent = new Intent(startingActivity, ArticleActivity.class);
-        intent.putExtra(TYPE, type);
-        startingActivity.startActivity(intent);
-    }
-
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.article_layout);
-
-        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
-        mPresenter = new ArticlePresenterImpl(this);
-        initRefreshView();
-        initRecycleView();
-        mPresenter.getData(1,type);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.news_fragment,null);
+        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
+        mPresenter = new NewsPresenterImpl(this);
+        initRefreshView(view);
+        initRecycleView(view);
+        mPresenter.getData(1,"");
+        return  view;
     }
 
-    private void initRefreshView() {
-        mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
+    private void initRefreshView(View view) {
+        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshWidget.setOnRefreshListener(this);
     }
 
-    private void initRecycleView() {
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(ArticleActivity.this,
+    private void initRecycleView(View view) {
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new ArticleAdapter();
+        mAdapter = new NewsAdapter();
         mAdapter.setOnItemClickListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -93,7 +88,7 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,type);
+                    mPresenter.loadMore(currentPage,"");
                 }
             }
         });
@@ -106,7 +101,7 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,type);
+                mPresenter.refresh(currentPage,"");
             }
         }, 500);
     }
@@ -117,13 +112,13 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
     }
 
     @Override
-    public void onOnFavClick(Article data) {
+    public void onOnFavClick(News data) {
 
     }
 
     @Override
-    public void onItemClick(Article data) {
-        ArticleDetailsActivity.startArticleDetails(ArticleActivity.this,"");
+    public void onItemClick(News data) {
+
     }
 
     @Override
@@ -152,7 +147,7 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
     }
 
     @Override
-    public void refreshDataSuccess(List<Article> entities) {
+    public void refreshView(List<News> entities) {
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
         }
@@ -161,7 +156,7 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
     }
 
     @Override
-    public void loadMoreWeekDataSuccess(final List<Article> entities) {
+    public void loadMoreView(final List<News> entities) {
         int delay = 0;
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;

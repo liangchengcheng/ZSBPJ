@@ -31,6 +31,7 @@ import view.lcc.wyzsb.mvp.param.HomeParams;
 import view.lcc.wyzsb.mvp.presenter.HomeFragmentPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
 import view.lcc.wyzsb.mvp.view.HomeFragmentView;
+import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
 import view.lcc.wyzsb.utils.ColorUtil;
 import view.lcc.wyzsb.utils.DensityUtil;
@@ -51,7 +52,7 @@ import view.lcc.wyzsb.view.home.SmoothListView.SmoothListView;
  * Description:  主页
  */
 public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener
-        ,HomeFragmentView,TravelingAdapter.ItemClickListener{
+        ,HomeFragmentView,TravelingAdapter.ItemClickListener,HeaderChannelView.OnChannelClickListener{
 
     private SmoothListView smoothListView;
 
@@ -174,6 +175,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         // 设置频道数据
         headerChannelView = new HeaderChannelView(getActivity());
         headerChannelView.fillView(channelList, smoothListView);
+        headerChannelView.setOnChannelClickListener(this);
         // 设置运营数据
         headerOperationView = new HeaderOperationView(getActivity());
         headerOperationView.fillView(operationList, smoothListView);
@@ -410,5 +412,10 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     public void click(TravelingEntity entity) {
         Intent intent = new Intent(getActivity(), VideoDetailsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void Channel(String title) {
+        ArticleActivity.startArticleActivity(getActivity(),"title");
     }
 }
