@@ -90,9 +90,9 @@
             android:fillViewport="false"
             app:tabBackground="@color/colorPrimary"
             app:tabGravity="center"
-            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorColor="@color/white"
             app:tabMaxWidth="100dp"
-            app:tabSelectedTextColor="@color/black"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/white" />
 
     </LinearLayout>

@@ -61,7 +61,7 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
         initRefreshView(view);
         initRecycleView(view);
         mPresenter.getData(1,"");
-        return  view;
+        return view;
     }
 
     private void initRefreshView(View view) {
