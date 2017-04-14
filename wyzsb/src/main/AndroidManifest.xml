@@ -60,7 +60,7 @@
             android:name=".ui.activity.video.VideoDetailsActivity1"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/ColorTranslucentTheme"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -5,11 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.ButtonBarLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.frame.CollapsingToolbarLayoutState;
+import view.lcc.wyzsb.frame.SystemBarHelper;
 
 /**
  * Author:       梁铖城
@@ -26,6 +28,11 @@ public class VideoDetailsActivity1 extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_details1);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        SystemBarHelper.immersiveStatusBar(this);
+        SystemBarHelper.setHeightAndPadding(this, toolbar);
+
+
         AppBarLayout app_bar = (AppBarLayout) findViewById(R.id.appbar);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         playButton = (ButtonBarLayout) findViewById(R.id.playButton);

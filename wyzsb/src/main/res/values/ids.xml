@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<item type="id" name="scrollview"/>
+
+	<item name="statusbar_view" type="id"/>
+	<item name="translucent_view" type="id"/>
 </resources>
