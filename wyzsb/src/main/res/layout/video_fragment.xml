@@ -18,10 +18,15 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
+                android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
-
+            <view.lcc.wyzsb.view.home.FilterView
+                android:id="@+id/real_filterView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <view.lcc.wyzsb.view.LoadingLayout
                 android:id="@+id/loading_layout"
                 android:layout_width="match_parent"

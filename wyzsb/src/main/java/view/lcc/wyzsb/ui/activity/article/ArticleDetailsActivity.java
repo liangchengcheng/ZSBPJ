@@ -13,8 +13,8 @@ import view.lcc.wyzsb.frame.UIManager;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:
- * Description:
+ * Date:         2017年04月13日13:03:32
+ * Description:  文章详情
  */
 public class ArticleDetailsActivity extends BaseActivity {
 

@@ -20,16 +20,23 @@ import view.lcc.wyzsb.adapter.VideoAdapter;
 import view.lcc.wyzsb.base.BaseFragment;
 import view.lcc.wyzsb.bean.News;
 import view.lcc.wyzsb.bean.Video;
+import view.lcc.wyzsb.bean.model.FilterData;
+import view.lcc.wyzsb.bean.model.FilterEntity;
+import view.lcc.wyzsb.bean.model.FilterTwoEntity;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
+import view.lcc.wyzsb.mvp.param.HomeParams;
 import view.lcc.wyzsb.mvp.presenter.NewsPresenter;
 import view.lcc.wyzsb.mvp.presenter.VideoPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.NewsPresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.VideoPresenterImpl;
 import view.lcc.wyzsb.mvp.view.NewsView;
 import view.lcc.wyzsb.mvp.view.VideoView;
+import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
+import view.lcc.wyzsb.utils.ModelUtil;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
+import view.lcc.wyzsb.view.home.FilterView;
 
 /**
  * Author:       梁铖城
@@ -52,14 +59,21 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
     protected long currentTime = 0;
     protected int currentPage = 1;
 
+    private FilterView realFilterView;
+    // 筛选数据
+    private FilterData filterData;
+    // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
+    private int filterPosition = -1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.news_fragment,null);
+        View view = inflater.inflate(R.layout.video_fragment,null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         mPresenter = new VideoPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
+        setFilerView(view);
         mPresenter.getData(1,"");
         return view;
     }
@@ -78,7 +92,6 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new VideoAdapter();
         mAdapter.setOnItemClickListener(this);
-
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -119,7 +132,7 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
 
     @Override
     public void onItemClick(Video data) {
-
+        VideoDetailsActivity.startVideoDetailsActivity(getActivity(),"");
     }
 
     @Override
@@ -176,6 +189,48 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
                 mAdapter.notifyDataSetChanged();
             }
         }, delay);
+    }
+
+    private void setFilerView(View view){
+        // 筛选数据
+        realFilterView = (FilterView) view.findViewById(R.id.real_filterView);
+        filterData = new FilterData();
+        filterData.setCategory(ModelUtil.getCategoryData());
+        filterData.setSorts(ModelUtil.getSortData());
+        filterData.setFilters(ModelUtil.getFilterData());
+        // 设置真FilterView数据
+        realFilterView.setFilterData(getActivity(), filterData);
+        realFilterView.setVisibility(View.VISIBLE);
+        // (真正的)筛选视图点击
+        realFilterView.setOnFilterClickListener(new FilterView.OnFilterClickListener() {
+            @Override
+            public void onFilterClick(int position) {
+                filterPosition = position;
+                realFilterView.show(position);
+            }
+        });
+        // 分类Item点击
+        realFilterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
+            @Override
+            public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
+                HomeParams params = new HomeParams();
+            }
+        });
+        // 排序Item点击
+        realFilterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
+            @Override
+            public void onItemSortClick(FilterEntity entity) {
+
+            }
+        });
+        // 筛选Item点击
+        realFilterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
+            @Override
+            public void onItemFilterClick(FilterEntity entity) {
+
+            }
+        });
+
     }
 
 }

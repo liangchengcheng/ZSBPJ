@@ -33,6 +33,7 @@ import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
 import view.lcc.wyzsb.mvp.view.HomeFragmentView;
 import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
+import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity1;
 import view.lcc.wyzsb.utils.ColorUtil;
 import view.lcc.wyzsb.utils.DensityUtil;
 import view.lcc.wyzsb.utils.ModelUtil;
@@ -410,7 +411,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     @Override
     public void click(TravelingEntity entity) {
-        Intent intent = new Intent(getActivity(), VideoDetailsActivity.class);
+        Intent intent = new Intent(getActivity(), VideoDetailsActivity1.class);
         startActivity(intent);
     }
 

@@ -49,6 +49,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <!--意见反馈意见-->
+        <activity
+            android:name=".ui.activity.setting.FeedBackActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ui.activity.video.VideoDetailsActivity1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorTranslucentTheme"/>
     </application>
 
 </manifest>

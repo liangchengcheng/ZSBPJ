@@ -11,6 +11,13 @@ import android.widget.TextView;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.TabViewPagerAdapter;
 import view.lcc.wyzsb.base.BaseFragment;
+import view.lcc.wyzsb.bean.model.FilterData;
+import view.lcc.wyzsb.bean.model.FilterEntity;
+import view.lcc.wyzsb.bean.model.FilterTwoEntity;
+import view.lcc.wyzsb.mvp.param.HomeParams;
+import view.lcc.wyzsb.utils.DensityUtil;
+import view.lcc.wyzsb.utils.ModelUtil;
+import view.lcc.wyzsb.view.home.FilterView;
 
 /**
  * Author:       梁铖城
@@ -19,11 +26,19 @@ import view.lcc.wyzsb.base.BaseFragment;
  * Description:  主页
  */
 public class DataFragment extends BaseFragment {
-
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private TextView point_city;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.data_fragment, null);
+        viewPager = (ViewPager) view.findViewById(R.id.second_viewpagers);
+        tabLayout = (TabLayout) view.findViewById(R.id.second_tabs);
+        point_city = (TextView) view.findViewById(R.id.pointcity);
+        setupViewPager();
+        return view;
+    }
     /**
      * 设置tab下的viewpager
      */
@@ -31,6 +46,7 @@ public class DataFragment extends BaseFragment {
         point_city.setText("");
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -52,9 +68,9 @@ public class DataFragment extends BaseFragment {
 
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFrag(new NewsFragment(), "安全新闻");
-        adapter.addFrag(new ArticleFragment(), "文字教程");
         adapter.addFrag(new VideoFragment(), "视频教程");
+        adapter.addFrag(new ArticleFragment(), "文字教程");
+        adapter.addFrag(new NewsFragment(), "安全新闻");
         viewPager.setAdapter(adapter);
     }
 
@@ -71,16 +87,6 @@ public class DataFragment extends BaseFragment {
     @Override
     public void initUI(View view) {
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.data_fragment, null);
-        viewPager = (ViewPager) view.findViewById(R.id.second_viewpagers);
-        tabLayout = (TabLayout) view.findViewById(R.id.second_tabs);
-        point_city = (TextView) view.findViewById(R.id.pointcity);
-        setupViewPager();
-        return view;
     }
 
     @Override

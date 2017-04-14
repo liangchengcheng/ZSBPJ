@@ -34,6 +34,7 @@
     <color name="red">#ff0000</color>
     <!--桔黄色 -->
     <color name="bisque">#ffe4c4</color>
+
     <!--鹿皮色 -->
     <color name="moccasin">#ffe4b5</color>
     <!--中紫罗兰色 -->
@@ -123,4 +124,9 @@
 
     <color name="light_main_list_item_unselected">#FFFFFF</color>
     <color name="light_main_list_item_selected">#f4f4f4</color>
+
+    <color name="listview_color">#8FFFE4C4</color>
+
+    <color name="home3">#72d3b4</color>
+    <color name="window_background">#eaeaea</color>
 </resources>

@@ -87,22 +87,23 @@
             android:id="@+id/second_tabs"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="0.5dp"
             android:fillViewport="false"
             app:tabBackground="@color/colorPrimary"
-            app:tabGravity="center"
+            app:tabGravity="fill"
             app:tabIndicatorColor="@color/white"
-            app:tabMaxWidth="100dp"
+            app:tabIndicatorHeight="1.5dp"
+            app:tabMinWidth="50dp"
             app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/MyCustomTabTextAppearance2"
             app:tabTextColor="@color/white" />
 
     </LinearLayout>
-
 
     <android.support.v4.view.ViewPager
         android:id="@+id/second_viewpagers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 </LinearLayout>
 

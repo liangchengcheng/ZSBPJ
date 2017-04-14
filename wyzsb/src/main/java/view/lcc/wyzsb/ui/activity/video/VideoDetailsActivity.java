@@ -1,6 +1,8 @@
 package view.lcc.wyzsb.ui.activity.video;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
 import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CommentsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.CommentsView;
+import view.lcc.wyzsb.ui.activity.article.ArticleDetailsActivity;
 import view.lcc.wyzsb.ui.fragment.CommentFragment;
 import view.lcc.wyzsb.ui.fragment.JianjieFragment;
 import view.lcc.wyzsb.utils.MediaUtils;
@@ -56,6 +59,13 @@ public class VideoDetailsActivity extends BaseActivity {
     private PowerManager.WakeLock wakeLock;
     View rootView;
     private TabLayout tlUserProfileTabs;
+
+    public static void startVideoDetailsActivity(Activity startingActivity, String type) {
+        Intent intent = new Intent(startingActivity, VideoDetailsActivity.class);
+        intent.putExtra("", type);
+        startingActivity.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

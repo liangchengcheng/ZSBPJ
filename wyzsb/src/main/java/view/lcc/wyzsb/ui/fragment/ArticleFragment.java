@@ -18,16 +18,23 @@ import view.lcc.wyzsb.adapter.VideoAdapter;
 import view.lcc.wyzsb.base.BaseFragment;
 import view.lcc.wyzsb.bean.Article;
 import view.lcc.wyzsb.bean.Video;
+import view.lcc.wyzsb.bean.model.FilterData;
+import view.lcc.wyzsb.bean.model.FilterEntity;
+import view.lcc.wyzsb.bean.model.FilterTwoEntity;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
+import view.lcc.wyzsb.mvp.param.HomeParams;
 import view.lcc.wyzsb.mvp.presenter.ArticlePresenter;
 import view.lcc.wyzsb.mvp.presenter.VideoPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.ArticlePresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.VideoPresenterImpl;
 import view.lcc.wyzsb.mvp.view.ArticleView;
 import view.lcc.wyzsb.mvp.view.VideoView;
+import view.lcc.wyzsb.ui.activity.article.ArticleDetailsActivity;
+import view.lcc.wyzsb.utils.ModelUtil;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
+import view.lcc.wyzsb.view.home.FilterView;
 
 /**
  * Author:       梁铖城
@@ -50,6 +57,12 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
     protected long currentTime = 0;
     protected int currentPage = 1;
 
+    private FilterView realFilterView;
+    // 筛选数据
+    private FilterData filterData;
+    // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
+    private int filterPosition = -1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,6 +71,7 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
         mPresenter = new ArticlePresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
+        setFilerView(view);
         mPresenter.getData(1,"");
         return view;
     }
@@ -117,7 +131,7 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
 
     @Override
     public void onItemClick(Article data) {
-
+        ArticleDetailsActivity.startArticleDetails(getActivity(),"");
     }
 
     @Override
@@ -174,5 +188,47 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
                 mAdapter.notifyDataSetChanged();
             }
         }, delay);
+    }
+
+    private void setFilerView(View view){
+        // 筛选数据
+        realFilterView = (FilterView) view.findViewById(R.id.real_filterView);
+        filterData = new FilterData();
+        filterData.setCategory(ModelUtil.getCategoryData());
+        filterData.setSorts(ModelUtil.getSortData());
+        filterData.setFilters(ModelUtil.getFilterData());
+        // 设置真FilterView数据
+        realFilterView.setFilterData(getActivity(), filterData);
+        realFilterView.setVisibility(View.VISIBLE);
+        // (真正的)筛选视图点击
+        realFilterView.setOnFilterClickListener(new FilterView.OnFilterClickListener() {
+            @Override
+            public void onFilterClick(int position) {
+                filterPosition = position;
+                realFilterView.show(position);
+            }
+        });
+        // 分类Item点击
+        realFilterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
+            @Override
+            public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
+                HomeParams params = new HomeParams();
+            }
+        });
+        // 排序Item点击
+        realFilterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
+            @Override
+            public void onItemSortClick(FilterEntity entity) {
+
+            }
+        });
+        // 筛选Item点击
+        realFilterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
+            @Override
+            public void onItemFilterClick(FilterEntity entity) {
+
+            }
+        });
+
     }
 }
