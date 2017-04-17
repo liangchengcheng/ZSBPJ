@@ -44,11 +44,10 @@ public class HomeFragmentPresenterImpl implements HomeFragmentPresenter {
                 if (params.getPage() == 1){
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-//                        String code = jsonObject.getString("c");
-//                        String msg = jsonObject.getString("m");
-                        Boolean error = jsonObject.getBoolean("error");
-                        if (!error) {
-                            String result = jsonObject.getString("results");
+                        String code = jsonObject.getString("status");
+                        String msg = jsonObject.getString("message");
+                        if (code.equals("1")) {
+                            String result = jsonObject.getString("result");
                             List<TravelingEntity> orders = GsonUtils.fromJsonArray(result, TravelingEntity.class);
                             view.getDataSuccess(orders);
                         } else {
@@ -61,10 +60,10 @@ public class HomeFragmentPresenterImpl implements HomeFragmentPresenter {
                 }else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.getString("c");
-                        String msg = jsonObject.getString("m");
+                        String code = jsonObject.getString("status");
+                        String msg = jsonObject.getString("message");
                         if (TextUtils.equals(code, "1")) {
-                            String result = jsonObject.getString("r");
+                            String result = jsonObject.getString("result");
                             List<TravelingEntity> orders = GsonUtils.fromJsonArray(result, TravelingEntity.class);
                             view.loadMoreDataSuccess(orders);
                         } else {

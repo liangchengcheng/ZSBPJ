@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import view.lcc.wyzsb.base.ApiClient;
 import view.lcc.wyzsb.base.AppConstants;
+import view.lcc.wyzsb.frame.ParamsMap;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
 import view.lcc.wyzsb.mvp.param.ArticleParams;
@@ -21,7 +22,10 @@ public class ArticleModel {
      * 获取我的订单详情
      */
     public OkHttpRequest getArticle(ArticleParams articleParams, ResultCallback<String> callback) {
-        HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_ARTICLE, map).tag("").get(callback);
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("page", "1");
+        paramsMap.put("company_name", "");
+        paramsMap.put("area", "");
+        return ApiClient.create(AppConstants.RequestPath.GET_ARTICLE, paramsMap).tag("").get(callback);
     }
 }

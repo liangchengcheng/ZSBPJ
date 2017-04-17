@@ -188,6 +188,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         // 设置假FilterView数据
         headerFilterView = new HeaderFilterView(getActivity());
         headerFilterView.fillView(new Object(), smoothListView);
+
         // 设置真FilterView数据
         realFilterView.setFilterData(mActivity, filterData);
         realFilterView.setVisibility(View.GONE);

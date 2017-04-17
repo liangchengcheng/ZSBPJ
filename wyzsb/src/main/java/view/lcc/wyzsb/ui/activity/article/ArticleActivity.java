@@ -31,8 +31,8 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:
  * Description:
  */
-public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout.OnRefreshListener,
-        ArticleAdapter.OnFavClickListener, ArticleAdapter.OnItemClickListener,View.OnClickListener,ArticleView{
+public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener,
+        ArticleAdapter.OnFavClickListener, ArticleAdapter.OnItemClickListener,View.OnClickListener,ArticleView {
 
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
@@ -113,7 +113,11 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()){
+            case R.id.guillotine_hamburger:
+                finish();
+                break;
+        }
     }
 
     @Override

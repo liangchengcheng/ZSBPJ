@@ -88,20 +88,19 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
         final TravelingEntity entity = getItem(position);
 
         holder.llRootView.setVisibility(View.VISIBLE);
-        if (TextUtils.isEmpty(entity.getType())) {
+        if (TextUtils.isEmpty(entity.getAuthor())) {
             holder.llRootView.setVisibility(View.INVISIBLE);
             return convertView;
         }
 
-        final String title = entity.getDesc() ;
+        final String title = entity.getCompany_name() ;
         holder.tvTitle.setText(title);
-        holder.tvRank.setText("排名:" + entity.getSource());
+        holder.tvRank.setText("排名:" + entity.getCompany_phone());
         String url = null;
-        List<String> images = entity.getImages();
-        if (images!=null && images.size()>0){
-            url =images.get(0);
+        String images = entity.getCompany_image();
+        if (!TextUtils.isEmpty(images)){
+            holder.givImage.loadNetImage(url, R.color.font_black_6);
         }
-        holder.givImage.loadNetImage(url, R.color.font_black_6);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

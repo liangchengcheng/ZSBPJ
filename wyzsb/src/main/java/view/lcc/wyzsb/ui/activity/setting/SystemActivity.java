@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.frame.DataCleanManager;
 import view.lcc.wyzsb.utils.SharePreferenceUtil;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.utils.UpdateApkTask;
@@ -23,6 +25,7 @@ import view.lcc.wyzsb.utils.UpdateApkTask;
  */
 public class SystemActivity extends BaseActivity implements View.OnClickListener{
 
+    private View toolBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +33,12 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
 
         TextView code = (TextView) findViewById(R.id.version_tv);
         code.setText("v"+getVerName(SystemActivity.this));
+        toolBar = findViewById(R.id.toolBar);
 
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.about).setOnClickListener(this);
         findViewById(R.id.checkUpgrade).setOnClickListener(this);
+        findViewById(R.id.cacheLayout).setOnClickListener(this);
     }
 
     @Override
@@ -49,6 +54,10 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.checkUpgrade:
                 update();
+                break;
+            case R.id.cacheLayout:
+                DataCleanManager.cleanSharedPreference(SystemActivity.this);
+                showSnackbar(toolBar,"清除缓存成功");
                 break;
         }
     }
@@ -78,5 +87,9 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
             e.printStackTrace();
         }
         return verName;
+    }
+
+    public void showSnackbar(View view, String string) {
+        Snackbar.make(view, string, Snackbar.LENGTH_LONG).show();
     }
 }

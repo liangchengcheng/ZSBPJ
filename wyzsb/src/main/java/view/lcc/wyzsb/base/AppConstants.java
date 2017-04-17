@@ -2,16 +2,10 @@ package view.lcc.wyzsb.base;
 
 public class AppConstants {
 
-    public final static String BASE_IP = "http://gank.io";
-    // 图片接口
-    public final static String UPLOAD_PATH = BASE_IP + "nacar-web-passenger/Api/queryPhoto/";
+    public final static String BASE_IP = "http://114.215.164.168:8080";
     // 乘客端常用地址
     public final static String BASE_URL = BASE_IP ;
-    //public final static String BASE_URL = "http://192.168.0.86:8080/nacar-web-passenger";
     // 会员注册地址
-    public final static String USER_BASE_URL = BASE_IP + "jwsso-passenger";
-    // 支付地址
-    public final static String PAY_URL = "http://211.101.37.232:8087/nacar-web-pay";
     //================================ 特殊字段 =====================================
     public static final String RESPONSE_CODE = "c";
 
@@ -81,9 +75,9 @@ public class AppConstants {
         //删除订单
         public final static String AddFeedBackService = "/Api/deleteOrderById";
         //订单评价
-        public final static String GET_ARTICLE = "/Api/assessOrder";
+        public final static String GET_ARTICLE = "/service/pagedes";
         //投诉司机
-        public final static String GET_COMMENT = "/Api/complainDriver";
+        public final static String GET_COMMENT = "/service/pagedes";
 
 
         //=============================  网约车的  ================================

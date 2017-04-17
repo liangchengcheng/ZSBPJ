@@ -1,9 +1,8 @@
 package view.lcc.wyzsb.mvp.model;
 
-import java.util.HashMap;
-
 import view.lcc.wyzsb.base.ApiClient;
 import view.lcc.wyzsb.base.AppConstants;
+import view.lcc.wyzsb.frame.ParamsMap;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
 import view.lcc.wyzsb.mvp.param.HomeParams;
@@ -20,7 +19,11 @@ public class HomeFragmentModel {
      * 获取我的订单详情
      */
     public OkHttpRequest getHomeFragment(HomeParams homeParams, ResultCallback<String> callback) {
-        HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("page", "1");
+        paramsMap.put("company_name", "");
+        paramsMap.put("area", "");
+
+        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, paramsMap).tag("").get(callback);
     }
 }

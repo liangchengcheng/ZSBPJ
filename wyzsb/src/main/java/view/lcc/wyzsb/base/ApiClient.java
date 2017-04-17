@@ -66,12 +66,12 @@ public class ApiClient {
     //会员系统
     public static OkHttpRequest.Builder createUser(String path, Map paramsMap, Map headerMap) {
         return new OkHttpRequest.Builder()
-                .url(AppConstants.USER_BASE_URL + path).params(paramsMap).content(null).headers(headerMap);
+                .url(AppConstants.BASE_URL + path).params(paramsMap).content(null).headers(headerMap);
     }
 
     public static OkHttpRequest.Builder createUser(String path, String content, Map headerMap) {
         return new OkHttpRequest.Builder()
-                .url(AppConstants.USER_BASE_URL + path).content(content).headers(headerMap);
+                .url(AppConstants.BASE_URL + path).content(content).headers(headerMap);
     }
 
     public static OkHttpRequest.Builder createUser(String path, Map paramsMap) {
@@ -92,12 +92,12 @@ public class ApiClient {
 
     public static OkHttpRequest.Builder createPay(String path, Map paramsMap, Map headerMap) {
         return new OkHttpRequest.Builder()
-                .url(AppConstants.PAY_URL + path).params(paramsMap).content(null).headers(headerMap);
+                .url(AppConstants.BASE_URL + path).params(paramsMap).content(null).headers(headerMap);
     }
 
     public static OkHttpRequest.Builder createPay(String path, String content, Map headerMap) {
         return new OkHttpRequest.Builder()
-                .url(AppConstants.PAY_URL + path).content(content).headers(headerMap);
+                .url(AppConstants.BASE_URL + path).content(content).headers(headerMap);
     }
 
 

@@ -68,11 +68,10 @@ public class ArticlePresenterImpl implements ArticlePresenter {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(entities);
-                    //int status = jsonObject.getInt("status");
-                    //String message = jsonObject.getString("message");
-                    Boolean error = jsonObject.getBoolean("error");
-                    if (!error) {
-                        String result = jsonObject.getString("results");
+                    String code = jsonObject.getString("status");
+                    String msg = jsonObject.getString("message");
+                    if (code.equals("1")) {
+                        String result = jsonObject.getString("result");
                         List<Article> weekDatas = GsonUtils.fromJsonArray(result, Article.class);
                         if (page == 1) {
                             view.refreshDataSuccess(weekDatas);
