@@ -18,7 +18,9 @@ import com.lcc.mvp.presenter.IndexMenuPresenter;
 import com.lcc.mvp.presenter.impl.IndexMenuPresenterImpl;
 import com.lcc.mvp.view.IndexMenuView;
 import com.lcc.view.loadview.LoadingLayout;
+
 import java.util.List;
+
 import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.utils.TimeUtils;
 import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
@@ -54,7 +56,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
 
     @Override
     protected void initView() {
-        type=getIntent().getStringExtra(TYPE);
+        type = getIntent().getStringExtra(TYPE);
         TextView tv_title= (TextView) findViewById(R.id.tv_title);
         tv_title.setText(type);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
@@ -62,7 +64,7 @@ public class IndexMenuActivity extends BaseActivity implements IndexMenuView, Sw
         mPresenter = new IndexMenuPresenterImpl(this);
         initRefreshView();
         initRecycleView();
-        mPresenter.getData(1,type);
+        mPresenter.getData(1, type);
     }
 
     private void initRefreshView() {

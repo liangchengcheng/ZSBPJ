@@ -20,6 +20,8 @@ import com.lcc.App;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.login.SignUpActivity;
 import com.lcc.utils.SharePreferenceUtil;
+import com.qq.e.ads.splash.SplashADListener;
+
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +31,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import zsbpj.lccpj.frame.ImageManager;
 
-public class SplashActivity extends Activity implements View.OnClickListener {
+public class SplashActivity extends Activity implements View.OnClickListener, SplashADListener {
     private LinearLayout ll_bottom_view;
     private String user_tk;
     private ImageView logo_inner_iv;
@@ -168,5 +170,30 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                         finish();
                     }
                 });
+    }
+
+    @Override
+    public void onADDismissed() {
+
+    }
+
+    @Override
+    public void onNoAD(int i) {
+
+    }
+
+    @Override
+    public void onADPresent() {
+
+    }
+
+    @Override
+    public void onADClicked() {
+
+    }
+
+    @Override
+    public void onADTick(long l) {
+
     }
 }

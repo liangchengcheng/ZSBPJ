@@ -22,8 +22,7 @@
             android:src="@drawable/ic_arrow_back_white_24dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:paddingRight="20dp"
-            />
+            android:paddingRight="20dp" />
 
 
         <TextView
