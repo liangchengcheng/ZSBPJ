@@ -129,4 +129,17 @@
 
     <color name="home3">#72d3b4</color>
     <color name="window_background">#eaeaea</color>
+
+    <!-- PaperButton Default -->
+    <dimen name="paper_text_size">15sp</dimen>
+    <color name="paper_text_color">#60000000</color>
+    <color name="paper_button_color">#FFAD5B</color>
+    <color name="paper_button_shadow_color">#000000</color>
+    <dimen name="paper_button_corner_radius">2dp</dimen>
+    <dimen name="paper_padding">1dp</dimen>
+
+    <color name="setting_act_viewline_common">#ffc6c5c4</color>
+    <color name="setting_act_textcolor_common">#ff727272</color>
+    <color name="setting_act_textcolor_cus1">#ffd4d4d4</color>
+    <color name="setting_act_rl_bgcolor_common">#ffffffff</color>
 </resources>

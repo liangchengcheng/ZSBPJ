@@ -22,6 +22,6 @@ public class NewsModel {
      */
     public OkHttpRequest getNews(NewsParams newsParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_USER_ORDER, map).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
     }
 }

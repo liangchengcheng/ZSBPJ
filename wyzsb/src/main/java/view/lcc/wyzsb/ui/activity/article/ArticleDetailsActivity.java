@@ -24,7 +24,7 @@ public class ArticleDetailsActivity extends BaseActivity {
         startingActivity.startActivity(intent);
     }
 
-    WebView mWebView;
+    private WebView mWebView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

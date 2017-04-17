@@ -79,29 +79,12 @@ public class AppConstants {
 
         //================================投诉评价订单================================
         //删除订单
-        public final static String DEL_ORDER = "/Api/deleteOrderById";
+        public final static String AddFeedBackService = "/Api/deleteOrderById";
         //订单评价
-        public final static String ASSESS_ORDER = "/Api/assessOrder";
+        public final static String GET_ARTICLE = "/Api/assessOrder";
         //投诉司机
-        public final static String COMPLAIN_DRIVER = "/Api/complainDriver";
+        public final static String GET_COMMENT = "/Api/complainDriver";
 
-        //================================巡游车的===================================
-        //获取我的订单的列表
-        public final static String GET_USER_ORDER = "/api/data/iOS/10/3";
-        //巡游车的  正在进行  的车费详情
-        public final static String XYC_ORDER_DETAIL_A = "/Api/xyc/getOrderDetails/A";
-        //巡游车的  等待出发  的车费详情
-        public final static String XYC_ORDER_DETAIL_B = "/Api/xyc/getOrderDetails/B";
-        //巡游车的  已经完成  已经支付  的车费详情
-        public final static String XYC_ORDER_DETAIL_C = "/Api/xyc/getOrderDetails/C";
-        //巡游车的  已经完成  未支付  的车费详情
-        public final static String XYC_ORDER_DETAIL_D = "/Api/xyc/getOrderDetails/D";
-        //巡游车的  已经取消  已经违约  已经支付  的车费详情
-        public final static String XYC_ORDER_DETAIL_E = "/Api/xyc/getOrderDetails/E";
-        //巡游车的  已经取消  已经违约  未支付  的车费详情
-        public final static String XYC_ORDER_DETAIL_F = "/Api/xyc/getOrderDetails/F";
-        //巡游车的  已经取消  未违约  的车费详情
-        public final static String XYC_ORDER_DETAIL_G = "/Api/xyc/getOrderDetails/G";
 
         //=============================  网约车的  ================================
         //网约车的  正在进行  的车费详情

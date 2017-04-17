@@ -55,12 +55,39 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
-
+        <!--视频详情界面-->
         <activity
             android:name=".ui.activity.video.VideoDetailsActivity1"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <!--关于-->
+        <activity
+            android:name=".ui.activity.setting.AboutActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--关于-->
+        <activity
+            android:name=".ui.activity.news.NewsDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--登录和注册-->
+        <activity
+            android:name=".ui.activity.login.LoginMainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!-- 系统的界面 -->
+        <activity
+            android:name=".ui.activity.setting.SystemActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

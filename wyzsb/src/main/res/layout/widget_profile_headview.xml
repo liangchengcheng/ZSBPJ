@@ -10,6 +10,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20.0dip">
         <Button
+            android:visibility="gone"
             android:id="@+id/layout_me_feedback"
             android:layout_width="25.0dip"
             android:layout_height="25.0dip"
@@ -48,7 +49,7 @@
                 android:layout_marginBottom="12dp"
                 android:visibility="visible"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="100dp"

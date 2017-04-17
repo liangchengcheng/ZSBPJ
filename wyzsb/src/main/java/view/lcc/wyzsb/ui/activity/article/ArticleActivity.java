@@ -47,7 +47,7 @@ public class ArticleActivity extends BaseActivity implements  SwipeRefreshLayout
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    private String type="面试准备";
+    private String type=" ";
 
     public static void startArticleActivity(Activity startingActivity, String type) {
         Intent intent = new Intent(startingActivity, ArticleActivity.class);

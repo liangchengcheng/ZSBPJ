@@ -32,6 +32,7 @@ import view.lcc.wyzsb.mvp.presenter.HomeFragmentPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
 import view.lcc.wyzsb.mvp.view.HomeFragmentView;
 import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
+import view.lcc.wyzsb.ui.activity.setting.AboutActivity;
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity1;
 import view.lcc.wyzsb.utils.ColorUtil;
@@ -53,7 +54,7 @@ import view.lcc.wyzsb.view.home.SmoothListView.SmoothListView;
  * Description:  主页
  */
 public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener
-        ,HomeFragmentView,TravelingAdapter.ItemClickListener,HeaderChannelView.OnChannelClickListener{
+        ,HomeFragmentView,TravelingAdapter.ItemClickListener,HeaderChannelView.OnChannelClickListener,View.OnClickListener{
 
     private SmoothListView smoothListView;
 
@@ -140,6 +141,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         viewActionMoreBg =  view.findViewById(R.id.view_action_more_bg);
         flActionMore = (FrameLayout) view.findViewById(R.id.fl_action_more);
         StatusBarUtil.setStatusBarTranslucent(getActivity(), false);
+        view.findViewById(R.id.fl_action_more).setOnClickListener(this);
         initData();
         initView();
         initListener();
@@ -418,5 +420,14 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     @Override
     public void Channel(String title) {
         ArticleActivity.startArticleActivity(getActivity(),"title");
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.fl_action_more:
+                AboutActivity.startAboutActivity(getActivity());
+                break;
+        }
     }
 }

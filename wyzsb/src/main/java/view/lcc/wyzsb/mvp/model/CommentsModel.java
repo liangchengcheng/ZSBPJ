@@ -25,7 +25,7 @@ public class CommentsModel {
         paramsMap.put("page", page);
         paramsMap.put("nid", nid);
         HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_USER_ORDER, map).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
     }
 
     /**

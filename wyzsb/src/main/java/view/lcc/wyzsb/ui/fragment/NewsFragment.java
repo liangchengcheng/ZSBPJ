@@ -26,6 +26,7 @@ import view.lcc.wyzsb.mvp.presenter.impl.NewsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.ArticleView;
 import view.lcc.wyzsb.mvp.view.NewsView;
 import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
+import view.lcc.wyzsb.ui.activity.news.NewsDetailsActivity;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
 
@@ -118,7 +119,7 @@ public class NewsFragment extends Fragment implements NewsView,SwipeRefreshLayou
 
     @Override
     public void onItemClick(News data) {
-
+        NewsDetailsActivity.startNewsDetailsActivity(getActivity(),data);
     }
 
     @Override
