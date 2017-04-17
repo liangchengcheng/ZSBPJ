@@ -88,6 +88,20 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+
+        <!-- 推荐书籍 -->
+        <activity
+            android:name=".ui.activity.setting.BookActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!-- 推荐博客 -->
+        <activity
+            android:name=".ui.activity.setting.LinkActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
