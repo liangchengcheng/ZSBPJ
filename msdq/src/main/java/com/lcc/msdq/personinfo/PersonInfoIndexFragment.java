@@ -22,6 +22,7 @@ import com.lcc.msdq.description.user.UserProfileActivity;
 import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.login.LoginActivity;
 import com.lcc.msdq.R;
+import com.lcc.msdq.login.LoginMainActivity;
 import com.lcc.msdq.login.ResetPasswordActivity;
 import com.lcc.msdq.fabu.FabuList;
 import com.lcc.msdq.setting.SettingActivity;
@@ -34,6 +35,9 @@ import zsbpj.lccpj.frame.ImageManager;
 import zsbpj.lccpj.view.glide.GlideCircleTransform;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
+/**
+ * 第三个界面
+ */
 public class PersonInfoIndexFragment extends Fragment implements View.OnClickListener {
     //头像
     private ImageView iv_more;
@@ -105,7 +109,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                     intent.putExtra(UserProfileActivity.UserInfo, DataManager.getUserInfo());
                     startActivityForResult(intent, 200);
                 } else {
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
+                    startActivity(new Intent(getActivity(), LoginMainActivity.class));
                 }
                 break;
             case R.id.rl_qd:
@@ -122,7 +126,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
+                    startActivityForResult(new Intent(getActivity(), LoginMainActivity.class), 101);
                     return;
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
@@ -132,7 +136,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
+                    startActivityForResult(new Intent(getActivity(), LoginMainActivity.class), 101);
                     return;
                 }
                 startActivity(new Intent(getActivity(), FabuList.class));
@@ -142,7 +146,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 101);
+                    startActivityForResult(new Intent(getActivity(), LoginMainActivity.class), 101);
                     return;
                 }
                 startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
@@ -160,13 +164,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 ShareUtil shareUtil = new ShareUtil();
                 shareUtil.showShare(getActivity());
                 break;
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 101 && resultCode == 101) {
-            setData();
         }
     }
 
@@ -188,7 +185,6 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
             } else {
                 tv_qm.setText(userInfo.getQm());
             }
-
             String user_image = userInfo.getUser_image();
             if (!TextUtils.isEmpty(user_image)) {
                 Glide.with(getActivity()).load(user_image)
@@ -205,8 +201,8 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
 
     public void onEvent(Integer event) {
         switch (event) {
-            case 0x02:
-
+            case 0x03:
+                setData();
                 break;
         }
     }

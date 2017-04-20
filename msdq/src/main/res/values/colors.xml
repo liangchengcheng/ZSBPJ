@@ -530,4 +530,5 @@
 
     <color name="mask_color">#88888888</color>
     <color name="check_bg">#f2f2f2</color>
+    <color name="bg_White">#FFFFFF</color>
 </resources>

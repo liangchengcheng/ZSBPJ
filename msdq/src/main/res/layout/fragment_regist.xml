@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fg_regist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rela_rephone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_color_black">
+
+        <ImageView
+            android:id="@+id/usericon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/iconmbile" />
+
+        <com.lcc.view.EditTextWithDel
+            android:id="@+id/userphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/usericon"
+            android:background="@null"
+            android:hint="请输入您的手机号"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rela_recode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_border_color_black">
+
+            <ImageView
+                android:id="@+id/keyicon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/keyicon" />
+
+            <com.lcc.view.EditTextWithDel
+                android:id="@+id/smscode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toEndOf="@+id/keyicon"
+                android:background="@null"
+                android:hint="验证码"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <com.lcc.view.PaperButton
+            android:id="@+id/send_smscode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            widget:paper_color="#9e9e9e"
+            widget:paper_corner_radius="19dp"
+            widget:paper_text="发送验证码"
+            widget:paper_text_color="@color/white"
+            widget:paper_text_size="13sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rela_repass"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_color_black">
+
+        <ImageView
+            android:id="@+id/codeicon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/codeicon" />
+
+        <com.lcc.view.EditTextWithDel
+            android:id="@+id/userpassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/codeicon"
+            android:background="@null"
+            android:hint="请输入您的密码"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <com.lcc.view.PaperButton
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        widget:paper_color="?attr/colorPrimary"
+        widget:paper_corner_radius="19dp"
+        widget:paper_text="下一步"
+        widget:paper_text_color="@color/white" />
+
+</LinearLayout>

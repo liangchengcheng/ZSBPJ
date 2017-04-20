@@ -10,7 +10,6 @@ import java.util.List;
  * Description:
  */
 public class News implements Serializable{
-
     //mid 新闻的主键
     private String id;
     //预览图
@@ -33,9 +32,6 @@ public class News implements Serializable{
     private String n_c;
     //新闻的正文
     private String n_b;
-
-
-
     // 暂无数据属性
     private boolean isNoData = false;
     private int height;

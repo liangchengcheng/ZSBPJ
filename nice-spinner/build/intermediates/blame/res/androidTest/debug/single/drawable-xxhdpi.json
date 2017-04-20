@@ -40,12 +40,12 @@
         "source": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_check_to_on_mtrl_000.png",
         "source": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_tab_indicator_mtrl_alpha.9.png",

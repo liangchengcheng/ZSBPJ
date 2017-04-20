@@ -57,7 +57,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void showThemeDialog() {
-
         android.support.v7.app.AlertDialog.Builder builder = DialogUtils.makeDialogBuilder(activity);
         builder.setTitle("更换主题");
         Integer[] res = new Integer[]{R.drawable.red_round, R.drawable.brown_round, R.drawable.blue_round,
@@ -93,15 +92,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case BROWN:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.BrownDialogTheme);
                 break;
-
             case BLUE:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.BlueDialogTheme);
                 break;
-
             case BLUE_GREY:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.BlueGreyDialogTheme);
                 break;
-
             default:
                 builder = new AlertDialog.Builder(SettingActivity.this, R.style.RedDialogTheme);
                 break;
@@ -123,23 +119,19 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.tx_changetheme:
                 showThemeDialog();
                 break;
-
             //去意见反馈的界面
             case R.id.ml_yjfk:
                 startActivity(new Intent(SettingActivity.this, FeedBackActivity.class));
                 break;
-
             //清理缓存，这里我知情理sp的缓存
             case R.id.ll_clear_cache:
                 DataCleanManager.cleanSharedPreference(SettingActivity.this);
                 FrameManager.getInstance().toastPrompt("清除缓存成功");
                 break;
-
             //返回按钮
             case R.id.guillotine_hamburger:
                 finish();
                 break;
-
             //注销登录
             case R.id.tv_logout:
                 logout();

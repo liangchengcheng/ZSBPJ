@@ -109,6 +109,9 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".login.LoginMainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".login.SignUpActivity"
             android:theme="@style/AppTheme" />
 
