@@ -1,5 +1,6 @@
 package com.lcc.view.tab.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import java.util.Arrays;
 /**
  * Created by sunger on 16/4/16.
  */
+@SuppressLint("ValidFragment")
 public class FragmentFloor extends Fragment {
 
     private ListView listView;
@@ -24,6 +26,7 @@ public class FragmentFloor extends Fragment {
     private String floors[] = {"全部时间", "最近一周", "最近一月", "最近一年"};
     private TestIndexFragment mainActivity;
 
+    @SuppressLint("ValidFragment")
     public FragmentFloor(TestIndexFragment mainActivity){
         this.mainActivity = mainActivity;
     }

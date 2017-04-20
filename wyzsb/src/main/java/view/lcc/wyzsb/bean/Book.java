@@ -10,6 +10,31 @@ import java.util.List;
  * Description:
  */
 public class Book implements Serializable{
+
+    //mid
+    private String id;
+    //发布时间
+    private String b_ct;
+    //更新时间
+    private String b_ut;
+    //类别(是哪个类型的)
+    private String b_type;
+    //书籍的简单的介绍
+    private String b_js;
+    //点击数量
+    private String b_c;
+    //书的名字
+    private String b_t;
+    //书的购买地址的url
+    private String b_u;
+    //书的图片
+    private String b_i;
+    //书的评分
+    private String b_g;
+
+
+
+
     /**
      * _id : 58d49b13421aa93abb7d4e4c
      * createdAt : 2017-03-24T12:05:39.590Z

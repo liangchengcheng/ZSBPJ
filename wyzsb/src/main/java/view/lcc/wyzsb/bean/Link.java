@@ -12,24 +12,19 @@ public class Link implements Serializable {
     //mid
     private String id;
     //发布时间
-    private String n_ct;
+    private String l_ct;
     //更新时间
-    private String n_ut;
+    private String l_ut;
     //类别(是   官网   还是  博客   还是论坛)
-    private String v_type;
+    private String l_type;
     //链接简单介绍
     private String l_js;
     //点击数量
     private String l_c;
     //链接的 主题
-    private String v_t;
+    private String l_t;
     //链接的url
-    private String v_u;
-
-
-
-
-
+    private String l_u;
 
 
     private String name ;

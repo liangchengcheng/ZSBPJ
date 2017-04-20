@@ -1,199 +1,160 @@
 package com.lcc.msdq;
 
-import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.lcc.App;
-import com.lcc.msdq.login.LoginActivity;
-import com.lcc.msdq.login.SignUpActivity;
-import com.lcc.utils.SharePreferenceUtil;
-import com.qq.e.ads.splash.SplashADListener;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
+import com.tencent.stat.StatService;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import zsbpj.lccpj.frame.ImageManager;
+import net.youmi.android.AdManager;
+import net.youmi.android.normal.common.ErrorCode;
+import net.youmi.android.normal.spot.SplashViewSettings;
+import net.youmi.android.normal.spot.SpotListener;
+import net.youmi.android.normal.spot.SpotManager;
 
-public class SplashActivity extends Activity implements View.OnClickListener, SplashADListener {
-    private LinearLayout ll_bottom_view;
-    private String user_tk;
-    private ImageView logo_inner_iv;
-    boolean isShowingRubberEffect = false;
-    private TextView app_name;
+/**
+ * <p>开屏窗口</p>
+ * Edited by Alian Lee on 2016-11-25.
+ */
+public class SplashActivity extends ADBaseActivity{
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        App.addActivity(this);
-        user_tk = SharePreferenceUtil.getUserTk();
+	private PermissionHelper mPermissionHelper;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		mContext = this;
+		// 设置全屏
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		// 移除标题栏
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_splash);
+		StatService.trackCustomEvent(this, "onCreate", "");
 
-        app_name = (TextView) findViewById(R.id.app_name);
-        logo_inner_iv = (ImageView) findViewById(R.id.logo_inner_iv);
-        ImageView ly = (ImageView) findViewById(R.id.ly);
-        ll_bottom_view = (LinearLayout) findViewById(R.id.ll_bottom_view);
-        findViewById(R.id.tv_toregister).setOnClickListener(this);
-        findViewById(R.id.tv_tologin).setOnClickListener(this);
-        FrameLayout reveal = (FrameLayout) findViewById(R.id.reveal);
-        changePic(ly);
-        if (TextUtils.isEmpty(user_tk)) {
-            ll_bottom_view.setVisibility(View.VISIBLE);
-        } else {
-            ll_bottom_view.setVisibility(View.GONE);
-        }
-        initAnimation();
-        //渐隐模式
-        //getWelcomeView(reveal);
-    }
+		// 当系统为6.0以上时，需要申请权限
+		mPermissionHelper = new PermissionHelper(this);
+		mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
+			@Override
+			public void onAfterApplyAllPermission() {
+				Log.i(TAG, "All of requested permissions has been granted, so run app logic.");
+				runApp();
+			}
+		});
+		if (Build.VERSION.SDK_INT < 23) {
+			// 如果系统版本低于23，直接跑应用的逻辑
+			Log.d(TAG, "The api level of system is lower than 23, so run app logic directly.");
+			runApp();
+		} else {
+			// 如果权限全部申请了，那就直接跑应用逻辑
+			if (mPermissionHelper.isAllRequestedPermissionGranted()) {
+				Log.d(TAG, "All of requested permissions has been granted, so run app logic directly.");
+				runApp();
+			} else {
+				// 如果还有权限为申请，而且系统版本大于23，执行申请权限逻辑
+				Log.i(TAG, "Some of requested permissions hasn't been granted, so apply permissions first.");
+				mPermissionHelper.applyPermissions();
+			}
+		}
+	}
+	
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		mPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		mPermissionHelper.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	/**
+	 * 跑应用的逻辑
+	 */
+	private void runApp() {
+		//初始化SDK
+		AdManager.getInstance(mContext).init("9d0696111575bd2c", "a7451addf9b2a57c", true);
+		//设置开屏
+		setupSplashAd();
+	}
+	
+	/**
+	 * 设置开屏广告
+	 */
+	private void setupSplashAd() {
+		// 创建开屏容器
+		final RelativeLayout splashLayout = (RelativeLayout) findViewById(R.id.rl_splash);
+		RelativeLayout.LayoutParams params =
+				new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		params.addRule(RelativeLayout.ABOVE, R.id.view_divider);
 
-    private void changePic(ImageView ly){
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12 && hour <= 18) {
-            ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.afternoon, ly);
-        } else {
-            ImageManager.getInstance().loadResImage(SplashActivity.this, R.drawable.night, ly);
-        }
-    }
+		// 对开屏进行设置
+		SplashViewSettings splashViewSettings = new SplashViewSettings();
+		//		// 设置是否展示失败自动跳转，默认自动跳转
+		//		splashViewSettings.setAutoJumpToTargetWhenShowFailed(false);
+		// 设置跳转的窗口类
+		splashViewSettings.setTargetClass(MainActivity.class);
+		// 设置开屏的容器
+		splashViewSettings.setSplashViewContainer(splashLayout);
 
-    private void getWelcomeView(View view) {
-        AlphaAnimation aa = new AlphaAnimation(0.2f, 1.0f);
-        aa.setDuration(3000);
-        view.startAnimation(aa);
-        aa.setAnimationListener(new Animation.AnimationListener() {
+		// 展示开屏广告
+		SpotManager.getInstance(mContext)
+				.showSplash(mContext, splashViewSettings, new SpotListener() {
 
-            @Override
-            public void onAnimationEnd(Animation arg0) {
-                JumpNextPage();
-            }
+					@Override
+					public void onShowSuccess() {
+						logInfo("开屏展示成功");
+					}
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+					@Override
+					public void onShowFailed(int errorCode) {
+						logError("开屏展示失败");
+						switch (errorCode) {
+						case ErrorCode.NON_NETWORK:
+							logError("网络异常");
+							break;
+						case ErrorCode.NON_AD:
+							logError("暂无开屏广告");
+							break;
+						case ErrorCode.RESOURCE_NOT_READY:
+							logError("开屏资源还没准备好");
+							break;
+						case ErrorCode.SHOW_INTERVAL_LIMITED:
+							logError("开屏展示间隔限制");
+							break;
+						case ErrorCode.WIDGET_NOT_IN_VISIBILITY_STATE:
+							logError("开屏控件处在不可见状态");
+							break;
+						default:
+							logError("errorCode: %d", errorCode);
+							break;
+						}
+					}
 
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-        });
-    }
+					@Override
+					public void onSpotClosed() {
+						logDebug("开屏被关闭");
+					}
 
-    public void JumpNextPage() {
+					@Override
+					public void onSpotClicked(boolean isWebPage) {
+						logDebug("开屏被点击");
+						logInfo("是否是网页广告？%s", isWebPage ? "是" : "不是");
+					}
+				});
+	}
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = null;
-        switch (v.getId()) {
-            case R.id.tv_tologin:
-                intent = new Intent(SplashActivity.this, LoginActivity.class);
-                intent.putExtra("from","welcome");
-                startActivity(intent);
-                break;
-            case R.id.tv_toregister:
-                intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-        }
-    }
-
-    private void initAnimation() {
-        startLogoInner1();
-        startLogoOuterAndAppName();
-    }
-
-    private void startLogoInner1() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_top_in);
-        logo_inner_iv.startAnimation(animation);
-    }
-
-    private void startLogoOuterAndAppName() {
-        final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
-        valueAnimator.setDuration(1000);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float fraction = animation.getAnimatedFraction();
-                if (fraction >= 0.8 && !isShowingRubberEffect) {
-                    isShowingRubberEffect = true;
-                    startShowAppName();
-                    finishActivity();
-                } else if (fraction >= 0.95) {
-                    valueAnimator.cancel();
-                    startLogoInner2();
-                }
-
-            }
-        });
-        valueAnimator.start();
-    }
-
-    private void startShowAppName() {
-        YoYo.with(Techniques.FadeIn).duration(1000).playOn(app_name);
-    }
-
-    private void startLogoInner2() {
-        YoYo.with(Techniques.RubberBand).duration(1000).playOn(logo_inner_iv);
-    }
-
-    private void finishActivity() {
-        Observable.timer(1000, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        if (TextUtils.isEmpty(user_tk)){
-                            return;
-                        }
-                        SystemClock.sleep(1500);
-                        Intent intent  = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-    }
-
-    @Override
-    public void onADDismissed() {
-
-    }
-
-    @Override
-    public void onNoAD(int i) {
-
-    }
-
-    @Override
-    public void onADPresent() {
-
-    }
-
-    @Override
-    public void onADClicked() {
-
-    }
-
-    @Override
-    public void onADTick(long l) {
-
-    }
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// 开屏展示界面的 onDestroy() 回调方法中调用
+		SpotManager.getInstance(mContext).onDestroy();
+	}
 }

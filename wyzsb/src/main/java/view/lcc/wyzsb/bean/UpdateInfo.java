@@ -17,7 +17,6 @@ public class UpdateInfo {
      * version_url : http://www.mytaxi.cn/download/nmjkvedio.apk
      * ok : 1
      */
-
     private int id;
     private String updated_time;
     private String version_code;

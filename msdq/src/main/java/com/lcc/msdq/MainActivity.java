@@ -22,6 +22,8 @@ import com.lcc.view.LoginDialog;
 import com.lcc.view.bottombar.BottomBar;
 import com.lcc.view.bottombar.BottomBarFragment;
 
+import net.youmi.android.normal.spot.SpotManager;
+
 import java.io.File;
 
 import de.greenrobot.event.EventBus;
@@ -130,6 +132,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void exitApp() {
+        SpotManager.getInstance(MainActivity.this).onAppExit();
         finish();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);

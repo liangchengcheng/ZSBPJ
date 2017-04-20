@@ -9,13 +9,21 @@ import java.io.Serializable;
  * Description:
  */
 public class User implements Serializable{
-    private String id;
 
+    private String id;
     //用户的手机号
-    private String p;
+    private String u_p;
     //用户的昵称
-    private String nn;
+    private String u_n;
     //用户的头像
-    private String ni;
+    private String u_i;
     //注册时间
+    private String u_c;
+    //用户jf
+    private String u_jf;
+    //用户等级
+    private String u_dj;
+    //用户的密码
+    private String u_pw;
+
 }

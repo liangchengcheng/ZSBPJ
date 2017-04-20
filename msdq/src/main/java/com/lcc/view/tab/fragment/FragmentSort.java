@@ -1,5 +1,6 @@
 package com.lcc.view.tab.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,13 +19,14 @@ import java.util.Arrays;
 /**
  * Created by sunger on 16/4/16.
  */
+@SuppressLint("ValidFragment")
 public class FragmentSort extends Fragment {
     private String sorts[] = {"综合排序", "最多收藏", "最新发布"};
     ListView listView;
     FilterAdapter adapter;
 
     private TestIndexFragment mainActivity;
-
+    @SuppressLint("ValidFragment")
     public FragmentSort(TestIndexFragment mainActivity){
         this.mainActivity = mainActivity;
     }

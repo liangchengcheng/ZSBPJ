@@ -74,7 +74,6 @@ public class SystemBarTintManager {
             TypedArray a = activity.obtainStyledAttributes(attrs);
             try {
                 mStatusBarAvailable = a.getBoolean(0, false);
-                mNavBarAvailable = a.getBoolean(1, false);
             } finally {
                 a.recycle();
             }

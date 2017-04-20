@@ -235,10 +235,9 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
 
     @Override
     public void onVcodeCheckSuccess(String token) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), UserNameActivity.class);
         startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.fade,
-                R.anim.my_alpha_action);
+        getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
     }
 
     @Override

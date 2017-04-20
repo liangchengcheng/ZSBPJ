@@ -14,14 +14,14 @@
             android:id="@+id/img_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/app_no_data_icon"
+            android:background="@drawable/ic_nodata"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/img_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/app_no_data_icon"
+            android:background="@drawable/ic_nodata"
             android:visibility="gone" />
 
         <com.lcc.view.ProgressBarCircularIndeterminate

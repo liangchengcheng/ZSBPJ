@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class News implements Serializable{
 
-    //mid
+    //mid 新闻的主键
     private String id;
     //预览图
     private String n_img;
@@ -20,19 +20,19 @@ public class News implements Serializable{
     //更新时间
     private String n_ut;
     //新闻主题
-    private String v_t;
+    private String n_t;
     //新闻来源
-    private String v_s;
+    private String n_s;
     //作者
     private String n_a;
     //类别
-    private String v_type;
+    private String n_type;
     //新闻简单介绍
     private String n_js;
     //点击数量
-    private String v_c;
+    private String n_c;
     //新闻的正文
-    private String v_b;
+    private String n_b;
 
 
 

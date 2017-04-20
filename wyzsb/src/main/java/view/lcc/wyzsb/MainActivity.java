@@ -6,12 +6,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+
+import net.youmi.android.normal.spot.SpotManager;
 
 import java.util.ArrayList;
 
 import view.lcc.wyzsb.adapter.MyPagerAdapter;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.ui.fragment.DataFragment;
 import view.lcc.wyzsb.ui.fragment.HomeFragment;
 import view.lcc.wyzsb.ui.fragment.SettingFragment;
@@ -122,5 +126,27 @@ public class MainActivity extends BaseActivity {
         }, 500);
     }
 
+    private long firstTime;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 800) {
+                Frame.getInstance().toastPrompt("再按一次退出程序");
+                firstTime = secondTime;
+                return true;
+            } else {
+                exitApp();
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    public void exitApp() {
+        SpotManager.getInstance(MainActivity.this).onAppExit();
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
+    }
 
 }

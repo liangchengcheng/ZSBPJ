@@ -1,5 +1,6 @@
 package com.lcc.view.tab.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,12 +18,15 @@ import java.util.Arrays;
 /**
  * Created by sunger on 16/4/16.
  */
+@SuppressLint("ValidFragment")
 public class FragmentCategory extends Fragment {
     private String clothes[] = {"全部类型", "专业知识", "人事知识", "其他"};
     private ListView listView;
     private FilterAdapter adapter;
     private TestIndexFragment mainActivity;
 
+
+    @SuppressLint("ValidFragment")
     public FragmentCategory(TestIndexFragment mainActivity){
         this.mainActivity = mainActivity;
     }

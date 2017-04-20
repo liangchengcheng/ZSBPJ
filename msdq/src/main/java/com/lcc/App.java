@@ -72,9 +72,7 @@ public class App extends Application {
     }
 
     private void initOkHttp() {
-        okHttpClient =
-                OkHttpClientManager.getInstance().getOkHttpClient();
-        okHttpClient = new OkHttpClient();
+        okHttpClient = OkHttpClientManager.getInstance().getOkHttpClient();
         okHttpClient.setConnectTimeout(CONNECT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(READ_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
     }

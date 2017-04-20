@@ -26,8 +26,8 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:layout_height="0.5dp"
+                android:background="#fff5f8fa" />
 
             <RelativeLayout
                 android:id="@+id/rl_qd"
@@ -144,10 +144,11 @@
                     android:gravity="end" />
             </RelativeLayout>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:background="#fff5f8fa" />
 
             <RelativeLayout
                 android:id="@+id/ll_fabu"
@@ -183,11 +184,11 @@
                     android:gravity="end" />
             </RelativeLayout>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
-
+                android:background="#fff5f8fa" />
             <RelativeLayout
                 android:id="@+id/rl_help"
                 android:layout_width="match_parent"
@@ -222,11 +223,11 @@
                     android:gravity="end" />
             </RelativeLayout>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
-
+                android:background="#fff5f8fa" />
             <RelativeLayout
                 android:id="@+id/rl_share"
                 android:layout_width="match_parent"
@@ -261,10 +262,11 @@
                     android:gravity="end" />
             </RelativeLayout>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:background="#fff5f8fa" />
 
             <RelativeLayout
                 android:id="@+id/rl_set"
@@ -303,7 +305,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:background="#fff5f8fa" />
 
         </LinearLayout>
     </LinearLayout>

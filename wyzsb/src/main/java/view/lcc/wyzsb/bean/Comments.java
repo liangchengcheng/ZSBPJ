@@ -11,29 +11,23 @@ import java.util.List;
  */
 public class Comments implements Serializable{
 
+    // (这个评论是视频的评论，文章的评论暂时没写)
+    // 这个评论的id
     private String id;
-    //评论的内容
+    // 评论的内容
     private String c_b;
-
-    private String author;
-    private String z_num;
-    private String created_time;
-    private String type;
-    private String nid;
-    private String pid;
-    private String replay_author;
-    private String phone;
-    private String nickname;
-    private String xb;
-    private String email;
-    private String created_at;
-    private String jf;
-    private String qm;
-    private String zy;
-    private String user_image;
-    private String title;
-    private String replay_nickname;
-
+    // 评论人的id
+    private String c_a;
+    // 评论人的昵称
+    private String c_nn;
+    // 评论人的头像
+    private String c_im;
+    // 评论的时间
+    private String c_t;
+    // 评论的类型
+    private String c_tp;
+    // 这个评论属于那个作品 比例视频的id
+    private String o_id;
 
     // 暂无数据属性
     private boolean isNoData = false;
