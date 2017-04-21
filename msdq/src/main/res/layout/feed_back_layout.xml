@@ -19,7 +19,7 @@
             android:id="@+id/guillotine_hamburger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back_white_24dp"
+            android:src="@drawable/icon_back"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:paddingRight="20dp"

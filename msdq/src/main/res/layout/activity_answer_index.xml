@@ -7,6 +7,39 @@
     android:background="#fff"
     android:orientation="vertical">
 
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/floatingMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        app:menu_colorNormal="?attr/colorPrimary"
+        app:menu_colorPressed="?attr/colorPrimary"
+        app:menu_colorRipple="?attr/colorPrimary">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/textmsg"
+            fab:backgroundTint="#ff9800"
+            fab:fab_colorNormal="#ff9800"
+            app:fab_label="评论"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingfabu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/imgemsg"
+            fab:backgroundTint="#4284E4"
+            fab:fab_colorNormal="#4284E4"
+            app:fab_label="回答"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +57,7 @@
                 android:id="@+id/guillotine_hamburger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:src="@drawable/icon_back"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="20dp"
@@ -72,37 +105,5 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/floatingMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        app:menu_colorNormal="?attr/colorPrimary"
-        app:menu_colorPressed="?attr/colorPrimary"
-        app:menu_colorRipple="?attr/colorPrimary">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floatingComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/textmsg"
-            fab:backgroundTint="#ff9800"
-            fab:fab_colorNormal="#ff9800"
-            app:fab_label="评论"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floatingfabu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/imgemsg"
-            fab:backgroundTint="#4284E4"
-            fab:fab_colorNormal="#4284E4"
-            app:fab_label="回答"
-            app:fab_size="mini" />
-
-    </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>

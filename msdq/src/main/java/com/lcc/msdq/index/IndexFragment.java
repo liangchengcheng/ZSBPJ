@@ -92,6 +92,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
         view.findViewById(R.id.msjt).setOnClickListener(this);
         view.findViewById(R.id.qt).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
+        view.findViewById(R.id.ll_change_zy).setOnClickListener(this);
 
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
@@ -212,7 +213,16 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             case R.id.qt:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "其他");
                 break;
-
+            //更换职业
+            case R.id.ll_change_zy:
+                if (TextUtils.isEmpty(user_name)) {
+                    LoginDialogFragment dialog = new LoginDialogFragment();
+                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
+                } else {
+                    Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                    startActivity(intent);
+                }
+                break;
             //去我的消息的界面
             case R.id.ll_news:
                 if (TextUtils.isEmpty(user_name)) {
