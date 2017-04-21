@@ -37,7 +37,7 @@
             android:id="@+id/iv_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_add_white_36dp" />
+            android:background="@drawable/lcc_fabu1" />
     </android.support.v7.widget.Toolbar>
 
     <com.lcc.view.tab.CommonTabLayout

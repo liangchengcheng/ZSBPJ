@@ -4,6 +4,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.lcc.App;
 import com.lcc.adapter.ChoiceType1Adapter;
 import com.lcc.base.BaseActivity;
@@ -13,7 +14,9 @@ import com.lcc.mvp.presenter.ChoiceTypePresenter;
 import com.lcc.mvp.presenter.impl.ChoicePresenterImpl;
 import com.lcc.mvp.view.ChoiceTypeView;
 import com.lcc.view.loadview.LoadingLayout;
+
 import java.util.List;
+
 import zsbpj.lccpj.utils.GsonUtils;
 
 /**
@@ -28,12 +31,14 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
     private LoadingLayout loading_layout;
     private RecyclerView mRecyclerView;
     private ChoiceType1Adapter mAdapter;
-    private String flag = "";
+
+    private String result = "";
 
     @Override
     protected void initView() {
         App.addActivity(this);
-        flag = getIntent().getStringExtra("flag");
+        result = getIntent().getStringExtra("result");
+
         findViewById(R.id.img_error).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
@@ -108,7 +113,7 @@ public class ChoiceTypeoneActivity extends BaseActivity implements ChoiceTypeVie
 
     @Override
     public void onItemClick(Type1 data) {
-        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this, data.getN_id(),flag);
+        ChoiceTypetwoActivity.startChoiceTypetwoActivity(ChoiceTypeoneActivity.this, data.getN_id(), result);
     }
 
     @Override

@@ -109,7 +109,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                     intent.putExtra(UserProfileActivity.UserInfo, DataManager.getUserInfo());
                     startActivityForResult(intent, 200);
                 } else {
-                    startActivity(new Intent(getActivity(), LoginMainActivity.class));
+                    LoginMainActivity.startLoginMainActivity("result",getActivity());
                 }
                 break;
             case R.id.rl_qd:
@@ -126,7 +126,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
-                    startActivityForResult(new Intent(getActivity(), LoginMainActivity.class), 101);
+                    LoginMainActivity.startLoginMainActivity("result",getActivity());
                     return;
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
@@ -136,7 +136,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                 user_name = DataManager.getUserName();
                 if (TextUtils.isEmpty(user_name)) {
                     FrameManager.getInstance().toastPrompt("请先登录");
-                    startActivityForResult(new Intent(getActivity(), LoginMainActivity.class), 101);
+                    LoginMainActivity.startLoginMainActivity("result",getActivity());
                     return;
                 }
                 startActivity(new Intent(getActivity(), FabuList.class));
@@ -149,7 +149,9 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
                     startActivityForResult(new Intent(getActivity(), LoginMainActivity.class), 101);
                     return;
                 }
-                startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
+                FrameManager.getInstance().toastPrompt("暂不能修密码");
+                LoginMainActivity.startLoginMainActivity("result",getActivity());
+                //startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
                 break;
             //常见问题
             case R.id.rl_help:

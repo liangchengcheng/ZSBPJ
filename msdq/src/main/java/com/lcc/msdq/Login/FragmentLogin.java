@@ -26,6 +26,7 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
 import com.lcc.mvp.view.LoginView;
@@ -41,8 +42,22 @@ import com.lcc.view.PaperButton;
  * Description:
  */
 public class FragmentLogin extends Fragment implements LoginView, View.OnClickListener{
-
     private LoginPresenter presenter;
+    private String result;
+
+    public static FragmentLogin newInstance(String r) {
+        FragmentLogin mFragment = new FragmentLogin();
+        Bundle bundle = new Bundle();
+        bundle.putString("result", r);
+        mFragment.setArguments(bundle);
+        return mFragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        result = getArguments().getString("result");
+        super.onViewCreated(view, savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -176,17 +191,31 @@ public class FragmentLogin extends Fragment implements LoginView, View.OnClickLi
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = null;
-                UserInfo userInfo = DataManager.getUserInfo();
-                if (userInfo == null || TextUtils.isEmpty(userInfo.getZy())) {
-                    intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
-                } else {
-                    intent = new Intent(getActivity(), MainActivity.class);
-                }
                 login_progress.setVisibility(View.GONE);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.fade,R.anim.my_alpha_action);
-                App.exit();
+                Intent intent = null;
+                //直接登录
+                if (!TextUtils.isEmpty(result)){
+                    UserInfo userInfo = DataManager.getUserInfo();
+                    if (userInfo == null || TextUtils.isEmpty(userInfo.getZy())) {
+                        intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                        intent.putExtra("result",result);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.fade,R.anim.my_alpha_action);
+                        getActivity().finish();
+                    } else {
+                        getActivity().finish();
+                    }
+                }else {
+                    UserInfo userInfo = DataManager.getUserInfo();
+                    if (userInfo == null || TextUtils.isEmpty(userInfo.getZy())) {
+                        intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                    } else {
+                        intent = new Intent(getActivity(), MainActivity.class);
+                    }
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.fade,R.anim.my_alpha_action);
+                    getActivity().finish();
+                }
             }
         },1500);
     }

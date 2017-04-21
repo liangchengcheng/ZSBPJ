@@ -132,21 +132,23 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener ,
         }
     };
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (verifyCodeCountdown == 0) {
+                mButtonSendVerifyCode.setClickable(true);
+                mButtonSendVerifyCode.setText(R.string.msg_get_verify_code);
+                return;
+            }
+            mButtonSendVerifyCode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
+            verifyCodeCountdown--;
+            taskHandler.postDelayed(this, DELAY_MILLIS);
+        }
+    };
+
     public void showVerifySuccess() {
         mButtonSendVerifyCode.setClickable(false);
-        taskHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (verifyCodeCountdown == 0) {
-                    mButtonSendVerifyCode.setClickable(true);
-                    mButtonSendVerifyCode.setText(R.string.msg_get_verify_code);
-                    return;
-                }
-                mButtonSendVerifyCode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
-                verifyCodeCountdown--;
-                taskHandler.postDelayed(this, DELAY_MILLIS);
-            }
-        }, DELAY_MILLIS);
+        taskHandler.postDelayed(runnable, DELAY_MILLIS);
     }
 
     @Override
@@ -197,6 +199,7 @@ public class CodeActivity extends BaseActivity implements View.OnClickListener ,
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();
+        taskHandler.removeCallbacks(runnable);
     }
 
     @Override

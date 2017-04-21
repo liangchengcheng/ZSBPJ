@@ -73,7 +73,7 @@ public class Advertisements implements OnPageChangeListener {
 
 	public View initView(final List<ActivityEntity> list){
 		View view = inflater.inflate(R.layout.advertisement_board, null);
-		view.setPadding(5, 5, 5, 12);
+		view.setPadding(0, 0, 0, 0);
 		vpAdvertise = (ViewPager) view.findViewById(R.id.vpAdvertise);
 		vpAdvertise.setOnPageChangeListener(this);
 		views = new ArrayList<View>();
@@ -111,7 +111,6 @@ public class Advertisements implements OnPageChangeListener {
 	
 	
 	private void initDots(View view, LinearLayout ll) {
-
 		dots = new ImageView[views.size()];
 		// 循环取得小点图片
 		for (int i = 0; i < views.size(); i++) {
@@ -125,14 +124,12 @@ public class Advertisements implements OnPageChangeListener {
 	}
 
 	private void setCurrentDot(int position) {
-		if (position < 0 || position > views.size() - 1
-				|| currentIndex == position) {
+		if (position < 0 || position > views.size() - 1 || currentIndex == position) {
 			return;
 		}
 
 		dots[position].setEnabled(false);
 		dots[currentIndex].setEnabled(true);
-
 		currentIndex = position;
 	}
 

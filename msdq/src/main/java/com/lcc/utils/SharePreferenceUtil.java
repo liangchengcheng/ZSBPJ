@@ -20,6 +20,26 @@ public class SharePreferenceUtil {
     public static final String UPDATE_TIME = "update_time";
     //默认所在的区域
     public static final String AREA = "area";
+    //是不是第一次加载
+    public static final String IS_FIRST = "first";
+
+    /**
+     * 获取 是不是第一次
+     */
+    public static String getIsFirst() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(FrameManager.getAppContext());
+        return sharedPreferences.getString(IS_FIRST, "");
+    }
+
+    /**
+     * 存放不是第一次
+     */
+    public static void setIsFirst(String value){
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(FrameManager.getAppContext());
+        sharedPreferences.edit().putString(IS_FIRST,value).commit();
+    }
 
     /**
      * 获取 session id

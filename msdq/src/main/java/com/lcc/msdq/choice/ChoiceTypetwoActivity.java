@@ -43,12 +43,12 @@ import zsbpj.lccpj.view.toast.SuperCustomToast;
 public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeView,
         ChoiceType2Adapter.OnItemClickListener, View.OnClickListener {
     public static final String NID = "nid";
-    public static final String FLAG = "flag";
+    public static final String RESULT = "result";
     private ChoiceTypePresenter choiceTypePresenter;
     private ChoiceType2Adapter mAdapter;
     private String nid;
     private String zy;
-    private String flag;
+    private String result;
 
     private LoadingLayout loading_layout;
     private SimpleArcDialog mDialog;
@@ -57,14 +57,15 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
     public static void startChoiceTypetwoActivity(Activity startingActivity, String nid, String flag) {
         Intent intent = new Intent(startingActivity, ChoiceTypetwoActivity.class);
         intent.putExtra(NID, nid);
-        intent.putExtra(FLAG, flag);
+        intent.putExtra(RESULT, flag);
         startingActivity.startActivity(intent);
     }
 
     @Override
     protected void initView() {
         nid = getIntent().getStringExtra(NID);
-        flag = getIntent().getStringExtra(FLAG);
+        result = getIntent().getStringExtra(RESULT);
+
         findViewById(R.id.img_error).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
@@ -146,7 +147,8 @@ public class ChoiceTypetwoActivity extends BaseActivity implements ChoiceTypeVie
         DataManager.editUser(userInfo);
         setSuccess();
         App.exit();
-        if (TextUtils.isEmpty(flag)) {
+        if (TextUtils.isEmpty(result)) {
+            // TODO: 2017/4/20 这里通知刷新
             finish();
         } else {
             startActivity(new Intent(ChoiceTypetwoActivity.this, MainActivity.class));

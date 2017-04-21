@@ -203,6 +203,10 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".login.UserNameActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".AboutActivity"
             android:theme="@style/AppTheme" />
 

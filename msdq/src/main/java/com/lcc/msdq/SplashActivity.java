@@ -3,12 +3,15 @@ package com.lcc.msdq;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.lcc.msdq.login.LoginMainActivity;
+import com.lcc.utils.SharePreferenceUtil;
 import com.tencent.stat.StatService;
 
 import net.youmi.android.AdManager;
@@ -97,13 +100,18 @@ public class SplashActivity extends ADBaseActivity{
 
 		// 对开屏进行设置
 		SplashViewSettings splashViewSettings = new SplashViewSettings();
-		//		// 设置是否展示失败自动跳转，默认自动跳转
-		//		splashViewSettings.setAutoJumpToTargetWhenShowFailed(false);
+		// 设置是否展示失败自动跳转，默认自动跳转
+		// splashViewSettings.setAutoJumpToTargetWhenShowFailed(false);
 		// 设置跳转的窗口类
-		splashViewSettings.setTargetClass(MainActivity.class);
+		String value = SharePreferenceUtil.getIsFirst();
+		if (TextUtils.isEmpty(value)){
+			splashViewSettings.setTargetClass(LoginMainActivity.class);
+		}else{
+			splashViewSettings.setTargetClass(MainActivity.class);
+		}
+		SharePreferenceUtil.setIsFirst("ok");
 		// 设置开屏的容器
 		splashViewSettings.setSplashViewContainer(splashLayout);
-
 		// 展示开屏广告
 		SpotManager.getInstance(mContext)
 				.showSplash(mContext, splashViewSettings, new SpotListener() {

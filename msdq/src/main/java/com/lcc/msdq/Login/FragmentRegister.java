@@ -56,8 +56,23 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
     PaperButton nextBt;
     private View root_view;
 
-    MyCountTimer timer;
     private CheckVcodePresenter presenter;
+
+    private String result;
+
+    public static FragmentRegister newInstance(String r) {
+        FragmentRegister mFragment = new FragmentRegister();
+        Bundle bundle = new Bundle();
+        bundle.putString("result", r);
+        mFragment.setArguments(bundle);
+        return mFragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        result = getArguments().getString("result");
+        super.onViewCreated(view, savedInstanceState);
+    }
 
     private void initData(View view) {
         root_view = view.findViewById(R.id.fg_regist);
@@ -84,10 +99,10 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
         EventHandler eh2 = new EventHandler() {
 
             @Override
-            public void afterEvent(int event, int result, Object data) {
+            public void afterEvent(int event, int re, Object data) {
                 Message msg = new Message();
                 msg.arg1 = event;
-                msg.arg2 = result;
+                msg.arg2 = re;
                 msg.obj = data;
                 mHandler2.sendMessage(msg);
             }
@@ -166,6 +181,10 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
         });
     }
 
+    private String code;
+    private String phone;
+    private String password;
+
     /**
      * 发送验证码点击事件
      */
@@ -179,8 +198,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                 boolean mobile = CheckUtils.isMobile(phone);
                 if (!TextUtils.isEmpty(phone)) {
                     if (mobile) {
-                        timer = new MyCountTimer(60 * 000, 1000);
-                        timer.start();
+                        showVerifySuccess();
                         SMSSDK.getVerificationCode("86", phone);
                     } else {
                         rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
@@ -196,16 +214,16 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
             }
         });
 
+
         //下一步的点击事件
         nextBt.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 final View view = v;
-                final String password = userpassword.getText().toString();
-                String code = smscode.getText().toString();
-                final String phone = userphone.getText().toString();
-
+                password = userpassword.getText().toString();
+                code = smscode.getText().toString();
+                phone = userphone.getText().toString();
                 if (TextUtils.isEmpty(phone)) {
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
                     rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
@@ -248,41 +266,49 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
 
     @Override
     public void CheckVerifyCodeSuccess() {
-
+        showSnackbar(root_view, "提示：短信验证成功成功了");
+        Intent intent = new Intent(getActivity(), UserNameActivity.class);
+        intent.putExtra("code", code);
+        intent.putExtra("phone", phone);
+        intent.putExtra("password",password);
+        intent.putExtra("result",result);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+        getActivity().finish();
     }
 
     @Override
     public void CheckVerifyCodeError(String msg) {
-
+        showSnackbar(root_view, "提示：短信验证成功失败");
     }
 
-    //事件定时器
-    class MyCountTimer extends CountDownTimer {
+    protected Handler taskHandler = new Handler();
+    private int verifyCodeCountdown = 60;
+    private static final int DELAY_MILLIS = 1 * 1000;
 
-        public MyCountTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            sendsmscode.setText((millisUntilFinished / 1000) + "秒后重发");
-            sendsmscode.setClickable(false);
-        }
-
-        @Override
-        public void onFinish() {
-            sendsmscode.setText("重新发送");
-            sendsmscode.setClickable(true);
-        }
+    public void showVerifySuccess() {
+        sendsmscode.setClickable(false);
+        taskHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (verifyCodeCountdown == 0) {
+                    sendsmscode.setClickable(true);
+                    sendsmscode.setText("重新发送");
+                    return;
+                }
+                sendsmscode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
+                verifyCodeCountdown--;
+                taskHandler.postDelayed(this, DELAY_MILLIS);
+            }
+        }, DELAY_MILLIS);
     }
+
 
     //回收timer
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-        }
+        SMSSDK.unregisterAllEventHandler();
     }
 
     public void showSnackbar(View view, String string) {
@@ -297,19 +323,20 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
             int result = msg.arg2;
             Object data = msg.obj;
             if (result == SMSSDK.RESULT_COMPLETE) {
-                Intent intent = null;
                 if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     showSnackbar(root_view, "提示：短信发送成功");
                 }
 
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     showSnackbar(root_view, "提示：短信验证成功");
-                    intent = new Intent(getActivity(), SignUpActivity.class);
-                    intent = new Intent(getActivity(), ResetPasswordActivity.class);
-                    //Intent intent = new Intent(getActivity(), UserNameActivity.class);
-                    intent.putExtra("phone", "");
+                    Intent intent = new Intent(getActivity(), UserNameActivity.class);
+                    intent.putExtra("code", code);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("password",password);
+                    intent.putExtra("result",result);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+                    getActivity().finish();
                 }
             } else {
                 int status = 0;
