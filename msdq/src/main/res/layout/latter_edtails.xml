@@ -24,8 +24,6 @@
             android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:src="@drawable/ic_arrow_back_white_24dp" />
-
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -98,8 +96,6 @@
                 android:background="?attr/colorPrimary"
                 android:elevation="4dp"
                 android:orientation="vertical" />
-
         </LinearLayout>
     </FrameLayout>
-
 </LinearLayout>

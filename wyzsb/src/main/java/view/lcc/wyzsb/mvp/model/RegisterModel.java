@@ -19,7 +19,7 @@ public class RegisterModel {
     public OkHttpRequest signIn(Register password, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, "");
-        return ApiClient.createUser(AppConstants.RequestPath.LOGIN, paramsMap)
+        return ApiClient.createUser(AppConstants.RequestPath.SIGN, paramsMap)
                 .addHeader("phone","").tag("").post(callback);
     }
 

@@ -66,7 +66,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             final Article weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_title.setText("请问如何才能把自己的学习成绩提高呢？");
+            holder.tv_title.setText(weekData.getA_t());
+            holder.tv_content.setText(weekData.getA_js());
+            holder.tv_author.setText(weekData.getA_a());
+            holder.tv_time.setText(weekData.getA_ct());
 
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
@@ -94,11 +97,17 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
+        TextView tv_content;
+        TextView tv_author;
+        TextView tv_time;
         CardView ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
+            tv_content = (TextView) itemView.findViewById(R.id.tv_content);
+            tv_author = (TextView) itemView.findViewById(R.id.tv_author);
+            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             ll_all = (CardView) itemView.findViewById(R.id.ll_all);
         }
     }

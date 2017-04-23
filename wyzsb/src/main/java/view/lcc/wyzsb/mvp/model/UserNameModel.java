@@ -19,7 +19,7 @@ public class UserNameModel {
     public OkHttpRequest signUserName(UserName userName, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, "");
-        return ApiClient.createUser(AppConstants.RequestPath.LOGIN, paramsMap)
+        return ApiClient.createUser(AppConstants.RequestPath.GET_NEWS, paramsMap)
                 .addHeader("phone","").tag("").post(callback);
     }
 

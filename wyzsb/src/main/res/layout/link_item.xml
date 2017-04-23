@@ -24,7 +24,7 @@
             android:lineSpacingExtra="2dp"
             android:maxLines="2"
             android:paddingBottom="6dp"
-            android:text="标题标题标题标题标题标题标标题标题标题标题标题"
+            android:text=""
             android:textColor="@color/assist_blue"
             android:textSize="14sp"/>
         <LinearLayout
@@ -41,7 +41,7 @@
                 android:id="@+id/tv_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="介绍:lcc"
+                android:text="lcc"
                 android:textColor="@color/black"
                 android:textSize="12sp"/>
 

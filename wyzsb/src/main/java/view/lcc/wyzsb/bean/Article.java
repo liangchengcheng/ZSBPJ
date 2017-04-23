@@ -36,6 +36,102 @@ public class Article implements Serializable{
     private String a_l;
 
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getA_t() {
+        return a_t;
+    }
+
+    public void setA_t(String a_t) {
+        this.a_t = a_t;
+    }
+
+    public String getA_a() {
+        return a_a;
+    }
+
+    public void setA_a(String a_a) {
+        this.a_a = a_a;
+    }
+
+    public String getA_img() {
+        return a_img;
+    }
+
+    public void setA_img(String a_img) {
+        this.a_img = a_img;
+    }
+
+    public String getA_ct() {
+        return a_ct;
+    }
+
+    public void setA_ct(String a_ct) {
+        this.a_ct = a_ct;
+    }
+
+    public String getA_ut() {
+        return a_ut;
+    }
+
+    public void setA_ut(String a_ut) {
+        this.a_ut = a_ut;
+    }
+
+    public String getA_b() {
+        return a_b;
+    }
+
+    public void setA_b(String a_b) {
+        this.a_b = a_b;
+    }
+
+    public String getA_time() {
+        return a_time;
+    }
+
+    public void setA_time(String a_time) {
+        this.a_time = a_time;
+    }
+
+    public String getA_type() {
+        return a_type;
+    }
+
+    public void setA_type(String a_type) {
+        this.a_type = a_type;
+    }
+
+    public String getA_js() {
+        return a_js;
+    }
+
+    public void setA_js(String a_js) {
+        this.a_js = a_js;
+    }
+
+    public String getA_c() {
+        return a_c;
+    }
+
+    public void setA_c(String a_c) {
+        this.a_c = a_c;
+    }
+
+    public String getA_l() {
+        return a_l;
+    }
+
+    public void setA_l(String a_l) {
+        this.a_l = a_l;
+    }
+
     // 暂无数据属性
     private boolean isNoData = false;
     private int height;

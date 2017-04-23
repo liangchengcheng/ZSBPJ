@@ -25,6 +25,7 @@ import com.lcc.mvp.presenter.IndexContentPresenter;
 import com.lcc.mvp.presenter.impl.IndexContentPresenterImpl;
 import com.lcc.mvp.view.IndexContentView;
 
+import com.lcc.utils.SystemBarHelper;
 import com.lcc.view.loadview.LoadingLayout;
 
 /**
@@ -67,6 +68,11 @@ public class IndexWebView extends BaseActivity implements IndexContentView, Tool
 
     @Override
     protected void initView() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        SystemBarHelper.immersiveStatusBar(this, 0);
+        SystemBarHelper.setHeightAndPadding(this, toolbar);
+
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         ivZhihuStory = (ImageView) findViewById(R.id.ivZhihuStory);
         toolbar = (Toolbar) findViewById(R.id.toolbar);

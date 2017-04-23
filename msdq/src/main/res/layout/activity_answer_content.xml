@@ -34,7 +34,7 @@
             android:layout_marginLeft="15dp"
             android:text=""
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_share"

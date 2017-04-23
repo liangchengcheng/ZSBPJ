@@ -18,10 +18,11 @@ import view.lcc.wyzsb.mvp.param.NewsParams;
 public class NewsModel {
 
     /**
-     * 获取我的订单详情
+     * 获取新闻的列表
      */
     public OkHttpRequest getNews(NewsParams newsParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
+        map.put("page",newsParams.getPage()+"");
+        return ApiClient.create(AppConstants.RequestPath.GET_NEWS, map).tag("").get(callback);
     }
 }

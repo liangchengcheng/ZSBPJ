@@ -27,6 +27,70 @@ public class Link implements Serializable {
     private String l_u;
 
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getL_ct() {
+        return l_ct;
+    }
+
+    public void setL_ct(String l_ct) {
+        this.l_ct = l_ct;
+    }
+
+    public String getL_ut() {
+        return l_ut;
+    }
+
+    public void setL_ut(String l_ut) {
+        this.l_ut = l_ut;
+    }
+
+    public String getL_type() {
+        return l_type;
+    }
+
+    public void setL_type(String l_type) {
+        this.l_type = l_type;
+    }
+
+    public String getL_js() {
+        return l_js;
+    }
+
+    public void setL_js(String l_js) {
+        this.l_js = l_js;
+    }
+
+    public String getL_c() {
+        return l_c;
+    }
+
+    public void setL_c(String l_c) {
+        this.l_c = l_c;
+    }
+
+    public String getL_t() {
+        return l_t;
+    }
+
+    public void setL_t(String l_t) {
+        this.l_t = l_t;
+    }
+
+    public String getL_u() {
+        return l_u;
+    }
+
+    public void setL_u(String l_u) {
+        this.l_u = l_u;
+    }
+
     private String name ;
 
     private String url ;

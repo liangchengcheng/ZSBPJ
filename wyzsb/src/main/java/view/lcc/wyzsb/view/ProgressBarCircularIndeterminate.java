@@ -19,13 +19,13 @@ public class ProgressBarCircularIndeterminate extends RelativeLayout {
     final static String MATERIALDESIGNXML = "http://schemas.android.com/apk/res-auto";
     final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
 
-    final int disabledBackgroundColor = Color.parseColor("#E2E2E2");
+    final int disabledBackgroundColor = Color.parseColor("#FFAD5B");
     int beforeBackground;
     float radius1 = 0;
     float radius2 = 0;
     int cont = 0;
     boolean firstAnimationOver = false;
-    int backgroundColor = Color.parseColor("#1E88E5");
+    int backgroundColor = Color.parseColor("#FFAD5B");
 
 
     public ProgressBarCircularIndeterminate(Context context) {
@@ -90,7 +90,7 @@ public class ProgressBarCircularIndeterminate extends RelativeLayout {
             if (background != -1)
                 setBackgroundColor(background);
             else
-                setBackgroundColor(Color.parseColor("#1E88E5"));
+                setBackgroundColor(Color.parseColor("#FFAD5B"));
         }
 
         setMinimumHeight(dpToPx(3, getResources()));

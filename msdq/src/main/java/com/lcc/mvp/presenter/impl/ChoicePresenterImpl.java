@@ -19,11 +19,11 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
     }
 
     private void loadData1() {
-        view.getLoading();
+        view.getLoading1();
         model.getType1(new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.getDataFail1(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
@@ -35,15 +35,15 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         if (!TextUtils.isEmpty(result)) {
-                            view.getDataSuccess(result);
+                            view.getDataSuccess1(result);
                         } else {
-                            view.getDataEmpty();
+                            view.getDataEmpty1();
                         }
                     } else {
-                        view.getDataFail(message);
+                        view.getDataFail1(message);
                     }
                 } catch (Exception e) {
-                    view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.getDataFail1(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }
@@ -51,11 +51,11 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
     }
 
     private void loadData2(String nid) {
-        view.getLoading();
+        view.getLoading2();
         model.getType2(nid,new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                view.getDataFail2(ApiException.getApiExceptionMessage(e.getMessage()));
             }
 
             @Override
@@ -67,15 +67,15 @@ public class ChoicePresenterImpl implements ChoiceTypePresenter {
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         if (!TextUtils.isEmpty(result)) {
-                            view.getDataSuccess(result);
+                            view.getDataSuccess2(result);
                         } else {
-                            view.getDataEmpty();
+                            view.getDataEmpty2();
                         }
                     } else {
-                        view.getDataFail(message);
+                        view.getDataFail2(message);
                     }
                 } catch (Exception e) {
-                    view.getDataFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    view.getDataFail2(ApiException.getApiExceptionMessage(e.getMessage()));
                     e.printStackTrace();
                 }
             }

@@ -30,6 +30,7 @@ import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.choice.VocationActivity;
 import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.index.article.IndexMenuActivity;
 import com.lcc.msdq.index.activity.IndexWebView;
@@ -185,31 +186,24 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             case R.id.mszb:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试准备");
                 break;
-
             case R.id.msjl:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试简历");
                 break;
-
             case R.id.msjq:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试技巧");
                 break;
-
             case R.id.mszz:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "常问问题");
                 break;
-
             case R.id.msgx:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试感想");
                 break;
-
             case R.id.msjz:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试举止");
                 break;
-
             case R.id.msjt:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "面试流程");
                 break;
-
             case R.id.qt:
                 IndexMenuActivity.startIndexMenuActivity(getActivity(), "其他");
                 break;
@@ -219,7 +213,8 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                     LoginDialogFragment dialog = new LoginDialogFragment();
                     dialog.show(getActivity().getFragmentManager(), "loginDialog");
                 } else {
-                    Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                    //Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                    Intent intent = new Intent(getActivity(), VocationActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -232,7 +227,6 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                 }
                 NewsIndex.startNewsIndex(getActivity());
                 break;
-
             //去我的收藏的界面
             case R.id.ll_fav:
                 if (TextUtils.isEmpty(user_name)) {
@@ -240,14 +234,11 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                     dialog.show(getActivity().getFragmentManager(), "loginDialog");
                     return;
                 }
-
                 startActivity(new Intent(getActivity(), FavoriteList.class));
                 break;
-
             case R.id.iv_more:
                 PopupMenu popup = new PopupMenu(getActivity(), iv_more);
-                popup.getMenuInflater()
-                        .inflate(R.menu.index_menu, popup.getMenu());
+                popup.getMenuInflater().inflate(R.menu.index_menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(this);
                 popup.show();
                 break;
@@ -263,11 +254,10 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                     LoginDialogFragment dialog = new LoginDialogFragment();
                     dialog.show(getActivity().getFragmentManager(), "loginDialog");
                 } else {
-                    Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                    Intent intent = new Intent(getActivity(), VocationActivity.class);
                     startActivity(intent);
                 }
                 break;
-
             case R.id.author:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;

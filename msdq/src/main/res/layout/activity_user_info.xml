@@ -24,17 +24,14 @@
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
-            android:src="@drawable/ic_arrow_back_white_24dp" />
-
-
+            android:src="@drawable/icon_back" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="编辑个人信息"
             android:textColor="#fff"
-            android:textSize="20sp" />
-
+            android:textSize="18sp" />
         <ImageView
             android:id="@+id/iv_save"
             android:layout_width="wrap_content"

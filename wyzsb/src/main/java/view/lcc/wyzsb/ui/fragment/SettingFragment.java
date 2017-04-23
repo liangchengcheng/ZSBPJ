@@ -14,7 +14,9 @@ import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.ui.activity.login.LoginMainActivity;
 import view.lcc.wyzsb.ui.activity.setting.AboutActivity;
 import view.lcc.wyzsb.ui.activity.setting.BookActivity;
+import view.lcc.wyzsb.ui.activity.setting.CollectionActivity;
 import view.lcc.wyzsb.ui.activity.setting.FeedBackActivity;
+import view.lcc.wyzsb.ui.activity.setting.HistoryActivity;
 import view.lcc.wyzsb.ui.activity.setting.LinkActivity;
 import view.lcc.wyzsb.ui.activity.setting.SystemActivity;
 import view.lcc.wyzsb.view.pulltozoomview.PullToZoomScrollViewEx;
@@ -46,6 +48,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         content_view.findViewById(R.id.layout_me_getseed).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_host_manage).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_focus).setOnClickListener(this);
+        content_view.findViewById(R.id.layout_me_room_manage).setOnClickListener(this);
+        content_view.findViewById(R.id.layout_me_history).setOnClickListener(this);
 
         scrollView.setHeaderView(header_view);
         scrollView.setZoomView(zoom_view);
@@ -83,6 +87,16 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             //书籍推荐
             case R.id.layout_me_focus:
                 intent = new Intent(getActivity(), BookActivity.class);
+                startActivity(intent);
+                break;
+            //视频的收藏
+            case R.id.layout_me_room_manage:
+                intent = new Intent(getActivity(), CollectionActivity.class);
+                startActivity(intent);
+                break;
+            //历史数据
+            case R.id.layout_me_history:
+                intent = new Intent(getActivity(), HistoryActivity.class);
                 startActivity(intent);
                 break;
         }

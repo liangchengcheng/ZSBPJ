@@ -37,6 +37,6 @@ public class CommentsModel {
         paramsMap.put("nid", "");
         paramsMap.put("pid", "");
         paramsMap.put("type", "");
-        return ApiClient.create(AppConstants.RequestPath.AlipayQuery, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, paramsMap).tag("").get(callback);
     }
 }

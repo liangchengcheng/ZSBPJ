@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside"
-        android:src="@drawable/jubao_icon2" />
+        android:src="@drawable/lcc_dg1" />
 
     <TextView
         android:textColor="#fff"

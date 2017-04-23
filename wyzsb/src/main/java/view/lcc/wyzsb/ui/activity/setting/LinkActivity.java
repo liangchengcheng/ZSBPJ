@@ -14,19 +14,14 @@ import android.view.View;
 import java.util.List;
 
 import view.lcc.wyzsb.R;
-import view.lcc.wyzsb.adapter.ArticleAdapter;
 import view.lcc.wyzsb.adapter.LinkAdapter;
 import view.lcc.wyzsb.base.BaseActivity;
-import view.lcc.wyzsb.bean.Article;
 import view.lcc.wyzsb.bean.Link;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
-import view.lcc.wyzsb.mvp.presenter.ArticlePresenter;
 import view.lcc.wyzsb.mvp.presenter.LinkPresenter;
-import view.lcc.wyzsb.mvp.presenter.impl.ArticlePresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.LinkPresenterImpl;
 import view.lcc.wyzsb.mvp.view.LinkView;
-import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
 
@@ -36,9 +31,8 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:         2015年11月21日15:28:25
  * Description:
  */
-public class LinkActivity extends BaseActivity implements LinkView,SwipeRefreshLayout.OnRefreshListener
-        , LinkAdapter.OnItemClickListener,View.OnClickListener{
-
+public class LinkActivity extends BaseActivity implements LinkView, SwipeRefreshLayout.OnRefreshListener
+        , LinkAdapter.OnItemClickListener, View.OnClickListener {
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
@@ -52,8 +46,7 @@ public class LinkActivity extends BaseActivity implements LinkView,SwipeRefreshL
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    private String type="";
-
+    private String type = "";
 
     public static void startLinkActivity(Activity startingActivity, String type) {
         Intent intent = new Intent(startingActivity, LinkActivity.class);
@@ -71,7 +64,7 @@ public class LinkActivity extends BaseActivity implements LinkView,SwipeRefreshL
         mPresenter = new LinkPresenterImpl(this);
         initRefreshView();
         initRecycleView();
-        mPresenter.getData(1,type);
+        mPresenter.getData(1, type);
     }
 
     private void initRefreshView() {
@@ -81,7 +74,7 @@ public class LinkActivity extends BaseActivity implements LinkView,SwipeRefreshL
     }
 
     private void initRecycleView() {
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(LinkActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -99,7 +92,7 @@ public class LinkActivity extends BaseActivity implements LinkView,SwipeRefreshL
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,type);
+                    mPresenter.loadMore(currentPage, type);
                 }
             }
         });
@@ -169,7 +162,7 @@ public class LinkActivity extends BaseActivity implements LinkView,SwipeRefreshL
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,type);
+                mPresenter.refresh(currentPage, type);
             }
         }, 500);
     }

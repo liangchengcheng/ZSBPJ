@@ -121,10 +121,8 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
                 } else {
                     dropDownLayout.showMenuAt(position);
                 }
-
             }
         });
-
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         return view;
     }
@@ -194,40 +192,40 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_add:
-                String user_name = DataManager.getUserName();
-                if (TextUtils.isEmpty(user_name)) {
-                    LoginDialogFragment dialog = new LoginDialogFragment();
-                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
-                    return;
-                }
-
-                final String zy = DataManager.getZY();
-                if (TextUtils.isEmpty(zy)) {
-                    FrameManager.getInstance().toastPrompt("请选选择一个要添加的职业类型");
-                    startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
-                } else {
-                    final String q = zy.substring(zy.length() - 32, zy.length());
-                    final String z = zy.substring(0, zy.length() - 33);
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("添加新问题")
-                            .setMessage("你是" + z + "是否重新选择添加别的职业的问题？")
-                            .setPositiveButton("直接添加", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    TestAddActivity.startTestAddActivity(getActivity(), q);
-                                    dialog.dismiss();
-                                }
-                            })
-                            .setNegativeButton("其他职业", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
-                }
-
+                TestAddActivity.startTestAddActivity(getActivity());
+//                String user_name = DataManager.getUserName();
+//                if (TextUtils.isEmpty(user_name)) {
+//                    LoginDialogFragment dialog = new LoginDialogFragment();
+//                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
+//                    return;
+//                }
+//
+//                final String zy = DataManager.getZY();
+//                if (TextUtils.isEmpty(zy)) {
+//                    FrameManager.getInstance().toastPrompt("请选选择一个要添加的职业类型");
+//                    startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
+//                } else {
+//                    final String q = zy.substring(zy.length() - 32, zy.length());
+//                    final String z = zy.substring(0, zy.length() - 33);
+//                    new AlertDialog.Builder(getActivity())
+//                            .setTitle("添加新问题")
+//                            .setMessage("你是" + z + "是否重新选择添加别的职业的问题？")
+//                            .setPositiveButton("直接添加", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    TestAddActivity.startTestAddActivity(getActivity(), q);
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .setNegativeButton("其他职业", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    startActivity(new Intent(getActivity(), ChoiceA_Activity.class));
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .show();
+//                }
                 break;
         }
     }

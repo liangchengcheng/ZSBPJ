@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/iv_head"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:textColor="#fff"
             android:text="登录界面"

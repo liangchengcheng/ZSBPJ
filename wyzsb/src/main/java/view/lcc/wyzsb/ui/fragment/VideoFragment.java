@@ -33,6 +33,7 @@ import view.lcc.wyzsb.mvp.presenter.impl.VideoPresenterImpl;
 import view.lcc.wyzsb.mvp.view.NewsView;
 import view.lcc.wyzsb.mvp.view.VideoView;
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
+import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity1;
 import view.lcc.wyzsb.utils.ModelUtil;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
@@ -132,7 +133,7 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
 
     @Override
     public void onItemClick(Video data) {
-        VideoDetailsActivity.startVideoDetailsActivity(getActivity(),"");
+        VideoDetailsActivity1.startVideoDetailsActivity(getActivity(),data);
     }
 
     @Override

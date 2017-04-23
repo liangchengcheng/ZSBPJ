@@ -10,7 +10,6 @@ import java.util.List;
  * Description:
  */
 public class Book implements Serializable{
-
     //mid
     private String id;
     //发布时间
@@ -33,110 +32,86 @@ public class Book implements Serializable{
     private String b_g;
 
 
-
-
-    /**
-     * _id : 58d49b13421aa93abb7d4e4c
-     * createdAt : 2017-03-24T12:05:39.590Z
-     * desc : Google guetzli JPEG 压缩的 Mac GUI 版本。
-     * images : ["http://img.gank.io/41da45bd-b62b-4de7-bda1-fb628437aad2"]
-     * publishedAt : 2017-03-24T12:12:34.753Z
-     * source : chrome
-     * type : iOS
-     * url : https://github.com/daviesgeek/guetzli-gui
-     * used : true
-     * who : 密码
-     */
-    private String _id;
-    private String createdAt;
-    private String desc;
-    private String publishedAt;
-    private String source;
-    private String type;
-    private String url;
-    private boolean used;
-    private String who;
-    private List<String> images;
-
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getB_ct() {
+        return b_ct;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setB_ct(String b_ct) {
+        this.b_ct = b_ct;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getB_ut() {
+        return b_ut;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setB_ut(String b_ut) {
+        this.b_ut = b_ut;
     }
 
-    public String getPublishedAt() {
-        return publishedAt;
+    public String getB_type() {
+        return b_type;
     }
 
-    public void setPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
+    public void setB_type(String b_type) {
+        this.b_type = b_type;
     }
 
-    public String getSource() {
-        return source;
+    public String getB_js() {
+        return b_js;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setB_js(String b_js) {
+        this.b_js = b_js;
     }
 
-    public String getType() {
-        return type;
+    public String getB_c() {
+        return b_c;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setB_c(String b_c) {
+        this.b_c = b_c;
     }
 
-    public String getUrl() {
-        return url;
+    public String getB_t() {
+        return b_t;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setB_t(String b_t) {
+        this.b_t = b_t;
     }
 
-    public boolean isUsed() {
-        return used;
+    public String getB_u() {
+        return b_u;
     }
 
-    public void setUsed(boolean used) {
-        this.used = used;
+    public void setB_u(String b_u) {
+        this.b_u = b_u;
     }
 
-    public String getWho() {
-        return who;
+    public String getB_i() {
+        return b_i;
     }
 
-    public void setWho(String who) {
-        this.who = who;
+    public void setB_i(String b_i) {
+        this.b_i = b_i;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getB_g() {
+        return b_g;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setB_g(String b_g) {
+        this.b_g = b_g;
     }
+
 
 
 

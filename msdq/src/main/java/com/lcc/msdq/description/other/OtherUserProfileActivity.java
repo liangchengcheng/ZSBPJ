@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -31,6 +32,7 @@ import com.lcc.msdq.flow.FlowIndex;
 import com.lcc.mvp.presenter.GetUserInfoPresenter;
 import com.lcc.mvp.presenter.impl.GetUserInfoPresenterImpl;
 import com.lcc.mvp.view.GetUserInfoView;
+import com.lcc.utils.SystemBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,11 @@ public class OtherUserProfileActivity extends BaseActivity implements View.OnCli
         ButterKnife.bind(this);
         phone = getIntent().getStringExtra(PHONE);
         getUserInfoPresenter = new GetUserInfoPresenterImpl(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        SystemBarHelper.immersiveStatusBar(this, 0);
+        SystemBarHelper.setHeightAndPadding(this, toolbar);
+
         tv_me.setOnClickListener(this);
         tv_you.setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);

@@ -30,11 +30,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="20sp"
+            android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="系统通知"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout

@@ -33,7 +33,7 @@
             android:layout_marginLeft="15dp"
             android:text="文章内容"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_share"
@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/detailspage_toolbar_icon_comment_blue_press" />
+                            android:background="@drawable/new_menus" />
 
                         <TextView
 

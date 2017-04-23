@@ -8,13 +8,21 @@ package com.lcc.mvp.view;
  */
 public interface ChoiceTypeView {
 
-    void getLoading();
+    void getLoading1();
 
-    void getDataEmpty();
+    void getLoading2();
 
-    void getDataFail(String msg);
+    void getDataEmpty1();
 
-    void getDataSuccess(String msg);
+    void getDataEmpty2();
+
+    void getDataFail1(String msg);
+
+    void getDataSuccess1(String msg);
+
+    void getDataFail2(String msg);
+
+    void getDataSuccess2(String msg);
 
     void setLoading();
 

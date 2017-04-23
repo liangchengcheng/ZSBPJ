@@ -2,6 +2,7 @@ package view.lcc.wyzsb.mvp.view;
 
 import java.util.List;
 
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.model.TravelingEntity;
 
 /**
@@ -21,9 +22,9 @@ public interface HomeFragmentView {
 
     void getDataFail(String msg);
 
-    void getDataSuccess(List<TravelingEntity> entities);
+    void getDataSuccess(List<Video> entities);
 
-    void loadMoreDataSuccess(List<TravelingEntity> entities);
+    void loadMoreDataSuccess(List<Video> entities);
 
     void loadMoreDataFail(String msg);
 }

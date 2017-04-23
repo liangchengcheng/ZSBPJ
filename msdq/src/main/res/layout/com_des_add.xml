@@ -37,7 +37,7 @@
             android:layout_gravity="center"
             android:text="增加新公司"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.model.ChannelEntity;
 import view.lcc.wyzsb.bean.model.FilterEntity;
 import view.lcc.wyzsb.bean.model.FilterTwoEntity;
@@ -95,9 +96,9 @@ public class ModelUtil {
     /**
      * 暂无数据
      */
-    public static List<TravelingEntity> getNoDataEntity(int height) {
-        List<TravelingEntity> list = new ArrayList<>();
-        TravelingEntity entity = new TravelingEntity();
+    public static List<Video> getNoDataEntity(int height) {
+        List<Video> list = new ArrayList<>();
+        Video entity = new Video();
         entity.setNoData(true);
         entity.setHeight(height);
         list.add(entity);

@@ -36,7 +36,7 @@
             android:layout_gravity="center"
             android:text="发布问题"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView

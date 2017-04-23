@@ -42,7 +42,7 @@ public class AboutActivity extends BaseActivity{
     public static String getVerName(Context context) {
         String verName = "";
         try {
-            verName = context.getPackageManager().getPackageInfo("com.hdsx.dtjc", 0).versionName;
+            verName = context.getPackageManager().getPackageInfo("view.lcc.wyzsb", 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

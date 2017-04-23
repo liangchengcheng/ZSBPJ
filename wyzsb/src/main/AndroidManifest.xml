@@ -85,9 +85,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <!--关于-->
+        <!--新闻的详情界面-->
         <activity
             android:name=".ui.activity.news.NewsDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--历史记录-->
+        <activity
+            android:name=".ui.activity.setting.HistoryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--收藏的界面-->
+        <activity
+            android:name=".ui.activity.setting.CollectionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>

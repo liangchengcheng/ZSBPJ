@@ -63,7 +63,8 @@ public class LinkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             final Link weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_title.setText("请问如何才能把自己的学习成绩提高呢？");
+            holder.tv_title.setText(weekData.getL_t());
+            holder.tv_rank.setText(weekData.getL_js());
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -90,11 +91,13 @@ public class LinkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
+        TextView tv_rank;
         LinearLayout ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
+            tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
             ll_all = (LinearLayout) itemView.findViewById(R.id.ll_all);
         }
     }

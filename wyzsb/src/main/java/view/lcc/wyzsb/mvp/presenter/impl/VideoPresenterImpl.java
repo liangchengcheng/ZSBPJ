@@ -72,12 +72,10 @@ public class VideoPresenterImpl implements VideoPresenter {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(entities);
-//                    int status = jsonObject.getInt("status");
-//                    String message = jsonObject.getString("message");
-                    boolean error = jsonObject.getBoolean("error");
-
-                    if (!error) {
-                        String result = jsonObject.getString("results");
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status ==1) {
+                        String result = jsonObject.getString("result");
                         List<Video> weekDatas = GsonUtils.fromJsonArray(result, Video.class);
                         if (page == 1) {
                             view.refreshView(weekDatas);

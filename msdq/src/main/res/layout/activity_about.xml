@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:text="关于作者"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
 

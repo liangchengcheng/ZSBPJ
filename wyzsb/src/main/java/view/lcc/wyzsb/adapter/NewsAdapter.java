@@ -1,6 +1,7 @@
 package view.lcc.wyzsb.adapter;
 
 import android.app.Activity;
+import android.media.Image;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +70,15 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             final News weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_title.setText("请问如何才能把自己的学习成绩提高呢？");
+            holder.tv_title.setText(weekData.getN_t());
+            holder.tv_rank.setText(weekData.getN_s());
+
+            Glide.with(holder.giv_image.getContext())
+                    .load(weekData.getN_img())
+                    .placeholder(R.color.article_des)
+                    .error(R.color.article_title)
+                    .into(holder.giv_image);
+
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -94,12 +105,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
+        TextView tv_rank;
+        ImageView giv_image;
         LinearLayout ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
+            tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
             ll_all = (LinearLayout) itemView.findViewById(R.id.ll_all);
+            giv_image = (ImageView) itemView.findViewById(R.id.giv_image);
         }
     }
 

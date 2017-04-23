@@ -27,20 +27,20 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/beijing2"
+                android:layout_height="200dp"
+                android:background="@drawable/header_back_night"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <LinearLayout
                     android:id="@+id/vUserProfileRoot"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:orientation="vertical"
-                    android:paddingBottom="20dp"
                     android:paddingLeft="24dp"
+                    android:gravity="center_vertical"
                     android:paddingRight="24dp"
                     android:paddingTop="64dp"
                     app:layout_collapseMode="parallax">
@@ -136,7 +136,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="5dp"
-
                                         android:textColor="#fff"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -175,7 +174,7 @@
                             android:layout_height="wrap_content"
                             android:text="个人资料"
                             android:textColor="#fff"
-                            android:textSize="20sp" />
+                            android:textSize="18sp" />
 
                         <ImageView
                             android:visibility="gone"

@@ -34,11 +34,10 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:
+ * Description:  书籍推荐
  */
 public class BookActivity extends BaseActivity implements BookView, SwipeRefreshLayout.OnRefreshListener
         ,BookAdapter.OnItemClickListener, View.OnClickListener {
-
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
@@ -54,7 +53,6 @@ public class BookActivity extends BaseActivity implements BookView, SwipeRefresh
     protected int currentPage = 1;
     private String type = "";
 
-
     public static void startBookActivity(Activity startingActivity, String type) {
         Intent intent = new Intent(startingActivity, BookActivity.class);
         intent.putExtra(TYPE, type);
@@ -64,7 +62,7 @@ public class BookActivity extends BaseActivity implements BookView, SwipeRefresh
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.link_activity);
+        setContentView(R.layout.book_activity);
 
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.iv_back).setOnClickListener(this);

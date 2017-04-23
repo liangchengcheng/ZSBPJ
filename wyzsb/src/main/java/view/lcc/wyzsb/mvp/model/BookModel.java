@@ -12,15 +12,16 @@ import view.lcc.wyzsb.mvp.param.NewsParams;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:
+ * Description:  获取books
  */
 public class BookModel {
 
     /**
      * 获取我的订单详情
      */
-    public OkHttpRequest getNews(NewsParams newsParams, ResultCallback<String> callback) {
+    public OkHttpRequest getBooks(NewsParams newsParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
+        map.put("page",newsParams.getPage()+"");
+        return ApiClient.create(AppConstants.RequestPath.GET_BOOKS, map).tag("").get(callback);
     }
 }

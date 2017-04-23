@@ -5,6 +5,7 @@ import com.squareup.okhttp.Request;
 import org.json.JSONObject;
 import java.util.List;
 import view.lcc.wyzsb.base.ApiException;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.model.TravelingEntity;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.mvp.model.HomeFragmentModel;
@@ -48,7 +49,7 @@ public class HomeFragmentPresenterImpl implements HomeFragmentPresenter {
                         String msg = jsonObject.getString("message");
                         if (code.equals("1")) {
                             String result = jsonObject.getString("result");
-                            List<TravelingEntity> orders = GsonUtils.fromJsonArray(result, TravelingEntity.class);
+                            List<Video> orders = GsonUtils.fromJsonArray(result, Video.class);
                             view.getDataSuccess(orders);
                         } else {
                             view.getDataFail("");
@@ -64,7 +65,7 @@ public class HomeFragmentPresenterImpl implements HomeFragmentPresenter {
                         String msg = jsonObject.getString("message");
                         if (TextUtils.equals(code, "1")) {
                             String result = jsonObject.getString("result");
-                            List<TravelingEntity> orders = GsonUtils.fromJsonArray(result, TravelingEntity.class);
+                            List<Video> orders = GsonUtils.fromJsonArray(result, Video.class);
                             view.loadMoreDataSuccess(orders);
                         } else {
                             view.loadMoreDataFail(msg);

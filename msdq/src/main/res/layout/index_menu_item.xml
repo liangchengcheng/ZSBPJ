@@ -49,7 +49,7 @@
                     android:ellipsize="end"
                     android:text=""
                     android:textColor="@color/article_title"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_summary"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:lineSpacingMultiplier="1.2"
@@ -66,7 +66,6 @@
                     android:textSize="13sp" />
 
                 <RelativeLayout
-                    android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -80,7 +79,7 @@
                         android:textColor="@color/white"
                         android:background="@drawable/bg_android_tag"
                         android:text="置顶"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
@@ -95,12 +94,13 @@
                         android:textColor="@color/white"
                         android:background="@drawable/bg_android_red_tag"
                         android:text="热门"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:id="@+id/ll_sc"
+                        android:gravity="center_vertical"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="5dp"
@@ -113,18 +113,17 @@
                             android:background="@android:color/transparent"
                             android:src="@drawable/detailspage_toolbar_icon_comment_blue_press" />
                         <TextView
+                            android:text="1111"
                             android:layout_marginLeft="5dp"
                             android:id="@+id/l_num"
-                            android:layout_gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:textColor="@color/article_des"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
-
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

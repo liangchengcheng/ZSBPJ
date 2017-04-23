@@ -23,7 +23,6 @@ public class HomeFragmentModel {
         paramsMap.put("page", "1");
         paramsMap.put("company_name", "");
         paramsMap.put("area", "");
-
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_VIDEO, paramsMap).tag("").get(callback);
     }
 }

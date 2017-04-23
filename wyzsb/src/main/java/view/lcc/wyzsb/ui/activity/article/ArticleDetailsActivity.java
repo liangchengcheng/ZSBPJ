@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageView;
+
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.frame.ImageManager;
 import view.lcc.wyzsb.frame.UIManager;
 
 /**
@@ -16,7 +20,10 @@ import view.lcc.wyzsb.frame.UIManager;
  * Date:         2017年04月13日13:03:32
  * Description:  文章详情
  */
-public class ArticleDetailsActivity extends BaseActivity {
+public class ArticleDetailsActivity extends BaseActivity implements View.OnClickListener{
+
+    private WebView mWebView;
+    private ImageView img_portrait;
 
     public static void startArticleDetails(Activity startingActivity, String type) {
         Intent intent = new Intent(startingActivity, ArticleDetailsActivity.class);
@@ -24,12 +31,14 @@ public class ArticleDetailsActivity extends BaseActivity {
         startingActivity.startActivity(intent);
     }
 
-    private WebView mWebView;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article_details);
+        findViewById(R.id.iv_back).setOnClickListener(this);
+        img_portrait = (ImageView) findViewById(R.id.img_portrait);
+        ImageManager.getInstance()
+                .loadCircleResImage(ArticleDetailsActivity.this,R.drawable.setting_bg,img_portrait);;
         mWebView = (WebView) findViewById(R.id.layout_web_view);
         initView();
     }
@@ -65,5 +74,14 @@ public class ArticleDetailsActivity extends BaseActivity {
         // 添加点击图片放大支持
         body = body.replaceAll("(<img[^>]+src=\")(\\S+)\"", "$1$2\" onClick=\"showImagePreview('$2')\"");
         return body;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

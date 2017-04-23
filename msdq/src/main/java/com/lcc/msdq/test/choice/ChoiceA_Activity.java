@@ -65,26 +65,44 @@ public class ChoiceA_Activity extends BaseActivity implements ChoiceTypeView,
     }
 
     @Override
-    public void getLoading() {
+    public void getLoading1() {
         loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
-    public void getDataEmpty() {
+    public void getDataEmpty1() {
         loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
     }
 
     @Override
-    public void getDataFail(String msg) {
+    public void getLoading2() {
+    }
+
+    @Override
+    public void getDataEmpty2() {
+    }
+
+    @Override
+    public void getDataFail2(String msg) {
+
+    }
+
+    @Override
+    public void getDataSuccess2(String msg) {
+
+    }
+
+    @Override
+    public void getDataFail1(String msg) {
         loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
-    public void getDataSuccess(String msg) {
+    public void getDataSuccess1(String msg) {
         try {
             List<Type1> data = GsonUtils.fromJsonArray(msg, Type1.class);
             if (data == null || data.size() == 0) {
-                getDataEmpty();
+                getDataEmpty1();
             }
             mAdapter.bind(data);
             loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
@@ -110,8 +128,7 @@ public class ChoiceA_Activity extends BaseActivity implements ChoiceTypeView,
 
     @Override
     public void onItemClick(Type1 data) {
-        ChoiceB_Activity.startChoiceB_Activity(ChoiceA_Activity.this,
-                data.getN_id());
+        ChoiceB_Activity.startChoiceB_Activity(ChoiceA_Activity.this, data.getN_id());
     }
 
     @Override

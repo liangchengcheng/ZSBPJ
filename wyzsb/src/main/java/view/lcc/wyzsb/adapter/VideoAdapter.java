@@ -4,9 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,14 +64,24 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
             }
         } else {
-            final Video weekData = mList.get(position);
+            final Video video = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_title.setText("请问如何才能把自己的学习成绩提高呢？");
+            holder.tv_title.setText(video.getV_t());
+            holder.tv_type.setText(video.getV_type());
+            holder.personnum.setText(video.getV_l());
+            holder.author.setText(video.getV_a());
+            holder.video_duration_tv.setText(video.getV_time());
+
+            Glide.with(holder.iv_page.getContext())
+                    .load(video.getV_img())
+                    .placeholder(R.color.article_des)
+                    .error(R.color.article_title)
+                    .into(holder.iv_page);
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mListener.onItemClick(weekData);
+                        mListener.onItemClick(video);
                     }
                 });
             }
@@ -90,11 +103,21 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
+        TextView tv_type;
+        TextView personnum;
+        TextView author;
+        TextView video_duration_tv;
+        ImageView iv_page;
         LinearLayout ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
+            tv_type = (TextView) itemView.findViewById(R.id.tv_type);
+            personnum = (TextView) itemView.findViewById(R.id.personnum);
+            author = (TextView) itemView.findViewById(R.id.author);
+            iv_page = (ImageView) itemView.findViewById(R.id.iv_page);
+            video_duration_tv = (TextView) itemView.findViewById(R.id.video_duration_tv);
             ll_all = (LinearLayout) itemView.findViewById(R.id.ll_all);
         }
     }

@@ -31,10 +31,13 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_scrollFlags="scroll" >
                 <ImageView
+                    android:id="@+id/iv_back"
                     android:background="@drawable/icon_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
                     android:textSize="18sp"
                     android:text="文章详情"
                     android:layout_width="wrap_content"
@@ -42,14 +45,14 @@
             </android.support.v7.widget.Toolbar>
             <!--post's title-->
             <TextView
-                android:text="56个民族是一家"
+                android:text="窗前明月光，疑是地上霜。举头望明月，低头思故乡"
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EBFAEB"
+                android:background="#FFE0B2"
                 android:padding="10dp"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_scrollFlags="scroll" />
             <!--the person info layout-->
             <LinearLayout
@@ -69,7 +72,7 @@
                     android:padding="10dp">
                     <!--person portrait-->
                     <ImageView
-                        android:background="@drawable/ic_nodata"
+                        android:background="@drawable/person"
                         android:id="@+id/img_portrait"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
@@ -78,7 +81,7 @@
                         android:contentDescription="@null" />
                     <!--person name-->
                     <TextView
-                        android:text="管理员的故事"
+                        android:text="埃罗芒阿老师"
                         android:id="@+id/tv_person_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -89,7 +92,7 @@
                         android:textSize="16sp" />
                     <!--user's summary-->
                     <TextView
-                        android:text="222222"
+                        android:text="发布时间:8小时前"
                         android:id="@+id/tv_publish_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

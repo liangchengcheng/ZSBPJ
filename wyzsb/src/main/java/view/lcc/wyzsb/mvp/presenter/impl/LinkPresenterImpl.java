@@ -71,12 +71,11 @@ public class LinkPresenterImpl implements LinkPresenter {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(entities);
-//                    int status = jsonObject.getInt("status");
-//                    String message = jsonObject.getString("message");
-                    boolean error = jsonObject.getBoolean("error");
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
 
-                    if (!error) {
-                        String result = jsonObject.getString("results");
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
                         List<Link> weekDatas = GsonUtils.fromJsonArray(result, Link.class);
                         if (page == 1) {
                             view.refreshView(weekDatas);

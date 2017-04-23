@@ -6,22 +6,19 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-
+import android.widget.TextView;
 import com.lcc.base.BaseActivity;
 import com.lcc.entity.QuestionAdd;
 import com.lcc.frame.Propertity;
+import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.R;
-import com.lcc.mvp.presenter.ComDesAddPresenter;
+import com.lcc.msdq.test.choice.VocationTestActivity;
 import com.lcc.mvp.presenter.QuestionAddPresenter;
 import com.lcc.mvp.presenter.impl.QuestionAddPresenterImpl;
 import com.lcc.mvp.view.QuestionAddView;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.finalteam.galleryfinal.FunctionConfig;
-import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
@@ -31,39 +28,48 @@ import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
  * Date:         2015年11月21日15:28:25
  * Description:  TestAddActivity
  */
-public class TestAddActivity extends BaseActivity implements QuestionAddView ,View.OnClickListener,
-        RadioGroup.OnCheckedChangeListener{
-    public static final String ZY = "zy";
-    private String zy = "";
+public class TestAddActivity extends BaseActivity implements QuestionAddView, View.OnClickListener,
+        RadioGroup.OnCheckedChangeListener {
+    private String zy;
     private List<File> files = new ArrayList<>();
     private QuestionAddPresenter presenter;
     private QuestionAdd questionAdd;
 
+    private View root_view;
     private SimpleArcDialog mDialog;
     private EditText editText_title;
     private EditText editText_summary;
     private RadioGroup rg_options;
+    private TextView tv_zy;
 
-    public static void startTestAddActivity(Activity startingActivity, String zy) {
+    public static void startTestAddActivity(Activity startingActivity) {
         Intent intent = new Intent(startingActivity, TestAddActivity.class);
-        intent.putExtra(ZY, zy);
         startingActivity.startActivity(intent);
     }
 
     @Override
     protected void initView() {
-        zy = getIntent().getStringExtra(ZY);
-        questionAdd=new QuestionAdd();
+        tv_zy = (TextView) findViewById(R.id.tv_zy);
+        String zr = DataManager.getZY();
+        if (!TextUtils.isEmpty(zr)) {
+            zy = zr.substring(zr.length() - 32, zr.length());
+            tv_zy.setText(zr.substring(0, zr.length() - 33));
+        }else {
+            tv_zy.setText("暂未设置职业");
+        }
+        questionAdd = new QuestionAdd();
         questionAdd.setKeyword("");
         questionAdd.setSource("");
         questionAdd.setOptions(Propertity.OPTIONS.ZYZS);
         presenter = new QuestionAddPresenterImpl(this);
 
-        rg_options= (RadioGroup) findViewById(R.id.rg_options);
+        root_view = findViewById(R.id.root_view);
+        rg_options = (RadioGroup) findViewById(R.id.rg_options);
         rg_options.setOnCheckedChangeListener(this);
-        editText_summary= (EditText) findViewById(R.id.editText_summary);
-        editText_title= (EditText) findViewById(R.id.editText_title);
-        findViewById(R.id.buttonSignUp).setOnClickListener(this);
+        editText_summary = (EditText) findViewById(R.id.editText_summary);
+        editText_title = (EditText) findViewById(R.id.editText_title);
+        findViewById(R.id.bt_fabu).setOnClickListener(this);
+        findViewById(R.id.tv_choice).setOnClickListener(this);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
 
@@ -89,13 +95,13 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
     @Override
     public void addSuccess() {
         closeDialog();
-        FrameManager.getInstance().toastPrompt("发布成功");
+        showSnackbar(root_view, "发布信息成功");
     }
 
     @Override
     public void addFail() {
         closeDialog();
-        FrameManager.getInstance().toastPrompt("发布失败");
+        showSnackbar(root_view, "发布信息失败");
     }
 
     private void closeDialog() {
@@ -106,39 +112,60 @@ public class TestAddActivity extends BaseActivity implements QuestionAddView ,Vi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.buttonSignUp:
-                if (TextUtils.isEmpty(editText_title.getText().toString())||
-                        TextUtils.isEmpty(editText_summary.getText().toString())){
-                    FrameManager.getInstance().toastPrompt("有未填写的数据");
+        switch (v.getId()) {
+            case R.id.bt_fabu:
+                String title = editText_title.getText().toString();
+                String summary = editText_summary.getText().toString();
+                if (TextUtils.isEmpty(zy)){
+                    showSnackbar(root_view, "请先选择职业");
+                    return;
+                }
+                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(summary)) {
+                    showSnackbar(root_view, "请将数据添加完整");
                     return;
                 }
 
-                if (editText_title.getText().toString().trim().length()<6||
-                        editText_title.getText().toString().length()>16){
-                    FrameManager.getInstance().toastPrompt("标题的长度不合法");
+                if (title.trim().length() < 6 || summary.length() > 16) {
+                    showSnackbar(root_view, "标题长度不合法");
                     return;
                 }
-
                 adding();
-                questionAdd.setTitle(editText_title.getText().toString());
-                questionAdd.setSummary(editText_summary.getText().toString());
+                questionAdd.setTitle(title);
+                questionAdd.setSummary(summary);
                 questionAdd.setType(zy);
                 presenter.QuestionAdd(questionAdd, files);
                 break;
             case R.id.guillotine_hamburger:
                 finish();
                 break;
+            case R.id.tv_choice:
+                Intent intent = new Intent(TestAddActivity.this, VocationTestActivity.class);
+                startActivityForResult(intent, 100);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK || requestCode != 100) {
+            return;
+        }
+        String zr = DataManager.getZY();
+        if (!TextUtils.isEmpty(zr)) {
+            zy = zr.substring(zr.length() - 32, zr.length());
+            tv_zy.setText(zr.substring(0, zr.length() - 33));
+        }else {
+            tv_zy.setText("暂未设置职业");
         }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (checkedId==R.id.rb_js){
+        if (checkedId == R.id.rb_js) {
             questionAdd.setOptions(Propertity.OPTIONS.ZYZS);
-        }else if (checkedId==R.id.rb_rs){
+        } else if (checkedId == R.id.rb_rs) {
             questionAdd.setOptions(Propertity.OPTIONS.RSZS);
-        }else {
+        } else {
             questionAdd.setOptions(Propertity.OPTIONS.QT);
         }
     }

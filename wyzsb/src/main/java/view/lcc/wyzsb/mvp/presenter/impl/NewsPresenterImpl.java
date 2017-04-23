@@ -40,6 +40,7 @@ public class NewsPresenterImpl implements NewsPresenter {
         }
         final long current_time = TimeUtils.getCurrentTime();
         NewsParams newsParams = new NewsParams();
+        newsParams.setPage(page);
         model.getNews(newsParams, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
@@ -67,17 +68,15 @@ public class NewsPresenterImpl implements NewsPresenter {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(entities);
-//                    int status = jsonObject.getInt("status");
-//                    String message = jsonObject.getString("message");
-                    boolean error = jsonObject.getBoolean("error");
-
-                    if (!error) {
-                        String result = jsonObject.getString("results");
-                        List<News> weekDatas = GsonUtils.fromJsonArray(result, News.class);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        List<News> Data = GsonUtils.fromJsonArray(result, News.class);
                         if (page == 1) {
-                            view.refreshView(weekDatas);
+                            view.refreshView(Data);
                         } else {
-                            view.loadMoreView(weekDatas);
+                            view.loadMoreView(Data);
                         }
                     } else {
                         if (get_data) {

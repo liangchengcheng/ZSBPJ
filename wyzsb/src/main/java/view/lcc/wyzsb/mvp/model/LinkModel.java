@@ -17,10 +17,11 @@ import view.lcc.wyzsb.mvp.param.NewsParams;
 public class LinkModel {
 
     /**
-     * 获取我的订单详情
+     * 获取blog
      */
     public OkHttpRequest getLink(NewsParams newsParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
+        map.put("page",newsParams.getPage()+"");
+        return ApiClient.create(AppConstants.RequestPath.GET_LINKS, map).tag("").get(callback);
     }
 }

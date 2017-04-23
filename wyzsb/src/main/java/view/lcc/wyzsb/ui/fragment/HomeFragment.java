@@ -20,6 +20,7 @@ import java.util.List;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.home.TravelingAdapter;
 import view.lcc.wyzsb.base.BaseFragment;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.model.ChannelEntity;
 import view.lcc.wyzsb.bean.model.FilterData;
 import view.lcc.wyzsb.bean.model.FilterEntity;
@@ -81,7 +82,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     // 运营数据
     private List<OperationEntity> operationList = new ArrayList<>();
     // ListView数据
-    private List<TravelingEntity> travelingList = new ArrayList<>();
+    private List<Video> travelingList = new ArrayList<>();
     // 广告视图
     private HeaderBannerView headerBannerView;
     // 频道视图
@@ -326,11 +327,11 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
             isStickyTop = true;
             viewTitleBg.setAlpha(0f);
             viewActionMoreBg.setAlpha(0f);
-            rlBar.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+            rlBar.setBackgroundColor(mContext.getResources().getColor(R.color.bg_btn_normal_color));
         } else {
             viewTitleBg.setAlpha(1f - fraction);
             viewActionMoreBg.setAlpha(1f - fraction);
-            rlBar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(mContext, fraction, R.color.transparent, R.color.colorPrimary));
+            rlBar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(mContext, fraction, R.color.transparent, R.color.bg_btn_normal_color));
         }
     }
 
@@ -384,12 +385,12 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     }
 
     @Override
-    public void getDataSuccess(List<TravelingEntity> entities) {
+    public void getDataSuccess(List<Video> entities) {
         fillAdapter(entities);
     }
 
     @Override
-    public void loadMoreDataSuccess(List<TravelingEntity> entities) {
+    public void loadMoreDataSuccess(List<Video> entities) {
 
     }
 
@@ -402,7 +403,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     /**
      * 填充数据（ListView的数据）
      */
-    private void fillAdapter(List<TravelingEntity> list) {
+    private void fillAdapter(List<Video> list) {
         if (list == null || list.size() == 0) {
             // 95 = 标题栏高度 ＋ FilterView的高度
             int height = mScreenHeight - DensityUtil.dip2px(mContext, 95);
@@ -413,9 +414,8 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     }
 
     @Override
-    public void click(TravelingEntity entity) {
-        Intent intent = new Intent(getActivity(), VideoDetailsActivity1.class);
-        startActivity(intent);
+    public void click(Video entity) {
+        VideoDetailsActivity1.startVideoDetailsActivity(getActivity(),entity);
     }
 
     @Override

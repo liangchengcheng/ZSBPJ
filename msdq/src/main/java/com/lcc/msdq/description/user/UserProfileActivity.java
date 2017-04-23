@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -29,6 +30,7 @@ import com.lcc.msdq.compony.content.HrFragment;
 import com.lcc.msdq.compony.content.OtherFragment;
 import com.lcc.msdq.favorite.ArticleFragment;
 import com.lcc.msdq.flow.FlowIndex;
+import com.lcc.utils.SystemBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +82,10 @@ public class UserProfileActivity extends BaseActivity implements View.OnClickLis
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         userInfo = (UserInfo) getIntent().getSerializableExtra(UserInfo);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        SystemBarHelper.immersiveStatusBar(this, 0);
+        SystemBarHelper.setHeightAndPadding(this, toolbar);
 
         tv_fs = (TextView) findViewById(R.id.tv_fs);
         tv_gz = (TextView) findViewById(R.id.tv_gz);

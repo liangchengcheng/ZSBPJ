@@ -178,8 +178,7 @@ public class SmoothListView extends ListView implements OnScrollListener {
     }
 
     private void updateHeaderHeight(float delta) {
-        mHeaderView.setVisiableHeight((int) delta
-                + mHeaderView.getVisiableHeight());
+        mHeaderView.setVisiableHeight((int) delta + mHeaderView.getVisiableHeight());
         if (mEnablePullRefresh && !mPullRefreshing) { // 未处于刷新状态，更新箭头
             if (mHeaderView.getVisiableHeight() > mHeaderViewHeight) {
                 mHeaderView.setState(SmoothListViewHeader.STATE_READY);

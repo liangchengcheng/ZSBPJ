@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:text="个人中心"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_sys_image"

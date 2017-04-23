@@ -32,6 +32,7 @@ import java.util.List;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.frame.CollapsingToolbarLayoutState;
 import view.lcc.wyzsb.frame.SystemBarHelper;
 import view.lcc.wyzsb.ui.fragment.CommentFragment;
@@ -55,13 +56,13 @@ public class VideoDetailsActivity1 extends BaseActivity {
     private PowerManager.WakeLock wakeLock;
     View rootView;
     private TabLayout tlUserProfileTabs;
+    private Video video;
 
-    public static void startVideoDetailsActivity(Activity startingActivity, String type) {
+    public static void startVideoDetailsActivity(Activity startingActivity, Video type) {
         Intent intent = new Intent(startingActivity, VideoDetailsActivity1.class);
-        intent.putExtra("", type);
+        intent.putExtra("url", type);
         startingActivity.startActivity(intent);
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
         this.mContext = this;
         rootView = getLayoutInflater().from(this).inflate(R.layout.video_details1, null);
         setContentView(rootView);
+        video = (Video) getIntent().getSerializableExtra("url");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         SystemBarHelper.immersiveStatusBar(this, 0);
@@ -145,10 +147,9 @@ public class VideoDetailsActivity1 extends BaseActivity {
         // 没有解决http://fzkt-biz.oss-cn-hangzhou.aliyuncs.com/vedio/2f58be65f43946c588ce43ea08491515.mp4
         // 这里模拟一个本地视频的播放，视频需要将testvideo文件夹的视频放到安卓设备的内置sd卡根目录中
         //String url1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
-        String url1 = "http://player.youku.com/player.php/sid/XODQxMjMyMzQ4/v.swf";
         VideoijkBean m1 = new VideoijkBean();
         m1.setStream("标清");
-        m1.setUrl(url1);
+        m1.setUrl(video.getV_url());
         list.add(m1);
         player = new PlayerView(this, rootView) {
             @Override
@@ -168,7 +169,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
                     @Override
                     public void onShowThumbnail(ImageView ivThumbnail) {
                         Glide.with(mContext)
-                                .load("http://pic2.nipic.com/20090413/406638_125424003_2.jpg")
+                                .load(video.getV_img())
                                 .placeholder(R.color.article_des)
                                 .error(R.color.article_title)
                                 .into(ivThumbnail);

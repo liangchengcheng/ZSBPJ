@@ -99,7 +99,7 @@
                 android:id="@+id/app_about_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="黑客教程是一款能够学习各种基本和黑客相关技术的基础软件" />
+                android:text="黑客教程是一款能够学习各种基本和黑客相关技术的基础软件，目前这是一个新的版本资源较少，后续将会有更多的资源" />
         </android.support.v7.widget.CardView>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

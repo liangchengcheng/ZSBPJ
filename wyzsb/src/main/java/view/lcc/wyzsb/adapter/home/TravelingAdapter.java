@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.model.TravelingEntity;
 import view.lcc.wyzsb.utils.ToastUtil;
 import view.lcc.wyzsb.view.home.GildeImageView.GlideImageView;
@@ -19,7 +20,7 @@ import view.lcc.wyzsb.view.home.GildeImageView.GlideImageView;
 /**
  * Created by sunfusheng on 16/4/20.
  */
-public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
+public class TravelingAdapter extends BaseListAdapter<Video> {
     private boolean isNoData;
     private int mHeight;
     // 一屏能显示的个数，这个根据屏幕高度和各自的需求定
@@ -31,12 +32,12 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
         super(context);
     }
 
-    public TravelingAdapter(Context context, List<TravelingEntity> list) {
+    public TravelingAdapter(Context context, List<Video> list) {
         super(context, list);
     }
 
     // 设置数据
-    public void setData(List<TravelingEntity> list) {
+    public void setData(List<Video> list) {
         clearAll();
         addALL(list);
 
@@ -55,11 +56,11 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
     }
 
     // 创建不满一屏的空数据
-    public List<TravelingEntity> createEmptyList(int size) {
-        List<TravelingEntity> emptyList = new ArrayList<>();
+    public List<Video> createEmptyList(int size) {
+        List<Video> emptyList = new ArrayList<>();
         if (size <= 0) return emptyList;
         for (int i=0; i<size; i++) {
-            emptyList.add(new TravelingEntity());
+            emptyList.add(new Video());
         }
         return emptyList;
     }
@@ -85,21 +86,21 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
             convertView.setTag(holder);
         }
 
-        final TravelingEntity entity = getItem(position);
+        final Video entity = getItem(position);
 
         holder.llRootView.setVisibility(View.VISIBLE);
-        if (TextUtils.isEmpty(entity.getAuthor())) {
+        if (TextUtils.isEmpty(entity.getId())) {
             holder.llRootView.setVisibility(View.INVISIBLE);
             return convertView;
         }
 
-        final String title = entity.getCompany_name() ;
+        final String title = entity.getV_t() ;
         holder.tvTitle.setText(title);
-        holder.tvRank.setText("排名:" + entity.getCompany_phone());
-        String url = null;
-        String images = entity.getCompany_image();
+        holder.tvRank.setText(  entity.getV_js());
+
+        String images = entity.getV_img();
         if (!TextUtils.isEmpty(images)){
-            holder.givImage.loadNetImage(url, R.color.font_black_6);
+            holder.givImage.loadNetImage(images, R.color.font_black_6);
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +132,6 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
     }
 
     public interface ItemClickListener{
-        void click(TravelingEntity entity);
+        void click(Video entity);
     }
 }

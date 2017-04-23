@@ -30,7 +30,7 @@
             android:layout_marginLeft="15dp"
             android:text="评论"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:visibility="gone"

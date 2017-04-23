@@ -6,6 +6,7 @@
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBar"
+        android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
 
@@ -19,9 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="博客导航"
+            android:text="网站导航"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
     </android.support.v7.widget.Toolbar>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_widget"

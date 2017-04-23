@@ -37,7 +37,7 @@
                 android:layout_marginLeft="30dp"
                 android:text="面试真题"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </android.support.v7.widget.Toolbar>
 

@@ -22,6 +22,6 @@ public class VideoModel {
      */
     public OkHttpRequest getVideo(VideoParams videoParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.GET_VIDEO, map).tag("").get(callback);
     }
 }

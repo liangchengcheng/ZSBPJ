@@ -10,15 +10,11 @@ import java.util.List;
 
 import view.lcc.wyzsb.base.ApiException;
 import view.lcc.wyzsb.bean.Book;
-import view.lcc.wyzsb.bean.News;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.mvp.model.BookModel;
-import view.lcc.wyzsb.mvp.model.NewsModel;
 import view.lcc.wyzsb.mvp.param.NewsParams;
 import view.lcc.wyzsb.mvp.presenter.BookPresenter;
-import view.lcc.wyzsb.mvp.presenter.NewsPresenter;
 import view.lcc.wyzsb.mvp.view.BookView;
-import view.lcc.wyzsb.mvp.view.NewsView;
 import view.lcc.wyzsb.utils.GsonUtils;
 import view.lcc.wyzsb.utils.TimeUtils;
 
@@ -38,13 +34,14 @@ public class BookPresenterImpl implements BookPresenter {
         model = new BookModel();
     }
 
-    private void loadData(final int page, final String options, final boolean get_data) {
+    private void loadData(final int page, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
         final long current_time = TimeUtils.getCurrentTime();
         NewsParams newsParams = new NewsParams();
-        model.getNews(newsParams, new ResultCallback<String>() {
+        newsParams.setPage(page);
+        model.getBooks(newsParams, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 if (get_data) {
@@ -71,17 +68,15 @@ public class BookPresenterImpl implements BookPresenter {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(entities);
-//                    int status = jsonObject.getInt("status");
-//                    String message = jsonObject.getString("message");
-                    boolean error = jsonObject.getBoolean("error");
-
-                    if (!error) {
-                        String result = jsonObject.getString("results");
-                        List<Book> weekDatas = GsonUtils.fromJsonArray(result, Book.class);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        String result = jsonObject.getString("result");
+                        List<Book> books = GsonUtils.fromJsonArray(result, Book.class);
                         if (page == 1) {
-                            view.refreshView(weekDatas);
+                            view.refreshView(books);
                         } else {
-                            view.loadMoreView(weekDatas);
+                            view.loadMoreView(books);
                         }
                     } else {
                         if (get_data) {
@@ -104,16 +99,16 @@ public class BookPresenterImpl implements BookPresenter {
 
     @Override
     public void getData(int page, String options) {
-        loadData(page, options, true);
+        loadData(page,  true);
     }
 
     @Override
     public void loadMore(int page, String options) {
-        loadData(page, options, false);
+        loadData(page,  false);
     }
 
     @Override
     public void refresh(int page, String options) {
-        loadData(1, options, false);
+        loadData(1,  false);
     }
 }

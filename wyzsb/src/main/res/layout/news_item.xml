@@ -13,12 +13,11 @@
         android:background="@drawable/ripple_item_clicked"
         android:padding="10dp">
 
-        <view.lcc.wyzsb.view.home.GildeImageView.GlideImageView
+        <ImageView
             android:id="@+id/giv_image"
             android:layout_width="80dp"
             android:layout_height="60dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"/>
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -32,7 +31,7 @@
             android:lineSpacingExtra="2dp"
             android:maxLines="2"
             android:paddingBottom="6dp"
-            android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
+            android:text=""
             android:textColor="@color/font_black_0"
             android:textSize="15sp"/>
 

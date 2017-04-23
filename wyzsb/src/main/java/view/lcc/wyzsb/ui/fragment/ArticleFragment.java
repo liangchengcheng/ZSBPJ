@@ -39,7 +39,7 @@ import view.lcc.wyzsb.view.home.FilterView;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:
+ * Date:         2017年04月23日11:02:32
  * Description:
  */
 public class ArticleFragment extends Fragment implements ArticleView,SwipeRefreshLayout.OnRefreshListener,
@@ -56,8 +56,8 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-
     private FilterView realFilterView;
+
     // 筛选数据
     private FilterData filterData;
     // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
