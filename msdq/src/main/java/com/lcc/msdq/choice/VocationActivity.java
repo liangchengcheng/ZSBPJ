@@ -240,7 +240,7 @@ public class VocationActivity extends BaseActivity implements ChoiceTypeView ,Vi
         toasts.setDefaultTextColor(Color.WHITE);
         toasts.show("设置成功", R.layout.choice_toast_item, R.id.content_toast, VocationActivity.this);
         App.exit();
-        if (TextUtils.isEmpty(result)) {
+        if (!TextUtils.isEmpty(result)) {
             finish();
         } else {
             startActivity(new Intent(VocationActivity.this, MainActivity.class));

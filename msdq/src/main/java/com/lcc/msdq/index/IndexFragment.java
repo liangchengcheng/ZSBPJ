@@ -6,10 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,9 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.PopupMenu;
-
 import com.lcc.adapter.WeekDataAdapter;
 import com.lcc.base.BaseFragment;
 import com.lcc.entity.ActivityEntity;
@@ -29,7 +23,6 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.area.LoginDialogFragment;
-import com.lcc.msdq.choice.ChoiceTypeoneActivity;
 import com.lcc.msdq.choice.VocationActivity;
 import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.index.article.IndexMenuActivity;
@@ -213,9 +206,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                     LoginDialogFragment dialog = new LoginDialogFragment();
                     dialog.show(getActivity().getFragmentManager(), "loginDialog");
                 } else {
-                    //Intent intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
-                    Intent intent = new Intent(getActivity(), VocationActivity.class);
-                    startActivity(intent);
+                    VocationActivity.startVocationActivity(getActivity(),"home");
                 }
                 break;
             //去我的消息的界面
@@ -254,8 +245,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
                     LoginDialogFragment dialog = new LoginDialogFragment();
                     dialog.show(getActivity().getFragmentManager(), "loginDialog");
                 } else {
-                    Intent intent = new Intent(getActivity(), VocationActivity.class);
-                    startActivity(intent);
+                    VocationActivity.startVocationActivity(getActivity(),"home");
                 }
                 break;
             case R.id.author:
