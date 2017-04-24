@@ -241,9 +241,9 @@ public class VideoDetailsActivity1 extends BaseActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        VideoDetailsActivity.Adapter adapter = new VideoDetailsActivity.Adapter(getSupportFragmentManager());
-        adapter.addFragment(new JianjieFragment(), "简介");
-        adapter.addFragment(new CommentFragment(), "评论");
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new JianjieFragment(video), "简介");
+        adapter.addFragment(new CommentFragment(video), "评论");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }

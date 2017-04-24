@@ -14,7 +14,7 @@ import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.mvp.presenter.FeedBackPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.FeedBackPresenterImpl;
 import view.lcc.wyzsb.mvp.view.FeedBackView;
-import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
+
 
 /**
  * Author:       梁铖城

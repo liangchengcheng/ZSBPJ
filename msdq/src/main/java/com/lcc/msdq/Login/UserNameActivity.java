@@ -13,6 +13,7 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.choice.VocationActivity;
 import com.lcc.mvp.presenter.SignUpPresenter;
 import com.lcc.mvp.presenter.impl.SignUpPresenterImpl;
 import com.lcc.mvp.view.SignUpView;
@@ -85,7 +86,7 @@ public class UserNameActivity extends FragmentActivity implements View.OnClickLi
     public void signUpSuccess() {
         showSnackbar(header, "注册账号成功");
         Intent intent = null;
-        intent = new Intent(UserNameActivity.this, ChoiceTypeoneActivity.class);
+        intent = new Intent(UserNameActivity.this, VocationActivity.class);
         intent.putExtra("result",result);
         startActivity(intent);
         finish();

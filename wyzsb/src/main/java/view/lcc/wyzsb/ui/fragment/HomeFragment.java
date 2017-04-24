@@ -34,7 +34,7 @@ import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
 import view.lcc.wyzsb.mvp.view.HomeFragmentView;
 import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
 import view.lcc.wyzsb.ui.activity.setting.AboutActivity;
-import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
+
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity1;
 import view.lcc.wyzsb.utils.ColorUtil;
 import view.lcc.wyzsb.utils.DensityUtil;

@@ -8,11 +8,17 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.bean.Article;
 import view.lcc.wyzsb.frame.ImageManager;
 import view.lcc.wyzsb.frame.UIManager;
+import view.lcc.wyzsb.mvp.presenter.ArticleDetailsPresenter;
+import view.lcc.wyzsb.mvp.presenter.impl.ArticleDetailsPresenterImpl;
+import view.lcc.wyzsb.mvp.view.ArticleDetailsView;
+import view.lcc.wyzsb.view.LoadingLayout;
 
 /**
  * Author:       梁铖城
@@ -20,14 +26,16 @@ import view.lcc.wyzsb.frame.UIManager;
  * Date:         2017年04月13日13:03:32
  * Description:  文章详情
  */
-public class ArticleDetailsActivity extends BaseActivity implements View.OnClickListener{
-
+public class ArticleDetailsActivity extends BaseActivity implements View.OnClickListener,ArticleDetailsView{
     private WebView mWebView;
     private ImageView img_portrait;
+    private LoadingLayout loading_layout;
+    private ArticleDetailsPresenter presenter;
+    private Article data;
 
-    public static void startArticleDetails(Activity startingActivity, String type) {
+    public static void startArticleDetails(Activity startingActivity, Article type) {
         Intent intent = new Intent(startingActivity, ArticleDetailsActivity.class);
-        intent.putExtra("", type);
+        intent.putExtra("data", type);
         startingActivity.startActivity(intent);
     }
 
@@ -35,21 +43,33 @@ public class ArticleDetailsActivity extends BaseActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article_details);
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        data = (Article) getIntent().getSerializableExtra("data");
+
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText(data.getA_t());
+
+        TextView tv_person_name = (TextView) findViewById(R.id.tv_person_name);
+        tv_person_name.setText(data.getA_a());
+
+        TextView tv_publish_time = (TextView) findViewById(R.id.tv_publish_time);
+        tv_publish_time.setText(data.getA_ct());
+
+        presenter = new ArticleDetailsPresenterImpl(this);
         findViewById(R.id.iv_back).setOnClickListener(this);
         img_portrait = (ImageView) findViewById(R.id.img_portrait);
         ImageManager.getInstance()
-                .loadCircleResImage(ArticleDetailsActivity.this,R.drawable.setting_bg,img_portrait);;
+                .loadUrlImage(ArticleDetailsActivity.this,data.getA_img(),img_portrait);
         mWebView = (WebView) findViewById(R.id.layout_web_view);
         initView();
     }
 
     private void initView() {
         // init WebView
-        String html = "<div><p> hello world </p></div>";
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(false);
-        mWebView.loadDataWithBaseURL("", loadHTMLData(html), "text/html", "UTF-8", "");
+        presenter.getContent(data.getId());
     }
 
     /**
@@ -83,5 +103,28 @@ public class ArticleDetailsActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void getLoading() {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
+    }
+
+    @Override
+    public void getDataEmpty() {
+        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
+    }
+
+    @Override
+    public void getDataSuccess(Article msg) {
+        //其他的属性则直接用上个界面传递过来的
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        mWebView.loadDataWithBaseURL("", loadHTMLData(msg.getA_b()), "text/html", "UTF-8", "");
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 }

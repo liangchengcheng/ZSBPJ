@@ -18,12 +18,12 @@ import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.CommentAdapter;
 import view.lcc.wyzsb.base.BaseFragment;
 import view.lcc.wyzsb.bean.Comments;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
 import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CommentsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.CommentsView;
-import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
 
@@ -35,11 +35,16 @@ import view.lcc.wyzsb.view.LoadingLayout;
  */
 public class CommentFragment extends Fragment implements CommentsView,CommentAdapter.OnItemClickListener,
         SwipeRefreshLayout.OnRefreshListener {
-
     private CommentsPresenter presenter;
     private CommentAdapter commentsAdapter;
     private RecyclerView mRecyclerView;
     private LoadingLayout loading_layout;
+
+    private Video video;
+
+    public CommentFragment(Video video){
+        this.video = video;
+    }
 
     @Nullable
     @Override
@@ -50,7 +55,7 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         initRefreshView(view);
         initRecycleView(view);
-        presenter.getData(1,"1");
+        presenter.getData(1,video.getId());
         return view;
     }
 
@@ -68,7 +73,7 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
         mSwipeRefreshWidget.setOnRefreshListener(this);
     }
 
-    private void initRecycleView(View view) {
+    private void initRecycleView(final View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
@@ -87,7 +92,7 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
                     commentsAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(commentsAdapter.getItemCount() - 1);
                     currentPage++;
-                    presenter.loadMore(currentPage, "");
+                    presenter.loadMore(currentPage, video.getId());
                 }
             }
         });
@@ -178,7 +183,7 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                presenter.refresh(currentPage, "");
+                presenter.refresh(currentPage, video.getId());
             }
         }, 500);
     }

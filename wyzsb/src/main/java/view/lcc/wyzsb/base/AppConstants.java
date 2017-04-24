@@ -29,7 +29,16 @@ public class AppConstants {
         //获取连接
         public final static String GET_LINKS = "/hk/getHLink";
         //获取books
+        public final static String getArticleById = "/hk/getArticleById";
+
+        //获取新闻的主题
+        public final static String getHNewsBody = "/hk/getHNewsBody";
+
+
+
+        //获取文章的内容详情
         public final static String GET_BOOKS = "/hk/getBooks";
+
 
 
         //验证码

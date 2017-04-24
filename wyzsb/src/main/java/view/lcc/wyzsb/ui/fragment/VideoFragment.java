@@ -32,7 +32,7 @@ import view.lcc.wyzsb.mvp.presenter.impl.NewsPresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.VideoPresenterImpl;
 import view.lcc.wyzsb.mvp.view.NewsView;
 import view.lcc.wyzsb.mvp.view.VideoView;
-import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity;
+
 import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity1;
 import view.lcc.wyzsb.utils.ModelUtil;
 import view.lcc.wyzsb.utils.TimeUtils;

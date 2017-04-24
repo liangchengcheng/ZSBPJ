@@ -127,7 +127,7 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
 
     @Override
     public void onItemClick(Article data) {
-        ArticleDetailsActivity.startArticleDetails(ArticleActivity.this,"");
+        ArticleDetailsActivity.startArticleDetails(ArticleActivity.this,data);
     }
 
     @Override

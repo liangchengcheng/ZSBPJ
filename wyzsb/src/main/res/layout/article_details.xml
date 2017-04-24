@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
-    android:background="?attr/colorPrimaryDark"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryDark"
+    android:fitsSystemWindows="true">
 
     <!--universal container-->
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <!--app bar layout-->
         <android.support.design.widget.AppBarLayout
@@ -29,28 +29,30 @@
                 android:background="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_scrollFlags="scroll" >
+                app:layout_scrollFlags="scroll">
+
                 <ImageView
                     android:id="@+id/iv_back"
-                    android:background="@drawable/icon_back"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_back" />
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:textSize="18sp"
                     android:text="文章详情"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textSize="18sp" />
             </android.support.v7.widget.Toolbar>
             <!--post's title-->
             <TextView
-                android:text="窗前明月光，疑是地上霜。举头望明月，低头思故乡"
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFE0B2"
                 android:padding="10dp"
+                android:text="窗前明月光，疑是地上霜。举头望明月，低头思故乡"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_scrollFlags="scroll" />
@@ -63,7 +65,7 @@
                 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:background="#EEE"/>
+                    android:background="#EEE" />
                 <!--the person info-->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -72,27 +74,26 @@
                     android:padding="10dp">
                     <!--person portrait-->
                     <ImageView
-                        android:background="@drawable/person"
                         android:id="@+id/img_portrait"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
+                        android:background="@drawable/person"
                         android:contentDescription="@null" />
                     <!--person name-->
                     <TextView
-                        android:text="埃罗芒阿老师"
                         android:id="@+id/tv_person_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/img_portrait"
                         android:layout_toRightOf="@id/img_portrait"
                         android:paddingTop="4dp"
+                        android:text="埃罗芒阿老师"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="16sp" />
                     <!--user's summary-->
                     <TextView
-                        android:text="发布时间:8小时前"
                         android:id="@+id/tv_publish_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -100,25 +101,23 @@
                         android:layout_marginTop="3dp"
                         android:layout_toEndOf="@id/img_portrait"
                         android:layout_toRightOf="@id/img_portrait"
+                        android:text="发布时间:8小时前"
                         android:textColor="#000"
                         android:textSize="12sp" />
                     <!--belong to topic-->
                     <TextView
-                        android:visibility="gone"
-                        android:text="11111"
                         android:id="@+id/tv_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="6dp"
+                        android:text="11111"
                         android:textColor="#000"
                         android:textSize="12sp"
-                         />
+                        android:visibility="gone" />
                     <!--the post's published time-->
                     <TextView
-                        android:visibility="gone"
-                        android:text="2222"
                         android:id="@+id/tv_extend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -126,15 +125,16 @@
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/tv_type"
                         android:layout_marginTop="6dp"
+                        android:text="2222"
                         android:textColor="#000"
                         android:textSize="12sp"
-                        />
+                        android:visibility="gone" />
                 </RelativeLayout>
                 <!--horizontal line-->
                 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:background="#EEE"/>
+                    android:background="#EEE" />
             </LinearLayout>
 
         </android.support.design.widget.AppBarLayout>
@@ -147,19 +147,30 @@
             android:background="#F6F6F6"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <WebView
-                android:id="@+id/layout_web_view"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent">
+
+                <WebView
+                    android:id="@+id/layout_web_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <view.lcc.wyzsb.view.LoadingLayout
+                    android:id="@+id/loading_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
 
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
 
     <!--&lt;!&ndash;bottom panel&ndash;&gt;-->
     <!--<include-->
-        <!--layout="@layout/view_detail_bottom_widget"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true" />-->
+    <!--layout="@layout/view_detail_bottom_widget"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true" />-->
 
 </RelativeLayout>

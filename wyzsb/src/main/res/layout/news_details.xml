@@ -34,6 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_gravity="center"
                     android:textSize="18sp"
                     android:text="资讯详情"
                     android:layout_width="wrap_content"

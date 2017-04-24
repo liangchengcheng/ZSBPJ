@@ -26,6 +26,7 @@ import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.choice.ChoiceTypeoneActivity;
+import com.lcc.msdq.choice.VocationActivity;
 import com.lcc.msdq.compony.content.CodeFragment;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
@@ -193,11 +194,11 @@ public class FragmentLogin extends Fragment implements LoginView, View.OnClickLi
             public void run() {
                 login_progress.setVisibility(View.GONE);
                 Intent intent = null;
-                //直接登录
+                //直接登录  result
                 if (!TextUtils.isEmpty(result)){
                     UserInfo userInfo = DataManager.getUserInfo();
                     if (userInfo == null || TextUtils.isEmpty(userInfo.getZy())) {
-                        intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                        intent = new Intent(getActivity(), VocationActivity.class);
                         intent.putExtra("result",result);
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.fade,R.anim.my_alpha_action);
@@ -208,7 +209,7 @@ public class FragmentLogin extends Fragment implements LoginView, View.OnClickLi
                 }else {
                     UserInfo userInfo = DataManager.getUserInfo();
                     if (userInfo == null || TextUtils.isEmpty(userInfo.getZy())) {
-                        intent = new Intent(getActivity(), ChoiceTypeoneActivity.class);
+                        intent = new Intent(getActivity(), VocationActivity.class);
                     } else {
                         intent = new Intent(getActivity(), MainActivity.class);
                     }

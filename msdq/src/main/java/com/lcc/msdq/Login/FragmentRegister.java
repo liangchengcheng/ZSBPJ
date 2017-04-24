@@ -25,6 +25,7 @@ import com.lcc.mvp.presenter.CheckVcodePresenter;
 import com.lcc.mvp.presenter.impl.CheckVcodePresenterImpl;
 import com.lcc.mvp.view.CheckVcodeView;
 import com.lcc.utils.CheckUtils;
+import com.lcc.utils.KeyboardUtils;
 import com.lcc.utils.Tools;
 import com.lcc.view.EditTextWithDel;
 import com.lcc.view.PaperButton;
@@ -58,7 +59,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
 
     private CheckVcodePresenter presenter;
 
-    private String result;
+    private String flag = "";
 
     public static FragmentRegister newInstance(String r) {
         FragmentRegister mFragment = new FragmentRegister();
@@ -70,7 +71,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        result = getArguments().getString("result");
+        flag = getArguments().getString("result");
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -193,6 +194,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
+                KeyboardUtils.hide(getActivity());
                 final View view = v;
                 String phone = userphone.getText().toString();
                 boolean mobile = CheckUtils.isMobile(phone);
@@ -210,11 +212,8 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                     phoneIv.setAnimation(Tools.shakeAnimation(2));
                     showSnackbar(view, "提示：手机号码不正确");
                 }
-
             }
         });
-
-
         //下一步的点击事件
         nextBt.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -229,7 +228,6 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                     rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     phoneIv.setAnimation(Tools.shakeAnimation(2));
                     showSnackbar(view, "提示：请输入手机号码");
-
                     return;
                 }
                 if (!CheckUtils.isMobile(phone)) {
@@ -245,12 +243,11 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
                     showSnackbar(view, "提示：请输入验证码");
                     return;
-
                 }
                 if (TextUtils.isEmpty(password)) {
                     rela_repass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     passIv.setAnimation(Tools.shakeAnimation(2));
-                    // fg_regist.setBackgroundResource(R.color.colorAccent);
+                    //fg_regist.setBackgroundResource(R.color.colorAccent);
                     showSnackbar(view, "IYO提示：请输入密码");
                     return;
                 }
@@ -271,7 +268,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
         intent.putExtra("code", code);
         intent.putExtra("phone", phone);
         intent.putExtra("password",password);
-        intent.putExtra("result",result);
+        intent.putExtra("result",flag);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
         getActivity().finish();
@@ -303,7 +300,6 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
         }, DELAY_MILLIS);
     }
 
-
     //回收timer
     @Override
     public void onDestroy() {
@@ -333,7 +329,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                     intent.putExtra("code", code);
                     intent.putExtra("phone", phone);
                     intent.putExtra("password",password);
-                    intent.putExtra("result",result);
+                    intent.putExtra("result",flag);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
                     getActivity().finish();

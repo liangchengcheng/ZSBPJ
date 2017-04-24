@@ -31,10 +31,8 @@ public class ModelUtil {
      */
     public static List<String> getBannerData() {
         List<String> adList = new ArrayList<>();
-        adList.add("http://img2.imgtn.bdimg.com/it/u=2850936076,2080165544&fm=206&gp=0.jpg");
-        adList.add("http://img3.imgtn.bdimg.com/it/u=524208507,12616758&fm=206&gp=0.jpg");
-        adList.add("http://img3.imgtn.bdimg.com/it/u=698582197,4250615262&fm=206&gp=0.jpg");
-        adList.add("http://img5.imgtn.bdimg.com/it/u=1467751238,3257336851&fm=11&gp=0.jpg");
+        adList.add("http://img5.imgtn.bdimg.com/it/u=3387699877,572565760&fm=23&gp=0.jpg");
+        adList.add("http://img4.imgtn.bdimg.com/it/u=3585605996,2650481562&fm=23&gp=0.jpg");
         return adList;
     }
 
@@ -43,14 +41,22 @@ public class ModelUtil {
      */
     public static List<ChannelEntity> getChannelData() {
         List<ChannelEntity> channelList = new ArrayList<>();
-        channelList.add(new ChannelEntity("WEB安全", "WordPress", R.drawable.lcc_ie));
-        channelList.add(new ChannelEntity("系统安全", "Linux", R.drawable.lcc_windows));
-        channelList.add(new ChannelEntity("网络安全", "IIS", R.drawable.lcc_service));
-        channelList.add(new ChannelEntity("终端安全", "路由器", R.drawable.lcc_zhongduan));
-        channelList.add(new ChannelEntity("数据安全", "mysql", R.drawable.lcc_data));
-        channelList.add(new ChannelEntity("内网渗透", "0day", R.drawable.lcc_saomiao));
-        channelList.add(new ChannelEntity("逆向破解", "Android", R.drawable.lcc_loudong));
-        channelList.add(new ChannelEntity("漏洞分析", "审计", R.drawable.lcc_code));
+        channelList.add(new ChannelEntity("WEB安全", "WordPress",
+                "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=304665959,1413891126&fm=23&gp=0.jpg"));
+        channelList.add(new ChannelEntity("系统安全", "Linux",
+                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=659929953,2220604144&fm=23&gp=0.jpg"));
+        channelList.add(new ChannelEntity("网络安全", "IIS",
+                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3106582618,3548567193&fm=23&gp=0.jpg"));
+        channelList.add(new ChannelEntity("终端安全", "路由器",
+                ""));
+        channelList.add(new ChannelEntity("数据安全", "mysql",
+                ""));
+        channelList.add(new ChannelEntity("内网渗透", "0day",
+                ""));
+        channelList.add(new ChannelEntity("逆向破解", "Android",
+                ""));
+        channelList.add(new ChannelEntity("漏洞分析", "审计",
+                R.drawable.lcc_code));
         return channelList;
     }
 

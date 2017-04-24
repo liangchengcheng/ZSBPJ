@@ -131,7 +131,7 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
 
     @Override
     public void onItemClick(Article data) {
-        ArticleDetailsActivity.startArticleDetails(getActivity(),"");
+        ArticleDetailsActivity.startArticleDetails(getActivity(),data);
     }
 
     @Override
