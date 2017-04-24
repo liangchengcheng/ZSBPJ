@@ -48,15 +48,15 @@ public class ModelUtil {
         channelList.add(new ChannelEntity("网络安全", "IIS",
                 "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3106582618,3548567193&fm=23&gp=0.jpg"));
         channelList.add(new ChannelEntity("终端安全", "路由器",
-                ""));
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=8699978,3001483890&fm=23&gp=0.jpg"));
         channelList.add(new ChannelEntity("数据安全", "mysql",
-                ""));
+                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1874647747,2949411964&fm=23&gp=0.jpg"));
         channelList.add(new ChannelEntity("内网渗透", "0day",
-                ""));
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=306464908,2928118390&fm=23&gp=0.jpg"));
         channelList.add(new ChannelEntity("逆向破解", "Android",
-                ""));
+                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=283337389,3090814806&fm=23&gp=0.jpg"));
         channelList.add(new ChannelEntity("漏洞分析", "审计",
-                R.drawable.lcc_code));
+                "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=603488282,2345355477&fm=23&gp=0.jpg"));
         return channelList;
     }
 

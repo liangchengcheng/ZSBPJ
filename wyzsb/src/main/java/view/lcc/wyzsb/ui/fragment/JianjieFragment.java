@@ -36,7 +36,7 @@ public class JianjieFragment extends Fragment{
         tv_author.setText(video.getV_a());
 
         TextView tv_time = (TextView) view.findViewById(R.id.tv_time);
-        tv_time.setText(video.getV_t());
+        tv_time.setText(video.getV_time());
 
         TextView tv_js = (TextView) view.findViewById(R.id.tv_js);
         tv_js.setText(video.getV_js());

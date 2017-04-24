@@ -420,7 +420,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     @Override
     public void Channel(String title) {
-        ArticleActivity.startArticleActivity(getActivity(),"title");
+        ArticleActivity.startArticleActivity(getActivity(),title);
     }
 
     @Override

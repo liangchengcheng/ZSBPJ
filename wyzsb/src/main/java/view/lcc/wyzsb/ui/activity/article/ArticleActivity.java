@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -33,7 +34,6 @@ import view.lcc.wyzsb.view.LoadingLayout;
  */
 public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener,
         ArticleAdapter.OnFavClickListener, ArticleAdapter.OnItemClickListener,View.OnClickListener,ArticleView {
-
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
@@ -49,6 +49,7 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
     protected int currentPage = 1;
     private String type=" ";
 
+
     public static void startArticleActivity(Activity startingActivity, String type) {
         Intent intent = new Intent(startingActivity, ArticleActivity.class);
         intent.putExtra(TYPE, type);
@@ -59,7 +60,9 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article_layout);
-
+        type = getIntent().getStringExtra(TYPE);
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText(type);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
         mPresenter = new ArticlePresenterImpl(this);
