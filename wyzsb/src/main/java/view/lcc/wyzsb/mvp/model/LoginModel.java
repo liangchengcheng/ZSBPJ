@@ -15,9 +15,10 @@ import view.lcc.wyzsb.mvp.param.Login;
  */
 public class LoginModel {
 
-    public OkHttpRequest signIn(Login password, ResultCallback<String> callback) {
+    public OkHttpRequest signIn(Login login, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, "");
+        paramsMap.put("phone",login.getPhone() );
+        paramsMap.put("passwords", login.getPassword());
         return ApiClient.createUser(AppConstants.RequestPath.SIGN, paramsMap)
                 .addHeader("phone","").tag("").post(callback);
     }

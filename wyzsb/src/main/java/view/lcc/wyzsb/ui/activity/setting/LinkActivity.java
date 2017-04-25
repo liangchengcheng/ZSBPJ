@@ -178,6 +178,6 @@ public class LinkActivity extends BaseActivity implements LinkView, SwipeRefresh
 
     @Override
     public void onItemClick(Link data) {
-
+        LinkDetailsActivity.startLinkDetailsActivity(LinkActivity.this,data);
     }
 }

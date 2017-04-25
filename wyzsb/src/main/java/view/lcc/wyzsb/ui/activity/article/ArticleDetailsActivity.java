@@ -76,8 +76,7 @@ public class ArticleDetailsActivity extends BaseActivity implements View.OnClick
      * load html form remote
      */
     private String loadHTMLData(String body) {
-        StringBuilder builder = new StringBuilder().append(UIManager.WEB_STYLE)
-                .append(UIManager.WEB_LOAD_IMAGES);
+        StringBuilder builder = new StringBuilder().append(UIManager.WEB_STYLE).append(UIManager.WEB_LOAD_IMAGES);
         // 下面是2个不同的注释。
         // builder.append("<body class='night'><div class='contentstyle' id='article_body'>");
         builder.append("<body><div class='contentstyle' id='article_body'>");

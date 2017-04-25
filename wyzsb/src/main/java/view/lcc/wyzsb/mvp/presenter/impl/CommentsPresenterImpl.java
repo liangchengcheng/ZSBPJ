@@ -9,6 +9,7 @@ import view.lcc.wyzsb.bean.Comments;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.mvp.model.CommentsModel;
 import view.lcc.wyzsb.mvp.param.Replay;
+import view.lcc.wyzsb.mvp.param.SendComments;
 import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
 import view.lcc.wyzsb.mvp.view.CommentsView;
 import view.lcc.wyzsb.utils.GsonUtils;
@@ -109,7 +110,7 @@ public class CommentsPresenterImpl implements CommentsPresenter{
     }
 
     @Override
-    public void sendComments(Replay replay) {
+    public void sendComments(SendComments replay) {
         model.sendComments(replay, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

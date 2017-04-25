@@ -8,6 +8,7 @@ import view.lcc.wyzsb.frame.ParamsMap;
 import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
 import view.lcc.wyzsb.mvp.param.Replay;
+import view.lcc.wyzsb.mvp.param.SendComments;
 
 /**
  * Author:       梁铖城
@@ -31,7 +32,7 @@ public class CommentsModel {
     /**
      * 发送评论到服务器
      */
-    public OkHttpRequest sendComments(Replay replay, ResultCallback<String> callback) {
+    public OkHttpRequest sendComments(SendComments replay, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("content", "");
         paramsMap.put("nid", "");

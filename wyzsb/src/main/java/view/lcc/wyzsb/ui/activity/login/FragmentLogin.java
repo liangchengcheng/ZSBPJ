@@ -35,7 +35,7 @@ import view.lcc.wyzsb.view.PaperButton;
  * Date:
  * Description:
  */
-public class FragmentLogin extends Fragment implements LoginView{
+public class FragmentLogin extends Fragment implements LoginView {
 
     private LoginPresenter presenter;
 
@@ -91,7 +91,7 @@ public class FragmentLogin extends Fragment implements LoginView{
             @Override
             public void afterTextChanged(Editable s) {
                 String text = userphone.getText().toString();
-                if(CheckUtils.isMobile(text)){
+                if (CheckUtils.isMobile(text)) {
                     //抖动
                     rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
                 }
@@ -107,6 +107,7 @@ public class FragmentLogin extends Fragment implements LoginView{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 //rela_pass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
@@ -116,36 +117,38 @@ public class FragmentLogin extends Fragment implements LoginView{
 
     private void initLogin() {
         SharedPreferences userinfo = getActivity().getSharedPreferences("userinfo", 0);
-        userphone.setText(userinfo.getString("username",null));
-        userpass.setText(userinfo.getString("password",null));
+        userphone.setText(userinfo.getString("username", null));
+        userpass.setText(userinfo.getString("password", null));
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final   String phone = userphone.getText().toString();
+                final String phone = userphone.getText().toString();
                 final String passwords = userpass.getText().toString();
-                final  View view= v;
+                final View view = v;
 
-                if (TextUtils.isEmpty(phone)){
+                if (TextUtils.isEmpty(phone)) {
                     rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     loginusericon.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(v,"IYO提示：请输入手机号码");
+                    showSnackbar(v, "提示：请输入手机号码");
                     return;
                 }
-                if(!CheckUtils.isMobile(phone)){
+                if (!CheckUtils.isMobile(phone)) {
                     //抖动
                     rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     loginusericon.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(v,"IYO提示：用户名不正确");
+                    showSnackbar(v, "提示：用户名不正确");
                     return;
                 }
-                if (TextUtils.isEmpty(passwords)){
+                if (TextUtils.isEmpty(passwords)) {
                     rela_pass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     codeicon.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(v,"IYO提示：请输入密码");
+                    showSnackbar(v, "提示：请输入密码");
                     return;
                 }
                 login_progress.setVisibility(View.VISIBLE);
                 Login login = new Login();
+                login.setPhone(phone);
+                login.setPassword(passwords);
                 presenter.signIn(login);
             }
         });
@@ -164,18 +167,18 @@ public class FragmentLogin extends Fragment implements LoginView{
     public void onSignInSuccess(String user) {
         rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
         rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
-        showSnackbar(rl_root_view,"IYO提示：登陆成功");
+        showSnackbar(rl_root_view, "提示：登陆成功");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 login_progress.setVisibility(View.GONE);
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.fade,R.anim.my_alpha_action);
+                getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
 
 
             }
-        },1500);
+        }, 1500);
     }
 
     @Override
@@ -188,10 +191,10 @@ public class FragmentLogin extends Fragment implements LoginView{
         loginFail();
     }
 
-    private void loginFail(){
+    private void loginFail() {
         login_progress.setVisibility(View.GONE);
         rela_pass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         codeicon.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(rl_root_view,"IYO提示：登陆失败");
+        showSnackbar(rl_root_view, "提示：登陆失败");
     }
 }

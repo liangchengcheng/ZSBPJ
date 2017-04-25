@@ -3,29 +3,35 @@ package view.lcc.wyzsb.ui.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 
 import java.util.List;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.CommentAdapter;
-import view.lcc.wyzsb.base.BaseFragment;
 import view.lcc.wyzsb.bean.Comments;
 import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
+import view.lcc.wyzsb.mvp.param.SendComments;
 import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CommentsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.CommentsView;
+import view.lcc.wyzsb.utils.KeyboardUtils;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
+import view.lcc.wyzsb.view.SendCommentButton;
 
 /**
  * Author:       梁铖城
@@ -33,29 +39,33 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:         2015年11月21日15:28:25
  * Description:
  */
-public class CommentFragment extends Fragment implements CommentsView,CommentAdapter.OnItemClickListener,
-        SwipeRefreshLayout.OnRefreshListener {
+public class CommentFragment extends Fragment implements CommentsView, CommentAdapter.OnItemClickListener,
+        SwipeRefreshLayout.OnRefreshListener ,SendCommentButton.OnSendClickListener{
     private CommentsPresenter presenter;
     private CommentAdapter commentsAdapter;
     private RecyclerView mRecyclerView;
     private LoadingLayout loading_layout;
 
+    private EditText etComment;
+
     private Video video;
 
-    public CommentFragment(Video video){
+    public CommentFragment(Video video) {
         this.video = video;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.comment_fragment,null);
-
+        View view = inflater.inflate(R.layout.comment_fragment, null);
         presenter = new CommentsPresenterImpl(this);
+        etComment = (EditText) view.findViewById(R.id.etComment);
+        btnSendComment = (SendCommentButton) view .findViewById(R.id.btnSendComment);
+        btnSendComment.setOnSendClickListener(this);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         initRefreshView(view);
         initRecycleView(view);
-        presenter.getData(1,video.getId());
+        presenter.getData(1, video.getId());
         return view;
     }
 
@@ -163,12 +173,17 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
 
     @Override
     public void replaySuccess() {
-
+        onRefresh();
+        etComment.setText("");
+        KeyboardUtils.hide(getActivity());
+        showSnackbar(etComment,"提交成功");
+        btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
     }
 
     @Override
     public void replayFail() {
-
+        KeyboardUtils.hide(getActivity());
+        showSnackbar(etComment,"提交失败");
     }
 
     @Override
@@ -186,5 +201,34 @@ public class CommentFragment extends Fragment implements CommentsView,CommentAda
                 presenter.refresh(currentPage, video.getId());
             }
         }, 500);
+    }
+
+    private SendCommentButton btnSendComment;
+
+    private boolean validateComment() {
+        if (TextUtils.isEmpty(etComment.getText())) {
+            btnSendComment.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+                    R.anim.shake_error));
+            return false;
+        }
+
+        return true;
+    }
+
+    private SendComments sendComments;
+
+    @Override
+    public void onSendClickListener(View v) {
+        // String user_name = DataManager.getUserName();
+        // TODO: 2017/4/25 此处做用户没登录的校验
+        if (validateComment()) {
+            sendComments = new SendComments();
+            sendComments.setContent(etComment.getText().toString().trim());
+            presenter.sendComments(sendComments);
+        }
+    }
+
+    public void showSnackbar(View view, String string) {
+        Snackbar.make(view, string, Snackbar.LENGTH_LONG).show();
     }
 }

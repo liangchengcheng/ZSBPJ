@@ -183,6 +183,6 @@ public class BookActivity extends BaseActivity implements BookView, SwipeRefresh
 
     @Override
     public void onItemClick(Book data) {
-
+        BookDetailsActivity.startBookDetailsActivity(BookActivity.this,data);
     }
 }

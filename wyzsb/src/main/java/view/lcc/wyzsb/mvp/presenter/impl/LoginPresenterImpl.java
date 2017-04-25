@@ -39,18 +39,14 @@ public class LoginPresenterImpl implements LoginPresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    int status = jsonObject.getInt("c");
-                    String message = jsonObject.getString("m");
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
                     if (status == 1) {
-                        String result = jsonObject.getString("s");
+                        String result = jsonObject.getString("result");
                         JSONObject ret = new JSONObject(result);
-
                         String uid = ret.getString("uid");
-
-
                         String token = ret.getString("token");
-
-
+                        // TODO: 2017/4/25 这里保存用户名和密码 
                         view.onSignInSuccess(result);
                     } else if (status == 0) {
                         view.onSignInFail(message);

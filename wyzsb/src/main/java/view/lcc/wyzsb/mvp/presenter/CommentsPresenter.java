@@ -1,6 +1,7 @@
 package view.lcc.wyzsb.mvp.presenter;
 
 import view.lcc.wyzsb.mvp.param.Replay;
+import view.lcc.wyzsb.mvp.param.SendComments;
 
 /**
  * Author:       梁铖城
@@ -16,6 +17,6 @@ public interface CommentsPresenter {
 
     void refresh(int page, String nid);
 
-    void sendComments(Replay replay);
+    void sendComments(SendComments replay);
 
 }

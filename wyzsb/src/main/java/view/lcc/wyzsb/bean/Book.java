@@ -31,6 +31,16 @@ public class Book implements Serializable{
     //书的评分
     private String b_g;
 
+    //书的详情
+    private String b_b;
+
+    public String getB_b() {
+        return b_b;
+    }
+
+    public void setB_b(String b_b) {
+        this.b_b = b_b;
+    }
 
     public String getId() {
         return id;

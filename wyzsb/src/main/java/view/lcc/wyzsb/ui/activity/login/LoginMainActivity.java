@@ -27,9 +27,10 @@ public class LoginMainActivity extends BaseActivity {
         setupViewPager();
     }
 
-    //设置tab下的viewpager
+    /**
+     * 设置tab下的viewpager
+     */
     private void setupViewPager() {
-
         final ViewPager login_viewpager = (ViewPager) findViewById(R.id.login_viewpager);
         setupViewPager(login_viewpager);
         TabLayout login_tabs = (TabLayout) findViewById(R.id.login_tabs);

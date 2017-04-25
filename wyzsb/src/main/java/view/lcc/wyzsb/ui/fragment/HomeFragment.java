@@ -56,7 +56,6 @@ import view.lcc.wyzsb.view.home.SmoothListView.SmoothListView;
  */
 public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener
         ,HomeFragmentView,TravelingAdapter.ItemClickListener,HeaderChannelView.OnChannelClickListener,View.OnClickListener{
-
     private SmoothListView smoothListView;
 
     private FilterView realFilterView;

@@ -19,12 +19,12 @@ import view.lcc.wyzsb.view.EditTextWithDel;
  * Date:         2017年04月19日19:40:54
  * Description:
  */
-public class UserNameActivity extends BaseActivity implements View.OnClickListener
-        , UserNameView {
+public class UserNameActivity extends BaseActivity implements View.OnClickListener, UserNameView {
 
     private UserNamePresenter userNamePresenter;
     private EditTextWithDel user;
     private View header;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

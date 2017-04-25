@@ -3,6 +3,7 @@ package view.lcc.wyzsb.ui.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import view.lcc.wyzsb.mvp.presenter.SendCodePresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CheckCodePresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.SendCodePresenterImpl;
 import view.lcc.wyzsb.mvp.view.CheckCodeView;
+import view.lcc.wyzsb.mvp.view.RegisterView;
 import view.lcc.wyzsb.mvp.view.SendCodeView;
 import view.lcc.wyzsb.utils.CheckUtils;
 import view.lcc.wyzsb.utils.Tools;
@@ -39,7 +41,7 @@ import view.lcc.wyzsb.view.PaperButton;
  * Date:
  * Description:
  */
-public class FragmentRegister extends Fragment implements SendCodeView,CheckCodeView {
+public class FragmentRegister extends Fragment implements CheckCodeView,RegisterView {
     EditTextWithDel userpassword;
     PaperButton sendsmscode;
     EditTextWithDel userphone;
@@ -57,7 +59,7 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
 
     MyCountTimer timer;
 
-    private SendCodePresenter sendCodePresenter;
+
     private CheckCodePresenter checkCodePresenter;
 
     private void initData(View view) {
@@ -80,7 +82,6 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, null);
-        sendCodePresenter = new SendCodePresenterImpl(this);
         checkCodePresenter = new CheckCodePresenterImpl(this);
         initData(view);
         initView();
@@ -159,21 +160,17 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
                     if (mobile) {
                         timer = new MyCountTimer(60*000, 1000);
                         timer.start();
-                        SendVcode sendVcode = new SendVcode();
-                        sendCodePresenter.requestVCode(sendVcode);
+                        // TODO: 2017/4/25 发送短信验证码
                     } else {
                         rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                         phoneIv.setAnimation(Tools.shakeAnimation(2));
-                        showSnackbar(view, "IYO提示：输入手机号码");
+                        showSnackbar(view, "提示：输入手机号码");
                     }
-
-
                 } else {
                     rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     phoneIv.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(view, "IYO提示：手机号码不正确");
+                    showSnackbar(view, "提示：手机号码不正确");
                 }
-
             }
         });
         //下一步的点击事件
@@ -189,14 +186,14 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
                     rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     phoneIv.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(view, "IYO提示：请输入手机号码");
+                    showSnackbar(view, "提示：请输入手机号码");
 
                     return;
                 }
                 if (!CheckUtils.isMobile(phone)) {
                     rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     phoneIv.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(view, "IYO提示：手机号不正确");
+                    showSnackbar(view, "提示：手机号不正确");
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
                     return;
                 }
@@ -204,7 +201,7 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
                     rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     keyIv.setAnimation(Tools.shakeAnimation(2));
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
-                    showSnackbar(view, "IYO提示：请输入验证码");
+                    showSnackbar(view, "提示：请输入验证码");
                     return;
 
                 }
@@ -212,7 +209,7 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
                     rela_repass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     passIv.setAnimation(Tools.shakeAnimation(2));
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
-                    showSnackbar(view, "IYO提示：请输入密码");
+                    showSnackbar(view, "提示：请输入密码");
                     return;
                 }
                 CheckVcode checkVcode = new CheckVcode();
@@ -244,27 +241,30 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
     public void onVcodeCheckFail(String msg) {
         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view,"IYO提示：验证码错误");
+        showSnackbar(root_view,"提示：验证码错误");
     }
 
     @Override
-    public void onSendLoading() {
-
+    public void RegisterLoading() {
+        //正在注册
     }
 
     @Override
-    public void onSendNetworkError(String msg) {
-        showSnackbar(root_view, "IYO提示：短信发送成功");
+    public void RegisterSuccess(String msg) {
+        //注册成功
+        showSnackbar(root_view, "提示：注册账号成功");
     }
 
     @Override
-    public void onRequestVcodeSuccess() {
-        showSnackbar(root_view, "IYO提示：短信发送失败");
+    public void RegisterFail(String msg) {
+        //注册失败
+        showSnackbar(root_view, "提示：注册账号失败");
     }
 
     @Override
-    public void onRequestVcodeFail(String msg) {
-
+    public void NetWorkErr(String msg) {
+        //网络错误
+        showSnackbar(root_view, "提示：网络错误，请稍后");
     }
 
     //事件定时器
@@ -298,5 +298,26 @@ public class FragmentRegister extends Fragment implements SendCodeView,CheckCode
 
     public void showSnackbar(View view, String string) {
         Snackbar.make(view, string, Snackbar.LENGTH_LONG).show();
+    }
+
+    protected Handler taskHandler = new Handler();
+    private int verifyCodeCountdown = 60;
+    private static final int DELAY_MILLIS = 1 * 1000;
+
+    public void showVerifySuccess() {
+        sendsmscode.setClickable(false);
+        taskHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (verifyCodeCountdown == 0) {
+                    sendsmscode.setClickable(true);
+                    sendsmscode.setText("重新发送");
+                    return;
+                }
+                sendsmscode.setText(verifyCodeCountdown + "秒后获取");
+                verifyCodeCountdown--;
+                taskHandler.postDelayed(this, DELAY_MILLIS);
+            }
+        }, DELAY_MILLIS);
     }
 }
