@@ -59,7 +59,7 @@ public class ArticleDetailsActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.iv_back).setOnClickListener(this);
         img_portrait = (ImageView) findViewById(R.id.img_portrait);
         ImageManager.getInstance()
-                .loadUrlImage(ArticleDetailsActivity.this,data.getA_img(),img_portrait);
+                .loadCircleImage(ArticleDetailsActivity.this,data.getA_img(),img_portrait);
         mWebView = (WebView) findViewById(R.id.layout_web_view);
         initView();
     }

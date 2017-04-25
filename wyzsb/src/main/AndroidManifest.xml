@@ -48,11 +48,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <!--视频详情界面-->
-        <activity
-            android:name=".ui.activity.video.VideoDetailsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+
         <!--文章列表-->
         <activity
             android:name=".ui.activity.article.ArticleActivity"
