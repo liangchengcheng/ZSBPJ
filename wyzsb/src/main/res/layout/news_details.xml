@@ -67,12 +67,20 @@
             android:layout_height="match_parent"
             android:background="#F6F6F6"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <WebView
-                android:id="@+id/layout_web_view"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent">
 
+                <WebView
+                    android:id="@+id/layout_web_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <view.lcc.wyzsb.view.LoadingLayout
+                    android:id="@+id/loading_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
 

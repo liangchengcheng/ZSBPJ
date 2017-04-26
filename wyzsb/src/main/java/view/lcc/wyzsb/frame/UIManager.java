@@ -1,12 +1,5 @@
 package view.lcc.wyzsb.frame;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.widget.Toast;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class UIManager {
 
     // 链接样式文件，代码块高亮的处理
