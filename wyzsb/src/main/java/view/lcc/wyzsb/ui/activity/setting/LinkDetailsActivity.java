@@ -2,6 +2,7 @@ package view.lcc.wyzsb.ui.activity.setting;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -14,6 +15,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -35,9 +37,10 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Description:  LinkDetailsActivity
  */
 public class LinkDetailsActivity extends BaseActivity   {
-    private LoadingLayout loading_layout;
+
     private WebView webView;
     private Link link;
+    private ProgressBar progressBar;
 
     public static void startLinkDetailsActivity(Activity startingActivity, Link type) {
         Intent intent = new Intent(startingActivity, LinkDetailsActivity.class);
@@ -49,8 +52,9 @@ public class LinkDetailsActivity extends BaseActivity   {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.link_details_layout);
-        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        int color = getResources().getColor(R.color.assist_blue);
+        progressBar.getProgressDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         link = (Link) getIntent().getSerializableExtra("data");
         initWebView();
         webView.loadUrl(link.getL_u());
@@ -96,10 +100,10 @@ public class LinkDetailsActivity extends BaseActivity   {
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (newProgress != 100) {
-                   // progressBar.setVisibility(View.VISIBLE);
-                   // progressBar.setProgress(newProgress);
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setProgress(newProgress);
                 } else {
-                   // progressBar.setVisibility(View.GONE);
+                   progressBar.setVisibility(View.GONE);
                 }
             }
 
