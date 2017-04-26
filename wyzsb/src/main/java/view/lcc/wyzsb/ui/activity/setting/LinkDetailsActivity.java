@@ -4,10 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import java.util.List;
 
@@ -28,8 +34,7 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:         2017年04月23日22:57:03
  * Description:  LinkDetailsActivity
  */
-public class LinkDetailsActivity extends BaseActivity implements LinkDetailsView {
-    private LinkDetailsPresenter linkDetailsPresenter;
+public class LinkDetailsActivity extends BaseActivity   {
     private LoadingLayout loading_layout;
     private WebView webView;
     private Link link;
@@ -44,79 +49,65 @@ public class LinkDetailsActivity extends BaseActivity implements LinkDetailsView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.link_details_layout);
-
-        link = (Link) getIntent().getSerializableExtra("data");
-        webView = (WebView) findViewById(R.id.webView);
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        settings.setLoadWithOverviewMode(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setDomStorageEnabled(true);
-        settings.setDatabaseEnabled(true);
-        settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webViewCache");
-        settings.setAppCacheEnabled(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        webView.setWebChromeClient(new WebChromeClient());
-
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
-        linkDetailsPresenter = new LinkDetailsPresenterImpl(this);
-        linkDetailsPresenter.getContent(link.getId());
+        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        link = (Link) getIntent().getSerializableExtra("data");
+        initWebView();
+        webView.loadUrl(link.getL_u());
     }
 
     @Override
-    public void getLoading() {
-        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
-    }
-
-    @Override
-    public void getDataEmpty() {
-        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
-    }
-
-    @Override
-    public void getDataFail(String msg) {
-        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
-    }
-
-    @Override
-    public void getDataSuccess(Link msg) {
-        try {
-            webView.loadDataWithBaseURL("about:blank", msg.getUrl(), "text/html", "utf-8", null);
-            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView.canGoBack()) {
+                webView.goBack();
+                return true;
+            }
         }
+        return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        try {
-            webView.getClass().getMethod("onResume").invoke(webView, (Object[]) null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private void initWebView() {
+        webView = (WebView) findViewById(R.id.webView);
+        WebSettings setting = webView.getSettings();
+        setting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        setting.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
+                view.loadUrl(link.getL_u());
+                return true;
+            }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        try {
-            webView.getClass().getMethod("onPause").invoke(webView, (Object[]) null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+            }
 
-    @Override
-    protected void onDestroy() {
-        if (webView != null) {
-            ((ViewGroup) webView.getParent()).removeView(webView);
-            webView.destroy();
-            webView = null;
-        }
-        super.onDestroy();
+            @Override
+            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+                super.onReceivedHttpError(view, request, errorResponse);
+            }
+
+        });
+
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (newProgress != 100) {
+                   // progressBar.setVisibility(View.VISIBLE);
+                   // progressBar.setProgress(newProgress);
+                } else {
+                   // progressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+            }
+        });
     }
 
 }

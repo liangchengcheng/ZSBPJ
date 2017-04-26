@@ -41,7 +41,7 @@ public class ModelUtil {
      */
     public static List<ChannelEntity> getChannelData() {
         List<ChannelEntity> channelList = new ArrayList<>();
-        channelList.add(new ChannelEntity("WEB安全", "WordPress",
+        channelList.add(new ChannelEntity("WEB安全", "渗透注入",
                 "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=304665959,1413891126&fm=23&gp=0.jpg"));
         channelList.add(new ChannelEntity("系统安全", "Linux",
                 "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=659929953,2220604144&fm=23&gp=0.jpg"));
@@ -65,8 +65,9 @@ public class ModelUtil {
      */
     public static List<OperationEntity> getOperationData() {
         List<OperationEntity> operationList = new ArrayList<>();
-        operationList.add(new OperationEntity("零基础", "命令行/编程", R.drawable.biancheng));
-        operationList.add(new OperationEntity("小工具", "安全方便", R.drawable.gongju));
+        operationList.add(new OperationEntity("编程基础", "编程基础知识","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493796139&di=444c496eb070ea43d63be80177336da7&imgtype=jpg&er=1&src=http%3A%2F%2Fi.dimg.cc%2F76%2F94%2F81%2F94%2F75%2F30%2Fef%2Fb1%2Fc9%2F75%2F33%2F4b%2F19%2Fd4%2Fa2%2F7c.jpg"));
+        //operationList.add(new OperationEntity("安全工具", "安全工具介绍", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493201473434&di=5a90063a9ce284f81005060aed5f4f5e&imgtype=0&src=http%3A%2F%2Farticle.fd.zol-img.com.cn%2Ft_s640x2000%2Fg5%2FM00%2F08%2F02%2FChMkJlYYhSeIJQNaAACffmThCREAADgHAPuKyUAAJ-W148.jpg"));
+        operationList.add(new OperationEntity("安全工具", "安全工具介绍", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493201497051&di=53d4092cdade8dd8e353f19b556010fd&imgtype=0&src=http%3A%2F%2Fwww.secdoctor.com%2Fuploads%2Fallimg%2F150908%2F705-150ZP9421N57.jpg"));
         return operationList;
     }
 
@@ -80,9 +81,19 @@ public class ModelUtil {
         return list;
     }
 
+    public static List<FilterEntity> getFilterData1() {
+        List<FilterEntity> list = new ArrayList<>();
+        list.add(new FilterEntity("全部", "0"));
+        list.add(new FilterEntity("初级", "1"));
+        list.add(new FilterEntity("中级", "2"));
+        list.add(new FilterEntity("高级", "3"));
+        return list;
+    }
+
     // 排序数据（时间的顺序）
     public static List<FilterEntity> getSortData() {
         List<FilterEntity> list = new ArrayList<>();
+        list.add(new FilterEntity("全部", "0"));
         list.add(new FilterEntity("最新", "1"));
         list.add(new FilterEntity("最热", "2"));
         return list;
@@ -91,13 +102,12 @@ public class ModelUtil {
     // 筛选数据 （按照类别分类）
     public static List<FilterEntity> getFilterData() {
         List<FilterEntity> list = new ArrayList<>();
+        list.add(new FilterEntity("全部", "0"));
         list.add(new FilterEntity("初级", "1"));
         list.add(new FilterEntity("中级", "2"));
         list.add(new FilterEntity("高级", "3"));
         return list;
     }
-
-
 
     /**
      * 暂无数据

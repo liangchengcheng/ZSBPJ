@@ -188,7 +188,6 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         // 设置假FilterView数据
         headerFilterView = new HeaderFilterView(getActivity());
         headerFilterView.fillView(new Object(), smoothListView);
-
         // 设置真FilterView数据
         realFilterView.setFilterData(mActivity, filterData);
         realFilterView.setVisibility(View.GONE);
@@ -207,7 +206,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         flActionMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AboutActivity.startAboutActivity(getActivity());
             }
         });
         // (假的ListView头部展示的)筛选视图点击

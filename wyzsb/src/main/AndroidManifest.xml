@@ -122,10 +122,22 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+        <!-- 推荐书籍的详情页面 -->
+        <activity
+            android:name=".ui.activity.setting.BookDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
         <!-- 推荐博客 -->
         <activity
             android:name=".ui.activity.setting.LinkActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <!-- 连接的详情页面 -->
+        <activity
+            android:name=".ui.activity.setting.LinkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>

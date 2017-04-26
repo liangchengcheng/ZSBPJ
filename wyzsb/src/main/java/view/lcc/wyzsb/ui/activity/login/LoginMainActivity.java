@@ -1,9 +1,12 @@
 package view.lcc.wyzsb.ui.activity.login;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.WindowManager;
 
 import view.lcc.wyzsb.R;
@@ -18,10 +21,19 @@ import view.lcc.wyzsb.base.BaseActivity;
  */
 public class LoginMainActivity extends BaseActivity {
 
+    private String result;
+
+    public static void startLoginMainActivity(String r, Activity startActivity) {
+        Intent intent = new Intent(startActivity, LoginMainActivity.class);
+        intent.putExtra("result", r);
+        startActivity.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main_fragment);
+        result = getIntent().getStringExtra("result");
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setupViewPager();
@@ -55,8 +67,13 @@ public class LoginMainActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new FragmentLogin(), "登录");
-        adapter.addFrag(new FragmentRegister(), "注册");
+        if (TextUtils.isEmpty(result)){
+            adapter.addFrag( FragmentLogin.newInstance(result), "登录");
+            adapter.addFrag( FragmentRegister.newInstance(result), "注册");
+        }else {
+            adapter.addFrag( FragmentLogin.newInstance(""), "登录");
+            adapter.addFrag( FragmentRegister.newInstance(""), "注册");
+        }
         viewPager.setAdapter(adapter);
     }
 }

@@ -71,8 +71,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //去登录
             case R.id.profile_headimg:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
-                startActivity(intent);
+                LoginMainActivity.startLoginMainActivity("flag",getActivity());
                 break;
             //系统设置
             case R.id.layout_me_setting:

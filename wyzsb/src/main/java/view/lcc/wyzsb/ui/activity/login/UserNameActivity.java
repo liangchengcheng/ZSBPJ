@@ -1,9 +1,12 @@
 package view.lcc.wyzsb.ui.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 
+import view.lcc.wyzsb.MainActivity;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.frame.Frame;
@@ -24,11 +27,13 @@ public class UserNameActivity extends BaseActivity implements View.OnClickListen
     private UserNamePresenter userNamePresenter;
     private EditTextWithDel user;
     private View header;
+    private String result = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_username);
+        result = getIntent().getStringExtra("result");
         header = findViewById(R.id.header);
         userNamePresenter = new UserNamePresenterImpl(this);
         user = (EditTextWithDel) findViewById(R.id.user);
@@ -52,16 +57,23 @@ public class UserNameActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void UserNameSuccess(String msg) {
-        showSnackbar(header,"提交昵称成功");
+        showSnackbar(header, "提交昵称成功");
+        if (TextUtils.isEmpty(result)) {
+            Intent intent = new Intent(UserNameActivity.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+        } else {
+            finish();
+        }
     }
 
     @Override
     public void UserNameFail(String msg) {
-        showSnackbar(header,"提交昵称失败");
+        showSnackbar(header, "提交昵称失败");
     }
 
     @Override
     public void NetWorkErr(String msg) {
-        showSnackbar(header,"网络发生错误");
+        showSnackbar(header, "网络发生错误");
     }
 }

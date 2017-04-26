@@ -39,6 +39,22 @@ public class FragmentLogin extends Fragment implements LoginView {
 
     private LoginPresenter presenter;
 
+    private String flag = "";
+
+    public static FragmentLogin newInstance(String r) {
+        FragmentLogin mFragment = new FragmentLogin();
+        Bundle bundle = new Bundle();
+        bundle.putString("result", r);
+        mFragment.setArguments(bundle);
+        return mFragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        flag = getArguments().getString("result");
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -172,11 +188,13 @@ public class FragmentLogin extends Fragment implements LoginView {
             @Override
             public void run() {
                 login_progress.setVisibility(View.GONE);
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
-
-
+                if (TextUtils.isEmpty(flag)){
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+                }else {
+                    getActivity().finish();
+                }
             }
         }, 1500);
     }

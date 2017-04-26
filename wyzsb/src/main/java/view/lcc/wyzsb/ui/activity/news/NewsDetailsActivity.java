@@ -46,8 +46,10 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsView
         initView();
     }
 
+    /**
+     *  init WebView
+     */
     private void initView() {
-        // init WebView
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(false);
