@@ -54,7 +54,8 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.android.support:support-v4:25.0.1'
     compile files('libs/ad.jar')
-    //视频相关
+    //短信相关
+    compile project(':SMSSDK')
 
 
 }

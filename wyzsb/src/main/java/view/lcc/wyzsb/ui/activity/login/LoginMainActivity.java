@@ -13,7 +13,7 @@ import view.lcc.wyzsb.base.BaseActivity;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:
+ * Date:         2017年04月26日08:14:43
  * Description:
  */
 public class LoginMainActivity extends BaseActivity {

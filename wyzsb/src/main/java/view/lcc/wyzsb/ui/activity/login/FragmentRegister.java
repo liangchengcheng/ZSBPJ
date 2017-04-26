@@ -1,10 +1,13 @@
 package view.lcc.wyzsb.ui.activity.login;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -17,8 +20,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import org.json.JSONObject;
 import org.xutils.view.annotation.ViewInject;
 
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 import view.lcc.wyzsb.MainActivity;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.mvp.param.CheckVcode;
@@ -57,10 +63,23 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
 
     private View root_view ;
 
-    MyCountTimer timer;
-
-
     private CheckCodePresenter checkCodePresenter;
+
+    private String flag = "";
+
+    public static FragmentRegister newInstance(String r) {
+        FragmentRegister mFragment = new FragmentRegister();
+        Bundle bundle = new Bundle();
+        bundle.putString("result", r);
+        mFragment.setArguments(bundle);
+        return mFragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        flag = getArguments().getString("result");
+        super.onViewCreated(view, savedInstanceState);
+    }
 
     private void initData(View view) {
         root_view = view.findViewById(R.id.fg_regist);
@@ -83,6 +102,20 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, null);
         checkCodePresenter = new CheckCodePresenterImpl(this);
+        SMSSDK.initSDK(getActivity(), "11cc5d753865c", "3c6cdfb8371e181a03f8a27f217e2043", true);
+        EventHandler eh2 = new EventHandler() {
+
+            @Override
+            public void afterEvent(int event, int re, Object data) {
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = re;
+                msg.obj = data;
+                mHandler2.sendMessage(msg);
+            }
+        };
+        SMSSDK.registerEventHandler(eh2);
+
         initData(view);
         initView();
         TextListener();
@@ -158,9 +191,9 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                 boolean mobile = CheckUtils.isMobile(phone);
                 if (!TextUtils.isEmpty(phone)) {
                     if (mobile) {
-                        timer = new MyCountTimer(60*000, 1000);
-                        timer.start();
                         // TODO: 2017/4/25 发送短信验证码
+                        showVerifySuccess();
+                        SMSSDK.getVerificationCode("86", phone);
                     } else {
                         rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                         phoneIv.setAnimation(Tools.shakeAnimation(2));
@@ -187,7 +220,6 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                     rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                     phoneIv.setAnimation(Tools.shakeAnimation(2));
                     showSnackbar(view, "提示：请输入手机号码");
-
                     return;
                 }
                 if (!CheckUtils.isMobile(phone)) {
@@ -203,7 +235,6 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
                     showSnackbar(view, "提示：请输入验证码");
                     return;
-
                 }
                 if (TextUtils.isEmpty(password)) {
                     rela_repass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
@@ -227,12 +258,16 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     public void onCheckNetworkError(String msg) {
         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view,"IYO提示：验证码错误");
+        showSnackbar(root_view,"提示：验证码错误");
     }
 
     @Override
     public void onVcodeCheckSuccess(String token) {
         Intent intent = new Intent(getActivity(), UserNameActivity.class);
+        intent.putExtra("code", code);
+        intent.putExtra("phone", phone);
+        intent.putExtra("password",password);
+        intent.putExtra("result",flag);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
     }
@@ -267,34 +302,6 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
         showSnackbar(root_view, "提示：网络错误，请稍后");
     }
 
-    //事件定时器
-    class MyCountTimer extends CountDownTimer {
-
-        public MyCountTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            sendsmscode.setText((millisUntilFinished / 1000) + "秒后重发");
-            sendsmscode.setClickable(false);
-        }
-
-        @Override
-        public void onFinish() {
-            sendsmscode.setText("重新发送");
-            sendsmscode.setClickable(true);
-        }
-    }
-
-    //回收timer
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-        }
-    }
 
     public void showSnackbar(View view, String string) {
         Snackbar.make(view, string, Snackbar.LENGTH_LONG).show();
@@ -320,4 +327,51 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
             }
         }, DELAY_MILLIS);
     }
+
+    private String code;
+    private String phone;
+    private String password;
+
+    Handler mHandler2 = new Handler() {
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int event = msg.arg1;
+            int result = msg.arg2;
+            Object data = msg.obj;
+            if (result == SMSSDK.RESULT_COMPLETE) {
+                if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                    showSnackbar(root_view, "提示：短信发送成功");
+                }
+
+                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                    showSnackbar(root_view, "提示：短信验证成功");
+                    Intent intent = new Intent(getActivity(), UserNameActivity.class);
+                    intent.putExtra("code", code);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("password",password);
+                    intent.putExtra("result",flag);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+                    getActivity().finish();
+                }
+            } else {
+                int status = 0;
+                try {
+                    ((Throwable) data).printStackTrace();
+                    Throwable throwable = (Throwable) data;
+                    JSONObject object = new JSONObject(throwable.getMessage());
+                    String des = object.optString("detail");
+                    status = object.optInt("status");
+                    if (!TextUtils.isEmpty(des)) {
+                        rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
+                        keyIv.setAnimation(Tools.shakeAnimation(2));
+                        showSnackbar(root_view, "提示：验证码错误");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 }

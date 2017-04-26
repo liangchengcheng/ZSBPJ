@@ -46,7 +46,7 @@ public class LoginPresenterImpl implements LoginPresenter {
                         JSONObject ret = new JSONObject(result);
                         String uid = ret.getString("uid");
                         String token = ret.getString("token");
-                        // TODO: 2017/4/25 这里保存用户名和密码 
+                        // TODO: 2017/4/25 这里保存用户名和密码
                         view.onSignInSuccess(result);
                     } else if (status == 0) {
                         view.onSignInFail(message);
