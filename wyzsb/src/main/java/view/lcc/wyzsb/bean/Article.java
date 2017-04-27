@@ -35,6 +35,25 @@ public class Article implements Serializable{
     //等级(初级，中级，高级)
     private String a_l;
 
+    private String a_id;
+
+    private String a_hi;
+
+    public String getA_id() {
+        return a_id;
+    }
+
+    public void setA_id(String a_id) {
+        this.a_id = a_id;
+    }
+
+    public String getA_hi() {
+        return a_hi;
+    }
+
+    public void setA_hi(String a_hi) {
+        this.a_hi = a_hi;
+    }
 
     public String getId() {
         return id;

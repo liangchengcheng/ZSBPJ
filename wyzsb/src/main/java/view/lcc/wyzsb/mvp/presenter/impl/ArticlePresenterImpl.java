@@ -41,6 +41,7 @@ public class ArticlePresenterImpl implements ArticlePresenter {
         }
         final long current_time = TimeUtils.getCurrentTime();
         ArticleParams params = new ArticleParams();
+        params.setPage(page);
         model.getArticle(params, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

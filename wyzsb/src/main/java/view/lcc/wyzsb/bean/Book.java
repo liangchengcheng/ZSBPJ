@@ -122,9 +122,6 @@ public class Book implements Serializable{
         this.b_g = b_g;
     }
 
-
-
-
     // 暂无数据属性
     private boolean isNoData = false;
     private int height;

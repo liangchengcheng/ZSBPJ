@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -22,7 +23,7 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:         2015年11月21日15:28:25
  * Description:  新闻资讯的详情的页面
  */
-public class NewsDetailsActivity extends BaseActivity implements NewsDetailsView {
+public class NewsDetailsActivity extends BaseActivity implements NewsDetailsView,View.OnClickListener {
 
     private WebView mWebView;
     private LoadingLayout loading_layout;
@@ -40,6 +41,7 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
         this.news = (News) getIntent().getSerializableExtra("news");
+        findViewById(R.id.lv_back).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         newsDetailsPresenter = new NewsDetailsPresenterImpl(this);
         mWebView = (WebView) findViewById(R.id.layout_web_view);
@@ -99,5 +101,14 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsView
         // 添加点击图片放大支持
         body = body.replaceAll("(<img[^>]+src=\")(\\S+)\"", "$1$2\" onClick=\"showImagePreview('$2')\"");
         return body;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.lv_back:
+                finish();
+                break;
+        }
     }
 }

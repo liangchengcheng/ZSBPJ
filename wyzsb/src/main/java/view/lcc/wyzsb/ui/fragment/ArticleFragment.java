@@ -72,7 +72,7 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
         initRefreshView(view);
         initRecycleView(view);
         setFilerView(view);
-        mPresenter.getData(1,"");
+        mPresenter.getData(currentPage,"");
         return view;
     }
 

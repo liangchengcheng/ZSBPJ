@@ -19,13 +19,11 @@ import view.lcc.wyzsb.mvp.param.HomeParams;
 public class ArticleModel {
 
     /**
-     * 获取我的订单详情
+     * 获取文章的列表。
      */
     public OkHttpRequest getArticle(ArticleParams articleParams, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put("page", "1");
-        paramsMap.put("company_name", "");
-        paramsMap.put("area", "");
+        paramsMap.put("page",articleParams.getPage());
         return ApiClient.create(AppConstants.RequestPath.GET_ARTICLE, paramsMap).tag("").get(callback);
     }
 }

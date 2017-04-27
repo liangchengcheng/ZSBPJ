@@ -45,6 +45,7 @@ public class VideoPresenterImpl implements VideoPresenter {
         }
         final long current_time = TimeUtils.getCurrentTime();
         VideoParams videoParams = new VideoParams();
+        videoParams.setPage(page);
         model.getVideo(videoParams, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
