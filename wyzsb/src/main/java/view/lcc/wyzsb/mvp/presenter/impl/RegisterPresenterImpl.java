@@ -44,10 +44,10 @@ public class RegisterPresenterImpl implements RegisterPresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    int status = jsonObject.getInt("c");
-                    String message = jsonObject.getString("m");
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
                     if (status == 1) {
-                        String result = jsonObject.getString("s");
+                        String result = jsonObject.getString("result");
                         JSONObject ret = new JSONObject(result);
                         String uid = ret.getString("uid");
                         String token = ret.getString("token");

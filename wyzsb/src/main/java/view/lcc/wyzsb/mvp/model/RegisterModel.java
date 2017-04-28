@@ -16,9 +16,11 @@ import view.lcc.wyzsb.mvp.param.Register;
  */
 public class RegisterModel {
 
-    public OkHttpRequest signIn(Register password, ResultCallback<String> callback) {
+    public OkHttpRequest signIn(Register register, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.PASSWORD_KEY, "");
+        paramsMap.put("phone", register.getPhone());
+        paramsMap.put("password", register.getPassword());
+        paramsMap.put("verify_code", register.getVerify_code());
         return ApiClient.createUser(AppConstants.RequestPath.SIGN, paramsMap)
                 .addHeader("phone","").tag("").post(callback);
     }

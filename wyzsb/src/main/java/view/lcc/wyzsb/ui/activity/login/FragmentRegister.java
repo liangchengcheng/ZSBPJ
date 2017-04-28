@@ -28,10 +28,13 @@ import cn.smssdk.SMSSDK;
 import view.lcc.wyzsb.MainActivity;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.mvp.param.CheckVcode;
+import view.lcc.wyzsb.mvp.param.Register;
 import view.lcc.wyzsb.mvp.param.SendVcode;
 import view.lcc.wyzsb.mvp.presenter.CheckCodePresenter;
+import view.lcc.wyzsb.mvp.presenter.RegisterPresenter;
 import view.lcc.wyzsb.mvp.presenter.SendCodePresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CheckCodePresenterImpl;
+import view.lcc.wyzsb.mvp.presenter.impl.RegisterPresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.SendCodePresenterImpl;
 import view.lcc.wyzsb.mvp.view.CheckCodeView;
 import view.lcc.wyzsb.mvp.view.RegisterView;
@@ -44,8 +47,8 @@ import view.lcc.wyzsb.view.PaperButton;
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
- * Date:
- * Description:
+ * Date:         2017年04月28日16:24:47
+ * Description:  注册相关的界面
  */
 public class FragmentRegister extends Fragment implements CheckCodeView,RegisterView {
     EditTextWithDel userpassword;
@@ -64,7 +67,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     private View root_view ;
 
     private CheckCodePresenter checkCodePresenter;
-
+    private RegisterPresenter registerPresenter;
     private String flag = "";
 
     public static FragmentRegister newInstance(String r) {
@@ -102,7 +105,8 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, null);
         checkCodePresenter = new CheckCodePresenterImpl(this);
-        SMSSDK.initSDK(getActivity(), "11cc5d753865c", "3c6cdfb8371e181a03f8a27f217e2043", true);
+        registerPresenter = new RegisterPresenterImpl(this);
+        SMSSDK.initSDK(getActivity(), "1d30662a0c12d", "08d948dff78b4c0e0a606a96a01286d6", true);
         EventHandler eh2 = new EventHandler() {
 
             @Override
@@ -115,7 +119,6 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
             }
         };
         SMSSDK.registerEventHandler(eh2);
-
         initData(view);
         initView();
         TextListener();
@@ -144,7 +147,6 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                 }
             }
         });
-
         //验证码改变背景变
         smscode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -244,7 +246,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                     return;
                 }
                 CheckVcode checkVcode = new CheckVcode();
-               checkCodePresenter.checkVCode(checkVcode);
+                checkCodePresenter.checkVCode(checkVcode);
             }
         });
     }
@@ -263,13 +265,12 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
 
     @Override
     public void onVcodeCheckSuccess(String token) {
-        Intent intent = new Intent(getActivity(), UserNameActivity.class);
-        intent.putExtra("code", code);
-        intent.putExtra("phone", phone);
-        intent.putExtra("password",password);
-        intent.putExtra("result",flag);
-        startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+        Register register = new Register();
+        register.setPhone(phone);
+        register.setPassword(password);
+        register.setVerify_code(code);
+        registerPresenter.register(register);
+
     }
 
     @Override
@@ -288,6 +289,13 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     public void RegisterSuccess(String msg) {
         //注册成功
         showSnackbar(root_view, "提示：注册账号成功");
+        Intent intent = new Intent(getActivity(), UserNameActivity.class);
+        intent.putExtra("code", code);
+        intent.putExtra("phone", phone);
+        intent.putExtra("password",password);
+        intent.putExtra("result",flag);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
     }
 
     @Override
