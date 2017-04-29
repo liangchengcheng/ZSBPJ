@@ -14,13 +14,11 @@ import view.lcc.wyzsb.mvp.param.CheckVcode;
  * Description:  校验验证码
  */
 public class CheckCodeModel {
-    public OkHttpRequest checkVCode(CheckVcode code, ResultCallback<String> callback) {
+    public OkHttpRequest checkVCode(CheckVcode checkVcode, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put(AppConstants.ParamKey.V_CODE, "");
-        return ApiClient.createUser(AppConstants.RequestPath.CHECK_VCODE, paramsMap)
-                .addHeader("phone", "")
-                .tag("")
-                .post(callback);
+        paramsMap.put("phone", checkVcode.getPhone());
+        paramsMap.put("code", checkVcode.getCode());
+        return ApiClient.createUser(AppConstants.RequestPath.CHECK_VCODE, paramsMap).get(callback);
     }
 
 }

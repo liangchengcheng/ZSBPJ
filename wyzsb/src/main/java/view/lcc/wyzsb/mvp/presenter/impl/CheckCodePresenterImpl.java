@@ -41,7 +41,7 @@ public class CheckCodePresenterImpl implements CheckCodePresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    int code = jsonObject.getInt(AppConstants.RESPONSE_CODE);
+                    int code = jsonObject.getInt("status");
                     if (code == 1) {
                         String result = jsonObject.getString(AppConstants.RESPONSE_RESULT);
                         if (result != null){

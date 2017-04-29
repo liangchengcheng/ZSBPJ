@@ -246,6 +246,8 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                     return;
                 }
                 CheckVcode checkVcode = new CheckVcode();
+                checkVcode.setPhone(phone);
+                checkVcode.setCode(code);
                 checkCodePresenter.checkVCode(checkVcode);
             }
         });
@@ -270,7 +272,6 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
         register.setPassword(password);
         register.setVerify_code(code);
         registerPresenter.register(register);
-
     }
 
     @Override

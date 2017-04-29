@@ -7,11 +7,11 @@ public class AppConstants {
     public final static String BASE_URL = BASE_IP ;
     // 会员注册地址
     //================================ 特殊字段 =====================================
-    public static final String RESPONSE_CODE = "c";
+    public static final String RESPONSE_CODE = "status";
 
-    public static final String RESPONSE_MSG = "m";
+    public static final String RESPONSE_MSG = "message";
 
-    public static final String RESPONSE_RESULT = "r";
+    public static final String RESPONSE_RESULT = "result";
 
     public final class RequestPath {
         //================================新的接口================================
@@ -42,7 +42,7 @@ public class AppConstants {
 
 
         //验证码
-        public final static String CHECK_VCODE = "/hk/getHBooks";
+        public final static String CHECK_VCODE = "/hk/checkVcode";
 
         public final static String SIGN = "/hk/getHBooks";
 
