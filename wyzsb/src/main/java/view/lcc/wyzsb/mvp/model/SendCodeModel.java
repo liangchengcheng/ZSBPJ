@@ -17,6 +17,6 @@ public class SendCodeModel {
     public OkHttpRequest requestVCode(SendVcode phone, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("phone", "");
-        return ApiClient.createUser(AppConstants.RequestPath.SIGN, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.SIGN, paramsMap).tag("").get(callback);
     }
 }

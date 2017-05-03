@@ -43,8 +43,12 @@ public class AppConstants {
 
         //验证码
         public final static String CHECK_VCODE = "/hk/checkVcode";
-
-        public final static String SIGN = "/hk/getHBooks";
+        //注册
+        public final static String SIGN = "/hk/register";
+        //登录
+        public final static String LOGIN = "/hk/login";
+        //注册昵称
+        public final static String USERNAME = "/hk/editUserName";
 
         public final static String GET_VOCODE = "/hk/getHBooks";
 

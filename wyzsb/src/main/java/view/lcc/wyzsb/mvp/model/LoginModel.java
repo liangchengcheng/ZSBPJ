@@ -18,9 +18,9 @@ public class LoginModel {
     public OkHttpRequest signIn(Login login, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("phone",login.getPhone() );
-        paramsMap.put("passwords", login.getPassword());
-        return ApiClient.createUser(AppConstants.RequestPath.SIGN, paramsMap)
-                .addHeader("phone","").tag("").post(callback);
+        paramsMap.put("password", login.getPassword());
+        return ApiClient.create(AppConstants.RequestPath.LOGIN, paramsMap)
+                .get(callback);
     }
 
 }

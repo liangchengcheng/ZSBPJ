@@ -12,7 +12,7 @@ import view.lcc.wyzsb.mvp.param.Register;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2017年04月15日20:03:25
- * Description:  登录
+ * Description:  注册
  */
 public class RegisterModel {
 
@@ -21,8 +21,7 @@ public class RegisterModel {
         paramsMap.put("phone", register.getPhone());
         paramsMap.put("password", register.getPassword());
         paramsMap.put("verify_code", register.getVerify_code());
-        return ApiClient.createUser(AppConstants.RequestPath.SIGN, paramsMap)
-                .addHeader("phone","").tag("").post(callback);
+        return ApiClient.create(AppConstants.RequestPath.SIGN, paramsMap).get(callback);
     }
 
 }
