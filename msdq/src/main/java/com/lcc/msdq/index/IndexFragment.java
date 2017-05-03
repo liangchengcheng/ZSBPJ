@@ -24,9 +24,11 @@ import com.lcc.msdq.AboutActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.area.LoginDialogFragment;
 import com.lcc.msdq.choice.VocationActivity;
+import com.lcc.msdq.fabu.FabuList;
 import com.lcc.msdq.favorite.FavoriteList;
 import com.lcc.msdq.index.article.IndexMenuActivity;
 import com.lcc.msdq.index.activity.IndexWebView;
+import com.lcc.msdq.login.LoginMainActivity;
 import com.lcc.msdq.news.NewsIndex;
 import com.lcc.mvp.presenter.IndexPresenter;
 import com.lcc.mvp.presenter.impl.IndexPresenterImpl;
@@ -87,6 +89,7 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
         view.findViewById(R.id.qt).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
         view.findViewById(R.id.ll_change_zy).setOnClickListener(this);
+        view.findViewById(R.id.tv_fabu).setOnClickListener(this);
 
         inflaters = LayoutInflater.from(getActivity());
         llAdvertiseBoard = (LinearLayout) view.findViewById(R.id.llAdvertiseBoard);
@@ -212,8 +215,8 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             //去我的消息的界面
             case R.id.ll_news:
                 if (TextUtils.isEmpty(user_name)) {
-                    LoginDialogFragment dialog = new LoginDialogFragment();
-                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
+                    FrameManager.getInstance().toastPrompt("请先登录");
+                    LoginMainActivity.startLoginMainActivity("result",getActivity());
                     return;
                 }
                 NewsIndex.startNewsIndex(getActivity());
@@ -221,11 +224,21 @@ public class IndexFragment extends BaseFragment implements IndexView, SwipeRefre
             //去我的收藏的界面
             case R.id.ll_fav:
                 if (TextUtils.isEmpty(user_name)) {
-                    LoginDialogFragment dialog = new LoginDialogFragment();
-                    dialog.show(getActivity().getFragmentManager(), "loginDialog");
+                    FrameManager.getInstance().toastPrompt("请先登录");
+                    LoginMainActivity.startLoginMainActivity("result",getActivity());
                     return;
                 }
                 startActivity(new Intent(getActivity(), FavoriteList.class));
+                break;
+            //去我的收藏的界面
+            case R.id.tv_fabu:
+                user_name = DataManager.getUserName();
+                if (TextUtils.isEmpty(user_name)) {
+                    FrameManager.getInstance().toastPrompt("请先登录");
+                    LoginMainActivity.startLoginMainActivity("result",getActivity());
+                    return;
+                }
+                startActivity(new Intent(getActivity(), FabuList.class));
                 break;
             case R.id.iv_more:
                 PopupMenu popup = new PopupMenu(getActivity(), iv_more);

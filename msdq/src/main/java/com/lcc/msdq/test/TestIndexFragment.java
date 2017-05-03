@@ -62,9 +62,11 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
     private int[] mIconUnselectIds = {
             R.drawable.tab_floor_unselected, R.drawable.tab_category_unseleted,
             R.drawable.tab_sort_unseleted};
+
     private int[] mIconSelectIds = {
             R.drawable.tab_floor_selected, R.drawable.tab_category_seleted,
             R.drawable.tab_sort_selected};
+
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private DropDownLayout dropDownLayout;
     private MenuLayout menuLayout;
@@ -93,8 +95,7 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_fragment, null);
         view.findViewById(R.id.iv_add).setOnClickListener(this);
         menuLayout = (MenuLayout) view.findViewById(R.id.menuLayout);
@@ -270,7 +271,11 @@ public class TestIndexFragment extends S_RefreshAndLoadFragment implements
             case 0:
                 mTitles[0] = tag;
                 start_time = TimeUtils.getStartTime(tag);
-                end_time = TimeUtils.getEndTime();
+                if (start_time.equals("全部时间")){
+                    end_time = "全部时间";
+                }else {
+                    end_time = TimeUtils.getEndTime();
+                }
                 currentPage = 1;
                 mPresenter.getData(currentPage, options, start_time, end_time, orders);
                 break;

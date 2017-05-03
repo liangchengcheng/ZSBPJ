@@ -73,6 +73,9 @@ public class LoginMainActivity extends FragmentActivity {
         }
 
         viewPager.setAdapter(adapter);
+        if (!TextUtils.isEmpty(result) && result.equals("tv_register")){
+            viewPager.setCurrentItem(1);
+        }
     }
 
 }

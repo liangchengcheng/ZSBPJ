@@ -20,7 +20,7 @@ import java.util.Arrays;
  */
 @SuppressLint("ValidFragment")
 public class FragmentCategory extends Fragment {
-    private String clothes[] = {"全部类型", "专业知识", "人事知识", "其他"};
+    private String clothes[] = {"全部题型", "专业知识", "人事知识", "其他"};
     private ListView listView;
     private FilterAdapter adapter;
     private TestIndexFragment mainActivity;

@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.lcc.msdq.R;
+import com.lcc.msdq.login.LoginMainActivity;
 import com.lcc.msdq.login.SignUpActivity;
 import com.lcc.mvp.presenter.LoginPresenter;
 import com.lcc.mvp.presenter.impl.LoginPresenterImpl;
@@ -43,6 +44,7 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 		mTextInputLayoutPhone = (TextInputLayout) view.findViewById(R.id.textInputLayout_phone);
 		mTextInputLayoutPassword = (TextInputLayout) view.findViewById(R.id.textInputLayout_password);
 		view.findViewById(R.id.btn_login).setOnClickListener(this);
+		view.findViewById(R.id.tv_register).setOnClickListener(this);
 	}
 
 	/**
@@ -104,6 +106,10 @@ public class LoginDialogFragment extends DialogFragment implements LoginView, Vi
 
 			case R.id.btn_login:
 				login();
+				break;
+
+			case R.id.tv_register:
+				LoginMainActivity.startLoginMainActivity("tv_register",getActivity());
 				break;
 		}
 	}

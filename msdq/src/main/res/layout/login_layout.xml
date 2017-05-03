@@ -3,6 +3,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_add"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="0dp"
@@ -16,14 +17,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:contentDescription="@string/app_name"
                 android:gravity="center"
                 android:text="用户登录"
                 android:textColor="#000"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,23 +85,31 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
-                <Button
+                <com.lcc.view.PaperButton
                     android:id="@+id/btn_login"
+                    widget:paper_corner_radius="19dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginRight="3dp"
-                    android:background="?attr/colorPrimary"
-                    android:text="登录"
-                    android:textColor="@color/white" />
+                    android:gravity="center"
+                    widget:paper_text="登录"
+                    widget:paper_text_size="15sp"
+                    widget:paper_color="?attr/colorPrimary"
+                    widget:paper_text_color="@color/white" />
             </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="right"
+                android:text="注册账号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </FrameLayout>
     <ProgressBar
