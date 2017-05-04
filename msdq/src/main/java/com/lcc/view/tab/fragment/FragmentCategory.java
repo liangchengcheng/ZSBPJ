@@ -25,6 +25,9 @@ public class FragmentCategory extends Fragment {
     private FilterAdapter adapter;
     private TestIndexFragment mainActivity;
 
+    public FragmentCategory(){
+
+    }
 
     @SuppressLint("ValidFragment")
     public FragmentCategory(TestIndexFragment mainActivity){
@@ -47,8 +50,10 @@ public class FragmentCategory extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainActivity.onFilter(1,clothes[position]);
-                adapter.setCheckItem(position);
+                if (mainActivity != null){
+                    mainActivity.onFilter(1,clothes[position]);
+                    adapter.setCheckItem(position);
+                }
             }
         });
     }

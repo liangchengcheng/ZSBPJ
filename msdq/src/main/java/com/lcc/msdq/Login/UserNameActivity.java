@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.lcc.App;
+import com.lcc.base.BaseActivity;
 import com.lcc.frame.data.DataManager;
 import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
@@ -25,7 +26,7 @@ import com.lcc.view.EditTextWithDel;
  * Date:         2017年04月19日19:40:54
  * Description:
  */
-public class UserNameActivity extends FragmentActivity implements View.OnClickListener, SignUpView {
+public class UserNameActivity extends BaseActivity implements View.OnClickListener, SignUpView {
 
     private SignUpPresenter mPresenter;
     private EditTextWithDel user;
@@ -35,11 +36,8 @@ public class UserNameActivity extends FragmentActivity implements View.OnClickLi
     private String code;
     private String result = "";
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_username);
+    protected void initView() {
         code = getIntent().getStringExtra("code");
         phone = getIntent().getStringExtra("phone");
         password = getIntent().getStringExtra("password");
@@ -49,6 +47,16 @@ public class UserNameActivity extends FragmentActivity implements View.OnClickLi
         mPresenter = new SignUpPresenterImpl(this);
         user = (EditTextWithDel) findViewById(R.id.user);
         findViewById(R.id.openbt).setOnClickListener(this);
+    }
+
+    @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.activity_username;
     }
 
     @Override
@@ -85,8 +93,7 @@ public class UserNameActivity extends FragmentActivity implements View.OnClickLi
     @Override
     public void signUpSuccess() {
         showSnackbar(header, "注册账号成功");
-        Intent intent = null;
-        intent = new Intent(UserNameActivity.this, VocationActivity.class);
+        Intent intent = new Intent(UserNameActivity.this, VocationActivity.class);
         intent.putExtra("result",result);
         startActivity(intent);
         finish();

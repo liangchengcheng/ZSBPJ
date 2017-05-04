@@ -26,6 +26,11 @@ public class FragmentSort extends Fragment {
     FilterAdapter adapter;
 
     private TestIndexFragment mainActivity;
+
+    public FragmentSort(){
+
+    }
+
     @SuppressLint("ValidFragment")
     public FragmentSort(TestIndexFragment mainActivity){
         this.mainActivity = mainActivity;
@@ -47,8 +52,10 @@ public class FragmentSort extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainActivity.onFilter(2,sorts[position]);
-                adapter.setCheckItem(position);
+               if (mainActivity != null){
+                   mainActivity.onFilter(2,sorts[position]);
+                   adapter.setCheckItem(position);
+               }
             }
         });
     }

@@ -293,7 +293,6 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
             }
             sendsmscode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
             verifyCodeCountdown--;
-            taskHandler.postDelayed(this, DELAY_MILLIS);
         }
     };
 

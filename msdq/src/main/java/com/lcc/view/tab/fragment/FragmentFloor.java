@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.lcc.msdq.test.TestIndexFragment;
 import com.lcc.view.tab.adapter.FilterAdapter;
 
@@ -26,15 +27,20 @@ public class FragmentFloor extends Fragment {
     private String floors[] = {"全部时间", "最近一周", "最近一月", "最近一年"};
     private TestIndexFragment mainActivity;
 
+    public FragmentFloor() {
+
+    }
+
     @SuppressLint("ValidFragment")
-    public FragmentFloor(TestIndexFragment mainActivity){
+    public FragmentFloor(TestIndexFragment mainActivity) {
         this.mainActivity = mainActivity;
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         listView = new ListView(getActivity());
-          return listView;
+        return listView;
     }
 
     @Override
@@ -46,8 +52,10 @@ public class FragmentFloor extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainActivity.onFilter(0,floors[position]);
-                adapter.setCheckItem(position);
+                if (mainActivity!=null){
+                    mainActivity.onFilter(0, floors[position]);
+                    adapter.setCheckItem(position);
+                }
             }
         });
     }

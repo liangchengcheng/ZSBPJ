@@ -232,7 +232,7 @@ public class FragmentLogin extends Fragment implements LoginView, View.OnClickLi
         login_progress.setVisibility(View.GONE);
         rela_pass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         codeicon.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(rl_root_view,"IYO提示：登陆失败");
+        showSnackbar(rl_root_view,"提示：登陆失败");
     }
 
     @Override

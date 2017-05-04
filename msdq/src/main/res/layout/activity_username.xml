@@ -104,7 +104,7 @@
             android:layout_marginRight="10dp"
             android:layout_toEndOf="@+id/personicon"
             android:background="@null"
-            android:hint="请输入您的用户名"
+            android:hint="请给自己起个昵称"
             android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/bg_Gray"

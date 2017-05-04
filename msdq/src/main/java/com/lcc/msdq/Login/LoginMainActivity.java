@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.WindowManager;
 import com.lcc.adapter.TabViewPagerAdapter;
+import com.lcc.base.BaseActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 
@@ -18,7 +19,7 @@ import com.lcc.msdq.comments.CommentsActivity;
  * Date:         2017年04月20日13:43:06
  * Description:  新的登录的界面
  */
-public class LoginMainActivity extends FragmentActivity {
+public class LoginMainActivity extends BaseActivity {
     private String result;
 
     public static void startLoginMainActivity(String r, Activity startActivity) {
@@ -28,12 +29,20 @@ public class LoginMainActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_login_layout);
+    protected void initView() {
         result = getIntent().getStringExtra("result");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setupViewPager();
+    }
+
+    @Override
+    protected boolean Open() {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.main_login_layout;
     }
 
     /**
