@@ -68,9 +68,11 @@ public class LoginMainActivity extends BaseActivity {
 
             }
         });
-
     }
 
+    /**
+     * 设置登录和注册的界面
+     */
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getSupportFragmentManager());
         if (TextUtils.isEmpty(result)){

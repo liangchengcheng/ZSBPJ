@@ -30,6 +30,9 @@ import zsbpj.lccpj.frame.FrameManager;
 import zsbpj.lccpj.view.simplearcloader.ArcConfiguration;
 import zsbpj.lccpj.view.simplearcloader.SimpleArcDialog;
 
+/**
+ * 登录和注册相关代码
+ */
 public class LoginActivity extends BaseActivity implements LoginView, View.OnClickListener {
     private LoginPresenter mPresenter;
     //用户名和密码

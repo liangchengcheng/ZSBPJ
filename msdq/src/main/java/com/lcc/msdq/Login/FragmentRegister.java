@@ -3,7 +3,6 @@ package com.lcc.msdq.login;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -186,6 +185,8 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
     private String phone;
     private String password;
 
+    private TimeCount timeCount;
+
     /**
      * 发送验证码点击事件
      */
@@ -200,7 +201,11 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                 boolean mobile = CheckUtils.isMobile(phone);
                 if (!TextUtils.isEmpty(phone)) {
                     if (mobile) {
-                        showVerifySuccess();
+                        //showVerifySuccess();
+                        if (timeCount == null) {
+                            timeCount = new TimeCount(sendsmscode, 60 * 1000, 1000);
+                        }
+                        timeCount.start();
                         SMSSDK.getVerificationCode("86", phone);
                     } else {
                         rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
@@ -267,8 +272,8 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
         Intent intent = new Intent(getActivity(), UserNameActivity.class);
         intent.putExtra("code", code);
         intent.putExtra("phone", phone);
-        intent.putExtra("password",password);
-        intent.putExtra("result",flag);
+        intent.putExtra("password", password);
+        intent.putExtra("result", flag);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
         getActivity().finish();
@@ -293,11 +298,13 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
             }
             sendsmscode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
             verifyCodeCountdown--;
+            taskHandler.postDelayed(this, DELAY_MILLIS);
         }
     };
 
     public void showVerifySuccess() {
         sendsmscode.setClickable(false);
+        new Thread(runnable).start();
         taskHandler.postDelayed(runnable, DELAY_MILLIS);
     }
 
@@ -307,6 +314,10 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();
         taskHandler.removeCallbacks(runnable);
+        if(timeCount!=null){
+            timeCount.cancel();
+        }
+        //注销
     }
 
     public void showSnackbar(View view, String string) {
@@ -330,8 +341,8 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
                     Intent intent = new Intent(getActivity(), UserNameActivity.class);
                     intent.putExtra("code", code);
                     intent.putExtra("phone", phone);
-                    intent.putExtra("password",password);
-                    intent.putExtra("result",flag);
+                    intent.putExtra("password", password);
+                    intent.putExtra("result", flag);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
                     getActivity().finish();
