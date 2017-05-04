@@ -57,5 +57,4 @@ dependencies {
     //短信相关
     compile project(':SMSSDK')
 
-
 }

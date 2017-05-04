@@ -9,6 +9,8 @@ import view.lcc.wyzsb.mvp.model.LoginModel;
 import view.lcc.wyzsb.mvp.param.Login;
 import view.lcc.wyzsb.mvp.presenter.LoginPresenter;
 import view.lcc.wyzsb.mvp.view.LoginView;
+import view.lcc.wyzsb.utils.SharePreferenceUtil;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 
 /**
  * Author:       梁铖城
@@ -44,9 +46,11 @@ public class LoginPresenterImpl implements LoginPresenter {
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         JSONObject ret = new JSONObject(result);
-                        String uid = ret.getString("uid");
-                        String token = ret.getString("token");
                         // TODO: 2017/4/25 这里保存用户名和密码
+                        UserSharePreferenceUtil.setUserImage(ret.getString("u_i"));
+                        UserSharePreferenceUtil.setUserName(ret.getString("u_n"));
+                        UserSharePreferenceUtil.setUserPhone(ret.getString("u_p"));
+                        UserSharePreferenceUtil.setUserSession(ret.getString("mid"));
                         view.onSignInSuccess(result);
                     } else if (status == 0) {
                         view.onSignInFail(message);

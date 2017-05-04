@@ -70,7 +70,7 @@ public class DataFragment extends BaseFragment {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getActivity().getSupportFragmentManager());
         adapter.addFrag(new VideoFragment(), "视频教程");
         adapter.addFrag(new ArticleFragment(), "文字教程");
-        adapter.addFrag(new NewsFragment(), "安全新闻");
+        adapter.addFrag(new NewsFragment(), "安全资讯");
         viewPager.setAdapter(adapter);
     }
 

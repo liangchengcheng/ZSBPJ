@@ -176,6 +176,8 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
         });
     }
 
+    private TimeCount timeCount;
+
     private void initView() {
         //发送验证码点击事件
         sendsmscode.setOnClickListener(new View.OnClickListener() {
@@ -186,8 +188,10 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
                 boolean mobile = CheckUtils.isMobile(phone);
                 if (!TextUtils.isEmpty(phone)) {
                     if (mobile) {
-                        // TODO: 2017/4/25 发送短信验证码
-                        showVerifySuccess();
+                        if (timeCount == null) {
+                            timeCount = new TimeCount(sendsmscode, 60 * 1000, 1000);
+                        }
+                        timeCount.start();
                         SMSSDK.getVerificationCode("86", phone);
                     } else {
                         rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
@@ -376,4 +380,14 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
             }
         }
     };
+
+    //回收timer
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SMSSDK.unregisterAllEventHandler();
+        if(timeCount!=null){
+            timeCount.cancel();
+        }
+    }
 }

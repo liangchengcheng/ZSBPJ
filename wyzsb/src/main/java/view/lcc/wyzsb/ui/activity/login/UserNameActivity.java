@@ -44,7 +44,15 @@ public class UserNameActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.openbt:
+                String username = user.getText().toString().trim();
+                if (TextUtils.isEmpty(username)) {
+                    showSnackbar(header, "昵称不能为空");
+                }
+                if (username.length() > 32) {
+                    showSnackbar(header, "昵称长度过长");
+                }
                 UserName userName = new UserName();
+                userName.setUsername(username);
                 userNamePresenter.userName(userName);
                 break;
         }

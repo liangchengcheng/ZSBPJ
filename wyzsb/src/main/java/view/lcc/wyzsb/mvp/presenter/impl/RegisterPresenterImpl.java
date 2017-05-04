@@ -14,6 +14,7 @@ import view.lcc.wyzsb.mvp.presenter.LoginPresenter;
 import view.lcc.wyzsb.mvp.presenter.RegisterPresenter;
 import view.lcc.wyzsb.mvp.view.LoginView;
 import view.lcc.wyzsb.mvp.view.RegisterView;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 
 /**
  * Author:       梁铖城
@@ -49,8 +50,10 @@ public class RegisterPresenterImpl implements RegisterPresenter {
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         JSONObject ret = new JSONObject(result);
-                        //String uid = ret.getString("uid");
-                        //String token = ret.getString("token");
+                        UserSharePreferenceUtil.setUserImage(ret.getString("u_i"));
+                        UserSharePreferenceUtil.setUserName(ret.getString("u_n"));
+                        UserSharePreferenceUtil.setUserPhone(ret.getString("u_p"));
+                        UserSharePreferenceUtil.setUserSession(ret.getString("mid"));
                         view.RegisterSuccess(result);
                     } else if (status == 0) {
                         view.RegisterFail(message);

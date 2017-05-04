@@ -142,6 +142,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <!-- 用户的昵称 -->
+        <activity
+            android:name=".ui.activity.login.UserNameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
         <!-- 其他组件 -->
         <activity
             android:name="net.youmi.android.AdBrowser"

@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.frame.ImageManager;
 import view.lcc.wyzsb.ui.activity.login.LoginMainActivity;
 import view.lcc.wyzsb.ui.activity.setting.AboutActivity;
 import view.lcc.wyzsb.ui.activity.setting.BookActivity;
@@ -19,6 +23,7 @@ import view.lcc.wyzsb.ui.activity.setting.FeedBackActivity;
 import view.lcc.wyzsb.ui.activity.setting.HistoryActivity;
 import view.lcc.wyzsb.ui.activity.setting.LinkActivity;
 import view.lcc.wyzsb.ui.activity.setting.SystemActivity;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 import view.lcc.wyzsb.view.pulltozoomview.PullToZoomScrollViewEx;
 
 /**
@@ -30,6 +35,8 @@ import view.lcc.wyzsb.view.pulltozoomview.PullToZoomScrollViewEx;
 public class SettingFragment extends Fragment implements View.OnClickListener {
 
     private PullToZoomScrollViewEx scrollView;
+    private TextView tv_phonenumber;
+    private ImageView profile_headimg;
 
     @Nullable
     @Override
@@ -37,6 +44,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.frg_profilecenter, null);
         scrollView = (PullToZoomScrollViewEx) view.findViewById(R.id.scrollView);
         View header_view = View.inflate(getActivity(), R.layout.widget_profile_headview, null);
+
+        tv_phonenumber = (TextView) header_view.findViewById(R.id.tv_phonenumber);
+        profile_headimg = (ImageView) header_view.findViewById(R.id.profile_headimg);
 
         header_view.findViewById(R.id.profile_headimg).setOnClickListener(this);
         header_view.findViewById(R.id.layout_me_setting).setOnClickListener(this);
@@ -54,6 +64,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         scrollView.setHeaderView(header_view);
         scrollView.setZoomView(zoom_view);
         scrollView.setScrollContentView(content_view);
+        setData();
         return view;
     }
 
@@ -71,7 +82,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //去登录
             case R.id.profile_headimg:
-                LoginMainActivity.startLoginMainActivity("flag",getActivity());
+                if (TextUtils.isEmpty(UserSharePreferenceUtil.getUserSession())){
+                    LoginMainActivity.startLoginMainActivity("flag",getActivity());
+                }
                 break;
             //系统设置
             case R.id.layout_me_setting:
@@ -99,5 +112,24 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void setData(){
+        String phone = UserSharePreferenceUtil.getUserPhone();
+        if (TextUtils.isEmpty(phone)){
+            return;
+        }
+
+        String nickname = UserSharePreferenceUtil.getUserName();
+        if (TextUtils.isEmpty(nickname)){
+            nickname = UserSharePreferenceUtil.getUserPhone();
+        }
+        tv_phonenumber.setText(nickname);
+        String url = UserSharePreferenceUtil.getUserImage();
+        if (!TextUtils.isEmpty(url)){
+            ImageManager.getInstance()
+                    .loadResImage(getContext(),R.mipmap.ic_launcher,profile_headimg);
+        }
+
     }
 }

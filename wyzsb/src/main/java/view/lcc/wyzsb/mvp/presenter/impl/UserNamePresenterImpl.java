@@ -19,7 +19,7 @@ import view.lcc.wyzsb.mvp.view.UserNameView;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:
- * Description:  登录接口
+ * Description:
  */
 public class UserNamePresenterImpl implements UserNamePresenter {
     private UserNameView view;
@@ -44,14 +44,10 @@ public class UserNamePresenterImpl implements UserNamePresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    int status = jsonObject.getInt("c");
-                    String message = jsonObject.getString("m");
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
                     if (status == 1) {
-                        String result = jsonObject.getString("s");
-                        JSONObject ret = new JSONObject(result);
-                        String uid = ret.getString("uid");
-                        String token = ret.getString("token");
-                        view.UserNameSuccess(result);
+                        view.UserNameSuccess("");
                     } else if (status == 0) {
                         view.UserNameFail(message);
                     }
