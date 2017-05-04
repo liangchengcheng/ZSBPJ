@@ -49,8 +49,8 @@ public class RegisterPresenterImpl implements RegisterPresenter {
                     if (status == 1) {
                         String result = jsonObject.getString("result");
                         JSONObject ret = new JSONObject(result);
-                        String uid = ret.getString("uid");
-                        String token = ret.getString("token");
+                        //String uid = ret.getString("uid");
+                        //String token = ret.getString("token");
                         view.RegisterSuccess(result);
                     } else if (status == 0) {
                         view.RegisterFail(message);

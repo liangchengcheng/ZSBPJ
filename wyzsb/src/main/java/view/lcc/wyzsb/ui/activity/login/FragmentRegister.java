@@ -3,7 +3,6 @@ package view.lcc.wyzsb.ui.activity.login;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -21,24 +20,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import org.json.JSONObject;
-import org.xutils.view.annotation.ViewInject;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import view.lcc.wyzsb.MainActivity;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.mvp.param.CheckVcode;
 import view.lcc.wyzsb.mvp.param.Register;
-import view.lcc.wyzsb.mvp.param.SendVcode;
 import view.lcc.wyzsb.mvp.presenter.CheckCodePresenter;
 import view.lcc.wyzsb.mvp.presenter.RegisterPresenter;
-import view.lcc.wyzsb.mvp.presenter.SendCodePresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CheckCodePresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.RegisterPresenterImpl;
-import view.lcc.wyzsb.mvp.presenter.impl.SendCodePresenterImpl;
 import view.lcc.wyzsb.mvp.view.CheckCodeView;
 import view.lcc.wyzsb.mvp.view.RegisterView;
-import view.lcc.wyzsb.mvp.view.SendCodeView;
 import view.lcc.wyzsb.utils.CheckUtils;
 import view.lcc.wyzsb.utils.Tools;
 import view.lcc.wyzsb.view.EditTextWithDel;
@@ -50,7 +43,7 @@ import view.lcc.wyzsb.view.PaperButton;
  * Date:         2017年04月28日16:24:47
  * Description:  注册相关的界面
  */
-public class FragmentRegister extends Fragment implements CheckCodeView,RegisterView {
+public class FragmentRegister extends Fragment implements CheckCodeView, RegisterView {
     EditTextWithDel userpassword;
     PaperButton sendsmscode;
     EditTextWithDel userphone;
@@ -64,7 +57,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     ImageView passIv;
     PaperButton nextBt;
 
-    private View root_view ;
+    private View root_view;
 
     private CheckCodePresenter checkCodePresenter;
     private RegisterPresenter registerPresenter;
@@ -213,9 +206,9 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
             @Override
             public void onClick(View v) {
                 final View view = v;
-                final String password = userpassword.getText().toString();
-                String code = smscode.getText().toString();
-                final String phone = userphone.getText().toString();
+                password = userpassword.getText().toString();
+                code = smscode.getText().toString();
+                phone = userphone.getText().toString();
 
                 if (TextUtils.isEmpty(phone)) {
                     // fg_regist.setBackgroundResource(R.color.colorAccent);
@@ -262,7 +255,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     public void onCheckNetworkError(String msg) {
         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view,"提示：验证码错误");
+        showSnackbar(root_view, "提示：验证码错误");
     }
 
     @Override
@@ -278,7 +271,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
     public void onVcodeCheckFail(String msg) {
         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view,"提示：验证码错误");
+        showSnackbar(root_view, "提示：验证码错误");
     }
 
     @Override
@@ -293,8 +286,8 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
         Intent intent = new Intent(getActivity(), UserNameActivity.class);
         intent.putExtra("code", code);
         intent.putExtra("phone", phone);
-        intent.putExtra("password",password);
-        intent.putExtra("result",flag);
+        intent.putExtra("password", password);
+        intent.putExtra("result", flag);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
     }
@@ -358,8 +351,8 @@ public class FragmentRegister extends Fragment implements CheckCodeView,Register
                     Intent intent = new Intent(getActivity(), UserNameActivity.class);
                     intent.putExtra("code", code);
                     intent.putExtra("phone", phone);
-                    intent.putExtra("password",password);
-                    intent.putExtra("result",flag);
+                    intent.putExtra("password", password);
+                    intent.putExtra("result", flag);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
                     getActivity().finish();
