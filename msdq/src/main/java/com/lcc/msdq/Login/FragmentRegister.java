@@ -283,21 +283,23 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
     private int verifyCodeCountdown = 60;
     private static final int DELAY_MILLIS = 1 * 1000;
 
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (verifyCodeCountdown == 0) {
+                sendsmscode.setClickable(true);
+                sendsmscode.setText("重新发送");
+                return;
+            }
+            sendsmscode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
+            verifyCodeCountdown--;
+            taskHandler.postDelayed(this, DELAY_MILLIS);
+        }
+    };
+
     public void showVerifySuccess() {
         sendsmscode.setClickable(false);
-        taskHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (verifyCodeCountdown == 0) {
-                    sendsmscode.setClickable(true);
-                    sendsmscode.setText("重新发送");
-                    return;
-                }
-                sendsmscode.setText(verifyCodeCountdown + getString(R.string.msg_verify_code_point));
-                verifyCodeCountdown--;
-                taskHandler.postDelayed(this, DELAY_MILLIS);
-            }
-        }, DELAY_MILLIS);
+        taskHandler.postDelayed(runnable, DELAY_MILLIS);
     }
 
     //回收timer
@@ -305,6 +307,7 @@ public class FragmentRegister extends Fragment implements CheckVcodeView {
     public void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();
+        taskHandler.removeCallbacks(runnable);
     }
 
     public void showSnackbar(View view, String string) {
