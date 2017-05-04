@@ -75,7 +75,7 @@ public class LoginMainActivity extends BaseActivity {
      */
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getSupportFragmentManager());
-        if (TextUtils.isEmpty(result)){
+        if (!TextUtils.isEmpty(result)){
             adapter.addFrag( FragmentLogin.newInstance(result), "登录");
             adapter.addFrag( FragmentRegister.newInstance(result), "注册");
         }else {

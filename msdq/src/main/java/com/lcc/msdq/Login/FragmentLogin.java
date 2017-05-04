@@ -36,6 +36,8 @@ import com.lcc.utils.Tools;
 import com.lcc.view.EditTextWithDel;
 import com.lcc.view.PaperButton;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
@@ -204,6 +206,7 @@ public class FragmentLogin extends Fragment implements LoginView, View.OnClickLi
                         getActivity().overridePendingTransition(R.anim.fade,R.anim.my_alpha_action);
                         getActivity().finish();
                     } else {
+                        EventBus.getDefault().post(0x03);
                         getActivity().finish();
                     }
                 }else {

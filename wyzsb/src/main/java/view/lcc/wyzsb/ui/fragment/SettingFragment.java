@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.Serializable;
-
+import de.greenrobot.event.EventBus;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.frame.ImageManager;
 import view.lcc.wyzsb.ui.activity.login.LoginMainActivity;
@@ -42,6 +41,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frg_profilecenter, null);
+
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
         scrollView = (PullToZoomScrollViewEx) view.findViewById(R.id.scrollView);
         View header_view = View.inflate(getActivity(), R.layout.widget_profile_headview, null);
 
@@ -71,10 +75,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Intent intent = null;
-        switch (view.getId()){
+        switch (view.getId()) {
             //意见反馈
             case R.id.layout_me_task:
-                FeedBackActivity.startFeedBackActivity(getActivity(),"");
+                FeedBackActivity.startFeedBackActivity(getActivity(), "");
                 break;
             //关于软件
             case R.id.layout_me_getseed:
@@ -82,8 +86,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //去登录
             case R.id.profile_headimg:
-                if (TextUtils.isEmpty(UserSharePreferenceUtil.getUserSession())){
-                    LoginMainActivity.startLoginMainActivity("flag",getActivity());
+                if (TextUtils.isEmpty(UserSharePreferenceUtil.getUserSession())) {
+                    LoginMainActivity.startLoginMainActivity("flag", getActivity());
                 }
                 break;
             //系统设置
@@ -114,22 +118,38 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void setData(){
+    private void setData() {
         String phone = UserSharePreferenceUtil.getUserPhone();
-        if (TextUtils.isEmpty(phone)){
+        if (TextUtils.isEmpty(phone)) {
             return;
         }
 
         String nickname = UserSharePreferenceUtil.getUserName();
-        if (TextUtils.isEmpty(nickname)){
+        if (TextUtils.isEmpty(nickname)) {
             nickname = UserSharePreferenceUtil.getUserPhone();
         }
         tv_phonenumber.setText(nickname);
         String url = UserSharePreferenceUtil.getUserImage();
-        if (!TextUtils.isEmpty(url)){
+        //这里等后期添加了
+        if (TextUtils.isEmpty(url)) {
             ImageManager.getInstance()
-                    .loadResImage(getContext(),R.mipmap.ic_launcher,profile_headimg);
+                    .loadResImage(getContext(), R.mipmap.ic_launcher, profile_headimg);
         }
+    }
 
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x03:
+                setData();
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

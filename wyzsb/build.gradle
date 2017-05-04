@@ -56,5 +56,7 @@ dependencies {
     compile files('libs/ad.jar')
     //短信相关
     compile project(':SMSSDK')
+    //eventbus
+    compile 'de.greenrobot:eventbus:2.4.0'
 
 }

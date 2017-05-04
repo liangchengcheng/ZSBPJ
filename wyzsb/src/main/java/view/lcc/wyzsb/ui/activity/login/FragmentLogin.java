@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import de.greenrobot.event.EventBus;
 import view.lcc.wyzsb.MainActivity;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.mvp.param.Login;
@@ -193,6 +194,7 @@ public class FragmentLogin extends Fragment implements LoginView {
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
                 }else {
+                    EventBus.getDefault().post(0x03);
                     getActivity().finish();
                 }
             }

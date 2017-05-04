@@ -58,6 +58,9 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         View view = inflater.inflate(R.layout.person_info_fragment, null);
         initView(view);
         return view;
@@ -85,6 +88,7 @@ public class PersonInfoIndexFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.rl_help).setOnClickListener(this);
         view.findViewById(R.id.rl_set).setOnClickListener(this);
         view.findViewById(R.id.rl_share).setOnClickListener(this);
+
         iv_more = (ImageView) view.findViewById(R.id.iv_more);
         tv_username = (TextView) view.findViewById(R.id.tv_username);
         tv_username.setOnClickListener(this);

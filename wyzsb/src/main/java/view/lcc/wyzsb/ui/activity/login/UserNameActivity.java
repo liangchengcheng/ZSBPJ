@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 
+import de.greenrobot.event.EventBus;
 import view.lcc.wyzsb.MainActivity;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
@@ -71,6 +72,7 @@ public class UserNameActivity extends BaseActivity implements View.OnClickListen
             startActivity(intent);
             overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
         } else {
+            EventBus.getDefault().post(0x03);
             finish();
         }
     }

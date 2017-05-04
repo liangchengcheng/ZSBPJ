@@ -30,6 +30,7 @@ import com.lcc.view.loadview.LoadingLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import zsbpj.lccpj.utils.GsonUtils;
 import zsbpj.lccpj.view.toast.SuperCustomToast;
 
@@ -241,6 +242,7 @@ public class VocationActivity extends BaseActivity implements ChoiceTypeView ,Vi
         toasts.show("设置成功", R.layout.choice_toast_item, R.id.content_toast, VocationActivity.this);
         App.exit();
         if (!TextUtils.isEmpty(result)) {
+            EventBus.getDefault().post(0x03);
             finish();
         } else {
             startActivity(new Intent(VocationActivity.this, MainActivity.class));
