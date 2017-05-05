@@ -33,6 +33,7 @@ public class FeedBackActivity extends BaseActivity implements FeedBackView,View.
     private FeedBackPresenter feedBackPresenter;
     private EditText et_message;
     private View toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

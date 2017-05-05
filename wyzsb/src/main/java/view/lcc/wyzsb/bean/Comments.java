@@ -29,6 +29,71 @@ public class Comments implements Serializable{
     // 这个评论属于那个作品 比例视频的id
     private String o_id;
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getC_b() {
+        return c_b;
+    }
+
+    public void setC_b(String c_b) {
+        this.c_b = c_b;
+    }
+
+    public String getC_a() {
+        return c_a;
+    }
+
+    public void setC_a(String c_a) {
+        this.c_a = c_a;
+    }
+
+    public String getC_nn() {
+        return c_nn;
+    }
+
+    public void setC_nn(String c_nn) {
+        this.c_nn = c_nn;
+    }
+
+    public String getC_im() {
+        return c_im;
+    }
+
+    public void setC_im(String c_im) {
+        this.c_im = c_im;
+    }
+
+    public String getC_t() {
+        return c_t;
+    }
+
+    public void setC_t(String c_t) {
+        this.c_t = c_t;
+    }
+
+    public String getC_tp() {
+        return c_tp;
+    }
+
+    public void setC_tp(String c_tp) {
+        this.c_tp = c_tp;
+    }
+
+    public String getO_id() {
+        return o_id;
+    }
+
+    public void setO_id(String o_id) {
+        this.o_id = o_id;
+    }
+
     // 暂无数据属性
     private boolean isNoData = false;
     private int height;

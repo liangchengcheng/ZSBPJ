@@ -64,11 +64,11 @@ public class CommentsPresenterImpl implements CommentsPresenter{
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(entities);
-//                    int status = jsonObject.getInt("status");
-//                    String message = jsonObject.getString("message");
-                    Boolean error = jsonObject.getBoolean("error");
-                    if (!error) {
-                        String result = jsonObject.getString("results");
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+
+                    if (status.equals("1")) {
+                        String result = jsonObject.getString("result");
                         List<Comments> weekDatas = GsonUtils.fromJsonArray(result, Comments.class);
                         if (page == 1) {
                             view.refreshDataSuccess(weekDatas);

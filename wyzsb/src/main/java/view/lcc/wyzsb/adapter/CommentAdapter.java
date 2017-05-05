@@ -19,6 +19,7 @@ import java.util.List;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.bean.Comments;
+import view.lcc.wyzsb.frame.ImageManager;
 
 /**
  * Author:       梁铖城
@@ -68,6 +69,18 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             final Comments weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
+            holder.tv_content.setText(weekData.getC_b());
+            holder.tv_time.setText(weekData.getC_t());
+            holder.tv_username.setText(weekData.getC_nn());
+
+            String url = weekData.getC_im();
+            if (TextUtils.isEmpty(url)){
+                ImageManager.getInstance().loadCircleResImage(holder.iv_portrait.getContext()
+                        ,R.mipmap.ic_launcher,holder.iv_portrait);
+            }else {
+                ImageManager.getInstance().loadCircleImage(holder.iv_portrait.getContext()
+                        ,url,holder.iv_portrait);
+            }
 
             if (mListener != null) {
                 holder.cd_all.setOnClickListener(new View.OnClickListener() {
@@ -95,10 +108,18 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     class NormalViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout cd_all;
+        ImageView iv_portrait;
+        TextView tv_username;
+        TextView tv_time;
+        TextView tv_content;
 
         public NormalViewHolder(View view) {
             super(view);
             cd_all = (LinearLayout) view.findViewById(R.id.cd_all);
+            iv_portrait = (ImageView) view.findViewById(R.id.iv_portrait);
+            tv_username = (TextView) view.findViewById(R.id.tv_username);
+            tv_time = (TextView) view.findViewById(R.id.tv_time);
+            tv_content = (TextView) view.findViewById(R.id.tv_content);
         }
     }
 

@@ -39,6 +39,7 @@ public class DataFragment extends BaseFragment {
         setupViewPager();
         return view;
     }
+
     /**
      * 设置tab下的viewpager
      */
@@ -68,8 +69,8 @@ public class DataFragment extends BaseFragment {
 
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFrag(new VideoFragment(), "视频教程");
-        adapter.addFrag(new ArticleFragment(), "文字教程");
+        adapter.addFrag(new VideoFragment(), "视频资料");
+        adapter.addFrag(new ArticleFragment(), "文字资料");
         adapter.addFrag(new NewsFragment(), "安全资讯");
         viewPager.setAdapter(adapter);
     }

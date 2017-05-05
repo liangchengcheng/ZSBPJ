@@ -13,7 +13,7 @@ public class FeedBackModel {
      */
     public OkHttpRequest PostMessage(String word, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put("content_body", word);
+        paramsMap.put("content_body", "hk:"+word);
         return ApiClient.create(AppConstants.RequestPath.AddFeedBackService, paramsMap).tag("").get(callback);
     }
 }

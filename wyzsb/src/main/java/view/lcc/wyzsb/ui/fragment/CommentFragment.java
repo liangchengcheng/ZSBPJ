@@ -28,8 +28,10 @@ import view.lcc.wyzsb.mvp.param.SendComments;
 import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.CommentsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.CommentsView;
+import view.lcc.wyzsb.ui.activity.login.LoginMainActivity;
 import view.lcc.wyzsb.utils.KeyboardUtils;
 import view.lcc.wyzsb.utils.TimeUtils;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 import view.lcc.wyzsb.view.LoadingLayout;
 import view.lcc.wyzsb.view.SendCommentButton;
 
@@ -215,14 +217,17 @@ public class CommentFragment extends Fragment implements CommentsView, CommentAd
         return true;
     }
 
-    private SendComments sendComments;
-
     @Override
     public void onSendClickListener(View v) {
-        // String user_name = DataManager.getUserName();
-        // TODO: 2017/4/25 此处做用户没登录的校验
+        String session = UserSharePreferenceUtil.getUserSession();
+        if (TextUtils.isEmpty(session)){
+            LoginMainActivity.startLoginMainActivity("flag",getActivity());
+            return;
+        }
+
         if (validateComment()) {
-            sendComments = new SendComments();
+            SendComments sendComments = new SendComments();
+            sendComments.setOid(video.getId());
             sendComments.setContent(etComment.getText().toString().trim());
             presenter.sendComments(sendComments);
         }

@@ -26,10 +26,8 @@ import com.dou361.ijkplayer.bean.VideoijkBean;
 import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Video;

@@ -9,6 +9,7 @@ import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
 import view.lcc.wyzsb.mvp.param.Replay;
 import view.lcc.wyzsb.mvp.param.SendComments;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 
 /**
  * Author:       梁铖城
@@ -24,9 +25,8 @@ public class CommentsModel {
     public OkHttpRequest getComments(int page, String nid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("page", page);
-        paramsMap.put("nid", nid);
-        HashMap<String, String> map = new HashMap<>();
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, map).tag("").get(callback);
+        paramsMap.put("o_id", nid);
+        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, paramsMap).tag("").get(callback);
     }
 
     /**
@@ -34,10 +34,12 @@ public class CommentsModel {
      */
     public OkHttpRequest sendComments(SendComments replay, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put("content", "");
-        paramsMap.put("nid", "");
-        paramsMap.put("pid", "");
-        paramsMap.put("type", "");
-        return ApiClient.create(AppConstants.RequestPath.GET_COMMENT, paramsMap).tag("").get(callback);
+        paramsMap.put("content", replay.getContent());
+        paramsMap.put("user_id", UserSharePreferenceUtil.getUserPhone());
+        paramsMap.put("user_name", UserSharePreferenceUtil.getUserName());
+        paramsMap.put("user_image", UserSharePreferenceUtil.getUserImage());
+        paramsMap.put("oid", replay.getOid());
+        paramsMap.put("type", "video");
+        return ApiClient.create(AppConstants.RequestPath.HCommentsAdd, paramsMap).tag("").get(callback);
     }
 }
