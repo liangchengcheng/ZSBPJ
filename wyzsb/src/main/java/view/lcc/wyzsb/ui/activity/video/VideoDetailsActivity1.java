@@ -20,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.dou361.ijkplayer.bean.VideoijkBean;
 import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
@@ -38,13 +37,13 @@ import view.lcc.wyzsb.ui.fragment.JianjieFragment;
 import view.lcc.wyzsb.utils.MediaUtils;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2017年04月11日13:46:31
- * Description:
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年04月11日13:46:31
+ * Description:  |视频的详情的界面
  */
-public class VideoDetailsActivity1 extends BaseActivity {
-    private CollapsingToolbarLayoutState state =CollapsingToolbarLayoutState.INTERNEDIATE;
+public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener {
+    private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private ButtonBarLayout playButton;
 
@@ -55,6 +54,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
     View rootView;
     private TabLayout tlUserProfileTabs;
     private Video video;
+    private View fab;
 
     public static void startVideoDetailsActivity(Activity startingActivity, Video type) {
         Intent intent = new Intent(startingActivity, VideoDetailsActivity1.class);
@@ -73,6 +73,9 @@ public class VideoDetailsActivity1 extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         SystemBarHelper.immersiveStatusBar(this, 0);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         tlUserProfileTabs = (TabLayout) findViewById(R.id.tlUserProfileTabs);
         tlUserProfileTabs.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -103,7 +106,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
                     }
                 } else {
                     if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        if(state == CollapsingToolbarLayoutState.COLLAPSED){
+                        if (state == CollapsingToolbarLayoutState.COLLAPSED) {
                             //由折叠变为中间状态时隐藏播放按钮
                             playButton.setVisibility(View.GONE);
                         }
@@ -117,8 +120,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
         });
     }
 
-    private void initVideo(){
-
+    private void initVideo() {
         //虚拟按键的隐藏方法
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -135,8 +137,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
                 }
             }
         });
-
-        //常亮
+        // 常亮
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "liveTAG");
         wakeLock.acquire();
@@ -144,7 +145,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
         // 有部分视频加载有问题，这个视频是有声音显示不出图像的，
         // 没有解决http://fzkt-biz.oss-cn-hangzhou.aliyuncs.com/vedio/2f58be65f43946c588ce43ea08491515.mp4
         // 这里模拟一个本地视频的播放，视频需要将testvideo文件夹的视频放到安卓设备的内置sd卡根目录中
-        //String url1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
+        // String url1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
         VideoijkBean m1 = new VideoijkBean();
         m1.setStream("标清");
         m1.setUrl(video.getV_url());
@@ -160,7 +161,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
             public PlayerView setPlaySource(List<VideoijkBean> list) {
                 return super.setPlaySource(list);
             }
-        }.setTitle("梁铖城").setProcessDurationOrientation(PlayStateParams.PROCESS_PORTRAIT)
+        }.setTitle("video").setProcessDurationOrientation(PlayStateParams.PROCESS_PORTRAIT)
                 .setScaleType(PlayStateParams.fillparent).forbidTouch(false).hideSteam(true)
                 .hideCenterPlayer(true)
                 .showThumbnail(new OnShowThumbnailListener() {
@@ -174,8 +175,7 @@ public class VideoDetailsActivity1 extends BaseActivity {
                     }
                 })
                 .setPlaySource(list)
-                .setChargeTie(true,60);
-        player.startPlay();
+                .setChargeTie(true, 60);
     }
 
     @Override
@@ -275,4 +275,15 @@ public class VideoDetailsActivity1 extends BaseActivity {
         }
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab:
+                if (player != null) {
+                    player.startPlay();
+                    this.fab.setVisibility(View.GONE);
+                }
+                break;
+        }
+    }
 }

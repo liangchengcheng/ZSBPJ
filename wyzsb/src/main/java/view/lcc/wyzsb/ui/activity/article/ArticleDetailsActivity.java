@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -21,10 +22,10 @@ import view.lcc.wyzsb.mvp.view.ArticleDetailsView;
 import view.lcc.wyzsb.view.LoadingLayout;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2017年04月13日13:03:32
- * Description:  文章详情
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年04月13日13:03:32
+ * Description:  |文章详情页面
  */
 public class ArticleDetailsActivity extends BaseActivity implements View.OnClickListener,ArticleDetailsView{
     private WebView mWebView;
@@ -43,25 +44,37 @@ public class ArticleDetailsActivity extends BaseActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article_details);
-        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+
         data = (Article) getIntent().getSerializableExtra("data");
+        presenter = new ArticleDetailsPresenterImpl(this);
+
+        findViewById(R.id.iv_back).setOnClickListener(this);
+        img_portrait = (ImageView) findViewById(R.id.img_portrait);
+        mWebView = (WebView) findViewById(R.id.layout_web_view);
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
 
         TextView tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText(data.getA_t());
-
         TextView tv_person_name = (TextView) findViewById(R.id.tv_person_name);
-        tv_person_name.setText(data.getA_a());
-
+        tv_person_name.setText(getDefaultAuthor(data.getA_a()));
         TextView tv_publish_time = (TextView) findViewById(R.id.tv_publish_time);
         tv_publish_time.setText(data.getA_ct());
 
-        presenter = new ArticleDetailsPresenterImpl(this);
-        findViewById(R.id.iv_back).setOnClickListener(this);
-        img_portrait = (ImageView) findViewById(R.id.img_portrait);
-        ImageManager.getInstance()
-                .loadCircleImage(ArticleDetailsActivity.this,data.getA_img(),img_portrait);
-        mWebView = (WebView) findViewById(R.id.layout_web_view);
+        String url = data.getA_img();
+        if (TextUtils.isEmpty(url)){
+            ImageManager.getInstance().loadCircleResImage(ArticleDetailsActivity.this
+                    ,R.mipmap.ic_launcher,img_portrait);
+        }else {
+            ImageManager.getInstance().loadCircleImage(ArticleDetailsActivity.this,url,img_portrait);
+        }
         initView();
+    }
+
+    private String getDefaultAuthor(String a){
+        if (TextUtils.isEmpty(a)){
+            a = "管理员";
+        }
+        return a;
     }
 
     private void initView() {

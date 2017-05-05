@@ -21,7 +21,7 @@ public class UserNameModel {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("userid", UserSharePreferenceUtil.getUserSession());
         paramsMap.put("phone", UserSharePreferenceUtil.getUserPhone());
-        paramsMap.put("nickname", userName.getUsername());
+        paramsMap.put("u_n", userName.getUsername());
         return ApiClient.create(AppConstants.RequestPath.USERNAME, paramsMap).get(callback);
     }
 

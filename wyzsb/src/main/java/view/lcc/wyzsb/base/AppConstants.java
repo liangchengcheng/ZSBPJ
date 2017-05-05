@@ -55,7 +55,6 @@ public class AppConstants {
         public final static String USERNAME = "/hk/editUserName";
 
         public final static String GET_VOCODE = "/hk/getHBooks";
-
     }
 
     public final class ParamKey {
@@ -67,7 +66,7 @@ public class AppConstants {
         //token
         public final static String TOKEN_HEAD = "token";
         //平台
-        public final static String PLATFROM = "platfrom";
+        public final static String PLATFROM = "platform";
         //市场编号
         public final static String MC = "mc";
     }

@@ -259,7 +259,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
     public void onCheckNetworkError(String msg) {
         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view, "提示：验证码错误");
+        showSnackbar(root_view, "提示：网络错误，验证码错误");
     }
 
     @Override
@@ -275,7 +275,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
     public void onVcodeCheckFail(String msg) {
         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
         keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view, "提示：验证码错误");
+        showSnackbar(root_view, "提示：验证码验证错误");
     }
 
     @Override
@@ -372,7 +372,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
                     if (!TextUtils.isEmpty(des)) {
                         rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
                         keyIv.setAnimation(Tools.shakeAnimation(2));
-                        showSnackbar(root_view, "提示：验证码错误");
+                        showSnackbar(root_view, des);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

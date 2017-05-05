@@ -7,10 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
- * Description:
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2015年11月21日15:28:25
+ * Description:  |
  */
 public class TimeUtils {
     private static final long ONE_MINUTE = 60;
@@ -93,7 +93,6 @@ public class TimeUtils {
             return "全部时间";
         }
     }
-
 
     /**
      * 距离今天多久

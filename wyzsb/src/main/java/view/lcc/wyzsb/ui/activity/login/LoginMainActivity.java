@@ -14,10 +14,10 @@ import view.lcc.wyzsb.adapter.TabViewPagerAdapter;
 import view.lcc.wyzsb.base.BaseActivity;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2017年04月26日08:14:43
- * Description:
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年04月26日08:14:43
+ * Description:  |
  */
 public class LoginMainActivity extends BaseActivity {
 
@@ -50,7 +50,7 @@ public class LoginMainActivity extends BaseActivity {
         login_tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                final 	int f=tab.getPosition();
+                final int f=tab.getPosition();
                 login_viewpager.setCurrentItem(f);
             }
             @Override
