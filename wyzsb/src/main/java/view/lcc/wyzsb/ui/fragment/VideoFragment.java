@@ -242,10 +242,10 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
             @Override
             public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
                 currentPage = 1;
-                if (rightEntity.getValue().equals("全部")){
+                if (rightEntity.getKey().equals("全部")){
                     v_type = "";
                 }else {
-                    v_type = rightEntity.getValue();
+                    v_type = rightEntity.getKey();
                 }
                 params = new VideoParams();
                 params.setPage(currentPage);
@@ -260,10 +260,10 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
             @Override
             public void onItemSortClick(FilterEntity entity) {
                 currentPage = 1;
-                if (entity.getValue().equals("全部")){
+                if (entity.getKey().equals("全部")){
                     more = "";
                 }else {
-                    more = entity.getValue();
+                    more = entity.getKey();
                 }
                 params = new VideoParams();
                 params.setPage(currentPage);
@@ -278,10 +278,10 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
             @Override
             public void onItemFilterClick(FilterEntity entity) {
                 currentPage = 1;
-                if (entity.getValue().equals("全部")){
+                if (entity.getKey().equals("全部")){
                     v_l = "";
                 }else {
-                    v_l = entity.getValue();
+                    v_l = entity.getKey();
                 }
                 params = new VideoParams();
                 params.setPage(currentPage);
@@ -291,7 +291,6 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
                 mPresenter.getData(params);
             }
         });
-
     }
 
 }

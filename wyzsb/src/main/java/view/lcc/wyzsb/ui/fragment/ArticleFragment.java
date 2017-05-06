@@ -243,10 +243,10 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
             @Override
             public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
                 currentPage = 1;
-                if (rightEntity.getValue().equals("全部")){
+                if (rightEntity.getKey().equals("全部")){
                     a_type = "";
                 }else {
-                    a_type = rightEntity.getValue();
+                    a_type = rightEntity.getKey();
                 }
                 params = new ArticleParams();
                 params.setPage(currentPage);
@@ -261,10 +261,10 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
             @Override
             public void onItemSortClick(FilterEntity entity) {
                 currentPage = 1;
-                if (entity.getValue().equals("全部")){
+                if (entity.getKey().equals("全部")){
                     a_c = "";
                 }else {
-                    a_c = entity.getValue();
+                    a_c = entity.getKey();
                 }
 
                 params = new ArticleParams();
@@ -280,10 +280,10 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
             @Override
             public void onItemFilterClick(FilterEntity entity) {
                 currentPage = 1;
-                if (entity.getValue().equals("全部")){
+                if (entity.getKey().equals("全部")){
                     a_l = "";
                 }else {
-                    a_l = entity.getValue();
+                    a_l = entity.getKey();
                 }
                 params = new ArticleParams();
                 params.setPage(currentPage);

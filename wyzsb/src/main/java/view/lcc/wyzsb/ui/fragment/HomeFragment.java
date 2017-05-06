@@ -29,9 +29,13 @@ import view.lcc.wyzsb.bean.model.OperationEntity;
 import view.lcc.wyzsb.bean.model.TravelingEntity;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.mvp.param.HomeParams;
+import view.lcc.wyzsb.mvp.param.VideoParams;
 import view.lcc.wyzsb.mvp.presenter.HomeFragmentPresenter;
+import view.lcc.wyzsb.mvp.presenter.VideoPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.HomeFragmentPresenterImpl;
+import view.lcc.wyzsb.mvp.presenter.impl.VideoPresenterImpl;
 import view.lcc.wyzsb.mvp.view.HomeFragmentView;
+import view.lcc.wyzsb.mvp.view.VideoView;
 import view.lcc.wyzsb.ui.activity.article.ArticleActivity;
 import view.lcc.wyzsb.ui.activity.setting.AboutActivity;
 
@@ -55,7 +59,7 @@ import view.lcc.wyzsb.view.home.SmoothListView.SmoothListView;
  * Description:  主页
  */
 public class HomeFragment extends BaseFragment implements SmoothListView.ISmoothListViewListener
-        ,HomeFragmentView,TravelingAdapter.ItemClickListener,HeaderChannelView.OnChannelClickListener,View.OnClickListener{
+        ,VideoView,TravelingAdapter.ItemClickListener,HeaderChannelView.OnChannelClickListener,View.OnClickListener{
     private SmoothListView smoothListView;
 
     private FilterView realFilterView;
@@ -118,7 +122,9 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
     private int filterPosition = -1;
     //Presenter
-    private HomeFragmentPresenter homeFragmentPresenter;
+    private VideoPresenter videoPresenter;
+
+    protected int currentPage = 1;
 
     @Override
     public int initContentView() {
@@ -129,6 +135,15 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     public void getBundle(Bundle bundle) {
 
     }
+
+    private VideoParams params;
+
+    //参数
+    private String v_type = "";
+
+    private String more = "";
+
+    private String v_l = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -154,7 +169,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     }
 
     public void initData() {
-        homeFragmentPresenter = new HomeFragmentPresenterImpl(this);
+        videoPresenter = new VideoPresenterImpl(this);
         mContext = getActivity();
         mActivity = getActivity();
         mScreenHeight = DensityUtil.getWindowHeight(getActivity());
@@ -191,14 +206,19 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         // 设置真FilterView数据
         realFilterView.setFilterData(mActivity, filterData);
         realFilterView.setVisibility(View.GONE);
-        // 设置ListView数据
-        HomeParams homeParams = new HomeParams();
-        homeParams.setPage(1);
-        homeFragmentPresenter.getListData(homeParams);
+
         mAdapter = new TravelingAdapter(getActivity(), travelingList);
         mAdapter.setOnItemClickListener(this);
         smoothListView.setAdapter(mAdapter);
         filterViewPosition = smoothListView.getHeaderViewsCount() - 1;
+
+        // 设置ListView数据
+        params = new VideoParams();
+        params.setPage(currentPage);
+        params.setMore(more);
+        params.setV_l(v_l);
+        params.setV_type(v_type);
+        videoPresenter.getData(params);
     }
 
     private void initListener() {
@@ -215,7 +235,8 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
             public void onFilterClick(int position) {
                 filterPosition = position;
                 isSmooth = true;
-                smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
+                smoothListView.smoothScrollToPositionFromTop(filterViewPosition,
+                        DensityUtil.dip2px(mContext, titleViewHeight));
             }
         });
         // (真正的)筛选视图点击
@@ -224,31 +245,62 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
             public void onFilterClick(int position) {
                 filterPosition = position;
                 realFilterView.show(position);
-                smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
+                smoothListView.smoothScrollToPositionFromTop(filterViewPosition,
+                        DensityUtil.dip2px(mContext, titleViewHeight));
             }
         });
         // 分类Item点击
         realFilterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
             @Override
             public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
-                HomeParams params = new HomeParams();
-                homeFragmentPresenter.getListData(params);
+                currentPage = 1;
+                if (rightEntity.getKey().equals("全部")){
+                    v_type = "";
+                }else {
+                    v_type = rightEntity.getKey();
+                }
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                videoPresenter.getData(params);
             }
         });
         // 排序Item点击
         realFilterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
             @Override
             public void onItemSortClick(FilterEntity entity) {
-                HomeParams params = new HomeParams();
-                homeFragmentPresenter.getListData(params);
+                currentPage = 1;
+                if (entity.getKey().equals("全部")){
+                    more = "";
+                }else {
+                    more = entity.getKey();
+                }
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                videoPresenter.getData(params);
             }
         });
         // 筛选Item点击
         realFilterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
             @Override
             public void onItemFilterClick(FilterEntity entity) {
-                HomeParams params = new HomeParams();
-                homeFragmentPresenter.getListData(params);
+                currentPage = 1;
+                if (entity.getKey().equals("全部")){
+                    v_l = "";
+                }else {
+                    v_l = entity.getKey();
+                }
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                videoPresenter.getData(params);
             }
         });
         smoothListView.setRefreshEnable(true);
@@ -350,6 +402,14 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                currentPage = 1;
+
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                videoPresenter.refresh(params);
                 smoothListView.stopRefresh();
                 smoothListView.setRefreshTime("刚刚");
             }
@@ -358,13 +418,13 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     @Override
     public void onLoadMore() {
-        //加载更多数据。
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                smoothListView.stopLoadMore();
-            }
-        }, 2000);
+        currentPage++;
+        params = new VideoParams();
+        params.setPage(currentPage);
+        params.setMore(more);
+        params.setV_l(v_l);
+        params.setV_type(v_type);
+        videoPresenter.loadMore(params);
     }
 
     @Override
@@ -383,21 +443,26 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
     }
 
     @Override
-    public void getDataSuccess(List<Video> entities) {
+    public void refreshOrLoadFail(String msg) {
+
+    }
+
+    @Override
+    public void refreshView(List<Video> entities) {
         fillAdapter(entities);
     }
 
     @Override
-    public void loadMoreDataSuccess(List<Video> entities) {
-
+    public void loadMoreView(List<Video> entities) {
+        if (entities.isEmpty()) {
+            Frame.getInstance().toastPrompt("没有更多数据...");
+        } else {
+            mAdapter.addALL(entities);
+        }
+        smoothListView.stopLoadMore();
+        mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void loadMoreDataFail(String msg) {
-
-    }
-
-    // TODO: 2017/4/11  fillAdapter
     /**
      * 填充数据（ListView的数据）
      */
