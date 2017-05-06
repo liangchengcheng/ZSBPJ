@@ -294,6 +294,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
         intent.putExtra("result", flag);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
+        getActivity().finish();
     }
 
     @Override

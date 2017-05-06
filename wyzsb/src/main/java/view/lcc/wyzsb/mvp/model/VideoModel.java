@@ -23,6 +23,9 @@ public class VideoModel {
     public OkHttpRequest getVideo(VideoParams videoParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
         map.put("page",videoParams.getPage()+"");
+        map.put("v_type",videoParams.getV_type()+"");
+        map.put("more",videoParams.getMore()+"");
+        map.put("v_l",videoParams.getV_l()+"");
         return ApiClient.create(AppConstants.RequestPath.GET_VIDEO, map).tag("").get(callback);
     }
 }

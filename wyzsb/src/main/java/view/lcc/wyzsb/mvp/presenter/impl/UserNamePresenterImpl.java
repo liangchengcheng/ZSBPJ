@@ -19,7 +19,7 @@ import view.lcc.wyzsb.mvp.view.UserNameView;
  * Author:       |梁铖城
  * Email:        |1038127753@qq.com
  * Date:         |2017年05月05日16:20:12
- * Description:
+ * Description:  |
  */
 public class UserNamePresenterImpl implements UserNamePresenter {
     private UserNameView view;

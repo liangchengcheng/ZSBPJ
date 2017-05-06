@@ -39,13 +39,11 @@ public class VideoPresenterImpl implements VideoPresenter {
         model = new VideoModel();
     }
 
-    private void loadData(final int page, final String options, final boolean get_data) {
+    private void loadData(final VideoParams videoParams, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
         final long current_time = TimeUtils.getCurrentTime();
-        VideoParams videoParams = new VideoParams();
-        videoParams.setPage(page);
         model.getVideo(videoParams, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
@@ -62,7 +60,7 @@ public class VideoPresenterImpl implements VideoPresenter {
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
                 }
-                updateView(response, delay, page, get_data);
+                updateView(response, delay, videoParams.getPage(), get_data);
             }
         });
     }
@@ -103,17 +101,17 @@ public class VideoPresenterImpl implements VideoPresenter {
     }
 
     @Override
-    public void getData(int page, String options) {
-        loadData(page, options, true);
+    public void getData(VideoParams params) {
+        loadData(params, true);
     }
 
     @Override
-    public void loadMore(int page, String options) {
-        loadData(page, options, false);
+    public void loadMore(VideoParams params) {
+        loadData(params, false);
     }
 
     @Override
-    public void refresh(int page, String options) {
-        loadData(1, options, false);
+    public void refresh(VideoParams params) {
+        loadData(params, false);
     }
 }

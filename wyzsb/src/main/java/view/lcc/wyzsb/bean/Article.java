@@ -10,6 +10,17 @@ import java.util.List;
  * Description:
  */
 public class Article implements Serializable{
+
+    private String bq;
+
+    public String getBq() {
+        return bq;
+    }
+
+    public void setBq(String bq) {
+        this.bq = bq;
+    }
+
     //mid 文章的主键
     private String id;
     //文章的题目

@@ -26,6 +26,7 @@ import view.lcc.wyzsb.bean.model.FilterTwoEntity;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
 import view.lcc.wyzsb.mvp.param.HomeParams;
+import view.lcc.wyzsb.mvp.param.VideoParams;
 import view.lcc.wyzsb.mvp.presenter.NewsPresenter;
 import view.lcc.wyzsb.mvp.presenter.VideoPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.NewsPresenterImpl;
@@ -47,6 +48,7 @@ import view.lcc.wyzsb.view.home.FilterView;
  */
 public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLayout.OnRefreshListener,
         VideoAdapter.OnFavClickListener, VideoAdapter.OnItemClickListener,View.OnClickListener{
+
     private LoadingLayout loading_layout;
     private VideoAdapter mAdapter;
     private VideoPresenter mPresenter;
@@ -65,6 +67,14 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
     private FilterData filterData;
     // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
     private int filterPosition = -1;
+    //请求的参数
+    private VideoParams params;
+    //参数
+    private String v_type = "";
+
+    private String more = "";
+
+    private String v_l = "";
 
     @Nullable
     @Override
@@ -75,7 +85,13 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
         initRefreshView(view);
         initRecycleView(view);
         setFilerView(view);
-        mPresenter.getData(currentPage,"");
+
+        params = new VideoParams();
+        params.setPage(currentPage);
+        params.setMore(more);
+        params.setV_l(v_l);
+        params.setV_type(v_type);
+        mPresenter.getData(params);
         return view;
     }
 
@@ -103,7 +119,13 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,"");
+
+                    params = new VideoParams();
+                    params.setPage(currentPage);
+                    params.setMore(more);
+                    params.setV_l(v_l);
+                    params.setV_type(v_type);
+                    mPresenter.loadMore(params);
                 }
             }
         });
@@ -116,7 +138,12 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,"");
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                mPresenter.refresh(params);
             }
         }, 500);
     }
@@ -214,21 +241,54 @@ public class VideoFragment extends Fragment implements VideoView,SwipeRefreshLay
         realFilterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
             @Override
             public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
-                HomeParams params = new HomeParams();
+                currentPage = 1;
+                if (rightEntity.getValue().equals("全部")){
+                    v_type = "";
+                }else {
+                    v_type = rightEntity.getValue();
+                }
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                mPresenter.getData(params);
             }
         });
         // 排序Item点击
         realFilterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
             @Override
             public void onItemSortClick(FilterEntity entity) {
-
+                currentPage = 1;
+                if (entity.getValue().equals("全部")){
+                    more = "";
+                }else {
+                    more = entity.getValue();
+                }
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                mPresenter.getData(params);
             }
         });
         // 筛选Item点击
         realFilterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
             @Override
             public void onItemFilterClick(FilterEntity entity) {
-
+                currentPage = 1;
+                if (entity.getValue().equals("全部")){
+                    v_l = "";
+                }else {
+                    v_l = entity.getValue();
+                }
+                params = new VideoParams();
+                params.setPage(currentPage);
+                params.setMore(more);
+                params.setV_l(v_l);
+                params.setV_type(v_type);
+                mPresenter.getData(params);
             }
         });
 

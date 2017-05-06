@@ -4,12 +4,22 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年05月06日15:35:12
  * Description:
  */
 public class Video implements Serializable{
+    private String bq;
+
+    public String getBq() {
+        return bq;
+    }
+
+    public void setBq(String bq) {
+        this.bq = bq;
+    }
+
     //mid
     private String id;
     //题目

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import de.greenrobot.event.EventBus;
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.ImageManager;
 import view.lcc.wyzsb.ui.activity.login.LoginMainActivity;
 import view.lcc.wyzsb.ui.activity.setting.AboutActivity;
@@ -32,7 +33,6 @@ import view.lcc.wyzsb.view.pulltozoomview.PullToZoomScrollViewEx;
  * Description:  设置界面
  */
 public class SettingFragment extends Fragment implements View.OnClickListener {
-
     private PullToZoomScrollViewEx scrollView;
     private TextView tv_phonenumber;
     private ImageView profile_headimg;
@@ -64,6 +64,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         content_view.findViewById(R.id.layout_me_focus).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_room_manage).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_history).setOnClickListener(this);
+        content_view.findViewById(R.id.layout_me_mind).setOnClickListener(this);
 
         scrollView.setHeaderView(header_view);
         scrollView.setZoomView(zoom_view);
@@ -107,13 +108,21 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //视频的收藏
             case R.id.layout_me_room_manage:
-                intent = new Intent(getActivity(), CollectionActivity.class);
-                startActivity(intent);
+                Frame.getInstance().toastPrompt("敬请期待");
+                //intent = new Intent(getActivity(), CollectionActivity.class);
+                //startActivity(intent);
                 break;
             //历史数据
             case R.id.layout_me_history:
-                intent = new Intent(getActivity(), HistoryActivity.class);
-                startActivity(intent);
+                Frame.getInstance().toastPrompt("敬请期待");
+                //intent = new Intent(getActivity(), HistoryActivity.class);
+                //startActivity(intent);
+                break;
+            //消息中心
+            case R.id.layout_me_mind:
+                Frame.getInstance().toastPrompt("敬请期待");
+                //intent = new Intent(getActivity(), HistoryActivity.class);
+                //startActivity(intent);
                 break;
         }
     }

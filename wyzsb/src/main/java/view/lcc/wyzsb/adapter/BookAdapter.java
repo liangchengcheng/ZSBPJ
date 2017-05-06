@@ -70,6 +70,8 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_title.setText(weekData.getB_t());
             holder.tv_rank.setText(""+weekData.getB_js());
+            holder.tv_fenshu.setText("评分:"+weekData.getB_g());
+            holder.tv_type.setText("分类:"+weekData.getB_type());
             Glide.with(holder.giv_image.getContext())
                     .load(weekData.getB_i())
                     .placeholder(R.color.article_des)
@@ -102,11 +104,15 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class NormalViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
         TextView tv_rank;
+        TextView tv_type;
+        TextView tv_fenshu;
         ImageView giv_image;
         LinearLayout ll_all;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
+            tv_type = (TextView) itemView.findViewById(R.id.tv_type);
+            tv_fenshu = (TextView) itemView.findViewById(R.id.tv_fenshu);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
             ll_all = (LinearLayout) itemView.findViewById(R.id.ll_all);

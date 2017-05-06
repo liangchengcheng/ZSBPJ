@@ -37,10 +37,10 @@ import view.lcc.wyzsb.view.LoadingLayout;
 import view.lcc.wyzsb.view.home.FilterView;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2017年04月23日11:02:32
- * Description:
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年04月23日11:02:32
+ * Description:  |文字资料
  */
 public class ArticleFragment extends Fragment implements ArticleView,SwipeRefreshLayout.OnRefreshListener,
         ArticleAdapter.OnFavClickListener,ArticleAdapter.OnItemClickListener,View.OnClickListener{
@@ -194,8 +194,11 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
         // 筛选数据
         realFilterView = (FilterView) view.findViewById(R.id.real_filterView);
         filterData = new FilterData();
+        // 第1行筛选数据
         filterData.setCategory(ModelUtil.getCategoryData());
+        // 第2行筛选数据
         filterData.setSorts(ModelUtil.getSortData());
+        // 第3行筛选数据
         filterData.setFilters(ModelUtil.getFilterData());
         // 设置真FilterView数据
         realFilterView.setFilterData(getActivity(), filterData);

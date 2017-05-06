@@ -21,10 +21,9 @@ import view.lcc.wyzsb.bean.model.TravelingEntity;
  */
 public class ModelUtil {
 
-    public static final String type_scenery = "资讯";
-    public static final String type_building = "大事件";
-    public static final String type_animal = "招聘";
-    public static final String type_plant = "其他";
+    public static final String type_1 = "安全相关";
+    public static final String type_2 = "其他";
+
 
     /**
      * 广告数据
@@ -71,25 +70,6 @@ public class ModelUtil {
         return operationList;
     }
 
-    // 分类数据
-    public static List<FilterTwoEntity> getCategoryData() {
-        List<FilterTwoEntity> list = new ArrayList<>();
-        list.add(new FilterTwoEntity(type_scenery, getFilterData()));
-        list.add(new FilterTwoEntity(type_building, getFilterData()));
-        list.add(new FilterTwoEntity(type_animal, getFilterData()));
-        list.add(new FilterTwoEntity(type_plant, getFilterData()));
-        return list;
-    }
-
-    public static List<FilterEntity> getFilterData1() {
-        List<FilterEntity> list = new ArrayList<>();
-        list.add(new FilterEntity("全部", "0"));
-        list.add(new FilterEntity("初级", "1"));
-        list.add(new FilterEntity("中级", "2"));
-        list.add(new FilterEntity("高级", "3"));
-        return list;
-    }
-
     // 排序数据（时间的顺序）
     public static List<FilterEntity> getSortData() {
         List<FilterEntity> list = new ArrayList<>();
@@ -109,6 +89,14 @@ public class ModelUtil {
         return list;
     }
 
+    // 分类数据
+    public static List<FilterTwoEntity> getCategoryData() {
+        List<FilterTwoEntity> list = new ArrayList<>();
+        list.add(new FilterTwoEntity(type_1, getFilterData1()));
+        list.add(new FilterTwoEntity(type_2, getFilterData2()));
+        return list;
+    }
+
     /**
      * 暂无数据
      */
@@ -120,5 +108,30 @@ public class ModelUtil {
         list.add(entity);
         return list;
     }
+
+    // 筛选数据（按照类别分类）
+    public static List<FilterEntity> getFilterData1() {
+        List<FilterEntity> list = new ArrayList<>();
+        list.add(new FilterEntity("全部", "0"));
+        list.add(new FilterEntity("WEB安全", "1"));
+        list.add(new FilterEntity("系统安全", "2"));
+        list.add(new FilterEntity("网络安全", "3"));
+        list.add(new FilterEntity("终端安全", "4"));
+        list.add(new FilterEntity("数据安全", "5"));
+        list.add(new FilterEntity("内网渗透", "6"));
+        list.add(new FilterEntity("逆向破解", "7"));
+        list.add(new FilterEntity("漏洞分析", "8"));
+        list.add(new FilterEntity("编程基础", "9"));
+        list.add(new FilterEntity("安全工具", "10"));
+
+        return list;
+    }
+    // 筛选数据 （按照类别分类）
+    public static List<FilterEntity> getFilterData2() {
+        List<FilterEntity> list = new ArrayList<>();
+        list.add(new FilterEntity("全部", "0"));
+        return list;
+    }
+
 
 }
