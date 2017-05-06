@@ -16,6 +16,7 @@ import java.util.List;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.bean.Article;
+import view.lcc.wyzsb.frame.ImageManager;
 
 
 /**
@@ -71,6 +72,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.tv_author.setText(weekData.getA_a());
             holder.tv_time.setText(weekData.getA_ct());
 
+            if (TextUtils.isEmpty(weekData.getA_img())){
+                holder.tv_comment_count.setVisibility(View.GONE);
+            }else {
+                holder.tv_comment_count.setVisibility(View.VISIBLE);
+                ImageManager.getInstance().loadUrlImage(holder.tv_comment_count.getContext()
+                        ,weekData.getA_img(),holder.tv_comment_count);
+            }
+
             if (mListener != null) {
                 holder.ll_all.setOnClickListener(new OnClickListener() {
                     @Override
@@ -96,6 +105,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
+        ImageView tv_comment_count;
         TextView tv_title;
         TextView tv_content;
         TextView tv_author;
@@ -109,6 +119,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tv_author = (TextView) itemView.findViewById(R.id.tv_author);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             ll_all = (CardView) itemView.findViewById(R.id.ll_all);
+            tv_comment_count = (ImageView) itemView.findViewById(R.id.tv_comment_count);
         }
     }
 

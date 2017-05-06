@@ -35,13 +35,11 @@ public class ArticlePresenterImpl implements ArticlePresenter {
         model = new ArticleModel();
     }
 
-    private void loadData(final int page, String type, final boolean get_data) {
+    private void loadData(final ArticleParams params, final boolean get_data) {
         if (get_data) {
             view.getLoading();
         }
         final long current_time = TimeUtils.getCurrentTime();
-        ArticleParams params = new ArticleParams();
-        params.setPage(page);
         model.getArticle(params, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
@@ -58,7 +56,7 @@ public class ArticlePresenterImpl implements ArticlePresenter {
                 if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
                     delay = DEF_DELAY;
                 }
-                updateView(response, delay, page, get_data);
+                updateView(response, delay, params.getPage(), get_data);
             }
         });
     }
@@ -99,18 +97,18 @@ public class ArticlePresenterImpl implements ArticlePresenter {
     }
 
     @Override
-    public void getData(int page, String type) {
-        loadData(page, type, true);
+    public void getData(ArticleParams params) {
+        loadData(params, true);
     }
 
     @Override
-    public void loadMore(int page, String type) {
-        loadData(page, type, false);
+    public void loadMore(ArticleParams params) {
+        loadData(params, false);
     }
 
     @Override
-    public void refresh(int page, String type) {
-        loadData(page, type, false);
+    public void refresh(ArticleParams params) {
+        loadData(params, false);
     }
 
 }

@@ -1,5 +1,8 @@
 package view.lcc.wyzsb.mvp.presenter;
 
+import view.lcc.wyzsb.bean.Article;
+import view.lcc.wyzsb.mvp.param.ArticleParams;
+
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
@@ -7,10 +10,11 @@ package view.lcc.wyzsb.mvp.presenter;
  * Description:
  */
 public interface ArticlePresenter {
-    void getData(int page,String type);
 
-    void loadMore(int page,String type);
+    void getData(ArticleParams article);
 
-    void refresh(int page,String type);
+    void loadMore(ArticleParams article);
+
+    void refresh(ArticleParams article);
 
 }

@@ -23,7 +23,9 @@ import view.lcc.wyzsb.bean.model.FilterEntity;
 import view.lcc.wyzsb.bean.model.FilterTwoEntity;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
+import view.lcc.wyzsb.mvp.param.ArticleParams;
 import view.lcc.wyzsb.mvp.param.HomeParams;
+import view.lcc.wyzsb.mvp.param.VideoParams;
 import view.lcc.wyzsb.mvp.presenter.ArticlePresenter;
 import view.lcc.wyzsb.mvp.presenter.VideoPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.ArticlePresenterImpl;
@@ -44,6 +46,7 @@ import view.lcc.wyzsb.view.home.FilterView;
  */
 public class ArticleFragment extends Fragment implements ArticleView,SwipeRefreshLayout.OnRefreshListener,
         ArticleAdapter.OnFavClickListener,ArticleAdapter.OnItemClickListener,View.OnClickListener{
+
     private LoadingLayout loading_layout;
     private ArticleAdapter mAdapter;
     private ArticlePresenter mPresenter;
@@ -57,6 +60,12 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
     protected long currentTime = 0;
     protected int currentPage = 1;
     private FilterView realFilterView;
+
+    private String a_l = "";
+    private String a_c = "";
+    private String a_type = "";
+
+    private ArticleParams params;
 
     // 筛选数据
     private FilterData filterData;
@@ -72,7 +81,13 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
         initRefreshView(view);
         initRecycleView(view);
         setFilerView(view);
-        mPresenter.getData(currentPage,"");
+
+        params = new ArticleParams();
+        params.setPage(currentPage);
+        params.setA_c(a_c);
+        params.setA_l(a_l);
+        params.setA_type(a_type);
+        mPresenter.getData(params);
         return view;
     }
 
@@ -101,7 +116,13 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,"");
+
+                    params = new ArticleParams();
+                    params.setPage(currentPage);
+                    params.setA_c(a_c);
+                    params.setA_l(a_l);
+                    params.setA_type(a_type);
+                    mPresenter.loadMore(params);
                 }
             }
         });
@@ -114,7 +135,13 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,"");
+
+                params = new ArticleParams();
+                params.setPage(currentPage);
+                params.setA_c(a_c);
+                params.setA_l(a_l);
+                params.setA_type(a_type);
+                mPresenter.refresh(params);
             }
         }, 500);
     }
@@ -215,21 +242,55 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
         realFilterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
             @Override
             public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
-                HomeParams params = new HomeParams();
+                currentPage = 1;
+                if (rightEntity.getValue().equals("全部")){
+                    a_type = "";
+                }else {
+                    a_type = rightEntity.getValue();
+                }
+                params = new ArticleParams();
+                params.setPage(currentPage);
+                params.setA_c(a_c);
+                params.setA_l(a_l);
+                params.setA_type(a_type);
+                mPresenter.getData(params);
             }
         });
         // 排序Item点击
         realFilterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
             @Override
             public void onItemSortClick(FilterEntity entity) {
+                currentPage = 1;
+                if (entity.getValue().equals("全部")){
+                    a_c = "";
+                }else {
+                    a_c = entity.getValue();
+                }
 
+                params = new ArticleParams();
+                params.setPage(currentPage);
+                params.setA_c(a_c);
+                params.setA_l(a_l);
+                params.setA_type(a_type);
+                mPresenter.getData(params);
             }
         });
         // 筛选Item点击
         realFilterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
             @Override
             public void onItemFilterClick(FilterEntity entity) {
-
+                currentPage = 1;
+                if (entity.getValue().equals("全部")){
+                    a_l = "";
+                }else {
+                    a_l = entity.getValue();
+                }
+                params = new ArticleParams();
+                params.setPage(currentPage);
+                params.setA_c(a_c);
+                params.setA_l(a_l);
+                params.setA_type(a_type);
+                mPresenter.getData(params);
             }
         });
 

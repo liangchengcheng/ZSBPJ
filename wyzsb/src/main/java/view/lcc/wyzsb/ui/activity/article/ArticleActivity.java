@@ -20,6 +20,7 @@ import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Article;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
+import view.lcc.wyzsb.mvp.param.ArticleParams;
 import view.lcc.wyzsb.mvp.presenter.ArticlePresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.ArticlePresenterImpl;
 import view.lcc.wyzsb.mvp.view.ArticleView;
@@ -47,7 +48,8 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-    private String type=" ";
+    private String type =" ";
+    private ArticleParams params;
 
 
     public static void startArticleActivity(Activity startingActivity, String type) {
@@ -68,7 +70,13 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
         mPresenter = new ArticlePresenterImpl(this);
         initRefreshView();
         initRecycleView();
-        mPresenter.getData(1,type);
+
+        params = new ArticleParams();
+        params.setPage(currentPage);
+        params.setA_c("");
+        params.setA_l("");
+        params.setA_type(type);
+        mPresenter.getData(params);
     }
 
     private void initRefreshView() {
@@ -96,7 +104,12 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage,type);
+                    params = new ArticleParams();
+                    params.setPage(currentPage);
+                    params.setA_c("");
+                    params.setA_l("");
+                    params.setA_type(type);
+                    mPresenter.loadMore(params);
                 }
             }
         });
@@ -109,7 +122,12 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage,type);
+                params = new ArticleParams();
+                params.setPage(currentPage);
+                params.setA_c("");
+                params.setA_l("");
+                params.setA_type(type);
+                mPresenter.refresh(params);
             }
         }, 500);
     }
@@ -160,11 +178,13 @@ public class ArticleActivity extends BaseActivity implements SwipeRefreshLayout.
 
     @Override
     public void refreshDataSuccess(List<Article> entities) {
+        mSwipeRefreshWidget.setRefreshing(false);
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
+            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }else {
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
         }
-        mSwipeRefreshWidget.setRefreshing(false);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override
