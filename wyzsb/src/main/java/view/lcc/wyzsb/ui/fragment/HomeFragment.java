@@ -429,7 +429,7 @@ public class HomeFragment extends BaseFragment implements SmoothListView.ISmooth
 
     @Override
     public void getLoading() {
-        Frame.getInstance().toastPrompt("开始加载数据");
+
     }
 
     @Override

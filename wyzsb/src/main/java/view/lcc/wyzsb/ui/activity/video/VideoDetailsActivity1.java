@@ -20,13 +20,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.dou361.ijkplayer.bean.VideoijkBean;
 import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Video;
@@ -55,6 +58,7 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
     private TabLayout tlUserProfileTabs;
     private Video video;
     private View fab;
+    private AppBarLayout app_bar;
 
     public static void startVideoDetailsActivity(Activity startingActivity, Video type) {
         Intent intent = new Intent(startingActivity, VideoDetailsActivity1.class);
@@ -82,9 +86,10 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         setViewPager();
         initVideo();
 
-        AppBarLayout app_bar = (AppBarLayout) findViewById(R.id.appbar);
+        app_bar = (AppBarLayout) findViewById(R.id.appbar);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         playButton = (ButtonBarLayout) findViewById(R.id.playButton);
+        playButton.setOnClickListener(this);
         app_bar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -279,6 +284,13 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
+                if (player != null) {
+                    player.startPlay();
+                    this.fab.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.playButton:
+                app_bar.setExpanded(true, true);
                 if (player != null) {
                     player.startPlay();
                     this.fab.setVisibility(View.GONE);

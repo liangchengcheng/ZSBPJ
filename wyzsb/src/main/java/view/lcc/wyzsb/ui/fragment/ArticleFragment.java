@@ -266,7 +266,6 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
                 }else {
                     a_c = entity.getKey();
                 }
-
                 params = new ArticleParams();
                 params.setPage(currentPage);
                 params.setA_c(a_c);
@@ -293,6 +292,5 @@ public class ArticleFragment extends Fragment implements ArticleView,SwipeRefres
                 mPresenter.getData(params);
             }
         });
-
     }
 }
