@@ -11,7 +11,7 @@ import android.widget.ScrollView;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2015年11月21日15:28:25
- * Description:  开始或者结束轮训器
+ * Description:
  */
 public class MyScrollView extends ScrollView {
 
@@ -37,6 +37,20 @@ public class MyScrollView extends ScrollView {
                 return true;
             }
             return false;
+        }
+    }
+
+    private ScrollViewListener scrollViewListener = null;
+
+    public void setScrollViewListener(ScrollViewListener scrollViewListener) {
+        this.scrollViewListener = scrollViewListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int x, int y, int oldx, int oldy) {
+        super.onScrollChanged(x, y, oldx, oldy);
+        if (scrollViewListener != null) {
+            scrollViewListener.onScrollChanged(this, x, y, oldx, oldy);
         }
     }
 }

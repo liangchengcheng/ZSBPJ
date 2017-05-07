@@ -28,6 +28,7 @@ import com.lcc.mvp.presenter.impl.MenuContentPresenterImpl;
 import com.lcc.mvp.view.MenuContentView;
 import com.lcc.view.MyScrollView;
 import com.lcc.view.MyWebView;
+import com.lcc.view.ScrollViewListener;
 import com.lcc.view.loadview.LoadingLayout;
 
 import zsbpj.lccpj.frame.FrameManager;
@@ -41,7 +42,7 @@ import zsbpj.lccpj.utils.LogUtils;
  * Description:  IndexMenuWebView
  */
 public class IndexMenuWebView extends BaseActivity implements MenuContentView, View.OnClickListener,
-        MyWebView.OnScrollChangedCallback, View.OnScrollChangeListener {
+        MyWebView.OnScrollChangedCallback, ScrollViewListener {
     public static final String DATA = "data";
     private MenuContentPresenter indexContentPresenter;
     private Article article;
@@ -84,7 +85,7 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     @Override
     protected void initView() {
         nest = (MyScrollView) findViewById(R.id.nest);
-        nest.setOnScrollChangeListener(this);
+        nest.setScrollViewListener(this);
         llDetailBottom = findViewById(R.id.llDetailBottom);
         findViewById(R.id.ll_issc).setOnClickListener(this);
         findViewById(R.id.ll_comments).setOnClickListener(this);
@@ -288,7 +289,12 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
     }
 
     @Override
-    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+    public void checkToken() {
+        getToken();
+    }
+
+    @Override
+    public void onScrollChanged(MyScrollView scrollView, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
         //下移隐藏
         if (scrollY - oldScrollY > 0 && isBottomShow) {
             isBottomShow = false;
@@ -298,11 +304,5 @@ public class IndexMenuWebView extends BaseActivity implements MenuContentView, V
             isBottomShow = true;
             llDetailBottom.animate().translationY(0);
         }
-
-    }
-
-    @Override
-    public void checkToken() {
-        getToken();
     }
 }
