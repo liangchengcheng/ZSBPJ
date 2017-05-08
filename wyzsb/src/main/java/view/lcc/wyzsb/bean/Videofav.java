@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Date:         2015年11月21日15:28:25
  * Description:
  */
-public class History implements Serializable{
+public class Videofav implements Serializable{
 
     private String bq;
 

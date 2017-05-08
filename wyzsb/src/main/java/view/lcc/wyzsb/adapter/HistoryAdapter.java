@@ -1,6 +1,7 @@
 package view.lcc.wyzsb.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import java.util.List;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.bean.Book;
+import view.lcc.wyzsb.bean.History;
 import view.lcc.wyzsb.bean.News;
+import view.lcc.wyzsb.view.home.GildeImageView.GlideImageView;
 
 /**
  * Author:       梁铖城
@@ -27,11 +30,11 @@ import view.lcc.wyzsb.bean.News;
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int NORMAL_ITEM = 0;
     public static final int FOOTER_ITEM = 2;
-    private List<Book> mList = new ArrayList<>();
+    private List<History> mList = new ArrayList<>();
     private boolean hasFooter;
     private boolean hasMoreData = true;
 
-    public void bind(List<Book> messages) {
+    public void bind(List<History> messages) {
         this.mList = messages;
         notifyDataSetChanged();
     }
@@ -49,7 +52,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
             return new  NormalViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.book_item, parent, false));
+                    .inflate(R.layout.item_travel, parent, false));
         } else {
             return new  FootViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.layout_foot_loading, parent, false));
@@ -64,20 +67,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((FootViewHolder) viewHolder).mTextView.setText("正在加载...");
             }
         } else {
-            final Book weekData = mList.get(position);
+            final History entity = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_title.setText(weekData.getB_t());
-            holder.tv_rank.setText(""+weekData.getB_js());
-            Glide.with(holder.giv_image.getContext())
-                    .load(weekData.getB_i())
-                    .placeholder(R.color.article_des)
-                    .error(R.color.article_title)
-                    .into(holder.giv_image);
+            final String title = entity.getV_t() ;
+            holder.tvTitle.setText(title);
+            holder.tvRank.setText(  entity.getV_js());
+
+            String images = entity.getV_img();
+            if (!TextUtils.isEmpty(images)){
+                holder.givImage.loadNetImage(images, R.color.font_black_6);
+            }
+
             if (mListener != null) {
-                holder.ll_all.setOnClickListener(new View.OnClickListener() {
+                holder.llRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mListener.onItemClick(weekData);
+                        mListener.onItemClick(entity);
                     }
                 });
             }
@@ -98,17 +103,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_title;
-        TextView tv_rank;
-        ImageView giv_image;
-        LinearLayout ll_all;
+        LinearLayout llRootView;
+        GlideImageView givImage;
+        TextView tvTitle;
+        TextView tvRank;
 
-        public NormalViewHolder(View itemView) {
-            super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-            tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
-            ll_all = (LinearLayout) itemView.findViewById(R.id.ll_all);
-            giv_image = (ImageView) itemView.findViewById(R.id.giv_image);
+        public NormalViewHolder(View view) {
+            super(view);
+            llRootView = (LinearLayout) view.findViewById(R.id.ll_root_view);
+            givImage = (GlideImageView) view.findViewById(R.id.giv_image);
+            tvTitle = (TextView) view.findViewById(R.id.tv_title);
+            tvRank = (TextView) view.findViewById(R.id.tv_rank);
         }
     }
 
@@ -126,14 +131,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public void appendToList(List<Book> list) {
+    public void appendToList(List<History> list) {
         if (list == null) {
             return;
         }
         mList.addAll(list);
     }
 
-    public List<Book> getList() {
+    public List<History> getList() {
         return mList;
     }
 
@@ -164,7 +169,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Book data);
+        void onItemClick(History data);
     }
 
     private OnItemClickListener mListener;

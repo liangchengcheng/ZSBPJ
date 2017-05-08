@@ -27,10 +27,10 @@ import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 import view.lcc.wyzsb.view.pulltozoomview.PullToZoomScrollViewEx;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2017年04月09日12:04:14
- * Description:  设置界面
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年04月09日12:04:14
+ * Description:  |设置界面
  */
 public class SettingFragment extends Fragment implements View.OnClickListener {
     private PullToZoomScrollViewEx scrollView;
@@ -57,6 +57,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
 
         View zoom_view = View.inflate(getActivity(), R.layout.widget_zoomview, null);
+
+        
         View content_view = View.inflate(getActivity(), R.layout.widget_profile_contentview, null);
         content_view.findViewById(R.id.layout_me_task).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_getseed).setOnClickListener(this);

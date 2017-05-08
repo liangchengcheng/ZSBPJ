@@ -15,13 +15,18 @@ import java.util.List;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.BookAdapter;
+import view.lcc.wyzsb.adapter.HistoryAdapter;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Book;
+import view.lcc.wyzsb.bean.History;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
 import view.lcc.wyzsb.mvp.presenter.BookPresenter;
+import view.lcc.wyzsb.mvp.presenter.HistoryPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.BookPresenterImpl;
+import view.lcc.wyzsb.mvp.presenter.impl.HistoryPresenterImpl;
 import view.lcc.wyzsb.mvp.view.BookView;
+import view.lcc.wyzsb.mvp.view.HistoryView;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
 
@@ -31,14 +36,15 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:         2015年11月21日15:28:25
  * Description:  历史记录的界面
  */
-public class HistoryActivity extends BaseActivity implements BookView, SwipeRefreshLayout.OnRefreshListener
-        ,BookAdapter.OnItemClickListener, View.OnClickListener {
+public class HistoryActivity extends BaseActivity implements HistoryView, SwipeRefreshLayout.OnRefreshListener
+        ,HistoryAdapter.OnItemClickListener, View.OnClickListener {
+
     public static final String TYPE = "type";
     private LoadingLayout loading_layout;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
-    private BookAdapter mAdapter;
-    private BookPresenter mPresenter;
+    private HistoryAdapter mAdapter;
+    private HistoryPresenter mPresenter;
 
     protected static final int DEF_DELAY = 1000;
     protected final static int STATE_LOAD = 0;
@@ -61,7 +67,7 @@ public class HistoryActivity extends BaseActivity implements BookView, SwipeRefr
 
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.iv_back).setOnClickListener(this);
-        mPresenter = new BookPresenterImpl(this);
+        mPresenter = new HistoryPresenterImpl(this);
         initRefreshView();
         initRecycleView();
         mPresenter.getData(1, type);
@@ -79,7 +85,7 @@ public class HistoryActivity extends BaseActivity implements BookView, SwipeRefr
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new BookAdapter();
+        mAdapter = new HistoryAdapter();
         mAdapter.setOnItemClickListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -125,7 +131,7 @@ public class HistoryActivity extends BaseActivity implements BookView, SwipeRefr
     }
 
     @Override
-    public void refreshView(List<Book> entities) {
+    public void refreshView(List<History> entities) {
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
         }
@@ -134,7 +140,7 @@ public class HistoryActivity extends BaseActivity implements BookView, SwipeRefr
     }
 
     @Override
-    public void loadMoreView(final List<Book> entities) {
+    public void loadMoreView(final List<History> entities) {
         int delay = 0;
         if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
             delay = DEF_DELAY;
@@ -177,7 +183,7 @@ public class HistoryActivity extends BaseActivity implements BookView, SwipeRefr
     }
 
     @Override
-    public void onItemClick(Book data) {
+    public void onItemClick(History data) {
 
     }
 }
