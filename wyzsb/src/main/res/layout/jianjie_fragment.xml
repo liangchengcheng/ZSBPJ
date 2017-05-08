@@ -16,38 +16,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="视频的标题"
             android:textColor="#000"
             android:textSize="16sp" />
 
         <LinearLayout
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tv_author"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="作者：小滴滴" />
 
             <TextView
+                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="3:22" />
+                android:text="时长：3:22" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="已经收藏"
+                        android:id="@+id/tv_sc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_con"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="12sp" />
+                </LinearLayout>
         </LinearLayout>
+        
         <TextView
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="视频简介："
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+        
         <TextView
             android:id="@+id/tv_js"
             android:layout_width="wrap_content"

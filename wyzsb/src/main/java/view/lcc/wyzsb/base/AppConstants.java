@@ -55,6 +55,15 @@ public class AppConstants {
         public final static String USERNAME = "/hk/editUserName";
 
         public final static String GET_VOCODE = "/hk/getHBooks";
+
+
+
+        //视频的详情
+        public final static String getVideoFavState = "/hk/getVideoFavState";
+        public final static String videoFavAdd = "/hk/videoFavAdd";
+        public final static String deleteVideo = "/hk/deleteVideo";
+        //历史记录+1
+        public final static String videoHisAdd = "/hk/videoHisAdd";
     }
 
     public final class ParamKey {

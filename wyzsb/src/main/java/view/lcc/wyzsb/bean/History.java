@@ -21,7 +21,7 @@ public class History implements Serializable{
     }
 
     //mid
-    private String id;
+    private String vid;
     //题目
     private String v_t;
     //作者
@@ -45,12 +45,12 @@ public class History implements Serializable{
     //等级(初级，中级，高级)
     private String v_l;
 
-    public String getId() {
-        return id;
+    public String getVid() {
+        return vid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVid(String vid) {
+        this.vid = vid;
     }
 
     public String getV_t() {

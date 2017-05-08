@@ -19,6 +19,7 @@ import view.lcc.wyzsb.adapter.HistoryAdapter;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Book;
 import view.lcc.wyzsb.bean.History;
+import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.OnRecycleViewScrollListener;
 import view.lcc.wyzsb.mvp.presenter.BookPresenter;
@@ -27,14 +28,15 @@ import view.lcc.wyzsb.mvp.presenter.impl.BookPresenterImpl;
 import view.lcc.wyzsb.mvp.presenter.impl.HistoryPresenterImpl;
 import view.lcc.wyzsb.mvp.view.BookView;
 import view.lcc.wyzsb.mvp.view.HistoryView;
+import view.lcc.wyzsb.ui.activity.video.VideoDetailsActivity1;
 import view.lcc.wyzsb.utils.TimeUtils;
 import view.lcc.wyzsb.view.LoadingLayout;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
- * Description:  历史记录的界面
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2015年11月21日15:28:25
+ * Description:  |历史记录的界面
  */
 public class HistoryActivity extends BaseActivity implements HistoryView, SwipeRefreshLayout.OnRefreshListener
         ,HistoryAdapter.OnItemClickListener, View.OnClickListener {
@@ -184,7 +186,19 @@ public class HistoryActivity extends BaseActivity implements HistoryView, SwipeR
 
     @Override
     public void onItemClick(History data) {
+        Video video = new Video();
+        video.setV_l(data.getV_l());
+        video.setV_type(data.getV_type());
+        video.setV_t(data.getV_t());
+        video.setBq(data.getBq());
+        video.setId(data.getVid());
+        video.setV_a(data.getV_a());
+        video.setV_img(data.getV_img());
+        video.setV_time(data.getV_time());
+        video.setV_url(data.getV_url());
+        video.setV_js(data.getV_js());
 
+        VideoDetailsActivity1.startVideoDetailsActivity(HistoryActivity.this,video);
     }
 }
 

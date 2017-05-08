@@ -23,6 +23,7 @@ import view.lcc.wyzsb.ui.activity.setting.FeedBackActivity;
 import view.lcc.wyzsb.ui.activity.setting.HistoryActivity;
 import view.lcc.wyzsb.ui.activity.setting.LinkActivity;
 import view.lcc.wyzsb.ui.activity.setting.SystemActivity;
+import view.lcc.wyzsb.ui.activity.setting.VideoFavActivity;
 import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 import view.lcc.wyzsb.view.pulltozoomview.PullToZoomScrollViewEx;
 
@@ -111,14 +112,14 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             //视频的收藏
             case R.id.layout_me_room_manage:
                 Frame.getInstance().toastPrompt("敬请期待");
-                //intent = new Intent(getActivity(), CollectionActivity.class);
-                //startActivity(intent);
+                intent = new Intent(getActivity(), VideoFavActivity.class);
+                startActivity(intent);
                 break;
             //历史数据
             case R.id.layout_me_history:
                 Frame.getInstance().toastPrompt("敬请期待");
-                //intent = new Intent(getActivity(), HistoryActivity.class);
-                //startActivity(intent);
+                intent = new Intent(getActivity(), HistoryActivity.class);
+                startActivity(intent);
                 break;
             //消息中心
             case R.id.layout_me_mind:

@@ -20,21 +20,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.dou361.ijkplayer.bean.VideoijkBean;
 import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Video;
+import view.lcc.wyzsb.bean.Videofav;
 import view.lcc.wyzsb.frame.CollapsingToolbarLayoutState;
 import view.lcc.wyzsb.frame.SystemBarHelper;
+import view.lcc.wyzsb.mvp.view.VideoDetailsView;
 import view.lcc.wyzsb.ui.fragment.CommentFragment;
 import view.lcc.wyzsb.ui.fragment.JianjieFragment;
 import view.lcc.wyzsb.utils.MediaUtils;
@@ -45,7 +44,8 @@ import view.lcc.wyzsb.utils.MediaUtils;
  * Date:         |2017年04月11日13:46:31
  * Description:  |视频的详情的界面
  */
-public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener {
+public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener,VideoDetailsView {
+
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private ButtonBarLayout playButton;
@@ -249,6 +249,46 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         adapter.addFragment(new CommentFragment(video), "评论");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void getDataSuccess(Videofav msg) {
+
+    }
+
+    @Override
+    public void LookHistory() {
+
+    }
+
+    @Override
+    public void LookHistoryFail(String msg) {
+
+    }
+
+    @Override
+    public void FavSuccess() {
+
+    }
+
+    @Override
+    public void FavFail(String msg) {
+
+    }
+
+    @Override
+    public void UnFavSuccess() {
+
+    }
+
+    @Override
+    public void UnFavFail(String msg) {
+
     }
 
     static class Adapter extends FragmentPagerAdapter {
