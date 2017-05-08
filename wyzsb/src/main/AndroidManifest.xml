@@ -95,6 +95,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <!--视频的收藏-->
+        <activity
+            android:name=".ui.activity.setting.VideoFavActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
         <!--收藏的界面-->
         <activity
             android:name=".ui.activity.setting.CollectionActivity"
