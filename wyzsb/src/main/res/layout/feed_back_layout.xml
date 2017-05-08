@@ -34,6 +34,8 @@
     </android.support.v7.widget.Toolbar>
 
     <EditText
+        android:textCursorDrawable="@null"
+        android:background="@null"
         android:id="@+id/et_message"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -42,6 +44,13 @@
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:textSize="14sp" />
+    <TextView
+        android:layout_margin="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:background="#999"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
     <TextView
         android:id="@+id/tv_post"

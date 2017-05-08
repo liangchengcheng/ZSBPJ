@@ -42,6 +42,7 @@ public class FeedBackActivity extends BaseActivity implements FeedBackView,View.
         et_message = (EditText) findViewById(R.id.et_message);
         feedBackPresenter = new FeedBackPresenterImpl(this);
         findViewById(R.id.tv_post).setOnClickListener(this);
+        findViewById(R.id.guillotine_hamburger).setOnClickListener(this);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class FeedBackActivity extends BaseActivity implements FeedBackView,View.
 
     @Override
     public void FeekSuccess() {
-
+        Frame.getInstance().toastPrompt("提交信息成功");
     }
 
     @Override
@@ -69,6 +70,9 @@ public class FeedBackActivity extends BaseActivity implements FeedBackView,View.
                     return;
                 }
                 feedBackPresenter.postMessage(message);
+                break;
+            case R.id.guillotine_hamburger:
+                finish();
                 break;
         }
     }
