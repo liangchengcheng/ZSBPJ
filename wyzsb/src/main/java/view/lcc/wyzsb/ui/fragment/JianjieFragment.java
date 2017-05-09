@@ -13,6 +13,7 @@ import view.lcc.wyzsb.adapter.CommentAdapter;
 import view.lcc.wyzsb.bean.Comments;
 import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.Videofav;
+import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.mvp.presenter.VideoDetailsPresenter;
 import view.lcc.wyzsb.mvp.presenter.impl.VideoDetailsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.VideoDetailsView;
@@ -61,43 +62,57 @@ public class JianjieFragment extends Fragment implements View.OnClickListener, V
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_sc:
-
+                if (isFav){
+                    videoDetailsPresenter.deleteFav(video.getId());
+                    return;
+                }else {
+                    videoDetailsPresenter.favVideo(video);
+                }
                 break;
         }
     }
 
     @Override
     public void getDataFail(String msg) {
-
+        Frame.getInstance().toastPrompt("获取详情失败");
     }
+
+    private boolean isFav = false;
 
     @Override
     public void getDataSuccess(Videofav msg) {
+        videoDetailsPresenter.historyVideo(video);
         if (msg != null){
+            isFav = true;
             tv_sc.setText("已收藏");
         }else {
+            isFav = false;
             tv_sc.setText("点击收藏");
         }
     }
 
     @Override
     public void LookHistory() {
-
+        // 记录+1
     }
 
     @Override
     public void LookHistoryFail(String msg) {
-
+        //记录+1失败
     }
 
     @Override
     public void FavSuccess() {
-
+        Frame.getInstance().toastPrompt("收藏成功");
+        isFav = true;
+        tv_sc.setText("已收藏");
     }
 
     @Override
     public void FavFail(String msg) {
-
+        Frame.getInstance().toastPrompt("收藏失败");
+        isFav = false;
+        tv_sc.setText("点击收藏");
     }
 
     @Override

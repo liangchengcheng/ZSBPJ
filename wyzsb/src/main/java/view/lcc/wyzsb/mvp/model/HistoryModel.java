@@ -8,6 +8,7 @@ import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
 import view.lcc.wyzsb.mvp.param.CollectionParams;
 import view.lcc.wyzsb.mvp.param.HistoryParams;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 
 /**
  * Author:       梁铖城
@@ -22,7 +23,8 @@ public class HistoryModel {
      */
     public OkHttpRequest getHistory(HistoryParams newsParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
+        map.put("phone", UserSharePreferenceUtil.getUserPhone());
         map.put("page",newsParams.getPage()+"");
-        return ApiClient.create(AppConstants.RequestPath.GET_BOOKS, map).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getVideoHis, map).tag("").get(callback);
     }
 }

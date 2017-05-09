@@ -24,9 +24,9 @@ import view.lcc.wyzsb.utils.GsonUtils;
 import view.lcc.wyzsb.utils.TimeUtils;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:         2015年11月21日15:28:25
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2015年11月21日15:28:25
  * Description:
  */
 public class HistoryPresenterImpl implements HistoryPresenter {
@@ -103,17 +103,17 @@ public class HistoryPresenterImpl implements HistoryPresenter {
     }
 
     @Override
-    public void getData(int page, String options) {
+    public void getData(int page) {
         loadData(page,  true);
     }
 
     @Override
-    public void loadMore(int page, String options) {
+    public void loadMore(int page) {
         loadData(page,  false);
     }
 
     @Override
-    public void refresh(int page, String options) {
+    public void refresh(int page) {
         loadData(1,  false);
     }
 }

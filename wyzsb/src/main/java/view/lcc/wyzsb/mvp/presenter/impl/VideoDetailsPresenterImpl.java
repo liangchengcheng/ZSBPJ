@@ -106,4 +106,31 @@ public class VideoDetailsPresenterImpl implements VideoDetailsPresenter {
             }
         });
     }
+
+    @Override
+    public void deleteFav(String vid) {
+        model.deleteFav(vid, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    String message = jsonObject.getString("message");
+                    if (status == 1) {
+                        view.UnFavSuccess();
+                    } else {
+                        view.UnFavFail(message);
+                    }
+                } catch (Exception e) {
+                    view.UnFavFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

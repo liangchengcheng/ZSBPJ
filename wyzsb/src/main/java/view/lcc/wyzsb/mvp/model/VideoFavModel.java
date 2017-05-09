@@ -8,6 +8,7 @@ import view.lcc.wyzsb.frame.okhttp.callback.ResultCallback;
 import view.lcc.wyzsb.frame.okhttp.request.OkHttpRequest;
 import view.lcc.wyzsb.mvp.param.HistoryParams;
 import view.lcc.wyzsb.mvp.param.VideoFavParams;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
 
 /**
  * Author:       |梁铖城
@@ -20,6 +21,7 @@ public class VideoFavModel {
     public OkHttpRequest getVideoFav(VideoFavParams newsParams, ResultCallback<String> callback) {
         HashMap<String, String> map = new HashMap<>();
         map.put("page",newsParams.getPage()+"");
+        map.put("phone", UserSharePreferenceUtil.getUserPhone());
         return ApiClient.create(AppConstants.RequestPath.GET_BOOKS, map).tag("").get(callback);
     }
 }

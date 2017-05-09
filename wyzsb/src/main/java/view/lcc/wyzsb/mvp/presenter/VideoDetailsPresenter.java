@@ -10,4 +10,6 @@ public interface VideoDetailsPresenter {
 
     void historyVideo(Video video);
 
+    void deleteFav(String vid);
+
 }

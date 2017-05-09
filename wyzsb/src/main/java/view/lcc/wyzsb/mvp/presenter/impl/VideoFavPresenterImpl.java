@@ -103,17 +103,17 @@ public class VideoFavPresenterImpl implements VideoFavPresenter {
     }
 
     @Override
-    public void getData(int page, String options) {
+    public void getData(int page) {
         loadData(page,  true);
     }
 
     @Override
-    public void loadMore(int page, String options) {
+    public void loadMore(int page) {
         loadData(page,  false);
     }
 
     @Override
-    public void refresh(int page, String options) {
+    public void refresh(int page) {
         loadData(1,  false);
     }
 }

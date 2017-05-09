@@ -72,7 +72,7 @@ public class VideoFavActivity extends BaseActivity implements VideoFavView, Swip
         mPresenter = new VideoFavPresenterImpl(this);
         initRefreshView();
         initRecycleView();
-        mPresenter.getData(1, type);
+        mPresenter.getData(currentPage);
     }
 
     private void initRefreshView() {
@@ -100,7 +100,7 @@ public class VideoFavActivity extends BaseActivity implements VideoFavView, Swip
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage, type);
+                    mPresenter.loadMore(currentPage);
                 }
             }
         });
@@ -170,7 +170,7 @@ public class VideoFavActivity extends BaseActivity implements VideoFavView, Swip
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.refresh(currentPage, type);
+                mPresenter.refresh(currentPage);
             }
         }, 500);
     }

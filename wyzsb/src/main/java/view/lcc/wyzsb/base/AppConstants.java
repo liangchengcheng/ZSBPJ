@@ -57,6 +57,9 @@ public class AppConstants {
         public final static String GET_VOCODE = "/hk/getHBooks";
 
 
+        public final static String getVideoHis = "/hk/getVideoHis";
+
+
 
         //视频的详情
         public final static String getVideoFavState = "/hk/getVideoFavState";
@@ -64,6 +67,8 @@ public class AppConstants {
         public final static String deleteVideo = "/hk/deleteVideo";
         //历史记录+1
         public final static String videoHisAdd = "/hk/videoHisAdd";
+
+        public final static String deleteFav = "/hk/deleteFav";
     }
 
     public final class ParamKey {

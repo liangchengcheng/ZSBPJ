@@ -8,9 +8,9 @@ package view.lcc.wyzsb.mvp.presenter;
  */
 public interface VideoFavPresenter {
 
-    void getData(int page, String options);
+    void getData(int page);
 
-    void loadMore(int page, String options);
+    void loadMore(int page);
 
-    void refresh(int page, String options);
+    void refresh(int page);
 }

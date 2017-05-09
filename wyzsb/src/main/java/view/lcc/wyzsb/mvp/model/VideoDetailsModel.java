@@ -16,14 +16,14 @@ public class VideoDetailsModel {
     public OkHttpRequest getData(String vid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("vid", vid);
+        paramsMap.put("phone", UserSharePreferenceUtil.getUserPhone());
         return ApiClient.create(AppConstants.RequestPath.getVideoFavState, paramsMap).tag("").get(callback);
     }
 
     /**
      * 收藏的这个视频
      */
-    public OkHttpRequest favVideo(Video video, ResultCallback<String>
-            callback) {
+    public OkHttpRequest favVideo(Video video, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("vid", video.getId());
         paramsMap.put("phone", UserSharePreferenceUtil.getUserPhone());
@@ -37,7 +37,7 @@ public class VideoDetailsModel {
         paramsMap.put("v_c", video.getV_c());
         paramsMap.put("v_l", video.getV_l());
         paramsMap.put("bq", video.getBq());
-        return ApiClient.create(AppConstants.RequestPath.videoFavAdd, paramsMap).tag("").post(callback);
+        return ApiClient.create(AppConstants.RequestPath.videoFavAdd, paramsMap).addHeader("phone","").post(callback);
     }
 
     /**
@@ -46,14 +46,14 @@ public class VideoDetailsModel {
     public OkHttpRequest UnFavVideo(String vid, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("vid", vid);
-        return ApiClient.create(AppConstants.RequestPath.deleteVideo, paramsMap).tag("").get(callback);
+        paramsMap.put("phone", UserSharePreferenceUtil.getUserPhone());
+        return ApiClient.create(AppConstants.RequestPath.deleteVideo, paramsMap).get(callback);
     }
 
     /**
      * 历史记录
      */
-    public OkHttpRequest historyVideo(Video video, ResultCallback<String>
-            callback) {
+    public OkHttpRequest historyVideo(Video video, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("vid", video.getId());
         paramsMap.put("phone", UserSharePreferenceUtil.getUserPhone());
@@ -67,7 +67,17 @@ public class VideoDetailsModel {
         paramsMap.put("v_c", video.getV_c());
         paramsMap.put("v_l", video.getV_l());
         paramsMap.put("bq", video.getBq());
-        return ApiClient.create(AppConstants.RequestPath.videoHisAdd, paramsMap).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.videoHisAdd, paramsMap).addHeader("phone","").post(callback);
+    }
+
+    /**
+     * 取消收藏
+     */
+    public OkHttpRequest deleteFav(String vid, ResultCallback<String> callback) {
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("vid", vid);
+        paramsMap.put("phone", UserSharePreferenceUtil.getUserPhone());
+        return ApiClient.create(AppConstants.RequestPath.deleteFav, paramsMap).addHeader("phone","").post(callback);
     }
 
 }
