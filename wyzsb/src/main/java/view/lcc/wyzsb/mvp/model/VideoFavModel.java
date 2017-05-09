@@ -22,6 +22,6 @@ public class VideoFavModel {
         HashMap<String, String> map = new HashMap<>();
         map.put("page",newsParams.getPage()+"");
         map.put("phone", UserSharePreferenceUtil.getUserPhone());
-        return ApiClient.create(AppConstants.RequestPath.GET_BOOKS, map).tag("").get(callback);
+        return ApiClient.create(AppConstants.RequestPath.getVideoFav, map).tag("").get(callback);
     }
 }

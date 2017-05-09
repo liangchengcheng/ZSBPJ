@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ import view.lcc.wyzsb.view.LoadingLayout;
 /**
  * Author:       |梁铖城
  * Email:        |1038127753@qq.com
- * Date:         |2015年11月21日15:28:25
+ * Date:         |2017年05月10日07:19:20
  * Description:  |历史记录的界面
  */
 public class HistoryActivity extends BaseActivity implements HistoryView, SwipeRefreshLayout.OnRefreshListener
@@ -66,6 +67,9 @@ public class HistoryActivity extends BaseActivity implements HistoryView, SwipeR
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_activity);
+
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("历史记录");
 
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         findViewById(R.id.iv_back).setOnClickListener(this);
@@ -136,9 +140,11 @@ public class HistoryActivity extends BaseActivity implements HistoryView, SwipeR
     public void refreshView(List<History> entities) {
         if (entities != null && entities.size() > 0) {
             mAdapter.bind(entities);
+            loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }else {
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
         }
         mSwipeRefreshWidget.setRefreshing(false);
-        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
     }
 
     @Override

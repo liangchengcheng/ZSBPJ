@@ -58,6 +58,7 @@ public class AppConstants {
 
 
         public final static String getVideoHis = "/hk/getVideoHis";
+        public final static String getVideoFav = "/hk/getVideoFav";
 
 
 
