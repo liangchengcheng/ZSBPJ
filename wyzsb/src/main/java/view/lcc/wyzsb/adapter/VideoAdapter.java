@@ -187,9 +187,9 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         void onOnFavClick(Video data);
     }
 
-    private ArticleAdapter.OnFavClickListener favListener;
+    private OnFavClickListener favListener;
 
-    public void setOnFavClickListener(ArticleAdapter.OnFavClickListener li) {
+    public void setOnFavClickListener(OnFavClickListener li) {
         this.favListener = li;
     }
 

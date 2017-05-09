@@ -183,9 +183,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         void onOnFavClick(News data);
     }
 
-    private ArticleAdapter.OnFavClickListener favListener;
+    private OnFavClickListener favListener;
 
-    public void setOnFavClickListener(ArticleAdapter.OnFavClickListener li) {
+    public void setOnFavClickListener(OnFavClickListener li) {
         this.favListener = li;
     }
 

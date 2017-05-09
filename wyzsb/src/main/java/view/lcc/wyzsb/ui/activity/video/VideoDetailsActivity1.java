@@ -44,7 +44,7 @@ import view.lcc.wyzsb.utils.MediaUtils;
  * Date:         |2017年04月11日13:46:31
  * Description:  |视频的详情的界面
  */
-public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener,VideoDetailsView {
+public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener {
 
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -251,45 +251,7 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         viewPager.setCurrentItem(0);
     }
 
-    @Override
-    public void getDataFail(String msg) {
 
-    }
-
-    @Override
-    public void getDataSuccess(Videofav msg) {
-
-    }
-
-    @Override
-    public void LookHistory() {
-
-    }
-
-    @Override
-    public void LookHistoryFail(String msg) {
-
-    }
-
-    @Override
-    public void FavSuccess() {
-
-    }
-
-    @Override
-    public void FavFail(String msg) {
-
-    }
-
-    @Override
-    public void UnFavSuccess() {
-
-    }
-
-    @Override
-    public void UnFavFail(String msg) {
-
-    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
