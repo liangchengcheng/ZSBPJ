@@ -4,4 +4,5 @@
 
 	<item name="statusbar_view" type="id"/>
 	<item name="translucent_view" type="id"/>
+	<item name="ivAdvertise" type="id"/>
 </resources>

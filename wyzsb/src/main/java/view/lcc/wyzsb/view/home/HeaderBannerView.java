@@ -16,18 +16,18 @@ import android.widget.RelativeLayout;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.adapter.home.HeaderBannerAdapter;
 import view.lcc.wyzsb.utils.DensityUtil;
 import view.lcc.wyzsb.view.home.GildeImageView.GlideImageView;
 
-public class HeaderBannerView extends AbsHeaderView<List<String>> {
+public class HeaderBannerView extends AbsHeaderView<List<String>>  {
 
     private ViewPager vpBanner;
-
     private LinearLayout llIndexContainer;
-
     private RelativeLayout rlBanner;
 
     private static final int BANNER_TYPE = 0;
@@ -56,7 +56,6 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
     @Override
     protected void getView(List<String> list, ListView listView) {
         View view = mInflate.inflate(R.layout.header_banner_layout, listView, false);
-
         vpBanner = (ViewPager) view.findViewById(R.id.vp_banner);
         llIndexContainer = (LinearLayout) view.findViewById(R.id.ll_index_container);
         rlBanner = (RelativeLayout) view.findViewById(R.id.rl_banner);
@@ -64,26 +63,58 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
         listView.addHeaderView(view);
     }
 
-    private void dealWithTheView(List<String> list) {
+    private void dealWithTheView(final List<String> list) {
         ivList.clear();
 
         bannerCount = list.size();
         if (bannerCount == 2) {
             list.addAll(list);
         }
-
         AbsListView.LayoutParams layoutParams = (AbsListView.LayoutParams) rlBanner.getLayoutParams();
         layoutParams.height = bannerHeight;
         rlBanner.setLayoutParams(layoutParams);
 
         createImageViews(list);
-        HeaderBannerAdapter adapter = new HeaderBannerAdapter(ivList);
+
+        HeaderBannerAdapter adapter = new HeaderBannerAdapter(ivList,list);
         vpBanner.setAdapter(adapter);
 
         addIndicatorImageViews();
+
         setViewPagerChangeListener();
-        controlViewPagerSpeed(vpBanner, 500);
+        vpBanner.setOffscreenPageLimit(2);
+        vpBanner.setAdapter(adapter);
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                int currentPage = count%list.size();
+                count++;
+                Message msg = Message.obtain();
+                msg.what = 0x01;
+                msg.obj = currentPage;
+                runHandler.sendMessage(msg);
+            }
+        };
+        timer.schedule(task, 1000, 3000);
     }
+
+    Timer timer;
+    TimerTask task;
+    int count = 0;
+
+    private Handler runHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0x01:
+                    int currentPage = (Integer) msg.obj;
+                    //setCurrentDot(currentPage);
+                    vpBanner.setCurrentItem(currentPage);
+                    break;
+            }
+        };
+    };
 
     // 创建要显示的ImageView
     private void createImageViews(List<String> list) {
@@ -91,7 +122,7 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
             GlideImageView imageView = new GlideImageView(mActivity);
             AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             imageView.setLayoutParams(params);
-            imageView.loadNetImage(list.get(i), R.color.font_black_6);
+            imageView.setId(R.id.ivAdvertise);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             ivList.add(imageView);
         }
@@ -158,5 +189,4 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
         } catch (Exception e) {
         }
     }
-
 }
