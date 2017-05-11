@@ -17,8 +17,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,12 +39,19 @@ import view.lcc.wyzsb.base.BaseActivity;
 import view.lcc.wyzsb.bean.Comments;
 import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.frame.CollapsingToolbarLayoutState;
+import view.lcc.wyzsb.frame.Frame;
 import view.lcc.wyzsb.frame.SystemBarHelper;
+import view.lcc.wyzsb.mvp.param.SendComments;
 import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
+import view.lcc.wyzsb.mvp.presenter.impl.CommentsPresenterImpl;
 import view.lcc.wyzsb.mvp.view.CommentsView;
+import view.lcc.wyzsb.ui.activity.login.LoginMainActivity;
 import view.lcc.wyzsb.ui.fragment.CommentFragment;
 import view.lcc.wyzsb.ui.fragment.JianjieFragment;
+import view.lcc.wyzsb.utils.KeyboardUtils;
 import view.lcc.wyzsb.utils.MediaUtils;
+import view.lcc.wyzsb.utils.UserSharePreferenceUtil;
+import view.lcc.wyzsb.view.SendCommentButton;
 
 /**
  * Author:       |梁铖城
@@ -49,7 +59,8 @@ import view.lcc.wyzsb.utils.MediaUtils;
  * Date:         |2017年04月11日13:46:31
  * Description:  |视频的详情的界面
  */
-public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener,CommentsView {
+public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener, CommentsView
+        , SendCommentButton.OnSendClickListener {
 
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -72,6 +83,9 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
     //评论的p
     private CommentsPresenter presenter;
 
+    private EditText etComment;
+    private SendCommentButton btnSendComment;
+
     public static void startVideoDetailsActivity(Activity startingActivity, Video type) {
         Intent intent = new Intent(startingActivity, VideoDetailsActivity1.class);
         intent.putExtra("url", type);
@@ -84,7 +98,13 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         this.mContext = this;
         rootView = getLayoutInflater().from(this).inflate(R.layout.video_details1, null);
         setContentView(rootView);
+
         video = (Video) getIntent().getSerializableExtra("url");
+        presenter = new CommentsPresenterImpl(this);
+        etComment = (EditText) findViewById(R.id.etComment);
+        btnSendComment = (SendCommentButton) findViewById(R.id.btnSendComment);
+        btnSendComment.setOnSendClickListener(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         SystemBarHelper.immersiveStatusBar(this, 0);
@@ -278,10 +298,13 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         }
     }
 
+    private CommentFragment commentFragment;
+
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new JianjieFragment(video), "简介");
-        adapter.addFragment(new CommentFragment(video), "评论");
+        commentFragment = new CommentFragment(video);
+        adapter.addFragment(commentFragment, "评论");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
     }
@@ -323,12 +346,19 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
 
     @Override
     public void replaySuccess() {
-
+        etComment.setText("");
+        KeyboardUtils.hide(VideoDetailsActivity1.this);
+        Frame.getInstance().toastPrompt("提交成功");
+        btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
+        if (commentFragment != null){
+            commentFragment.onRefresh();
+        }
     }
 
     @Override
     public void replayFail() {
-
+        KeyboardUtils.hide(VideoDetailsActivity1.this);
+        Frame.getInstance().toastPrompt("提交失败");
     }
 
 
@@ -378,5 +408,31 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onSendClickListener(View v) {
+        String session = UserSharePreferenceUtil.getUserSession();
+        if (TextUtils.isEmpty(session)) {
+            LoginMainActivity.startLoginMainActivity("flag", VideoDetailsActivity1.this);
+            return;
+        }
+
+        if (validateComment()) {
+            SendComments sendComments = new SendComments();
+            sendComments.setOid(video.getId());
+            sendComments.setContent(etComment.getText().toString().trim());
+            presenter.sendComments(sendComments);
+        }
+    }
+
+    private boolean validateComment() {
+        if (TextUtils.isEmpty(etComment.getText())) {
+            btnSendComment.startAnimation(AnimationUtils.loadAnimation(VideoDetailsActivity1.this,
+                    R.anim.shake_error));
+            return false;
+        }
+
+        return true;
     }
 }

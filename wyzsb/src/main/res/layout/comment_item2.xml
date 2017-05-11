@@ -38,8 +38,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="lcc"
-                    android:textColor="#339933"
-                    android:textSize="@dimen/item_title" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_time"
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:text="这里是文章的内容的介绍的地址"
                 android:textColor="#232323"
-                android:textSize="@dimen/item_content" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
     <View

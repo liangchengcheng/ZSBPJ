@@ -42,15 +42,21 @@ import view.lcc.wyzsb.view.SendCommentButton;
  * Description:
  */
 public class CommentFragment extends Fragment implements CommentsView, CommentAdapter.OnItemClickListener,
-        SwipeRefreshLayout.OnRefreshListener ,SendCommentButton.OnSendClickListener{
+        SwipeRefreshLayout.OnRefreshListener {
     private CommentsPresenter presenter;
     private CommentAdapter commentsAdapter;
     private RecyclerView mRecyclerView;
     private LoadingLayout loading_layout;
 
-    private EditText etComment;
-
     private Video video;
+
+    protected static final int DEF_DELAY = 1000;
+    protected final static int STATE_LOAD = 0;
+    protected final static int STATE_NORMAL = 1;
+    protected int currentState = STATE_NORMAL;
+    protected long currentTime = 0;
+    protected int currentPage = 1;
+    private SwipeRefreshLayout mSwipeRefreshWidget;
 
     public CommentFragment(Video video) {
         this.video = video;
@@ -61,23 +67,13 @@ public class CommentFragment extends Fragment implements CommentsView, CommentAd
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.comment_fragment, null);
         presenter = new CommentsPresenterImpl(this);
-        etComment = (EditText) view.findViewById(R.id.etComment);
-        btnSendComment = (SendCommentButton) view .findViewById(R.id.btnSendComment);
-        btnSendComment.setOnSendClickListener(this);
+
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         initRefreshView(view);
         initRecycleView(view);
-        presenter.getData(1, video.getId());
+        presenter.getData(currentPage, video.getId());
         return view;
     }
-
-    protected static final int DEF_DELAY = 1000;
-    protected final static int STATE_LOAD = 0;
-    protected final static int STATE_NORMAL = 1;
-    protected int currentState = STATE_NORMAL;
-    protected long currentTime = 0;
-    protected int currentPage = 1;
-    private SwipeRefreshLayout mSwipeRefreshWidget;
 
     private void initRefreshView(View view) {
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
@@ -175,17 +171,12 @@ public class CommentFragment extends Fragment implements CommentsView, CommentAd
 
     @Override
     public void replaySuccess() {
-        onRefresh();
-        etComment.setText("");
-        KeyboardUtils.hide(getActivity());
-        Frame.getInstance().toastPrompt("提交成功");
-        btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
+
     }
 
     @Override
     public void replayFail() {
-        KeyboardUtils.hide(getActivity());
-        Frame.getInstance().toastPrompt("提交失败");
+
     }
 
     @Override
@@ -205,33 +196,9 @@ public class CommentFragment extends Fragment implements CommentsView, CommentAd
         }, 500);
     }
 
-    private SendCommentButton btnSendComment;
 
-    private boolean validateComment() {
-        if (TextUtils.isEmpty(etComment.getText())) {
-            btnSendComment.startAnimation(AnimationUtils.loadAnimation(getActivity(),
-                    R.anim.shake_error));
-            return false;
-        }
 
-        return true;
-    }
 
-    @Override
-    public void onSendClickListener(View v) {
-        String session = UserSharePreferenceUtil.getUserSession();
-        if (TextUtils.isEmpty(session)){
-            LoginMainActivity.startLoginMainActivity("flag",getActivity());
-            return;
-        }
-
-        if (validateComment()) {
-            SendComments sendComments = new SendComments();
-            sendComments.setOid(video.getId());
-            sendComments.setContent(etComment.getText().toString().trim());
-            presenter.sendComments(sendComments);
-        }
-    }
 
     public void showSnackbar(View view, String string) {
         Snackbar.make(view, string, Snackbar.LENGTH_LONG).show();

@@ -20,6 +20,7 @@ import java.util.List;
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.bean.Comments;
 import view.lcc.wyzsb.frame.ImageManager;
+import view.lcc.wyzsb.utils.TimeUtils;
 
 /**
  * Author:       梁铖城
@@ -70,7 +71,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             final Comments weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
             holder.tv_content.setText(weekData.getC_b());
-            holder.tv_time.setText(weekData.getC_t());
+            holder.tv_time.setText(TimeUtils.getTimeFormatText(weekData.getC_t()));
             holder.tv_username.setText(weekData.getC_nn());
 
             String url = weekData.getC_im();
