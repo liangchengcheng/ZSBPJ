@@ -31,6 +31,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textSize="14sp"
                 android:id="@+id/tv_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:textSize="14sp"
                     android:id="@+id/tv_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -69,11 +71,12 @@
                     android:paddingTop="5dp"
                     android:text="已经收藏"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
+            android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -87,7 +90,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="简介3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 

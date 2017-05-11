@@ -178,14 +178,14 @@ public class CommentFragment extends Fragment implements CommentsView, CommentAd
         onRefresh();
         etComment.setText("");
         KeyboardUtils.hide(getActivity());
-        showSnackbar(etComment,"提交成功");
+        Frame.getInstance().toastPrompt("提交成功");
         btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
     }
 
     @Override
     public void replayFail() {
         KeyboardUtils.hide(getActivity());
-        showSnackbar(etComment,"提交失败");
+        Frame.getInstance().toastPrompt("提交失败");
     }
 
     @Override

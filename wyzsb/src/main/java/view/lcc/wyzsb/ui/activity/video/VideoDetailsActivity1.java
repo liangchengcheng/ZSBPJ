@@ -20,20 +20,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.dou361.ijkplayer.bean.VideoijkBean;
 import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.wyzsb.bean.Comments;
 import view.lcc.wyzsb.bean.Video;
-import view.lcc.wyzsb.bean.Videofav;
 import view.lcc.wyzsb.frame.CollapsingToolbarLayoutState;
 import view.lcc.wyzsb.frame.SystemBarHelper;
-import view.lcc.wyzsb.mvp.view.VideoDetailsView;
+import view.lcc.wyzsb.mvp.presenter.CommentsPresenter;
+import view.lcc.wyzsb.mvp.view.CommentsView;
 import view.lcc.wyzsb.ui.fragment.CommentFragment;
 import view.lcc.wyzsb.ui.fragment.JianjieFragment;
 import view.lcc.wyzsb.utils.MediaUtils;
@@ -44,7 +49,7 @@ import view.lcc.wyzsb.utils.MediaUtils;
  * Date:         |2017年04月11日13:46:31
  * Description:  |视频的详情的界面
  */
-public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener {
+public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener,CommentsView {
 
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -54,11 +59,18 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
     private Context mContext;
     private List<VideoijkBean> list;
     private PowerManager.WakeLock wakeLock;
-    View rootView;
+    private View rootView;
     private TabLayout tlUserProfileTabs;
     private Video video;
     private View fab;
     private AppBarLayout app_bar;
+    //顶部的播放按钮和状态提示
+    private ImageView iv_bf;
+    private TextView tv_top_title;
+    //下面的评论按钮
+    private View llAddComment;
+    //评论的p
+    private CommentsPresenter presenter;
 
     public static void startVideoDetailsActivity(Activity startingActivity, Video type) {
         Intent intent = new Intent(startingActivity, VideoDetailsActivity1.class);
@@ -77,6 +89,11 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         SystemBarHelper.immersiveStatusBar(this, 0);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
+
+        llAddComment = findViewById(R.id.llAddComment);
+        llAddComment.setVisibility(View.GONE);
+        tv_top_title = (TextView) findViewById(R.id.tv_top_title);
+        iv_bf = (ImageView) findViewById(R.id.iv_bf);
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
@@ -237,6 +254,24 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
 
     private void setViewPager() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    llAddComment.setVisibility(View.VISIBLE);
+                } else {
+                    llAddComment.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int position, float arg1, int arg2) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
         if (viewPager != null) {
             setupViewPager(viewPager);
             tlUserProfileTabs.setupWithViewPager(viewPager);
@@ -251,6 +286,50 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         viewPager.setCurrentItem(0);
     }
 
+    @Override
+    public void getLoading() {
+
+    }
+
+    @Override
+    public void getDataEmpty() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void refreshOrLoadFail(String msg) {
+
+    }
+
+    @Override
+    public void refreshDataSuccess(List<Comments> list) {
+
+    }
+
+    @Override
+    public void loadMoreWeekDataSuccess(List<Comments> entities) {
+
+    }
+
+    @Override
+    public void rePlaying() {
+
+    }
+
+    @Override
+    public void replaySuccess() {
+
+    }
+
+    @Override
+    public void replayFail() {
+
+    }
 
 
     static class Adapter extends FragmentPagerAdapter {
