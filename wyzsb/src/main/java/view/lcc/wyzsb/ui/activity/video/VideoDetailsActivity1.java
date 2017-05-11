@@ -60,7 +60,7 @@ import view.lcc.wyzsb.view.SendCommentButton;
  * Description:  |视频的详情的界面
  */
 public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickListener, CommentsView
-        , SendCommentButton.OnSendClickListener {
+        , SendCommentButton.OnSendClickListener ,PlayerView.stateListener{
 
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -218,6 +218,7 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
                 })
                 .setPlaySource(list)
                 .setChargeTie(true, 60);
+        player.setOnstateListener(this);
     }
 
     @Override
@@ -361,6 +362,26 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
         Frame.getInstance().toastPrompt("提交失败");
     }
 
+    @Override
+    public void onchange(int state) {
+        switch (state){
+            //标识停止了
+            case 0:
+                iv_bf.setVisibility(View.VISIBLE);
+                tv_top_title.setText("重新播放");
+                break;
+            //标识暂停了
+            case 1:
+                iv_bf.setVisibility(View.VISIBLE);
+                tv_top_title.setText("继续播放");
+                break;
+            //标识开始了
+            case 2:
+                iv_bf.setVisibility(View.GONE);
+                tv_top_title.setText(video.getV_t());
+                break;
+        }
+    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
