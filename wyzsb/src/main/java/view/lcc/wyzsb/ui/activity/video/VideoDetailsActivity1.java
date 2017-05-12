@@ -453,7 +453,6 @@ public class VideoDetailsActivity1 extends BaseActivity implements View.OnClickL
                     R.anim.shake_error));
             return false;
         }
-
         return true;
     }
 }

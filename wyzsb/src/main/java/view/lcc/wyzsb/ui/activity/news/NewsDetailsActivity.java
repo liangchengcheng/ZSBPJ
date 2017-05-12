@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import view.lcc.wyzsb.R;
 import view.lcc.wyzsb.base.BaseActivity;
@@ -41,6 +42,9 @@ public class NewsDetailsActivity extends BaseActivity implements NewsDetailsView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
         this.news = (News) getIntent().getSerializableExtra("news");
+
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText(news.getN_t());
         findViewById(R.id.lv_back).setOnClickListener(this);
         loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         newsDetailsPresenter = new NewsDetailsPresenterImpl(this);

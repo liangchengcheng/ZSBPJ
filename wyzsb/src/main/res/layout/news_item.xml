@@ -14,18 +14,19 @@
         android:padding="10dp">
 
         <ImageView
+            android:layout_alignParentRight="true"
             android:id="@+id/giv_image"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop" />
 
         <TextView
+            android:layout_toLeftOf="@+id/giv_image"
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/giv_image"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/giv_image"
+            android:layout_marginRight="10dp"
             android:ellipsize="end"
             android:gravity="top|start"
             android:lineSpacingExtra="2dp"
@@ -33,15 +34,15 @@
             android:paddingBottom="6dp"
             android:text=""
             android:textColor="@color/font_black_0"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
 
         <LinearLayout
             android:gravity="bottom"
             android:orientation="horizontal"
             android:layout_alignBottom="@+id/giv_image"
             android:layout_below="@+id/tv_title"
-            android:layout_toRightOf="@id/giv_image"
-            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/giv_image"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

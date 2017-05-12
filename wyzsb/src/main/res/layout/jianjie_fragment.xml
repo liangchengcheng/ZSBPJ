@@ -82,17 +82,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:text="视频简介：" />
-
         <TextView
             android:id="@+id/tv_js"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="简介3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆3分钟教你给自己化一个原宿妆"
             android:textSize="14sp" />
     </LinearLayout>
-
-
 </android.support.v4.widget.NestedScrollView>
 
