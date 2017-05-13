@@ -1,5 +1,6 @@
 package com.hsfcompany.tzcs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.hsfcompany.tzcs.adapter.DataAdapter;
 import com.hsfcompany.tzcs.base.BaseFragment;
 import com.hsfcompany.tzcs.bean.News;
+import com.hsfcompany.tzcs.ui.DataDetailsActivity;
 import com.hsfcompany.tzcs.utils.BeanUtil;
 
 import java.util.List;
@@ -45,6 +47,8 @@ public class DataFragment extends BaseFragment implements DataAdapter.OnItemClic
 
     @Override
     public void onItemClick(News data) {
-
+        Intent intent = new Intent(getActivity(), DataDetailsActivity.class);
+        intent.putExtra("data",data);
+        startActivity(intent);
     }
 }

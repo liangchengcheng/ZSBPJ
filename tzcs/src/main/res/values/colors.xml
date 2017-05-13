@@ -59,7 +59,7 @@
     <color name="button_text_color">#FFFFFF</color>
 
 
-
+    <color name="assist_blue">#ff35aaf6</color>
 
     <!-- 这里是文字的颜色和app的主题色 -->
     <color name="login_text_color">#BDBDBD</color>
