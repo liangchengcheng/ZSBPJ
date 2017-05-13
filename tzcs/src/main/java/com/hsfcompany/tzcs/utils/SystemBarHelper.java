@@ -1,4 +1,4 @@
-package com.hsfcompany.tzcs.ui;
+package com.hsfcompany.tzcs.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hsfcompany.tzcs.R;
-import com.hsfcompany.tzcs.base.BaseActivity;
 import com.hsfcompany.tzcs.bean.News;
+import com.hsfcompany.tzcs.utils.SystemBarHelper;
 
 
 /**

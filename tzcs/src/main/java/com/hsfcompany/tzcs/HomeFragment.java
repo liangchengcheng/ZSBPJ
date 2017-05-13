@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.hsfcompany.tzcs.base.BaseFragment;
 import com.hsfcompany.tzcs.ui.ResultActivity;
+import com.hsfcompany.tzcs.ui.TanShiActivity;
 import com.hsfcompany.tzcs.view.ColorArcProgressBar;
 
 /**
@@ -35,7 +36,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         switch (view.getId()) {
             //体质测试
             case R.id.mszb:
-
+                intent = new Intent(getActivity(), TanShiActivity.class);
+                startActivity(intent);
                 break;
             //痰湿与体重控制检测
             case R.id.msjl:
