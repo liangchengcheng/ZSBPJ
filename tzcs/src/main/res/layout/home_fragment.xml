@@ -41,7 +41,6 @@
             app:back_color="@android:color/white"
             />
 
-
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
@@ -181,7 +180,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/sum_histogram_icon"
+                        android:background="@drawable/book_icon"
                         android:scaleType="centerCrop" />
 
                     <TextView
