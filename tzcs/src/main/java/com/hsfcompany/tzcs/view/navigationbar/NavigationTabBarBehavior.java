@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
-import com.steven.babyiyo.R;
+import com.hsfcompany.tzcs.R;
 
 public class NavigationTabBarBehavior extends VerticalScrollingBehavior<NavigationTabBar> {
 
