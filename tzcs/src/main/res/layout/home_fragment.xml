@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:attribute="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,60 +20,34 @@
             android:layout_height="match_parent"
             android:src="?attr/colorPrimary" />
 
-        <android.support.v7.widget.CardView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="80dp"
-            android:elevation="10dp"
-            attribute:cardBackgroundColor="@color/colorPrimary"
-            attribute:cardCornerRadius="40dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tvFollowersCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:text="354"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvFollowersCount"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-5dp"
-                    android:text="Stars"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <ImageView
-            android:id="@+id/ivPhoto"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/ic_launcher"
+        <com.hsfcompany.tzcs.view.ColorArcProgressBar
+            android:layout_width="100dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
-            attribute:civ_border_color="#ffffff"
-            attribute:civ_border_width="5dp" />
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/bar2"
+            app:is_need_content="true"
+            app:front_color1="#69cbd2"
+            app:front_color2="#7eb6e2"
+            app:front_color3="#989df7"
+            app:max_value="21"
+            app:back_width="5dp"
+            app:front_width="10dp"
+            app:total_engle="270"
+            app:is_need_unit="true"
+            app:string_unit="天"
+            app:is_need_title="true"
+            app:string_title="距离下次检测"
+            app:back_color="@android:color/white"
+            />
+
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ivPhoto"
+            android:layout_below="@id/bar2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
             android:text="@string/app_name"
             android:textColor="@android:color/white"
             android:textSize="20sp"
@@ -90,13 +65,14 @@
             android:typeface="monospace" />
 
         <android.support.v7.widget.CardView
+            android:visibility="gone"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="80dp"
             android:elevation="10dp"
-            attribute:cardBackgroundColor="@color/colorPrimary"
+            attribute:cardBackgroundColor="@color/red"
             attribute:cardCornerRadius="40dp">
 
             <RelativeLayout
@@ -125,6 +101,7 @@
                     android:textSize="12sp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
     </library.CrescentoContainer>
 
     <ScrollView
