@@ -39,4 +39,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile files('libs/hellocharts-library-1.5.8.jar')
+    compile 'de.greenrobot:greendao:2.0.0'
 }

@@ -51,28 +51,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:id="@+id/cb_1"
             android:textSize="16sp"
             android:text="吃东西腹胀，或不消化"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <CheckBox
+            android:id="@+id/cb_2"
             android:textSize="16sp"
             android:layout_marginTop="10dp"
-            android:text="吃东西腹胀，或不消化"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
-            android:text="吃东西腹胀，或不消化"
+            android:text="身体沉重，不轻松，不爽快"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <CheckBox
+            android:id="@+id/cb_3"
             android:textSize="16sp"
             android:layout_marginTop="10dp"
-            android:text="吃东西腹胀，或不消化"
+            android:text="腹部肥满，或眼睑肿，或额部油脂多"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/cb_4"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:text="舌苔厚腻，或痰多,或嘴里黏"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -98,10 +101,11 @@
                 android:gravity="center"
                 widget:paper_color="?attr/colorPrimary"
                 widget:paper_corner_radius="29dp"
-                widget:paper_text="上一题"
+                widget:paper_text="关闭"
                 widget:paper_text_color="@color/white" />
 
             <com.hsfcompany.tzcs.view.PaperButton
+                android:id="@+id/pb_next"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
