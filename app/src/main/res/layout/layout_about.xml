@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2015 GuDong <gudong.name@gmail.com>
   ~
   ~  This file is part of GdTranslate
@@ -19,12 +18,11 @@
   ~
   -->
 
-<FrameLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:paddingRight="16dp">
 
     <WebView
         android:id="@+id/webview"

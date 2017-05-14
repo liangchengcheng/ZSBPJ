@@ -7,9 +7,11 @@
         <item name="colorAccent">#00bcd4</item>
         <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
     </style>
+
     <style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert">
 
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -22,7 +24,9 @@
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="queryBackground">@android:color/transparent</item>
     </style>
+
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo"></style>
+
     <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#00bcd4</item>
         <item name="colorPrimaryDark">#512DA8</item>
@@ -138,6 +142,7 @@
         <item name="colorPrimaryDark">@color/dark_green</item>
         <item name="colorAccent">@color/accent_green</item>
     </style>
+
     <style name="AppBaseTheme.Dark" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="android:fitsSystemWindows">true</item>
@@ -195,9 +200,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
     <style name="selectableItemBackground">
         <item name="android:background">@drawable/bt_selector</item>
     </style>
+
     <style name="BB_BottomBarItem_Fixed">
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:orientation">vertical</item>
@@ -236,6 +243,7 @@
         <item name="android:windowExitAnimation">@anim/pop_hide</item>
         <!-- 指定消失的动画xml -->
     </style>
+
     <style name="progress_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>

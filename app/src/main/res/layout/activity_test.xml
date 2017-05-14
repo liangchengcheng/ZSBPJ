@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_test_main"
-    android:background="#fff"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,11 +38,12 @@
                 android:textColor="#fff"
                 android:textSize="14sp" />
         </android.support.v7.widget.Toolbar>
+
         <com.lcc.view.LoadingLayout
             android:id="@+id/ly_loading"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-             />
+            android:layout_height="match_parent" />
+
         <include layout="@layout/main_test" />
 
         <RelativeLayout
@@ -80,13 +81,13 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:src="@mipmap/icon_fav"
             app:backgroundTint="@color/theme_color"
             app:borderWidth="0dp"
             app:elevation="6dp"
             app:fabSize="mini"
-            android:layout_gravity="bottom|right"
             app:pressedTranslationZ="12dp"
             app:rippleColor="@color/theme_color_level2" />
     </LinearLayout>

@@ -48,10 +48,10 @@ import zsbpj.lccpj.view.recyclerview.listener.OnRecycleViewScrollListener;
 import android.view.MenuItem;
 
 /**
- * Author:  梁铖城
- * Email:   1038127753@qq.com
- * Date:    2016年04月21日07:17:52
- * Description: 第一页fragment
+ * Author:      |梁铖城
+ * Email:       |1038127753@qq.com
+ * Date:        |2016年04月21日07:17:52
+ * Description: |第一页fragment
  */
 public class IndexFragment extends BaseFragment implements IndexView, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, PopupMenu.OnMenuItemClickListener {

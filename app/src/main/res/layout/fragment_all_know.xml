@@ -13,9 +13,9 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:id="@+id/circle_yellow"
@@ -24,20 +24,20 @@
                 android:background="@drawable/shape_circle_yellow" />
 
             <TextView
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/circle_yellow"
-                android:text="历届真题集锦" />
+                android:text="历届真题集锦"
+                android:textColor="#000"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:id="@+id/circle_blue"
@@ -46,21 +46,21 @@
                 android:background="@drawable/shape_circle_blue" />
 
             <TextView
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/circle_blue"
-                android:text="历届模拟考题" />
+                android:text="历届模拟考题"
+                android:textColor="#000"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="25dp"
             android:id="@+id/wdsc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:id="@+id/circle_green"
@@ -69,21 +69,21 @@
                 android:background="@drawable/shape_circle_green" />
 
             <TextView
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/circle_green"
-                android:text="收藏的练习题目" />
+                android:text="收藏的练习题目"
+                android:textColor="#000"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="25dp"
             android:id="@+id/zwcs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:id="@+id/circle_red"
@@ -92,14 +92,14 @@
                 android:background="@drawable/shape_circle_red" />
 
             <TextView
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/circle_red"
-                android:text="随机单选题测试" />
+                android:text="随机单选题测试"
+                android:textColor="#000"
+                android:textSize="20sp" />
         </RelativeLayout>
     </LinearLayout>
 

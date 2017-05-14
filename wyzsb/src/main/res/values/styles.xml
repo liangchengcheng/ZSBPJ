@@ -44,6 +44,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="SettingMenuTvStyle">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@color/setting_act_textcolor_common</item>

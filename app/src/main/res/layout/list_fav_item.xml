@@ -3,20 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:orientation="vertical"
     android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/tv_test_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
         android:lineSpacingExtra="6dp"
         android:lines="2"
         android:text="加载..."
-        android:ellipsize="end"
         android:textColor="@color/black"
         android:textSize="15sp" />
 

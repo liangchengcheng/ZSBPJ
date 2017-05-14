@@ -84,6 +84,7 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
+
     private String fid;
     private TestEntity entity;
     private TestAnswerPresenter mPresenter;
@@ -95,6 +96,8 @@ public class AnswerIndexActivity extends BaseActivity implements TestAnswerView,
     private RecyclerView recyclerView;
     //收藏用户适配器
     private UserListFavAdapter adapter;
+
+
     //收藏用户的标示
     protected static final int UDEF_DELAY = 1000;
     protected final static int USTATE_LOAD = 0;

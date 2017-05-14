@@ -2,43 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#fff"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
-        android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
         android:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_collapseMode="pin" >
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
-            android:textSize="20sp"
-            android:textColor="#fff"
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="自我检测"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_title" />
-        <TextView
-            android:textSize="14sp"
+            android:text="自我检测"
             android:textColor="#fff"
-            android:layout_marginRight="5dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/toolbar_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_gravity="right|center_vertical"
-            android:id="@+id/toolbar_count" />
+            android:layout_marginRight="5dp"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="14sp" />
     </android.support.v7.widget.Toolbar>
+
     <FrameLayout
-        android:orientation="vertical"
         android:id="@+id/cl_test_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:orientation="vertical">
 
         <ScrollView
             android:id="@+id/sv_main_test"
@@ -114,6 +115,7 @@
                         android:textColor="@color/bt_next_text"
                         android:textSize="16sp" />
                 </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_answer_long"
                     android:layout_width="match_parent"
@@ -124,17 +126,18 @@
                     android:textSize="16sp" />
             </LinearLayout>
         </ScrollView>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:src="@mipmap/icon_fav"
             app:backgroundTint="@color/theme_color"
             app:borderWidth="0dp"
             app:elevation="6dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             app:pressedTranslationZ="12dp"
             app:rippleColor="@color/theme_color_level2" />
     </FrameLayout>

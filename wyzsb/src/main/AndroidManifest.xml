@@ -12,8 +12,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 以下为可选权限 -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
@@ -26,27 +26,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ADBaseActivity" >
-        </activity >
+        <activity android:name=".ADBaseActivity"></activity>
 
         <activity
             android:name=".SplashActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-            <intent-filter >
+            android:screenOrientation="portrait">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter >
-        </activity >
+            </intent-filter>
+        </activity>
 
         <!--主机面-->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <!--视频详情界面-->
 
         <!--文章列表-->
@@ -54,145 +53,142 @@
             android:name=".ui.activity.article.ArticleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <!--文章详情页面-->
         <activity
             android:name=".ui.activity.article.ArticleDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!--意见反馈意见-->
         <activity
             android:name=".ui.activity.setting.FeedBackActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <!--视频详情界面-->
         <activity
             android:name=".ui.activity.video.VideoDetailsActivity1"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--关于-->
         <activity
             android:name=".ui.activity.setting.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!--新闻的详情界面-->
         <activity
             android:name=".ui.activity.news.NewsDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!--历史记录-->
         <activity
             android:name=".ui.activity.setting.HistoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!--视频的收藏-->
         <activity
             android:name=".ui.activity.setting.VideoFavActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!--收藏的界面-->
         <activity
             android:name=".ui.activity.setting.CollectionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!--登录和注册-->
         <activity
             android:name=".ui.activity.login.LoginMainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!-- 系统的界面 -->
         <activity
             android:name=".ui.activity.setting.SystemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!-- 推荐书籍 -->
         <activity
             android:name=".ui.activity.setting.BookActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <!-- 推荐书籍的详情页面 -->
         <activity
             android:name=".ui.activity.setting.BookDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!-- 推荐博客 -->
         <activity
             android:name=".ui.activity.setting.LinkActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <!-- 连接的详情页面 -->
         <activity
             android:name=".ui.activity.setting.LinkDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!-- 用户的昵称 -->
         <activity
             android:name=".ui.activity.login.UserNameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!-- 其他组件 -->
         <activity
             android:name="net.youmi.android.AdBrowser"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity >
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
 
         <service
             android:name="net.youmi.android.AdService"
-            android:exported="false" >
-        </service >
+            android:exported="false"></service>
 
-        <receiver android:name="net.youmi.android.AdReceiver" >
-            <intent-filter >
+        <receiver android:name="net.youmi.android.AdReceiver">
+            <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_INSTALL" />
 
                 <data android:scheme="package" />
-            </intent-filter >
-        </receiver >
+            </intent-filter>
+        </receiver>
 
         <!-- 有米SDK为了兼容Android N应用间共享文件行为变更而需要配置的FileProvider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="view.lcc.wyzsb.fileProvider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
-        </provider >
+        </provider>
 
         <!-- 有米渠道号(可选配置) 渠道号不能带空格，类型为整数 -->
         <meta-data
             android:name="YOUMI_CHANNEL"
-            android:value="0" >
-        </meta-data >
+            android:value="0"></meta-data>
     </application>
 
 </manifest>

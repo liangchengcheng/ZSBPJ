@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="150dip"
     android:background="@color/base_bg_color"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <ImageView 
+    <ImageView
         android:id="@+id/ivAdvertise"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:scaleType="fitXY"
-        android:src="@drawable/loading1"/>
-   
+        android:src="@drawable/loading1" />
+
 
 </RelativeLayout>

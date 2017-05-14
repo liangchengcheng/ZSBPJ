@@ -5,6 +5,6 @@
     android:layout_gravity="center_vertical"
     android:clickable="true"
     android:padding="10dip"
-    android:src="@drawable/point_yellow" >
+    android:src="@drawable/point_yellow">
 
 </ImageView>

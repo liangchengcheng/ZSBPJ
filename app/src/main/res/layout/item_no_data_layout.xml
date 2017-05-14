@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_root_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -11,16 +10,16 @@
         android:id="@+id/iv_placeholder_image"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_no_data"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_no_data" />
 
     <TextView
         android:id="@+id/tv_placeholder_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/iv_placeholder_image"
+        android:layout_centerHorizontal="true"
         android:text="呃，暂无数据"
-        android:textColor="@color/font_black_5"/>
+        android:textColor="@color/font_black_5" />
 
 </RelativeLayout>

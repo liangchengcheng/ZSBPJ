@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sv_main_test"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/ly_main"
@@ -72,14 +71,15 @@
                 android:text="下一题"
                 android:textColor="@color/bt_next_text"
                 android:textSize="16sp" />
+
             <TextView
-                android:layout_marginRight="15dp"
                 android:id="@+id/bt_show_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/bt_next"
                 android:layout_centerVertical="true"
                 android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/bt_next"
                 android:background="@drawable/bt_bg"
                 android:clickable="true"
                 android:padding="5dp"
@@ -89,10 +89,10 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_marginBottom="25dp"
             android:id="@+id/tv_answer_long"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             android:layout_marginTop="15dp"
             android:textColor="@color/black"
             android:textSize="16sp" />

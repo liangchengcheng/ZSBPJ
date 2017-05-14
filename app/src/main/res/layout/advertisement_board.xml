@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/base_bg_color"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpAdvertise"
@@ -13,15 +13,13 @@
 
 
     <LinearLayout
-        android:gravity="right"
-        android:background="@drawable/news_gallery_text_bg"
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal" 
-       >
-    </LinearLayout>
+        android:background="@drawable/news_gallery_text_bg"
+        android:gravity="right"
+        android:orientation="horizontal"></LinearLayout>
 
 </RelativeLayout>

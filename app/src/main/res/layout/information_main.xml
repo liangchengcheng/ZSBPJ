@@ -2,9 +2,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
-    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -25,10 +25,10 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:background="@drawable/bg_ef"
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/bg_ef"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
@@ -39,8 +39,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarTheme"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-            </android.support.v7.widget.Toolbar>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -51,341 +50,343 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="vertical"
-           android:layout_height="wrap_content">
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="3dp"
-               android:layout_marginRight="3dp"
-               android:layout_marginTop="40dp"
-               android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/breakfast_icon" />
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="报名资格" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/breakfast_icon" />
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="报名资格" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/book_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="考试科目" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/book_icon" />
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="考试科目" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/sum_histogram_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="考试复习" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
-           </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="3dp"
-               android:layout_marginRight="3dp"
-               android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/sum_histogram_icon" />
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="考试复习" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:orientation="horizontal">
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/telephone_bill_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="考试时间" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/telephone_bill_icon" />
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="考试时间" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/sum_pie_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="报名流程" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/sum_pie_icon" />
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="报名流程" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/education_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="学历待遇" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
-           </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="3dp"
-               android:layout_marginRight="3dp"
-               android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/education_icon" />
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="学历待遇" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:orientation="horizontal">
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/fruit_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="其他" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/fruit_icon" />
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="其他" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                       android:orientation="vertical">
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/lunch_icon" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="其他" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
+                        android:orientation="vertical">
 
-               <android.support.v7.widget.CardView
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="1.5dp"
-                   android:layout_weight="1"
-                   android:clickable="true"
-                   android:focusable="true"
-                   android:foreground="?android:attr/selectableItemBackground"
-                   android:orientation="horizontal"
-                   app:cardCornerRadius="1dp"
-                   app:cardUseCompatPadding="true">
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/lunch_icon" />
 
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="其他" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                       <ImageView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="54dp"
-                           android:layout_height="54dp"
-                           android:layout_marginTop="10dp"
-                           android:background="@drawable/sport_icon" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1.5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="1dp"
+                    app:cardUseCompatPadding="true">
 
-                       <TextView
-                           android:layout_gravity="center_horizontal"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingBottom="10dp"
-                           android:paddingTop="5dp"
-                           android:text="其他" />
-                   </LinearLayout>
-               </android.support.v7.widget.CardView>
-           </LinearLayout>
-       </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/sport_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="5dp"
+                            android:text="其他" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
