@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.hsfcompany.tzcs.R;
+import com.hsfcompany.tzcs.dao.UserInfo;
 
 /**
  * Author:       |梁铖城
@@ -23,6 +24,8 @@ public class YangXuActivity extends AppCompatActivity implements View.OnClickLis
 
     private int score;
 
+    private UserInfo userInfo;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -33,7 +36,7 @@ public class YangXuActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tanshi_activity);
-
+        userInfo = (UserInfo) getIntent().getSerializableExtra("data");
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.pb_next).setOnClickListener(this);
 
@@ -85,7 +88,9 @@ public class YangXuActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 }
+                userInfo.setYangxuzhi(score);
                 Intent intent = new Intent(YangXuActivity.this,YinXuActivity.class);
+                intent.putExtra("data",userInfo);
                 startActivity(intent);
                 break;
             case R.id.iv_back:

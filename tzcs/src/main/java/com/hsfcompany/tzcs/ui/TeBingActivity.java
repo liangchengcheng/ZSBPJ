@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.hsfcompany.tzcs.R;
+import com.hsfcompany.tzcs.dao.DataManager;
+import com.hsfcompany.tzcs.dao.UserInfo;
 
 /**
  * Author:       |梁铖城
@@ -22,6 +24,8 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
 
     private int score;
 
+    private UserInfo userInfo;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -33,6 +37,7 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tebing_activity);
 
+        userInfo = (UserInfo) getIntent().getSerializableExtra("data");
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.pb_next).setOnClickListener(this);
 
@@ -83,7 +88,10 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 }
+                userInfo.setTebingzhi(score);
+                DataManager.addUserInfo(userInfo);
                 Intent intent = new Intent(TeBingActivity.this,ResultActivity.class);
+                intent.putExtra("data",userInfo);
                 startActivity(intent);
                 break;
             case R.id.iv_back:

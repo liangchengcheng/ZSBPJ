@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.hsfcompany.tzcs.R;
+import com.hsfcompany.tzcs.dao.UserInfo;
 
 /**
  * Author:       |梁铖城
@@ -21,6 +22,7 @@ public class QiXuActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox cb_4;
 
     private int score;
+    private UserInfo userInfo;
 
     @Override
     protected void onResume() {
@@ -32,6 +34,7 @@ public class QiXuActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qixu_activity);
+        userInfo = (UserInfo) getIntent().getSerializableExtra("data");
 
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.pb_next).setOnClickListener(this);
@@ -83,7 +86,9 @@ public class QiXuActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 }
+                userInfo.setQixuzhi(score);
                 Intent intent = new Intent(QiXuActivity.this,XueYuActivity.class);
+                intent.putExtra("data",userInfo);
                 startActivity(intent);
                 break;
             case R.id.iv_back:

@@ -20,7 +20,7 @@
         <TextView
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
             android:text="体质测试(1/8)"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
