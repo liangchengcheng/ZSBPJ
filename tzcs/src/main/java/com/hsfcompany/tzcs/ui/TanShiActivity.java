@@ -63,10 +63,10 @@ public class TanShiActivity extends AppCompatActivity implements View.OnClickLis
                             score += 15;
                         }
                     }else {
-                        if (cb_4.isChecked()){
+                        if (cb_2.isChecked()){
                             score += 35;
-                            if (cb_2.isChecked()){
-                                score += 10;
+                            if (cb_4.isChecked()){
+                                score += 15;
                             }
                             if (cb_3.isChecked()){
                                 score += 10;
@@ -74,11 +74,11 @@ public class TanShiActivity extends AppCompatActivity implements View.OnClickLis
                         }else {
                             if (cb_3.isChecked()){
                                 score += 35;
-                                if (cb_2.isChecked()){
-                                    score += 10;
+                                if (cb_4.isChecked()){
+                                    score += 15;
                                 }
                             }else {
-                                if (cb_2.isChecked()){
+                                if (cb_4.isChecked()){
                                     score += 35;
                                 }
                             }

@@ -44,9 +44,58 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--详情界面-->
+        <!--痰湿质-->
         <activity
             android:name=".ui.TanShiActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--阳虚-->
+        <activity
+            android:name=".ui.YangXuActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--阴虚-->
+        <activity
+            android:name=".ui.YinXuActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--气郁质-->
+        <activity
+            android:name=".ui.QiYuActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--湿热-->
+        <activity
+            android:name=".ui.ShiReActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 气虚质 -->
+        <activity
+            android:name=".ui.QiXuActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 血瘀质 -->
+        <activity
+            android:name=".ui.XueYuActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 特禀质 -->
+        <activity
+            android:name=".ui.TeBingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

@@ -61,16 +61,16 @@ public class QiXuActivity extends AppCompatActivity implements View.OnClickListe
                             score += 15;
                         }
                     }else {
-                        if (cb_4.isChecked()){
+                        if (cb_2.isChecked()){
                             score += 55;
                             if (cb_1.isChecked()){
                                 score += 10;
                             }
-                            if (cb_2.isChecked()){
-                                score += 10;
+                            if (cb_4.isChecked()){
+                                score += 15;
                             }
                         }else {
-                            if (cb_2.isChecked()){
+                            if (cb_4.isChecked()){
                                 score += 55;
                                 if (cb_1.isChecked()){
                                     score += 10;

@@ -62,16 +62,16 @@ public class YinXuActivity extends AppCompatActivity implements View.OnClickList
                             score += 10;
                         }
                     }else {
-                        if (cb_1.isChecked()){
+                        if (cb_2.isChecked()){
                             score += 45;
-                            if (cb_2.isChecked()){
-                                score += 10;
+                            if (cb_1.isChecked()){
+                                score += 15;
                             }
                             if (cb_4.isChecked()){
                                 score += 10;
                             }
                         }else {
-                            if (cb_2.isChecked()){
+                            if (cb_1.isChecked()){
                                 score += 45;
                                 if (cb_4.isChecked()){
                                     score += 10;

@@ -62,7 +62,7 @@ public class XueYuActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }else {
                         if (cb_3.isChecked()){
-                            score += 55;
+                            score += 65;
                             if (cb_2.isChecked()){
                                 score += 10;
                             }
