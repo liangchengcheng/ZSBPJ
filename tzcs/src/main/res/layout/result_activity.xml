@@ -52,7 +52,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#cccccc" />
+                        android:background="#eeeeee" />
                 </RelativeLayout>
 
                 <TextView
@@ -72,7 +72,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#cccccc" />
+                        android:background="#eeeeee" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -179,7 +179,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#cccccc" />
+                        android:background="#eeeeee" />
                 </RelativeLayout>
 
                 <TextView
@@ -199,12 +199,63 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#cccccc" />
+                        android:background="#eeeeee" />
                 </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:textColor="#000"
+                    android:text="福酶纳豆，每次1包，早上一次，用温水冲调食用。"
+                    android:id="@+id/tv_fa1"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:text="瑞芝康源，每次1-2包，早晚各一次，用热开水冲调食用。"
+                    android:id="@+id/tv_fa2"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:text="五子汤，每次2-4包，早上一次，用热开水冲调食用。"
+                    android:id="@+id/tv_fa3"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:text="伊人舒，每次2-4包，早上一次，用热开水冲调食用。"
+                    android:id="@+id/tv_fa4"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:text="福润雪和，每次1-2包，晚上一次，用热开水冲调食用。"
+                    android:id="@+id/tv_fa5"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 
 

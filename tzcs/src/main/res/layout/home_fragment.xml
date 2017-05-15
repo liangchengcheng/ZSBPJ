@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvName"
             android:layout_centerHorizontal="true"
-            android:text="体质检测 • 养生保健 • 健康小知识"
+            android:text="体质检测 • 体质调理 • 健康小知识"
             android:textColor="#AAffffff"
             android:textSize="13sp"
             android:typeface="monospace" />
