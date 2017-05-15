@@ -62,11 +62,10 @@
             android:text="请输入一个昵称"
             android:textSize="16sp" />
         <EditText
+            android:layout_marginTop="10dp"
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:background="@null"
             android:inputType="text"
             android:textColor="@color/black"

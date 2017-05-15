@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.hsfcompany.tzcs.R;
+import com.hsfcompany.tzcs.base.BaseApplication;
 import com.hsfcompany.tzcs.base.Frame;
 import com.hsfcompany.tzcs.dao.UserInfo;
 
@@ -33,6 +34,7 @@ public class TestMainActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
+        BaseApplication.addActivity(this);
 
         user = (EditText) findViewById(R.id.user);
         rb_nan = (RadioButton) findViewById(R.id.rb_nan);

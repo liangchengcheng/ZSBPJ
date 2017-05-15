@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.hsfcompany.tzcs.R;
+import com.hsfcompany.tzcs.base.BaseApplication;
 import com.hsfcompany.tzcs.dao.UserInfo;
 
 /**
@@ -34,6 +35,7 @@ public class XueYuActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xueyu_activity);
+        BaseApplication.addActivity(this);
         userInfo = (UserInfo) getIntent().getSerializableExtra("data");
 
         findViewById(R.id.iv_back).setOnClickListener(this);

@@ -65,8 +65,8 @@ public class ResultActivity extends BaseActivity {
         }
 
         columnData_TOP = new ColumnChartData(columns);
-        columnData_TOP.setAxisXBottom(new Axis(axisValues).setHasLines(true).setName("体质名称"));
-        columnData_TOP.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(2).setName("体质分数"));
+        columnData_TOP.setAxisXBottom(new Axis(axisValues).setHasLines(true).setName("体质名称").setTextColor(Color.parseColor("#000000")));
+        columnData_TOP.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(2).setName("").setTextColor(Color.parseColor("#000000")));
         chart_top.setColumnChartData(columnData_TOP);
         chart_top.setValueSelectionEnabled(true);
         chart_top.setZoomType(ZoomType.HORIZONTAL);

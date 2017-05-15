@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.hsfcompany.tzcs.R;
+import com.hsfcompany.tzcs.base.BaseApplication;
 import com.hsfcompany.tzcs.dao.UserInfo;
 
 /**
@@ -36,6 +37,7 @@ public class TanShiActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tanshi_activity);
+        BaseApplication.addActivity(this);
 
         userInfo = (UserInfo) getIntent().getSerializableExtra("data");
         findViewById(R.id.iv_back).setOnClickListener(this);
