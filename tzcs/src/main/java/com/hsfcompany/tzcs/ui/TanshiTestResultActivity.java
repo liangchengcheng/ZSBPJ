@@ -2,6 +2,7 @@ package com.hsfcompany.tzcs.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.hsfcompany.tzcs.R;
@@ -31,6 +32,13 @@ public class TanshiTestResultActivity extends AppCompatActivity {
         score = getIntent().getIntExtra("score", 0);
         String result = getState(score)+getSZState();
         tv_tz.setText(result);
+
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public String getState(int score) {
@@ -45,16 +53,16 @@ public class TanshiTestResultActivity extends AppCompatActivity {
     }
 
     public String getSZState() {
-        double i = tizhong / Math.pow(shengao,2);
+        double i = tizhong / Math.pow(shengao/100,2);
         if (i>=40){
             return "并且您的体重是严重肥胖。";
         }else if (i>=30){
             return "并且您的体重是重度肥胖。";
-        } else if (i>27.9 || i<=29.9){
+        } else if (i>27.9 && i<=29.9){
             return "并且您的体重是中度肥胖。";
-        }else if (i>24 || i<=27.9){
+        }else if (i>24 && i<=27.9){
             return "并且您的体重是中度肥胖。";
-        } else if (i>18.5 || i<=23.9){
+        } else if (i>18.5 && i<=23.9){
             return "并且您的体重是中度肥胖。";
         }else if (i<18.5){
             return "并且您的体重是偏瘦。";
