@@ -107,9 +107,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!-- 特禀质 -->
+        <!--   -->
         <activity
             android:name=".ui.TanshiTestMainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--   -->
+        <activity
+            android:name=".ui.TanshiTestMain2Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--   -->
+        <activity
+            android:name=".ui.TanshiTestResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
