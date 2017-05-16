@@ -57,7 +57,7 @@
     <color name="blue_btn_bg_pressed_color">#96BFD2</color>
     <color name="float_transparent">#66000000</color>
     <color name="button_text_color">#FFFFFF</color>
-
+    <color name="gray">#D3D3D3</color>
 
     <color name="assist_blue">#ff35aaf6</color>
 

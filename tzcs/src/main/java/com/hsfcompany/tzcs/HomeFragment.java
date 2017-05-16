@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.hsfcompany.tzcs.base.BaseFragment;
 import com.hsfcompany.tzcs.ui.ResultActivity;
 import com.hsfcompany.tzcs.ui.TanShiActivity;
+import com.hsfcompany.tzcs.ui.TanshiTestMainActivity;
 import com.hsfcompany.tzcs.ui.TestMainActivity;
 import com.hsfcompany.tzcs.view.ColorArcProgressBar;
 
@@ -28,6 +29,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         bar2.setCurrentValues(18);
         view.findViewById(R.id.mszb).setOnClickListener(this);
         view.findViewById(R.id.msjq).setOnClickListener(this);
+        view.findViewById(R.id.msjl).setOnClickListener(this);
+        view.findViewById(R.id.mszz).setOnClickListener(this);
         return view;
     }
 
@@ -42,9 +45,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //痰湿与体重控制检测
             case R.id.msjl:
-
+                intent = new Intent(getActivity(), TanshiTestMainActivity.class);
+                startActivity(intent);
                 break;
-
             //测试记录
             case R.id.msjq:
                 intent = new Intent(getActivity(), ResultActivity.class);

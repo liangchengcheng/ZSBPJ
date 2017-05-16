@@ -11,6 +11,8 @@ import com.hsfcompany.tzcs.base.BaseApplication;
 import com.hsfcompany.tzcs.dao.DataManager;
 import com.hsfcompany.tzcs.dao.UserInfo;
 
+import java.util.Date;
+
 /**
  * Author:       |梁铖城
  * Email:        |1038127753@qq.com
@@ -91,6 +93,7 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 userInfo.setTebingzhi(score);
+                userInfo.setCtime(new Date());
                 DataManager.addUserInfo(userInfo);
                 Intent intent = new Intent(TeBingActivity.this,ResultActivity.class);
                 intent.putExtra("data",userInfo);
