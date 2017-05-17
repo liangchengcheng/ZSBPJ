@@ -10,6 +10,8 @@ import com.hsfcompany.tzcs.R;
 import com.hsfcompany.tzcs.base.BaseApplication;
 import com.hsfcompany.tzcs.dao.DataManager;
 import com.hsfcompany.tzcs.dao.UserInfo;
+import com.hsfcompany.tzcs.utils.SharePreferenceUtil;
+import com.hsfcompany.tzcs.utils.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -93,6 +95,9 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 }
+                String localtime = TimeUtils.StrTime(System.currentTimeMillis());
+                SharePreferenceUtil.setUpdateTime(localtime);
+
                 userInfo.setTebingzhi(score);
                 SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();

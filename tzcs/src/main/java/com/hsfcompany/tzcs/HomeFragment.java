@@ -2,6 +2,7 @@ package com.hsfcompany.tzcs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.hsfcompany.tzcs.ui.TanShiActivity;
 import com.hsfcompany.tzcs.ui.TanshiTestMainActivity;
 import com.hsfcompany.tzcs.ui.TestMainActivity;
 import com.hsfcompany.tzcs.ui.history.HistoryActivity;
+import com.hsfcompany.tzcs.utils.SharePreferenceUtil;
+import com.hsfcompany.tzcs.utils.TimeUtils;
 import com.hsfcompany.tzcs.view.ColorArcProgressBar;
 
 /**
@@ -27,7 +30,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, null);
         bar2 = (ColorArcProgressBar) view.findViewById(R.id.bar2);
-        bar2.setCurrentValues(18);
+        //获取上次体检的时间
+        String updateTime = SharePreferenceUtil.getUpdateTime();
+        if (!TextUtils.isEmpty(updateTime)) {
+            //获取当前时间
+            String localtime = TimeUtils.StrTime(System.currentTimeMillis());
+            int day =21 - (int)(Long.parseLong(localtime) - Long.parseLong(updateTime)) / (60 * 60 * 24);
+            bar2.setCurrentValues(day);
+        }else {
+            bar2.setCurrentValues(0);
+        }
         view.findViewById(R.id.mszb).setOnClickListener(this);
         view.findViewById(R.id.msjq).setOnClickListener(this);
         view.findViewById(R.id.msjl).setOnClickListener(this);

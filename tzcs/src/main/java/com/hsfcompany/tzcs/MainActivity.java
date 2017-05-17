@@ -1,23 +1,28 @@
 package com.hsfcompany.tzcs;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.hsfcompany.tzcs.adapter.MyPagerAdapter;
+import com.hsfcompany.tzcs.ui.setting.AboutActivity;
 import com.hsfcompany.tzcs.view.NoScrollViewPager;
 import com.hsfcompany.tzcs.view.navigationbar.NavigationTabBar;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private ArrayList<Fragment> fgList;
     private NavigationView navigationView;
@@ -143,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         //https://segmentfault.com/a/1190000004151222
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
-            //navigationView.setNavigationItemSelectedListener(this);
+            navigationView.setNavigationItemSelectedListener(this);
             View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
             RelativeLayout headerBackground = (RelativeLayout) headerLayout.findViewById(R.id.header_background);
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,5 +157,19 @@ public class MainActivity extends AppCompatActivity {
 			drawer.addDrawerListener(toggle);
 			toggle.syncState();*/
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_app) {
+
+        } else if (id == R.id.nav_set) {
+            Toast.makeText(MainActivity.this, "nav_gallery", Toast.LENGTH_LONG).show();
+        } else if (id == R.id.nav_about) {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 }
