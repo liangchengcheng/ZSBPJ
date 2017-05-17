@@ -42,14 +42,13 @@ public class TanshiTestResultActivity extends AppCompatActivity {
     }
 
     public String getState(int score) {
-        if (score >= 65) {
+        if (score > 65) {
             return "您的身体是痰湿体质";
-        } else if (score >= 40 && score < 65) {
+        } else if (score > 40 && score <= 65) {
             return "您的身体是倾向痰湿";
         } else {
             return "您的身体不是痰湿";
         }
-
     }
 
     public String getSZState() {

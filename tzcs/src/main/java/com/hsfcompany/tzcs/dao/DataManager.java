@@ -57,6 +57,7 @@ public class DataManager {
      */
     public static List<UserInfo> getAllData() {
         Query query = getNoteDao(Frame.getAppContext()).queryBuilder()
+                .orderDesc(UserInfoDao.Properties.Ctime)
                 .build();
         return query.list();
     }

@@ -113,9 +113,9 @@ public class ResultActivity extends BaseActivity {
     }
 
     public int getDataColor(int score){
-        if (score>=65){
+        if (score>65){
             return Color.parseColor("#ed4444");
-        }else if (score>=40&& score<65){
+        }else if (score>40&& score<=65){
             return Color.parseColor("#FFAD5B");
         }else {
             return Color.parseColor("#29c741");

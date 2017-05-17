@@ -41,9 +41,16 @@ public class MainActivity extends AppCompatActivity {
         fgList.add(homeFragment);
         fgList.add(dataFragment);
     }
+    private NoScrollViewPager viewPager;
+
+    public void setCurrent(){
+        if (viewPager != null){
+            viewPager.setCurrentItem(1);
+        }
+    }
 
     private void initUI() {
-        final NoScrollViewPager viewPager = (NoScrollViewPager) findViewById(R.id.vp_horizontal_ntb);
+        viewPager = (NoScrollViewPager) findViewById(R.id.vp_horizontal_ntb);
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fgList);
         viewPager.setAdapter(myPagerAdapter);
 

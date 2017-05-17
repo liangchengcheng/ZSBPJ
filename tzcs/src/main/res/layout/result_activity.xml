@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -87,80 +88,100 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_f1"
+                            android:layout_width="45dp"
+                            android:layout_height="15dp"
+                            android:layout_centerVertical="true"
+                            android:background="#ed4444" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_toRightOf="@+id/tv_f1"
+                            android:text="急需调理"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_f2"
+                            android:layout_width="45dp"
+                            android:layout_height="15dp"
+                            android:layout_centerVertical="true"
+                            android:background="#FFAD5B" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_toRightOf="@+id/tv_f2"
+                            android:text="倾向调理"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tv_f1"
-                        android:layout_width="45dp"
-                        android:layout_height="15dp"
-                        android:layout_centerVertical="true"
-                        android:background="#ed4444" />
-
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="3dp"
-                        android:layout_toRightOf="@+id/tv_f1"
-                        android:text="急需调理"
-                        android:textColor="#000"
-                        android:textSize="12sp" />
-                </RelativeLayout>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_f3"
+                            android:layout_width="45dp"
+                            android:layout_height="15dp"
+                            android:layout_centerVertical="true"
+                            android:background="#29c741" />
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_toRightOf="@+id/tv_f3"
+                            android:text="潜在状态"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tv_f2"
-                        android:layout_width="45dp"
-                        android:layout_height="15dp"
-                        android:layout_centerVertical="true"
-                        android:background="#FFAD5B" />
+                </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="3dp"
-                        android:layout_toRightOf="@+id/tv_f2"
-                        android:text="倾向调理"
-                        android:textColor="#000"
-                        android:textSize="12sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tv_f3"
-                        android:layout_width="45dp"
-                        android:layout_height="15dp"
-                        android:layout_centerVertical="true"
-                        android:background="#29c741" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="3dp"
-                        android:layout_toRightOf="@+id/tv_f3"
-                        android:text="潜在状态"
-                        android:textColor="#000"
-                        android:textSize="12sp" />
-                </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,58 +223,59 @@
                         android:background="#eeeeee" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:orientation="vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
 
                 <TextView
-                    android:textColor="#000"
-                    android:text="福酶纳豆，每次1包，早上一次，用温水冲调食用。"
                     android:id="@+id/tv_fa1"
-                    android:textSize="16sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="福酶纳豆，每次1包，早上一次，用温水冲调食用。"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:textColor="#000"
+                    android:id="@+id/tv_fa2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="瑞芝康源，每次1-2包，早晚各一次，用热开水冲调食用。"
-                    android:id="@+id/tv_fa2"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:textColor="#000"
+                    android:id="@+id/tv_fa3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="五子汤，每次2-4包，早上一次，用热开水冲调食用。"
-                    android:id="@+id/tv_fa3"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:textColor="#000"
+                    android:id="@+id/tv_fa4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="伊人舒，每次2-4包，早上一次，用热开水冲调食用。"
-                    android:id="@+id/tv_fa4"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:textColor="#000"
+                    android:id="@+id/tv_fa5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="福润雪和，每次1-2包，晚上一次，用热开水冲调食用。"
-                    android:id="@+id/tv_fa5"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#000"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

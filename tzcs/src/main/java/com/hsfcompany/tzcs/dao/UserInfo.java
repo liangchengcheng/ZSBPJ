@@ -12,7 +12,7 @@ public class UserInfo implements Serializable{
     private Long id;
     private String nickname;
     private String sex;
-    private java.util.Date ctime;
+    private String ctime;
     private Integer tanshizhi;
     private Integer yangxuzhi;
     private Integer yinxuzhi;
@@ -29,7 +29,7 @@ public class UserInfo implements Serializable{
         this.id = id;
     }
 
-    public UserInfo(Long id, String nickname, String sex, java.util.Date ctime, Integer tanshizhi, Integer yangxuzhi, Integer yinxuzhi, Integer qiyuzhi, Integer shirezhi, Integer qixuzhi, Integer xueyuzhi, Integer tebingzhi) {
+    public UserInfo(Long id, String nickname, String sex, String ctime, Integer tanshizhi, Integer yangxuzhi, Integer yinxuzhi, Integer qiyuzhi, Integer shirezhi, Integer qixuzhi, Integer xueyuzhi, Integer tebingzhi) {
         this.id = id;
         this.nickname = nickname;
         this.sex = sex;
@@ -68,11 +68,11 @@ public class UserInfo implements Serializable{
         this.sex = sex;
     }
 
-    public java.util.Date getCtime() {
+    public String getCtime() {
         return ctime;
     }
 
-    public void setCtime(java.util.Date ctime) {
+    public void setCtime(String ctime) {
         this.ctime = ctime;
     }
 

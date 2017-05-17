@@ -5,19 +5,15 @@
         <menu>
             <item
                 android:id="@+id/nav_app"
-                android:icon="@drawable/ic_settings_24dp"
+                android:icon="@drawable/ic_bookmark_border_black_24dp"
                 android:title="应用推广"/>
             <item
-                android:id="@+id/nav_his"
-                android:icon="@drawable/ic_settings_24dp"
-                android:title="历史记录"/>
-            <item
                 android:id="@+id/nav_set"
-                android:icon="@drawable/ic_settings_24dp"
+                android:icon="@drawable/ic_delete_black_24dp"
                 android:title="清除历史"/>
             <item
                 android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_about"
+                android:icon="@drawable/ic_help_outline_black_24dp"
                 android:title="关于"/>
         </menu>
     </item>

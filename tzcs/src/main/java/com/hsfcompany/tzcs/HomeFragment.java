@@ -11,6 +11,7 @@ import com.hsfcompany.tzcs.ui.ResultActivity;
 import com.hsfcompany.tzcs.ui.TanShiActivity;
 import com.hsfcompany.tzcs.ui.TanshiTestMainActivity;
 import com.hsfcompany.tzcs.ui.TestMainActivity;
+import com.hsfcompany.tzcs.ui.history.HistoryActivity;
 import com.hsfcompany.tzcs.view.ColorArcProgressBar;
 
 /**
@@ -50,12 +51,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //测试记录
             case R.id.msjq:
-                intent = new Intent(getActivity(), ResultActivity.class);
+                intent = new Intent(getActivity(), HistoryActivity.class);
                 startActivity(intent);
                 break;
             //健康知识
             case R.id.mszz:
-
+                MainActivity activity = (MainActivity) getActivity();
+                activity.setCurrent();
                 break;
         }
     }

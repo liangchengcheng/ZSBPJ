@@ -27,7 +27,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Nickname = new Property(1, String.class, "nickname", false, "NICKNAME");
         public final static Property Sex = new Property(2, String.class, "sex", false, "SEX");
-        public final static Property Ctime = new Property(3, java.util.Date.class, "ctime", false, "CTIME");
+        public final static Property Ctime = new Property(3, String.class, "ctime", false, "CTIME");
         public final static Property Tanshizhi = new Property(4, Integer.class, "tanshizhi", false, "TANSHIZHI");
         public final static Property Yangxuzhi = new Property(5, Integer.class, "yangxuzhi", false, "YANGXUZHI");
         public final static Property Yinxuzhi = new Property(6, Integer.class, "yinxuzhi", false, "YINXUZHI");
@@ -54,7 +54,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'NICKNAME' TEXT," + // 1: nickname
                 "'SEX' TEXT," + // 2: sex
-                "'CTIME' INTEGER," + // 3: ctime
+                "'CTIME' TEXT," + // 3: ctime
                 "'TANSHIZHI' INTEGER," + // 4: tanshizhi
                 "'YANGXUZHI' INTEGER," + // 5: yangxuzhi
                 "'YINXUZHI' INTEGER," + // 6: yinxuzhi
@@ -90,10 +90,10 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (sex != null) {
             stmt.bindString(3, sex);
         }
- 
-        java.util.Date ctime = entity.getCtime();
+
+        String ctime = entity.getCtime();
         if (ctime != null) {
-            stmt.bindLong(4, ctime.getTime());
+            stmt.bindString(4, ctime);
         }
  
         Integer tanshizhi = entity.getTanshizhi();
@@ -150,7 +150,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // nickname
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // sex
-            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // ctime
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // ctime
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // tanshizhi
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // yangxuzhi
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // yinxuzhi
@@ -169,7 +169,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setNickname(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setSex(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setCtime(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setCtime(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setTanshizhi(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
         entity.setYangxuzhi(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setYinxuzhi(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));

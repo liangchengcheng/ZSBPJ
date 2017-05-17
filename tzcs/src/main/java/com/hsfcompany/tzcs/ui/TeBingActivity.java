@@ -11,6 +11,7 @@ import com.hsfcompany.tzcs.base.BaseApplication;
 import com.hsfcompany.tzcs.dao.DataManager;
 import com.hsfcompany.tzcs.dao.UserInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -93,7 +94,9 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 userInfo.setTebingzhi(score);
-                userInfo.setCtime(new Date());
+                SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
+                userInfo.setCtime(simpleDateFormat.format(date));
                 DataManager.addUserInfo(userInfo);
                 Intent intent = new Intent(TeBingActivity.this,ResultActivity.class);
                 intent.putExtra("data",userInfo);
