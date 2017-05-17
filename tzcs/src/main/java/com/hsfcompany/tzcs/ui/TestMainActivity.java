@@ -66,7 +66,7 @@ public class TestMainActivity extends AppCompatActivity implements View.OnClickL
                 UserInfo userInfo = new UserInfo();
                 String nickName = user.getText().toString();
                 if (TextUtils.isEmpty(nickName)){
-                    userInfo.setNickname("无昵称");
+                    userInfo.setNickname("无标签");
                 }else {
                     userInfo.setNickname(nickName);
                 }
