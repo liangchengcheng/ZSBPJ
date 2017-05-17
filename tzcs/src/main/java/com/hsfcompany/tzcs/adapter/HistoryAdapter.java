@@ -42,7 +42,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         final UserInfo weekData = mList.get(position);
         NormalViewHolder holder = (NormalViewHolder) viewHolder;
-        holder.tv_title.setText("体质测试："+weekData.getNickname());
+        holder.tv_title.setText("测试标签："+weekData.getNickname());
         holder.tv_content.setText("测试时间："+weekData.getCtime());
 
         if (mListener != null) {

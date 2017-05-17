@@ -33,7 +33,7 @@ public class TanshiTestResultActivity extends AppCompatActivity {
         String result = getState(score)+getSZState();
         tv_tz.setText(result);
 
-        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.lv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

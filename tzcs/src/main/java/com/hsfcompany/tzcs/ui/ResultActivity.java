@@ -3,6 +3,7 @@ package com.hsfcompany.tzcs.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import com.hsfcompany.tzcs.R;
 import com.hsfcompany.tzcs.base.BaseActivity;
@@ -34,22 +35,55 @@ public class ResultActivity extends BaseActivity {
     public final static String[] NAME = new String[]{"痰湿质", "阳虚质", "阴虚质", "气郁质", "湿热质",
             "气虚质", "血瘀质", "特禀质"};
 
-    int[] score_top ;
-
-    int[] colors = {Color.parseColor("#37C930"), Color.parseColor("#7CC4F7"), Color.parseColor("#FB6E47")
-            , Color.parseColor("#FB6E47"), Color.parseColor("#FB6E47"), Color.parseColor("#FB6E47"),
-            Color.parseColor("#5884E7"), Color.parseColor("#FB53A8")};
+    int[] score_top;
     private ColumnChartData columnData_TOP;
+
+
+    private View tv_fa1, tv_fa2, tv_fa3, tv_fa4, tv_fa5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
+
+        tv_fa1 = findViewById(R.id.tv_fa1);
+        tv_fa2 = findViewById(R.id.tv_fa2);
+        tv_fa3 = findViewById(R.id.tv_fa3);
+        tv_fa4 = findViewById(R.id.tv_fa4);
+        tv_fa5 = findViewById(R.id.tv_fa5);
+
         userInfo = (UserInfo) getIntent().getSerializableExtra("data");
-        score_top = new int[]{userInfo.getTanshizhi(),userInfo.getYangxuzhi(),userInfo.getYinxuzhi()
-                ,userInfo.getQiyuzhi(),userInfo.getShirezhi(),userInfo.getQixuzhi(),userInfo.getXueyuzhi(),userInfo.getTebingzhi()};
+        score_top = new int[]{userInfo.getTanshizhi(), userInfo.getYangxuzhi(), userInfo.getYinxuzhi()
+                , userInfo.getQiyuzhi(), userInfo.getShirezhi(), userInfo.getQixuzhi(), userInfo.getXueyuzhi(), userInfo.getTebingzhi()};
         chart_top = (ColumnChartView) findViewById(R.id.chart_top);
         generateColumnDataTop();
+        setState();
+    }
+
+    private void setState() {
+        if (userInfo.getTebingzhi() > 40 || (userInfo.getYangxuzhi() <= 40 &&
+                userInfo.getYinxuzhi() <= 40 &&
+                userInfo.getTanshizhi() <= 40 &&
+                userInfo.getQiyuzhi() <= 40 &&
+                userInfo.getShirezhi() <= 40 &&
+                userInfo.getQixuzhi() <= 40)) {
+            tv_fa2.setVisibility(View.VISIBLE);
+        }
+
+        if (userInfo.getYangxuzhi() > 40) {
+            if (userInfo.getSex().equals("男")) {
+                tv_fa3.setVisibility(View.VISIBLE);
+            } else {
+                tv_fa4.setVisibility(View.VISIBLE);
+            }
+        }
+
+        if (userInfo.getYinxuzhi() > 40 || userInfo.getTanshizhi() > 40
+                || userInfo.getQiyuzhi() > 40 || userInfo.getShirezhi() > 40 ||
+                userInfo.getQixuzhi() > 40) {
+            tv_fa5.setVisibility(View.VISIBLE);
+        }
     }
 
     private void generateColumnDataTop() {
@@ -74,7 +108,7 @@ public class ResultActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                prepareDataAnimation();
+                //prepareDataAnimation();
                 //chart_top.startDataAnimation();
             }
         }, 1500);
@@ -112,12 +146,12 @@ public class ResultActivity extends BaseActivity {
         }
     }
 
-    public int getDataColor(int score){
-        if (score>65){
+    public int getDataColor(int score) {
+        if (score > 65) {
             return Color.parseColor("#ed4444");
-        }else if (score>40&& score<=65){
+        } else if (score > 40 && score <= 65) {
             return Color.parseColor("#FFAD5B");
-        }else {
+        } else {
             return Color.parseColor("#29c741");
         }
 
