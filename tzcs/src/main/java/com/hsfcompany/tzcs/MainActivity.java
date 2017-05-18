@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.hsfcompany.tzcs.adapter.MyPagerAdapter;
 import com.hsfcompany.tzcs.ui.setting.AboutActivity;
+import com.hsfcompany.tzcs.ui.setting.JieshaoActivity;
 import com.hsfcompany.tzcs.view.NoScrollViewPager;
 import com.hsfcompany.tzcs.view.navigationbar.NavigationTabBar;
 
@@ -163,13 +164,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_app) {
-
+            Intent intent = new Intent(MainActivity.this, JieshaoActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_set) {
-            Toast.makeText(MainActivity.this, "nav_gallery", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "缓存已经清除", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_about) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         }
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
 }

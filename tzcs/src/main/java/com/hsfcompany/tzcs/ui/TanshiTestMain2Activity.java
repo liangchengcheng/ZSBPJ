@@ -46,6 +46,7 @@ public class TanshiTestMain2Activity extends AppCompatActivity implements View.O
         cb_7 = (CheckBox) findViewById(R.id.cb_7);
         cb_8 = (CheckBox) findViewById(R.id.cb_8);
         findViewById(R.id.pb_next).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
 
     @Override

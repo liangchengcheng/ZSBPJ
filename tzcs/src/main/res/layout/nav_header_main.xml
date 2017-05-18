@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:id="@+id/header_background"
-    android:background="@drawable/homeback"
+    android:background="@drawable/js3"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:gravity="bottom">
 

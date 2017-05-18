@@ -53,6 +53,7 @@ public class TanshiTestMainActivity extends AppCompatActivity implements View.On
         ruler_height.setValue(165, 80, 250, 1);
         ruler_weight.setValue(55, 20, 200, 0.1f);
         findViewById(R.id.pb_next).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
     }
 
@@ -64,6 +65,9 @@ public class TanshiTestMainActivity extends AppCompatActivity implements View.On
                 intent.putExtra("shengao",shengao);
                 intent.putExtra("tizhong",tizhong);
                 startActivity(intent);
+                finish();
+                break;
+            case R.id.iv_back:
                 finish();
                 break;
         }
