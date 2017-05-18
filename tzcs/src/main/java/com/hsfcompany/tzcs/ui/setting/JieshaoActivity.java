@@ -238,10 +238,10 @@ public class JieshaoActivity extends AppCompatActivity{
             entity1.setAddress("关注我们");
             entity1.setCountry("海斯富生物科技有限公司");
             entity1.setCoverImageUrl(R.drawable.chapin);
-            entity1.setDescription("可以通过官网关注我们或者微信添加公众号 hasifu 添加关注也可在APP商店搜索《海斯富健康生活商城》关注我们的产品");
+            entity1.setDescription("可以通过官网关注我们或者微信添加公众号 haisifu 添加关注也可在APP商店搜索《海斯富健康生活商城》关注我们的产品");
             entity1.setMapImageUrl(R.drawable.chapin);
             entity1.setTemperature("海斯福");
-            entity1.setTime("官方网站:http://www.healthfull.cn");
+            entity1.setTime("微信添加公众号 haisifu 关注我们");
             dataList.add(entity1);
 
         } catch (Exception e) {

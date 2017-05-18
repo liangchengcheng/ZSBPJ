@@ -36,17 +36,17 @@ public class YangXuActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tanshi_activity);
+        setContentView(R.layout.yangxu_activity);
         BaseApplication.addActivity(this);
         userInfo = (UserInfo) getIntent().getSerializableExtra("data");
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.pb_next).setOnClickListener(this);
+        findViewById(R.id.openbt).setOnClickListener(this);
 
         cb_1 = (CheckBox) findViewById(R.id.cb_1);
         cb_2 = (CheckBox) findViewById(R.id.cb_2);
         cb_3 = (CheckBox) findViewById(R.id.cb_3);
         cb_4 = (CheckBox) findViewById(R.id.cb_4);
-        Toast.makeText(YangXuActivity.this,"",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -96,6 +96,9 @@ public class YangXuActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.iv_back:
+                finish();
+                break;
+            case R.id.openbt:
                 finish();
                 break;
         }

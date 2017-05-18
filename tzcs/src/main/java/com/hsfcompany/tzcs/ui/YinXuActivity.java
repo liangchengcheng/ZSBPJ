@@ -41,6 +41,7 @@ public class YinXuActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.pb_next).setOnClickListener(this);
+        findViewById(R.id.openbt).setOnClickListener(this);
 
         cb_1 = (CheckBox) findViewById(R.id.cb_1);
         cb_2 = (CheckBox) findViewById(R.id.cb_2);
@@ -95,6 +96,9 @@ public class YinXuActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.iv_back:
+                finish();
+                break;
+            case R.id.openbt:
                 finish();
                 break;
         }

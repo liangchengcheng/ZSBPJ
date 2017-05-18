@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minHeight="300dp"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rt_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/img_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_nodata"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_nodata"
+            android:visibility="gone" />
+
+        <com.hsfcompany.tzcs.view.ProgressBarCircularIndeterminate
+            android:id="@+id/animProgress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/colorPrimary" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rt_image"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="加载中..."
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</RelativeLayout>
