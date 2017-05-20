@@ -10,12 +10,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.hsfcompany.tzcs.adapter.MyPagerAdapter;
+import com.hsfcompany.tzcs.base.Frame;
 import com.hsfcompany.tzcs.ui.setting.AboutActivity;
 import com.hsfcompany.tzcs.ui.setting.JieshaoActivity;
 import com.hsfcompany.tzcs.view.NoScrollViewPager;
@@ -174,5 +176,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawer.closeDrawer(GravityCompat.END);
         return true;
+    }
+
+    private long firstTime;
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 800) {
+                Frame.getInstance().toastPrompt("再按一次退出程序");
+                firstTime = secondTime;
+                return true;
+            } else {
+                exitApp();
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    public void exitApp() {
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
     }
 }

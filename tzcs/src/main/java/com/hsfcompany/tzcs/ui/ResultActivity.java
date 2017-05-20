@@ -26,7 +26,7 @@ import lecho.lib.hellocharts.view.ColumnChartView;
  * Date:         |05-13 15:30
  * Description:  |
  */
-public class ResultActivity extends BaseActivity {
+public class ResultActivity extends BaseActivity implements View.OnClickListener{
 
     private ColumnChartView chart_top;
 
@@ -46,7 +46,7 @@ public class ResultActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
-
+        findViewById(R.id.lv_back).setOnClickListener(this);
         tv_fa1 = findViewById(R.id.tv_fa1);
         tv_fa2 = findViewById(R.id.tv_fa2);
         tv_fa3 = findViewById(R.id.tv_fa3);
@@ -142,7 +142,6 @@ public class ResultActivity extends BaseActivity {
                     column.getValues().get(7).setTarget(userInfo.getTebingzhi());
                 }
             }
-
         }
     }
 
@@ -154,6 +153,14 @@ public class ResultActivity extends BaseActivity {
         } else {
             return Color.parseColor("#29c741");
         }
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.lv_back:
+                finish();
+                break;
+        }
     }
 }

@@ -17,6 +17,7 @@ import com.hsfcompany.tzcs.dao.UserInfo;
 import com.hsfcompany.tzcs.ui.ResultActivity;
 import com.hsfcompany.tzcs.ui.TeBingActivity;
 import com.hsfcompany.tzcs.utils.BeanUtil;
+import com.hsfcompany.tzcs.view.LoadingLayout;
 
 import java.util.List;
 
@@ -28,10 +29,12 @@ import java.util.List;
  */
 public class HistoryActivity extends AppCompatActivity implements HistoryAdapter.OnItemClickListener {
 
+    private LoadingLayout loadingLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_activity);
+        loadingLayout = (LoadingLayout) findViewById(R.id.loading_layout);
         initRecycleView();
     }
 
@@ -44,8 +47,15 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         HistoryAdapter adapter = new HistoryAdapter();
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
+        loadingLayout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
         List<UserInfo> data = DataManager.getAllData();
-        adapter.bind(data);
+        if (data !=null && data.size()>0){
+            adapter.bind(data);
+            loadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+        }else {
+            loadingLayout.setLoadingLayout(LoadingLayout.NO_DATA);
+        }
+
 
         findViewById(R.id.lv_back).setOnClickListener(new View.OnClickListener() {
             @Override

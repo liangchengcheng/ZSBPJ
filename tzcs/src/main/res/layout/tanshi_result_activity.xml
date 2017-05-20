@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
@@ -141,6 +142,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <android.support.v7.widget.CardView
+                    android:visibility="gone"
+                    android:id="@+id/cd_tanshi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="5dp"
@@ -170,7 +173,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="16sp"
-                                android:text="仅是倾向痰湿/痰湿体质调理方案"
+                                android:text="倾向痰湿/痰湿体质调理方案"
                                 android:textColor="#212121"/>
 
                             <TextView
@@ -185,12 +188,13 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/cd_cz"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="5dp"
                     android:layout_margin="2dp"
-                    android:layout_marginBottom="5dp"
-                    >
+                    android:layout_marginBottom="5dp">
 
                     <LinearLayout
                         android:padding="5dp"
@@ -229,6 +233,8 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/cd_fp"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="5dp"

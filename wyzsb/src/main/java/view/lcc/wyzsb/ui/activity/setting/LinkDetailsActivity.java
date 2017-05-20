@@ -36,7 +36,7 @@ import view.lcc.wyzsb.view.LoadingLayout;
  * Date:         2017年04月23日22:57:03
  * Description:  LinkDetailsActivity
  */
-public class LinkDetailsActivity extends BaseActivity   {
+public class LinkDetailsActivity extends BaseActivity implements View.OnClickListener{
 
     private WebView webView;
     private Link link;
@@ -58,6 +58,7 @@ public class LinkDetailsActivity extends BaseActivity   {
         link = (Link) getIntent().getSerializableExtra("data");
         initWebView();
         webView.loadUrl(link.getL_u());
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
 
     @Override
@@ -114,4 +115,12 @@ public class LinkDetailsActivity extends BaseActivity   {
         });
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
+    }
 }
