@@ -33,7 +33,7 @@
                 app:layout_collapseMode="parallax">
 
                 <ImageView
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="50dp"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:src="@mipmap/ic_launcher"/>
@@ -70,8 +70,8 @@
                 <TextView
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
-                    android:layout_marginLeft="20dp"
-                    android:text="关于"
+                    android:layout_gravity="center"
+                    android:text="关于软件"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </android.support.v7.widget.Toolbar>
