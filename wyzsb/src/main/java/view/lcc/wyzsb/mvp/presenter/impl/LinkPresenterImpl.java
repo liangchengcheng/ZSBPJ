@@ -44,6 +44,7 @@ public class LinkPresenterImpl implements LinkPresenter {
         }
         final long current_time = TimeUtils.getCurrentTime();
         NewsParams newsParams = new NewsParams();
+        newsParams.setPage(page);
         model.getLink(newsParams, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {

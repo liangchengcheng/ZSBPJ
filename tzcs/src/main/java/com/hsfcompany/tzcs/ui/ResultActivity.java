@@ -41,11 +41,15 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
 
     private View tv_fa1, tv_fa2, tv_fa3, tv_fa4, tv_fa5;
 
+    private View rzky;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
+
+        rzky = findViewById(R.id.rzky);
         findViewById(R.id.lv_back).setOnClickListener(this);
         tv_fa1 = findViewById(R.id.tv_fa1);
         tv_fa2 = findViewById(R.id.tv_fa2);
@@ -69,6 +73,8 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
                 userInfo.getShirezhi() <= 40 &&
                 userInfo.getQixuzhi() <= 40)) {
             tv_fa2.setVisibility(View.VISIBLE);
+        }else {
+            rzky.setVisibility(View.VISIBLE);
         }
 
         if (userInfo.getYangxuzhi() > 40) {
@@ -95,13 +101,14 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
             values = new ArrayList<SubcolumnValue>();
             values.add(new SubcolumnValue(score_top[i], getDataColor(score_top[i])));
             axisValues.add(new AxisValue(i).setLabel(NAME[i]));
-            columns.add(new Column(values).setHasLabelsOnlyForSelected(true).setHasLabels(true));
+            columns.add(new Column(values).setHasLabelsOnlyForSelected(true).setHasLabels(false));
         }
 
         columnData_TOP = new ColumnChartData(columns);
         columnData_TOP.setAxisXBottom(new Axis(axisValues).setHasLines(true).setName("体质名称").setTextColor(Color.parseColor("#000000")));
         columnData_TOP.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(2).setName("").setTextColor(Color.parseColor("#000000")));
         chart_top.setColumnChartData(columnData_TOP);
+
         chart_top.setValueSelectionEnabled(true);
         chart_top.setZoomType(ZoomType.HORIZONTAL);
 
