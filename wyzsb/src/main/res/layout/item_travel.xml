@@ -37,7 +37,6 @@
                 android:textSize="15sp"/>
 
             <LinearLayout
-                android:gravity="bottom"
                 android:orientation="horizontal"
                 android:layout_below="@+id/tv_title"
                 android:layout_toRightOf="@id/giv_image"
