@@ -72,6 +72,7 @@ public class DataFragment extends BaseFragment {
         //adapter.addFrag(new VideoFragment(), "视频资料");
         adapter.addFrag(new ArticleFragment(), "文字资料");
         adapter.addFrag(new NewsFragment(), "安全资讯");
+
         viewPager.setAdapter(adapter);
     }
 

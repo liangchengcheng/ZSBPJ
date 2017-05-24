@@ -11,7 +11,7 @@
         android:id="@+id/iv_placeholder_image"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_no_data"
+        android:src="@drawable/ic_nodata"
         android:layout_centerInParent="true"/>
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/iv_placeholder_image"
-        android:text="呃，暂无数据"
+        android:text="暂无数据"
         android:textColor="@color/font_black_5"/>
 
 </RelativeLayout>

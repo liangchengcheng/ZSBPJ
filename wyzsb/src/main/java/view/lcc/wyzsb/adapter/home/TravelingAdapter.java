@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import view.lcc.wyzsb.R;
+import view.lcc.wyzsb.bean.Article;
 import view.lcc.wyzsb.bean.Video;
 import view.lcc.wyzsb.bean.model.TravelingEntity;
 import view.lcc.wyzsb.utils.ToastUtil;
@@ -20,7 +21,7 @@ import view.lcc.wyzsb.view.home.GildeImageView.GlideImageView;
 /**
  * Created by sunfusheng on 16/4/20.
  */
-public class TravelingAdapter extends BaseListAdapter<Video> {
+public class TravelingAdapter extends BaseListAdapter<Article> {
     private boolean isNoData;
     private int mHeight;
     // 一屏能显示的个数，这个根据屏幕高度和各自的需求定
@@ -32,12 +33,12 @@ public class TravelingAdapter extends BaseListAdapter<Video> {
         super(context);
     }
 
-    public TravelingAdapter(Context context, List<Video> list) {
+    public TravelingAdapter(Context context, List<Article> list) {
         super(context, list);
     }
 
     // 设置数据
-    public void setData(List<Video> list) {
+    public void setData(List<Article> list) {
         clearAll();
         addALL(list);
 
@@ -56,11 +57,11 @@ public class TravelingAdapter extends BaseListAdapter<Video> {
     }
 
     // 创建不满一屏的空数据
-    public List<Video> createEmptyList(int size) {
-        List<Video> emptyList = new ArrayList<>();
+    public List<Article> createEmptyList(int size) {
+        List<Article> emptyList = new ArrayList<>();
         if (size <= 0) return emptyList;
         for (int i=0; i<size; i++) {
-            emptyList.add(new Video());
+            emptyList.add(new Article());
         }
         return emptyList;
     }
@@ -86,7 +87,7 @@ public class TravelingAdapter extends BaseListAdapter<Video> {
             convertView.setTag(holder);
         }
 
-        final Video entity = getItem(position);
+        final Article entity = getItem(position);
 
         holder.llRootView.setVisibility(View.VISIBLE);
         if (TextUtils.isEmpty(entity.getId())) {
@@ -94,11 +95,11 @@ public class TravelingAdapter extends BaseListAdapter<Video> {
             return convertView;
         }
 
-        final String title = entity.getV_t() ;
+        final String title = entity.getA_t() ;
         holder.tvTitle.setText(title);
-        holder.tvRank.setText(  entity.getV_js());
+        holder.tvRank.setText(  entity.getA_js());
 
-        String images = entity.getV_img();
+        String images = entity.getA_img();
         if (!TextUtils.isEmpty(images)){
             holder.givImage.loadNetImage(images, R.color.font_black_6);
         }
@@ -132,6 +133,6 @@ public class TravelingAdapter extends BaseListAdapter<Video> {
     }
 
     public interface ItemClickListener{
-        void click(Video entity);
+        void click(Article entity);
     }
 }
