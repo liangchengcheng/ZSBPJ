@@ -7,9 +7,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.WindowManager;
 import com.lcc.adapter.TabViewPagerAdapter;
 import com.lcc.base.BaseActivity;
+import com.lcc.msdq.MainActivity;
 import com.lcc.msdq.R;
 import com.lcc.msdq.comments.CommentsActivity;
 
@@ -31,6 +33,20 @@ public class LoginMainActivity extends BaseActivity {
     @Override
     protected void initView() {
         result = getIntent().getStringExtra("result");
+        View close = findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginMainActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        if (!TextUtils.isEmpty(result)){
+            close.setVisibility(View.GONE);
+        }else {
+            close.setVisibility(View.VISIBLE);
+        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setupViewPager();
     }

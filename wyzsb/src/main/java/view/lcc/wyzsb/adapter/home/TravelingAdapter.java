@@ -102,6 +102,9 @@ public class TravelingAdapter extends BaseListAdapter<Article> {
         String images = entity.getA_img();
         if (!TextUtils.isEmpty(images)){
             holder.givImage.loadNetImage(images, R.color.font_black_6);
+            holder.givImage.setVisibility(View.VISIBLE);
+        }else {
+            holder.givImage.setVisibility(View.GONE);
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

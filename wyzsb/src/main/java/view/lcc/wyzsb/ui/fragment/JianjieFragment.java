@@ -1,5 +1,6 @@
 package view.lcc.wyzsb.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import view.lcc.wyzsb.mvp.view.VideoDetailsView;
  * Date:         2015年11月21日15:28:25
  * Description:
  */
+@SuppressLint("ValidFragment")
 public class JianjieFragment extends Fragment implements View.OnClickListener, VideoDetailsView {
 
     private Video video;
@@ -31,7 +33,7 @@ public class JianjieFragment extends Fragment implements View.OnClickListener, V
     private TextView tv_sc;
 
     private VideoDetailsPresenter videoDetailsPresenter;
-
+    @SuppressLint("ValidFragment")
     public JianjieFragment(Video video){
         this.video = video;
     }

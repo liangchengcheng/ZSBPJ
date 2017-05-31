@@ -1,5 +1,6 @@
 package view.lcc.wyzsb.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -41,6 +42,7 @@ import view.lcc.wyzsb.view.SendCommentButton;
  * Date:         2015年11月21日15:28:25
  * Description:
  */
+@SuppressLint("ValidFragment")
 public class CommentFragment extends Fragment implements CommentsView, CommentAdapter.OnItemClickListener,
         SwipeRefreshLayout.OnRefreshListener {
     private CommentsPresenter presenter;
@@ -57,7 +59,7 @@ public class CommentFragment extends Fragment implements CommentsView, CommentAd
     protected long currentTime = 0;
     protected int currentPage = 1;
     private SwipeRefreshLayout mSwipeRefreshWidget;
-
+    @SuppressLint("ValidFragment")
     public CommentFragment(Video video) {
         this.video = video;
     }

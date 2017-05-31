@@ -53,7 +53,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.android.support:support-v4:25.0.1'
-    compile files('libs/ad.jar')
     //短信相关
     compile project(':SMSSDK')
     //eventbus

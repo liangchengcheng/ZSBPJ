@@ -96,10 +96,6 @@ public class ADBaseActivity extends Activity {
 
 	/**
 	 * 展示Toast
-	 *
-	 * @param duration
-	 * @param format
-	 * @param args
 	 */
 	private void showToast(int duration, String format, Object... args) {
 		Toast.makeText(mContext, String.format(format, args), duration).show();

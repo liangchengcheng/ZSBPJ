@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
-import net.youmi.android.normal.spot.SpotManager;
+
 
 import java.util.ArrayList;
 
@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void exitApp() {
-        SpotManager.getInstance(MainActivity.this).onAppExit();
+
         finish();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);

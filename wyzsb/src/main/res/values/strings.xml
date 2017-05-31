@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">new project by lcc</string>
-
+    <string name="app_name">黑客技术宝典</string>
     <string name="smoothlistview_header_hint_normal">下拉刷新</string>
     <string name="smoothlistview_header_hint_ready">松开刷新数据</string>
     <string name="smoothlistview_header_hint_loading">正在加载...</string>
