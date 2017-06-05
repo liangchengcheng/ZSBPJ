@@ -98,3 +98,22 @@ git easyui + mysql个人的博客系统
 8：MyRealm
 9：文件上传
 10://通过UE自己封装的ajax请求数据
+var ue = UE.getEditor('editor');
+ue.addListener("ready", function(){
+   //通过UE自己封装的ajax请求数据
+   UE.ajax.request("${pageContext.request.contextPath}/admin/blog/findById.do",
+         {
+            method: "post",
+            async: false,
+            data: {"id":"${param.id}"},
+            onsuccess: function(result) { //根据id查询Blog，返回一个json格式的blog对象
+               result = eval("(" + result.responseText + ")");
+               $("#title").val(result.title);
+               $("#keyWord").val(result.keyWord);
+               $("#blogTypeId").combobox("setValue", result.blogType.id);
+               UE.getEditor('editor').setContent(result.content);
+            }
+         });
+验证码：blogdetails.jsp
+document.getElementById("randImage").src="${pageContext.request.contextPath}/image.jsp?"+Math.random();
+Index.JSP的文章的前端实现
