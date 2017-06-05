@@ -1,0 +1,100 @@
+git0项目之SpringMVC+spring+Mybatis的校园o2o电商项目的后台和管理
+
+1：工具类有日期的管理类、激光推送的类、md5加密、分页的类、xss的攻击的类
+2：@Service标注impl。
+3：方式1：@Resource(name="foodCategoryMapper")
+	private FoodCategoryMapper foodCategoryMapper;
+4：方式2：
+private OrderMapper orderMapper;
+
+	private PreferentialMapper preferentialMapper;
+
+	public OrderMapper getOrderMapper() {
+		return orderMapper;
+	}
+
+	@Autowired
+	public void setOrderMapper(OrderMapper orderMapper) {
+		this.orderMapper = orderMapper;
+	}
+
+	@Autowired
+	public void setPreferentialMapper(PreferentialMapper preferentialMapper) {
+		this.pref
+5：
+在controller 里面
+@Autowired
+	private FoodService foodService;
+ 或者
+@Resource private  HotSearchService hotSearchService;
+
+6：FoodController的获取所有的评论是分页的具体的实践
+7：NewsController里面有文件上传相关。
+8：spring-mvc 的配置和spring的基本配置
+9：mybatis的基本配置
+
+
+
+
+
+git0项目之龙果开源-后台管理系统
+1：logback.xml  配置了输出等
+2：applicationContext-core.xml  的文件引入模块和引入配置文件
+3：applicationContext-jdbc.xml  dataSource配置sqlSessionFactory
+配置了transactionManager
+4：applicationContext-mail.xml  配置邮件
+5：applicationContext-session.xml  （session 和 resdis） jedisPoolConfig jedisConnectionFactory
+redisTemplate  redisHttpSessionConfiguration
+6：3：applicationContext-template.xml  配置了 FreeMarker视图解析器
+
+7：3：applicationContext-Thread.xml  配置了 线程池相关
+8：CachedImpl  基本的缓存类的实现
+9：返回实体的封装  Result<T>
+10：分页的组件 Page<T>
+11：一种特殊的查询   List<RcUser> selectByExample(RcUserExample example);Criteria
+12：redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, fieldCode);
+13：flt  前端文件非常好
+14：前端list。flt的   表格数据 dictionaryList_tab
+
+
+
+
+git0手把手教你整合最优雅SSM框架：SpringMVC + Spring + MyBatis
+1：applicationContext.xml 的 配置数据源dataSource
+配置了配置mybatis的sqlSessionFactory
+配置Mapper的dao的扫描的入口
+配置事物管理transactionManager
+配置安全管理器securityManager
+配置shiro的过滤器shiroFilter
+配置事物通知属性<tx:advice id="txAdvice" transaction-manager="transactionManager">
+配置事物切面<aop:config>
+
+2：spring-mvc.xml的配置文件上传
+配置视图解析器
+配置静态资源解析
+配置扫描
+
+3:blogManage.jsp的多选删除的功能的实现。
+4：openTab打开小的弹窗和修改
+5:blogManage.jsp 搜索  删除 刷新 查询
+6：modifyBlog 的编辑器的使用
+7：授权 AuthorizingRealm  MyRealm
+8；BlogIndex 索引的使用
+9：
+JSONObject result = new JSONObject();
+result.put("success", true);
+ResponseUtil.write(response, result);
+
+
+
+git easyui + mysql个人的博客系统
+1：配置mybatis的sqlSessionFactory
+2：扫描mapper接口（即dao），Spring会自动查找其下的类
+3：事务管理（transaction manager）
+4：自定义Realm
+5：开启Shiro注解
+6;PageUtil  页面生成前端的布局
+7：对Lucene的基本使用blogindex
+8：MyRealm
+9：文件上传
+10://通过UE自己封装的ajax请求数据
