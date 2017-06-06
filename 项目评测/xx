@@ -114,6 +114,19 @@ ue.addListener("ready", function(){
                UE.getEditor('editor').setContent(result.content);
             }
          });
-验证码：blogdetails.jsp
+11：验证码：blogdetails.jsp
 document.getElementById("randImage").src="${pageContext.request.contextPath}/image.jsp?"+Math.random();
-Index.JSP的文章的前端实现
+12：Index.JSP的文章的前端实现
+
+
+
+
+git0 MyBatis + AngularJS写成的单页应用博客
+
+1  ：logback.xml   打印错误日志等，
+2  ：appProperties 读取配置文件
+3：配置阿里巴巴的dataSource
+4： sqlSessionFactory ----mybatis
+5:  transactionManager
+6:  viewResolvers 视图解析器
+7： 配置json 模板 messageConverters
