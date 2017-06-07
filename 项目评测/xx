@@ -122,7 +122,6 @@ document.getElementById("randImage").src="${pageContext.request.contextPath}/ima
 
 
 git0 MyBatis + AngularJS写成的单页应用博客
-
 1  ：logback.xml   打印错误日志等，
 2  ：appProperties 读取配置文件
 3：配置阿里巴巴的dataSource

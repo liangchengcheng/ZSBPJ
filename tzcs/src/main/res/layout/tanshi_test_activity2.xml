@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="您感到身体学生不轻松或不爽快吗？"
+                    android:text="您感到身体沉重不轻松或不爽快吗？"
                     android:textSize="16sp" />
 
                 <CheckBox
