@@ -122,6 +122,7 @@ document.getElementById("randImage").src="${pageContext.request.contextPath}/ima
 
 
 git0 MyBatis + AngularJS写成的单页应用博客
+
 1  ：logback.xml   打印错误日志等，
 2  ：appProperties 读取配置文件
 3：配置阿里巴巴的dataSource
@@ -129,3 +130,37 @@ git0 MyBatis + AngularJS写成的单页应用博客
 5:  transactionManager
 6:  viewResolvers 视图解析器
 7： 配置json 模板 messageConverters
+8: 拦截器，拦截ipgetIpAddress
+9：拦截器是否是手机访问
+10: 分页拦截器PaginationInterceptor
+
+<c:choose>
+    <c:when test="${type == 1}">
+        <c:set var="second_nav" value="文章添加" />
+        <c:set var="url" value="${staticDomain}/manage/article/add" />
+        <c:set var="submit_btn" value="发布文章" />
+    </c:when>
+    <c:when test="${type == 2}">
+        <c:set var="second_nav" value="文章更新" />
+        <c:set var="url" value="${staticDomain}/manage/article/update" />
+        <c:set var="submit_btn" value="更新文章" />
+    </c:when>
+</c:choose>
+
+<%@ include file="../include/index_man_header.jsp" %>
+时间的格式化：<fmt:formatDate value="${picInfo.createTime}" pattern="yyyy-MM-dd mm:hh:ss" />
+12:图片上传遮罩层 pic list.jsp 和图片上传功能的实现
+13：日志删除遮罩层record list.jsp
+14:<fmt:formatDate value="${archivesVO.timeStamp}" pattern="yyyy-MM" />
+15:<c:if test="${archivesVO.timeStamp eq timeStamp}">class="active"</c:if> >
+ <fmt:formatDate value="${archivesVO.timeStamp}" pattern="yyyy年MM月"/>
+16:循环的简单使用
+<c:forEach var="categoryInfoVO" items="${categoryInfoVOList}" varStatus="status">
+    <div class="left-item">
+        <span>
+            <a href="${staticDomain}/category/${categoryInfoVO.slug}/list">${categoryInfoVO.categoryTitle}</a>
+            (${fn:length(categoryInfoVO.articleInfoVOList)})
+        </span>
+        <div class="time-point"></div>
+    </div>
+</c:forEach>
