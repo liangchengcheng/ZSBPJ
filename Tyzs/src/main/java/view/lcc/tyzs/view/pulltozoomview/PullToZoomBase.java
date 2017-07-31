@@ -13,7 +13,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import view.lcc.wyzsb.R;
+import view.lcc.tyzs.R;
+
 
 /**
  * Author:    ZhuWenWu

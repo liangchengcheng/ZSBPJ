@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -18,24 +17,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import org.json.JSONObject;
-
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import view.lcc.wyzsb.R;
-import view.lcc.wyzsb.mvp.param.CheckVcode;
-import view.lcc.wyzsb.mvp.param.Register;
-import view.lcc.wyzsb.mvp.presenter.CheckCodePresenter;
-import view.lcc.wyzsb.mvp.presenter.RegisterPresenter;
-import view.lcc.wyzsb.mvp.presenter.impl.CheckCodePresenterImpl;
-import view.lcc.wyzsb.mvp.presenter.impl.RegisterPresenterImpl;
-import view.lcc.wyzsb.mvp.view.CheckCodeView;
-import view.lcc.wyzsb.mvp.view.RegisterView;
-import view.lcc.wyzsb.utils.CheckUtils;
-import view.lcc.wyzsb.utils.Tools;
-import view.lcc.wyzsb.view.EditTextWithDel;
-import view.lcc.wyzsb.view.PaperButton;
+import view.lcc.tyzs.R;
+import view.lcc.tyzs.mvp.presenter.RegisterPresenter;
+import view.lcc.tyzs.mvp.presenter.impl.RegisterPresenterImpl;
+import view.lcc.tyzs.mvp.view.RegisterView;
+import view.lcc.tyzs.ui.home.MainActivity;
+import view.lcc.tyzs.utils.CheckUtils;
+import view.lcc.tyzs.utils.Tools;
+import view.lcc.tyzs.view.EditTextWithDel;
+import view.lcc.tyzs.view.PaperButton;
 
 /**
  * Author:       梁铖城
@@ -43,7 +33,7 @@ import view.lcc.wyzsb.view.PaperButton;
  * Date:         2017年04月28日16:24:47
  * Description:  注册相关的界面
  */
-public class FragmentRegister extends Fragment implements CheckCodeView, RegisterView {
+public class FragmentRegister extends Fragment implements RegisterView {
     EditTextWithDel userpassword;
     PaperButton sendsmscode;
     EditTextWithDel userphone;
@@ -59,7 +49,11 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
 
     private View root_view;
 
-    private CheckCodePresenter checkCodePresenter;
+    private String code;
+    private String phone;
+    private String password;
+
+
     private RegisterPresenter registerPresenter;
     private String flag = "";
 
@@ -97,21 +91,7 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, null);
-        checkCodePresenter = new CheckCodePresenterImpl(this);
         registerPresenter = new RegisterPresenterImpl(this);
-        SMSSDK.initSDK(getActivity(), "1d30662a0c12d", "08d948dff78b4c0e0a606a96a01286d6", true);
-        EventHandler eh2 = new EventHandler() {
-
-            @Override
-            public void afterEvent(int event, int re, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = re;
-                msg.obj = data;
-                mHandler2.sendMessage(msg);
-            }
-        };
-        SMSSDK.registerEventHandler(eh2);
         initData(view);
         initView();
         TextListener();
@@ -176,35 +156,9 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
         });
     }
 
-    private TimeCount timeCount;
+
 
     private void initView() {
-        //发送验证码点击事件
-        sendsmscode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final View view = v;
-                String phone = userphone.getText().toString();
-                boolean mobile = CheckUtils.isMobile(phone);
-                if (!TextUtils.isEmpty(phone)) {
-                    if (mobile) {
-                        if (timeCount == null) {
-                            timeCount = new TimeCount(sendsmscode, 60 * 1000, 1000);
-                        }
-                        timeCount.start();
-                        SMSSDK.getVerificationCode("86", phone);
-                    } else {
-                        rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
-                        phoneIv.setAnimation(Tools.shakeAnimation(2));
-                        showSnackbar(view, "提示：输入手机号码");
-                    }
-                } else {
-                    rela_rephone.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
-                    phoneIv.setAnimation(Tools.shakeAnimation(2));
-                    showSnackbar(view, "提示：手机号码不正确");
-                }
-            }
-        });
         //下一步的点击事件
         nextBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,40 +196,9 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
                     showSnackbar(view, "提示：请输入密码");
                     return;
                 }
-                CheckVcode checkVcode = new CheckVcode();
-                checkVcode.setPhone(phone);
-                checkVcode.setCode(code);
-                checkCodePresenter.checkVCode(checkVcode);
+
             }
         });
-    }
-
-    @Override
-    public void onCheckLoading() {
-
-    }
-
-    @Override
-    public void onCheckNetworkError(String msg) {
-        rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
-        keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view, "提示：网络错误，验证码错误");
-    }
-
-    @Override
-    public void onVcodeCheckSuccess(String token) {
-        Register register = new Register();
-        register.setPhone(phone);
-        register.setPassword(password);
-        register.setVerify_code(code);
-        registerPresenter.register(register);
-    }
-
-    @Override
-    public void onVcodeCheckFail(String msg) {
-        rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
-        keyIv.setAnimation(Tools.shakeAnimation(2));
-        showSnackbar(root_view, "提示：验证码验证错误");
     }
 
     @Override
@@ -287,13 +210,12 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
     public void RegisterSuccess(String msg) {
         //注册成功
         showSnackbar(root_view, "提示：注册账号成功");
-        Intent intent = new Intent(getActivity(), UserNameActivity.class);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.putExtra("code", code);
         intent.putExtra("phone", phone);
         intent.putExtra("password", password);
         intent.putExtra("result", flag);
         startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
         getActivity().finish();
     }
 
@@ -335,60 +257,9 @@ public class FragmentRegister extends Fragment implements CheckCodeView, Registe
         }, DELAY_MILLIS);
     }
 
-    private String code;
-    private String phone;
-    private String password;
-
-    Handler mHandler2 = new Handler() {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            int event = msg.arg1;
-            int result = msg.arg2;
-            Object data = msg.obj;
-            if (result == SMSSDK.RESULT_COMPLETE) {
-                if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    showSnackbar(root_view, "提示：短信发送成功");
-                }
-
-                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    showSnackbar(root_view, "提示：短信验证成功");
-                    Intent intent = new Intent(getActivity(), UserNameActivity.class);
-                    intent.putExtra("code", code);
-                    intent.putExtra("phone", phone);
-                    intent.putExtra("password", password);
-                    intent.putExtra("result", flag);
-                    startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
-                    getActivity().finish();
-                }
-            } else {
-                int status = 0;
-                try {
-                    ((Throwable) data).printStackTrace();
-                    Throwable throwable = (Throwable) data;
-                    JSONObject object = new JSONObject(throwable.getMessage());
-                    String des = object.optString("detail");
-                    status = object.optInt("status");
-                    if (!TextUtils.isEmpty(des)) {
-                        rela_recode.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));
-                        keyIv.setAnimation(Tools.shakeAnimation(2));
-                        showSnackbar(root_view, des);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-
     //回收timer
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SMSSDK.unregisterAllEventHandler();
-        if(timeCount!=null){
-            timeCount.cancel();
-        }
     }
 }

@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
-import view.lcc.wyzsb.R;
+import view.lcc.tyzs.R;
 
 public class EditTextWithDel extends EditText {
 	private final static String TAG = "EditTextWithDel";

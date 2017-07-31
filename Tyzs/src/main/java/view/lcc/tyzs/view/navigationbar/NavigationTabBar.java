@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import view.lcc.wyzsb.R;
+import view.lcc.tyzs.R;
 
 /**
  * Created by GIGAMOLE on 24.03.2016.

@@ -1,10 +1,13 @@
 package view.lcc.tyzs.ui.login;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -19,16 +22,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import de.greenrobot.event.EventBus;
-import view.lcc.wyzsb.MainActivity;
-import view.lcc.wyzsb.R;
-import view.lcc.wyzsb.mvp.param.Login;
-import view.lcc.wyzsb.mvp.presenter.LoginPresenter;
-import view.lcc.wyzsb.mvp.presenter.impl.LoginPresenterImpl;
-import view.lcc.wyzsb.mvp.view.LoginView;
-import view.lcc.wyzsb.utils.CheckUtils;
-import view.lcc.wyzsb.utils.Tools;
-import view.lcc.wyzsb.view.EditTextWithDel;
-import view.lcc.wyzsb.view.PaperButton;
+import view.lcc.tyzs.R;
+import view.lcc.tyzs.mvp.presenter.LoginPresenter;
+import view.lcc.tyzs.mvp.presenter.impl.LoginPresenterImpl;
+import view.lcc.tyzs.mvp.view.LoginView;
+import view.lcc.tyzs.ui.home.MainActivity;
+import view.lcc.tyzs.utils.CheckUtils;
+import view.lcc.tyzs.utils.Tools;
+import view.lcc.tyzs.view.EditTextWithDel;
+import view.lcc.tyzs.view.PaperButton;
 
 /**
  * Author:       梁铖城
@@ -105,16 +107,17 @@ public class FragmentLogin extends Fragment implements LoginView {
 
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void afterTextChanged(Editable s) {
                 String text = userphone.getText().toString();
                 if (CheckUtils.isMobile(text)) {
-                    //抖动
                     rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
                 }
             }
         });
         userpass.addTextChangedListener(new TextWatcher() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 rela_pass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
@@ -137,6 +140,7 @@ public class FragmentLogin extends Fragment implements LoginView {
         userphone.setText(userinfo.getString("username", null));
         userpass.setText(userinfo.getString("password", null));
         bt_login.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 final String phone = userphone.getText().toString();
@@ -163,10 +167,8 @@ public class FragmentLogin extends Fragment implements LoginView {
                     return;
                 }
                 login_progress.setVisibility(View.VISIBLE);
-                Login login = new Login();
-                login.setPhone(phone);
-                login.setPassword(passwords);
-                presenter.signIn(login);
+
+                presenter.login(phone,passwords);
             }
         });
     }
@@ -180,6 +182,7 @@ public class FragmentLogin extends Fragment implements LoginView {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onSignInSuccess(String user) {
         rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
@@ -192,7 +195,6 @@ public class FragmentLogin extends Fragment implements LoginView {
                 if (TextUtils.isEmpty(flag)){
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.fade, R.anim.my_alpha_action);
                 }else {
                     EventBus.getDefault().post(0x03);
                     getActivity().finish();
@@ -211,6 +213,7 @@ public class FragmentLogin extends Fragment implements LoginView {
         loginFail();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void loginFail() {
         login_progress.setVisibility(View.GONE);
         rela_pass.setBackground(getResources().getDrawable(R.drawable.bg_border_color_cutmaincolor));

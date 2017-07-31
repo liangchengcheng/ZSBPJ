@@ -9,9 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.WindowManager;
 
-import view.lcc.wyzsb.R;
-import view.lcc.wyzsb.adapter.TabViewPagerAdapter;
-import view.lcc.wyzsb.base.BaseActivity;
+import view.lcc.tyzs.R;
+import view.lcc.tyzs.adapter.TabViewPagerAdapter;
+import view.lcc.tyzs.base.BaseActivity;
+
 
 /**
  * Author:       |梁铖城

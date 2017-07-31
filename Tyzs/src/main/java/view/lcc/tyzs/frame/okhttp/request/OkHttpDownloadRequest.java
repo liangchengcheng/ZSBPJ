@@ -4,13 +4,11 @@ import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-
 import view.lcc.tyzs.frame.okhttp.OkHttpClientManager;
 import view.lcc.tyzs.frame.okhttp.callback.ResultCallback;
 
