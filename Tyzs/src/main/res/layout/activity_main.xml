@@ -17,6 +17,12 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <TextView
+            android:background="#eee"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
         <view.lcc.tyzs.view.navigationbar.NavigationTabBar
             android:id="@+id/ntb_horizontal"
             android:layout_width="match_parent"

@@ -118,7 +118,7 @@
             android:layout_marginLeft="15dp"
             android:src="@drawable/codeicon" />
 
-        <view.lcc.wyzsb.view.EditTextWithDel
+        <view.lcc.tyzs.view.EditTextWithDel
             android:id="@+id/userpassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -134,7 +134,7 @@
             android:textSize="13sp" />
     </RelativeLayout>
 
-    <view.lcc.wyzsb.view.PaperButton
+    <view.lcc.tyzs.view.PaperButton
         android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="40dp"

@@ -51,13 +51,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
 
         View content_view = View.inflate(getActivity(), R.layout.widget_profile_contentview, null);
-        content_view.findViewById(R.id.layout_me_task).setOnClickListener(this);
+
         content_view.findViewById(R.id.layout_me_getseed).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_host_manage).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_focus).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_room_manage).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_history).setOnClickListener(this);
-        content_view.findViewById(R.id.layout_me_mind).setOnClickListener(this);
+
 
         scrollView.setHeaderView(header_view);
         scrollView.setZoomView(zoom_view);
@@ -70,10 +70,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-            //意见反馈
-            case R.id.layout_me_task:
 
-                break;
+
             //关于软件
             case R.id.layout_me_getseed:
 
@@ -103,10 +101,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             case R.id.layout_me_history:
 
                 break;
-            //消息中心
-            case R.id.layout_me_mind:
 
-                break;
         }
     }
 

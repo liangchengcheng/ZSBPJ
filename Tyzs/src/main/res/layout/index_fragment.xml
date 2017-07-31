@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/ll_fav"
+                    android:id="@+id/ll_jifen"
                     android:layout_margin="8dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/mszb"
+                        android:id="@+id/tzcs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -187,13 +187,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试准备"
+                            android:text="体质测试"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/msjl"
+                        android:id="@+id/zchy"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -212,13 +212,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试简历"
+                            android:text="注册会员"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/msjq"
+                        android:id="@+id/jfbd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -237,13 +237,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试技巧"
+                            android:text="积分变动"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/mszz"
+                        android:id="@+id/cjwt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -262,7 +262,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="常问问题"
+                            android:text="常见问题"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -285,7 +285,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/msgx"
+                        android:id="@+id/gsjs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -304,13 +304,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试感想"
+                            android:text="公司介绍"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/msjz"
+                        android:id="@+id/rxcp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -329,13 +329,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试举止"
+                            android:text="热销产品"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/msjt"
+                        android:id="@+id/gwc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -354,7 +354,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:padding="8dp"
-                            android:text="面试流程"
+                            android:text="购物车"
                             android:textColor="#585858"
                             android:textSize="12sp" />
                     </LinearLayout>

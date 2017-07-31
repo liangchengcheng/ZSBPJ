@@ -64,7 +64,7 @@
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/codeicon" />
 
-            <view.lcc.wyzsb.view.EditTextWithDel
+            <view.lcc.tyzs.view.EditTextWithDel
                 android:id="@+id/userpass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

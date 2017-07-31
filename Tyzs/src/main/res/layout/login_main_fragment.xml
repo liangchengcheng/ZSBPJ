@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:background="@drawable/searchicon" >
+    android:background="@color/m29c741" >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp" >
