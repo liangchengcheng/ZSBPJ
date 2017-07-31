@@ -1,0 +1,17 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="common_margin">12dp</dimen>
+    <dimen name="default_elevation">8dp</dimen>
+    <dimen name="comment_avatar_size">48dp</dimen>
+
+    <dimen name="item_title">16sp</dimen>
+    <dimen name="item_content">14sp</dimen>
+    <dimen name="item_time">12sp</dimen>
+    <item name="secondary_alpha" format="float" type="dimen">0.54</item>
+    <item name="standard_alpha" format="float" type="dimen">0.84</item>
+
+    <dimen name="setting_menu_item_height">42.0dp</dimen>
+</resources>

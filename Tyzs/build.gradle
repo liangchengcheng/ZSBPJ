@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        applicationId "view.lcc.tyzs"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    // Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    // XUtils
+    compile 'org.xutils:xutils:3.3.36'
+    //rx相关
+    compile 'io.reactivex:rxjava:1.2.6'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    //视频相关
+    compile project(':jjdxm-ijkplayer')
+    // 根据需要支持去拓展，在jjdxm-ijkplayer中默认加入了armv7a的了
+    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
+    compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
+    compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
+    compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
+    compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
+    //gson和okhttp
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.android.support:support-v4:25.0.1'
+    //短信相关
+    compile project(':SMSSDK')
+    //eventbus
+    compile 'de.greenrobot:eventbus:2.4.0'
+}

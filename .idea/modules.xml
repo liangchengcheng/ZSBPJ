@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/dropdownlayout/DropDownLayout.iml" filepath="$PROJECT_DIR$/dropdownlayout/DropDownLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/SMSSDK/SMSSDK.iml" filepath="$PROJECT_DIR$/SMSSDK/SMSSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tyzs/Tyzs.iml" filepath="$PROJECT_DIR$/Tyzs/Tyzs.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZSBPJ.iml" filepath="$PROJECT_DIR$/ZSBPJ.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dxjnzgz/dxjnzgz.iml" filepath="$PROJECT_DIR$/dxjnzgz/dxjnzgz.iml" />
