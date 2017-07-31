@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:padding="8dp"
-                        android:text="我的收藏"
+                        android:text="我的积分"
                         android:textColor="#fff"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:padding="8dp"
-                        android:text="我的发布"
+                        android:text="我的消息"
                         android:textColor="#fff"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:padding="8dp"
-                        android:text="系统消息"
+                        android:text="我的订单"
                         android:textColor="#fff"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:padding="8dp"
-                        android:text="切换职业"
+                        android:text="我的体质"
                         android:textColor="#fff"
                         android:textSize="14sp" />
                 </LinearLayout>
