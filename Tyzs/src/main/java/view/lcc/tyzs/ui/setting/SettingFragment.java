@@ -106,17 +106,17 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setData() {
-        String phone = SharePreferenceUtil.getUserType();
+        String phone = SharePreferenceUtil.getUid();
         if (TextUtils.isEmpty(phone)) {
             return;
         }
 
-        String nickname = SharePreferenceUtil.getUserType();
+        String nickname = SharePreferenceUtil.getUid();
         if (TextUtils.isEmpty(nickname)) {
-            nickname = SharePreferenceUtil.getUserType();
+            nickname = SharePreferenceUtil.getUid();
         }
         tv_phonenumber.setText(nickname);
-        String url = SharePreferenceUtil.getUserType();
+        String url = SharePreferenceUtil.getUid();
         //这里等后期添加了
         if (TextUtils.isEmpty(url)) {
             ImageManager.getInstance()

@@ -41,64 +41,6 @@
             android:textSize="13sp" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/rela_recode"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:background="@drawable/bg_border_color_black">
-
-            <ImageView
-                android:id="@+id/keyicon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/keyicon" />
-
-            <view.lcc.tyzs.view.EditTextWithDel
-                android:id="@+id/smscode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/keyicon"
-                android:background="@null"
-                android:hint="验证码"
-                android:inputType="number"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
-        <view.lcc.tyzs.view.PaperButton
-            android:id="@+id/send_smscode"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            widget:paper_color="@color/codeGary"
-            widget:paper_corner_radius="19dp"
-            widget:paper_text="发送验证码"
-            widget:paper_text_color="@color/white"
-            widget:paper_text_size="13sp" />
-
-
-    </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/rela_repass"
         android:layout_width="match_parent"
@@ -128,6 +70,76 @@
             android:layout_toEndOf="@+id/codeicon"
             android:background="@null"
             android:hint="请输入您的密码"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rela_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_color_black">
+
+        <ImageView
+            android:id="@+id/icon_name"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/codeicon" />
+
+        <view.lcc.tyzs.view.EditTextWithDel
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/icon_name"
+            android:background="@null"
+            android:hint="请输入您的姓名"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rela_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_color_black">
+
+        <ImageView
+            android:id="@+id/icon_id"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/codeicon" />
+
+        <view.lcc.tyzs.view.EditTextWithDel
+            android:id="@+id/userid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/icon_id"
+            android:background="@null"
+            android:hint="请输入您的身份证"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/white"

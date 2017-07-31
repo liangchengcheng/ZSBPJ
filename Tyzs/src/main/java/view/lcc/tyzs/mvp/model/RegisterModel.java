@@ -20,7 +20,7 @@ public class RegisterModel {
         paramsMap.put("name", name);
         paramsMap.put("cardid", cardid);
         paramsMap.put("Pwd", Pwd);
-        return ApiClient.create(AppConstants.RequestPath.SIGN, paramsMap).get(callback);
+        return ApiClient.create(AppConstants.RequestPath.SIGN, paramsMap).post(callback);
     }
 
 }

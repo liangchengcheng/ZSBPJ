@@ -42,9 +42,9 @@ public class AppConstants {
         //验证码
         public final static String CHECK_VCODE = "/hk/checkVcode";
         //注册
-        public final static String SIGN = "/hk/register";
+        public final static String SIGN = "/Interface/Register.ashx";
         //登录
-        public final static String LOGIN = "/hk/login";
+        public final static String LOGIN = "/Interface/Login.ashx";
         //注册昵称
         public final static String USERNAME = "/hk/editUserName";
 

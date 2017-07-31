@@ -1,5 +1,7 @@
 package view.lcc.tyzs.mvp.presenter.impl;
 
+import android.text.TextUtils;
+
 import com.squareup.okhttp.Request;
 import org.json.JSONObject;
 
@@ -11,10 +13,10 @@ import view.lcc.tyzs.mvp.view.RegisterView;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 
 /**
- * Author:       梁铖城
- * Email:        1038127753@qq.com
- * Date:
- * Description:  登录接口
+ * Author:       |梁铖城
+ * Email:        |1038127753@qq.com
+ * Date:         |2017年08月01日07:41:07
+ * Description:  |注册接口
  */
 public class RegisterPresenterImpl implements RegisterPresenter {
     private RegisterView view;
@@ -39,16 +41,12 @@ public class RegisterPresenterImpl implements RegisterPresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    int status = jsonObject.getInt("status");
-                    String message = jsonObject.getString("message");
-                    if (status == 1) {
-                        String result = jsonObject.getString("result");
-                        JSONObject ret = new JSONObject(result);
-                        // TODO: 2017/7/31
-                        SharePreferenceUtil.setUpdateTime(ret.getString("u_i"));
-                        view.RegisterSuccess(result);
-                    } else if (status == 0) {
-                        view.RegisterFail(message);
+                    String status = jsonObject.getString("resultno");
+                    if (!TextUtils.isEmpty(status) && status.equals("000")) {
+
+                        view.RegisterSuccess("");
+                    } else  {
+                        view.RegisterFail("注册失败，请稍后再试");
                     }
                 } catch (Exception e) {
                     view.RegisterFail("注册失败");
