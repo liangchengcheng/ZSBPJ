@@ -10,9 +10,9 @@ public interface LoginView {
 
     void Loading();
 
-    void onSignInSuccess(String user);
+    void onLoginSuccess(String user);
 
-    void onSignInFail(String msg);
+    void onLoginFail(String msg);
 
     void NetWorkErr(String msg);
 }

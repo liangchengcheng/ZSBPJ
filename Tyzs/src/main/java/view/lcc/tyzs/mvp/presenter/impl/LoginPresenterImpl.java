@@ -1,6 +1,9 @@
 package view.lcc.tyzs.mvp.presenter.impl;
 
+import android.text.TextUtils;
+
 import com.squareup.okhttp.Request;
+
 import org.json.JSONObject;
 
 import view.lcc.tyzs.base.ApiException;
@@ -26,9 +29,9 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void login(String phone,String password) {
+    public void login(String phone, final String password) {
         view.Loading();
-        model.signIn(phone,password, new ResultCallback<String>() {
+        model.onLogin(phone, password, new ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 view.NetWorkErr(ApiException.getApiExceptionMessage(e.getMessage()));
@@ -38,19 +41,31 @@ public class LoginPresenterImpl implements LoginPresenter {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    int status = jsonObject.getInt("status");
-                    String message = jsonObject.getString("message");
-                    if (status == 1) {
-                        String result = jsonObject.getString("result");
-                        JSONObject ret = new JSONObject(result);
+                    String status = jsonObject.getString("resultno");
+                    if (!TextUtils.isEmpty(status) && status.equals("000")) {
+                        String result = (String) jsonObject.get("resultjson");
+                        JSONObject con = new JSONObject(result);
+                        String Name = con.getString("name");
 
-                        SharePreferenceUtil.setUpdateTime(ret.getString("u_i"));
-                        view.onSignInSuccess(result);
-                    } else if (status == 0) {
-                        view.onSignInFail(message);
+                        if (Name != null) {
+                            String UID = con.getString("UID");
+                            String cardId = con.getString("cardid");
+                            String rate = con.getString("rate");
+                            String rName = con.getString("rname");
+
+                            SharePreferenceUtil.setName(Name);
+                            SharePreferenceUtil.setrName(rName);
+                            SharePreferenceUtil.setCardId(cardId);
+                            SharePreferenceUtil.setUid(UID);
+                            SharePreferenceUtil.setPwd(password);
+                           SharePreferenceUtil.setRate(rate);
+                        }
+                        view.onLoginSuccess(result);
+                    } else {
+                        view.onLoginFail("登录失败");
                     }
                 } catch (Exception e) {
-                    view.onSignInFail("登录失败");
+                    view.onLoginFail("登录失败");
                     e.printStackTrace();
                 }
             }

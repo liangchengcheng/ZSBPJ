@@ -79,7 +79,9 @@ public class FragmentLogin extends Fragment implements LoginView {
     private ImageView codeicon;
     private RelativeLayout rela_name;
     private RelativeLayout rela_pass;
+
     private Handler handler = new Handler() {
+
     };
 
     private void initView(View view) {
@@ -184,7 +186,7 @@ public class FragmentLogin extends Fragment implements LoginView {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onSignInSuccess(String user) {
+    public void onLoginSuccess(String user) {
         rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
         rela_name.setBackground(getResources().getDrawable(R.drawable.bg_border_color_black));
         showSnackbar(rl_root_view, "提示：登陆成功");
@@ -204,7 +206,7 @@ public class FragmentLogin extends Fragment implements LoginView {
     }
 
     @Override
-    public void onSignInFail(String msg) {
+    public void onLoginFail(String msg) {
         loginFail();
     }
 

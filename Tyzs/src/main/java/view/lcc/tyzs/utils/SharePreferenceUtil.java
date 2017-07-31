@@ -6,145 +6,91 @@ import view.lcc.tyzs.frame.Frame;
 
 public class SharePreferenceUtil {
 
-    //session id
-    public static final String USER_TK = "user_tk";
-    //职业类型
-    public static final String USER_TYPE = "user_type";
-    //职业类型id
-    public static final String USER_TYPE_ID = "user_type_id";
-    //是否已经看了首页
-    public static final String GUIDE = "guide";
-    //是否开启缓存
-    public static final String IS_CACHE = "is_cache";
-    //软件更新的时间
-    public static final String UPDATE_TIME = "update_time";
-    //默认所在的区域
-    public static final String AREA = "area";
 
-    /**
-     * 获取 session id
-     */
-    public static String getUserTk() {
+    public static final String NAME = "name";
+
+    public static final String R_NAME = "r_name";
+
+    public static final String CARD_ID = "card_id";
+
+    public static final String UID = "uid";
+
+    public static final String RATE = "rate";
+
+    public static final String PWD = "pwd";
+
+
+    public static String getName() {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getString(USER_TK, "");
+        return sharedPreferences.getString(NAME, "");
     }
 
-    /**
-     * 存放 session id
-     */
-    public static void setUserTk(String value){
+    public static void setName(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putString(USER_TK,value).commit();
+        sharedPreferences.edit().putString(NAME,value).commit();
     }
 
-    /**
-     * 读取是否开启了缓存，默认是开启的
-     */
-    public static boolean isCache() {
+    public static String getrName() {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getBoolean(IS_CACHE, true);
+        return sharedPreferences.getString(R_NAME, "");
     }
 
-    /**
-     * 设置是否开启了缓存
-     */
-    public static void setIsCache(boolean isCache){
+    public static void setrName(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putBoolean(IS_CACHE,isCache).apply();
+        sharedPreferences.edit().putString(R_NAME,value).commit();
     }
 
-    /**
-     * 获取职业类型
-     */
-    public static String getUserType() {
+    public static String getCardId() {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getString(USER_TYPE, "");
+        return sharedPreferences.getString(CARD_ID, "");
     }
 
-    /**
-     * 存放职业类型
-     */
-    public static void setUserType(String value){
+    public static void setCardId(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putString(USER_TYPE,value).apply();
+        sharedPreferences.edit().putString(CARD_ID,value).commit();
     }
 
-    /**
-     * 获取是否引导了界面
-     */
-    public static boolean getGuide() {
+    public static String getUid() {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getBoolean(GUIDE, false);
+        return sharedPreferences.getString(UID, "");
     }
 
-    /**
-     * 设置是否引导了界面
-     */
-    public static void setGuide(){
+    public static void setUid(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putBoolean(GUIDE,true).apply();
+        sharedPreferences.edit().putString(UID,value).commit();
     }
 
-    /**
-     * 获取软件更新的时间
-     */
-    public static String getUpdateTime() {
+    public static String getPwd() {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getString(UPDATE_TIME, null);
+        return sharedPreferences.getString(PWD, "");
     }
 
-    /**
-     * 设置是否引导了界面
-     */
-    public static void setUpdateTime(String value){
+    public static void setPwd(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putString(UPDATE_TIME,value).apply();
+        sharedPreferences.edit().putString(PWD,value).commit();
+    }
+    public static String getRate() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString(RATE, "");
     }
 
-    /**
-     * 获取职业类型ID
-     */
-    public static String getUserTypeId() {
+    public static void setRate(String value){
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getString(USER_TYPE_ID, "");
+        sharedPreferences.edit().putString(RATE,value).commit();
     }
 
-    /**
-     * 存放职业类型ID
-     */
-    public static void setUserTypeId(String value){
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putString(USER_TYPE_ID,value).apply();
-    }
 
-    /**
-     * 获取所在的区域
-     */
-    public static String getAREA() {
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(Frame.getAppContext());
-        return sharedPreferences.getString(AREA, "");
-    }
-
-    /**
-     * 设置所在的区域在本地
-     */
-    public static void setAREA(String value){
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(Frame.getAppContext());
-        sharedPreferences.edit().putString(AREA,value).apply();
-    }
 
 }
