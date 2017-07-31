@@ -17,6 +17,7 @@ import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.ui.car.CarFragment;
 import view.lcc.tyzs.ui.goods.GoodsFragment;
+import view.lcc.tyzs.ui.setting.SettingFragment;
 import view.lcc.tyzs.view.NoScrollViewPager;
 import view.lcc.tyzs.view.navigationbar.NavigationTabBar;
 
@@ -38,9 +39,11 @@ public class MainActivity  extends BaseActivity {
         HomeFragment homeFragment = new HomeFragment();
         GoodsFragment goodsFragment = new GoodsFragment();
         CarFragment carFragment = new CarFragment();
+        SettingFragment settingFragment = new SettingFragment();
         fgList.add(homeFragment);
         fgList.add(goodsFragment);
         fgList.add(carFragment);
+        fgList.add(settingFragment);
     }
 
     private void initUI() {
