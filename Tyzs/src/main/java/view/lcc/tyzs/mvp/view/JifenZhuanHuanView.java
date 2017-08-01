@@ -6,7 +6,7 @@ package view.lcc.tyzs.mvp.view;
  * Date:         2017年04月15日20:00:59
  * Description:
  */
-public interface JifenZhuanRangView {
+public interface JifenZhuanHuanView {
 
     void JifenZhuanRangLoading();
 

@@ -8,5 +8,5 @@ package view.lcc.tyzs.mvp.presenter;
  */
 public interface JifenZhuanZhangPresenter {
 
-    void jifenZhuanHuan(String aphone, String value);
+    void jifenZhuanZhang(String aphone, String value);
 }
