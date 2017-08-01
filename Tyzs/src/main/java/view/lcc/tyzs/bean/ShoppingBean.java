@@ -33,4 +33,68 @@ public class ShoppingBean implements Serializable {
 
     //商品的数量
     private  String count;
+
+    public String getGoodDescription() {
+        return GoodDescription;
+    }
+
+    public void setGoodDescription(String goodDescription) {
+        GoodDescription = goodDescription;
+    }
+
+    public String getGoodID() {
+        return GoodID;
+    }
+
+    public void setGoodID(String goodID) {
+        GoodID = goodID;
+    }
+
+    public String getGoodName() {
+        return GoodName;
+    }
+
+    public void setGoodName(String goodName) {
+        GoodName = goodName;
+    }
+
+    public String getGoodPrice() {
+        return GoodPrice;
+    }
+
+    public void setGoodPrice(String goodPrice) {
+        GoodPrice = goodPrice;
+    }
+
+    public String getGoodCost() {
+        return GoodCost;
+    }
+
+    public void setGoodCost(String goodCost) {
+        GoodCost = goodCost;
+    }
+
+    public String getGoodProfit() {
+        return GoodProfit;
+    }
+
+    public void setGoodProfit(String goodProfit) {
+        GoodProfit = goodProfit;
+    }
+
+    public String getGoodImgUrl() {
+        return GoodImgUrl;
+    }
+
+    public void setGoodImgUrl(String goodImgUrl) {
+        GoodImgUrl = goodImgUrl;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
 }

@@ -14,56 +14,46 @@ public class AppConstants {
 
     public final class RequestPath {
 
-        //================================新的接口================================
-        //意见反馈
-        public final static String AddFeedBackService = "/service/AddFeedBackService";
-        //获取文章
-        public final static String GET_ARTICLE = "/hk/getArticle";
-        //获取评论列表
-        public final static String GET_COMMENT = "/hk/getHCommentsById";
-
-
-        public final static String HCommentsAdd = "/hk/HCommentsAdd";
-        //获取视频列表
-        public final static String GET_VIDEO = "/hk/getVideoInfo";
-        //获取getHNews
-        public final static String GET_NEWS = "/hk/getHNews";
-        //获取连接
-        public final static String GET_LINKS = "/hk/getHLink";
-        //获取books
-        public final static String getArticleById = "/hk/getArticleById";
-        //获取新闻的主题
-        public final static String getHNewsBody = "/hk/getHNewsBody";
-        //获取文章的内容详情
-        public final static String GET_BOOKS = "/hk/getBooks";
-
-
-
-        //验证码
-        public final static String CHECK_VCODE = "/hk/checkVcode";
         //注册
         public final static String SIGN = "/Interface/Register.ashx";
         //登录
         public final static String LOGIN = "/Interface/Login.ashx";
-        //注册昵称
-        public final static String USERNAME = "/hk/editUserName";
 
-        public final static String GET_VOCODE = "/hk/getHBooks";
+        public final static String GOODS = "/Interface/GetGoodList.ashx?action=all";
+
+        //收货地址获取
+        public final static String ADDRESSS_GET = "/Interface/GetGoodList.ashx?action=all";
+
+        //收货地址 编辑
+        public final static String ADDRESSS_EDIT = "/Interface/AddressInfo.ashx?action=change";
+
+        //收货地址 增加
+        public final static String ADDRESSS_ADD = "/Interface/AddressInfo.ashx?action=add";
+
+        //收货地址 删除
+        public final static String ADDRESSS_DELETE = "/Interface/AddressInfo.ashx?action=delete";
 
 
-        public final static String getVideoHis = "/hk/getVideoHis";
-        public final static String getVideoFav = "/hk/getVideoFav";
 
 
+        //积分转账
+        public final static String JFZZ = "/Interface/Transfer.ashx";
 
-        //视频的详情
-        public final static String getVideoFavState = "/hk/getVideoFavState";
-        public final static String videoFavAdd = "/hk/videoFavAdd";
-        public final static String deleteVideo = "/hk/deleteVideo";
-        //历史记录+1
-        public final static String videoHisAdd = "/hk/videoHisAdd";
+        //积分提现申请
+        public final static String JFTX = "/Interface/DrawCash.ashx";
 
-        public final static String deleteFav = "/hk/deleteFav";
+        //积分转换
+        public final static String JFZH = "/Interface/Convert.ashx";
+
+        //积分列表
+        public final static String JFLB = "/Interface/Point.ashx?action=getlist";
+
+        //积分余额
+        public final static String JFYE = "/Interface/Point.ashx?action=balance";
+
+        //订单生成
+        public final static String DDSC = "/Interface/Order.ashx?action=add";
+
     }
 
     public final class ParamKey {

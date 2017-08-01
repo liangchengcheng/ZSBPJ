@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view.lcc.tyzs.view.NumEditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/net_cart_count"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/iv_product_num_des"
+        android:layout_width="24dip"
+        android:layout_height="24dip"
+        android:src="@drawable/edit_product_num_des_selector" />
+
+    <EditText
+        android:focusableInTouchMode="false"
+        android:clickable="true"
+        android:id="@+id/et_product_num"
+        android:layout_width="65dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:background="@drawable/cart_product_count_bg"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="14sp" 
+        android:text="1" />
+
+    <ImageView
+        android:id="@+id/iv_product_num_add"
+        android:layout_width="24dip"
+        android:layout_height="24dip"
+        android:src="@drawable/edit_product_num_add_selector" />
+</view.lcc.tyzs.view.NumEditText>

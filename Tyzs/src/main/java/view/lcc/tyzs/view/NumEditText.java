@@ -83,7 +83,6 @@ public class NumEditText extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         initView();
-
     }
 
     private void initView() {
@@ -103,8 +102,7 @@ public class NumEditText extends LinearLayout {
         @Override
         public void onClick(View view) {
             String numstr = numedit.getText().toString().trim();
-            int num = ("".equals(numstr) || numstr.length() == 0) ? 0 : Integer
-                    .parseInt(numstr);
+            int num = ("".equals(numstr) || numstr.length() == 0) ? 0 : Integer.parseInt(numstr);
             numedit.clearFocus();
             if (view == numadd) {
                 numadd.requestFocus();
