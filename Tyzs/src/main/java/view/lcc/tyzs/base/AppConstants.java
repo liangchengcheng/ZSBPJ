@@ -21,6 +21,19 @@ public class AppConstants {
 
         public final static String GOODS = "/Interface/GetGoodList.ashx?action=all";
 
+
+
+        //收货地址 增加
+        public final static String SHOP_CAR_ADD = "/Interface/Shopcar.ashx?action=add";
+
+        //收货地址 删除
+        public final static String SHOP_CAR_GET = "/Interface/Shopcar.ashx?action=get";
+
+
+
+
+
+
         //收货地址获取
         public final static String ADDRESSS_GET = "/Interface/GetGoodList.ashx?action=all";
 
@@ -32,6 +45,8 @@ public class AppConstants {
 
         //收货地址 删除
         public final static String ADDRESSS_DELETE = "/Interface/AddressInfo.ashx?action=delete";
+
+
 
 
 
