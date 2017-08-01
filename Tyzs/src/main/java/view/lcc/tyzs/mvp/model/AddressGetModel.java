@@ -14,7 +14,7 @@ import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
  */
 public class AddressGetModel {
 
-    public OkHttpRequest AddressGet(String phone, ResultCallback<String> callback) {
+    public OkHttpRequest addressGet(String phone, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("phone", phone);
         return ApiClient.create(AppConstants.RequestPath.SIGN, paramsMap).post(callback);

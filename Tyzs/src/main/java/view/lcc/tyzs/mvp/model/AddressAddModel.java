@@ -14,7 +14,7 @@ import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
  */
 public class AddressAddModel {
 
-    public OkHttpRequest AddressAdd(String phone,String address,
+    public OkHttpRequest addressAdd(String phone,String address,
                                     String addressee,String aphone, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("phone", phone);

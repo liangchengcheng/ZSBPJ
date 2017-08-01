@@ -14,7 +14,7 @@ import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
  */
 public class AddressEditModel {
 
-    public OkHttpRequest AddressAdd(String aid,
+    public OkHttpRequest addressAdd(String aid,
                                     String phone,
                                     String address,
                                     String addressee,

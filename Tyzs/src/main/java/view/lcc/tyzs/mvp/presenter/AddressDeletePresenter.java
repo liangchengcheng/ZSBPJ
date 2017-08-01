@@ -6,6 +6,6 @@ package view.lcc.tyzs.mvp.presenter;
  * Date:         |08-02 06:30
  * Description:  |
  */
-public interface AddressGetPresenter {
-    void  addressGet(String phone);
+public interface AddressDeletePresenter {
+    void addressDelete(String aid,String phone);
 }

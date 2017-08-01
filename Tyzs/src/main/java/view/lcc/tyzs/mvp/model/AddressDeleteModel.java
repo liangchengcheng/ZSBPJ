@@ -14,7 +14,7 @@ import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
  */
 public class AddressDeleteModel {
 
-    public OkHttpRequest AddressAdd(String aid,String phone, ResultCallback<String> callback) {
+    public OkHttpRequest addressDelete(String aid,String phone, ResultCallback<String> callback) {
         ParamsMap paramsMap = new ParamsMap();
         paramsMap.put("aid", aid);
         paramsMap.put("phone", phone);
