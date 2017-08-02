@@ -46,8 +46,7 @@ public class GoodsPresenterImpl implements GoodsPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
-                        view.getGoodsSuccess("");
+                        view.getGoodsSuccess(response);
                     } else  {
                         view.getGoodsFail("获取信息失败，请稍后再试");
                     }

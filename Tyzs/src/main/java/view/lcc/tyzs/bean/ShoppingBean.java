@@ -5,6 +5,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 
 import java.io.Serializable;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Author:       |梁铖城
@@ -14,7 +15,7 @@ import java.io.Serializable;
  */
 @Entity(nameInDb = "SHOP", createInDb = false)
 public class ShoppingBean implements Serializable {
-
+    static final long serialVersionUID = 2L;
     //描述
     private String GoodDescription;
 
@@ -40,6 +41,24 @@ public class ShoppingBean implements Serializable {
 
     //商品的数量
     private  String count;
+
+    @Generated(hash = 1918161046)
+    public ShoppingBean(String GoodDescription, String GoodID, String GoodName,
+            String GoodPrice, String GoodCost, String GoodProfit, String GoodImgUrl,
+            String count) {
+        this.GoodDescription = GoodDescription;
+        this.GoodID = GoodID;
+        this.GoodName = GoodName;
+        this.GoodPrice = GoodPrice;
+        this.GoodCost = GoodCost;
+        this.GoodProfit = GoodProfit;
+        this.GoodImgUrl = GoodImgUrl;
+        this.count = count;
+    }
+
+    @Generated(hash = 1245823369)
+    public ShoppingBean() {
+    }
 
     public String getGoodDescription() {
         return GoodDescription;

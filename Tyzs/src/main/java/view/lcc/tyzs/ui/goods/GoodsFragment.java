@@ -2,8 +2,6 @@ package view.lcc.tyzs.ui.goods;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -14,11 +12,8 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.google.gson.reflect.TypeToken;
-
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +25,6 @@ import view.lcc.tyzs.bean.ShoppingBean;
 import view.lcc.tyzs.mvp.presenter.GoodsPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.GoodsPresenterImpl;
 import view.lcc.tyzs.mvp.view.GoodsView;
-import view.lcc.tyzs.utils.ACache;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.view.LoadingLayout;
 
@@ -40,13 +34,12 @@ import view.lcc.tyzs.view.LoadingLayout;
  * Date:         |07-31 17:03
  * Description:  |
  */
-public class GoodsFragment extends Fragment implements GoodsView{
+public class GoodsFragment extends Fragment implements GoodsView {
     //左右两侧的布局
     private ListView lv1, lv2;
     private LinearLayout lv1_layout;
     //动态布局
     private LoadingLayout loading_layout;
-
 
     //左侧的数据
     private static final String[] dataLeft = {"日常食疗", "体质食疗", "体质理疗", "日用系列", "创业包"};
@@ -58,7 +51,7 @@ public class GoodsFragment extends Fragment implements GoodsView{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.goods_fragment,null);
+        View view = inflater.inflate(R.layout.goods_fragment, null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         lv1 = (ListView) view.findViewById(R.id.lv1);
         lv2 = (ListView) view.findViewById(R.id.lv2);
@@ -69,6 +62,7 @@ public class GoodsFragment extends Fragment implements GoodsView{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        goodsPresenter = new GoodsPresenterImpl(GoodsFragment.this);
         showPopupWindow();
     }
 
@@ -78,6 +72,7 @@ public class GoodsFragment extends Fragment implements GoodsView{
     public void showPopupWindow() {
         final LeftAdapter leftAdapter = new LeftAdapter(getActivity(), Arrays.asList(dataLeft));
         lv1.setAdapter(leftAdapter);
+        goodsPresenter.goods(pageNo + "", "100", dataLeft[0]);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -88,8 +83,7 @@ public class GoodsFragment extends Fragment implements GoodsView{
                     rightData.clear();
                     rightData = new ArrayList<>();
                     String type = dataLeft[position];
-                    goodsPresenter = new GoodsPresenterImpl(GoodsFragment.this);
-                    goodsPresenter.goods(pageNo + "","100",type);
+                    goodsPresenter.goods(pageNo + "", "100", type);
                 }
             }
         });
@@ -102,39 +96,36 @@ public class GoodsFragment extends Fragment implements GoodsView{
 
     @Override
     public void getGoodsSuccess(String result) {
-        if (!TextUtils.isEmpty(result)){
-           try{
-               String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
-               JSONObject jsonObject = new JSONObject(data);
-               String result_json = jsonObject.getString("resultjson");
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
+                JSONObject jsonObject = new JSONObject(data);
+                String result_json = jsonObject.getString("resultjson");
                 rightData = GsonUtils.changeGsonToList(result_json, ShoppingBean.class);
-               if (lv2.getVisibility() == View.INVISIBLE) {
-                   lv2.setVisibility(View.VISIBLE);
-                   lv1_layout.getLayoutParams().width = 0;
-                   rightAdapter = new RightAdapter(getActivity(), rightData);
-               }
 
-               if (rightAdapter != null) {
-                   loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-                   lv2.setAdapter(rightAdapter);
-                   rightAdapter.notifyDataSetChanged();
-                   lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                       @Override
-                       public void onItemClick(AdapterView<?> parent,
-                                               View view, int position, long id) {
-                           ShoppingBean bean = rightData.get(position);
-                           Intent intent = new Intent(getActivity(), GoodsDetailsActivity.class);
-                           intent.putExtra("bean", bean);
-                           startActivity(intent);
-                       }
-                   });
-               }
-           }catch (Exception e){
-               loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
-               e.printStackTrace();
-           }
-        }else {
+                rightAdapter = new RightAdapter(getActivity(), rightData);
+                if (rightAdapter != null) {
+                    loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+                    lv2.setAdapter(rightAdapter);
+                    rightAdapter.notifyDataSetChanged();
+                    lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent,
+                                                View view, int position, long id) {
+                            ShoppingBean bean = rightData.get(position);
+                            Intent intent = new Intent(getActivity(), GoodsDetailsActivity.class);
+                            intent.putExtra("bean", bean);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
+                e.printStackTrace();
+            }
+        } else {
             //数据为空
             loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
         }

@@ -2,6 +2,7 @@ package view.lcc.tyzs.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +52,11 @@ public class LeftAdapter extends BaseAdapter {
 
         holder.name.setText(l.get(position));
         if (position == selectItem) {
-            convertView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+            convertView.setBackgroundColor(Color.parseColor("#E5E9F1"));
+            holder.name.setTextColor(context.getResources().getColor(R.color.colorPrimary));
         } else {
-            convertView.setBackgroundColor(context.getResources().getColor(R.color.m29c741));
+            convertView.setBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.name.setTextColor(context.getResources().getColor(R.color.main_textcolormore));
         }
         return convertView;
     }

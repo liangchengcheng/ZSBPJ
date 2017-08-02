@@ -19,7 +19,7 @@ public class GoodsModel {
         paramsMap.put("page", page);
         paramsMap.put("pagesize", pagesize);
         paramsMap.put("type", type);
-        return ApiClient.create(AppConstants.RequestPath.SIGN, paramsMap).post(callback);
+        return ApiClient.create(AppConstants.RequestPath.GOODS, paramsMap).post(callback);
     }
 
 }

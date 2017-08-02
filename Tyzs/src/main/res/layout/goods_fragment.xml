@@ -10,21 +10,10 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-        <ImageView
-            android:id="@+id/guillotine_hamburger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:paddingBottom="10dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            android:src="@drawable/icon_back" />
-
 
         <TextView
             android:id="@+id/tv_title"
@@ -50,8 +39,8 @@
 
             <LinearLayout
                 android:id="@+id/lv_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
                 <ListView
@@ -76,7 +65,7 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:orientation="vertical">
                 <FrameLayout
@@ -91,8 +80,7 @@
                         android:divider="@null"
                         android:focusable="false"
                         android:listSelector="#00000000"
-                        android:scrollbars="none"
-                        android:visibility="invisible" />
+                        android:scrollbars="none" />
                     <view.lcc.tyzs.view.LoadingLayout
                         android:id="@+id/loading_layout"
                         android:layout_width="match_parent"
