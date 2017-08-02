@@ -26,8 +26,11 @@ import view.lcc.tyzs.bean.Address;
 import view.lcc.tyzs.bean.OrderInfo;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.JifenYuePresenter;
+import view.lcc.tyzs.mvp.presenter.OrderConfirmPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.JifenYuePresenterImpl;
+import view.lcc.tyzs.mvp.presenter.impl.OrderConfrimPresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenYueView;
+import view.lcc.tyzs.mvp.view.OrderConfirmView;
 import view.lcc.tyzs.ui.address.AddressListActivity;
 import view.lcc.tyzs.utils.Md5Utils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
@@ -40,7 +43,7 @@ import view.lcc.tyzs.utils.SingleTrueUtils;
  * Description:  |
  */
 // TODO: 2017/8/2 获取积分加弹窗
-public class OrderConfirmActivity extends BaseActivity implements View.OnClickListener, JifenYueView {
+public class OrderConfirmActivity extends BaseActivity implements View.OnClickListener, JifenYueView, OrderConfirmView {
     //订单信息
     private ArrayList<OrderInfo> orderInfos;
     //全部数据
@@ -49,6 +52,8 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     private double prince;
     //获取积分余额
     private JifenYuePresenter jifenPresenter;
+    //提交订单
+    private OrderConfirmPresenter orderConfirmPresenter;
     //可用积分
     private String point;
 
@@ -69,6 +74,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_confirm_activity);
         jifenPresenter = new JifenYuePresenterImpl(this);
+        orderConfirmPresenter = new OrderConfrimPresenterImpl(this);
         initView();
     }
 
@@ -159,6 +165,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                     et_jisuan.setText("0");
                     Frame.getInstance().toastPrompt("商品总额小于1不允许使用积分");
                 }
+                // TODO: 2017/8/2 这个地方看一下
                 point = prince + "";
                 prince = 0;
 
@@ -186,10 +193,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 maps.put("orderinfo", orderinfo);
                 String content = gson.toJson(maps);
 
-                Map<String, String> mapend = new HashMap<String, String>();
-                mapend.put("verification", Md5Utils.encode(content).toUpperCase());
-                mapend.put("content", content);
-
+                orderConfirmPresenter.orderConfirm(Md5Utils.encode(content).toUpperCase(), content);
                 break;
         }
     }
@@ -239,6 +243,66 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     public void JifenYueFail(String msg) {
         closeLoading();
         Frame.getInstance().toastPrompt("获取积分失败");
+    }
+
+    @Override
+    public void OrderConfirmLoading() {
+        Frame.getInstance().toastPrompt("正在提交订单");
+    }
+
+    @Override
+    public void OrderConfirmSuccess(String result) {
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            String resultjson = jsonObject.getString("resultjson");
+            JSONObject j2 = new JSONObject(resultjson);
+            String verification = j2.getString("verification").toUpperCase();
+            String content = j2.getString("content");
+            String contentmd5 = Md5Utils.encode(content);
+            if (verification.equals(contentmd5.toUpperCase())) {
+                DecimalFormat df = new DecimalFormat("######0.00");
+                tv_order_name = (TextView) findViewById(R.id.tv_order_name);
+                tv_order_phone = (TextView) findViewById(R.id.tv_order_phone);
+                tv_order_address = (TextView) findViewById(R.id.tv_order_address);
+                /*sp.edit().putString("dizhis", tv_order_address.getText().toString())
+                        .putString("phones", tv_order_phone.getText().toString())
+                        .putString("names", tv_order_name.getText().toString())
+                        .putString("princes", df.format(prince - Double.parseDouble(point))).commit();*/
+
+                //说明他的验证码是正确的
+                JSONObject jsonObject1 = new JSONObject(content);
+                String orderinfo = jsonObject1.getString("orderinfo");
+                String orderTotal = jsonObject1.getString("orderTotal");
+
+                String OID = jsonObject1.getString("OID");
+                // TODO: 16/8/9 1和1.0的区别 
+                if (orderTotal.equals(prince + "")) {
+                    //说明价格是一样的
+                } else {
+                    prince = Double.parseDouble(orderTotal);
+                }
+                Intent intent = new Intent(OrderConfirmActivity.this, OrderResultActivity.class);
+                intent.putExtra("point", point);
+                //订单id
+                intent.putExtra("OID", OID);
+                intent.putExtra("dizhis", tv_order_address.getText().toString());
+                intent.putExtra("phones", tv_order_phone.getText().toString());
+                intent.putExtra("names", tv_order_name.getText().toString());
+                //实际支付
+                intent.putExtra("princes", df.format(prince - Double.parseDouble(point)));
+                startActivity(intent);
+            } else {
+                // TODO: 2017/8/2 弹窗最好
+                Frame.getInstance().toastPrompt("订单可能被篡改了");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void OrderConfirmFail(String msg) {
+        Frame.getInstance().toastPrompt("提交订单失败");
     }
 
     @Override
