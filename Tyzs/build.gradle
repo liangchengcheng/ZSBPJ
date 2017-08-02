@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -41,14 +42,6 @@ dependencies {
     //rx相关
     compile 'io.reactivex:rxjava:1.2.6'
     compile 'io.reactivex:rxandroid:1.2.1'
-    //视频相关
-    compile project(':jjdxm-ijkplayer')
-    // 根据需要支持去拓展，在jjdxm-ijkplayer中默认加入了armv7a的了
-    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
-    compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
-    compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
-    compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
-    compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
     //gson和okhttp
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
@@ -57,4 +50,5 @@ dependencies {
     compile project(':SMSSDK')
     //eventbus
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'org.greenrobot:greendao:3.2.2'
 }

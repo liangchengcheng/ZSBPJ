@@ -24,7 +24,7 @@
             android:background="@drawable/ic_nodata"
             android:visibility="gone" />
 
-        <view.lcc.wyzsb.view.ProgressBarCircularIndeterminate
+        <view.lcc.tyzs.view.ProgressBarCircularIndeterminate
             android:id="@+id/animProgress"
             android:layout_width="50dp"
             android:layout_height="50dp"
