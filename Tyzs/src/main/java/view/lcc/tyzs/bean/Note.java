@@ -1,5 +1,9 @@
 package view.lcc.tyzs.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Property;
+
 import java.io.Serializable;
 
 /**
@@ -8,9 +12,12 @@ import java.io.Serializable;
  * Date:         |08-01 08:52
  * Description:  |
  */
+@Entity(nameInDb = "NOTE", createInDb = false)
 public class Note implements Serializable{
 
 
+    @Id
+    @Property(nameInDb = "ID")
     private String ID;
 
     private String Type;

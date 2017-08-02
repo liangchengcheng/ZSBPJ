@@ -1,5 +1,9 @@
 package view.lcc.tyzs.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Property;
+
 import java.io.Serializable;
 
 /**
@@ -8,12 +12,15 @@ import java.io.Serializable;
  * Date:         |08-01 08:55
  * Description:  |
  */
+@Entity(nameInDb = "SHOP", createInDb = false)
 public class ShoppingBean implements Serializable {
 
     //描述
     private String GoodDescription;
 
     //ID
+    @Id
+    @Property(nameInDb = "GoodID")
     private String GoodID;
 
     //名字

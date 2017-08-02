@@ -6,6 +6,7 @@ import org.greenrobot.greendao.annotation.Property;
 
 import java.io.Serializable;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Author:       |梁铖城
@@ -13,7 +14,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Date:         |08-01 08:57
  * Description:  |
  */
-@Entity(nameInDb = "ShoppingCarBean", createInDb = false)
+@Entity(nameInDb = "SHOP_CAR", createInDb = false)
 public class ShoppingCarBean implements Serializable {
     static final long serialVersionUID = 1L;
 
@@ -46,6 +47,9 @@ public class ShoppingCarBean implements Serializable {
     //商品数量
     private String number;
 
+    @Transient
+    private boolean isCheck;
+
     @Generated(hash = 524153276)
     public ShoppingCarBean(String GID, String price, String cost, String profit,
             String name, String description, String ImageUrl, String IsDelete,
@@ -63,6 +67,14 @@ public class ShoppingCarBean implements Serializable {
 
     @Generated(hash = 281679540)
     public ShoppingCarBean() {
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 
     public String getGID() {
