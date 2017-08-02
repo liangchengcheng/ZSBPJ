@@ -91,6 +91,52 @@ public class SharePreferenceUtil {
         sharedPreferences.edit().putString(RATE,value).commit();
     }
 
+    //收件人
+    public static String getAddressPerson() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString("addressee1", "");
+    }
+
+    public static void setAddressPerson(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        sharedPreferences.edit().putString("addressee1",value).commit();
+    }
+
+    //收件人的电话
+    public static String getAddressPhone() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString("aphone1", "");
+    }
+
+    public static void setAddressPhone(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        sharedPreferences.edit().putString("aphone1",value).commit();
+    }
+
+
+    //收件人的地址
+    public static String getAddressInfo() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString("address1", "");
+    }
+
+    public static void setAddressInfo(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        sharedPreferences.edit().putString("address1",value).commit();
+    }
+
+
+    //收件人的地址 的id
+    public static String getAddressId() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString("aid", "");
+    }
+
+    public static void setAddressId(String value){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Frame.getAppContext());
+        sharedPreferences.edit().putString("aid",value).commit();
+    }
+
 
 
 }

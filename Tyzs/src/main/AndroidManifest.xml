@@ -49,7 +49,7 @@
 
         <!--订单提交-->
         <activity
-            android:name=".ui.goods.OrderConfirm"
+            android:name=".ui.goods.OrderConfirmActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
