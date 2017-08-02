@@ -44,9 +44,11 @@ public class GoodsFragment extends Fragment implements GoodsView {
     //左侧的数据
     private static final String[] dataLeft = {"日常食疗", "体质食疗", "体质理疗", "日用系列", "创业包"};
     private int pageNo = 1;
+    private int pageSize = 10;
     private List<ShoppingBean> rightData = new ArrayList<>();
     private GoodsPresenter goodsPresenter;
     private RightAdapter rightAdapter;
+
 
     @Nullable
     @Override
@@ -72,7 +74,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
     public void showPopupWindow() {
         final LeftAdapter leftAdapter = new LeftAdapter(getActivity(), Arrays.asList(dataLeft));
         lv1.setAdapter(leftAdapter);
-        goodsPresenter.goods(pageNo + "", "100", dataLeft[0]);
+        goodsPresenter.goods(pageNo + "", pageSize + "", dataLeft[0]);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,7 +85,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
                     rightData.clear();
                     rightData = new ArrayList<>();
                     String type = dataLeft[position];
-                    goodsPresenter.goods(pageNo + "", "100", type);
+                    goodsPresenter.goods(pageNo + "", pageSize + "", type);
                 }
             }
         });
@@ -105,22 +107,20 @@ public class GoodsFragment extends Fragment implements GoodsView {
 
 
                 rightAdapter = new RightAdapter(getActivity(), rightData);
-                if (rightAdapter != null) {
-                    loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-                    lv2.setAdapter(rightAdapter);
-                    rightAdapter.notifyDataSetChanged();
-                    lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+                lv2.setAdapter(rightAdapter);
+                rightAdapter.notifyDataSetChanged();
+                lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                        @Override
-                        public void onItemClick(AdapterView<?> parent,
-                                                View view, int position, long id) {
-                            ShoppingBean bean = rightData.get(position);
-                            Intent intent = new Intent(getActivity(), GoodsDetailsActivity.class);
-                            intent.putExtra("bean", bean);
-                            startActivity(intent);
-                        }
-                    });
-                }
+                    @Override
+                    public void onItemClick(AdapterView<?> parent,
+                                            View view, int position, long id) {
+                        ShoppingBean bean = rightData.get(position);
+                        Intent intent = new Intent(getActivity(), GoodsDetailsActivity.class);
+                        intent.putExtra("bean", bean);
+                        startActivity(intent);
+                    }
+                });
             } catch (Exception e) {
                 loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
                 e.printStackTrace();

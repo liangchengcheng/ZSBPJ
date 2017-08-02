@@ -1,0 +1,272 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F2EB"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:background="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="订单确认"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="vertical"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="18dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip">
+
+                <!-- 收货人信息 start -->
+
+                <LinearLayout
+                    android:id="@+id/ll_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/fruit_icon"/>
+
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="发现时间："/>
+
+                    <TextView
+                        android:id="@+id/patrol_date"
+                        style="@style/ItemText"
+                        android:hint="选择收获地址"/>
+
+                </LinearLayout>
+
+                <View
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_bg"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_order_linkman">
+                    <TextView
+                        android:id="@+id/tv_order_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dip"
+                        android:text="" />
+                    <TextView
+                        android:id="@+id/tv_order_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dip"
+                        android:text="" />
+                    <TextView
+                        android:id="@+id/tv_order_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dip"
+                        android:text="" />
+                </LinearLayout>
+                <!-- 收货人信息 stop -->
+
+                <!-- 商品列表 start-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:text="商品列表" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ListView
+                        android:id="@+id/lv_products_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:paddingLeft="8dip"
+                        android:paddingRight="8dip" />
+                </LinearLayout>
+                <!-- 支付及配送方式start -->
+
+                <!-- 支付及配送方式stop -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="支付及配送方式" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="6dip"
+                        android:text="如果您账户中的积分不足，请联系客服充值，客服电话4006-0535-00或17705353966" />
+                </LinearLayout>
+
+                <!-- 其他要求 start -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:text="其他要求" />
+                    <EditText
+                        android:id="@+id/et_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:hint="请输入你的留言"
+                        android:maxLines="2"
+                        android:minLines="2"
+                        android:padding="12dip"
+                        android:text=" "
+                        android:textColor="#222"
+                        android:textColorHint="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 商品列表 start-->
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ll_order_linkmans"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_yue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:text="刷新积分"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/et_jisuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="输入积分"
+                        android:textSize="14sp" />
+
+                    <CheckBox
+                        android:id="@+id/ck_dixian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dip"
+                        android:checked="false"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:background="#eeeeee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+           <LinearLayout
+               android:layout_width="0dp"
+               android:orientation="vertical"
+               android:layout_height="wrap_content">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="#F7F7F7"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:textSize="14sp"
+                       android:id="@+id/tv_zj"
+                       android:textColor="@color/background_half_transparent"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="总计：" />
+                   <TextView
+                       android:id="@+id/tv_order_sum"
+                       android:layout_marginLeft="3dip"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="12dp"
+                       android:textColor="@color/red" />
+               </LinearLayout>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/tv_jf"
+                   android:layout_marginTop="6dip"
+                   android:text="积分" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:padding="20dp"
+                   android:id="@+id/btn_put_order"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:background="@color/colorPrimary"
+                   android:text="提交购买"
+                   android:textColor="#FFF"
+                   android:textSize="16sp" />
+           </LinearLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

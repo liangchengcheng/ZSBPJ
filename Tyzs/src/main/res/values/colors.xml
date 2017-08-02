@@ -142,4 +142,6 @@
     <color name="setting_act_textcolor_common">#ff727272</color>
     <color name="setting_act_textcolor_cus1">#ffd4d4d4</color>
     <color name="setting_act_rl_bgcolor_common">#ffffffff</color>
+
+    <color name="content_color">#3C3C3C</color>
 </resources>
