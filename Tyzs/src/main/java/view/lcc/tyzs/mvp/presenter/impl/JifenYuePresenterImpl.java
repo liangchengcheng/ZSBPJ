@@ -46,8 +46,7 @@ public class JifenYuePresenterImpl implements JifenYuePresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
-                        view.JifenYueSuccess("");
+                        view.JifenYueSuccess(response);
                     } else  {
                         view.JifenYueFail("获取地址信息失败，请稍后再试");
                     }

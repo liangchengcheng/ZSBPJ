@@ -10,7 +10,7 @@ import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
  * Author:       梁铖城
  * Email:        1038127753@qq.com
  * Date:         2017年04月15日20:03:25
- * Description:  获取订单
+ * Description:  获取shangpin
  */
 public class GoodsModel {
 

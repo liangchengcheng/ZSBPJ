@@ -10,8 +10,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.OrderConfirmAdapter;
@@ -19,9 +25,13 @@ import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.bean.Address;
 import view.lcc.tyzs.bean.OrderInfo;
 import view.lcc.tyzs.frame.Frame;
+import view.lcc.tyzs.mvp.presenter.JifenYuePresenter;
+import view.lcc.tyzs.mvp.presenter.impl.JifenYuePresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenYueView;
 import view.lcc.tyzs.ui.address.AddressListActivity;
+import view.lcc.tyzs.utils.Md5Utils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
+import view.lcc.tyzs.utils.SingleTrueUtils;
 
 /**
  * Author:       |梁铖城
@@ -29,14 +39,18 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
  * Date:         |08-02 20:36
  * Description:  |
  */
-public class OrderConfirmActivity extends BaseActivity implements View.OnClickListener ,JifenYueView{
+// TODO: 2017/8/2 获取积分加弹窗
+public class OrderConfirmActivity extends BaseActivity implements View.OnClickListener, JifenYueView {
     //订单信息
     private ArrayList<OrderInfo> orderInfos;
-
     //全部数据
     private String shoujianren, addressPhone, address, addressId;
     //价格
     private double prince;
+    //获取积分余额
+    private JifenYuePresenter jifenPresenter;
+    //可用积分
+    private String point;
 
 
     //tv_order_sum (总额)
@@ -54,6 +68,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_confirm_activity);
+        jifenPresenter = new JifenYuePresenterImpl(this);
         initView();
     }
 
@@ -73,7 +88,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         initAddress();
         initPrince();
         findViewById(R.id.btn_put_order).setOnClickListener(this);
-
+        jifenPresenter.jifenYue();
     }
 
     //填充价格
@@ -111,7 +126,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         if (requestCode == 100 && resultCode == RESULT_OK) {
             Address bean = (Address) data.getSerializableExtra("address");
             addressId = bean.getAID();
-            if (bean != null){
+            if (bean != null) {
                 tv_order_address.setText("收货地址：" + bean.getAddress());
                 tv_order_phone.setText("联系电话：" + bean.getPhone());
                 tv_order_name.setText("收货人：" + bean.getAddressee());
@@ -130,6 +145,51 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 break;
             //购买
             case R.id.btn_put_order:
+                if (!TextUtils.isEmpty(point)) {
+                    Frame.getInstance().toastPrompt("获取积分失败，请稍后再试");
+                    return;
+                }
+                //收获地址
+                if (TextUtils.isEmpty(addressId)) {
+                    Frame.getInstance().toastPrompt("收获地址不能为空");
+                    return;
+                }
+                //商品的总价格
+                if (prince <= 1) {
+                    et_jisuan.setText("0");
+                    Frame.getInstance().toastPrompt("商品总额小于1不允许使用积分");
+                }
+                point = prince + "";
+                prince = 0;
+
+                //计算商品价格
+                ArrayList<Map<String, String>> orderInfo = new ArrayList<Map<String, String>>();
+                for (int i = 0; i < orderInfos.size(); i++) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("GID", orderInfos.get(i).getGID());
+                    map.put("number", orderInfos.get(i).getNumber());
+                    orderInfo.add(map);
+                    prince += Double.parseDouble(orderInfos.get(i).getTrueprice())
+                            * Double.parseDouble(orderInfos.get(i).getNumber());
+                }
+                Gson gson = new Gson();
+                String orderinfo = gson.toJson(orderInfo);
+
+                //计算订单内容
+                Map<String, String> maps = new HashMap<String, String>();
+                maps.put("user", SharePreferenceUtil.getName());
+                maps.put("AID", addressId);
+                maps.put("msg", et_other.getText().toString().trim());
+                maps.put("orderTotal", prince + "");
+                maps.put("point", point);
+                maps.put("creatTime", SingleTrueUtils.singlechou(System.currentTimeMillis()));
+                maps.put("orderinfo", orderinfo);
+                String content = gson.toJson(maps);
+
+                Map<String, String> mapend = new HashMap<String, String>();
+                mapend.put("verification", Md5Utils.encode(content).toUpperCase());
+                mapend.put("content", content);
+
                 break;
         }
     }
@@ -140,17 +200,56 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void JifenYueSuccess(String msg) {
+    public void JifenYueSuccess(String result) {
+        closeLoading();
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            String resultJson = jsonObject.getString("resultjson");
+            JSONObject js = new JSONObject(resultJson);
 
+            String p = js.getString("balance");
+            String[] results = p.split(",");
+            if (results.length == 2) {
+                String[] cz = results[1].split("=");
+                point = cz[1];
+            } else {
+                String[] xt = results[0].split("=");
+                if (xt[0].contains("系统")) {
+                    point = "0";
+                } else {
+                    point = xt[1];
+                }
+            }
+
+            tv_yue.setText("积分:" + point + "(1积分抵1元)");
+            if (Double.parseDouble(point) < prince) {
+                // TODO: 2017/8/2 弹窗
+                Frame.getInstance().toastPrompt("充值积分余额不足，请充值");
+            }
+            //0积分的话就直接就是不可以用积分的状态
+            if (point.equals("0")) {
+                et_jisuan.setEnabled(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void JifenYueFail(String msg) {
+        closeLoading();
         Frame.getInstance().toastPrompt("获取积分失败");
     }
 
     @Override
     public void NetWorkErr(String msg) {
+        closeLoading();
         Frame.getInstance().toastPrompt("网络不可用");
     }
+
+    private void closeLoading() {
+
+    }
+
+
 }
