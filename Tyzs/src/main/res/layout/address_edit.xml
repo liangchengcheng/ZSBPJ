@@ -172,7 +172,7 @@
                 android:src="@drawable/ic_expand_normal"/>
         </LinearLayout>
         <include
-            android:id="@+id/line_city"
+            android:id="@+id/line_area"
             layout="@layout/line"/>
 
 

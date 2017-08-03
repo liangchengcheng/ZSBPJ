@@ -3,10 +3,12 @@ package view.lcc.tyzs.ui.address;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -31,6 +33,15 @@ import view.lcc.tyzs.bean.Address;
 import view.lcc.tyzs.bean.CityModel;
 import view.lcc.tyzs.bean.CountryModel;
 import view.lcc.tyzs.bean.ProvinceModel;
+import view.lcc.tyzs.frame.Frame;
+import view.lcc.tyzs.mvp.presenter.AddressAddPresenter;
+import view.lcc.tyzs.mvp.presenter.AddressDeletePresenter;
+import view.lcc.tyzs.mvp.presenter.AddressEditPresenter;
+import view.lcc.tyzs.mvp.presenter.impl.AddressDeletePresenterImpl;
+import view.lcc.tyzs.mvp.presenter.impl.AddressEditPresenterImpl;
+import view.lcc.tyzs.mvp.view.AddressDeleteView;
+import view.lcc.tyzs.mvp.view.AddressEditView;
+import view.lcc.tyzs.utils.SharePreferenceUtil;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -40,7 +51,8 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * Date:         |08-03 08:33
  * Description:  |
  */
-public class AddressEditActivity extends BaseActivity implements View.OnClickListener{
+public class AddressEditActivity extends BaseActivity implements View.OnClickListener
+        ,CompoundButton.OnCheckedChangeListener,AddressEditView ,AddressDeleteView{
     private PopupWindow provincePopupWindow;
     private PopupWindow cityPopupWindow;
     private PopupWindow areaPopupWindow;
@@ -63,38 +75,101 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     //地址
     private Address bean;
     //地址id
-    private String addresId;
+    private String addressId;
 
     private int pPosition;
     private int cPosition;
+
+    private List<String> province_string = new ArrayList<>();
+    private List<String> city_string = new ArrayList<>();
+    private List<String> area_string = new ArrayList<>();
+
     private boolean isCity = true;
     private boolean isCounty = true;
+
+    private AddressEditPresenter addressEditPresenter;
+    private AddressDeletePresenter addressDeletePresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.address_edit);
+        addressEditPresenter = new AddressEditPresenterImpl(this);
+        addressDeletePresenter = new AddressDeletePresenterImpl(this);
         InitData();
+
+        line_province = findViewById(R.id.line_province);
+        line_city = findViewById(R.id.line_city);
+        line_area = findViewById(R.id.line_area);
+
+        tv_province = (TextView) findViewById(R.id.tv_province);
+        tv_city = (TextView) findViewById(R.id.tv_city);
+        tv_area = (TextView) findViewById(R.id.tv_area);
 
         et_er = (EditText) findViewById(R.id.et_edit_linkman);
         et_phone = (EditText) findViewById(R.id.et_edit_phone);
         et_edit_address = (EditText) findViewById(R.id.et_edit_address);
         cb_select = (CheckBox) findViewById(R.id.cb_select);
+        cb_select.setOnCheckedChangeListener(this);
 
         findViewById(R.id.ll_province).setOnClickListener(this);
         findViewById(R.id.ll_city).setOnClickListener(this);
         findViewById(R.id.ll_country).setOnClickListener(this);
 
-        Intent intent = getIntent();
         bean = (Address) getIntent().getSerializableExtra("bean");
         if ( bean != null){
             String person = bean.getAddressee();
             String phone = bean.getPhone();
-            addresId = bean.getAID();
+            addressId = bean.getAID();
             et_er.setText(person);
             et_phone.setText(phone);
         }
+    }
 
+    private void saveData(){
+        if (cb_select.isChecked()) {
+            isDefault = "是";
+        } else {
+            isDefault = "否";
+        }
+
+        if (!TextUtils.isEmpty(tv_province.getText().toString()) ||
+                !TextUtils.isEmpty(tv_city.getText().toString())||
+                !TextUtils.isEmpty(tv_area.getText().toString())||
+                !TextUtils.isEmpty(et_edit_address.getText().toString().trim())
+                ){
+            Frame.getInstance().toastPrompt("地址信息不完整");
+            return;
+        }
+
+        if (!TextUtils.isEmpty(et_er.getText().toString().trim())){
+            Frame.getInstance().toastPrompt("收件人不能为空");
+            return;
+        }
+
+        if (!TextUtils.isEmpty(et_phone.getText().toString().trim())){
+            Frame.getInstance().toastPrompt("收件电话不能为空");
+            return;
+        }
+
+        String totalAddress = tv_province.getText().toString()
+                + tv_city.getText().toString()
+                + tv_area.getText().toString()
+                + et_edit_address.getText().toString().trim();
+        //开始编辑地址信息
+        addressEditPresenter.addressEdit(
+                addressId
+                , SharePreferenceUtil.getName()
+                ,totalAddress,et_er.getText().toString().trim()
+                ,et_phone.getText().toString().trim(),
+                isDefault
+        );
+    }
+
+    private void deleteAddress(){
+        if (!TextUtils.isEmpty(addressId)){
+            addressDeletePresenter.addressDelete(addressId, SharePreferenceUtil.getName());
+        }
     }
 
     private void InitData() {
@@ -183,10 +258,6 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             e.printStackTrace();
         }
     }
-
-    private List<String> province_string = new ArrayList<>();
-    private List<String> city_string = new ArrayList<>();
-    private List<String> area_string = new ArrayList<>();
 
     //所在省
     private void createProvincePopupWindow() {
@@ -331,5 +402,45 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                 areaPopupWindow.showAsDropDown(line_area);
                 break;
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+    }
+
+    @Override
+    public void AddressEditLoading() {
+
+    }
+
+    @Override
+    public void AddressEditSuccess(String msg) {
+
+    }
+
+    @Override
+    public void AddressEditFail(String msg) {
+
+    }
+
+    @Override
+    public void AddressDeleteLoading() {
+
+    }
+
+    @Override
+    public void AddressDeleteSuccess(String msg) {
+
+    }
+
+    @Override
+    public void AddressDeleteFail(String msg) {
+
+    }
+
+    @Override
+    public void NetWorkErr(String msg) {
+
     }
 }
