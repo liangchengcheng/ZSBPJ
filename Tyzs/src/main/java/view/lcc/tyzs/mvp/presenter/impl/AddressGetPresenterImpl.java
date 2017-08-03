@@ -14,6 +14,7 @@ import view.lcc.tyzs.mvp.presenter.AddressAddPresenter;
 import view.lcc.tyzs.mvp.presenter.AddressGetPresenter;
 import view.lcc.tyzs.mvp.view.AddressAddView;
 import view.lcc.tyzs.mvp.view.AddressGetView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -46,10 +47,9 @@ public class AddressGetPresenterImpl implements AddressGetPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
-                        view.AddressGetSuccess("");
+                        view.AddressGetSuccess(response);
                     } else  {
-                        view.AddressGetFail("添加信息失败，请稍后再试");
+                        view.AddressGetFail(ErrorLogUtils.SystemError(status));
                     }
                 } catch (Exception e) {
                     view.AddressGetFail("添加信息失败");

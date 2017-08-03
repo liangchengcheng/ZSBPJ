@@ -26,9 +26,13 @@ public class AddressListAdapter extends BaseAdapter {
     private Context context;
     private List<Address> list = new ArrayList<Address>();
 
-    public AddressListAdapter(Context context, List<Address> list) {
+    public AddressListAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setData( List<Address> list){
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @Override

@@ -7,6 +7,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +22,11 @@ import view.lcc.tyzs.adapter.AddressListAdapter;
 import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.bean.Address;
 import view.lcc.tyzs.mvp.presenter.AddressGetPresenter;
+import view.lcc.tyzs.mvp.presenter.impl.AddressGetPresenterImpl;
 import view.lcc.tyzs.mvp.view.AddressGetView;
+import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
+import view.lcc.tyzs.view.LoadingLayout;
 
 /**
  * Author:       |梁铖城
@@ -30,9 +38,10 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
 public class AddressListActivity extends BaseActivity implements AddressListAdapter.EditListener
         ,AdapterView.OnItemClickListener  ,View.OnClickListener,AddressGetView{
     private ListView addressList;
+    private LoadingLayout loading_layout;
+
     private AddressListAdapter addressListAdapter;
     private AddressGetPresenter presenter;
-
     private List<Address> list = new ArrayList<Address>();
     
     @Override
@@ -43,15 +52,14 @@ public class AddressListActivity extends BaseActivity implements AddressListAdap
     }
 
     private void initView() {
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
         addressList = (ListView) findViewById(R.id.lv_ad_list);
-        addressList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
+        addressList.setOnItemClickListener(this);
+        addressListAdapter = new AddressListAdapter(AddressListActivity.this);
+        addressList.setAdapter(addressListAdapter);
         findViewById(R.id.iv_more).setOnClickListener(this);
         findViewById(R.id.iv_back).setOnClickListener(this);
+        presenter = new AddressGetPresenterImpl(this);
     }
 
     private void getAddress(){
@@ -61,7 +69,9 @@ public class AddressListActivity extends BaseActivity implements AddressListAdap
 
     @Override
     public void edit(Address address) {
-
+        Intent intent = new Intent(AddressListActivity.this,AddressEditActivity.class);
+        intent.putExtra("bean",address);
+        startActivityForResult(intent , 100);
     }
 
     @Override
@@ -91,22 +101,35 @@ public class AddressListActivity extends BaseActivity implements AddressListAdap
 
     @Override
     public void AddressGetLoading() {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
-    public void AddressGetSuccess(String msg) {
-
+    public void AddressGetSuccess(String result) {
+       try{
+           String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
+           JSONObject jsonObject = new JSONObject(data);
+           String resultJson = jsonObject.getString("resultjson");
+           list = GsonUtils.fromJsonArray(resultJson,Address.class);
+           if (list != null && list.size() > 0){
+               loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+               addressListAdapter.setData(list);
+           }else{
+               loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+           }
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     @Override
     public void AddressGetFail(String msg) {
-
+        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
     }
 
     @Override
     public void NetWorkErr(String msg) {
-
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
     }
 
     @Override

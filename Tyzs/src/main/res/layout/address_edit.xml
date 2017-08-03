@@ -1,0 +1,231 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="修改收货地址"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/moreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_bz"/>
+
+            <TextView
+                style="@style/ItemText"
+                android:text="收件人信息："/>
+
+            <EditText
+                android:hint="请输入收件人信息"
+                android:id="@+id/et_edit_linkman"
+                style="@style/EditTextStyle"
+                android:inputType="textMultiLine"
+                android:maxLines="3"/>
+
+        </LinearLayout>
+        <include layout="@layout/line"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_bz"/>
+
+            <TextView
+                style="@style/ItemText"
+                android:text="收件人电话："/>
+
+            <EditText
+                android:hint="请输入收件人电话"
+                android:id="@+id/et_edit_phone"
+                style="@style/EditTextStyle"
+                android:inputType="textMultiLine"
+                android:maxLines="3"/>
+
+        </LinearLayout>
+        <include layout="@layout/line"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_province"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_count"/>
+            <TextView
+                style="@style/ItemText"
+                android:text="选择省:"/>
+            <TextView
+                android:id="@+id/tv_province"
+                style="@style/ItemText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="点击所在省份"/>
+            <ImageView
+                android:id="@+id/iv_more_direction"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_expand_normal"/>
+        </LinearLayout>
+        <include
+            android:id="@+id/line_province"
+            layout="@layout/line"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_count"/>
+            <TextView
+                style="@style/ItemText"
+                android:text="所在市:"/>
+            <TextView
+                android:id="@+id/tv_city"
+                style="@style/ItemText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="点击所在省份"/>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_expand_normal"/>
+        </LinearLayout>
+        <include
+            android:id="@+id/line_city"
+            layout="@layout/line"/>
+
+        <LinearLayout
+            android:id="@+id/ll_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_count"/>
+            <TextView
+                style="@style/ItemText"
+                android:text="所在区县:"/>
+            <TextView
+                android:id="@+id/tv_area"
+                style="@style/ItemText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="点击ItemText"/>
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_expand_normal"/>
+        </LinearLayout>
+        <include
+            android:id="@+id/line_city"
+            layout="@layout/line"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_bz"/>
+
+            <TextView
+                style="@style/ItemText"
+                android:text="精确地址："/>
+
+            <EditText
+                android:hint="请输入详细地址精确到门牌号"
+                android:id="@+id/et_edit_address"
+                style="@style/EditTextStyle"
+                android:inputType="textMultiLine"
+                android:maxLines="3"/>
+
+        </LinearLayout>
+        <include layout="@layout/line"/>
+
+
+        <CheckBox
+            android:id="@+id/cb_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dip"
+            android:text="是否设置为默认地址" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal">
+        <TextView
+            android:padding="10dp"
+            android:gravity="center"
+            android:id="@+id/btn_edit_ok"
+            android:textColor="#fff"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

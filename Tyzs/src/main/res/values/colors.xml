@@ -145,4 +145,6 @@
 
     <color name="content_color">#3C3C3C</color>
     <color name="grey_light">#eee</color>
+    <color name="text_press">#00BF7A</color>
+    <color name="item_press">#F0FFFA</color>
 </resources>

@@ -32,14 +32,22 @@
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
 
-    <ListView
-        android:id="@+id/lv_ad_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="18dip"
-        android:scrollbars="none"
-        android:listSelector="@drawable/list_item_selector"
-        android:cacheColorHint="@android:color/transparent"
-        android:dividerHeight="18dip"
-        android:divider="@null" />
+   <fragment
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <ListView
+           android:id="@+id/lv_ad_list"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:padding="18dip"
+           android:scrollbars="none"
+           android:listSelector="@drawable/list_item_selector"
+           android:cacheColorHint="@android:color/transparent"
+           android:dividerHeight="18dip"
+           android:divider="@null" />
+       <view.lcc.tyzs.view.LoadingLayout
+           android:id="@+id/loading_layout"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" />
+   </fragment>
 </LinearLayout>
