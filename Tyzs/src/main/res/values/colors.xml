@@ -144,4 +144,5 @@
     <color name="setting_act_rl_bgcolor_common">#ffffffff</color>
 
     <color name="content_color">#3C3C3C</color>
+    <color name="grey_light">#eee</color>
 </resources>
