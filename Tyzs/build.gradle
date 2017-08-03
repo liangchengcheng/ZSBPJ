@@ -51,4 +51,6 @@ dependencies {
     //eventbus
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'org.greenrobot:greendao:3.2.2'
+
+    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
 }

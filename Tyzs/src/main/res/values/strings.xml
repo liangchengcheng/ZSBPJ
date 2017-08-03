@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">养生APP</string>
+    <string name="loading">加载...</string>
+    <string name="address_add">添加地址...</string>
 </resources>
