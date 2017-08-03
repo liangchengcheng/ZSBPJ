@@ -147,4 +147,6 @@
     <color name="grey_light">#eee</color>
     <color name="text_press">#00BF7A</color>
     <color name="item_press">#F0FFFA</color>
+
+    <color name="back">#F1F2F2</color>
 </resources>
