@@ -56,12 +56,12 @@
         "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/drawable-xxxhdpi/abc_ic_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/drawable-xxxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/drawable-xxxhdpi/abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/drawable-xxxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_btn_radio_to_on_mtrl_015.png",

@@ -8,12 +8,12 @@
         "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/abc_action_mode_bar.xml"
     },
     {
-        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/abc_activity_chooser_view_list_item.xml",
-        "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/abc_activity_chooser_view_list_item.xml"
-    },
-    {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/abc_screen_toolbar.xml",
         "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/abc_action_bar_up_container.xml",
@@ -92,12 +92,12 @@
         "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/abc_action_bar_title_item.xml"
     },
     {
-        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/notification_template_big_media_narrow.xml",
-        "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/notification_template_big_media_narrow.xml"
-    },
-    {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/notification_template_lines.xml",
         "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/Users/lcc/.android/build-cache/124a506388485d601db95f606b1289bd6d649151/output/res/layout/notification_template_big_media_narrow.xml"
     },
     {
         "merged": "/Users/lcc/AndroidStudioProjects/ZSBPJ/nice-spinner/build/intermediates/res/merged/androidTest/debug/layout/abc_screen_content_include.xml",
