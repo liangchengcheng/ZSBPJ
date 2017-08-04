@@ -49,13 +49,12 @@ public class JifenTixianPresenterImpl implements JifenTixianPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
-                        view.JifenTiXianSuccess("");
+                        view.JifenTiXianSuccess(response);
                     } else  {
-                        view.JifenTiXianFail("获取地址信息失败，请稍后再试");
+                        view.JifenTiXianFail("提交提现信息失败，请稍后再试");
                     }
                 } catch (Exception e) {
-                    view.JifenTiXianFail("获取地址信息失败");
+                    view.JifenTiXianFail("提交提现信息失败");
                     e.printStackTrace();
                 }
             }

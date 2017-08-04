@@ -8,7 +8,8 @@ package view.lcc.tyzs.mvp.presenter;
  */
 public interface JifenTixianPresenter {
     void jifenTixian(String value,
-                     String name, String CONTACT,
+                     String name,
+                     String CONTACT,
                      String BCID,
                      String bank);
 }
