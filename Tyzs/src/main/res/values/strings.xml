@@ -2,4 +2,6 @@
     <string name="app_name">养生APP</string>
     <string name="loading">加载...</string>
     <string name="address_add">添加地址...</string>
+    <string name="get_point">正在获取积分...</string>
+    <string name="tx">正在提交提现申请...</string>
 </resources>
