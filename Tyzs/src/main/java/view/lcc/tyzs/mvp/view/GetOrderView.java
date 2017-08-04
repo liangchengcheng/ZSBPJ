@@ -1,5 +1,7 @@
 package view.lcc.tyzs.mvp.view;
 
+import java.util.List;
+
 /**
  * Author:       梁铖城
  * Email:        1038127753@qq.com
@@ -8,11 +10,17 @@ package view.lcc.tyzs.mvp.view;
  */
 public interface GetOrderView {
 
-    void RegisterLoading();
+    void GetOrderLoading();
 
-    void RegisterSuccess(String msg);
+    void GetOrderSuccess(String msg);
 
-    void RegisterFail(String msg);
+    void GetOrderFail(String msg);
 
     void NetWorkErr(String msg);
+
+    void refreshOrLoadFail(String msg);
+
+    void refreshDataSuccess(String msg);
+
+    void loadMoreWeekDataSuccess(String msg);
 }

@@ -12,4 +12,9 @@ package view.lcc.tyzs.mvp.presenter;
 public interface GetOrderPresenter {
 
     void getOrder(String page,String pagesize,String phone,String state);
+
+    void refresh(String page,String pagesize,String phone,String state);
+
+    void loadMore(String page,String pagesize,String phone,String state);
+
 }

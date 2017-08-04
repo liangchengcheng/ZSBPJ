@@ -1,5 +1,6 @@
 package view.lcc.tyzs.mvp.presenter.impl;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -19,6 +20,7 @@ import view.lcc.tyzs.mvp.presenter.GetOrderPresenter;
 import view.lcc.tyzs.mvp.presenter.RegisterPresenter;
 import view.lcc.tyzs.mvp.view.GetOrderView;
 import view.lcc.tyzs.mvp.view.RegisterView;
+import view.lcc.tyzs.utils.TimeUtils;
 
 /**
  * Author:       |梁铖城
@@ -29,15 +31,21 @@ import view.lcc.tyzs.mvp.view.RegisterView;
 public class GetOrderPresenterImpl implements GetOrderPresenter {
     private GetOrderView view;
     private GetOrderModel model;
+    private static final int DEF_DELAY = (int) (1 * 1000);
+
 
     public GetOrderPresenterImpl(GetOrderView view) {
         this.view = view;
         model = new GetOrderModel();
     }
 
-    @Override
-    public void getOrder(String page,String pagesize,String phone,String state) {
-        view.RegisterLoading();
+
+    private void loadData(final String page, String pagesize, String phone, String state, final boolean getData) {
+        if (getData) {
+            view.GetOrderLoading();
+        }
+        final long current_time = TimeUtils.getCurrentTime();
+
         model.register(page,pagesize,phone,state, new ResultCallback<String>() {
 
             @Override
@@ -47,22 +55,62 @@ public class GetOrderPresenterImpl implements GetOrderPresenter {
 
             @Override
             public void onResponse(String response) {
+                int delay = 0;
+                if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
+                    delay = DEF_DELAY;
+                }
+                updateView(response, delay, Integer.parseInt(page), getData);
+            }
+        });
+    }
+
+    private void updateView(final String entities, int delay, final int page, final boolean get_data) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("resultno");
-                    if (!TextUtils.isEmpty(status) && status.equals("000")) {
-                        String data = response.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
-                        // TODO: 2017/8/1 没写完 
-                        view.RegisterSuccess("");
-                    } else  {
-                        view.RegisterFail("注册失败，请稍后再试");
+                    JSONObject jsonObject = new JSONObject(entities);
+                    String code = jsonObject.getString("resultno");
+                    if (code.equals("000")) {
+                        if (page == 1) {
+                            view.refreshDataSuccess(entities);
+                        } else {
+                            view.loadMoreWeekDataSuccess(entities);
+                        }
+                    }  else {
+                        if (get_data) {
+                            // TODO: 2017/8/4 具体的错误信息
+                            view.GetOrderFail("获取信息失败");
+                        } else {
+                            view.refreshOrLoadFail("");
+                        }
                     }
                 } catch (Exception e) {
-                    view.RegisterFail("注册失败");
+                    if (get_data) {
+                        view.GetOrderFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    } else {
+                        view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    }
                     e.printStackTrace();
                 }
             }
-        });
+        }, delay);
+    }
+
+    @Override
+    public void getOrder(String page,String pagesize,String phone,String state) {
+        view.GetOrderLoading();
+
+    }
+
+    @Override
+    public void refresh(String page, String pagesize, String phone, String state) {
+
+    }
+
+    @Override
+    public void loadMore(String page, String pagesize, String phone, String state) {
+
     }
 
 }
