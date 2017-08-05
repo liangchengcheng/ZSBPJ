@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.BaseActivity;
+import view.lcc.tyzs.base.BaseApplication;
+import view.lcc.tyzs.bean.Note;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.JifenZhuanZhangPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.JifenZhuanZhangPresenterImpl;
@@ -24,10 +27,9 @@ import view.lcc.tyzs.mvp.view.JifenZhuanZhangView;
  * Date:         |08-04 22:05
  * Description:  |积分转账
  */
-public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZhangView,View.OnClickListener{
+public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZhangView, View.OnClickListener {
     private JifenZhuanZhangPresenter jifenZhuanZhangPresenter;
 
-    private Button btn_edit_ok;
     private EditText et_gold_name, et_gold_value;
 
     @Override
@@ -48,8 +50,25 @@ public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZ
     }
 
     @Override
-    public void JifenZhuanZhangSuccess(String msg) {
+    public void JifenZhuanZhangSuccess(String result) {
         closeDialog();
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            JSONObject object = new JSONObject(jsonObject.getString("resultjson"));
+
+            Note note = new Note();
+            note.setID(UUID.randomUUID().toString());
+            note.setTime(getCurrentTime());
+            note.setType("积分转账");
+            note.setSpno(object.getString("SPNO"));
+            note.setState("成功");
+            note.setChangeValue(et_gold_value.getText().toString());
+            note.setBalance(object.getString("balance"));
+            BaseApplication.getDaoSession().getNoteDao().insert(note);
+            Frame.getInstance().toastPrompt("提交转账信息成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,14 +85,19 @@ public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZ
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_edit_ok:
                 if (!TextUtils.isEmpty(et_gold_name.getText()) && !TextUtils.isEmpty(et_gold_value.getText())) {
-                    jifenZhuanZhangPresenter.jifenZhuanZhang( et_gold_name.getText().toString(),et_gold_value.getText().toString());
-                }else {
+                    jifenZhuanZhangPresenter.jifenZhuanZhang(et_gold_name.getText().toString(), et_gold_value.getText().toString());
+                } else {
                     Frame.getInstance().toastPrompt("转账信息不能为空");
                 }
                 break;
         }
+    }
+
+    private String getCurrentTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(new Date());
     }
 }
