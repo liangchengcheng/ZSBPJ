@@ -46,8 +46,7 @@ public class JifenZhuanZhangPresenterImpl implements JifenZhuanZhangPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
-                        view.JifenZhuanZhangSuccess("");
+                        view.JifenZhuanZhangSuccess(response);
                     } else  {
                         view.JifenZhuanZhangFail("获取地址信息失败，请稍后再试");
                     }

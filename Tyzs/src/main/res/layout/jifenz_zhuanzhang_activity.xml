@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_bz"/>
+
+        <TextView
+            style="@style/ItemText"
+            android:text="接收者手机号："/>
+
+        <EditText
+            android:hint="请输入接收者手机号"
+            android:id="@+id/et_gold_name"
+            style="@style/EditTextStyle"
+            android:inputType="number"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+    <include layout="@layout/line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_bz"/>
+
+        <TextView
+            style="@style/ItemText"
+            android:text="积分金额："/>
+
+        <EditText
+            android:hint="请输入积分金额"
+            android:id="@+id/et_gold_value"
+            style="@style/EditTextStyle"
+            android:inputType="number"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+    <include layout="@layout/line"/>
+
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal">
+        <TextView
+            android:text="提交"
+            android:padding="10dp"
+            android:gravity="center"
+            android:id="@+id/btn_edit_ok"
+            android:textColor="#fff"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>
