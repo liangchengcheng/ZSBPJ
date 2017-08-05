@@ -291,7 +291,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 intent.putExtra("bean", infos);
                 startActivity(intent);
                 break;
-
+            //同步信息
             case R.id.moreBtn:
                 List<ShoppingCarItemBean> list = new ArrayList<ShoppingCarItemBean>();
                 try {
