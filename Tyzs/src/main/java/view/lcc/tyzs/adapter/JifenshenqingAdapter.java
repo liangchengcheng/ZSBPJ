@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.bean.Note;
@@ -74,15 +75,10 @@ public class JifenshenqingAdapter extends BaseAdapter {
     }
 
     // 向list里面添加新的数据
-    public void addDate(ArrayList<Note> bean) {
+    public void addDate(List<Note> bean) {
         beans.addAll(bean);
+        notifyDataSetChanged();
     }
-
-    // 这个是同步数据用的
-    public void newdata(ArrayList<Note> bean) {
-        this.beans = bean;
-    }
-
 
     static class ViewHolder {
         TextView tv_time;
