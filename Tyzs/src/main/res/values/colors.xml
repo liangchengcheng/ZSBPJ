@@ -18,6 +18,7 @@
     <color name="bg_head_color">#F8F8F8</color>
     <color name="province_line_border">#C7C7C7</color>
     <color name="main_textcolormore">#63564B</color>
+    <color name="backgroundColorPress">#DBDBD3</color>
     <!-- 白色 -->
     <color name="bg_White">#FFFFFF</color>
     <!-- 透明 -->
