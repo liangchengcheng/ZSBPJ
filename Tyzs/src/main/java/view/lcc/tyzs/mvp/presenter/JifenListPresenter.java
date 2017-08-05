@@ -8,4 +8,8 @@ package view.lcc.tyzs.mvp.presenter;
  */
 public interface JifenListPresenter {
     void jifenList(String page,String type);
+
+    void refresh(String page,String type);
+
+    void loadMore(String page,String type);
 }

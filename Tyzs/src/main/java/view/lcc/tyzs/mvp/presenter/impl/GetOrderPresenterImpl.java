@@ -99,18 +99,17 @@ public class GetOrderPresenterImpl implements GetOrderPresenter {
 
     @Override
     public void getOrder(String page,String pagesize,String phone,String state) {
-        view.GetOrderLoading();
-
+        loadData(page,pagesize,phone,state,true);
     }
 
     @Override
     public void refresh(String page, String pagesize, String phone, String state) {
-
+        loadData(page,pagesize,phone,state,false);
     }
 
     @Override
     public void loadMore(String page, String pagesize, String phone, String state) {
-
+        loadData(page,pagesize,phone,state,false);
     }
 
 }

@@ -15,4 +15,10 @@ public interface JifenListView {
     void JifenListFail(String msg);
 
     void NetWorkErr(String msg);
+
+    void refreshOrLoadFail(String msg);
+
+    void refreshDataSuccess(String msg);
+
+    void loadMoreWeekDataSuccess(String msg);
 }

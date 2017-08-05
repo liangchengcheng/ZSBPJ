@@ -23,12 +23,13 @@ public class OrderMainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.order_main_activity);
         viewPager = (ViewPager) findViewById(R.id.second_viewpagers);
         tabLayout = (TabLayout) findViewById(R.id.second_tabs);
+        setupViewPager();
     }
 
     private void setupViewPager() {
-
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/white"
+        app:layout_collapseMode="pin" >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:background="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:text="积分列表"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/second_tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:fillViewport="false"
+            app:tabBackground="@color/colorPrimary"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/divider_low"
+            app:tabIndicatorHeight="1.5dp"
+            app:tabMinWidth="50dp"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/MyCustomTabTextAppearance2"
+            app:tabTextColor="@color/white" />
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/second_viewpagers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</LinearLayout>

@@ -1,5 +1,6 @@
 package view.lcc.tyzs.mvp.presenter.impl;
 
+import android.os.Handler;
 import android.text.TextUtils;
 
 import com.squareup.okhttp.Request;
@@ -14,6 +15,7 @@ import view.lcc.tyzs.mvp.presenter.JifenListPresenter;
 import view.lcc.tyzs.mvp.presenter.ShopCarGetPresenter;
 import view.lcc.tyzs.mvp.view.JifenListView;
 import view.lcc.tyzs.mvp.view.ShopCarGetView;
+import view.lcc.tyzs.utils.TimeUtils;
 
 /**
  * Author:       |梁铖城
@@ -24,16 +26,19 @@ import view.lcc.tyzs.mvp.view.ShopCarGetView;
 public class JifenListPresenterImpl implements JifenListPresenter {
     private JifenListView view;
     private JifenListModel model;
+    private static final int DEF_DELAY = (int) (1 * 1000);
 
     public JifenListPresenterImpl(JifenListView view) {
         this.view = view;
         model = new JifenListModel();
     }
 
-    @Override
-    public void jifenList(String page,String type) {
-        view.JifenListLoading();
-        model.jifenList(page,type,new ResultCallback<String>() {
+    private void loadData(final String page, String type, final boolean getData) {
+        if (getData) {
+            view.JifenListLoading();
+        }
+        final long current_time = TimeUtils.getCurrentTime();
+        model.jifenList(page,type, new ResultCallback<String>() {
 
             @Override
             public void onError(Request request, Exception e) {
@@ -42,21 +47,61 @@ public class JifenListPresenterImpl implements JifenListPresenter {
 
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("resultno");
-                    if (!TextUtils.isEmpty(status) && status.equals("000")) {
+                int delay = 0;
+                if (TimeUtils.getCurrentTime() - current_time < DEF_DELAY) {
+                    delay = DEF_DELAY;
+                }
+                updateView(response, delay, Integer.parseInt(page), getData);
+            }
+        });
+    }
 
-                        view.JifenListSuccess("");
-                    } else  {
-                        view.JifenListFail("获取地址信息失败，请稍后再试");
+    private void updateView(final String entities, int delay, final int page, final boolean get_data) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject(entities);
+                    String code = jsonObject.getString("resultno");
+                    if (code.equals("000")) {
+                        if (page == 1) {
+                            view.refreshDataSuccess(entities);
+                        } else {
+                            view.loadMoreWeekDataSuccess(entities);
+                        }
+                    }  else {
+                        if (get_data) {
+                            // TODO: 2017/8/5 具体的错误信息
+                            view.JifenListFail("获取信息失败");
+                        } else {
+                            view.refreshOrLoadFail("");
+                        }
                     }
                 } catch (Exception e) {
-                    view.JifenListFail("获取地址信息失败");
+                    if (get_data) {
+                        view.JifenListFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    } else {
+                        view.refreshOrLoadFail(ApiException.getApiExceptionMessage(e.getMessage()));
+                    }
                     e.printStackTrace();
                 }
             }
-        });
+        }, delay);
+    }
+
+    @Override
+    public void jifenList(String page,String type) {
+        loadData(page,type,true);
+    }
+
+    @Override
+    public void refresh(String page,String type) {
+        loadData(page,type,false);
+    }
+
+    @Override
+    public void loadMore(String page,String type) {
+        loadData(page,type,false);
     }
 
 }
