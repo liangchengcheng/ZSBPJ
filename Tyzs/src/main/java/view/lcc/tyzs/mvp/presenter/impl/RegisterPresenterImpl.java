@@ -43,8 +43,7 @@ public class RegisterPresenterImpl implements RegisterPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
-                        view.RegisterSuccess("");
+                        view.RegisterSuccess(response);
                     } else  {
                         view.RegisterFail("注册失败，请稍后再试");
                     }

@@ -29,7 +29,7 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void login(String phone, final String password) {
+    public void login(final String phone, final String password) {
         view.Loading();
         model.onLogin(phone, password, new ResultCallback<String>() {
             @Override
@@ -45,15 +45,16 @@ public class LoginPresenterImpl implements LoginPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         String result = (String) jsonObject.get("resultjson");
                         JSONObject con = new JSONObject(result);
-                        String Name = con.getString("name");
-
-                        if (Name != null) {
+                        String nickName = con.getString("name");
+                        if (nickName != null) {
                             String UID = con.getString("UID");
                             String cardId = con.getString("cardid");
                             String rate = con.getString("rate");
                             String rName = con.getString("rname");
 
-                            SharePreferenceUtil.setName(Name);
+
+                            SharePreferenceUtil.setName(phone);
+                            SharePreferenceUtil.setNickname(nickName);
                             SharePreferenceUtil.setrName(rName);
                             SharePreferenceUtil.setCardId(cardId);
                             SharePreferenceUtil.setUid(UID);

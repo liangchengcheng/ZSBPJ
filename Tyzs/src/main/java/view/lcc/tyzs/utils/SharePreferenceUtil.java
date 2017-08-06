@@ -9,6 +9,7 @@ public class SharePreferenceUtil {
 
     public static final String NAME = "name";
 
+    public static final String NICKNAME = "n_name";
     public static final String R_NAME = "r_name";
 
     public static final String CARD_ID = "card_id";
@@ -19,6 +20,17 @@ public class SharePreferenceUtil {
 
     public static final String PWD = "pwd";
 
+    public static void setNickname(String NAME) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(Frame.getAppContext());
+        sharedPreferences.edit().putString(NICKNAME,NAME).commit();
+    }
+
+    public static String getNickname() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString(NICKNAME, "");
+    }
 
     public static String getName() {
         SharedPreferences sharedPreferences = PreferenceManager

@@ -18,9 +18,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.mvp.presenter.LoginPresenter;
 import view.lcc.tyzs.mvp.presenter.RegisterPresenter;
+import view.lcc.tyzs.mvp.presenter.impl.LoginPresenterImpl;
 import view.lcc.tyzs.mvp.presenter.impl.RegisterPresenterImpl;
+import view.lcc.tyzs.mvp.view.LoginView;
 import view.lcc.tyzs.mvp.view.RegisterView;
 import view.lcc.tyzs.ui.home.MainActivity;
 import view.lcc.tyzs.utils.CheckUtils;
@@ -34,7 +39,7 @@ import view.lcc.tyzs.view.PaperButton;
  * Date:         2017年04月28日16:24:47
  * Description:  注册相关的界面
  */
-public class FragmentRegister extends Fragment implements RegisterView {
+public class FragmentRegister extends Fragment implements RegisterView,LoginView {
     EditTextWithDel userpassword;
     EditTextWithDel userphone;
     EditTextWithDel username;
@@ -55,6 +60,7 @@ public class FragmentRegister extends Fragment implements RegisterView {
     private String phone;
     private String password;
     private RegisterPresenter registerPresenter;
+    private LoginPresenter loginPresenter;
     private String flag = "";
 
     public static FragmentRegister newInstance(String r) {
@@ -93,6 +99,7 @@ public class FragmentRegister extends Fragment implements RegisterView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, null);
         registerPresenter = new RegisterPresenterImpl(this);
+        loginPresenter = new LoginPresenterImpl(this);
         initData(view);
         initView();
         TextListener();
@@ -194,19 +201,13 @@ public class FragmentRegister extends Fragment implements RegisterView {
 
     @Override
     public void RegisterLoading() {
-        //正在注册
+        showSnackbar(root_view, "提示：正在注册账号,请稍后");
     }
 
     @Override
     public void RegisterSuccess(String msg) {
-        //注册成功
-        showSnackbar(root_view, "提示：注册账号成功");
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("name", name);
-        intent.putExtra("phone", phone);
-        intent.putExtra("Pwd", password);
-        intent.putExtra("cardid", id);
-        startActivity(intent);
+        //loginPresenter.login(phone,password);
+        EventBus.getDefault().post(0x03);
         getActivity().finish();
     }
 
@@ -214,6 +215,27 @@ public class FragmentRegister extends Fragment implements RegisterView {
     public void RegisterFail(String msg) {
         //注册失败
         showSnackbar(root_view, "提示：注册账号失败");
+    }
+
+    @Override
+    public void Loading() {
+        showSnackbar(root_view, "提示：正在登录请稍后");
+    }
+
+    @Override
+    public void onLoginSuccess(String user) {
+        if (TextUtils.isEmpty(flag)){
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        }else {
+            EventBus.getDefault().post(0x03);
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onLoginFail(String msg) {
+
     }
 
     @Override

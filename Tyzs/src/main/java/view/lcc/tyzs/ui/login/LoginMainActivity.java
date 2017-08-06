@@ -60,8 +60,6 @@ public class LoginMainActivity extends BaseActivity {
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
-
             }
         });
     }
