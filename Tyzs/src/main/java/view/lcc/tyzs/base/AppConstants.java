@@ -36,7 +36,7 @@ public class AppConstants {
 
 
         //收货地址获取
-        public final static String ADDRESSS_GET = "/Interface/GetGoodList.ashx?action=all";
+        public final static String ADDRESSS_GET = "/Interface/AddressInfo.ashx?action=get";
 
         //收货地址 编辑
         public final static String ADDRESSS_EDIT = "/Interface/AddressInfo.ashx?action=change";

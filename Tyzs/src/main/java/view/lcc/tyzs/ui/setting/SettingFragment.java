@@ -14,6 +14,7 @@ import android.widget.TextView;
 import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.frame.ImageManager;
+import view.lcc.tyzs.ui.address.AddressListActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.pulltozoomview.PullToZoomScrollViewEx;
 
@@ -70,8 +71,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-
-
             //关于软件
             case R.id.layout_me_getseed:
 
@@ -93,9 +92,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             case R.id.layout_me_focus:
 
                 break;
-            //视频的收藏
+            //地址管理
             case R.id.layout_me_room_manage:
-
+                // TODO: 2017/8/6 判断是否登录了 
+                intent = new Intent(getActivity(), AddressListActivity.class);
+                startActivity(intent);
                 break;
             //历史数据
             case R.id.layout_me_history:

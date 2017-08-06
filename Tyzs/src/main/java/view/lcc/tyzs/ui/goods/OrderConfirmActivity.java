@@ -57,7 +57,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     //可用积分
     private String point;
 
-
     //tv_order_sum (总额)
     private TextView tv_order_name, tv_order_phone, tv_order_address, tv_order_sum;
     //商品列表
@@ -84,6 +83,11 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         et_jisuan = (EditText) findViewById(R.id.et_jisuan);
         lv_products_list = (ListView) findViewById(R.id.lv_products_list);
         tv_order_sum = (TextView) findViewById(R.id.tv_order_sum);
+
+        tv_order_name = (TextView) findViewById(R.id.tv_order_name);
+        tv_order_phone = (TextView) findViewById(R.id.tv_order_phone);
+        tv_order_address = (TextView) findViewById(R.id.tv_order_address);
+
         //获取上个页面传递过来的页面信息
         orderInfos = (ArrayList<OrderInfo>) getIntent().getSerializableExtra("data");
         if (orderInfos != null) {

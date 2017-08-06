@@ -1,31 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dip"
     android:background="#D2D2D2"
     android:orientation="horizontal"
-    android:padding="1dip" >
+    android:padding="1dip">
 
     <FrameLayout
         android:id="@+id/fl_ad_select"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/list_item_selector" >
+        android:background="@drawable/list_item_selector">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="18dip"
-            android:paddingLeft="18dip"
-            android:paddingRight="18dip"
-            android:paddingTop="18dip" >
+            android:padding="18dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_ad_linkman"
@@ -63,38 +59,38 @@
         </LinearLayout>
 
         <ImageView
-            android:focusable="false"
-            android:clickable="false"
-            android:focusableInTouchMode="false"
             android:id="@+id/iv_ad_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/modify_order_address_selected" />
+            android:background="@drawable/modify_order_address_selected"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/fl_ad_edit"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#EFEFEF" >
+        android:background="#EFEFEF">
 
         <ImageView
-            android:focusable="false"
-            android:clickable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/modify_order_address_cut_line" />
+            android:background="@drawable/modify_order_address_cut_line"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
 
         <ImageView
-            android:focusable="false"
-            android:clickable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dip"
-            android:background="@drawable/modify_order_address_edit" />
+            android:background="@drawable/modify_order_address_edit"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
     </FrameLayout>
 
 </LinearLayout>

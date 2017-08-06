@@ -34,7 +34,7 @@ import view.lcc.tyzs.view.LoadingLayout;
  * Date:         |08-02 22:23
  * Description:  |
  */
-// TODO: 2017/8/3 登录放在外侧
+
 public class AddressListActivity extends BaseActivity implements AddressListAdapter.EditListener
         ,AdapterView.OnItemClickListener  ,View.OnClickListener,AddressGetView{
     private ListView addressList;
@@ -60,6 +60,7 @@ public class AddressListActivity extends BaseActivity implements AddressListAdap
         findViewById(R.id.iv_more).setOnClickListener(this);
         findViewById(R.id.iv_back).setOnClickListener(this);
         presenter = new AddressGetPresenterImpl(this);
+        getAddress();
     }
 
     private void getAddress(){

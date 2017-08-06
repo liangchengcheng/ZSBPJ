@@ -114,7 +114,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
                 orderlist.add(info);
 
                 Intent intent = new Intent(GoodsDetailsActivity.this, OrderConfirmActivity.class);
-                intent.putExtra("bean", orderlist);
+                intent.putExtra("data", orderlist);
                 intent.putExtra("number", num);
                 startActivity(intent);
                 break;
