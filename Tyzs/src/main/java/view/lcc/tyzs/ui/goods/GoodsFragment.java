@@ -37,7 +37,6 @@ import view.lcc.tyzs.view.LoadingLayout;
 public class GoodsFragment extends Fragment implements GoodsView {
     //左右两侧的布局
     private ListView lv1, lv2;
-    private LinearLayout lv1_layout;
     //动态布局
     private LoadingLayout loading_layout;
 
@@ -47,8 +46,6 @@ public class GoodsFragment extends Fragment implements GoodsView {
     private int pageSize = 10;
     private List<ShoppingBean> rightData = new ArrayList<>();
     private GoodsPresenter goodsPresenter;
-    private RightAdapter rightAdapter;
-
 
     @Nullable
     @Override
@@ -57,7 +54,6 @@ public class GoodsFragment extends Fragment implements GoodsView {
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         lv1 = (ListView) view.findViewById(R.id.lv1);
         lv2 = (ListView) view.findViewById(R.id.lv2);
-        lv1_layout = (LinearLayout) view.findViewById(R.id.lv_layout);
         return view;
     }
 
@@ -73,6 +69,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
      */
     public void showPopupWindow() {
         final LeftAdapter leftAdapter = new LeftAdapter(getActivity(), Arrays.asList(dataLeft));
+        leftAdapter.setSelectItem(0);
         lv1.setAdapter(leftAdapter);
         goodsPresenter.goods(pageNo + "", pageSize + "", dataLeft[0]);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,8 +78,6 @@ public class GoodsFragment extends Fragment implements GoodsView {
                 if (parent.getAdapter() instanceof LeftAdapter) {
                     leftAdapter.setSelectItem(position);
                     leftAdapter.notifyDataSetChanged();
-                    lv2.setVisibility(View.INVISIBLE);
-                    rightData.clear();
                     rightData = new ArrayList<>();
                     String type = dataLeft[position];
                     goodsPresenter.goods(pageNo + "", pageSize + "", type);
@@ -96,6 +91,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
         loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
+    private RightAdapter rightAdapter;
     @Override
     public void getGoodsSuccess(String result) {
         if (!TextUtils.isEmpty(result)) {
@@ -103,13 +99,15 @@ public class GoodsFragment extends Fragment implements GoodsView {
                 String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
                 JSONObject jsonObject = new JSONObject(data);
                 String result_json = jsonObject.getString("resultjson");
-                rightData = GsonUtils.changeGsonToList(result_json, ShoppingBean.class);
+                rightData = GsonUtils.fromJsonArray(result_json, ShoppingBean.class);
+                if (rightAdapter == null){
+                    rightAdapter = new RightAdapter(getActivity(), rightData);
+                    lv2.setAdapter(rightAdapter);
+                }else {
+                    rightAdapter.setData(rightData);
+                }
 
-
-                rightAdapter = new RightAdapter(getActivity(), rightData);
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-                lv2.setAdapter(rightAdapter);
-                rightAdapter.notifyDataSetChanged();
                 lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
