@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,26 +23,26 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
  * Description:  |购物车的数量变化
  */
 public class GoodsToCarDialog extends Dialog implements View.OnClickListener {
-    private Button btn_ok;
-    private Button btn_cancel;
-
     private TextView tv_price;
     private TextView name;
     private TextView tv_count;
 
     private NumEditText net_numedit;
 
-    private int count;
+    private String count;
     private ShoppingBean shoppingBean;
+    private Context context;
 
 
-    public GoodsToCarDialog(Context context) {
-        super(context);
+    public GoodsToCarDialog(Context context, String count, ShoppingBean shoppingBean) {
+        super(context, R.style.Dialog2);
+        this.count = count;
+        this.shoppingBean = shoppingBean;
+        this.context = context;
     }
 
-    // TODO: 2017/8/1 用计划巡查的样式
     public GoodsToCarDialog(Context context, int themeResId) {
-        super(context, themeResId);
+        super(context, R.style.Dialog2);
     }
 
     protected GoodsToCarDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
@@ -50,23 +52,22 @@ public class GoodsToCarDialog extends Dialog implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog_edit_cart_num);
 
-        btn_ok = (Button) findViewById(R.id.btn_cancel);
-        btn_cancel = (Button) findViewById(R.id.btn_ok);
         tv_price = (TextView) findViewById(R.id.tv_dialog_cart_price);
         name = (TextView) findViewById(R.id.name);
         tv_count = (TextView) findViewById(R.id.tv_dialog_cart_count);
         net_numedit = (NumEditText) findViewById(R.id.net_dialog_count);
-        setContentView(R.layout.dialog_edit_cart_num);
+
         setCanceledOnTouchOutside(false);
 
 
-        net_numedit.setNum(count);
+        net_numedit.setNum(Integer.parseInt(count));
         name.setText(shoppingBean.getGoodName());
         tv_count.setText(String.valueOf(count));
 
         String rate = SharePreferenceUtil.getRate();
-        if (!TextUtils.isEmpty(rate)) {
+        if (TextUtils.isEmpty(rate)) {
             tv_price.setText(shoppingBean.getGoodPrice());
         } else {
             double sum = Double.parseDouble(shoppingBean.getGoodCost()) + Double.parseDouble(shoppingBean.getGoodProfit()) * Double.parseDouble(rate);
@@ -76,13 +77,20 @@ public class GoodsToCarDialog extends Dialog implements View.OnClickListener {
         net_numedit.setNumChangedListener(new NumChangedListener() {
             @Override
             public void numChanged(int num) {
-                count = num;
+                count = num + "";
                 tv_count.setText(String.valueOf(num));
             }
         });
 
-        btn_cancel.setOnClickListener(this);
-        btn_ok.setOnClickListener(this);
+        findViewById(R.id.btn_cancel).setOnClickListener(this);
+        findViewById(R.id.btn_ok).setOnClickListener(this);
+        Window window = getWindow();
+        window.getDecorView().setPadding(0,0,0,0);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
     }
 
     @Override
@@ -90,8 +98,8 @@ public class GoodsToCarDialog extends Dialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_ok:
                 int num = net_numedit.getNum();
-                if (listener != null){
-                    listener.onNumChange(num+"");
+                if (listener != null) {
+                    listener.onNumChange(num + "");
                 }
                 dismiss();
                 break;
@@ -104,11 +112,11 @@ public class GoodsToCarDialog extends Dialog implements View.OnClickListener {
 
     public NumChangeListener listener;
 
-    public void setOnNumChangeListener(NumChangeListener listener){
+    public void setOnNumChangeListener(NumChangeListener listener) {
         this.listener = listener;
     }
 
-    public interface NumChangeListener{
+    public interface NumChangeListener {
         void onNumChange(String num);
     }
 }
