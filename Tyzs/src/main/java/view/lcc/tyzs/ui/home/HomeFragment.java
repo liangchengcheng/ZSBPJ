@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
+import view.lcc.tyzs.utils.StatusBarUtil;
 
 /**
  * Author:       |梁铖城
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.gsjs).setOnClickListener(this);
         view.findViewById(R.id.rxcp).setOnClickListener(this);
         view.findViewById(R.id.gwc).setOnClickListener(this);
+        StatusBarUtil.setStatusBarTranslucent(getActivity(), false);
         return view;
     }
 

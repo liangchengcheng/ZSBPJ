@@ -18,6 +18,7 @@ import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.ui.car.CarFragment;
 import view.lcc.tyzs.ui.goods.GoodsFragment;
 import view.lcc.tyzs.ui.setting.SettingFragment;
+import view.lcc.tyzs.utils.SystemBarHelper;
 import view.lcc.tyzs.view.NoScrollViewPager;
 import view.lcc.tyzs.view.navigationbar.NavigationTabBar;
 
@@ -29,6 +30,9 @@ public class MainActivity  extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //SystemBarHelper.immersiveStatusBar(this);
+        //SystemBarHelper.immersiveStatusBar(this, 0);
+        //SystemBarHelper.setHeightAndPadding(this, mToolbar);
 
         initFragment();
         initUI();

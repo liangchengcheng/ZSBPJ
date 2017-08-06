@@ -15,11 +15,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_head_image"
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:id="@+id/iv_head_image"
+                   android:layout_width="match_parent"
+                   android:layout_height="250dp"
+                   android:scaleType="centerCrop" />
+
+               <ImageButton
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@drawable/icon_back"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+           </FrameLayout>
+
+
+            <TextView
+                android:background="#eee"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop" />
+                android:layout_height="1dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,6 +58,15 @@
                     android:text="仙人余粮"
                     android:textColor="#000"
                     android:textSize="20dp" />
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:background="#eee"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,6 +122,14 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:background="#eee"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -123,48 +158,59 @@
 
     <LinearLayout
         android:layout_gravity="bottom"
-        android:id="@+id/detail_buy_board"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
-        android:background="#eee"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-        </RelativeLayout>
+        android:layout_height="wrap_content">
+        <TextView
+            android:background="#eee"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:id="@+id/detail_buy_board"
+            android:layout_width="match_parent"
+            android:layout_height="50.0dip"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/add_car"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@color/paper_button_color"
-                android:gravity="center"
-                android:text="加入购物车"
-                android:textColor="#fff" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/add_buy"
-                android:layout_width="match_parent"
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:text="立即购买"
-                android:textColor="#fff" />
-        </LinearLayout>
+                android:layout_weight="2">
 
+                <TextView
+                    android:id="@+id/add_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/paper_button_color"
+                    android:gravity="center"
+                    android:text="加入购物车"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/add_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="立即购买"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        
 
     </LinearLayout>
 </FrameLayout>
