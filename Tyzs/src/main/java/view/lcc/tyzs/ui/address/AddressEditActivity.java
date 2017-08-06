@@ -1,6 +1,5 @@
 package view.lcc.tyzs.ui.address;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,6 @@ import view.lcc.tyzs.bean.CityModel;
 import view.lcc.tyzs.bean.CountryModel;
 import view.lcc.tyzs.bean.ProvinceModel;
 import view.lcc.tyzs.frame.Frame;
-import view.lcc.tyzs.mvp.presenter.AddressAddPresenter;
 import view.lcc.tyzs.mvp.presenter.AddressDeletePresenter;
 import view.lcc.tyzs.mvp.presenter.AddressEditPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.AddressDeletePresenterImpl;
@@ -52,7 +49,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * Description:  |
  */
 public class AddressEditActivity extends BaseActivity implements View.OnClickListener
-        ,CompoundButton.OnCheckedChangeListener,AddressEditView ,AddressDeleteView{
+        , CompoundButton.OnCheckedChangeListener, AddressEditView, AddressDeleteView {
     private PopupWindow provincePopupWindow;
     private PopupWindow cityPopupWindow;
     private PopupWindow areaPopupWindow;
@@ -114,9 +111,10 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.ll_province).setOnClickListener(this);
         findViewById(R.id.ll_city).setOnClickListener(this);
         findViewById(R.id.ll_country).setOnClickListener(this);
+        findViewById(R.id.btn_edit_ok).setOnClickListener(this);
 
         bean = (Address) getIntent().getSerializableExtra("bean");
-        if ( bean != null){
+        if (bean != null) {
             String person = bean.getAddressee();
             String phone = bean.getPhone();
             addressId = bean.getAID();
@@ -126,28 +124,28 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         InitData();
     }
 
-    private void saveData(){
+    private void saveData() {
         if (cb_select.isChecked()) {
             isDefault = "是";
         } else {
             isDefault = "否";
         }
 
-        if (!TextUtils.isEmpty(tv_province.getText().toString()) ||
-                !TextUtils.isEmpty(tv_city.getText().toString())||
-                !TextUtils.isEmpty(tv_area.getText().toString())||
-                !TextUtils.isEmpty(et_edit_address.getText().toString().trim())
-                ){
+        if (TextUtils.isEmpty(tv_province.getText().toString()) ||
+                TextUtils.isEmpty(tv_city.getText().toString()) ||
+                TextUtils.isEmpty(tv_area.getText().toString()) ||
+                TextUtils.isEmpty(et_edit_address.getText().toString().trim())
+                ) {
             Frame.getInstance().toastPrompt("地址信息不完整");
             return;
         }
 
-        if (!TextUtils.isEmpty(et_er.getText().toString().trim())){
+        if (TextUtils.isEmpty(et_er.getText().toString().trim())) {
             Frame.getInstance().toastPrompt("收件人不能为空");
             return;
         }
 
-        if (!TextUtils.isEmpty(et_phone.getText().toString().trim())){
+        if (TextUtils.isEmpty(et_phone.getText().toString().trim())) {
             Frame.getInstance().toastPrompt("收件电话不能为空");
             return;
         }
@@ -160,14 +158,14 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         addressEditPresenter.addressEdit(
                 addressId
                 , SharePreferenceUtil.getName()
-                ,totalAddress,et_er.getText().toString().trim()
-                ,et_phone.getText().toString().trim(),
+                , totalAddress, et_er.getText().toString().trim()
+                , et_phone.getText().toString().trim(),
                 isDefault
         );
     }
 
-    private void deleteAddress(){
-        if (!TextUtils.isEmpty(addressId)){
+    private void deleteAddress() {
+        if (!TextUtils.isEmpty(addressId)) {
             addressDeletePresenter.addressDelete(addressId, SharePreferenceUtil.getName());
         }
     }
@@ -177,7 +175,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         AddressXML = getRawAddress().toString();
         try {
             analysXML(AddressXML);
-            if (provinceList !=null){
+            if (provinceList != null) {
                 tv_province.setText(provinceList.get(0).getProvince());
                 tv_city.setText(provinceList.get(0).getCity_list().get(0).getCity());
                 tv_area.setText(provinceList.get(0).getCity_list().get(0).getCounty_list().get(0).getCounty());
@@ -223,13 +221,11 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                         provinceModel = new ProvinceModel();
                         provinceModel.setProvince(province);
                         cityList = new ArrayList<CityModel>();
-
                     } else if ("city".equals(typeName)) {
                         city = parser.getAttributeValue(0);
                         cityModel = new CityModel();
                         cityModel.setCity(city);
                         countyList = new ArrayList<CountryModel>();
-
                     } else if ("area".equals(typeName)) {
                         county = parser.getAttributeValue(0);
                         countyModel = new CountryModel();
@@ -262,8 +258,8 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     //所在省
     private void createProvincePopupWindow() {
-        if (provinceList != null){
-            for (ProvinceModel provinceModel : provinceList){
+        if (provinceList != null) {
+            for (ProvinceModel provinceModel : provinceList) {
                 province_string.add(provinceModel.getProvince());
             }
 
@@ -303,11 +299,11 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     //所在市
     private void createCityPopupWindow() {
-        if (provinceList != null){
+        if (provinceList != null) {
             final List<CityModel> city_list = provinceList.get(pPosition).getCity_list();
-            if (city_list != null){
+            if (city_list != null) {
                 city_string = new ArrayList<>();
-                for (CityModel cityModel : city_list){
+                for (CityModel cityModel : city_list) {
                     city_string.add(cityModel.getCity());
                 }
 
@@ -338,11 +334,11 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     //所在市
     private void createAreaPopupWindow() {
-        if (provinceList != null){
+        if (provinceList != null) {
             List<CountryModel> county_list = provinceList.get(pPosition).getCity_list().get(cPosition).getCounty_list();
-            if (county_list != null){
+            if (county_list != null) {
                 area_string = new ArrayList<>();
-                for (CountryModel city_list : county_list){
+                for (CountryModel city_list : county_list) {
                     area_string.add(city_list.getCounty());
                 }
 
@@ -388,7 +384,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             //所在省
             case R.id.ll_province:
                 createProvincePopupWindow();
@@ -404,46 +400,58 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                 createAreaPopupWindow();
                 areaPopupWindow.showAsDropDown(line_area);
                 break;
+            case R.id.btn_edit_ok:
+                saveData();
+                break;
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+        if (isChecked) {
+            isDefault = "是";
+        } else {
+            isDefault = "否";
+        }
     }
 
     @Override
     public void AddressEditLoading() {
-
+        createDialog(R.string.save);
     }
 
     @Override
     public void AddressEditSuccess(String msg) {
-
+        Frame.getInstance().toastPrompt("保存成功，请稍后再试");
+        closeDialog();
     }
 
     @Override
     public void AddressEditFail(String msg) {
-
+        Frame.getInstance().toastPrompt("保存失败，请稍后再试");
+        closeDialog();
     }
 
     @Override
     public void AddressDeleteLoading() {
-
+        createDialog(R.string.delete);
     }
 
     @Override
     public void AddressDeleteSuccess(String msg) {
-
+        Frame.getInstance().toastPrompt("删除成功，请稍后再试");
+        closeDialog();
     }
 
     @Override
     public void AddressDeleteFail(String msg) {
-
+        Frame.getInstance().toastPrompt("删除失败，请稍后再试");
+        closeDialog();
     }
 
     @Override
     public void NetWorkErr(String msg) {
-
+        Frame.getInstance().toastPrompt("网络不稳定，请稍后再试");
+        closeDialog();
     }
 }

@@ -7,5 +7,5 @@ package view.lcc.tyzs.mvp.presenter;
  * Description:  |
  */
 public interface AddressAddPresenter {
-    void addressAdd(String phone,String address, String addressee,String aphone);
+    void addressAdd(String phone,String address, String addressee, String aphone);
 }

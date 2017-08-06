@@ -6,4 +6,6 @@
     <string name="tx">正在提交提现申请...</string>
     <string name="zz">正在提交转账申请...</string>
     <string name="zh">正在提交转换申请...</string>
+    <string name="save">正在保存...</string>
+    <string name="delete">正在删除...</string>
 </resources>
