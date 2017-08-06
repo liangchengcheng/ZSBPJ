@@ -3,8 +3,10 @@ package view.lcc.tyzs.mvp.model;
 import view.lcc.tyzs.base.ApiClient;
 import view.lcc.tyzs.base.AppConstants;
 import view.lcc.tyzs.base.ParamsMap;
+import view.lcc.tyzs.bean.request.JifenTixianRequest;
 import view.lcc.tyzs.frame.okhttp.callback.ResultCallback;
 import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
+import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 
 /**
@@ -19,15 +21,25 @@ public class JifenTixianModel {
                                      String name, String CONTACT,
                                      String BCID,
                                      String bank, ResultCallback<String> callback) {
-        ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put("phone", SharePreferenceUtil.getName());
-        paramsMap.put("value", value);
-        paramsMap.put("name", name);
-        paramsMap.put("CONTACT", CONTACT);
-        paramsMap.put("BCID", BCID);
-        paramsMap.put("bank", bank);
+        JifenTixianRequest jifenTixianRequest = new JifenTixianRequest();
+        jifenTixianRequest.setPhone(SharePreferenceUtil.getName());
+        jifenTixianRequest.setValue(value);
+        jifenTixianRequest.setName(name);
+        jifenTixianRequest.setCONTACT(CONTACT);
+        jifenTixianRequest.setBCID(BCID);
+        jifenTixianRequest.setBank(bank);
 
-        return ApiClient.create(AppConstants.RequestPath.JFLB, paramsMap).get(callback);
+        ParamsMap paramsMap = new ParamsMap();
+        paramsMap.put("callValue", GsonUtils.createGsonString(jifenTixianRequest));
+
+        String timeValue = paramsMap.get("Calldate");
+        String url = AppConstants.RequestPath.JFTX;
+        if (url.endsWith("ashx")) {
+            url = url + "?Calldate=" + timeValue;
+        } else {
+            url = url + "&Calldate=" + timeValue;
+        }
+        return ApiClient.create(url, paramsMap).post(callback);
     }
 
 }

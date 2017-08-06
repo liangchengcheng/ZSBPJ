@@ -20,6 +20,8 @@ public class AppConstants {
         //登录
         public final static String LOGIN = "/Interface/Login.ashx";
 
+        public final static String CHANGEPWD = "/Interface/Login.ashx";
+
         public final static String GOODS = "/Interface/GetGoodList.ashx?action=all";
 
 
@@ -49,7 +51,7 @@ public class AppConstants {
 
 
 
-
+        public final static String GET_ORDER = "/Interface/Order.ashx?action=add";
 
 
         //积分转账

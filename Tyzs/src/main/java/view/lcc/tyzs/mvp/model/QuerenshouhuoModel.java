@@ -3,8 +3,12 @@ package view.lcc.tyzs.mvp.model;
 import view.lcc.tyzs.base.ApiClient;
 import view.lcc.tyzs.base.AppConstants;
 import view.lcc.tyzs.base.ParamsMap;
+import view.lcc.tyzs.bean.request.LoginRequest;
+import view.lcc.tyzs.bean.request.QuerenshouhuoRequest;
 import view.lcc.tyzs.frame.okhttp.callback.ResultCallback;
 import view.lcc.tyzs.frame.okhttp.request.OkHttpRequest;
+import view.lcc.tyzs.utils.GsonUtils;
+import view.lcc.tyzs.utils.Md5Utils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 
 /**
@@ -16,10 +20,22 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
 public class QuerenshouhuoModel {
 
     public OkHttpRequest Querenshouhuo(String OID, ResultCallback<String> callback) {
+        QuerenshouhuoRequest querenshouhuoRequest = new QuerenshouhuoRequest();
+        querenshouhuoRequest.setUser(SharePreferenceUtil.getName());
+        querenshouhuoRequest.setOID(OID);
+
         ParamsMap paramsMap = new ParamsMap();
-        paramsMap.put("user", SharePreferenceUtil.getName());
-        paramsMap.put("OID", OID);
-        return ApiClient.create(AppConstants.RequestPath.SHOP_CAR_ADD, paramsMap).post(callback);
+        paramsMap.put("callValue", GsonUtils.createGsonString(querenshouhuoRequest));
+
+        String timeValue = paramsMap.get("Calldate");
+        String url = AppConstants.RequestPath.LOGIN;
+        if (url.endsWith("ashx")) {
+            url = url+ "?Calldate=" + timeValue;
+        } else {
+            url = url+ "&Calldate=" + timeValue;
+        }
+        return ApiClient.create(url, paramsMap).post(callback);
+
     }
 
 }
