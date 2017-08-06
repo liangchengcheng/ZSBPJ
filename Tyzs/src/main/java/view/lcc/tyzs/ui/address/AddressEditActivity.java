@@ -96,7 +96,6 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.address_edit);
         addressEditPresenter = new AddressEditPresenterImpl(this);
         addressDeletePresenter = new AddressDeletePresenterImpl(this);
-        InitData();
 
         line_province = findViewById(R.id.line_province);
         line_city = findViewById(R.id.line_city);
@@ -124,6 +123,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             et_er.setText(person);
             et_phone.setText(phone);
         }
+        InitData();
     }
 
     private void saveData(){
@@ -172,18 +172,19 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    //获取中国省市区信息
     private void InitData() {
-        //获取中国省市区信息
         AddressXML = getRawAddress().toString();
         try {
             analysXML(AddressXML);
-            //初始化button数据
-            tv_province.setText(provinceList.get(0).getProvince());
-            tv_city.setText(provinceList.get(0).getCity_list().get(0).getCity());
-            tv_area.setText(provinceList.get(0).getCity_list().get(0).getCounty_list().get(0).getCounty());
-            //初始化列表下标
-            pPosition = 0;
-            cPosition = 0;
+            if (provinceList !=null){
+                tv_province.setText(provinceList.get(0).getProvince());
+                tv_city.setText(provinceList.get(0).getCity_list().get(0).getCity());
+                tv_area.setText(provinceList.get(0).getCity_list().get(0).getCounty_list().get(0).getCounty());
+                //初始化列表下标
+                pPosition = 0;
+                cPosition = 0;
+            }
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
@@ -305,6 +306,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         if (provinceList != null){
             final List<CityModel> city_list = provinceList.get(pPosition).getCity_list();
             if (city_list != null){
+                city_string = new ArrayList<>();
                 for (CityModel cityModel : city_list){
                     city_string.add(cityModel.getCity());
                 }
@@ -339,6 +341,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         if (provinceList != null){
             List<CountryModel> county_list = provinceList.get(pPosition).getCity_list().get(cPosition).getCounty_list();
             if (county_list != null){
+                area_string = new ArrayList<>();
                 for (CountryModel city_list : county_list){
                     area_string.add(city_list.getCounty());
                 }
@@ -351,7 +354,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         areaPopupWindow.dismiss();
-                        tv_area.setText(city_string.get(position));
+                        tv_area.setText(area_string.get(position));
                     }
                 });
             }

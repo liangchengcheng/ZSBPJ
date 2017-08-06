@@ -56,6 +56,7 @@ public class AddressListActivity extends BaseActivity implements AddressListAdap
         addressList = (ListView) findViewById(R.id.lv_ad_list);
         addressList.setOnItemClickListener(this);
         addressListAdapter = new AddressListAdapter(AddressListActivity.this);
+        addressListAdapter.setOnEditListener(this);
         addressList.setAdapter(addressListAdapter);
         findViewById(R.id.iv_more).setOnClickListener(this);
         findViewById(R.id.iv_back).setOnClickListener(this);

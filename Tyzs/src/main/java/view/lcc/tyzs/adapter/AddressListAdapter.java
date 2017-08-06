@@ -81,7 +81,6 @@ public class AddressListAdapter extends BaseAdapter {
             SharePreferenceUtil.setAddressInfo(list.get(position).getAddress());
             SharePreferenceUtil.setAddressPerson(list.get(position).getAddressee());
             SharePreferenceUtil.setAddressPhone(list.get(position).getPhone());
-
         } else {
             holder.selected.setVisibility(View.GONE);
         }

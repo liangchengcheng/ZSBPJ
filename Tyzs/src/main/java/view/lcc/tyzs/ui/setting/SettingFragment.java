@@ -94,7 +94,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //地址管理
             case R.id.layout_me_room_manage:
-                // TODO: 2017/8/6 判断是否登录了 
+                // TODO: 2017/8/6 判断是否登录了
                 intent = new Intent(getActivity(), AddressListActivity.class);
                 startActivity(intent);
                 break;
