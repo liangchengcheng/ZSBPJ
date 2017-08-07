@@ -112,6 +112,39 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <!--积分-->
+        <activity
+            android:name=".ui.jifen.JifenListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <!--积分-->
+        <activity
+            android:name=".ui.jifen.JifenShenqingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--积分-->
+        <activity
+            android:name=".ui.jifen.JifentixianActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <!--积分-->
+        <activity
+            android:name=".ui.jifen.JifenzhuanhuanActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--积分-->
+        <activity
+            android:name=".ui.jifen.JifenzhuanzhangActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

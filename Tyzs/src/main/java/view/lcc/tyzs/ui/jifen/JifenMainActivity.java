@@ -31,8 +31,8 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.jifen_main_activity);
         jifenYuePresenter = new JifenYuePresenterImpl(this);
 
@@ -41,12 +41,15 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
         findViewById(R.id.btn_zz).setOnClickListener(this);
         findViewById(R.id.btn_tx).setOnClickListener(this);
         findViewById(R.id.jfzh).setOnClickListener(this);
-        findViewById(R.id.tv_change).setOnClickListener(this);
+        findViewById(R.id.jfzh).setOnClickListener(this);
         findViewById(R.id.ll_changelist).setOnClickListener(this);
+        findViewById(R.id.tv_change).setOnClickListener(this);
+        findViewById(R.id.mingxi).setOnClickListener(this);
 
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_balance = (TextView) findViewById(R.id.tv_balance);
         tv_balance1 = (TextView) findViewById(R.id.tv_balance1);
+
         //// TODO: 2017/8/4 返回按钮
         jifenYuePresenter.jifenYue();
     }
@@ -139,6 +142,10 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
                 break;
             //变动列表
             case R.id.ll_changelist:
+                startActivity(new Intent(JifenMainActivity.this, JifenListActivity.class));
+                break;
+            //变动列表
+            case R.id.mingxi:
                 startActivity(new Intent(JifenMainActivity.this, JifenListActivity.class));
                 break;
 

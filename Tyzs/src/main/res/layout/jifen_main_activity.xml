@@ -150,8 +150,6 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="积分变动情况" />
+                    android:text="变动明细" />
 
             </LinearLayout>
 
@@ -209,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="积分变动情况" />
+                    android:text="申请记录" />
 
             </LinearLayout>
 

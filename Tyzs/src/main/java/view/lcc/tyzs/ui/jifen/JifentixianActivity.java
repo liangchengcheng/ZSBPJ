@@ -40,8 +40,8 @@ public class JifentixianActivity extends BaseActivity implements JifenTiXianView
     private JifenTixianPresenter jifenTixianPresenter;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.jifen_tixian_activity);
         jifenTixianPresenter = new JifenTixianPresenterImpl(this);
 
