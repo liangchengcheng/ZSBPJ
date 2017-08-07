@@ -75,7 +75,7 @@
                         android:id="@+id/lv2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#FFFFFF"
+                        android:background="#F5F5F5"
                         android:clickable="true"
                         android:divider="@null"
                         android:focusable="false"
@@ -88,6 +88,5 @@
                 </FrameLayout>
             </RelativeLayout>
         </LinearLayout>
-
     </FrameLayout>
 </LinearLayout>

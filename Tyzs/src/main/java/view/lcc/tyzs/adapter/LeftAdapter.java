@@ -52,7 +52,7 @@ public class LeftAdapter extends BaseAdapter {
 
         holder.name.setText(l.get(position));
         if (position == selectItem) {
-            convertView.setBackgroundColor(Color.parseColor("#E5E9F1"));
+            convertView.setBackgroundColor(Color.parseColor("#F5F5F5"));
             holder.name.setTextColor(context.getResources().getColor(R.color.colorPrimary));
         } else {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.white));

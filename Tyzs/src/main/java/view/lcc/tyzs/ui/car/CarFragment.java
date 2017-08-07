@@ -48,7 +48,6 @@ import view.lcc.tyzs.view.CartProductItemChangedListener;
  * Description:  |
  */
 public class CarFragment extends Fragment implements CartProductItemChangedListener, View.OnClickListener, ShopCarAddView, ShopCarGetView {
-
     private CarAdapter adapter;
     private ListView listview;
     private List<ShoppingCarBean> beans;
@@ -59,6 +58,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
 
     private Map<Integer, ShoppingCarBean> unCheckedList = new HashMap<Integer, ShoppingCarBean>();
     private boolean checkMark = true;
+    private DecimalFormat df = new DecimalFormat("######0.00");
 
     private ShopCarGetPresenter shopCarGetPresenter;
     private ShopCarAddPresenter shopCarAddPresenter;
@@ -87,7 +87,11 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
         adapter.setCartProductItemChangedListener(this);
         allCheck = (CheckBox) view.findViewById(R.id.cb_cart_all_check);
         allCheck.setOnCheckedChangeListener(new myCheckChangeListener());
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         try {
             String name = SharePreferenceUtil.getName();
             if (TextUtils.isEmpty(name)) {
@@ -96,7 +100,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
             }
             beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
             if (beans != null && beans.size() > 0) {
-                adapter.addDate(beans);
+                adapter.newData(beans);
                 listview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 for (int i = 0; i < beans.size(); i++) {
@@ -130,8 +134,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 }
             }
         }
-        DecimalFormat df = new DecimalFormat("######0.00");
-        total_sum.setText("合：" + df.format(prince).replace("-", "") + "元");
+        total_sum.setText("合:￥" + df.format(prince).replace("-", ""));
     }
 
     @Override
@@ -199,8 +202,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 }
             }
         }
-        DecimalFormat df = new DecimalFormat("######0.00");
-        total_sum.setText("合：" + df.format(prince).replace("-", "") + "元");
+        total_sum.setText("合:￥" + df.format(prince).replace("-", "") );
     }
 
     @Override
@@ -248,7 +250,6 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                             double sum = Double.parseDouble(adapter.getItem(i).getCost())
                                     + Double.parseDouble(adapter.getItem(i).getProfit())
                                     * Double.parseDouble(Rate);
-                            DecimalFormat df = new DecimalFormat("######0.00");
                             info.setTrueprice(df.format(sum) + "");
                         }
                         infos.add(info);
@@ -334,13 +335,12 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                                     * Double.parseDouble(adapter.getItem(i).getNumber());
                         }
                     }
-                    DecimalFormat df = new DecimalFormat("######0.00");
-                    total_sum.setText("合：" + df.format(prince).replace("-", "") + "元");
+                    total_sum.setText("合:￥" + df.format(prince).replace("-", ""));
                 } else {
                     for (int i = 0; i < beans.size(); i++) {
                         unCheckedList.put(i, beans.get(i));
                     }
-                    total_sum.setText("合：0元");
+                    total_sum.setText("合:￥0");
                 }
                 adapter.notifyDataSetChanged();
             }
