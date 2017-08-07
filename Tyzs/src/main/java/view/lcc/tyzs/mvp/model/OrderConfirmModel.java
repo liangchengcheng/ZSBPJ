@@ -25,7 +25,7 @@ public class OrderConfirmModel {
         paramsMap.put("callValue", GsonUtils.createGsonString(orderConfirmRequest));
 
         String timeValue = paramsMap.get("Calldate");
-        String url = AppConstants.RequestPath.LOGIN;
+        String url = AppConstants.RequestPath.CONFIRM;
         if (url.endsWith("ashx")) {
             url = url + "?Calldate=" + timeValue;
         } else {

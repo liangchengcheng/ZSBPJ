@@ -32,6 +32,7 @@ import view.lcc.tyzs.mvp.presenter.impl.OrderConfrimPresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenYueView;
 import view.lcc.tyzs.mvp.view.OrderConfirmView;
 import view.lcc.tyzs.ui.address.AddressListActivity;
+import view.lcc.tyzs.utils.DialogUtils;
 import view.lcc.tyzs.utils.Md5Utils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.SingleTrueUtils;
@@ -155,7 +156,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 break;
             //购买
             case R.id.btn_put_order:
-                if (!TextUtils.isEmpty(point)) {
+                if (TextUtils.isEmpty(point)) {
                     Frame.getInstance().toastPrompt("获取积分失败，请稍后再试");
                     return;
                 }
@@ -204,12 +205,12 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void JifenYueLoading() {
-        Frame.getInstance().toastPrompt("开始获取积分");
+        createDialog(R.string.get_point);
     }
 
     @Override
     public void JifenYueSuccess(String result) {
-        closeLoading();
+        closeDialog();
         try {
             JSONObject jsonObject = new JSONObject(result);
             String resultJson = jsonObject.getString("resultjson");
@@ -231,8 +232,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
 
             tv_yue.setText("积分:" + point + "(1积分抵1元)");
             if (Double.parseDouble(point) < prince) {
-                // TODO: 2017/8/2 弹窗
-                Frame.getInstance().toastPrompt("充值积分余额不足，请充值");
+                DialogUtils.showTip(OrderConfirmActivity.this,"充值积分余额不足，请充值");
             }
             //0积分的话就直接就是不可以用积分的状态
             if (point.equals("0")) {
@@ -245,17 +245,18 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void JifenYueFail(String msg) {
-        closeLoading();
+        closeDialog();
         Frame.getInstance().toastPrompt("获取积分失败");
     }
 
     @Override
     public void OrderConfirmLoading() {
-        Frame.getInstance().toastPrompt("正在提交订单");
+        createDialog(R.string.send_info);
     }
 
     @Override
     public void OrderConfirmSuccess(String result) {
+        closeDialog();
         try {
             JSONObject jsonObject = new JSONObject(result);
             String resultjson = jsonObject.getString("resultjson");
@@ -272,7 +273,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                         .putString("phones", tv_order_phone.getText().toString())
                         .putString("names", tv_order_name.getText().toString())
                         .putString("princes", df.format(prince - Double.parseDouble(point))).commit();*/
-
                 //说明他的验证码是正确的
                 JSONObject jsonObject1 = new JSONObject(content);
                 String orderinfo = jsonObject1.getString("orderinfo");
@@ -306,17 +306,14 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void OrderConfirmFail(String msg) {
-        Frame.getInstance().toastPrompt("提交订单失败");
+        closeDialog();
+        Frame.getInstance().toastPrompt("提交订单失败，请稍后再试");
     }
 
     @Override
     public void NetWorkErr(String msg) {
-        closeLoading();
+        closeDialog();
         Frame.getInstance().toastPrompt("网络不可用");
-    }
-
-    private void closeLoading() {
-
     }
 
 

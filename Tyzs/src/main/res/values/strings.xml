@@ -8,4 +8,5 @@
     <string name="zh">正在提交转换申请...</string>
     <string name="save">正在保存...</string>
     <string name="delete">正在删除...</string>
+    <string name="send_info">正在提交信息...</string>
 </resources>

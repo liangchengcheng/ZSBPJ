@@ -54,8 +54,8 @@ public class OrderConfirmAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tv_name.setText("名称:" + getItem(position).getName());
-        holder.tv_price.setText("价格:" + getItem(position).getTrueprice() + "元  X " + getItem(position).getNumber() + "件");
+        holder.tv_name.setText("" + getItem(position).getName());
+        holder.tv_price.setText("" + getItem(position).getTrueprice() + "元  X " + getItem(position).getNumber() + "件");
         return convertView;
     }
 

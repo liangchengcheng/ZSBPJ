@@ -47,8 +47,88 @@
 
                 <!-- 收货人信息 start -->
 
+                <RelativeLayout
+                    android:id="@+id/ll_order_linkman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/tv_ll"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/icon_dizhi" />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_ll"
+                        style="@style/ItemText"
+                        android:text="收货地址" />
+
+                    <TextView
+                        android:id="@+id/patrol_date"
+                        style="@style/ItemText"
+                        android:hint="" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15.0dip"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_profile_enter" />
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="#eee" />
+
                 <LinearLayout
-                    android:id="@+id/ll_date"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="16dip"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_order_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_order_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_order_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="1dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="#eee" />
+                <!-- 收货人信息 stop -->
+
+                <!-- 商品列表 start-->
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -58,64 +138,17 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/fruit_icon" />
+                        android:src="@drawable/icon_shangpin" />
 
                     <TextView
-                        style="@style/ItemText"
-                        android:text="收货地址：" />
-
-                    <TextView
-                        android:id="@+id/patrol_date"
-                        style="@style/ItemText"
-                        android:hint="选择收获地址" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:text="商品列表" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_order_linkman"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_order_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dip"
-                        android:text="" />
-
-                    <TextView
-                        android:id="@+id/tv_order_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dip"
-                        android:text="" />
-
-                    <TextView
-                        android:id="@+id/tv_order_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dip"
-                        android:text="" />
-                </LinearLayout>
-
-                <View xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginRight="14dp"
-                    android:layout_marginLeft="14dp"
-                    android:background="#eee" />
-                <!-- 收货人信息 stop -->
-
-                <!-- 商品列表 start-->
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:text="商品列表" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -127,52 +160,93 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="8dip"
-                        android:paddingRight="8dip" />
+                        android:paddingLeft="15dip"
+                        android:paddingRight="15dip" />
                 </LinearLayout>
                 <!-- 支付及配送方式start -->
-
-                <!-- 支付及配送方式stop -->
-                <LinearLayout
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                <View
+                    android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
+                    android:layout_height="1dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="#eee" />
+                <!-- 支付及配送方式stop -->
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="支付及配送方式" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
 
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/icon_peisong" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:text="支付及配送方式" />
+
+                    </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dip"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
                         android:text="如果您账户中的积分不足，请联系客服充值，客服电话4006-0535-00或17705353966"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="1dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="#eee" />
                 <!-- 其他要求 start -->
                 <LinearLayout
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:text="其他要求" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/icon_qita" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:text="其他要求" />
+
+                    </LinearLayout>
 
                     <EditText
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:id="@+id/et_other"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -184,7 +258,7 @@
                         android:textColor="#222"
                         android:background="#eee"
                         android:textColorHint="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
                 <!-- 商品列表 start-->
 
