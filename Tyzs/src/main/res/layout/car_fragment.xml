@@ -15,7 +15,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="购物车"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <ImageView
@@ -26,15 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true" />
-        <CheckBox
-            android:layout_centerVertical="true"
-            android:textColor="#ffffff"
-            android:text="全选/反选"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/cb_cart_all_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false" />
+
     </RelativeLayout>
 
 
@@ -50,14 +42,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+      <TextView
+          android:background="#ededed"
+          android:layout_width="match_parent"
+          android:layout_height="1dp" />
         <RelativeLayout
             android:id="@+id/detail_buy_board"
             android:layout_width="fill_parent"
             android:layout_height="50.0dip"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary">
-
-
+            android:background="@color/white">
+            <CheckBox
+                android:layout_centerVertical="true"
+                android:textColor="#ffffff"
+                android:text="全选/反选"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/cb_cart_all_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false" />
             <TextView
                 android:id="@+id/total_sum"
                 android:layout_alignParentLeft="true"
@@ -81,7 +83,6 @@
                 android:drawablePadding="2.0dip"
                 android:background="@color/colorPrimary"
                 android:text="删除"
-
                 android:textSize="16.0sp" />
 
             <TextView

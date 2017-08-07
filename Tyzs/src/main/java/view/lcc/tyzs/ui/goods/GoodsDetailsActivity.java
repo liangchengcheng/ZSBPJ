@@ -1,6 +1,7 @@
 package view.lcc.tyzs.ui.goods;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -10,16 +11,22 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.AppConstants;
 import view.lcc.tyzs.base.BaseActivity;
+import view.lcc.tyzs.base.BaseApplication;
 import view.lcc.tyzs.bean.OrderInfo;
 import view.lcc.tyzs.bean.ShoppingBean;
+import view.lcc.tyzs.bean.ShoppingCarBean;
+import view.lcc.tyzs.bean.ShoppingCarBeanDao;
 import view.lcc.tyzs.frame.ImageManager;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
+import view.lcc.tyzs.view.GoodsBuyDialog;
 import view.lcc.tyzs.view.GoodsToCarDialog;
+import view.lcc.tyzs.view.SuperCustomToast;
 
 /**
  * Author:       |梁铖城
@@ -27,7 +34,7 @@ import view.lcc.tyzs.view.GoodsToCarDialog;
  * Date:         |08-01 22:02
  * Description:  |
  */
-public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, GoodsToCarDialog.NumChangeListener {
+public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, GoodsToCarDialog.NumChangeListener, GoodsBuyDialog.NumBuyListener {
     //显示的图片
     private ImageView iv_head_image;
     //名字
@@ -88,35 +95,15 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             //添加购物车
             case R.id.add_car:
-                GoodsToCarDialog carDialog = new GoodsToCarDialog(GoodsDetailsActivity.this,num,shoppingBean);
-                carDialog.setOnNumChangeListener(this);
-                carDialog.show();
+                GoodsToCarDialog goodsToCarDialog = new GoodsToCarDialog(GoodsDetailsActivity.this, "1", shoppingBean);
+                goodsToCarDialog.setOnNumChangeListener(this);
+                goodsToCarDialog.show();
                 break;
             //购买
             case R.id.add_buy:
-                //判断用户是否登入
-                String name = SharePreferenceUtil.getName();
-                if (TextUtils.isEmpty(name)) {
-                    LoginMainActivity.startLoginMainActivity("", GoodsDetailsActivity.this);
-                    return;
-                }
-
-                orderlist = new ArrayList<>();
-                //此处需要再次判断
-                if (TextUtils.isEmpty(rate)) {
-                    info.setTrueprice(total_prince);
-                } else {
-                    info.setTrueprice(shoppingBean.getGoodPrice());
-                }
-                info.setGID(shoppingBean.getGoodID());
-                info.setName(shoppingBean.getGoodName());
-                info.setNumber(num);
-                orderlist.add(info);
-
-                Intent intent = new Intent(GoodsDetailsActivity.this, OrderConfirmActivity.class);
-                intent.putExtra("data", orderlist);
-                intent.putExtra("number", num);
-                startActivity(intent);
+                GoodsBuyDialog goodsBuyDialog = new GoodsBuyDialog(GoodsDetailsActivity.this, num, shoppingBean);
+                goodsBuyDialog.setNumBuyListener(this);
+                goodsBuyDialog.show();
                 break;
         }
     }
@@ -124,7 +111,64 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onNumChange(String num) {
         if (!TextUtils.isEmpty(num)) {
+            ShoppingCarBean shoppingCarBean = new ShoppingCarBean();
+            shoppingCarBean.setGID(shoppingBean.getGoodID());
+            shoppingCarBean.setDescription(shoppingBean.getGoodDescription());
+            shoppingCarBean.setImageUrl(shoppingBean.getGoodImgUrl());
+            shoppingCarBean.setIsDelete("是");
+            shoppingCarBean.setName(shoppingBean.getGoodName());
+            shoppingCarBean.setPrice(shoppingBean.getGoodPrice());
+            shoppingCarBean.setCost(shoppingBean.getGoodCost());
+            shoppingCarBean.setProfit(shoppingBean.getGoodProfit());
+            shoppingCarBean.setNumber(num);
+
+            List<ShoppingCarBean> list = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().where(ShoppingCarBeanDao.Properties.GID.eq(
+                    shoppingCarBean.getGID()
+            )).list();
+            if (list != null && list.size() > 0) {
+                String number = list.get(0).getNumber();
+                int n = Integer.parseInt(number) + Integer.parseInt(num);
+                shoppingCarBean.setNumber(n+"");
+            }
+            BaseApplication.getDaoSession().getShoppingCarBeanDao().insertOrReplace(shoppingCarBean);
+            showMsg();
+        }
+    }
+
+    private void showMsg() {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show("添加购物车成功", R.layout.choice_toast_item, R.id.content_toast, GoodsDetailsActivity.this);
+    }
+
+    @Override
+    public void buy(String num) {
+        if (!TextUtils.isEmpty(num)) {
             this.num = num;
+
+            //判断用户是否登入
+            String name = SharePreferenceUtil.getName();
+            if (TextUtils.isEmpty(name)) {
+                LoginMainActivity.startLoginMainActivity("", GoodsDetailsActivity.this);
+                return;
+            }
+
+            orderlist = new ArrayList<>();
+            //此处需要再次判断
+            if (TextUtils.isEmpty(rate)) {
+                info.setTrueprice(total_prince);
+            } else {
+                info.setTrueprice(shoppingBean.getGoodPrice());
+            }
+            info.setGID(shoppingBean.getGoodID());
+            info.setName(shoppingBean.getGoodName());
+            info.setNumber(num);
+            orderlist.add(info);
+
+            Intent intent = new Intent(GoodsDetailsActivity.this, OrderConfirmActivity.class);
+            intent.putExtra("data", orderlist);
+            intent.putExtra("number", num);
+            startActivity(intent);
         }
     }
 }

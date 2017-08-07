@@ -2,12 +2,9 @@ package view.lcc.tyzs.ui.car;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +47,7 @@ import view.lcc.tyzs.view.CartProductItemChangedListener;
  * Date:         |07-31 17:04
  * Description:  |
  */
-public class CarFragment extends Fragment implements CartProductItemChangedListener, View.OnClickListener ,ShopCarAddView,ShopCarGetView{
+public class CarFragment extends Fragment implements CartProductItemChangedListener, View.OnClickListener, ShopCarAddView, ShopCarGetView {
 
     private CarAdapter adapter;
     private ListView listview;
@@ -219,8 +214,8 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                             delete_List.add(bean);
                         }
                     }
-                    if (delete_List.size() > 0){
-                        for (ShoppingCarBean shoppingCarBean : delete_List){
+                    if (delete_List.size() > 0) {
+                        for (ShoppingCarBean shoppingCarBean : delete_List) {
                             BaseApplication.getDaoSession().getShoppingCarBeanDao().delete(shoppingCarBean);
                         }
                     }
@@ -247,7 +242,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                         info.setGID(adapter.getItem(i).getGID());
                         info.setName(adapter.getItem(i).getName());
                         info.setNumber(adapter.getItem(i).getNumber());
-                        if (Rate == null || Rate .equals("")) {
+                        if (Rate == null || Rate.equals("")) {
                             info.setTrueprice(adapter.getItem(i).getPrice());
                         } else {
                             double sum = Double.parseDouble(adapter.getItem(i).getCost())
@@ -266,14 +261,14 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                         is.add(bean);
                     }
                 }
-                if (is.size() > 0){
-                    for (ShoppingCarBean shoppingCarBean : is){
+                if (is.size() > 0) {
+                    for (ShoppingCarBean shoppingCarBean : is) {
                         BaseApplication.getDaoSession().getShoppingCarBeanDao().delete(shoppingCarBean);
                     }
                 }
 
                 List<ShoppingCarItemBean> data_list = new ArrayList<ShoppingCarItemBean>();
-                List<ShoppingCarBean>  shoppingCarBeanList =  BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
+                List<ShoppingCarBean> shoppingCarBeanList = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
                 for (int i = 0; i < shoppingCarBeanList.size(); i++) {
                     ShoppingCarItemBean s = new ShoppingCarItemBean();
                     s.setGID(shoppingCarBeanList.get(i).getGID());
@@ -284,7 +279,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 String name = SharePreferenceUtil.getName();
                 if (!TextUtils.isEmpty(name)) {
                     Gson gson = new Gson();
-                    shopCarAddPresenter.shopCarAdd(name,gson.toJson(data_list));
+                    shopCarAddPresenter.shopCarAdd(name, gson.toJson(data_list));
                 }
 
                 Intent intent = new Intent(getActivity(), OrderConfirmActivity.class);
@@ -306,7 +301,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                     String phone = SharePreferenceUtil.getName();
                     if (!TextUtils.isEmpty(phone)) {
                         Gson gson = new Gson();
-                        shopCarAddPresenter.shopCarAdd(phone,gson.toJson(list));
+                        shopCarAddPresenter.shopCarAdd(phone, gson.toJson(list));
 
                     }
                 } catch (Exception e) {
@@ -379,12 +374,12 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
 
     @Override
     public void ShopCarGetSuccess(String result) {
-        try{
+        try {
             JSONObject jsonObject = new JSONObject(result);
             String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
             JSONObject dataBean = new JSONObject(data);
             String resultJson = dataBean.getString("resultjson");
-            beans = GsonUtils.fromJsonArray(resultJson,ShoppingCarBean.class);
+            beans = GsonUtils.fromJsonArray(resultJson, ShoppingCarBean.class);
             if (beans.size() > 0) {
                 for (int i = 0; i < beans.size(); i++) {
                     BaseApplication.getDaoSession().getShoppingCarBeanDao().insert(beans.get(i));
@@ -396,7 +391,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                     unCheckedList.put(i, beans.get(i));
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
