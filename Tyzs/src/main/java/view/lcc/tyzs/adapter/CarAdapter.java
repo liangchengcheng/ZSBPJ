@@ -68,26 +68,25 @@ public class CarAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.car_item, null);
         ImageView ivPreview = (ImageView) convertView.findViewById(R.id.iv_page);
-        TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
-        TextView sum = (TextView) convertView.findViewById(R.id.sum);
+        TextView tv_name = (TextView) convertView.findViewById(R.id.tv_title);
         TextView tv_price = (TextView) convertView.findViewById(R.id.tv_price_vip);
         CheckBox cb_cart_all_check = (CheckBox) convertView.findViewById(R.id.cb_cart_all_check);
         NumEditText net_cart_count = (NumEditText) convertView.findViewById(R.id.net_cart_count);
 
         tv_name.setText("名称:" + getItem(position).getName());
         if (TextUtils.isEmpty(Rate)) {
-            tv_price.setText(getItem(position).getPrice() + "元/ ");
-            sum.setText("" + (Double.parseDouble(getItem(position).getPrice().trim()) * Integer.parseInt(getItem(position).getNumber().trim())));
+            tv_price.setText("￥"+getItem(position).getPrice() );
+
         } else {
             double sums = Double.parseDouble(getItem(position).getCost()) + Double.parseDouble(getItem(position).getProfit()) * Double.parseDouble(Rate);
             DecimalFormat df = new DecimalFormat("######0.00");
-            tv_price.setText(df.format(sums) + "元/ ");
-            sum.setText("合" + df.format(sums * Integer.parseInt(getItem(position).getNumber())) + "元");
+            tv_price.setText("￥"+df.format(sums));
+
         }
 
         net_cart_count.setNum(Integer.parseInt(getItem(position).getNumber()));
 
-        ImageManager.getInstance().loadCircleImage(context, AppConstants.BASE_URL+"/"+getItem(position).getImageUrl(),ivPreview);
+        ImageManager.getInstance().loadUrlImage(context, AppConstants.PIC_URL+"/"+getItem(position).getImageUrl(),ivPreview);
 
         cb_cart_all_check.setChecked(getItem(position).isCheck());
         cb_cart_all_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
