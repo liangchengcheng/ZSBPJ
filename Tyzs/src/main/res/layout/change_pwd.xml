@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="修改密码"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_bz" />
+
+            <TextView
+                style="@style/ItemText"
+                android:text="原始密码：" />
+
+            <EditText
+                android:id="@+id/passwod"
+                style="@style/EditTextStyle"
+                android:hint="请输入收件人信息"
+                android:inputType="textMultiLine"
+                android:maxLines="3" />
+
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_bz" />
+
+            <TextView
+                style="@style/ItemText"
+                android:text="新密码：" />
+
+            <EditText
+                android:id="@+id/newpassword"
+                style="@style/EditTextStyle"
+                android:hint="请输入新密码"
+                android:inputType="textMultiLine"
+                android:maxLines="3" />
+
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_bz" />
+
+            <TextView
+                style="@style/ItemText"
+                android:text="确认密码：" />
+
+            <EditText
+                android:id="@+id/newpassword_new"
+                style="@style/EditTextStyle"
+                android:hint="再次输入确认密码"
+                android:inputType="textMultiLine"
+                android:maxLines="3" />
+
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+    </LinearLayout>
+
+    <Button
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/btn_changepassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:text="修改密码"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

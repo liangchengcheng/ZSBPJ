@@ -15,6 +15,10 @@ import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.frame.ImageManager;
 import view.lcc.tyzs.ui.address.AddressListActivity;
+import view.lcc.tyzs.ui.jifen.JifenMainActivity;
+import view.lcc.tyzs.ui.login.ChangePwdActivity;
+import view.lcc.tyzs.ui.login.LoginMainActivity;
+import view.lcc.tyzs.ui.order.OrderMainActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.pulltozoomview.PullToZoomScrollViewEx;
 
@@ -73,24 +77,28 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             //关于软件
             case R.id.layout_me_getseed:
-
+                intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
                 break;
             //去登录
             case R.id.profile_headimg:
-
+                intent = new Intent(getActivity(), LoginMainActivity.class);
+                startActivity(intent);
                 break;
             //系统设置
             case R.id.layout_me_setting:
-
-
+                intent = new Intent(getActivity(), SystemActivity.class);
+                startActivity(intent);
                 break;
-            //博客导航
+            //我的余额
             case R.id.layout_me_host_manage:
-
+                intent = new Intent(getActivity(), JifenMainActivity.class);
+                startActivity(intent);
                 break;
-            //书籍推荐
+            //我的订单
             case R.id.layout_me_focus:
-
+                intent = new Intent(getActivity(), OrderMainActivity.class);
+                startActivity(intent);
                 break;
             //地址管理
             case R.id.layout_me_room_manage:
@@ -98,9 +106,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), AddressListActivity.class);
                 startActivity(intent);
                 break;
-            //历史数据
+            //修改密码
             case R.id.layout_me_history:
-
+                // TODO: 2017/8/6 判断是否登录了
+                intent = new Intent(getActivity(), ChangePwdActivity.class);
+                startActivity(intent);
                 break;
 
         }

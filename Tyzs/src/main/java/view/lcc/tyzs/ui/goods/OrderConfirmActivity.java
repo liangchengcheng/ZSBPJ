@@ -68,7 +68,9 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     private TextView tv_yue;
     //输入的积分
     private EditText et_jisuan;
-
+    //积分
+    private TextView tv_jf;
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView() {
+        tv_jf = (TextView) findViewById(R.id.tv_jf);
         tv_yue = (TextView) findViewById(R.id.tv_yue);
         et_other = (EditText) findViewById(R.id.et_other);
         et_jisuan = (EditText) findViewById(R.id.et_jisuan);
@@ -231,6 +234,8 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
             }
 
             tv_yue.setText("积分:" + point + "(1积分抵1元)");
+            // TODO: 2017/8/7 自己加 
+            tv_jf.setText("积分:" + point + "(1积分抵1元)");
             if (Double.parseDouble(point) < prince) {
                 DialogUtils.showTip(OrderConfirmActivity.this,"充值积分余额不足，请充值");
             }
