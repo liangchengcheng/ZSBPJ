@@ -9,6 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/colorPrimary"
         android:textColor="@color/white"
         app:layout_collapseMode="pin" >
         <ImageView

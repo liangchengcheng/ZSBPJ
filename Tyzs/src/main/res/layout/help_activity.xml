@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textColor="@color/white"
+        app:layout_collapseMode="pin" >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:background="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:text="常见问题"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:text="忘记密码了，怎么办？"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:text="如果你忘记了密码，请联系客服进行修改，客服电话: 4006-0535-00, 177053539966 "
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:layout_marginTop="5dp"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <TextView
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:text="不会下订单，怎么办？"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:text="在商品列表点击查看详情，点击购买支付一定的积分，即可购买成功。"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+</LinearLayout>
