@@ -25,10 +25,11 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
 public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,View.OnClickListener{
 
     private ChangePwdPresenter changePwdPresenter;
+    //密码的输入
     private EditText passwod;
     private EditText newpassword;
     private EditText newpassword_new;
-
+    //修改密码
     private String save_pwd;
 
     @Override
@@ -51,6 +52,8 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
     @Override
     public void ChangePwdSuccess(String msg) {
         closeDialog();
+        SharePreferenceUtil.setPwd(newpassword_new.getText().toString().trim());
+        Frame.getInstance().toastPrompt("密码修改成功");
     }
 
     @Override

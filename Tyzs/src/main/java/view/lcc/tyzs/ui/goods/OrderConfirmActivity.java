@@ -234,7 +234,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
             }
 
             tv_yue.setText("积分:" + point + "(1积分抵1元)");
-            // TODO: 2017/8/7 自己加 
+            // TODO: 2017/8/7 自己加的
             tv_jf.setText("积分:" + point + "(1积分抵1元)");
             if (Double.parseDouble(point) < prince) {
                 DialogUtils.showTip(OrderConfirmActivity.this,"充值积分余额不足，请充值");

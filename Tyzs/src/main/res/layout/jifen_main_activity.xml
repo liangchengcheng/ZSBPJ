@@ -3,38 +3,26 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/title"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:background="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:text="积分余额"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </android.support.v7.widget.Toolbar>
 
-        <ImageButton
-            android:id="@+id/moreBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:background="@color/colorPrimary" />
-
-        <TextView
-            android:id="@+id/tv_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:text="申请记录"
-            android:textColor="#fff" />
-    </RelativeLayout>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cd_view"
@@ -47,9 +35,10 @@
         android:background="@color/colorPrimary">
 
         <LinearLayout
+            android:background="@drawable/jifenmain"
             android:id="@+id/ll_changelist"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:orientation="vertical">
 
             <TextView
@@ -58,8 +47,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:text=""
-                android:textColor="@color/colorPrimary"
+                android:text="lcc"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
 
@@ -70,7 +59,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:text="系统余额:0"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
             <TextView
@@ -80,7 +69,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:text="充值余额:0"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
         </LinearLayout>
 
@@ -176,6 +165,32 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/mingxi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="积分变动情况" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/tv_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

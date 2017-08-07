@@ -10,7 +10,7 @@ import view.lcc.tyzs.base.BaseActivity;
  * Author:       |梁铖城
  * Email:        |1038127753@qq.com
  * Date:         |08-05 20:53
- * Description:  |
+ * Description:  |JIeshaoActivity
  */
 public class JIeshaoActivity extends BaseActivity{
 
