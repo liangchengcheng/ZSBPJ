@@ -20,6 +20,7 @@ import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.JifenZhuanHuanPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.JifenZhuanHuanPresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenZhuanHuanView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -38,6 +39,7 @@ public class JifenzhuanhuanActivity extends BaseActivity implements JifenZhuanHu
         setContentView(R.layout.jifenz_zhuanhuan_activity);
         jifenZhuanHuanPresenter = new JifenZhuanHuanPresenterImpl(this);
         et_gold_value = (EditText) findViewById(R.id.et_gold_value);
+        findViewById(R.id.btn_edit_ok).setOnClickListener(this);
     }
 
     @Override
@@ -76,7 +78,13 @@ public class JifenzhuanhuanActivity extends BaseActivity implements JifenZhuanHu
     @Override
     public void JifenZhuanRangFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交申请失败，请稍微再试");
+        String message = ErrorLogUtils.SystemError(msg);
+        if (!TextUtils.isEmpty(message)){
+            Frame.getInstance().toastPrompt(message);
+        }else {
+            Frame.getInstance().toastPrompt("提交申请失败，请稍微再试");
+        }
+
     }
 
     @Override

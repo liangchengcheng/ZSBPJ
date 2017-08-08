@@ -71,10 +71,9 @@ public class JifenListPresenterImpl implements JifenListPresenter {
                         }
                     }  else {
                         if (get_data) {
-                            // TODO: 2017/8/5 具体的错误信息
-                            view.JifenListFail("获取信息失败");
+                            view.JifenListFail(code);
                         } else {
-                            view.refreshOrLoadFail("");
+                            view.refreshOrLoadFail(code);
                         }
                     }
                 } catch (Exception e) {

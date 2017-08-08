@@ -23,6 +23,7 @@ import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.JifenTixianPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.JifenTixianPresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenTiXianView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -89,7 +90,12 @@ public class JifentixianActivity extends BaseActivity implements JifenTiXianView
     @Override
     public void JifenTiXianFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交申请信息失败");
+        String message = ErrorLogUtils.SystemError(msg);
+        if (!TextUtils.isEmpty(message)){
+            Frame.getInstance().toastPrompt(message);
+        }else {
+            Frame.getInstance().toastPrompt("提现失败，请稍后再试");
+        }
     }
 
     @Override

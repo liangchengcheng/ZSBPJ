@@ -51,7 +51,7 @@ public class JifenTixianPresenterImpl implements JifenTixianPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.JifenTiXianSuccess(response);
                     } else  {
-                        view.JifenTiXianFail("提交提现信息失败，请稍后再试");
+                        view.JifenTiXianFail(status);
                     }
                 } catch (Exception e) {
                     view.JifenTiXianFail("提交提现信息失败");

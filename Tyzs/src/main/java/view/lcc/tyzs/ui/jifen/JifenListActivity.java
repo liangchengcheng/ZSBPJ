@@ -30,7 +30,6 @@ public class JifenListActivity extends BaseActivity {
         viewPager = (ViewPager) findViewById(R.id.second_viewpagers);
         tabLayout = (TabLayout) findViewById(R.id.second_tabs);
         setupViewPager();
-
     }
 
     private void setupViewPager() {

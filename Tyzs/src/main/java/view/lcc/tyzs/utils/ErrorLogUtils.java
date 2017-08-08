@@ -224,7 +224,7 @@ public class ErrorLogUtils {
                     error = "VIP会员无法进行转换";
                     break;
                 default:
-                    error = "错误代码未处理";
+                    error = "";
                     break;
             }
 

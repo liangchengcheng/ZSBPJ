@@ -48,7 +48,7 @@ public class JifenZhuanHuanPresenterImpl implements JifenZhuanHuanPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.JifenZhuanRangSuccess(response);
                     } else  {
-                        view.JifenZhuanRangFail("获取地址信息失败，请稍后再试");
+                        view.JifenZhuanRangFail(status);
                     }
                 } catch (Exception e) {
                     view.JifenZhuanRangFail("获取地址信息失败");

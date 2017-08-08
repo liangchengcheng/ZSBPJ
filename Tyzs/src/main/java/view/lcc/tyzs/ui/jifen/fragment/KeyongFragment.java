@@ -66,7 +66,7 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
         mPresenter = new JifenListPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
-        mPresenter.jifenList(currentPage + "", TYPE);
+        //mPresenter.jifenList(currentPage + "", TYPE);
         return view;
     }
 

@@ -186,7 +186,7 @@ public class XitongFragment extends Fragment implements JifenListView, SwipeRefr
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.jifenList(currentPage + "", TYPE);
+                mPresenter.refresh(currentPage + "", TYPE);
             }
         }, 500);
     }

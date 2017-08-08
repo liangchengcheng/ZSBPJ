@@ -20,6 +20,7 @@ import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.JifenZhuanZhangPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.JifenZhuanZhangPresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenZhuanZhangView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -74,7 +75,12 @@ public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZ
     @Override
     public void JifenZhuanZhangFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交转账信息失败");
+        String message = ErrorLogUtils.SystemError(msg);
+        if (!TextUtils.isEmpty(message)){
+            Frame.getInstance().toastPrompt(message);
+        }else {
+            Frame.getInstance().toastPrompt("提交转账信息失败");
+        }
     }
 
     @Override

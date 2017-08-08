@@ -44,6 +44,7 @@ public class JifenShenqingActivity extends BaseActivity implements View.OnClickL
         List<Note> list = BaseApplication.getDaoSession().getNoteDao().queryBuilder().list();
         if (list != null && list.size() > 0){
             jifenshenqingAdapter.addDate(list);
+            loadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
         }else {
             loadingLayout.setLoadingLayout(LoadingLayout.NO_DATA);
         }

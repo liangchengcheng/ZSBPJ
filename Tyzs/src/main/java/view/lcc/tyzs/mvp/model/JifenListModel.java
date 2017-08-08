@@ -21,7 +21,7 @@ public class JifenListModel {
 
     public OkHttpRequest jifenList(String page,String type, ResultCallback<String> callback) {
         JifenListRequest jifenListRequest = new JifenListRequest();
-        jifenListRequest.setPagesize(page);
+        jifenListRequest.setPage(page);
         jifenListRequest.setUser( SharePreferenceUtil.getName());
         jifenListRequest.setBs("OR");
         jifenListRequest.setPagesize("10");
