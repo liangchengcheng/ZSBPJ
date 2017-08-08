@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20.0dip">
+        android:layout_marginTop="10.0dip">
 
         <Button
             android:id="@+id/layout_me_feedback"
@@ -24,9 +24,8 @@
             android:layout_width="30.0dip"
             android:layout_height="30.0dip"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20.0dip"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn_nav_profile_settings" />
+            android:background="@drawable/btn_nav_profile_settings"
+            android:padding="10dp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -43,15 +42,15 @@
 
             <TextView
                 android:id="@+id/tv_phonenumber"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="点击登录"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:visibility="visible" />
 
             <Button
@@ -74,7 +73,7 @@
                 android:layout_height="80dp"
                 android:layout_above="@+id/btn_login"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginBottom="20dp"
                 android:src="@drawable/user_headimg" />
         </RelativeLayout>
     </LinearLayout>

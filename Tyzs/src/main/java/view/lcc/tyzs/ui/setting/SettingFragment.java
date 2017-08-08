@@ -43,11 +43,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }
 
         scrollView = (PullToZoomScrollViewEx) view.findViewById(R.id.scrollView);
-        View header_view = View.inflate(getActivity(), R.layout.widget_profile_headview, null);
 
+
+
+
+        View header_view = View.inflate(getActivity(), R.layout.widget_profile_headview, null);
         tv_phonenumber = (TextView) header_view.findViewById(R.id.tv_phonenumber);
         profile_headimg = (ImageView) header_view.findViewById(R.id.profile_headimg);
-
         header_view.findViewById(R.id.profile_headimg).setOnClickListener(this);
         header_view.findViewById(R.id.layout_me_setting).setOnClickListener(this);
 
@@ -55,8 +57,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         View zoom_view = View.inflate(getActivity(), R.layout.widget_zoomview, null);
 
 
-        View content_view = View.inflate(getActivity(), R.layout.widget_profile_contentview, null);
 
+
+        View content_view = View.inflate(getActivity(), R.layout.widget_profile_contentview, null);
         content_view.findViewById(R.id.layout_me_getseed).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_host_manage).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_focus).setOnClickListener(this);

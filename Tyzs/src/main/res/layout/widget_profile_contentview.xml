@@ -101,7 +101,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15.0dip"
-                        android:src="@drawable/ic_profile_room" />
+                        android:src="@drawable/jifen1" />
 
                     <TextView
                         android:id="@+id/tv_host_manage"
@@ -145,7 +145,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15.0dip"
-                    android:src="@drawable/ic_profile_host_room" />
+                    android:src="@drawable/dingdan1" />
 
                 <TextView
                     android:id="@+id/tv_me_focus"
@@ -187,7 +187,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15.0dip"
-                    android:src="@drawable/ic_profile_host_room" />
+                    android:src="@drawable/dizhi1" />
 
                 <TextView
                     android:textSize="14sp"
@@ -228,7 +228,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15.0dip"
-                    android:src="@drawable/ic_profile_histoy" />
+                    android:src="@drawable/mima1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -273,7 +273,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15.0dip"
-                    android:src="@drawable/ic_profile_game" />
+                    android:src="@drawable/guanyu1" />
 
                 <TextView
                     android:textSize="14sp"

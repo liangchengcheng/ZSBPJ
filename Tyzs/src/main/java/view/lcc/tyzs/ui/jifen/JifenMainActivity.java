@@ -23,12 +23,10 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
  * Description:  |
  */
 public class JifenMainActivity extends BaseActivity implements JifenYueView, View.OnClickListener {
-
     private TextView tv_balance, tv_name, tv_balance1;
     private String balance;
 
     private JifenYuePresenter jifenYuePresenter;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

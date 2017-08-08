@@ -4,6 +4,6 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:scaleType="centerCrop"
-           android:src="@drawable/setting_bg1"
+           android:src="@drawable/setting1"
            android:layout_gravity="center_horizontal"
            android:contentDescription="@string/app_name" />

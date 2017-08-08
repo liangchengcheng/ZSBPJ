@@ -73,7 +73,7 @@ public class CarAdapter extends BaseAdapter {
         CheckBox cb_cart_all_check = (CheckBox) convertView.findViewById(R.id.cb_cart_all_check);
         NumEditText net_cart_count = (NumEditText) convertView.findViewById(R.id.net_cart_count);
 
-        tv_name.setText("名称:" + getItem(position).getName());
+        tv_name.setText(getItem(position).getName());
         if (TextUtils.isEmpty(Rate)) {
             tv_price.setText("￥"+getItem(position).getPrice() );
 
