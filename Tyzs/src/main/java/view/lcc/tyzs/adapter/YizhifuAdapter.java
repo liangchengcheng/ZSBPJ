@@ -70,7 +70,6 @@ public class YizhifuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.tv_name.setText("订单总额" + weekData.getTotal() + "元");
             holder.tv_price.setText("是否支付:" + weekData.getIspay());
             // getItem(position).getTotal()
-            holder.ivPreview.setImageResource(R.drawable.weizhifu);
             holder.btn_tr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,7 +100,6 @@ public class YizhifuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      * 正常的布局
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivPreview;
         TextView tv_name;
         TextView tv_price;
         TextView tv_shijian;
@@ -111,7 +109,6 @@ public class YizhifuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         public NormalViewHolder(View convertView) {
             super(convertView);
-            ivPreview = (ImageView) convertView.findViewById(R.id.iv_command);
             tv_name = (TextView) convertView.findViewById(R.id.tv_name);
             tv_price = (TextView) convertView.findViewById(R.id.tv_prince);
             tv_shijian = (TextView) convertView.findViewById(R.id.tv_time);

@@ -108,6 +108,16 @@ public class WeifukuanFragment extends Fragment implements GetOrderView, SwipeRe
     @Override
     public void GetOrderFail(String msg) {
         loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        if (msg.equals("145")){
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        }else {
+            String message = ErrorLogUtils.SystemError(msg);
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+            if (!TextUtils.isEmpty(message)){
+                Frame.getInstance().toastPrompt(message);
+            }
+        }
+
     }
 
     @Override

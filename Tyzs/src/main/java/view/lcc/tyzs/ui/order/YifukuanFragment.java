@@ -1,4 +1,4 @@
-package view.lcc.tyzs.ui.jifen.fragment;
+package view.lcc.tyzs.ui.order;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,17 +18,13 @@ import org.json.JSONObject;
 import java.util.List;
 
 import view.lcc.tyzs.R;
-import view.lcc.tyzs.adapter.JifenListAdapter;
 import view.lcc.tyzs.adapter.WeifukuanAdapter;
-import view.lcc.tyzs.bean.InterGrationBean;
+import view.lcc.tyzs.adapter.YizhifuAdapter;
 import view.lcc.tyzs.bean.OrderInfoData;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.GetOrderPresenter;
-import view.lcc.tyzs.mvp.presenter.JifenListPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.GetOrderPresenterImpl;
-import view.lcc.tyzs.mvp.presenter.impl.JifenListPresenterImpl;
 import view.lcc.tyzs.mvp.view.GetOrderView;
-import view.lcc.tyzs.mvp.view.JifenListView;
 import view.lcc.tyzs.utils.ErrorLogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
@@ -40,14 +36,13 @@ import view.lcc.tyzs.view.OnRecycleViewScrollListener;
  * Author:       |梁铖城
  * Email:        |1038127753@qq.com
  * Date:         |08-04 07:09
- * Description:  |系统积分
+ * Description:  |未支付的订单
  */
-public class KeyongFragment extends Fragment implements JifenListView, SwipeRefreshLayout.OnRefreshListener
-        , JifenListAdapter.OnItemClickListener {
-
+public class YifukuanFragment extends Fragment implements GetOrderView, SwipeRefreshLayout.OnRefreshListener
+        , YizhifuAdapter.OnItemClickListener {
     private LoadingLayout loading_layout;
-    private JifenListAdapter mAdapter;
-    private JifenListPresenter mPresenter;
+    private YizhifuAdapter mAdapter;
+    private GetOrderPresenter mPresenter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
 
@@ -57,18 +52,17 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
     protected int currentState = STATE_NORMAL;
     protected long currentTime = 0;
     protected int currentPage = 1;
-
-    private static final String TYPE = "充值积分";
+    private static final String TYPE = "已支付";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.weifukuan_fragment, null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
-        mPresenter = new JifenListPresenterImpl(this);
+        mPresenter = new GetOrderPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
-        mPresenter.jifenList(currentPage + "", TYPE);
+        mPresenter.getOrder(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
         return view;
     }
 
@@ -80,12 +74,12 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
 
     private void initRecycleView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new JifenListAdapter();
+        mAdapter = new YizhifuAdapter();
         mAdapter.setOnItemClickListener(this);
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -96,40 +90,26 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
                     mAdapter.setHasFooter(true);
                     mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
                     currentPage++;
-                    mPresenter.loadMore(currentPage + "", TYPE);
+                    mPresenter.loadMore(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
                 }
             }
         });
     }
 
     @Override
-    public void JifenListLoading() {
+    public void GetOrderLoading() {
         loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
-    public void JifenListSuccess(String result) {
-        try {
-            String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
-            JSONObject jsonObject = new JSONObject(data);
-            String resultJson = jsonObject.getString("resultjson");
-            List<InterGrationBean> dataList = GsonUtils.fromJsonArray(resultJson, InterGrationBean.class);
-            if (dataList != null && dataList.size() > 0) {
-                mAdapter.bind(dataList);
-                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-            } else {
-                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
-            }
-            mSwipeRefreshWidget.setRefreshing(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void GetOrderSuccess(String msg) {
+
     }
 
     @Override
-    public void JifenListFail(String msg) {
+    public void GetOrderFail(String msg) {
         loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
-        if (msg.equals("116")){
+        if (msg.equals("145")){
             loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
         }else {
             String message = ErrorLogUtils.SystemError(msg);
@@ -151,11 +131,17 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
             mSwipeRefreshWidget.setRefreshing(false);
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
-            if (msg.equals("116")){
+            if (msg.equals("145")){
                 mAdapter.setHasMoreDataAndFooter(false, false);
                 Frame.getInstance().toastPrompt("没有更多数据...");
+            }else {
+                String message = ErrorLogUtils.SystemError(msg);
+                if (TextUtils.isEmpty(message)){
+                    Frame.getInstance().toastPrompt("加载失败");
+                }else {
+                    Frame.getInstance().toastPrompt(message);
+                }
             }
-            Frame.getInstance().toastPrompt(msg);
         }
     }
 
@@ -165,7 +151,7 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
             String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
             JSONObject jsonObject = new JSONObject(data);
             String resultJson = jsonObject.getString("resultjson");
-            List<InterGrationBean> dataList = GsonUtils.fromJsonArray(resultJson, InterGrationBean.class);
+            List<OrderInfoData> dataList = GsonUtils.fromJsonArray(resultJson, OrderInfoData.class);
             if (dataList != null && dataList.size() > 0) {
                 mAdapter.bind(dataList);
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
@@ -186,7 +172,7 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
             String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
             JSONObject jsonObject = new JSONObject(data);
             String resultJson = jsonObject.getString("resultjson");
-            final List<InterGrationBean> entities = GsonUtils.fromJsonArray(resultJson, InterGrationBean.class);
+            final List<OrderInfoData> entities = GsonUtils.fromJsonArray(resultJson, OrderInfoData.class);
             int delay = 0;
             if (TimeUtils.getCurrentTime() - currentTime < DEF_DELAY) {
                 delay = DEF_DELAY;
@@ -218,13 +204,13 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
             public void run() {
                 currentPage = 1;
                 mSwipeRefreshWidget.setRefreshing(true);
-                mPresenter.jifenList(currentPage + "", TYPE);
+                mPresenter.refresh(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
             }
         }, 500);
     }
 
     @Override
-    public void onItemClick(InterGrationBean data) {
+    public void onItemClick(OrderInfoData data) {
 
     }
 }

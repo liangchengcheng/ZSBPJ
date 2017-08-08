@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.JifenListPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.JifenListPresenterImpl;
 import view.lcc.tyzs.mvp.view.JifenListView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.TimeUtils;
@@ -109,6 +111,15 @@ public class XitongFragment extends Fragment implements JifenListView, SwipeRefr
     @Override
     public void JifenListFail(String msg) {
         loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        if (msg.equals("116")){
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        }else {
+            String message = ErrorLogUtils.SystemError(msg);
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+            if (!TextUtils.isEmpty(message)){
+                Frame.getInstance().toastPrompt(message);
+            }
+        }
     }
 
     @Override

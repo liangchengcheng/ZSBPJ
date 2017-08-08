@@ -55,9 +55,9 @@ public class OrderMainActivity extends BaseActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new WeifukuanFragment(), "未付款");
-        adapter.addFrag(new WeifukuanFragment(), "已付款");
-        adapter.addFrag(new WeifukuanFragment(), "待收货");
-        adapter.addFrag(new WeifukuanFragment(), "已完成");
+        adapter.addFrag(new YifukuanFragment(), "已付款");
+        adapter.addFrag(new DaishouhuoFragment(), "待收货");
+        adapter.addFrag(new YiwanchengFragment(), "已完成");
 
         viewPager.setAdapter(adapter);
     }

@@ -70,7 +70,6 @@ public class WeifukuanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.tv_name.setText("订单总额"+weekData.getTotal()+"元" );
             holder.tv_price.setText("是否支付:" +weekData.getIspay());
             // getItem(position).getTotal()
-            holder.ivPreview.setImageResource(R.drawable.weizhifu);
         }
     }
 
