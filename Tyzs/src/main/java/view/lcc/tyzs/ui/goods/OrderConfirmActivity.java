@@ -287,10 +287,8 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 String orderTotal = jsonObject1.getString("orderTotal");
 
                 String OID = jsonObject1.getString("OID");
-                // TODO: 16/8/9 1和1.0的区别 
-                if (orderTotal.equals(prince + "")) {
-                    //说明价格是一样的
-                } else {
+
+                if (!orderTotal.equals(prince + "")) {
                     prince = Double.parseDouble(orderTotal);
                 }
                 Intent intent = new Intent(OrderConfirmActivity.this, OrderResultActivity.class);
@@ -304,7 +302,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("princes", df.format(prince - Double.parseDouble(point)));
                 startActivity(intent);
             } else {
-                // TODO: 2017/8/2 弹窗最好
                 Frame.getInstance().toastPrompt("订单可能被篡改了");
             }
         } catch (Exception e) {
@@ -315,7 +312,12 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void OrderConfirmFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交订单失败，请稍后再试");
+        if (!TextUtils.isEmpty(msg)){
+            Frame.getInstance().toastPrompt(msg);
+        }else {
+            Frame.getInstance().toastPrompt("提交订单失败，请稍后再试");
+        }
+
     }
 
     @Override

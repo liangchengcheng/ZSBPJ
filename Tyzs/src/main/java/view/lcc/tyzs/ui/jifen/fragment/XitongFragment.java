@@ -75,8 +75,7 @@ public class XitongFragment extends Fragment implements JifenListView, SwipeRefr
 
     private void initRecycleView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new JifenListAdapter();
@@ -123,6 +122,10 @@ public class XitongFragment extends Fragment implements JifenListView, SwipeRefr
             mSwipeRefreshWidget.setRefreshing(false);
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
+            if (msg.equals("116")){
+                mAdapter.setHasMoreDataAndFooter(false, false);
+                Frame.getInstance().toastPrompt("没有更多数据...");
+            }
             Frame.getInstance().toastPrompt(msg);
         }
     }

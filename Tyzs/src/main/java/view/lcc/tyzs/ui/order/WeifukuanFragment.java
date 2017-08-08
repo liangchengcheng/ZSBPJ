@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.GetOrderPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.GetOrderPresenterImpl;
 import view.lcc.tyzs.mvp.view.GetOrderView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.TimeUtils;
@@ -119,7 +121,18 @@ public class WeifukuanFragment extends Fragment implements GetOrderView, SwipeRe
             mSwipeRefreshWidget.setRefreshing(false);
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
-            Frame.getInstance().toastPrompt(msg);
+            if (msg.equals("145")){
+                mAdapter.setHasMoreDataAndFooter(false, false);
+                Frame.getInstance().toastPrompt("没有更多数据...");
+            }else {
+                String message = ErrorLogUtils.SystemError(msg);
+                if (TextUtils.isEmpty(message)){
+                    Frame.getInstance().toastPrompt("加载失败");
+                }else {
+                    Frame.getInstance().toastPrompt(message);
+                }
+
+            }
         }
     }
 

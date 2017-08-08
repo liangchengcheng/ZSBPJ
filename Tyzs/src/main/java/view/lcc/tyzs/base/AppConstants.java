@@ -52,8 +52,8 @@ public class AppConstants {
         public final static String ADDRESSS_DELETE = "/Interface/AddressInfo.ashx?action=delete";
 
 
-
-        public final static String GET_ORDER = "/Interface/Order.ashx?action=add";
+        //我的订单
+        public final static String GET_ORDER = "/Interface/Order.ashx?action=getlist";
 
 
         //积分转账

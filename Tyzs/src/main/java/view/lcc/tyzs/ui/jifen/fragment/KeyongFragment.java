@@ -56,7 +56,7 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
     protected long currentTime = 0;
     protected int currentPage = 1;
 
-    private static final String TYPE = "可用积分";
+    private static final String TYPE = "充值积分";
 
     @Nullable
     @Override
@@ -66,7 +66,7 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
         mPresenter = new JifenListPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
-        //mPresenter.jifenList(currentPage + "", TYPE);
+        mPresenter.jifenList(currentPage + "", TYPE);
         return view;
     }
 
@@ -106,8 +106,22 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
     }
 
     @Override
-    public void JifenListSuccess(String msg) {
-
+    public void JifenListSuccess(String result) {
+        try {
+            String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
+            JSONObject jsonObject = new JSONObject(data);
+            String resultJson = jsonObject.getString("resultjson");
+            List<InterGrationBean> dataList = GsonUtils.fromJsonArray(resultJson, InterGrationBean.class);
+            if (dataList != null && dataList.size() > 0) {
+                mAdapter.bind(dataList);
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+            } else {
+                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+            }
+            mSwipeRefreshWidget.setRefreshing(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -126,6 +140,10 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
             mSwipeRefreshWidget.setRefreshing(false);
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         } else {
+            if (msg.equals("116")){
+                mAdapter.setHasMoreDataAndFooter(false, false);
+                Frame.getInstance().toastPrompt("没有更多数据...");
+            }
             Frame.getInstance().toastPrompt(msg);
         }
     }

@@ -16,7 +16,7 @@ import view.lcc.tyzs.utils.GsonUtils;
  */
 public class GetOrderModel {
 
-    public OkHttpRequest register(String page, String pagesize, String phone, String state, ResultCallback<String> callback) {
+    public OkHttpRequest GetOrder(String page, String pagesize, String phone, String state, ResultCallback<String> callback) {
         GetOrderRequest getOrderRequest = new GetOrderRequest();
         getOrderRequest.setPhone(phone);
         getOrderRequest.setPage(page);

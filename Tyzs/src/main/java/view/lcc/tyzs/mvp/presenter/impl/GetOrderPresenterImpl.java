@@ -46,7 +46,7 @@ public class GetOrderPresenterImpl implements GetOrderPresenter {
         }
         final long current_time = TimeUtils.getCurrentTime();
 
-        model.register(page,pagesize,phone,state, new ResultCallback<String>() {
+        model.GetOrder(page,pagesize,phone,state, new ResultCallback<String>() {
 
             @Override
             public void onError(Request request, Exception e) {
@@ -79,10 +79,9 @@ public class GetOrderPresenterImpl implements GetOrderPresenter {
                         }
                     }  else {
                         if (get_data) {
-                            // TODO: 2017/8/4 具体的错误信息
-                            view.GetOrderFail("获取信息失败");
+                            view.GetOrderFail(code);
                         } else {
-                            view.refreshOrLoadFail("");
+                            view.refreshOrLoadFail(code);
                         }
                     }
                 } catch (Exception e) {

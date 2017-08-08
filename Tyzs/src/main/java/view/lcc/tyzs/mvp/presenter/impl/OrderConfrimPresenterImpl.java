@@ -14,6 +14,7 @@ import view.lcc.tyzs.mvp.presenter.OrderConfirmPresenter;
 import view.lcc.tyzs.mvp.presenter.ShopCarAddPresenter;
 import view.lcc.tyzs.mvp.view.OrderConfirmView;
 import view.lcc.tyzs.mvp.view.ShopCarAddView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -48,7 +49,7 @@ public class OrderConfrimPresenterImpl implements OrderConfirmPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.OrderConfirmSuccess(response);
                     } else  {
-                        view.OrderConfirmFail("添加信息失败，请稍后再试");
+                        view.OrderConfirmFail(ErrorLogUtils.SystemError(status));
                     }
                 } catch (Exception e) {
                     view.OrderConfirmFail("添加信息失败");
