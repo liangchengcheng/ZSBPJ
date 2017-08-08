@@ -46,7 +46,6 @@ public class ShopCarAddPresenterImpl implements ShopCarAddPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
                         view.ShopCarAddSuccess("");
                     } else  {
                         view.ShopCarAddFail("添加信息失败，请稍后再试");

@@ -91,6 +91,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         tv_order_name = (TextView) findViewById(R.id.tv_order_name);
         tv_order_phone = (TextView) findViewById(R.id.tv_order_phone);
         tv_order_address = (TextView) findViewById(R.id.tv_order_address);
+        findViewById(R.id.btn_put_order).setOnClickListener(this);
 
         //获取上个页面传递过来的页面信息
         orderInfos = (ArrayList<OrderInfo>) getIntent().getSerializableExtra("data");
@@ -100,8 +101,10 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         }
         //添加收获地址
         initAddress();
-        initPrince();
-        findViewById(R.id.btn_put_order).setOnClickListener(this);
+        //计算价格
+        if (orderInfos != null){
+            initPrince();
+        }
         jifenPresenter.jifenYue();
     }
 

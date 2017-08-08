@@ -9,7 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.ui.jifen.JifenListActivity;
+import view.lcc.tyzs.ui.jifen.JifenMainActivity;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
+import view.lcc.tyzs.ui.order.OrderMainActivity;
+import view.lcc.tyzs.ui.setting.HelpActivity;
+import view.lcc.tyzs.ui.setting.JIeshaoActivity;
 import view.lcc.tyzs.utils.StatusBarUtil;
 
 /**
@@ -32,6 +37,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.gsjs).setOnClickListener(this);
         view.findViewById(R.id.rxcp).setOnClickListener(this);
         view.findViewById(R.id.gwc).setOnClickListener(this);
+
+        view.findViewById(R.id.tv_order).setOnClickListener(this);
+        view.findViewById(R.id.ll_news).setOnClickListener(this);
+        view.findViewById(R.id.ll_change_zy).setOnClickListener(this);
         //StatusBarUtil.setStatusBarTranslucent(getActivity(), false);
         return view;
     }
@@ -42,8 +51,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             //我的积分
             case R.id.ll_jifen:
-                LoginMainActivity.startLoginMainActivity("R",getActivity());
+                intent = new Intent(getActivity(), JifenMainActivity.class);
+                startActivity(intent);
                 break;
+            //我的订单
+            case R.id.tv_order:
+                intent = new Intent(getActivity(), OrderMainActivity.class);
+                startActivity(intent);
+                break;
+            //我的消息
+            case R.id.ll_news:
+                intent = new Intent(getActivity(), OrderMainActivity.class);
+                startActivity(intent);
+                break;
+            //我的体质
+            case R.id.ll_change_zy:
+                intent = new Intent(getActivity(), OrderMainActivity.class);
+                startActivity(intent);
+                break;
+
+
+
             //体质测试
             case R.id.tzcs:
                 intent = new Intent(getActivity(), LoginMainActivity.class);
@@ -52,32 +80,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //注册会员
             case R.id.zchy:
                 intent = new Intent(getActivity(), LoginMainActivity.class);
+                intent.putExtra("action","register");
                 startActivity(intent);
                 break;
             //积分变动
             case R.id.jfbd:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
+                intent = new Intent(getActivity(), JifenListActivity.class);
                 startActivity(intent);
                 break;
             //常见问题
             case R.id.cjwt:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
+                intent = new Intent(getActivity(), HelpActivity.class);
                 startActivity(intent);
                 break;
             //公司介绍
             case R.id.gsjs:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
+                intent = new Intent(getActivity(), JIeshaoActivity.class);
                 startActivity(intent);
                 break;
             //商品
             case R.id.rxcp:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
-                startActivity(intent);
+                ((MainActivity)(getActivity())).setCurrent(1);
                 break;
-            //商品
+            //购物车
             case R.id.gwc:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
-                startActivity(intent);
+                ((MainActivity)(getActivity())).setCurrent(2);
                 break;
         }
     }

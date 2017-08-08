@@ -75,7 +75,7 @@
                         android:textSize="14sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/tv_fabu"
+                    android:id="@+id/tv_order"
                     android:layout_margin="8dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

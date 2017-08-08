@@ -21,6 +21,7 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/delete"
             android:gravity="left" />
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -33,28 +34,38 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:layout_gravity="end"
             android:id="@+id/moreBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:layout_marginRight="5dp"
             android:background="@drawable/shuaxin" />
 
     </android.support.v7.widget.Toolbar>
 
-    <ListView
-        android:divider="@null"
-        android:id="@+id/lv_main"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp">
+
+        <ListView
+            android:id="@+id/lv_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null" />
+
+        <view.lcc.tyzs.view.LoadingLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -62,44 +73,46 @@
             android:background="#eee" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:id="@+id/detail_buy_board"
             android:layout_width="match_parent"
             android:layout_height="50.0dip"
-            android:background="@color/white">
-
-           <LinearLayout
-               android:gravity="center_vertical"
-               android:layout_weight="1"
-               android:orientation="horizontal"
-               android:layout_width="0dp"
-               android:layout_height="match_parent">
-               <CheckBox
-                   android:id="@+id/cb_cart_all_check"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginLeft="10dp"
-                   android:button="@drawable/checkbox_bg"
-                   android:checked="false"
-                   android:textColor="#ffffff" />
-
-               <TextView
-                   android:id="@+id/total_sum"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_centerVertical="true"
-                   android:layout_marginLeft="5dp"
-                   android:layout_toRightOf="@+id/cb_cart_all_check"
-                   android:gravity="center"
-                   android:text="总计0元"
-                   android:textColor="@color/red"
-                   android:textSize="14.0sp" />
-           </LinearLayout>
+            android:background="@color/white"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cb_cart_all_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:button="@drawable/checkbox_bg"
+                    android:checked="false"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/total_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/cb_cart_all_check"
+                    android:gravity="center"
+                    android:text="总计0元"
+                    android:textColor="@color/red"
+                    android:textSize="14.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
                 <TextView
                     android:id="@+id/ok"
                     android:layout_width="match_parent"

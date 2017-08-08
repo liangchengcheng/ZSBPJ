@@ -56,22 +56,23 @@
                     android:padding="14dp">
 
                     <ImageView
-                        android:layout_centerVertical="true"
                         android:id="@+id/tv_ll"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/icon_dizhi" />
 
                     <TextView
+                        style="@style/ItemText"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/tv_ll"
-                        style="@style/ItemText"
                         android:text="收货地址" />
 
                     <TextView
                         android:id="@+id/patrol_date"
                         style="@style/ItemText"
                         android:hint="" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -82,19 +83,20 @@
                         android:src="@drawable/btn_profile_enter" />
 
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginRight="14dp"
                     android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
                     android:background="#eee" />
 
                 <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="16dip"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dip"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_order_name"
@@ -106,23 +108,21 @@
                         android:id="@+id/tv_order_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="" />
 
                     <TextView
                         android:id="@+id/tv_order_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_height="1dp"
-                    android:layout_marginRight="14dp"
                     android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="10dp"
                     android:background="#eee" />
                 <!-- 收货人信息 stop -->
 
@@ -141,10 +141,7 @@
                         android:src="@drawable/icon_shangpin" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
+                        style="@style/ItemText"
                         android:text="商品列表" />
 
                 </LinearLayout>
@@ -166,10 +163,10 @@
                 <!-- 支付及配送方式start -->
                 <View
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_height="1dp"
-                    android:layout_marginRight="14dp"
                     android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="10dp"
                     android:background="#eee" />
                 <!-- 支付及配送方式stop -->
 
@@ -192,13 +189,10 @@
                             android:src="@drawable/icon_peisong" />
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
+                            style="@style/ItemText"
                             android:text="支付及配送方式" />
-
                     </LinearLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,18 +203,19 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_height="1dp"
-                    android:layout_marginRight="14dp"
                     android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="10dp"
                     android:background="#eee" />
                 <!-- 其他要求 start -->
                 <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -234,29 +229,31 @@
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:src="@drawable/icon_qita" />
-
+                        <TextView
+                            style="@style/ItemText"
+                            android:text="其他要求" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
-                            android:text="其他要求" />
+                            android:text="" />
 
                     </LinearLayout>
 
                     <EditText
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
                         android:id="@+id/et_other"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="#eee"
                         android:gravity="top"
                         android:hint="请输入你的留言"
                         android:maxLines="2"
                         android:minLines="2"
                         android:padding="12dip"
                         android:textColor="#222"
-                        android:background="#eee"
                         android:textColorHint="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -330,11 +327,12 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_marginLeft="3dp"
+                        android:padding="3dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:layout_marginLeft="3dp"
                             android:id="@+id/tv_zj"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -358,10 +356,10 @@
                         android:layout_weight="1">
 
                         <TextView
+                           android:padding="3dp"
                             android:id="@+id/tv_jf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dip"
                             android:text="积分" />
                     </LinearLayout>
 

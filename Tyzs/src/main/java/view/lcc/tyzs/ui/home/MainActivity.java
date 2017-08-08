@@ -26,6 +26,8 @@ public class MainActivity  extends BaseActivity {
 
     private ArrayList<Fragment> fgList;
 
+    private NoScrollViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class MainActivity  extends BaseActivity {
     }
 
     private void initUI() {
-        final NoScrollViewPager viewPager = (NoScrollViewPager) findViewById(R.id.vp_horizontal_ntb);
+        viewPager = (NoScrollViewPager) findViewById(R.id.vp_horizontal_ntb);
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fgList);
         viewPager.setAdapter(myPagerAdapter);
 
@@ -156,6 +158,13 @@ public class MainActivity  extends BaseActivity {
         finish();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);
+    }
+
+
+    public void setCurrent(int position){
+        if ( viewPager!= null){
+            viewPager.setCurrentItem(position);
+        }
     }
 
 }

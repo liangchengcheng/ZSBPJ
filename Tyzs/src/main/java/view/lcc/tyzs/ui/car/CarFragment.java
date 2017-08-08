@@ -26,6 +26,7 @@ import java.util.Map;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.CarAdapter;
 import view.lcc.tyzs.base.BaseApplication;
+import view.lcc.tyzs.base.BaseFragment;
 import view.lcc.tyzs.bean.OrderInfo;
 import view.lcc.tyzs.bean.ShoppingCarBean;
 import view.lcc.tyzs.bean.ShoppingCarItemBean;
@@ -40,6 +41,7 @@ import view.lcc.tyzs.ui.goods.OrderConfirmActivity;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.CartProductItemChangedListener;
+import view.lcc.tyzs.view.LoadingLayout;
 
 /**
  * Author:       |梁铖城
@@ -47,14 +49,18 @@ import view.lcc.tyzs.view.CartProductItemChangedListener;
  * Date:         |07-31 17:04
  * Description:  |
  */
-public class CarFragment extends Fragment implements CartProductItemChangedListener, View.OnClickListener, ShopCarAddView, ShopCarGetView {
-    private CarAdapter adapter;
+public class CarFragment extends BaseFragment implements CartProductItemChangedListener, View.OnClickListener, ShopCarAddView, ShopCarGetView {
+
     private ListView listview;
-    private List<ShoppingCarBean> beans;
+    private LoadingLayout loading_layout;
     private CheckBox allCheck;
-    private String Rate;
     private TextView total_sum;
+
+
     private double prince = 0;
+    private String Rate;
+    private CarAdapter adapter;
+    private List<ShoppingCarBean> beans;
 
     private Map<Integer, ShoppingCarBean> unCheckedList = new HashMap<Integer, ShoppingCarBean>();
     private boolean checkMark = true;
@@ -72,6 +78,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
     }
 
     private void initView(View view) {
+        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         total_sum = (TextView) view.findViewById(R.id.total_sum);
         Rate = SharePreferenceUtil.getRate();
         listview = (ListView) view.findViewById(R.id.lv_main);
@@ -106,6 +113,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 for (int i = 0; i < beans.size(); i++) {
                     unCheckedList.put(i, beans.get(i));
                 }
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             } else {
                 //没有数据就去服务器获取
                 shopCarGetPresenter.shopCarGet(SharePreferenceUtil.getName());
@@ -208,6 +216,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //删除应该也得同步
             case R.id.btn_delete:
                 try {
                     ArrayList<ShoppingCarBean> delete_List = new ArrayList<ShoppingCarBean>();
@@ -221,21 +230,22 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                             BaseApplication.getDaoSession().getShoppingCarBeanDao().delete(shoppingCarBean);
                         }
                     }
-
+                    loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
                     beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
                     if (beans.size() > 0) {
+                        loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
                         adapter.newData(beans);
                         for (int i = 0; i < beans.size(); i++) {
                             unCheckedList.put(i, beans.get(i));
                         }
                     } else {
-                        listview.setVisibility(View.GONE);
+                       loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-
+            //提交购买
             case R.id.ok:
                 ArrayList<OrderInfo> infos = new ArrayList<OrderInfo>();
                 for (int i = 0; i < adapter.getCount(); i++) {
@@ -255,7 +265,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                         infos.add(info);
                     }
                 }
-                //删除
+                //删除已经购买的了（其实这个地方不合理，应该是购买成功了再删除）
                 ArrayList<ShoppingCarBean> is = new ArrayList<ShoppingCarBean>();
                 for (ShoppingCarBean bean : adapter.beans) {
                     if (bean.isCheck()) {
@@ -267,7 +277,7 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                         BaseApplication.getDaoSession().getShoppingCarBeanDao().delete(shoppingCarBean);
                     }
                 }
-
+                //已经购买,删除后同步到服务器
                 List<ShoppingCarItemBean> data_list = new ArrayList<ShoppingCarItemBean>();
                 List<ShoppingCarBean> shoppingCarBeanList = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
                 for (int i = 0; i < shoppingCarBeanList.size(); i++) {
@@ -284,7 +294,8 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 }
 
                 Intent intent = new Intent(getActivity(), OrderConfirmActivity.class);
-                intent.putExtra("bean", infos);
+                intent.putExtra("data", infos);
+                intent.putExtra("action", "car");
                 startActivity(intent);
                 break;
             //同步信息
@@ -308,7 +319,6 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 break;
         }
     }
@@ -349,33 +359,35 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
 
     @Override
     public void ShopCarAddLoading() {
-        Frame.getInstance().toastPrompt("正在提交购物车信息");
+        createDialog(R.string.send_info);
     }
 
     @Override
     public void ShopCarAddSuccess(String msg) {
+        closeDialog();
         Frame.getInstance().toastPrompt("同步购物车信息成功");
     }
 
     @Override
     public void ShopCarAddFail(String msg) {
+        closeDialog();
         Frame.getInstance().toastPrompt("同步购物车信息失败");
     }
 
     @Override
     public void NetWorkErr(String msg) {
+        closeDialog();
         Frame.getInstance().toastPrompt("网络不稳定，请稍后再试");
     }
 
     @Override
     public void ShopCarGetLoading() {
-        Frame.getInstance().toastPrompt("正在获取信息...");
+        loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
     }
 
     @Override
     public void ShopCarGetSuccess(String result) {
         try {
-            JSONObject jsonObject = new JSONObject(result);
             String data = result.replace("\\", "").replace("\"[", "[").replace("]\"", "]");
             JSONObject dataBean = new JSONObject(data);
             String resultJson = dataBean.getString("resultjson");
@@ -384,12 +396,14 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
                 for (int i = 0; i < beans.size(); i++) {
                     BaseApplication.getDaoSession().getShoppingCarBeanDao().insert(beans.get(i));
                 }
-                adapter.addDate(beans);
+                adapter.newData(beans);
                 listview.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
                 for (int i = 0; i < beans.size(); i++) {
                     unCheckedList.put(i, beans.get(i));
                 }
+                loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+            }else {
+                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -398,7 +412,11 @@ public class CarFragment extends Fragment implements CartProductItemChangedListe
 
     @Override
     public void ShopCarGetFail(String msg) {
-
+        if (msg.equals("142")){
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        }else {
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        }
     }
 
 }

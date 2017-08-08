@@ -45,8 +45,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         scrollView = (PullToZoomScrollViewEx) view.findViewById(R.id.scrollView);
 
 
-
-
         View header_view = View.inflate(getActivity(), R.layout.widget_profile_headview, null);
         tv_phonenumber = (TextView) header_view.findViewById(R.id.tv_phonenumber);
         profile_headimg = (ImageView) header_view.findViewById(R.id.profile_headimg);
@@ -55,8 +53,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
 
         View zoom_view = View.inflate(getActivity(), R.layout.widget_zoomview, null);
-
-
 
 
         View content_view = View.inflate(getActivity(), R.layout.widget_profile_contentview, null);
@@ -125,17 +121,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
-        String nickname = SharePreferenceUtil.getUid();
-        if (TextUtils.isEmpty(nickname)) {
-            nickname = SharePreferenceUtil.getUid();
+        String nickname = SharePreferenceUtil.getNickname();
+        String dc = SharePreferenceUtil.getrName();
+        if (!TextUtils.isEmpty(nickname) && !TextUtils.isEmpty(dc)) {
+            tv_phonenumber.setText(nickname + "/" + dc);
         }
-        tv_phonenumber.setText(nickname);
-        String url = SharePreferenceUtil.getUid();
-        //这里等后期添加了
-        if (TextUtils.isEmpty(url)) {
-            ImageManager.getInstance()
-                    .loadResImage(getContext(), R.mipmap.ic_launcher, profile_headimg);
-        }
+
+        ImageManager.getInstance().loadResImage(getContext(), R.mipmap.ic_launcher, profile_headimg);
     }
 
     public void onEvent(Integer event) {
