@@ -4,6 +4,8 @@
     android:minHeight="300dp"
     android:layout_height="match_parent">
 
+
+
     <RelativeLayout
         android:id="@+id/rt_image"
         android:layout_width="wrap_content"

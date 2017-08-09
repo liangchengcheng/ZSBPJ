@@ -55,4 +55,65 @@
         <attr name="paper_shadow_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="CrescentoImageView">
+        <attr name="curvature" format="dimension"/>
+        <attr name="gravity" format="integer">
+            <flag name="top" value="0"/>
+            <flag name="bottom" value="1"/>
+        </attr>
+        <attr name="curvatureDirection" format="integer">
+            <flag name="outward" value="0"/>
+            <flag name="inward" value="1"/>
+        </attr>
+        <attr name="tintMode" format="integer">
+            <flag name="automatic" value="0"/>
+            <flag name="manual" value="1"/>
+        </attr>
+        <attr name="tintColor" format="color"/>
+        <attr name="tintAlpha" format="integer"/>
+        <attr name="gradientDirection" format="integer">
+            <flag name="top_to_bottom" value="0" />
+            <flag name="bottom_to_top" value="1" />
+            <flag name="left_to_right" value="2" />
+            <flag name="right_to_left" value="3" />
+        </attr>
+        <attr name="gradientStartColor" format="color"/>
+        <attr name="gradientEndColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ColorArcProgressBar">
+        <attr name="back_color" format="color"/>
+        <attr name="front_color1" format="color"/>
+        <attr name="front_color2" format="color"/>
+        <attr name="front_color3" format="color"/>
+        <attr name="back_width" format="dimension"/>
+        <attr name="front_width" format="dimension"/>
+        <attr name="is_need_title" format="boolean"/>
+        <attr name="is_need_content" format="boolean"/>
+        <attr name="is_need_unit" format="boolean"/>
+        <attr name="is_need_dial" format="boolean"/>
+        <attr name="string_title" format="string"/>
+        <attr name="string_unit" format="string"/>
+        <attr name="total_engle" format="integer"/>
+        <attr name="current_value" format="float"/>
+        <attr name="max_value" format="float"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="pile">
+        <attr name="interval" format="dimension" />
+        <attr name="sizeRatio" format="float" />
+        <attr name="scaleStep" format="float" />
+        <attr name="displayCount" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="scene">
+        <attr name="leftMargin" format="dimension" />
+        <attr name="leftDistance" format="dimension" />
+        <attr name="rightDistance" format="dimension" />
+        <attr name="verticalDistance" format="dimension" />
+        <attr name="ltextSize" format="float" />
+        <attr name="ltextColor" format="color" />
+    </declare-styleable>
+
 </resources>
