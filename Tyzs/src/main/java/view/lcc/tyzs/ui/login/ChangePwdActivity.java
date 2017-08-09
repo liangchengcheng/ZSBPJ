@@ -20,15 +20,15 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
  * Author:       |梁铖城
  * Email:        |1038127753@qq.com
  * Date:         |08-01 08:31
- * Description:  |
+ * Description:  |===修改密码===
  */
 public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,View.OnClickListener{
-
     private ChangePwdPresenter changePwdPresenter;
     //密码的输入
     private EditText passwod;
     private EditText newpassword;
     private EditText newpassword_new;
+
     //修改密码
     private String save_pwd;
 
@@ -38,6 +38,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
         setContentView(R.layout.change_pwd);
         changePwdPresenter = new ChangePwdPresenterImpl(this);
         findViewById(R.id.btn_changepassword).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
         newpassword_new = (EditText) findViewById(R.id.newpassword_new);
         passwod = (EditText) findViewById(R.id.passwod);
         newpassword = (EditText) findViewById(R.id.newpassword);
@@ -53,7 +54,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
     public void ChangePwdSuccess(String msg) {
         closeDialog();
         SharePreferenceUtil.setPwd(newpassword_new.getText().toString().trim());
-        Frame.getInstance().toastPrompt("密码修改成功");
+        showSuperMsg("密码修改成功",ChangePwdActivity.this);
         finish();
     }
 
@@ -61,7 +62,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
     public void ChangePwdFail(String msg) {
         closeDialog();
        if (TextUtils.isEmpty(msg)){
-           Frame.getInstance().toastPrompt("提交失败，请稍后再试");
+           Frame.getInstance().toastPrompt("修改密码，请稍后再试");
        }else {
            Frame.getInstance().toastPrompt(msg);
        }
@@ -87,7 +88,6 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
                     Frame.getInstance().toastPrompt("密码长度为6位");
                     return;
                 }
-
                 if (!newpassword.getText().toString().equals(newpassword_new.getText().toString())){
                     Frame.getInstance().toastPrompt("两次密码长度不一致");
                     return;
@@ -97,6 +97,9 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
                     return;
                 }
                 changePwdPresenter.changePwd(newpassword.getText().toString().trim(),SharePreferenceUtil.getName());
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

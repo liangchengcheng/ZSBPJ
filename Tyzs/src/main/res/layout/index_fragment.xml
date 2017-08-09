@@ -155,15 +155,17 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:background="@drawable/main_ceshi"
+                    android:background="@drawable/index_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:text="体质测试系统"
                         android:textColor="#fff"
@@ -172,7 +174,8 @@
                         android:layout_height="wrap_content" />
 
                    <LinearLayout
-                       android:layout_marginLeft="10dp"
+                       android:gravity="right"
+                       android:layout_marginRight="10dp"
                        android:layout_marginTop="10dp"
                        android:layout_width="match_parent"
                        android:orientation="horizontal"
@@ -195,9 +198,9 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="bottom|right"
                     android:text="立 即 测 试"
                     android:id="@+id/tv_cs"
                     android:layout_width="wrap_content"
