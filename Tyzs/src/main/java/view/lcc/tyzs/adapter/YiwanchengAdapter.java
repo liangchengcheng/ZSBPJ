@@ -67,6 +67,15 @@ public class YiwanchengAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             holder.tv_name.setText("订单总额"+weekData.getTotal()+"元" );
             holder.tv_price.setText("是否支付:" +weekData.getIspay());
             // getItem(position).getTotal()
+
+            holder.ll_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.onItemClick(weekData);
+                    }
+                }
+            });
         }
     }
 
@@ -88,6 +97,7 @@ public class YiwanchengAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tv_price;
         TextView tv_shijian;
         TextView tv_id;
+        View ll_content;
 
         public NormalViewHolder(View convertView) {
             super(convertView);
@@ -96,6 +106,7 @@ public class YiwanchengAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tv_price = (TextView) convertView.findViewById(R.id.tv_prince);
             tv_shijian = (TextView) convertView.findViewById(R.id.tv_time);
             tv_id = (TextView) convertView.findViewById(R.id.tv_id);
+            ll_content = convertView.findViewById(R.id.ll_content);
         }
     }
 

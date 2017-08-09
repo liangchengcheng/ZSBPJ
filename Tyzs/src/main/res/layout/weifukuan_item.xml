@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/ll_content"
     android:layout_height="wrap_content"
     android:background="@color/back">
     <RelativeLayout
@@ -11,13 +12,15 @@
         android:layout_marginRight="8dp"
         android:background="@drawable/list_item_bg">
         <LinearLayout
+            android:background="@color/colorPrimary"
+            android:padding="5dp"
             android:id="@+id/item_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:singleLine="true"
+              android:textColor="#fff"
                 android:textSize="14sp"
                 android:id="@+id/tv_id"
                 android:padding="5dp"

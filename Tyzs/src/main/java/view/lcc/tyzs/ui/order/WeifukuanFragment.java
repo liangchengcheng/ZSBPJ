@@ -1,5 +1,6 @@
 package view.lcc.tyzs.ui.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -212,6 +213,8 @@ public class WeifukuanFragment extends Fragment implements GetOrderView, SwipeRe
 
     @Override
     public void onItemClick(OrderInfoData data) {
-
+        Intent intent = new Intent(getActivity(), OrderDetailsActivity.class);
+        intent.putExtra("OID",data.getOID());
+        startActivity(intent);
     }
 }

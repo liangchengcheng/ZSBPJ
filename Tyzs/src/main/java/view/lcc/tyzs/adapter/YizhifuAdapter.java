@@ -83,6 +83,15 @@ public class YizhifuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     }
                 }
             });
+
+            holder.ll_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.onItemClick(weekData);
+                    }
+                }
+            });
         }
     }
 
@@ -106,6 +115,7 @@ public class YizhifuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView tv_id;
         TextView btn_tr;
         EditText ed_reson;
+        View ll_content;
 
         public NormalViewHolder(View convertView) {
             super(convertView);
@@ -115,6 +125,7 @@ public class YizhifuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tv_id = (TextView) convertView.findViewById(R.id.tv_id);
             btn_tr = (TextView) convertView.findViewById(R.id.btn_tr);
             ed_reson = (EditText) convertView.findViewById(R.id.et_yuanyin);
+            ll_content = convertView.findViewById(R.id.ll_content);
         }
     }
 

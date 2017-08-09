@@ -49,7 +49,8 @@ public class AppConstants {
 
         //我的订单
         public final static String GET_ORDER = "/Interface/Order.ashx?action=getlist";
-
+        //订单的详情
+        public final static String ORDER_DETAILS = "/Interface/Order.ashx?action=getorderinfo";
 
         //积分转账
         public final static String JFZZ = "/Interface/Transfer.ashx";

@@ -106,6 +106,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <!--订单详情-->
+        <activity
+            android:name=".ui.order.OrderDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <!--积分-->
         <activity
             android:name=".ui.jifen.JifenMainActivity"

@@ -75,6 +75,14 @@ public class DaishouhuoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
+            holder.ll_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.onItemClick(weekData);
+                    }
+                }
+            });
         }
     }
 
@@ -97,6 +105,7 @@ public class DaishouhuoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tv_shijian;
         TextView tv_id;
         TextView queren;
+        View ll_content;
 
         public NormalViewHolder(View convertView) {
             super(convertView);
@@ -105,6 +114,7 @@ public class DaishouhuoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tv_shijian = (TextView) convertView.findViewById(R.id.tv_time);
             tv_id = (TextView) convertView.findViewById(R.id.tv_id);
             queren = (TextView) convertView.findViewById(R.id.btn_tr);
+            ll_content = convertView.findViewById(R.id.ll_content);
         }
     }
 
