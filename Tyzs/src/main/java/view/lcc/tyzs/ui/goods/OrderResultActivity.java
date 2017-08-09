@@ -1,11 +1,14 @@
 package view.lcc.tyzs.ui.goods;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.BaseActivity;
+import view.lcc.tyzs.ui.order.OrderMainActivity;
 
 /**
  * Author:       |梁铖城
@@ -48,5 +51,12 @@ public class OrderResultActivity extends BaseActivity {
 
         tv_result= (TextView) findViewById(R.id.tv_result);
         tv_result.setText("订单结果：恭喜你订单提交成功。");
+
+        findViewById(R.id.btn_order).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrderResultActivity.this, OrderMainActivity.class));
+            }
+        });
     }
 }

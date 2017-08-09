@@ -20,11 +20,15 @@ import java.util.List;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.WeifukuanAdapter;
 import view.lcc.tyzs.adapter.YizhifuAdapter;
+import view.lcc.tyzs.base.BaseFragment;
 import view.lcc.tyzs.bean.OrderInfoData;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.GetOrderPresenter;
+import view.lcc.tyzs.mvp.presenter.ShenqingtuihuoPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.GetOrderPresenterImpl;
+import view.lcc.tyzs.mvp.presenter.impl.ShenqingtuihuoPresenterImpl;
 import view.lcc.tyzs.mvp.view.GetOrderView;
+import view.lcc.tyzs.mvp.view.ShenqingtuihuoView;
 import view.lcc.tyzs.utils.ErrorLogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
@@ -38,11 +42,10 @@ import view.lcc.tyzs.view.OnRecycleViewScrollListener;
  * Date:         |08-04 07:09
  * Description:  |未支付的订单
  */
-public class YifukuanFragment extends Fragment implements GetOrderView, SwipeRefreshLayout.OnRefreshListener
-        , YizhifuAdapter.OnItemClickListener {
+public class YifukuanFragment extends BaseFragment implements GetOrderView, SwipeRefreshLayout.OnRefreshListener
+        , YizhifuAdapter.OnItemClickListener,ShenqingtuihuoView ,YizhifuAdapter.OnTuihuoClickListener{
     private LoadingLayout loading_layout;
-    private YizhifuAdapter mAdapter;
-    private GetOrderPresenter mPresenter;
+
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
 
@@ -53,6 +56,9 @@ public class YifukuanFragment extends Fragment implements GetOrderView, SwipeRef
     protected long currentTime = 0;
     protected int currentPage = 1;
     private static final String TYPE = "已支付";
+    private YizhifuAdapter mAdapter;
+    private GetOrderPresenter mPresenter;
+    private ShenqingtuihuoPresenter shenqingtuihuoPresenter;
 
     @Nullable
     @Override
@@ -60,6 +66,7 @@ public class YifukuanFragment extends Fragment implements GetOrderView, SwipeRef
         View view = inflater.inflate(R.layout.weifukuan_fragment, null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         mPresenter = new GetOrderPresenterImpl(this);
+        shenqingtuihuoPresenter = new ShenqingtuihuoPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
         mPresenter.getOrder(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
@@ -122,6 +129,7 @@ public class YifukuanFragment extends Fragment implements GetOrderView, SwipeRef
 
     @Override
     public void NetWorkErr(String msg) {
+        closeDialog();
         loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
     }
 
@@ -212,5 +220,27 @@ public class YifukuanFragment extends Fragment implements GetOrderView, SwipeRef
     @Override
     public void onItemClick(OrderInfoData data) {
 
+    }
+
+    @Override
+    public void ShenqingtuihuoLoading() {
+        createDialog(R.string.send_info);
+    }
+
+    @Override
+    public void ShenqingtuihuoSuccess(String msg) {
+        closeDialog();
+        Frame.getInstance().toastPrompt("提交成功，等待客服处理...");
+    }
+
+    @Override
+    public void ShenqingtuihuoFail(String msg) {
+        closeDialog();
+        Frame.getInstance().toastPrompt("提交失败，请稍后再试");
+    }
+
+    @Override
+    public void OnTuihuoClick(OrderInfoData data, String liYou) {
+        shenqingtuihuoPresenter.Shenqingtuihuo(data.getOID(),liYou);
     }
 }

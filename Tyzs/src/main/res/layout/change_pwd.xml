@@ -50,7 +50,7 @@
             <EditText
                 android:id="@+id/passwod"
                 style="@style/EditTextStyle"
-                android:hint="请输入收件人信息"
+                android:hint="请输入原始密码"
                 android:inputType="textMultiLine"
                 android:maxLines="3" />
 

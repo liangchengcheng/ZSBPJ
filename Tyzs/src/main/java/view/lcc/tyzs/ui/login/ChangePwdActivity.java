@@ -54,12 +54,17 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdView ,Vi
         closeDialog();
         SharePreferenceUtil.setPwd(newpassword_new.getText().toString().trim());
         Frame.getInstance().toastPrompt("密码修改成功");
+        finish();
     }
 
     @Override
     public void ChangePwdFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交失败，请稍后再试");
+       if (TextUtils.isEmpty(msg)){
+           Frame.getInstance().toastPrompt("提交失败，请稍后再试");
+       }else {
+           Frame.getInstance().toastPrompt(msg);
+       }
     }
 
     @Override

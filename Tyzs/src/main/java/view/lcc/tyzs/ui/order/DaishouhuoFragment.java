@@ -15,16 +15,21 @@ import android.view.ViewGroup;
 
 import org.json.JSONObject;
 
+import java.io.Closeable;
 import java.util.List;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.DaishouhuoAdapter;
 import view.lcc.tyzs.adapter.YizhifuAdapter;
+import view.lcc.tyzs.base.BaseFragment;
 import view.lcc.tyzs.bean.OrderInfoData;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.GetOrderPresenter;
+import view.lcc.tyzs.mvp.presenter.QuerenshouhuoPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.GetOrderPresenterImpl;
+import view.lcc.tyzs.mvp.presenter.impl.QuerenshouhuoPresenterImpl;
 import view.lcc.tyzs.mvp.view.GetOrderView;
+import view.lcc.tyzs.mvp.view.QuerenshouhuoView;
 import view.lcc.tyzs.utils.ErrorLogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
@@ -38,8 +43,8 @@ import view.lcc.tyzs.view.OnRecycleViewScrollListener;
  * Date:         |08-04 07:09
  * Description:  |未支付的订单
  */
-public class DaishouhuoFragment extends Fragment implements GetOrderView, SwipeRefreshLayout.OnRefreshListener
-        , DaishouhuoAdapter.OnItemClickListener {
+public class DaishouhuoFragment extends BaseFragment implements GetOrderView, SwipeRefreshLayout.OnRefreshListener
+        , DaishouhuoAdapter.OnItemClickListener ,DaishouhuoAdapter.OnSureClickListener,QuerenshouhuoView{
     private LoadingLayout loading_layout;
     private DaishouhuoAdapter mAdapter;
     private GetOrderPresenter mPresenter;
@@ -53,6 +58,7 @@ public class DaishouhuoFragment extends Fragment implements GetOrderView, SwipeR
     protected long currentTime = 0;
     protected int currentPage = 1;
     private static final String TYPE = "待收货";
+    private QuerenshouhuoPresenter querenshouhuoPresenter;
 
     @Nullable
     @Override
@@ -60,6 +66,7 @@ public class DaishouhuoFragment extends Fragment implements GetOrderView, SwipeR
         View view = inflater.inflate(R.layout.weifukuan_fragment, null);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         mPresenter = new GetOrderPresenterImpl(this);
+        querenshouhuoPresenter = new QuerenshouhuoPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
          mPresenter.getOrder(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
@@ -214,4 +221,26 @@ public class DaishouhuoFragment extends Fragment implements GetOrderView, SwipeR
     public void onItemClick(OrderInfoData data) {
 
     }
+
+    @Override
+    public void OnSureClick(OrderInfoData data) {
+        querenshouhuoPresenter.Querenshouhuo(data.getOID());
+    }
+
+    @Override
+    public void QuerenshouhuoLoading() {
+        createDialog(R.string.send_info);
+    }
+
+    @Override
+    public void QuerenshouhuoSuccess(String msg) {
+        closeDialog();
+        Frame.getInstance().toastPrompt("提交信息成功");
+    }
+
+    @Override
+    public void QuerenshouhuoFail(String msg) {
+        Frame.getInstance().toastPrompt("提交信息失败");
+    }
+
 }

@@ -14,6 +14,7 @@ import view.lcc.tyzs.mvp.presenter.ChangePwdPresenter;
 import view.lcc.tyzs.mvp.presenter.RegisterPresenter;
 import view.lcc.tyzs.mvp.view.ChangePwdView;
 import view.lcc.tyzs.mvp.view.RegisterView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -46,10 +47,9 @@ public class ChangePwdPresenterImpl implements ChangePwdPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
                         view.ChangePwdSuccess("");
                     } else  {
-                        view.ChangePwdFail("注册失败，请稍后再试");
+                        view.ChangePwdFail(ErrorLogUtils.SystemError(status));
                     }
                 } catch (Exception e) {
                     view.ChangePwdFail("注册失败");

@@ -1,5 +1,7 @@
 package view.lcc.tyzs.base;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -8,7 +10,9 @@ import android.widget.PopupWindow;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.ui.goods.GoodsDetailsActivity;
 import view.lcc.tyzs.utils.DialogUtils;
+import view.lcc.tyzs.view.SuperCustomToast;
 
 /**
  * Author:       梁铖城
@@ -42,5 +46,11 @@ public class BaseActivity extends FragmentActivity {
 
     public void closeDialog(){
         DialogUtils.dismiss(progressDialog);
+    }
+
+    public void showSuperMsg(String text, Activity activity) {
+        SuperCustomToast toasts = SuperCustomToast.getInstance(getApplicationContext());
+        toasts.setDefaultTextColor(Color.WHITE);
+        toasts.show(text, R.layout.choice_toast_item, R.id.content_toast, activity);
     }
 }
