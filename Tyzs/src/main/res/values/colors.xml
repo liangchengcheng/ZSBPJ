@@ -96,7 +96,7 @@
     <color name="divider_high">#ffe6edf0</color>
     <color name="login_title_color">#ffffffff</color>
     <color name="divider_low">#fff5f8fa</color>
-
+    <color name="gray">#D3D3D3</color>
     <color name="item_bg">#fff3f4f9</color>
 
     <color name="assist_blue">#ff35aaf6</color>
