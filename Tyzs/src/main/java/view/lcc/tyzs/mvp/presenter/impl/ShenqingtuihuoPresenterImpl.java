@@ -14,6 +14,7 @@ import view.lcc.tyzs.mvp.presenter.QuerenshouhuoPresenter;
 import view.lcc.tyzs.mvp.presenter.ShenqingtuihuoPresenter;
 import view.lcc.tyzs.mvp.view.QuerenshouhuoView;
 import view.lcc.tyzs.mvp.view.ShenqingtuihuoView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -46,10 +47,9 @@ public class ShenqingtuihuoPresenterImpl implements ShenqingtuihuoPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
                         view.ShenqingtuihuoSuccess("");
                     } else  {
-                        view.ShenqingtuihuoFail("添加信息失败，请稍后再试");
+                        view.ShenqingtuihuoFail(ErrorLogUtils.SystemError(status));
                     }
                 } catch (Exception e) {
                     view.ShenqingtuihuoFail("添加信息失败");

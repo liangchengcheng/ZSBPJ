@@ -29,7 +29,7 @@ public class ShenqingtuihuoModel {
         paramsMap.put("callValue", GsonUtils.createGsonString(shenqingtuohuoRequest));
 
         String timeValue = paramsMap.get("Calldate");
-        String url = AppConstants.RequestPath.LOGIN;
+        String url = AppConstants.RequestPath.TUIHUO;
         if (url.endsWith("ashx")) {
             url = url+ "?Calldate=" + timeValue;
         } else {

@@ -70,7 +70,7 @@ public class DaishouhuoFragment extends BaseFragment implements GetOrderView, Sw
         querenshouhuoPresenter = new QuerenshouhuoPresenterImpl(this);
         initRefreshView(view);
         initRecycleView(view);
-         mPresenter.getOrder(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
+        mPresenter.getOrder(currentPage + "", 10 + "", SharePreferenceUtil.getName(), TYPE);
         return view;
     }
 
@@ -87,7 +87,7 @@ public class DaishouhuoFragment extends BaseFragment implements GetOrderView, Sw
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new DaishouhuoAdapter();
         mAdapter.setOnItemClickListener(this);
-
+        mAdapter.setOnSureClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -239,11 +239,16 @@ public class DaishouhuoFragment extends BaseFragment implements GetOrderView, Sw
     public void QuerenshouhuoSuccess(String msg) {
         closeDialog();
         Frame.getInstance().toastPrompt("提交信息成功");
+        onRefresh();
     }
 
     @Override
     public void QuerenshouhuoFail(String msg) {
-        Frame.getInstance().toastPrompt("提交信息失败");
+        if (!TextUtils.isEmpty(msg)){
+            Frame.getInstance().toastPrompt(msg);
+        }else {
+            Frame.getInstance().toastPrompt("提交信息失败");
+        }
     }
 
 }

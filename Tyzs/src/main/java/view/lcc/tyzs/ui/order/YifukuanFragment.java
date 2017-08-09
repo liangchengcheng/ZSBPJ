@@ -87,7 +87,7 @@ public class YifukuanFragment extends BaseFragment implements GetOrderView, Swip
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new YizhifuAdapter();
         mAdapter.setOnItemClickListener(this);
-
+        mAdapter.setOnTuihuoClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
             @Override
@@ -233,13 +233,18 @@ public class YifukuanFragment extends BaseFragment implements GetOrderView, Swip
     @Override
     public void ShenqingtuihuoSuccess(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交成功，等待客服处理...");
+        Frame.getInstance().toastPrompt("提交成功，等待客服处理");
+        onRefresh();
     }
 
     @Override
     public void ShenqingtuihuoFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("提交失败，请稍后再试");
+        if (!TextUtils.isEmpty(msg)){
+            Frame.getInstance().toastPrompt(msg);
+        }else {
+            Frame.getInstance().toastPrompt("提交信息失败");
+        }
     }
 
     @Override

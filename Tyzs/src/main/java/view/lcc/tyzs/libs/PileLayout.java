@@ -13,11 +13,10 @@ import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
-
-import com.hsfcompany.tzcs.R;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import view.lcc.tyzs.R;
 
 /**
  * Created by xmuSistone on 2017/5/12.

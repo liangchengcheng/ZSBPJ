@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.TabViewPagerAdapter;
@@ -30,6 +31,13 @@ public class JifenListActivity extends BaseActivity {
         viewPager = (ViewPager) findViewById(R.id.second_viewpagers);
         tabLayout = (TabLayout) findViewById(R.id.second_tabs);
         setupViewPager();
+
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setupViewPager() {

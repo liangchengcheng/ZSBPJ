@@ -22,6 +22,7 @@ public class AppConstants {
         public final static String CHANGEPWD = "/Interface/ChangePWD.ashx";
 
 
+
         //购物
         public final static String GOODS = "/Interface/GetGoodList.ashx?action=all";
         //提交订单
@@ -36,7 +37,6 @@ public class AppConstants {
 
 
 
-
         //收货地址获取
         public final static String ADDRESSS_GET = "/Interface/AddressInfo.ashx?action=get";
         //收货地址 编辑
@@ -47,10 +47,17 @@ public class AppConstants {
         public final static String ADDRESSS_DELETE = "/Interface/AddressInfo.ashx?action=delete";
 
 
+
         //我的订单
         public final static String GET_ORDER = "/Interface/Order.ashx?action=getlist";
         //订单的详情
         public final static String ORDER_DETAILS = "/Interface/Order.ashx?action=getorderinfo";
+        //退货
+        public final static String TUIHUO = "/Interface/Order.ashx?action=applyreturn";
+        //确认收货
+        public final static String SHOUHUO = "/Interface/Order.ashx?action=confirmation";
+
+
 
         //积分转账
         public final static String JFZZ = "/Interface/Transfer.ashx";

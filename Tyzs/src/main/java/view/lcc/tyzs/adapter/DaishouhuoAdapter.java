@@ -45,7 +45,7 @@ public class DaishouhuoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NORMAL_ITEM) {
             return new NormalViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.yiwancheng_item, parent, false));
+                    .inflate(R.layout.daishouhuo_item, parent, false));
         } else {
             return new FootViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.layout_foot_loading, parent, false));

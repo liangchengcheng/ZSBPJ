@@ -2,6 +2,7 @@ package view.lcc.tyzs.ui.order;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -43,6 +44,13 @@ public class OrderDetailsActivity extends BaseActivity implements OrderDetailsVi
         loadingLayout = (LoadingLayout) findViewById(R.id.loading_layout);
         orderDetailsPresenter = new OrderDetailsPresenterImpl(this);
         orderDetailsPresenter.OrderDetails(getIntent().getStringExtra("OID"));
+
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

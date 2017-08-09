@@ -28,7 +28,7 @@ public class QuerenshouhuoModel {
         paramsMap.put("callValue", GsonUtils.createGsonString(querenshouhuoRequest));
 
         String timeValue = paramsMap.get("Calldate");
-        String url = AppConstants.RequestPath.LOGIN;
+        String url = AppConstants.RequestPath.SHOUHUO;
         if (url.endsWith("ashx")) {
             url = url+ "?Calldate=" + timeValue;
         } else {

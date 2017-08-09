@@ -62,7 +62,7 @@ public class JifenListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else {
             final InterGrationBean weekData = mList.get(position);
             NormalViewHolder holder = (NormalViewHolder) viewHolder;
-            holder.tv_time.setText("时间：" + weekData.getTime().replace("T", "   "));
+            holder.tv_time.setText(  weekData.getTime().replace("T", "   "));
             holder.tv_id.setText("受益人：" + weekData.getBphone());
             holder.tv_jine.setText("变动积分：" + weekData.getValue() + "");
             holder.tv_region.setText("变动原因：" + weekData.getReason());
