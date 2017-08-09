@@ -1,5 +1,6 @@
 package view.lcc.tyzs.ui.address;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -112,6 +113,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.ll_city).setOnClickListener(this);
         findViewById(R.id.ll_country).setOnClickListener(this);
         findViewById(R.id.btn_edit_ok).setOnClickListener(this);
+        findViewById(R.id.delete).setOnClickListener(this);
 
         bean = (Address) getIntent().getSerializableExtra("bean");
         if (bean != null) {
@@ -403,6 +405,9 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
             case R.id.btn_edit_ok:
                 saveData();
                 break;
+            case R.id.delete:
+                deleteAddress();
+                break;
         }
     }
 
@@ -422,8 +427,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void AddressEditSuccess(String msg) {
-        Frame.getInstance().toastPrompt("保存成功，请稍后再试");
+        Frame.getInstance().toastPrompt("保存成功");
         closeDialog();
+        Intent intent = new Intent();
+        intent.putExtra("ok", "ok");
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -439,8 +448,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void AddressDeleteSuccess(String msg) {
-        Frame.getInstance().toastPrompt("删除成功，请稍后再试");
+        Frame.getInstance().toastPrompt("删除成功");
         closeDialog();
+        Intent intent = new Intent();
+        intent.putExtra("ok", "ok");
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override

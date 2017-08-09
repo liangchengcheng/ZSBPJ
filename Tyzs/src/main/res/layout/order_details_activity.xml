@@ -19,18 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
-            android:text="地址列表"
+            android:text="订单详情"
             android:textColor="@color/white"
             android:textSize="18sp" />
-
-        <ImageView
-            android:padding="7dp"
-            android:id="@+id/iv_more"
-            android:layout_gravity="right"
-            android:layout_width="wrap_content"
-            android:src="@drawable/add"
-            android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
@@ -40,7 +31,6 @@
             android:id="@+id/lv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="18dip"
             android:scrollbars="none"
             android:listSelector="@drawable/list_item_selector"
             android:cacheColorHint="@android:color/transparent"

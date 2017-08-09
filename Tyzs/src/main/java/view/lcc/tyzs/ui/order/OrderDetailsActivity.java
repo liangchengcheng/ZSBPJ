@@ -38,6 +38,7 @@ public class OrderDetailsActivity extends BaseActivity implements OrderDetailsVi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details_activity);
+        adapter = new OrderDetailsAdapter(OrderDetailsActivity.this);
         lv_list = (ListView) findViewById(R.id.lv_list);
         loadingLayout = (LoadingLayout) findViewById(R.id.loading_layout);
         orderDetailsPresenter = new OrderDetailsPresenterImpl(this);

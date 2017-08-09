@@ -25,10 +25,10 @@
 
         <ImageView
             android:padding="7dp"
-            android:id="@+id/moreBtn"
+            android:id="@+id/delete"
             android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:src="@drawable/add"
+            android:src="@drawable/delete"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
 

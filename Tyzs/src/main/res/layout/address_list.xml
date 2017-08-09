@@ -29,7 +29,7 @@
             android:id="@+id/iv_more"
             android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:src="@drawable/add"
+            android:src="@drawable/add1"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
 
@@ -40,11 +40,11 @@
            android:id="@+id/lv_ad_list"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:padding="18dip"
+           android:padding="5dip"
            android:scrollbars="none"
            android:listSelector="@drawable/list_item_selector"
            android:cacheColorHint="@android:color/transparent"
-           android:dividerHeight="18dip"
+           android:dividerHeight="2dip"
            android:divider="@null" />
        <view.lcc.tyzs.view.LoadingLayout
            android:id="@+id/loading_layout"

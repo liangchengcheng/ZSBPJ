@@ -46,7 +46,6 @@ public class AddressDeletePresenterImpl implements AddressDeletePresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
                         view.AddressDeleteSuccess("");
                     } else  {
                         view.AddressDeleteFail("获取信息失败，请稍后再试");
