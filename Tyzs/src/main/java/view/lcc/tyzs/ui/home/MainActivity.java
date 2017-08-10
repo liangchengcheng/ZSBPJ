@@ -1,10 +1,12 @@
 package view.lcc.tyzs.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,7 +19,9 @@ import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.ui.car.CarFragment;
 import view.lcc.tyzs.ui.goods.GoodsFragment;
+import view.lcc.tyzs.ui.login.LoginMainActivity;
 import view.lcc.tyzs.ui.setting.SettingFragment;
+import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.SystemBarHelper;
 import view.lcc.tyzs.view.NoScrollViewPager;
 import view.lcc.tyzs.view.navigationbar.NavigationTabBar;
@@ -35,7 +39,6 @@ public class MainActivity  extends BaseActivity {
         //SystemBarHelper.immersiveStatusBar(this);
         //SystemBarHelper.immersiveStatusBar(this, 0);
         //SystemBarHelper.setHeightAndPadding(this, mToolbar);
-
         initFragment();
         initUI();
     }
@@ -71,7 +74,14 @@ public class MainActivity  extends BaseActivity {
             @Override
             public void onStartTabSelected(NavigationTabBar.Model model, int index) {
                 Log.i("====", "开始被选择" + index);
-                if (index == 2) {}
+                if (index == 2) {
+                    String name = SharePreferenceUtil.getName();
+                    if (TextUtils.isEmpty(name)){
+                        Intent intent = new Intent(MainActivity.this, LoginMainActivity.class);
+                        startActivity(intent);
+                        viewPager.setCurrentItem(0);
+                    }
+                }
             }
 
             @Override

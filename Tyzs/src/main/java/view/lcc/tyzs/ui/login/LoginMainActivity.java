@@ -22,7 +22,7 @@ import view.lcc.tyzs.base.BaseActivity;
  */
 public class LoginMainActivity extends BaseActivity {
 
-    private String result;
+    private String result = "";
 
     public static void startLoginMainActivity(String r, Activity startActivity) {
         Intent intent = new Intent(startActivity, LoginMainActivity.class);
@@ -66,13 +66,8 @@ public class LoginMainActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getSupportFragmentManager());
-        if (!TextUtils.isEmpty(result)){
-            adapter.addFrag( FragmentLogin.newInstance(result), "登录");
-            adapter.addFrag( FragmentRegister.newInstance(result), "注册");
-        }else {
-            adapter.addFrag( FragmentLogin.newInstance(""), "登录");
-            adapter.addFrag( FragmentRegister.newInstance(""), "注册");
-        }
+        adapter.addFrag( FragmentLogin.newInstance(result), "账号登录");
+        adapter.addFrag( FragmentRegister.newInstance(result), "会员注册");
         viewPager.setAdapter(adapter);
     }
 }

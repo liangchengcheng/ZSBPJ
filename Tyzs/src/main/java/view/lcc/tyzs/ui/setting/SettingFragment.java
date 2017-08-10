@@ -73,6 +73,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Intent intent = null;
+        String name = SharePreferenceUtil.getName();
         switch (view.getId()) {
             //关于软件
             case R.id.layout_me_getseed:
@@ -91,23 +92,37 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //我的余额
             case R.id.layout_me_host_manage:
+                if (TextUtils.isEmpty(name)){
+                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    return;
+                }
                 intent = new Intent(getActivity(), JifenMainActivity.class);
                 startActivity(intent);
                 break;
             //我的订单
             case R.id.layout_me_focus:
+                if (TextUtils.isEmpty(name)){
+                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    return;
+                }
                 intent = new Intent(getActivity(), OrderMainActivity.class);
                 startActivity(intent);
                 break;
             //地址管理
             case R.id.layout_me_room_manage:
-                // TODO: 2017/8/6 判断是否登录了
+                if (TextUtils.isEmpty(name)){
+                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    return;
+                }
                 intent = new Intent(getActivity(), AddressListActivity.class);
                 startActivity(intent);
                 break;
             //修改密码
             case R.id.layout_me_history:
-                // TODO: 2017/8/6 判断是否登录了
+                if (TextUtils.isEmpty(name)){
+                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    return;
+                }
                 intent = new Intent(getActivity(), ChangePwdActivity.class);
                 startActivity(intent);
                 break;

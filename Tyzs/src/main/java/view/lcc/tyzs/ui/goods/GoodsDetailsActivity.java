@@ -166,9 +166,10 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-
+    /**
+     * 选择商品的数量和其他属性
+     */
     public void OnChoiceDialog(final int type) {
-
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog, null);
         TextView tv_price = (TextView) view.findViewById(R.id.tv_dialog_cart_price);

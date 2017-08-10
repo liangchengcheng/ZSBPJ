@@ -149,6 +149,24 @@ public class SharePreferenceUtil {
         sharedPreferences.edit().putString("aid",value).commit();
     }
 
+    //软件更新的时间
+    public static final String UPDATE_TIME = "update_time";
+
+    /**
+     * 获取软件更新的时间
+     */
+    public static String getUpdateTime() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(Frame.getAppContext());
+        return sharedPreferences.getString(UPDATE_TIME, null);
+    }
+
+    public static void setUpdateTime(String value){
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(Frame.getAppContext());
+        sharedPreferences.edit().putString(UPDATE_TIME,value).apply();
+    }
+
 
 
 }
