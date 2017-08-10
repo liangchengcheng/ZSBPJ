@@ -17,6 +17,7 @@ import view.lcc.tyzs.ui.login.LoginMainActivity;
 import view.lcc.tyzs.ui.order.OrderMainActivity;
 import view.lcc.tyzs.ui.setting.HelpActivity;
 import view.lcc.tyzs.ui.setting.JIeshaoActivity;
+import view.lcc.tyzs.ui.tizhi.TizhiActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.StatusBarUtil;
 
@@ -95,7 +96,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             //体质测试
             case R.id.tzcs:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
+                intent = new Intent(getActivity(), TizhiActivity.class);
                 startActivity(intent);
                 break;
             //注册会员
