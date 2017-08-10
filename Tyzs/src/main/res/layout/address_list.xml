@@ -29,7 +29,7 @@
             android:id="@+id/iv_more"
             android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:src="@drawable/add1"
+            android:src="@drawable/add2"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
 

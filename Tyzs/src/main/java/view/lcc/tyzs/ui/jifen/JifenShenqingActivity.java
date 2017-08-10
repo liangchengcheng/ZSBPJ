@@ -48,7 +48,7 @@ public class JifenShenqingActivity extends BaseActivity implements View.OnClickL
 
     private void initData() {
         loadingLayout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
-        List<Note> list = BaseApplication.getDaoSession().getNoteDao().queryBuilder().orderAsc(
+        List<Note> list = BaseApplication.getDaoSession().getNoteDao().queryBuilder().orderDesc(
                 NoteDao.Properties.Time
         ).list();
         if (list != null && list.size() > 0){
@@ -57,7 +57,6 @@ public class JifenShenqingActivity extends BaseActivity implements View.OnClickL
         }else {
             loadingLayout.setLoadingLayout(LoadingLayout.NO_DATA);
         }
-
     }
 
     @Override

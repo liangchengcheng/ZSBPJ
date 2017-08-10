@@ -62,7 +62,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_bz"/>
+            android:src="@drawable/ic_fzr"/>
 
         <TextView
             style="@style/ItemText"
@@ -87,7 +87,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_bz"/>
+            android:src="@drawable/ic_bhlx"/>
 
         <TextView
             style="@style/ItemText"
@@ -112,7 +112,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_bz"/>
+            android:src="@drawable/ic_bhsl"/>
 
         <TextView
             style="@style/ItemText"
@@ -138,7 +138,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_bz"/>
+            android:src="@drawable/ic_ld"/>
 
         <TextView
             style="@style/ItemText"

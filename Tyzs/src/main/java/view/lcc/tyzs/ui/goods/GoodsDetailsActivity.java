@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +26,7 @@ import view.lcc.tyzs.bean.ShoppingCarBeanDao;
 import view.lcc.tyzs.frame.ImageManager;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
-import view.lcc.tyzs.view.GoodsBuyDialog;
-import view.lcc.tyzs.view.GoodsToCarDialog;
+import view.lcc.tyzs.view.NumEditText;
 import view.lcc.tyzs.view.SuperCustomToast;
 
 /**
@@ -34,7 +35,7 @@ import view.lcc.tyzs.view.SuperCustomToast;
  * Date:         |08-01 22:02
  * Description:  |
  */
-public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, GoodsToCarDialog.NumChangeListener, GoodsBuyDialog.NumBuyListener {
+public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener {
     //显示的图片
     private ImageView iv_head_image;
     //名字
@@ -95,20 +96,15 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             //添加购物车
             case R.id.add_car:
-                GoodsToCarDialog goodsToCarDialog = new GoodsToCarDialog(GoodsDetailsActivity.this, "1", shoppingBean);
-                goodsToCarDialog.setOnNumChangeListener(this);
-                goodsToCarDialog.show();
+                OnChoiceDialog(0);
                 break;
             //购买
             case R.id.add_buy:
-                GoodsBuyDialog goodsBuyDialog = new GoodsBuyDialog(GoodsDetailsActivity.this, num, shoppingBean);
-                goodsBuyDialog.setNumBuyListener(this);
-                goodsBuyDialog.show();
+                OnChoiceDialog(1);
                 break;
         }
     }
 
-    @Override
     public void onNumChange(String num) {
         if (!TextUtils.isEmpty(num)) {
             ShoppingCarBean shoppingCarBean = new ShoppingCarBean();
@@ -128,7 +124,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             if (list != null && list.size() > 0) {
                 String number = list.get(0).getNumber();
                 int n = Integer.parseInt(number) + Integer.parseInt(num);
-                shoppingCarBean.setNumber(n+"");
+                shoppingCarBean.setNumber(n + "");
             }
             BaseApplication.getDaoSession().getShoppingCarBeanDao().insertOrReplace(shoppingCarBean);
             showMsg();
@@ -141,11 +137,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         toasts.show("添加购物车成功", R.layout.choice_toast_item, R.id.content_toast, GoodsDetailsActivity.this);
     }
 
-    @Override
     public void buy(String num) {
         if (!TextUtils.isEmpty(num)) {
             this.num = num;
-
             //判断用户是否登入
             String name = SharePreferenceUtil.getName();
             if (TextUtils.isEmpty(name)) {
@@ -170,5 +164,40 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             intent.putExtra("number", num);
             startActivity(intent);
         }
+    }
+
+
+    public void OnChoiceDialog(final int type) {
+
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog, null);
+        TextView tv_price = (TextView) view.findViewById(R.id.tv_dialog_cart_price);
+        TextView name = (TextView) view.findViewById(R.id.name);
+        final NumEditText net_numedit = (NumEditText)view.findViewById(R.id.net_dialog_count);
+
+        net_numedit.setNum(Integer.parseInt(num));
+        name.setText(shoppingBean.getGoodName());
+
+        String rate = SharePreferenceUtil.getRate();
+        if (TextUtils.isEmpty(rate)) {
+            tv_price.setText(shoppingBean.getGoodPrice());
+        } else {
+            double sum = Double.parseDouble(shoppingBean.getGoodCost()) + Double.parseDouble(shoppingBean.getGoodProfit()) * Double.parseDouble(rate);
+            DecimalFormat df = new DecimalFormat("######0.00");
+            tv_price.setText(df.format(sum) + "元");
+        }
+        view.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int s = net_numedit.getNum();
+                if (type == 0) {
+                    onNumChange(s + "");
+                } else {
+                    buy(s + "");
+                }
+            }
+        });
+        dialog.setContentView(view);
+        dialog.show();
     }
 }

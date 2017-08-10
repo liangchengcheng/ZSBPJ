@@ -24,7 +24,7 @@ import view.lcc.tyzs.utils.SharePreferenceUtil;
 public class GoodsBuyDialog extends Dialog implements View.OnClickListener {
     private TextView tv_price;
     private TextView name;
-    private TextView tv_count;
+
 
     private NumEditText net_numedit;
 
@@ -55,7 +55,6 @@ public class GoodsBuyDialog extends Dialog implements View.OnClickListener {
 
         tv_price = (TextView) findViewById(R.id.tv_dialog_cart_price);
         name = (TextView) findViewById(R.id.name);
-        tv_count = (TextView) findViewById(R.id.tv_dialog_cart_count);
         net_numedit = (NumEditText) findViewById(R.id.net_dialog_count);
 
         setCanceledOnTouchOutside(false);
@@ -63,7 +62,6 @@ public class GoodsBuyDialog extends Dialog implements View.OnClickListener {
 
         net_numedit.setNum(Integer.parseInt(count));
         name.setText(shoppingBean.getGoodName());
-        tv_count.setText(String.valueOf(count));
 
         String rate = SharePreferenceUtil.getRate();
         if (TextUtils.isEmpty(rate)) {
@@ -77,7 +75,6 @@ public class GoodsBuyDialog extends Dialog implements View.OnClickListener {
             @Override
             public void numChanged(int num) {
                 count = num + "";
-                tv_count.setText(String.valueOf(num));
             }
         });
 

@@ -95,7 +95,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/codeicon" />
+            android:src="@drawable/name2" />
 
         <view.lcc.tyzs.view.EditTextWithDel
             android:id="@+id/username"
@@ -130,7 +130,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/codeicon" />
+            android:src="@drawable/sfz2" />
 
         <view.lcc.tyzs.view.EditTextWithDel
             android:id="@+id/userid"
@@ -159,7 +159,7 @@
         android:gravity="center"
         widget:paper_color="?attr/colorPrimary"
         widget:paper_corner_radius="19dp"
-        widget:paper_text="下一步"
+        widget:paper_text="提交注册信息"
         widget:paper_text_color="@color/white" />
 
 </LinearLayout>

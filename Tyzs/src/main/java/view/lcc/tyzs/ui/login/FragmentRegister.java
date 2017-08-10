@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 
 import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseFragment;
+import view.lcc.tyzs.frame.Frame;
 import view.lcc.tyzs.mvp.presenter.LoginPresenter;
 import view.lcc.tyzs.mvp.presenter.RegisterPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.LoginPresenterImpl;
@@ -39,7 +41,7 @@ import view.lcc.tyzs.view.PaperButton;
  * Date:         2017年04月28日16:24:47
  * Description:  注册相关的界面
  */
-public class FragmentRegister extends Fragment implements RegisterView,LoginView {
+public class FragmentRegister extends BaseFragment implements RegisterView,LoginView {
     EditTextWithDel userpassword;
     EditTextWithDel userphone;
     EditTextWithDel username;
@@ -150,8 +152,6 @@ public class FragmentRegister extends Fragment implements RegisterView,LoginView
         });
     }
 
-
-
     private void initView() {
         //下一步的点击事件
         nextBt.setOnClickListener(new View.OnClickListener() {
@@ -202,11 +202,14 @@ public class FragmentRegister extends Fragment implements RegisterView,LoginView
     @Override
     public void RegisterLoading() {
         showSnackbar(root_view, "提示：正在注册账号,请稍后");
+        createDialog(R.string.send_info);
     }
 
     @Override
     public void RegisterSuccess(String msg) {
         //loginPresenter.login(phone,password);
+        closeDialog();
+        Frame.getInstance().toastPrompt("提交注册信息成功，等待管理员审核...");
         EventBus.getDefault().post(0x03);
         getActivity().finish();
     }
@@ -214,6 +217,7 @@ public class FragmentRegister extends Fragment implements RegisterView,LoginView
     @Override
     public void RegisterFail(String msg) {
         //注册失败
+        closeDialog();
         showSnackbar(root_view, "提示：注册账号失败");
     }
 
@@ -243,7 +247,6 @@ public class FragmentRegister extends Fragment implements RegisterView,LoginView
         //网络错误
         showSnackbar(root_view, "提示：网络错误，请稍后");
     }
-
 
     public void showSnackbar(View view, String string) {
         Snackbar.make(view, string, Snackbar.LENGTH_LONG).show();

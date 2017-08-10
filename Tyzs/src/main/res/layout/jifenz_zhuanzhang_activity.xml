@@ -62,7 +62,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_bz"/>
+            android:src="@drawable/ic_count"/>
 
         <TextView
             style="@style/ItemText"

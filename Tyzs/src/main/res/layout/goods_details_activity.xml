@@ -10,40 +10,41 @@
         android:scrollbars="vertical">
 
         <LinearLayout
-            android:paddingBottom="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="60dp">
 
-           <FrameLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <ImageView
-                   android:id="@+id/iv_head_image"
-                   android:layout_width="match_parent"
-                   android:layout_height="250dp"
-                   android:scaleType="centerCrop" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-               <ImageButton
-                   android:layout_marginLeft="10dp"
-                   android:layout_marginTop="10dp"
-                   android:background="@drawable/icon_back"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content" />
-           </FrameLayout>
+                <ImageView
+                    android:id="@+id/iv_head_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/icon_back" />
+            </FrameLayout>
 
 
             <TextView
-                android:background="#eee"
                 android:layout_width="match_parent"
-                android:layout_height="1dp" />
+                android:layout_height="1dp"
+                android:background="#eee" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -54,24 +55,20 @@
                     android:layout_marginTop="4dp"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:paddingLeft="10dp"
                     android:text="仙人余粮"
                     android:textColor="#000"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
 
                 <TextView
-                    android:layout_marginTop="10dp"
-                    android:background="#eee"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp" />
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#eee" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
@@ -81,6 +78,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -88,6 +86,7 @@
                             android:textColor="#000" />
 
                         <TextView
+                            android:textSize="16sp"
                             android:id="@+id/tv_prince"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -103,6 +102,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -110,7 +110,7 @@
                             android:textColor="#000" />
 
                         <TextView
-
+                            android:textSize="16sp"
                             android:id="@+id/tv_prince_vip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -123,33 +123,32 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_marginTop="10dp"
-                    android:background="#eee"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp" />
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#eee" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="16sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="商品功能:"
-                        android:textColor="@color/red" />
+                        android:text="商品功能"
+                        android:textColor="@color/black" />
 
                     <TextView
+                        android:textSize="14sp"
                         android:id="@+id/tv_decription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="主要治疗气郁质 发病倾向：心悸怔忡、目赤、眼干、乳房胀痛、郁证、脏躁、百合病、梅核气、不寐、胁痛等疾病。"
-                        android:textColor="#000" />
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -157,14 +156,16 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
         <TextView
-            android:background="#eee"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="1dp"
+            android:background="#eee" />
+
         <LinearLayout
             android:id="@+id/detail_buy_board"
             android:layout_width="match_parent"
@@ -176,6 +177,38 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:padding="3dp"
+                            android:layout_width="22dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/car4" />
+                        <TextView
+                            android:layout_gravity="right"
+                            android:gravity="center"
+                            android:textColor="#fff"
+                            android:background="@drawable/shape_circle_red"
+                            android:textSize="10sp"
+                            android:layout_width="wrap_content"
+                            android:text="3"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="购物车"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </RelativeLayout>
 
             <LinearLayout
@@ -210,7 +243,7 @@
 
 
         </LinearLayout>
-        
+
 
     </LinearLayout>
 </FrameLayout>
