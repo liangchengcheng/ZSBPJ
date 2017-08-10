@@ -92,6 +92,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         tv_order_phone = (TextView) findViewById(R.id.tv_order_phone);
         tv_order_address = (TextView) findViewById(R.id.tv_order_address);
         findViewById(R.id.btn_put_order).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
         //获取上个页面传递过来的页面信息
         orderInfos = (ArrayList<OrderInfo>) getIntent().getSerializableExtra("data");
@@ -203,8 +204,10 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 maps.put("creatTime", SingleTrueUtils.singlechou(System.currentTimeMillis()));
                 maps.put("orderinfo", orderinfo);
                 String content = gson.toJson(maps);
-
                 orderConfirmPresenter.orderConfirm(Md5Utils.encode(content).toUpperCase(), content);
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

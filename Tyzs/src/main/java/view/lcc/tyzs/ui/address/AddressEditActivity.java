@@ -114,6 +114,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.ll_country).setOnClickListener(this);
         findViewById(R.id.btn_edit_ok).setOnClickListener(this);
         findViewById(R.id.delete).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
         bean = (Address) getIntent().getSerializableExtra("bean");
         if (bean != null) {
@@ -406,6 +407,9 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                 saveData();
                 break;
             case R.id.delete:
+                deleteAddress();
+                break;
+            case R.id.iv_back:
                 deleteAddress();
                 break;
         }

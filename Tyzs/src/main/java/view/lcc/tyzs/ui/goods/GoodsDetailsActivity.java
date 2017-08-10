@@ -72,6 +72,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
         findViewById(R.id.add_car).setOnClickListener(this);
         findViewById(R.id.add_buy).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
         shoppingBean = (ShoppingBean) getIntent().getSerializableExtra("bean");
         ImageManager.getInstance().loadUrlImage(GoodsDetailsActivity.this, AppConstants.PIC_URL + shoppingBean.getGoodImgUrl(), iv_head_image);
@@ -101,6 +102,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             //购买
             case R.id.add_buy:
                 OnChoiceDialog(1);
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

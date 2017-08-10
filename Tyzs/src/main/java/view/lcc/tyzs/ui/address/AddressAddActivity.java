@@ -105,6 +105,7 @@ public class AddressAddActivity extends BaseActivity implements AddressAddView, 
         findViewById(R.id.ll_city).setOnClickListener(this);
         findViewById(R.id.ll_country).setOnClickListener(this);
         findViewById(R.id.btn_edit_ok).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
         InitData();
     }
@@ -376,6 +377,9 @@ public class AddressAddActivity extends BaseActivity implements AddressAddView, 
                 break;
             case R.id.btn_edit_ok:
                 saveData();
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }
