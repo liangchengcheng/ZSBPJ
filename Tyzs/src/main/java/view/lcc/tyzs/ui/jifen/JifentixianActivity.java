@@ -52,6 +52,7 @@ public class JifentixianActivity extends BaseActivity implements JifenTiXianView
         et_gold_backcardid = (EditText) findViewById(R.id.et_gold_backcardid);
         et_gold_bank = (EditText) findViewById(R.id.et_gold_bank);
         findViewById(R.id.btn_edit_ok).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
 
     @Override
@@ -122,6 +123,9 @@ public class JifentixianActivity extends BaseActivity implements JifenTiXianView
                 } else {
                     Frame.getInstance().toastPrompt("信息不完整");
                 }
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

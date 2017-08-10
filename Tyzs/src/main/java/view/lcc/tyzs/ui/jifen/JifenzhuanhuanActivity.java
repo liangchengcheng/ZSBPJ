@@ -40,6 +40,7 @@ public class JifenzhuanhuanActivity extends BaseActivity implements JifenZhuanHu
         jifenZhuanHuanPresenter = new JifenZhuanHuanPresenterImpl(this);
         et_gold_value = (EditText) findViewById(R.id.et_gold_value);
         findViewById(R.id.btn_edit_ok).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
     }
 
     @Override
@@ -102,6 +103,9 @@ public class JifenzhuanhuanActivity extends BaseActivity implements JifenZhuanHu
                 } else {
                     Frame.getInstance().toastPrompt("转换积分值不能为空");
                 }
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

@@ -48,8 +48,13 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
         tv_balance = (TextView) findViewById(R.id.tv_balance);
         tv_balance1 = (TextView) findViewById(R.id.tv_balance1);
 
-        // TODO: 2017/8/4 返回按钮
         jifenYuePresenter.jifenYue();
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

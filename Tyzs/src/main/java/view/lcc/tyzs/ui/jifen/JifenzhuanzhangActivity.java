@@ -41,6 +41,7 @@ public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZ
         et_gold_name = (EditText) findViewById(R.id.et_gold_name);
         et_gold_value = (EditText) findViewById(R.id.et_gold_value);
         findViewById(R.id.btn_edit_ok).setOnClickListener(this);
+        findViewById(R.id.iv_back).setOnClickListener(this);
 
         jifenZhuanZhangPresenter = new JifenZhuanZhangPresenterImpl(this);
     }
@@ -98,6 +99,9 @@ public class JifenzhuanzhangActivity extends BaseActivity implements JifenZhuanZ
                 } else {
                     Frame.getInstance().toastPrompt("转账信息不能为空");
                 }
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

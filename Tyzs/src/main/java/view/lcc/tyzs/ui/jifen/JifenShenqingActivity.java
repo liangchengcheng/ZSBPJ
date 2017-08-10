@@ -13,6 +13,7 @@ import view.lcc.tyzs.adapter.JifenshenqingAdapter;
 import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.base.BaseApplication;
 import view.lcc.tyzs.bean.Note;
+import view.lcc.tyzs.bean.NoteDao;
 import view.lcc.tyzs.view.LoadingLayout;
 
 /**
@@ -37,11 +38,19 @@ public class JifenShenqingActivity extends BaseActivity implements View.OnClickL
         jifenshenqingAdapter = new JifenshenqingAdapter(JifenShenqingActivity.this);
         listview.setAdapter(jifenshenqingAdapter);
         initData();
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
         loadingLayout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
-        List<Note> list = BaseApplication.getDaoSession().getNoteDao().queryBuilder().list();
+        List<Note> list = BaseApplication.getDaoSession().getNoteDao().queryBuilder().orderAsc(
+                NoteDao.Properties.Time
+        ).list();
         if (list != null && list.size() > 0){
             jifenshenqingAdapter.addDate(list);
             loadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);

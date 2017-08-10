@@ -21,7 +21,7 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_gravity="center"
-            android:text="积分转换"
+            android:text="积分转账"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
