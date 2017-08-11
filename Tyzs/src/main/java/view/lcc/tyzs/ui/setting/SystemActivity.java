@@ -28,8 +28,6 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.system_layout);
 
-        TextView code = (TextView) findViewById(R.id.version_tv);
-        code.setText("v"+getVerName(SystemActivity.this));
         toolBar = findViewById(R.id.toolBar);
 
         findViewById(R.id.iv_back).setOnClickListener(this);
@@ -50,22 +48,13 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
             case R.id.checkUpgrade:
-
+                intent = new Intent(SystemActivity.this,KefuActivity.class);
+                startActivity(intent);
                 break;
             case R.id.cacheLayout:
                 Frame.getInstance().toastPrompt("清除缓存成功");
                 break;
         }
-    }
-
-    public static String getVerName(Context context) {
-        String verName = "";
-        try {
-            verName = context.getPackageManager().getPackageInfo("com.hdsx.dtjc", 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return verName;
     }
 
     public void showSnackbar(View view, String string) {
