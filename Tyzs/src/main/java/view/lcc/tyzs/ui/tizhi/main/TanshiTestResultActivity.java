@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseActivity;
 
 
 /**
@@ -14,7 +15,7 @@ import view.lcc.tyzs.R;
  * Date:         |05-16 21:35
  * Description:  |
  */
-public class TanshiTestResultActivity extends AppCompatActivity {
+public class TanshiTestResultActivity extends BaseActivity {
 
     private TextView tv_tz;
 

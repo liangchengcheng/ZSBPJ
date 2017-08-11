@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.base.BaseApplication;
 import view.lcc.tyzs.bean.UserInfo;
 
@@ -16,7 +17,7 @@ import view.lcc.tyzs.bean.UserInfo;
  * Date:         |05-13 19:40
  * Description:  |
  */
-public class YangXuActivity extends AppCompatActivity implements View.OnClickListener{
+public class YangXuActivity extends BaseActivity implements View.OnClickListener{
     private CheckBox cb_1;
     private CheckBox cb_2;
     private CheckBox cb_3;

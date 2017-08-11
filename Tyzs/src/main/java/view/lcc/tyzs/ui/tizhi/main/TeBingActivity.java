@@ -2,16 +2,16 @@ package view.lcc.tyzs.ui.tizhi.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.base.BaseApplication;
 import view.lcc.tyzs.bean.UserInfo;
-import view.lcc.tyzs.ui.tizhi.ResultActivity;
+import view.lcc.tyzs.ui.tizhi.result.ResultActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.TimeUtils;
 
@@ -21,7 +21,7 @@ import view.lcc.tyzs.utils.TimeUtils;
  * Date:         |05-13 19:40
  * Description:  |
  */
-public class TeBingActivity extends AppCompatActivity implements View.OnClickListener{
+public class TeBingActivity extends BaseActivity implements View.OnClickListener{
     private CheckBox cb_1;
     private CheckBox cb_2;
     private CheckBox cb_3;

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseActivity;
 
 
 /**
@@ -15,7 +16,7 @@ import view.lcc.tyzs.R;
  * Date:         |05-16 07:24
  * Description:  |
  */
-public class TanshiTestMain2Activity extends AppCompatActivity implements View.OnClickListener{
+public class TanshiTestMain2Activity extends BaseActivity implements View.OnClickListener{
     private CheckBox cb_1;
     private CheckBox cb_2;
     private CheckBox cb_3;

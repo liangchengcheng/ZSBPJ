@@ -1,4 +1,4 @@
-package view.lcc.tyzs.ui.tizhi;
+package view.lcc.tyzs.ui.tizhi.result;
 
 import android.content.Intent;
 import android.graphics.Color;

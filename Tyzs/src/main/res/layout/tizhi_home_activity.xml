@@ -114,112 +114,6 @@
             android:paddingRight="10dp"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/mszb"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/medical_icon"
-                        android:scaleType="centerCrop" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="体质测试"
-                        android:textColor="#585858"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:id="@+id/msjl"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/sum_pie_icon"
-                        android:scaleType="centerCrop" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="痰湿与体重控制检测"
-                        android:textColor="#585858"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/msjq"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/book_icon"
-                        android:scaleType="centerCrop" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="测试记录"
-                        android:textColor="#585858"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/mszz"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/education_icon"
-                        android:scaleType="centerCrop" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="健康知识"
-                        android:textColor="#585858"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
             <TextView
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -231,6 +125,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:id="@+id/mszb"
                 android:elevation="5dp"
                 android:layout_margin="8dp"
                 attribute:cardCornerRadius="3dp">
@@ -257,20 +152,22 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:text="体质检测"
-                            android:textColor="#212121"/>
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textColor="#AA212121"
-                            android:text="使用体质检测和痰湿与体重控制检测功能测试自己健康"/>
+                            android:text="使用体质检测功能测试自己体质和调理方案"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:id="@+id/msjl"
                 android:elevation="5dp"
                 android:layout_margin="8dp"
                 attribute:cardCornerRadius="3dp">
@@ -296,7 +193,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:text="体质检测"
+                            android:text="痰湿与体重控制检测"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="#AA212121"
+                            android:text="使用痰湿与体重控制检测功能测试自己健康"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/msjq"
+                android:elevation="5dp"
+                android:layout_margin="8dp"
+                attribute:cardCornerRadius="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimaryDark" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="历史测试记录"
                             android:textColor="#212121"/>
 
                         <TextView
@@ -304,10 +243,11 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textColor="#AA212121"
-                            android:text="使用体质检测和痰湿与体重控制检测功能测试自己健康"/>
+                            android:text="查看历史的测试记录和调理方案"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -348,91 +288,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
-
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="60dp"-->
-                <!--android:elevation="5dp"-->
-                <!--android:layout_margin="8dp"-->
-                <!--attribute:cardCornerRadius="3dp">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<View-->
-                        <!--android:layout_width="5dp"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:background="@color/colorPrimaryDark" />-->
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:gravity="center_vertical"-->
-                        <!--android:orientation="vertical">-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textSize="14sp"-->
-                            <!--android:text="Diagonalify"-->
-                            <!--android:textColor="#212121"/>-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textSize="12sp"-->
-                            <!--android:textColor="#AA212121"-->
-                            <!--android:text="Create super easy diagonal cut on image view"/>-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="60dp"-->
-                <!--android:elevation="5dp"-->
-                <!--android:layout_margin="8dp"-->
-                <!--attribute:cardCornerRadius="3dp">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<View-->
-                        <!--android:layout_width="5dp"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:background="@color/colorPrimaryDark" />-->
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:gravity="center_vertical"-->
-                        <!--android:orientation="vertical">-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textSize="14sp"-->
-                            <!--android:text="Perfecto"-->
-                            <!--android:textColor="#212121"/>-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textSize="12sp"-->
-                            <!--android:textColor="#AA212121"-->
-                            <!--android:text="Http connection made easy"/>-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
-
         </LinearLayout>
     </ScrollView>
 

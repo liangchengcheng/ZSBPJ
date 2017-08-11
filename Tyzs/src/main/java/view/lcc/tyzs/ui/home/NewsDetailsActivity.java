@@ -1,4 +1,4 @@
-package view.lcc.tyzs.ui.tizhi;
+package view.lcc.tyzs.ui.home;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -20,7 +20,7 @@ import view.lcc.tyzs.utils.SystemBarHelper;
  * Date:         |05-13 18:30
  * Description:  |
  */
-public class DataDetailsActivity extends AppCompatActivity {
+public class NewsDetailsActivity extends AppCompatActivity {
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
 
     private View tv_t;

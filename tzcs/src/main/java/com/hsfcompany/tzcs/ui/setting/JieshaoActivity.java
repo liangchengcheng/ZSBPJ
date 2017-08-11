@@ -37,7 +37,6 @@ import libs.widget.VerticalTransitionLayout;
  */
 public class JieshaoActivity extends AppCompatActivity{
 
-
     public static void startJieshaoActivity(Activity startingActivity) {
         Intent intent = new Intent(startingActivity, JieshaoActivity.class);
         startingActivity.startActivity(intent);
