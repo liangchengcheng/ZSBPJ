@@ -56,5 +56,6 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile 'com.android.support:palette-v7:25.0.0'
+
 }
 

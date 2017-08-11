@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.tv_order).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
         view.findViewById(R.id.ll_change_zy).setOnClickListener(this);
+        view.findViewById(R.id.llAdvertiseBoard).setOnClickListener(this);
         //StatusBarUtil.setStatusBarTranslucent(getActivity(), false);
         return view;
     }
@@ -91,10 +92,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
 
-
-
-
             //体质测试
+            case R.id.llAdvertiseBoard:
             case R.id.tzcs:
                 intent = new Intent(getActivity(), TizhiActivity.class);
                 startActivity(intent);
