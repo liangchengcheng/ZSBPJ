@@ -14,6 +14,7 @@ import view.lcc.tyzs.mvp.presenter.PersonNumGetPresenter;
 import view.lcc.tyzs.mvp.presenter.ShopCarGetPresenter;
 import view.lcc.tyzs.mvp.view.PersonNumGetView;
 import view.lcc.tyzs.mvp.view.ShopCarGetView;
+import view.lcc.tyzs.utils.ErrorLogUtils;
 
 /**
  * Author:       |梁铖城
@@ -46,12 +47,12 @@ public class PersonNumGetPresenterImpl implements PersonNumGetPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-                        view.PersonNumGetSuccess("");
+                        view.PersonNumGetSuccess(response);
                     } else  {
-                        view.PersonNumGetFail("获取地址信息失败，请稍后再试");
+                        view.PersonNumGetFail(ErrorLogUtils.SystemError(status));
                     }
                 } catch (Exception e) {
-                    view.PersonNumGetFail("获取地址信息失败");
+                    view.PersonNumGetFail("获取信息失败，请稍后再试");
                     e.printStackTrace();
                 }
             }
