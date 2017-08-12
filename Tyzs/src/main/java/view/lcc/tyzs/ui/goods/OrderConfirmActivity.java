@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -97,6 +99,8 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         //获取上个页面传递过来的页面信息
         orderInfos = (ArrayList<OrderInfo>) getIntent().getSerializableExtra("data");
         if (orderInfos != null) {
+            int height = 90 * orderInfos.size();
+            lv_products_list.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
             OrderConfirmAdapter adapter = new OrderConfirmAdapter(orderInfos, OrderConfirmActivity.this);
             lv_products_list.setAdapter(adapter);
         }
@@ -239,9 +243,9 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 }
             }
 
-            tv_yue.setText("积分:" + point);
             // TODO: 2017/8/7 自己加的
-            tv_jf.setText("积分:" + point);
+            tv_yue.setText(point);
+            tv_jf.setText(point);
             if (Double.parseDouble(point) < prince) {
                 DialogUtils.showTip(OrderConfirmActivity.this,"充值积分余额不足，请充值");
             }

@@ -273,6 +273,11 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                         infos.add(info);
                     }
                 }
+
+                if (infos.size() < 1){
+                    Frame.getInstance().toastPrompt("请选择结算的商品");
+                    return;
+                }
                 //删除已经购买的了（其实这个地方不合理，应该是购买成功了再删除）
                 ArrayList<ShoppingCarBean> is = new ArrayList<ShoppingCarBean>();
                 for (ShoppingCarBean bean : adapter.beans) {
@@ -294,9 +299,10 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     s.setNumber(shoppingCarBeanList.get(i).getNumber());
                     data_list.add(s);
                 }
-
-                Gson gsons = new Gson();
-                shopCarAddPresenter.shopCarAdd(name, gsons.toJson(data_list));
+                if (data_list.size() > 0){
+                    Gson gsons = new Gson();
+                    shopCarAddPresenter.shopCarAdd(name, gsons.toJson(data_list));
+                }
                 Intent intent = new Intent(getActivity(), OrderConfirmActivity.class);
                 intent.putExtra("data", infos);
                 intent.putExtra("action", "car");
