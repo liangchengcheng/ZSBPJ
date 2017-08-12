@@ -199,7 +199,17 @@
                         android:layout_marginLeft="15dip"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="如果您账户中的积分不足，请联系客服充值，客服电话4006-0535-00或17705353966"
+                        android:text="购买产品使用积分，(1积分抵1元) 。如果您账户中的积分不足，请联系客服充值"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="客服电话4006-0535-00或17705353966"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -314,6 +324,7 @@
                 android:background="#eee" />
 
             <LinearLayout
+                android:paddingLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

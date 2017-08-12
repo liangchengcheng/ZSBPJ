@@ -239,9 +239,9 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 }
             }
 
-            tv_yue.setText("积分:" + point + "(1积分抵1元)");
+            tv_yue.setText("积分:" + point);
             // TODO: 2017/8/7 自己加的
-            tv_jf.setText("积分:" + point + "(1积分抵1元)");
+            tv_jf.setText("积分:" + point);
             if (Double.parseDouble(point) < prince) {
                 DialogUtils.showTip(OrderConfirmActivity.this,"充值积分余额不足，请充值");
             }
@@ -280,10 +280,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 tv_order_name = (TextView) findViewById(R.id.tv_order_name);
                 tv_order_phone = (TextView) findViewById(R.id.tv_order_phone);
                 tv_order_address = (TextView) findViewById(R.id.tv_order_address);
-                /*sp.edit().putString("dizhis", tv_order_address.getText().toString())
-                        .putString("phones", tv_order_phone.getText().toString())
-                        .putString("names", tv_order_name.getText().toString())
-                        .putString("princes", df.format(prince - Double.parseDouble(point))).commit();*/
                 //说明他的验证码是正确的
                 JSONObject jsonObject1 = new JSONObject(content);
                 String orderinfo = jsonObject1.getString("orderinfo");
@@ -294,6 +290,8 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 if (!orderTotal.equals(prince + "")) {
                     prince = Double.parseDouble(orderTotal);
                 }
+
+
                 Intent intent = new Intent(OrderConfirmActivity.this, OrderResultActivity.class);
                 intent.putExtra("point", point);
                 //订单id
@@ -304,6 +302,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 //实际支付
                 intent.putExtra("princes", df.format(prince - Double.parseDouble(point)));
                 startActivity(intent);
+                finish();
             } else {
                 Frame.getInstance().toastPrompt("订单可能被篡改了");
             }
@@ -328,6 +327,5 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         closeDialog();
         Frame.getInstance().toastPrompt("网络不可用");
     }
-
 
 }

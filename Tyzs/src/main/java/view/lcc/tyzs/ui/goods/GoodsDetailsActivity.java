@@ -26,6 +26,7 @@ import view.lcc.tyzs.bean.ShoppingCarBeanDao;
 import view.lcc.tyzs.frame.ImageManager;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
+import view.lcc.tyzs.view.NumChangedListener;
 import view.lcc.tyzs.view.NumEditText;
 import view.lcc.tyzs.view.SuperCustomToast;
 
@@ -58,6 +59,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     private OrderInfo info = new OrderInfo();
     //数量
     private String num = "1";
+    //购物车的数量
+    private TextView car_num;
+    DecimalFormat df = new DecimalFormat("######0.00");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         tv_prince = (TextView) findViewById(R.id.tv_prince);
         tv_prince_vip = (TextView) findViewById(R.id.tv_prince_vip);
         tv_decription = (TextView) findViewById(R.id.tv_decription);
+        car_num = (TextView) findViewById(R.id.car_num);
 
         findViewById(R.id.add_car).setOnClickListener(this);
         findViewById(R.id.add_buy).setOnClickListener(this);
@@ -90,6 +95,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         } else {
             tv_prince_vip.setText("登录后显示");
         }
+        setCarNum();
     }
 
     @Override
@@ -109,6 +115,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    //添加购物车相关
     public void onNumChange(String num) {
         if (!TextUtils.isEmpty(num)) {
             ShoppingCarBean shoppingCarBean = new ShoppingCarBean();
@@ -132,6 +139,8 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             }
             BaseApplication.getDaoSession().getShoppingCarBeanDao().insertOrReplace(shoppingCarBean);
             showMsg();
+            //添加成功就重新刷新购物车的数量
+            setCarNum();
         }
     }
 
@@ -153,7 +162,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
             orderlist = new ArrayList<>();
             //此处需要再次判断
-            if (TextUtils.isEmpty(rate)) {
+            if (!TextUtils.isEmpty(rate)) {
                 info.setTrueprice(total_prince);
             } else {
                 info.setTrueprice(shoppingBean.getGoodPrice());
@@ -167,18 +176,21 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             intent.putExtra("data", orderlist);
             intent.putExtra("number", num);
             startActivity(intent);
+            finish();
         }
     }
 
     /**
      * 选择商品的数量和其他属性
      */
+    private double danjia;
+
     public void OnChoiceDialog(final int type) {
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = LayoutInflater.from(this).inflate(R.layout.sheet_dialog, null);
-        TextView tv_price = (TextView) view.findViewById(R.id.tv_dialog_cart_price);
+        final TextView tv_price = (TextView) view.findViewById(R.id.tv_dialog_cart_price);
         TextView name = (TextView) view.findViewById(R.id.name);
-        final NumEditText net_numedit = (NumEditText)view.findViewById(R.id.net_dialog_count);
+        final NumEditText net_numedit = (NumEditText) view.findViewById(R.id.net_dialog_count);
 
         net_numedit.setNum(Integer.parseInt(num));
         name.setText(shoppingBean.getGoodName());
@@ -186,11 +198,21 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         String rate = SharePreferenceUtil.getRate();
         if (TextUtils.isEmpty(rate)) {
             tv_price.setText(shoppingBean.getGoodPrice());
+            danjia = Double.parseDouble(shoppingBean.getGoodPrice());
         } else {
             double sum = Double.parseDouble(shoppingBean.getGoodCost()) + Double.parseDouble(shoppingBean.getGoodProfit()) * Double.parseDouble(rate);
-            DecimalFormat df = new DecimalFormat("######0.00");
             tv_price.setText(df.format(sum) + "元");
+            danjia = sum;
         }
+
+        net_numedit.setNumChangedListener(new NumChangedListener() {
+            @Override
+            public void numChanged(int num) {
+                double p = num * danjia;
+                tv_price.setText(df.format(p) + "元");
+            }
+        });
+
         view.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,9 +222,21 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
                 } else {
                     buy(s + "");
                 }
+                dialog.dismiss();
             }
         });
         dialog.setContentView(view);
         dialog.show();
+    }
+
+    private void setCarNum() {
+        if (shoppingBean != null) {
+            List<ShoppingCarBean> list = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().where(
+                    ShoppingCarBeanDao.Properties.GID.eq(shoppingBean.getGoodID())
+            ).list();
+            if (list != null && list.size() > 0) {
+                car_num.setText(list.get(0).getNumber());
+            }
+        }
     }
 }

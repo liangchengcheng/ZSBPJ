@@ -23,7 +23,7 @@
             android:layout_gravity="right"
             android:textColor="@color/red"
             android:layout_width="match_parent"
-            android:text="120元X3件"
+            android:text=""
             android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

@@ -56,6 +56,7 @@ public class OrderResultActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(OrderResultActivity.this, OrderMainActivity.class));
+                finish();
             }
         });
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
