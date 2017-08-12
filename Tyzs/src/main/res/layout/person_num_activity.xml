@@ -25,18 +25,53 @@
     </android.support.v7.widget.Toolbar>
 
 
-   <android.support.v7.widget.CardView
-       android:layout_width="match_parent"
-       android:background="@color/colorPrimary"
-       android:layout_height="200dp">
-      <LinearLayout
-          android:background="@color/colorPrimary"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
-          <view.lcc.tyzs.view.scrollnumber.MultiScrollNumber
-              android:id="@+id/scroll_number"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
-      </LinearLayout>
-   </android.support.v7.widget.CardView>
+ <FrameLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+     <android.support.v7.widget.CardView
+         android:layout_width="match_parent"
+         android:background="@color/colorPrimary"
+         android:layout_height="wrap_content">
+         <RelativeLayout
+             android:padding="50dp"
+             android:orientation="vertical"
+             android:background="@color/colorPrimary"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/ll_num"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="111"
+                    android:id="@+id/tv_num"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="68sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="个"
+                    android:textColor="#FFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+             <TextView
+                 android:layout_marginTop="20dp"
+                 android:layout_below="@+id/ll_num"
+                 android:gravity="center"
+                 android:textColor="#fff"
+                 android:text="*当前你推荐的会员人数"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
+         </RelativeLayout>
+     </android.support.v7.widget.CardView>
+
+
+ </FrameLayout>
 </LinearLayout>
