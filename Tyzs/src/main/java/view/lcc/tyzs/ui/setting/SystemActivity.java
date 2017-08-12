@@ -13,6 +13,7 @@ import android.widget.TextView;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.frame.Frame;
+import view.lcc.tyzs.utils.SharePreferenceUtil;
 
 /**
  * Author:       梁铖城
@@ -34,6 +35,7 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
         findViewById(R.id.about).setOnClickListener(this);
         findViewById(R.id.checkUpgrade).setOnClickListener(this);
         findViewById(R.id.cacheLayout).setOnClickListener(this);
+        findViewById(R.id.logout).setOnClickListener(this);
     }
 
     @Override
@@ -53,6 +55,13 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.cacheLayout:
                 Frame.getInstance().toastPrompt("清除缓存成功");
+                break;
+            case R.id.logout:
+                SharePreferenceUtil.setPwd("");
+                SharePreferenceUtil.setNickname("");
+                SharePreferenceUtil.setName("");
+                SharePreferenceUtil.setRate("");
+                Frame.getInstance().toastPrompt("退出成功，请重新登录");
                 break;
         }
     }

@@ -38,6 +38,8 @@ import view.lcc.tyzs.mvp.presenter.impl.ShopCarGetPresenterImpl;
 import view.lcc.tyzs.mvp.view.ShopCarAddView;
 import view.lcc.tyzs.mvp.view.ShopCarGetView;
 import view.lcc.tyzs.ui.goods.OrderConfirmActivity;
+import view.lcc.tyzs.ui.login.LoginMainActivity;
+import view.lcc.tyzs.utils.DialogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.CartProductItemChangedListener;
@@ -247,6 +249,12 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                 break;
             //提交购买
             case R.id.ok:
+                String name = SharePreferenceUtil.getName();
+                if (TextUtils.isEmpty(name)){
+                   Frame.getInstance().toastPrompt("请先登录");
+                    LoginMainActivity.startLoginMainActivity("buy",getActivity());
+                    return;
+                }
                 ArrayList<OrderInfo> infos = new ArrayList<OrderInfo>();
                 for (int i = 0; i < adapter.getCount(); i++) {
                     if (adapter.getItem(i).isCheck()) {
@@ -287,12 +295,8 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     data_list.add(s);
                 }
 
-                String name = SharePreferenceUtil.getName();
-                if (!TextUtils.isEmpty(name)) {
-                    Gson gson = new Gson();
-                    shopCarAddPresenter.shopCarAdd(name, gson.toJson(data_list));
-                }
-
+                Gson gsons = new Gson();
+                shopCarAddPresenter.shopCarAdd(name, gsons.toJson(data_list));
                 Intent intent = new Intent(getActivity(), OrderConfirmActivity.class);
                 intent.putExtra("data", infos);
                 intent.putExtra("action", "car");
@@ -300,6 +304,12 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                 break;
             //同步信息
             case R.id.moreBtn:
+                String p = SharePreferenceUtil.getName();
+                if (TextUtils.isEmpty(p)){
+                    Frame.getInstance().toastPrompt("请先登录");
+                    return;
+                }
+
                 List<ShoppingCarItemBean> list = new ArrayList<ShoppingCarItemBean>();
                 try {
                     List<ShoppingCarBean> shoppingCarBeans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
@@ -309,7 +319,10 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                         s.setNumber(shoppingCarBeans.get(i).getNumber());
                         list.add(s);
                     }
-
+                    if (list.size() < 1){
+                        Frame.getInstance().toastPrompt("数据已经同步");
+                        return;
+                    }
                     String phone = SharePreferenceUtil.getName();
                     if (!TextUtils.isEmpty(phone)) {
                         Gson gson = new Gson();

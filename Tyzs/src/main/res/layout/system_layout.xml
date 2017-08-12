@@ -142,6 +142,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/logout"
                 android:gravity="center"
                 android:textColor="#FFF"
                 android:padding="15dp"

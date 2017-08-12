@@ -33,6 +33,12 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     private TextView tv_phonenumber;
     private ImageView profile_headimg;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setData();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -131,17 +137,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setData() {
-        String phone = SharePreferenceUtil.getUid();
-        if (TextUtils.isEmpty(phone)) {
-            return;
-        }
-
         String nickname = SharePreferenceUtil.getNickname();
         String dc = SharePreferenceUtil.getrName();
         if (!TextUtils.isEmpty(nickname) && !TextUtils.isEmpty(dc)) {
             tv_phonenumber.setText(nickname + "/" + dc);
+        }else {
+            tv_phonenumber.setText("请先登录");
         }
-
         ImageManager.getInstance().loadResImage(getContext(), R.mipmap.ic_launcher, profile_headimg);
     }
 

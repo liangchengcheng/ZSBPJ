@@ -48,7 +48,7 @@ public class ShopCarGetPresenterImpl implements ShopCarGetPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.ShopCarGetSuccess(response);
                     } else  {
-                        view.ShopCarGetFail("获取购物车信息失败，请稍后再试");
+                        view.ShopCarGetFail(status);
                     }
                 } catch (Exception e) {
                     view.ShopCarGetFail("获取地址信息失败");

@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.AppConstants;
 import view.lcc.tyzs.base.BaseActivity;
@@ -68,6 +69,10 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.goods_details_activity);
 
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
         iv_head_image = (ImageView) findViewById(R.id.iv_head_image);
         good_name = (TextView) findViewById(R.id.good_name);
         tv_prince = (TextView) findViewById(R.id.tv_prince);
@@ -85,7 +90,11 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         tv_prince.setText(shoppingBean.getGoodPrice());
         tv_decription.setText(shoppingBean.getGoodDescription());
 
-        //获取权限
+        initData();
+    }
+
+    //获取权限
+    private void initData() {
         rate = SharePreferenceUtil.getRate();
         if (!TextUtils.isEmpty(rate)) {
             double sum = Double.parseDouble(shoppingBean.getGoodCost()) + Double.parseDouble(shoppingBean.getGoodProfit()) * Double.parseDouble(rate);
@@ -156,7 +165,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             //判断用户是否登入
             String name = SharePreferenceUtil.getName();
             if (TextUtils.isEmpty(name)) {
-                LoginMainActivity.startLoginMainActivity("", GoodsDetailsActivity.this);
+                LoginMainActivity.startLoginMainActivity("details", GoodsDetailsActivity.this);
                 return;
             }
 
@@ -237,6 +246,22 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             if (list != null && list.size() > 0) {
                 car_num.setText(list.get(0).getNumber());
             }
+        }
+    }
+
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x03:
+                initData();
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
         }
     }
 }
