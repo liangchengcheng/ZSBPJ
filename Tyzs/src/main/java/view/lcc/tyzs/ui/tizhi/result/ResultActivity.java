@@ -37,9 +37,9 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
     private ColumnChartData columnData_TOP;
 
 
-    private View tv_fa1, tv_fa2, tv_fa3, tv_fa4, tv_fa5;
+    private View tv_fa1, tv_fa2, tv_fa3;
 
-    private View rzky;
+    //private View rzky;
 
 
     @Override
@@ -47,13 +47,12 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
 
-        rzky = findViewById(R.id.rzky);
+        //rzky = findViewById(R.id.rzky);
         findViewById(R.id.lv_back).setOnClickListener(this);
         tv_fa1 = findViewById(R.id.tv_fa1);
         tv_fa2 = findViewById(R.id.tv_fa2);
         tv_fa3 = findViewById(R.id.tv_fa3);
-        tv_fa4 = findViewById(R.id.tv_fa4);
-        tv_fa5 = findViewById(R.id.tv_fa5);
+
 
         userInfo = (UserInfo) getIntent().getSerializableExtra("data");
         score_top = new int[]{userInfo.getTanshizhi(), userInfo.getYangxuzhi(), userInfo.getYinxuzhi()
@@ -64,29 +63,16 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void setState() {
-        if (userInfo.getTebingzhi() > 40 || (userInfo.getYangxuzhi() <= 40 &&
-                userInfo.getYinxuzhi() <= 40 &&
-                userInfo.getTanshizhi() <= 40 &&
-                userInfo.getQiyuzhi() <= 40 &&
-                userInfo.getShirezhi() <= 40 &&
-                userInfo.getQixuzhi() <= 40)) {
-            tv_fa2.setVisibility(View.VISIBLE);
-        }else {
-            rzky.setVisibility(View.VISIBLE);
-        }
 
+        //阳虚质
         if (userInfo.getYangxuzhi() > 40) {
-            if (userInfo.getSex().equals("男")) {
-                tv_fa3.setVisibility(View.VISIBLE);
-            } else {
-                tv_fa4.setVisibility(View.VISIBLE);
-            }
+            tv_fa2.setVisibility(View.VISIBLE);
         }
-
+        //规则3 阴虚
         if (userInfo.getYinxuzhi() > 40 || userInfo.getTanshizhi() > 40
                 || userInfo.getQiyuzhi() > 40 || userInfo.getShirezhi() > 40 ||
                 userInfo.getQixuzhi() > 40) {
-            tv_fa5.setVisibility(View.VISIBLE);
+            tv_fa3.setVisibility(View.VISIBLE);
         }
     }
 

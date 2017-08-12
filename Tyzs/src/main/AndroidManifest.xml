@@ -220,7 +220,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.tizhi.main.TanshiTestResultActivity"
+            android:name=".ui.tizhi.result.TanshiTestResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

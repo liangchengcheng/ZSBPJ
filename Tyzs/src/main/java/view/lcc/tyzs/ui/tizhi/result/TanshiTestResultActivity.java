@@ -1,4 +1,4 @@
-package view.lcc.tyzs.ui.tizhi.main;
+package view.lcc.tyzs.ui.tizhi.result;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

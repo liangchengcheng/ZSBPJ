@@ -2,12 +2,12 @@ package view.lcc.tyzs.ui.tizhi.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.BaseActivity;
+import view.lcc.tyzs.ui.tizhi.result.TanshiTestResultActivity;
 
 
 /**
