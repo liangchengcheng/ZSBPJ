@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     LoginMainActivity.startLoginMainActivity("",getActivity());
                     return;
                 }
-                intent = new Intent(getActivity(), OrderMainActivity.class);
+                intent = new Intent(getActivity(), PersonNumActivity.class);
                 startActivity(intent);
                 break;
             //我的体质

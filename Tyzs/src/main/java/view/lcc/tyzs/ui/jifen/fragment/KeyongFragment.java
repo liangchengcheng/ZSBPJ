@@ -154,8 +154,14 @@ public class KeyongFragment extends Fragment implements JifenListView, SwipeRefr
             if (msg.equals("116")){
                 mAdapter.setHasMoreDataAndFooter(false, false);
                 Frame.getInstance().toastPrompt("没有更多数据...");
+            }else {
+                String s = ErrorLogUtils.SystemError(msg);
+                if (TextUtils.isEmpty(s)){
+                    Frame.getInstance().toastPrompt(s);
+                }else {
+                    Frame.getInstance().toastPrompt("加载失败，请稍后再试");
+                }
             }
-            Frame.getInstance().toastPrompt(msg);
         }
     }
 

@@ -70,6 +70,9 @@ public class AppConstants {
         //积分余额
         public final static String JFYE = "/Interface/Point.ashx?action=balance";
 
+
+        public final static String PERSON_NUM = "/Interface/Point.ashx?action=balance";
+
     }
 
     public final class ParamKey {

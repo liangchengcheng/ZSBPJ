@@ -52,7 +52,7 @@
 
     </LinearLayout>
 
-    <libs.PileLayout
+    <view.lcc.tyzs.libs.PileLayout
         android:id="@+id/pileLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
