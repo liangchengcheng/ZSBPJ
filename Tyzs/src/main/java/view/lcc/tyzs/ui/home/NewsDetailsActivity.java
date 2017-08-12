@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.bean.News;
 import view.lcc.tyzs.utils.SystemBarHelper;
 
@@ -20,7 +21,7 @@ import view.lcc.tyzs.utils.SystemBarHelper;
  * Date:         |05-13 18:30
  * Description:  |
  */
-public class NewsDetailsActivity extends AppCompatActivity {
+public class NewsDetailsActivity extends BaseActivity {
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
 
     private View tv_t;

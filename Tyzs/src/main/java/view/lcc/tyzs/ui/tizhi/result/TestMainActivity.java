@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import view.lcc.tyzs.R;
+import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.base.BaseApplication;
 import view.lcc.tyzs.bean.UserInfo;
 import view.lcc.tyzs.ui.tizhi.main.TanShiActivity;
@@ -21,7 +22,7 @@ import view.lcc.tyzs.ui.tizhi.main.TanShiActivity;
  * Date:         |05-14 18:35
  * Description:  |
  */
-public class TestMainActivity extends AppCompatActivity implements View.OnClickListener{
+public class TestMainActivity extends BaseActivity implements View.OnClickListener{
 
     private RadioButton rb_nan;
     private RadioButton rb_nv;
@@ -52,6 +53,14 @@ public class TestMainActivity extends AppCompatActivity implements View.OnClickL
                     rb_nv.setTextColor(Color.parseColor("#FFAD5B"));
                     rb_nan.setTextColor(Color.parseColor("#000000"));
                 }
+            }
+        });
+
+        //返回
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

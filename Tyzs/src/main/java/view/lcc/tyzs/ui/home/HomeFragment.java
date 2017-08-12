@@ -18,6 +18,7 @@ import view.lcc.tyzs.ui.order.OrderMainActivity;
 import view.lcc.tyzs.ui.setting.HelpActivity;
 import view.lcc.tyzs.ui.setting.JIeshaoActivity;
 import view.lcc.tyzs.ui.tizhi.TizhiActivity;
+import view.lcc.tyzs.ui.tizhi.history.HistoryActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.StatusBarUtil;
 
@@ -50,6 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.ll_news).setOnClickListener(this);
         view.findViewById(R.id.ll_change_zy).setOnClickListener(this);
         view.findViewById(R.id.llAdvertiseBoard).setOnClickListener(this);
+
+        view.findViewById(R.id.qt).setOnClickListener(this);
         //StatusBarUtil.setStatusBarTranslucent(getActivity(), false);
         return view;
     }
@@ -86,12 +89,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), PersonNumActivity.class);
                 startActivity(intent);
                 break;
-            //我的体质
+            //测试记录
             case R.id.ll_change_zy:
-                intent = new Intent(getActivity(), OrderMainActivity.class);
+                intent = new Intent(getActivity(), HistoryActivity.class);
                 startActivity(intent);
                 break;
-
             //体质测试
             case R.id.llAdvertiseBoard:
             case R.id.tzcs:
@@ -134,6 +136,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 ((MainActivity)(getActivity())).setCurrent(2);
+                break;
+            //健康知识
+            case R.id.qt:
+                startActivity(new Intent(getActivity(),NewsActivity.class));
                 break;
         }
     }

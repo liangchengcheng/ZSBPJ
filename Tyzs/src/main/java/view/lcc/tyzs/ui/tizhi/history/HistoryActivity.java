@@ -12,6 +12,7 @@ import java.util.List;
 
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.HistoryAdapter;
+import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.base.BaseApplication;
 import view.lcc.tyzs.bean.UserInfo;
 import view.lcc.tyzs.ui.tizhi.result.ResultActivity;
@@ -23,7 +24,7 @@ import view.lcc.tyzs.view.LoadingLayout;
  * Date:         |05-17 06:38
  * Description:  |
  */
-public class HistoryActivity extends AppCompatActivity implements HistoryAdapter.OnItemClickListener {
+public class HistoryActivity extends BaseActivity implements HistoryAdapter.OnItemClickListener {
 
     private LoadingLayout loadingLayout;
 
