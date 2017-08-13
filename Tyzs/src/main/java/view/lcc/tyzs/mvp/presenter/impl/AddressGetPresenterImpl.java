@@ -49,7 +49,7 @@ public class AddressGetPresenterImpl implements AddressGetPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.AddressGetSuccess(response);
                     } else  {
-                        view.AddressGetFail(ErrorLogUtils.SystemError(status));
+                        view.AddressGetFail(status);
                     }
                 } catch (Exception e) {
                     view.AddressGetFail("添加信息失败");

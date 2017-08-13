@@ -126,7 +126,11 @@ public class AddressListActivity extends BaseActivity implements AddressListAdap
 
     @Override
     public void AddressGetFail(String msg) {
-        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        if (msg.equals("127")){
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        }else {
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        }
     }
 
     @Override

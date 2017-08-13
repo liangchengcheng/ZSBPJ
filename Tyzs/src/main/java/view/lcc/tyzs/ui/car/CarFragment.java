@@ -102,11 +102,6 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
     public void onResume() {
         super.onResume();
         try {
-            String name = SharePreferenceUtil.getName();
-            if (TextUtils.isEmpty(name)) {
-                Frame.getInstance().toastPrompt("请先登录");
-                return;
-            }
             beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
             if (beans != null && beans.size() > 0) {
                 adapter.newData(beans);
@@ -118,7 +113,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
             } else {
                 //没有数据就去服务器获取
-                shopCarGetPresenter.shopCarGet(SharePreferenceUtil.getName());
+                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,7 +149,6 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
             if (unCheckedList.containsKey(position)) {
                 unCheckedList.remove(beans.get(position));
                 unCheckedList.keySet().remove(position);
-
                 if (TextUtils.isEmpty(Rate)) {
                     for (int i = 0; i < adapter.getCount(); i++) {
                         if (adapter.getItem(i).isCheck()) {
@@ -234,12 +228,14 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     }
                     loading_layout.setLoadingLayout(LoadingLayout.NETWORK_LOADING);
                     beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
+                    adapter.newData(beans);
+                    allCheck.setChecked(false);
+                    total_sum.setText("合:￥ 0"  );
+                    for (int i = 0; i < beans.size(); i++) {
+                        unCheckedList.put(i, beans.get(i));
+                    }
                     if (beans.size() > 0) {
                         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-                        adapter.newData(beans);
-                        for (int i = 0; i < beans.size(); i++) {
-                            unCheckedList.put(i, beans.get(i));
-                        }
                     } else {
                        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
                     }
@@ -290,6 +286,19 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                         BaseApplication.getDaoSession().getShoppingCarBeanDao().delete(shoppingCarBean);
                     }
                 }
+                //删除后刷新购物车界面
+                beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
+                adapter.newData(beans);
+                allCheck.setChecked(false);
+                total_sum.setText("合:￥ 0"  );
+                for (int i = 0; i < beans.size(); i++) {
+                    unCheckedList.put(i, beans.get(i));
+                }
+                if (beans.size() > 0) {
+                    loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+                } else {
+                    loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+                }
                 //已经购买,删除后同步到服务器
                 List<ShoppingCarItemBean> data_list = new ArrayList<ShoppingCarItemBean>();
                 List<ShoppingCarBean> shoppingCarBeanList = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
@@ -315,28 +324,31 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     Frame.getInstance().toastPrompt("请先登录");
                     return;
                 }
+                if (beans.size() > 0){
+                    List<ShoppingCarItemBean> list = new ArrayList<ShoppingCarItemBean>();
+                    try {
+                        List<ShoppingCarBean> shoppingCarBeans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
+                        for (int i = 0; i < shoppingCarBeans.size(); i++) {
+                            ShoppingCarItemBean s = new ShoppingCarItemBean();
+                            s.setGID(shoppingCarBeans.get(i).getGID());
+                            s.setNumber(shoppingCarBeans.get(i).getNumber());
+                            list.add(s);
+                        }
+                        if (list.size() < 1){
+                            Frame.getInstance().toastPrompt("数据已经同步");
+                            return;
+                        }
+                        String phone = SharePreferenceUtil.getName();
+                        if (!TextUtils.isEmpty(phone)) {
+                            Gson gson = new Gson();
+                            shopCarAddPresenter.shopCarAdd(phone, gson.toJson(list));
 
-                List<ShoppingCarItemBean> list = new ArrayList<ShoppingCarItemBean>();
-                try {
-                    List<ShoppingCarBean> shoppingCarBeans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
-                    for (int i = 0; i < shoppingCarBeans.size(); i++) {
-                        ShoppingCarItemBean s = new ShoppingCarItemBean();
-                        s.setGID(shoppingCarBeans.get(i).getGID());
-                        s.setNumber(shoppingCarBeans.get(i).getNumber());
-                        list.add(s);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    if (list.size() < 1){
-                        Frame.getInstance().toastPrompt("数据已经同步");
-                        return;
-                    }
-                    String phone = SharePreferenceUtil.getName();
-                    if (!TextUtils.isEmpty(phone)) {
-                        Gson gson = new Gson();
-                        shopCarAddPresenter.shopCarAdd(phone, gson.toJson(list));
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    shopCarGetPresenter.shopCarGet(SharePreferenceUtil.getName());
                 }
                 break;
         }
@@ -384,13 +396,12 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
     @Override
     public void ShopCarAddSuccess(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("同步购物车信息成功");
+        Frame.getInstance().toastPrompt("加载成功");
     }
 
     @Override
     public void ShopCarAddFail(String msg) {
         closeDialog();
-        Frame.getInstance().toastPrompt("同步购物车信息失败");
     }
 
     @Override
@@ -413,7 +424,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
             beans = GsonUtils.fromJsonArray(resultJson, ShoppingCarBean.class);
             if (beans.size() > 0) {
                 for (int i = 0; i < beans.size(); i++) {
-                    BaseApplication.getDaoSession().getShoppingCarBeanDao().insert(beans.get(i));
+                    BaseApplication.getDaoSession().getShoppingCarBeanDao().insertOrReplace(beans.get(i));
                 }
                 adapter.newData(beans);
                 listview.setAdapter(adapter);

@@ -234,7 +234,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/music_icon"
+                            android:background="@drawable/housing_loan_icon1"
                             android:scaleType="centerCrop" />
 
                         <TextView
@@ -284,7 +284,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/snack_icon"
+                            android:background="@drawable/sum_histogram_icon"
                             android:scaleType="centerCrop" />
 
                         <TextView
@@ -309,7 +309,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/sport_icon"
+                            android:background="@drawable/sport_icon1"
                             android:scaleType="centerCrop" />
 
                         <TextView
@@ -401,7 +401,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/traffic_icon"
+                            android:background="@drawable/vehicle_maintenance_icon1"
                             android:scaleType="centerCrop" />
 
                         <TextView
@@ -426,7 +426,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/fruit_icon"
+                            android:background="@drawable/education_icon"
                             android:scaleType="centerCrop" />
 
                         <TextView
