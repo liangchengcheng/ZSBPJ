@@ -27,66 +27,79 @@
             android:textSize="18sp" />
 
     </android.support.v7.widget.Toolbar>
-    <FrameLayout
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E5E9F1">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="#E5E9F1">
 
             <LinearLayout
-                android:id="@+id/lv_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <ListView
-                    android:id="@+id/lv1"
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lv_layout"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="#F5F5F5"
-                    android:descendantFocusability="blocksDescendants"
-                    android:divider="@null"
-                    android:dividerHeight="0dp"
-                    android:listSelector="#00000000"
-                    android:scrollbars="none"
-                    android:visibility="visible" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#e6e6e6"
-                android:visibility="visible" />
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
                     <ListView
-                        android:id="@+id/lv2"
+                        android:id="@+id/lv1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#F5F5F5"
-                        android:clickable="true"
+                        android:descendantFocusability="blocksDescendants"
                         android:divider="@null"
-                        android:focusable="false"
+                        android:dividerHeight="0dp"
                         android:listSelector="#00000000"
-                        android:scrollbars="none" />
-                    <view.lcc.tyzs.view.LoadingLayout
-                        android:id="@+id/loading_layout"
+                        android:scrollbars="none"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#e6e6e6"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </FrameLayout>
-            </RelativeLayout>
-        </LinearLayout>
-    </FrameLayout>
+                        android:layout_height="match_parent">
+
+                        <ListView
+                            android:id="@+id/lv2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#F5F5F5"
+                            android:clickable="true"
+                            android:divider="@null"
+                            android:focusable="false"
+                            android:listSelector="#00000000"
+                            android:scrollbars="none" />
+
+                        <view.lcc.tyzs.view.LoadingLayout
+                            android:id="@+id/loading_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </FrameLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

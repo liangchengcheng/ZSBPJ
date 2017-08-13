@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import view.lcc.tyzs.mvp.presenter.GoodsPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.GoodsPresenterImpl;
 import view.lcc.tyzs.mvp.view.GoodsView;
 import view.lcc.tyzs.utils.GsonUtils;
+import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.LoadingLayout;
 
 /**
@@ -34,9 +36,10 @@ import view.lcc.tyzs.view.LoadingLayout;
  * Date:         |07-31 17:03
  * Description:  |
  */
-public class GoodsFragment extends Fragment implements GoodsView {
+public class GoodsFragment extends Fragment implements GoodsView, SwipeRefreshLayout.OnRefreshListener {
     //左右两侧的布局
     private ListView lv1, lv2;
+    private SwipeRefreshLayout mSwipeRefreshWidget;
     //动态布局
     private LoadingLayout loading_layout;
 
@@ -58,11 +61,19 @@ public class GoodsFragment extends Fragment implements GoodsView {
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         lv1 = (ListView) view.findViewById(R.id.lv1);
         lv2 = (ListView) view.findViewById(R.id.lv2);
+        initRefreshView(view);
         showPopupWindow();
         return view;
     }
 
+    private void initRefreshView(View view) {
+        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
+        mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshWidget.setOnRefreshListener(this);
+    }
+
     private LeftAdapter leftAdapter;
+    private String type = "日常食疗";
 
     /**
      * 返回类型 显示双列的ListView的联动的效果
@@ -79,7 +90,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
                     leftAdapter.setSelectItem(position);
                     leftAdapter.notifyDataSetChanged();
                     rightData = new ArrayList<>();
-                    String type = dataLeft[position];
+                    type = dataLeft[position];
                     goodsPresenter.goods(pageNo + "", pageSize + "", type);
                 }
             }
@@ -101,12 +112,9 @@ public class GoodsFragment extends Fragment implements GoodsView {
                 JSONObject jsonObject = new JSONObject(data);
                 String result_json = jsonObject.getString("resultjson");
                 rightData = GsonUtils.fromJsonArray(result_json, ShoppingBean.class);
-                if (rightAdapter == null) {
-                    rightAdapter = new RightAdapter(getActivity(), rightData);
-                    lv2.setAdapter(rightAdapter);
-                } else {
-                    rightAdapter.setData(rightData);
-                }
+
+                rightAdapter = new RightAdapter(getActivity(), rightData, SharePreferenceUtil.getRate());
+                lv2.setAdapter(rightAdapter);
 
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
                 lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -146,7 +154,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
     public void onEvent(Integer event) {
         switch (event) {
             case 0x02:
-                showPopupWindow();
+
                 break;
         }
     }
@@ -159,4 +167,8 @@ public class GoodsFragment extends Fragment implements GoodsView {
         }
     }
 
+    @Override
+    public void onRefresh() {
+        showPopupWindow();
+    }
 }

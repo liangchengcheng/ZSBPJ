@@ -31,11 +31,11 @@ public class RightAdapter extends BaseAdapter {
     private List<ShoppingBean> list;
     private String rate;
 
-    public RightAdapter(Context context, List<ShoppingBean> list) {
+    public RightAdapter(Context context, List<ShoppingBean> list, String rate) {
         this.context = context;
         this.list = list;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        rate = SharePreferenceUtil.getRate();
+        this.rate = rate;
     }
 
     @Override
@@ -102,14 +102,15 @@ public class RightAdapter extends BaseAdapter {
         ImageView iv_content_image;
     }
 
-    public void updateRate(){
+    public void updateRate() {
         rate = SharePreferenceUtil.getRate();
     }
 
-    public void setData(List<ShoppingBean> list){
+    public void setData(List<ShoppingBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
+
     private int selectItem = -1;
 
     public void setSelectItem(int p) {
