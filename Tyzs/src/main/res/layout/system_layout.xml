@@ -66,7 +66,7 @@
             <TextView
                 android:id="@+id/cacheSize"
                 style="@style/SettingMenuRightStyle"
-                android:text="1.42M" />
+                android:text="" />
         </RelativeLayout>
 
         <View

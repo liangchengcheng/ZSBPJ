@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //我的消息
             case R.id.ll_news:
                 if (TextUtils.isEmpty(name)){
-                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    LoginMainActivity.startLoginMainActivity("home",getActivity());
                     return;
                 }
                 intent = new Intent(getActivity(), PersonNumActivity.class);

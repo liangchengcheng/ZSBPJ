@@ -15,6 +15,7 @@ import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.frame.ImageManager;
 import view.lcc.tyzs.ui.address.AddressListActivity;
+import view.lcc.tyzs.ui.home.PersonNumActivity;
 import view.lcc.tyzs.ui.jifen.JifenMainActivity;
 import view.lcc.tyzs.ui.login.ChangePwdActivity;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
@@ -67,6 +68,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         content_view.findViewById(R.id.layout_me_focus).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_room_manage).setOnClickListener(this);
         content_view.findViewById(R.id.layout_me_history).setOnClickListener(this);
+        content_view.findViewById(R.id.layout_memeber).setOnClickListener(this);
 
 
         scrollView.setHeaderView(header_view);
@@ -132,6 +134,15 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 intent = new Intent(getActivity(), ChangePwdActivity.class);
+                startActivity(intent);
+                break;
+            //我的会员
+            case R.id.layout_memeber:
+                if (TextUtils.isEmpty(name)){
+                    LoginMainActivity.startLoginMainActivity("setting",getActivity());
+                    return;
+                }
+                intent = new Intent(getActivity(), PersonNumActivity.class);
                 startActivity(intent);
                 break;
 
