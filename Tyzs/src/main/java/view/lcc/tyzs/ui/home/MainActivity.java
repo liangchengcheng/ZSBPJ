@@ -78,14 +78,7 @@ public class MainActivity  extends BaseActivity {
             @Override
             public void onStartTabSelected(NavigationTabBar.Model model, int index) {
                 Log.i("====", "开始被选择" + index);
-                if (index == 2) {
-                    String name = SharePreferenceUtil.getName();
-                    if (TextUtils.isEmpty(name)){
-                        Intent intent = new Intent(MainActivity.this, LoginMainActivity.class);
-                        startActivity(intent);
-                        viewPager.setCurrentItem(0);
-                    }
-                }
+
             }
 
             @Override

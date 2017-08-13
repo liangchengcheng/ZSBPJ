@@ -48,7 +48,7 @@ public class GoodsPresenterImpl implements GoodsPresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.getGoodsSuccess(response);
                     } else  {
-                        view.getGoodsFail("获取信息失败，请稍后再试");
+                        view.getGoodsFail(status);
                     }
                 } catch (Exception e) {
                     view.getGoodsFail("获取信息失败");

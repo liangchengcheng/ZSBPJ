@@ -29,6 +29,12 @@ public class NewsActivity extends BaseActivity implements DataAdapter.OnItemClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.data_activity);
         initRecycleView();
+        findViewById(R.id.lv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initRecycleView() {

@@ -263,7 +263,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:text="雪和正本汤，每次1-2包，晚上食用，用热开水冲调。"
+                            android:text="蕴煦正本汤，每次1-2包，早上食用，用热开水冲调；。"
                             android:textColor="#000"
                             android:textSize="16sp" />
                         <TextView

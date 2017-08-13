@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -92,6 +91,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
     }
 
     private RightAdapter rightAdapter;
+
     @Override
     public void getGoodsSuccess(String result) {
         if (!TextUtils.isEmpty(result)) {
@@ -100,10 +100,10 @@ public class GoodsFragment extends Fragment implements GoodsView {
                 JSONObject jsonObject = new JSONObject(data);
                 String result_json = jsonObject.getString("resultjson");
                 rightData = GsonUtils.fromJsonArray(result_json, ShoppingBean.class);
-                if (rightAdapter == null){
+                if (rightAdapter == null) {
                     rightAdapter = new RightAdapter(getActivity(), rightData);
                     lv2.setAdapter(rightAdapter);
-                }else {
+                } else {
                     rightAdapter.setData(rightData);
                 }
 
@@ -131,7 +131,11 @@ public class GoodsFragment extends Fragment implements GoodsView {
 
     @Override
     public void getGoodsFail(String msg) {
-        loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        if (msg.equals("116")) {
+            loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+        } else {
+            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+        }
     }
 
     @Override

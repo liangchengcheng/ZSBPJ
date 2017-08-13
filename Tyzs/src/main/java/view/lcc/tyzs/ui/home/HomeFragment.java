@@ -135,10 +135,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             //购物车
             case R.id.gwc:
-                if (TextUtils.isEmpty(name)){
-                    LoginMainActivity.startLoginMainActivity("",getActivity());
-                    return;
-                }
                 ((MainActivity)(getActivity())).setCurrent(2);
                 break;
             //健康知识

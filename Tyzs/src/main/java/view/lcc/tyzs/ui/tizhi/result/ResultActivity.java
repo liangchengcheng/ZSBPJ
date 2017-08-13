@@ -63,7 +63,6 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void setState() {
-
         //阳虚质
         if (userInfo.getYangxuzhi() > 40) {
             tv_fa2.setVisibility(View.VISIBLE);
