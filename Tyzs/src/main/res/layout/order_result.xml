@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="联系电话：17705353966或4006-0535-00"
+                    android:text="联系电话：187 5453 1914 或 4006-0535-00"
                     android:textColor="#ff000000"
                     android:textSize="14sp" />
             </LinearLayout>

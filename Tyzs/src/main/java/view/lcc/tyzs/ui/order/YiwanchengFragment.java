@@ -130,7 +130,11 @@ public class YiwanchengFragment extends Fragment implements GetOrderView, SwipeR
     public void refreshOrLoadFail(String msg) {
         if (mSwipeRefreshWidget.isRefreshing()) {
             mSwipeRefreshWidget.setRefreshing(false);
-            loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+            if (msg.equals("145")){
+                loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+            }else {
+                loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
+            }
         } else {
             if (msg.equals("145")){
                 mAdapter.setHasMoreDataAndFooter(false, false);

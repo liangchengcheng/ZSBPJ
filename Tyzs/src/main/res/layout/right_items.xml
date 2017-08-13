@@ -14,51 +14,56 @@
         <ImageView
             android:id="@+id/iv_content_image"
             android:layout_width="88dp"
-            android:layout_height="72dp"
+            android:layout_height="88dp"
             android:layout_margin="5dp"
             android:background="@drawable/loading"
             android:scaleType="centerCrop" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
-                android:maxLines="2"
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
                 android:text="名称：材料装饰城 "
                 android:textColor="#000"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tv_price"
+            <LinearLayout
+                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:tag="Hover"
-                android:text="￥199 "
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_price_vip"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:tag="Hover"
-                android:text="会员尊享价格：199元 "
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:tag="Hover"
+                    android:text="￥199 "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_price_vip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:tag="Hover"
+                    android:text="会员尊享价格：199元 "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
     </LinearLayout>
 
     <TextView

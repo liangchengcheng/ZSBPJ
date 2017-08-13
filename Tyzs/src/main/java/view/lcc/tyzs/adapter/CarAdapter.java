@@ -136,6 +136,7 @@ public class CarAdapter extends BaseAdapter {
     // 这个是同步数据用的
     public void newData(List<ShoppingCarBean> bean) {
         this.beans = bean;
+        Rate = SharePreferenceUtil.getRate();
         notifyDataSetChanged();
     }
 

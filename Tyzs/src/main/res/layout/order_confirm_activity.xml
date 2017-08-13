@@ -201,7 +201,7 @@
                         android:layout_marginLeft="15dip"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="客服电话4006-0535-00或17705353966"
+                        android:text="客服电话4006-0535-00 或 187 5453 1914"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -369,7 +369,7 @@
                            android:padding="3dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="积分" />
+                            android:text="积分：" />
                         <TextView
                             android:id="@+id/tv_jf"
                             android:layout_width="wrap_content"

@@ -81,6 +81,7 @@ public class JifentixianActivity extends BaseActivity implements JifenTiXianView
                 @Override
                 public void run() {
                     startActivity(new Intent(JifentixianActivity.this,JifenShenqingActivity.class));
+                    finish();
                 }
             },1500);
         } catch (Exception e) {

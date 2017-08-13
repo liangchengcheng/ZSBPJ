@@ -40,9 +40,6 @@ public class MainActivity  extends BaseActivity {
         //SystemBarHelper.immersiveStatusBar(this);
         //SystemBarHelper.immersiveStatusBar(this, 0);
         //SystemBarHelper.setHeightAndPadding(this, mToolbar);
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
         initFragment();
         initUI();
     }
@@ -171,22 +168,6 @@ public class MainActivity  extends BaseActivity {
     public void setCurrent(int position){
         if ( viewPager!= null){
             viewPager.setCurrentItem(position);
-        }
-    }
-
-    public void onEvent(Integer event) {
-        switch (event) {
-            case 0x02:
-                this.recreate();
-                break;
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
         }
     }
 

@@ -39,8 +39,7 @@ public class NewsActivity extends BaseActivity implements DataAdapter.OnItemClic
 
     private void initRecycleView() {
         RecyclerView mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(NewsActivity.this,
-                LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(NewsActivity.this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         DataAdapter adapter = new DataAdapter();

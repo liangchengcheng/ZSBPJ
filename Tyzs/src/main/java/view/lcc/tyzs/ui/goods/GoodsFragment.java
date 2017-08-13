@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.LeftAdapter;
 import view.lcc.tyzs.adapter.RightAdapter;
@@ -42,7 +43,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
     //左侧的数据
     private static final String[] dataLeft = {"日常食疗", "体质食疗", "体质理疗", "日用系列", "创业包"};
     private int pageNo = 1;
-    private int pageSize = 10;
+    private int pageSize = 100;
     private List<ShoppingBean> rightData = new ArrayList<>();
     private GoodsPresenter goodsPresenter;
 
@@ -50,24 +51,24 @@ public class GoodsFragment extends Fragment implements GoodsView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.goods_fragment, null);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+        goodsPresenter = new GoodsPresenterImpl(GoodsFragment.this);
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         lv1 = (ListView) view.findViewById(R.id.lv1);
         lv2 = (ListView) view.findViewById(R.id.lv2);
+        showPopupWindow();
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        goodsPresenter = new GoodsPresenterImpl(GoodsFragment.this);
-        showPopupWindow();
-    }
+    private LeftAdapter leftAdapter;
 
     /**
      * 返回类型 显示双列的ListView的联动的效果
      */
     public void showPopupWindow() {
-        final LeftAdapter leftAdapter = new LeftAdapter(getActivity(), Arrays.asList(dataLeft));
+        leftAdapter = new LeftAdapter(getActivity(), Arrays.asList(dataLeft));
         leftAdapter.setSelectItem(0);
         lv1.setAdapter(leftAdapter);
         goodsPresenter.goods(pageNo + "", pageSize + "", dataLeft[0]);
@@ -111,8 +112,7 @@ public class GoodsFragment extends Fragment implements GoodsView {
                 lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
-                    public void onItemClick(AdapterView<?> parent,
-                                            View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ShoppingBean bean = rightData.get(position);
                         Intent intent = new Intent(getActivity(), GoodsDetailsActivity.class);
                         intent.putExtra("bean", bean);
@@ -142,4 +142,21 @@ public class GoodsFragment extends Fragment implements GoodsView {
     public void NetWorkErr(String msg) {
         loading_layout.setLoadingLayout(LoadingLayout.NETWORK_ERROR);
     }
+
+    public void onEvent(Integer event) {
+        switch (event) {
+            case 0x02:
+                showPopupWindow();
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
 }

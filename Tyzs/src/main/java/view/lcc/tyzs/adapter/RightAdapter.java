@@ -102,6 +102,10 @@ public class RightAdapter extends BaseAdapter {
         ImageView iv_content_image;
     }
 
+    public void updateRate(){
+        rate = SharePreferenceUtil.getRate();
+    }
+
     public void setData(List<ShoppingBean> list){
         this.list = list;
         notifyDataSetChanged();

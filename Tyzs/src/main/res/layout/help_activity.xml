@@ -36,7 +36,7 @@
     <TextView
         android:padding="10dp"
         android:textSize="14sp"
-        android:text="如果你忘记了密码，请联系客服进行修改，客服电话: 4006-0535-00, 177053539966 "
+        android:text="如果你忘记了密码，请联系客服进行修改，客服电话: 4006-0535-00 或 187 5453 1914 "
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
