@@ -251,7 +251,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     public void onEvent(Integer event) {
         switch (event) {
-            case 0x03:
+            case 0x02:
                 initData();
                 break;
         }

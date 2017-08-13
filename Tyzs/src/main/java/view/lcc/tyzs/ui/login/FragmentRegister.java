@@ -210,7 +210,7 @@ public class FragmentRegister extends BaseFragment implements RegisterView,Login
         //loginPresenter.login(phone,password);
         closeDialog();
         Frame.getInstance().toastPrompt("提交注册信息成功，等待管理员审核...");
-        EventBus.getDefault().post(0x03);
+        EventBus.getDefault().post(0x02);
         getActivity().finish();
     }
 
@@ -232,7 +232,7 @@ public class FragmentRegister extends BaseFragment implements RegisterView,Login
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         }else {
-            EventBus.getDefault().post(0x03);
+            EventBus.getDefault().post(0x02);
             getActivity().finish();
         }
     }

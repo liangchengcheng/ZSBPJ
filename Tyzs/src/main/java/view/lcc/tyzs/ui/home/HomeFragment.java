@@ -149,7 +149,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
     public void onEvent(Integer event) {
         switch (event) {
-            case 0x03:
+            case 0x02:
                 setData();
                 break;
         }

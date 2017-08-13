@@ -206,7 +206,7 @@ public class FragmentLogin extends Fragment implements LoginView {
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }else {
-                    EventBus.getDefault().post(0x03);
+                    EventBus.getDefault().post(0x02);
                     getActivity().finish();
                 }
             }

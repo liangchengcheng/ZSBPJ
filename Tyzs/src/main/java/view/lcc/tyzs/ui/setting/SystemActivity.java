@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.frame.Frame;
@@ -62,7 +63,17 @@ public class SystemActivity extends BaseActivity implements View.OnClickListener
                 SharePreferenceUtil.setName("");
                 SharePreferenceUtil.setRate("");
                 Frame.getInstance().toastPrompt("退出成功，请重新登录");
+                EventBus.getDefault().post(0x02);
                 break;
+        }
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
         }
     }
 
