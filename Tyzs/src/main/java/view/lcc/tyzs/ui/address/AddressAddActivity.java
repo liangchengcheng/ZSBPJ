@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -225,6 +226,7 @@ public class AddressAddActivity extends BaseActivity implements AddressAddView, 
     //所在省
     private void createProvincePopupWindow() {
         if (provinceList != null) {
+            province_string = new ArrayList<>();
             for (ProvinceModel provinceModel : provinceList) {
                 province_string.add(provinceModel.getProvince());
             }
@@ -236,6 +238,11 @@ public class AddressAddActivity extends BaseActivity implements AddressAddView, 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position >provinceList.size() ){
+                        return;
+                    }
+                    Log.e("lcc --",position+"");
+                    Log.e("lcc --size",provinceList.size()+"");
                     provincePopupWindow.dismiss();
                     tv_province.setText(province_string.get(position));
                     pPosition = position;

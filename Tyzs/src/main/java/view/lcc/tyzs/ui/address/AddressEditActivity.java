@@ -262,6 +262,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     //所在省
     private void createProvincePopupWindow() {
         if (provinceList != null) {
+            province_string = new ArrayList<>();
             for (ProvinceModel provinceModel : provinceList) {
                 province_string.add(provinceModel.getProvince());
             }
