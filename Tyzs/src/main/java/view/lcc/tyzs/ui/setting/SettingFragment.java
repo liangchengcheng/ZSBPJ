@@ -88,8 +88,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             //去登录
             case R.id.profile_headimg:
-                intent = new Intent(getActivity(), LoginMainActivity.class);
-                startActivity(intent);
+                if (TextUtils.isEmpty(name)){
+                    LoginMainActivity.startLoginMainActivity("setting",getActivity());
+                    return;
+                }
                 break;
             //系统设置
             case R.id.layout_me_setting:
@@ -99,7 +101,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             //我的余额
             case R.id.layout_me_host_manage:
                 if (TextUtils.isEmpty(name)){
-                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    LoginMainActivity.startLoginMainActivity("setting",getActivity());
                     return;
                 }
                 intent = new Intent(getActivity(), JifenMainActivity.class);
@@ -108,7 +110,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             //我的订单
             case R.id.layout_me_focus:
                 if (TextUtils.isEmpty(name)){
-                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    LoginMainActivity.startLoginMainActivity("setting",getActivity());
                     return;
                 }
                 intent = new Intent(getActivity(), OrderMainActivity.class);
@@ -117,7 +119,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             //地址管理
             case R.id.layout_me_room_manage:
                 if (TextUtils.isEmpty(name)){
-                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    LoginMainActivity.startLoginMainActivity("setting",getActivity());
                     return;
                 }
                 intent = new Intent(getActivity(), AddressListActivity.class);
@@ -126,7 +128,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             //修改密码
             case R.id.layout_me_history:
                 if (TextUtils.isEmpty(name)){
-                    LoginMainActivity.startLoginMainActivity("",getActivity());
+                    LoginMainActivity.startLoginMainActivity("setting",getActivity());
                     return;
                 }
                 intent = new Intent(getActivity(), ChangePwdActivity.class);

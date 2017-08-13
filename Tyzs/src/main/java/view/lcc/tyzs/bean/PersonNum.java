@@ -9,13 +9,13 @@ import java.io.Serializable;
  * Description:  |
  */
 public class PersonNum implements Serializable {
-    private int num;
+    private int count;
 
-    public int getNum() {
-        return num;
+    public int getCount() {
+        return count;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setCount(int count) {
+        this.count = count;
     }
 }

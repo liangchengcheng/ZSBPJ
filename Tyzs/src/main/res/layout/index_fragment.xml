@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:padding="8dp"
-                        android:text="我的推荐"
+                        android:text="我的会员"
                         android:textColor="#fff"
                         android:textSize="14sp" />
                 </LinearLayout>

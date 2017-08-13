@@ -19,6 +19,7 @@ import view.lcc.tyzs.ui.setting.HelpActivity;
 import view.lcc.tyzs.ui.setting.JIeshaoActivity;
 import view.lcc.tyzs.ui.tizhi.TizhiActivity;
 import view.lcc.tyzs.ui.tizhi.history.HistoryActivity;
+import view.lcc.tyzs.ui.tizhi.main.TanshiTestMainActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.utils.StatusBarUtil;
 
@@ -96,8 +97,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             //体质测试
             case R.id.llAdvertiseBoard:
-            case R.id.tzcs:
                 intent = new Intent(getActivity(), TizhiActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tzcs:
+                intent = new Intent(getActivity(), TanshiTestMainActivity.class);
                 startActivity(intent);
                 break;
             //注册会员

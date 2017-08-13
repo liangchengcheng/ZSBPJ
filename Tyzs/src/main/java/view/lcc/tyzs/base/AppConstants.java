@@ -71,7 +71,8 @@ public class AppConstants {
         public final static String JFYE = "/Interface/Point.ashx?action=balance";
 
 
-        public final static String PERSON_NUM = "/Interface/Point.ashx?action=balance";
+        //获取推荐人数
+        public final static String PERSON_NUM = "/Interface/Member.ashx";
 
     }
 

@@ -27,6 +27,7 @@ import view.lcc.tyzs.mvp.presenter.LoginPresenter;
 import view.lcc.tyzs.mvp.presenter.impl.LoginPresenterImpl;
 import view.lcc.tyzs.mvp.view.LoginView;
 import view.lcc.tyzs.ui.home.MainActivity;
+import view.lcc.tyzs.ui.setting.HelpActivity;
 import view.lcc.tyzs.utils.CheckUtils;
 import view.lcc.tyzs.utils.Tools;
 import view.lcc.tyzs.view.EditTextWithDel;
@@ -95,6 +96,13 @@ public class FragmentLogin extends Fragment implements LoginView {
         rela_name = (RelativeLayout) view.findViewById(R.id.rela_name);
         rela_pass = (RelativeLayout) view.findViewById(R.id.rela_pass);
         rl_root_view = view.findViewById(R.id.rl_root_view);
+
+        view.findViewById(R.id.tv_forgetcode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), HelpActivity.class));
+            }
+        });
     }
 
     private void textListener() {

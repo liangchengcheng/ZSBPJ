@@ -2,7 +2,6 @@ package view.lcc.tyzs.ui.jifen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
@@ -55,6 +54,7 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
                 finish();
             }
         });
+        tv_name.setText("您好," + SharePreferenceUtil.getNickname());
     }
 
     @Override
@@ -70,7 +70,6 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
             String result_json = jsonObject.getString("resultjson");
             JSONObject js = new JSONObject(result_json);
             String balance = js.getString("balance");
-
             if (balance.equals("")) {
                 tv_balance.setText("您的余额：0 ");
             }
