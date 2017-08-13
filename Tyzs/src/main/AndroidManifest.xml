@@ -28,7 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.home.MainActivity"
+            android:name=".ui.WelcomeActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,11 @@
         </activity>
 
         <!--关于-->
+        <activity
+            android:name=".ui.home.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />   <!--关于-->
         <activity
             android:name=".ui.setting.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
