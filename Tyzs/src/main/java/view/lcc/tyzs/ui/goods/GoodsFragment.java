@@ -36,10 +36,10 @@ import view.lcc.tyzs.view.LoadingLayout;
  * Date:         |07-31 17:03
  * Description:  |
  */
-public class GoodsFragment extends Fragment implements GoodsView, SwipeRefreshLayout.OnRefreshListener {
+public class GoodsFragment extends Fragment implements GoodsView {
     //左右两侧的布局
     private ListView lv1, lv2;
-    private SwipeRefreshLayout mSwipeRefreshWidget;
+
     //动态布局
     private LoadingLayout loading_layout;
 
@@ -61,15 +61,9 @@ public class GoodsFragment extends Fragment implements GoodsView, SwipeRefreshLa
         loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
         lv1 = (ListView) view.findViewById(R.id.lv1);
         lv2 = (ListView) view.findViewById(R.id.lv2);
-        initRefreshView(view);
+
         showPopupWindow();
         return view;
-    }
-
-    private void initRefreshView(View view) {
-        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
-        mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary);
-        mSwipeRefreshWidget.setOnRefreshListener(this);
     }
 
     private LeftAdapter leftAdapter;
@@ -167,7 +161,6 @@ public class GoodsFragment extends Fragment implements GoodsView, SwipeRefreshLa
         }
     }
 
-    @Override
     public void onRefresh() {
         showPopupWindow();
     }

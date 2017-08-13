@@ -3,11 +3,8 @@ package view.lcc.tyzs.ui.car;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -26,8 +23,8 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 import view.lcc.tyzs.R;
 import view.lcc.tyzs.adapter.CarAdapter;
+import view.lcc.tyzs.base.BaseActivity;
 import view.lcc.tyzs.base.BaseApplication;
-import view.lcc.tyzs.base.BaseFragment;
 import view.lcc.tyzs.bean.OrderInfo;
 import view.lcc.tyzs.bean.ShoppingCarBean;
 import view.lcc.tyzs.bean.ShoppingCarItemBean;
@@ -40,7 +37,6 @@ import view.lcc.tyzs.mvp.view.ShopCarAddView;
 import view.lcc.tyzs.mvp.view.ShopCarGetView;
 import view.lcc.tyzs.ui.goods.OrderConfirmActivity;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
-import view.lcc.tyzs.utils.DialogUtils;
 import view.lcc.tyzs.utils.GsonUtils;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.CartProductItemChangedListener;
@@ -52,7 +48,7 @@ import view.lcc.tyzs.view.LoadingLayout;
  * Date:         |07-31 17:04
  * Description:  |
  */
-public class CarFragment extends BaseFragment implements CartProductItemChangedListener, View.OnClickListener, ShopCarAddView, ShopCarGetView {
+public class CarActivity extends BaseActivity implements CartProductItemChangedListener, View.OnClickListener, ShopCarAddView, ShopCarGetView {
 
     private ListView listview;
     private LoadingLayout loading_layout;
@@ -72,33 +68,29 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
     private ShopCarGetPresenter shopCarGetPresenter;
     private ShopCarAddPresenter shopCarAddPresenter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.car_fragment, null);
-        initView(view);
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
-        return view;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.car_activity);
+        initView();
     }
 
-    private void initView(View view) {
-        loading_layout = (LoadingLayout) view.findViewById(R.id.loading_layout);
-        total_sum = (TextView) view.findViewById(R.id.total_sum);
+    private void initView() {
+        loading_layout = (LoadingLayout) findViewById(R.id.loading_layout);
+        total_sum = (TextView) findViewById(R.id.total_sum);
         Rate = SharePreferenceUtil.getRate();
-        listview = (ListView) view.findViewById(R.id.lv_main);
+        listview = (ListView) findViewById(R.id.lv_main);
 
-        view.findViewById(R.id.moreBtn).setOnClickListener(this);
-        view.findViewById(R.id.ok).setOnClickListener(this);
-        view.findViewById(R.id.btn_delete).setOnClickListener(this);
+        findViewById(R.id.moreBtn).setOnClickListener(this);
+        findViewById(R.id.ok).setOnClickListener(this);
+        findViewById(R.id.btn_delete).setOnClickListener(this);
 
         shopCarAddPresenter = new ShopCarAddPresenterImpl(this);
         shopCarGetPresenter = new ShopCarGetPresenterImpl(this);
 
-        adapter = new CarAdapter(getActivity());
+        adapter = new CarAdapter(CarActivity.this);
         adapter.setCartProductItemChangedListener(this);
-        allCheck = (CheckBox) view.findViewById(R.id.cb_cart_all_check);
+        allCheck = (CheckBox) findViewById(R.id.cb_cart_all_check);
         allCheck.setOnCheckedChangeListener(new myCheckChangeListener());
     }
 
@@ -210,7 +202,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                 }
             }
         }
-        total_sum.setText("合:￥" + df.format(prince).replace("-", "") );
+        total_sum.setText("合:￥" + df.format(prince).replace("-", ""));
     }
 
     @Override
@@ -234,14 +226,14 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
                     adapter.newData(beans);
                     allCheck.setChecked(false);
-                    total_sum.setText("合:￥ 0"  );
+                    total_sum.setText("合:￥ 0");
                     for (int i = 0; i < beans.size(); i++) {
                         unCheckedList.put(i, beans.get(i));
                     }
                     if (beans.size() > 0) {
                         loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
                     } else {
-                       loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
+                        loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -250,9 +242,9 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
             //提交购买
             case R.id.ok:
                 String name = SharePreferenceUtil.getName();
-                if (TextUtils.isEmpty(name)){
-                   Frame.getInstance().toastPrompt("请先登录");
-                    LoginMainActivity.startLoginMainActivity("buy",getActivity());
+                if (TextUtils.isEmpty(name)) {
+                    Frame.getInstance().toastPrompt("请先登录");
+                    LoginMainActivity.startLoginMainActivity("buy", CarActivity.this);
                     return;
                 }
                 ArrayList<OrderInfo> infos = new ArrayList<OrderInfo>();
@@ -274,7 +266,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     }
                 }
 
-                if (infos.size() < 1){
+                if (infos.size() < 1) {
                     Frame.getInstance().toastPrompt("请选择结算的商品");
                     return;
                 }
@@ -294,7 +286,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                 beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
                 adapter.newData(beans);
                 allCheck.setChecked(false);
-                total_sum.setText("合:￥ 0"  );
+                total_sum.setText("合:￥ 0");
                 for (int i = 0; i < beans.size(); i++) {
                     unCheckedList.put(i, beans.get(i));
                 }
@@ -312,23 +304,24 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     s.setNumber(shoppingCarBeanList.get(i).getNumber());
                     data_list.add(s);
                 }
-                if (data_list.size() > 0){
+                if (data_list.size() > 0) {
                     Gson gsons = new Gson();
                     shopCarAddPresenter.shopCarAdd(name, gsons.toJson(data_list));
                 }
-                Intent intent = new Intent(getActivity(), OrderConfirmActivity.class);
+                Intent intent = new Intent(CarActivity.this, OrderConfirmActivity.class);
                 intent.putExtra("data", infos);
                 intent.putExtra("action", "car");
                 startActivity(intent);
+                finish();
                 break;
             //同步信息
             case R.id.moreBtn:
                 String p = SharePreferenceUtil.getName();
-                if (TextUtils.isEmpty(p)){
+                if (TextUtils.isEmpty(p)) {
                     Frame.getInstance().toastPrompt("请先登录");
                     return;
                 }
-                if (beans.size() > 0){
+                if (beans.size() > 0) {
                     List<ShoppingCarItemBean> list = new ArrayList<ShoppingCarItemBean>();
                     try {
                         List<ShoppingCarBean> shoppingCarBeans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
@@ -338,7 +331,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                             s.setNumber(shoppingCarBeans.get(i).getNumber());
                             list.add(s);
                         }
-                        if (list.size() < 1){
+                        if (list.size() < 1) {
                             Frame.getInstance().toastPrompt("数据已经同步");
                             return;
                         }
@@ -436,7 +429,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                     unCheckedList.put(i, beans.get(i));
                 }
                 loading_layout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-            }else {
+            } else {
                 loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
             }
         } catch (Exception e) {
@@ -446,9 +439,9 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
 
     @Override
     public void ShopCarGetFail(String msg) {
-        if (msg.equals("142")){
+        if (msg.equals("142")) {
             loading_layout.setLoadingLayout(LoadingLayout.NO_DATA);
-        }else {
+        } else {
             loading_layout.setLoadingLayout(LoadingLayout.LOADDATA_ERROR);
         }
     }
@@ -461,7 +454,7 @@ public class CarFragment extends BaseFragment implements CartProductItemChangedL
                 beans = BaseApplication.getDaoSession().getShoppingCarBeanDao().queryBuilder().list();
                 adapter.newData(beans);
                 allCheck.setChecked(false);
-                total_sum.setText("合:￥ 0"  );
+                total_sum.setText("合:￥ 0");
                 for (int i = 0; i < beans.size(); i++) {
                     unCheckedList.put(i, beans.get(i));
                 }

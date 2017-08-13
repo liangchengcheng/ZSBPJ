@@ -209,7 +209,7 @@ public class ErrorLogUtils {
                     error = "未达到本月最低消费积分";
                     break;
                 case "165.2":
-                    error = "未到达本月最低消费额度";
+                    error = "本月未消费";
                     break;
                 case "168":
                     error = "可用积分余额不足,请先充值";

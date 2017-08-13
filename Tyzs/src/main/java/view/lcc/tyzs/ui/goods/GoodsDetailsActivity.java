@@ -25,6 +25,7 @@ import view.lcc.tyzs.bean.ShoppingBean;
 import view.lcc.tyzs.bean.ShoppingCarBean;
 import view.lcc.tyzs.bean.ShoppingCarBeanDao;
 import view.lcc.tyzs.frame.ImageManager;
+import view.lcc.tyzs.ui.car.CarActivity;
 import view.lcc.tyzs.ui.login.LoginMainActivity;
 import view.lcc.tyzs.utils.SharePreferenceUtil;
 import view.lcc.tyzs.view.NumChangedListener;
@@ -83,6 +84,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         findViewById(R.id.add_car).setOnClickListener(this);
         findViewById(R.id.add_buy).setOnClickListener(this);
         findViewById(R.id.iv_back).setOnClickListener(this);
+        findViewById(R.id.fl_car).setOnClickListener(this);
 
         shoppingBean = (ShoppingBean) getIntent().getSerializableExtra("bean");
         ImageManager.getInstance().loadUrlImage(GoodsDetailsActivity.this, AppConstants.PIC_URL + shoppingBean.getGoodImgUrl(), iv_head_image);
@@ -119,6 +121,10 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
                 OnChoiceDialog(1);
                 break;
             case R.id.iv_back:
+                finish();
+                break;
+            case R.id.fl_car:
+                startActivity(new Intent(GoodsDetailsActivity.this, CarActivity.class));
                 finish();
                 break;
         }
