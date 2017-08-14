@@ -253,7 +253,7 @@
                             android:id="@+id/tv_fa1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="菌酶多，每次1-2包，早万各一次，用温水（不超过40℃）冲调。"
+                            android:text="菌酶多，每次1-2包，早晚各一次，用温水（不超过40℃）冲调。"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -263,7 +263,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:text="蕴煦正本汤，每次1-2包，早上食用，用热开水冲调；。"
+                            android:text="蕴煦正本汤，每次1-2包，早上食用，用热开水冲调。"
                             android:textColor="#000"
                             android:textSize="16sp" />
                         <TextView

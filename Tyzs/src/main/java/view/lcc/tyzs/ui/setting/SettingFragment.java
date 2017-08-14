@@ -157,7 +157,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }else {
             tv_phonenumber.setText("请先登录");
         }
-        ImageManager.getInstance().loadResImage(getContext(), R.mipmap.ic_launcher, profile_headimg);
+        ImageManager.getInstance().loadResImage(getContext(), R.drawable.logins, profile_headimg);
     }
 
     public void onEvent(Integer event) {

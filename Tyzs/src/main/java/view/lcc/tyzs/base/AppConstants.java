@@ -3,8 +3,8 @@ package view.lcc.tyzs.base;
 public class AppConstants {
 
     // 乘客端常用地址
-//    public final static String BASE_URL = "http://115.28.2.207:8401" ;
-    public final static String BASE_URL = "http://115.28.2.207:8341" ;
+    public final static String BASE_URL = "http://115.28.2.207:8401" ;
+//    public final static String BASE_URL = "http://115.28.2.207:8341" ;
     public final static String PIC_URL = "http://115.28.2.207:8003/" ;
 
     //================================ 特殊字段 =====================================

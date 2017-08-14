@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import view.lcc.tyzs.R;
 
-
 public class LoadingLayout extends LinearLayout {
 
     public final static int STATE_REFRESH = 2;
