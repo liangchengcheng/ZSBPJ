@@ -104,7 +104,6 @@ public class WeifukuanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public NormalViewHolder(View convertView) {
             super(convertView);
-            ivPreview = (ImageView) convertView.findViewById(R.id.iv_command);
             tv_name = (TextView) convertView.findViewById(R.id.tv_name);
             tv_price = (TextView) convertView.findViewById(R.id.tv_prince);
             tv_shijian = (TextView) convertView.findViewById(R.id.tv_time);
