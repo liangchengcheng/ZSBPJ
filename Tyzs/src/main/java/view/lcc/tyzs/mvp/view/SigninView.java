@@ -16,7 +16,7 @@ public interface SigninView {
 
     void getSigninLoading();
 
-    void getSigninSuccess();
+    void getSigninSuccess(String rusult);
 
     void getSigninFail(String msg);
 }

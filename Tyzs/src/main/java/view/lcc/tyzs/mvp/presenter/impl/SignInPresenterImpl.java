@@ -66,6 +66,28 @@ public class SignInPresenterImpl implements SignInPresenter {
 
     @Override
     public void getSignIn(String phone) {
+        view.getSigninLoading();
+        model.getSignin(phone, new ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                view.getSigninFail(ApiException.getApiExceptionMessage(e.getMessage()));
+            }
 
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("resultno");
+                    if (!TextUtils.isEmpty(status) && status.equals("000")) {
+                        view.getSigninSuccess(response);
+                    } else {
+                        view.getSigninFail(ErrorLogUtils.SystemError(status));
+                    }
+                } catch (Exception e) {
+                    view.getSigninFail("登录失败");
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
