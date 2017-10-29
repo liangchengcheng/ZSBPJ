@@ -10,6 +10,7 @@ public class SharePreferenceUtil {
     public static final String NAME = "name";
 
     public static final String NICKNAME = "n_name";
+
     public static final String R_NAME = "r_name";
 
     public static final String CARD_ID = "card_id";

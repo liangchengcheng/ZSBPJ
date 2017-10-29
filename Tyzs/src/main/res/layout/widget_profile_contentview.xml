@@ -16,6 +16,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/lcc_yue" />
         <TextView
+            android:id="@+id/jifen"
             android:layout_marginLeft="5dp"
             android:textColor="?attr/colorPrimary"
             android:layout_width="match_parent"

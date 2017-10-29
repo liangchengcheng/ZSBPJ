@@ -52,7 +52,8 @@ public class SignInPresenterImpl implements SignInPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-                        view.onSigninSuccess();
+                        String resultJson = jsonObject.getString("resultjson");
+                        view.onSigninSuccess(resultJson);
                     } else {
                         view.onSigninFail(ErrorLogUtils.SystemError(status));
                     }

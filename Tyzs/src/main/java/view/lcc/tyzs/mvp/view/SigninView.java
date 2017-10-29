@@ -10,7 +10,7 @@ public interface SigninView {
 
     void onSigninLoading();
 
-    void onSigninSuccess();
+    void onSigninSuccess(String mes);
 
     void onSigninFail(String msg);
 

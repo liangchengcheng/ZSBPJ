@@ -42,7 +42,7 @@ public class SigninModel {
         paramsMap.put("callValue", GsonUtils.createGsonString(getOrderRequest));
 
         String timeValue = paramsMap.get("Calldate");
-        String url = AppConstants.RequestPath.QIANDAO;
+        String url = AppConstants.RequestPath.QIANDAO_YUE;
         if (url.endsWith("ashx")) {
             url = url + "?Calldate=" + timeValue;
         } else {
