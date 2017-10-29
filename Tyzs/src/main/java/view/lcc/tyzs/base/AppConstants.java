@@ -75,6 +75,12 @@ public class AppConstants {
         //获取推荐人数
         public final static String PERSON_NUM = "/Interface/Member.ashx";
 
+
+        //签到
+        public final static String QIANDAO = "/Interface/Signin.ashx?action=getlist";
+        //签到余额
+        public final static String QIANDAO_YUE = "/Interface/Signin.ashx?action=balance";
+
     }
 
     public final class ParamKey {
@@ -89,6 +95,8 @@ public class AppConstants {
         public final static String PLATFROM = "platform";
         //市场编号
         public final static String MC = "mc";
+
+
     }
 
 }

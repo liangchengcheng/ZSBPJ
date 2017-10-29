@@ -13,7 +13,7 @@ public class ApiException {
     public static String getApiExceptionMessage(String msg) {
         String message = "";
         if (TextUtils.isEmpty(msg)){
-            return "服务器正在维护...请稍后再来";
+            return "网络不稳定，请稍后再试";
         }
 
         try{
@@ -25,10 +25,12 @@ public class ApiException {
                 message = "服务未响应，请稍后再试";
             }else if (code >= 500) {
                 message = "服务器错误，请稍后再试";
+            }else {
+                message = "网络不稳定，请稍后再试";
             }
         }catch (Exception e){
-            e.printStackTrace();
             message = "不能连接服务器，请稍后再试";
+            e.printStackTrace();
         }
 
         return message;

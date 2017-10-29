@@ -30,9 +30,6 @@ buildscript {
         mavenCentral()
     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-    }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

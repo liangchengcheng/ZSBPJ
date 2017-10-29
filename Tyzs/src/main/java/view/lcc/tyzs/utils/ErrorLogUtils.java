@@ -223,6 +223,9 @@ public class ErrorLogUtils {
                 case "163":
                     error = "VIP会员无法进行转换";
                     break;
+                case "169":
+                    error = "今日已签到";
+                    break;
                 default:
                     error = "";
                     break;
