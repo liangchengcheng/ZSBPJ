@@ -51,7 +51,6 @@ public class AddressEditPresenterImpl implements AddressEditPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("resultno");
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
-
                         view.AddressEditSuccess("");
                     } else  {
                         view.AddressEditFail("添加信息失败，请稍后再试");

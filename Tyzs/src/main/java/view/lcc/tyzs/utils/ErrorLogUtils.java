@@ -203,7 +203,7 @@ public class ErrorLogUtils {
                     error = "存在非法字符";
                     break;
                 case "157":
-                    error = "此订单已经申请了，请下拉刷新";
+                    error = "此订单已经提交申请";
                     break;
                 case "165.3":
                     error = "未达到本月最低消费积分";

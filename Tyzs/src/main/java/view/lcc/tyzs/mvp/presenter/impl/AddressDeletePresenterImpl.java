@@ -48,10 +48,10 @@ public class AddressDeletePresenterImpl implements AddressDeletePresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.AddressDeleteSuccess("");
                     } else  {
-                        view.AddressDeleteFail("获取信息失败，请稍后再试");
+                        view.AddressDeleteFail("删除信息失败，请稍后再试");
                     }
                 } catch (Exception e) {
-                    view.AddressDeleteFail("获取信息失败");
+                    view.AddressDeleteFail("删除信息失败");
                     e.printStackTrace();
                 }
             }

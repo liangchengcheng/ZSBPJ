@@ -52,7 +52,7 @@ public class AddressGetPresenterImpl implements AddressGetPresenter {
                         view.AddressGetFail(status);
                     }
                 } catch (Exception e) {
-                    view.AddressGetFail("添加信息失败");
+                    view.AddressGetFail("获取信息失败");
                     e.printStackTrace();
                 }
             }

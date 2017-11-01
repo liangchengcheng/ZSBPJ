@@ -48,10 +48,10 @@ public class JifenYuePresenterImpl implements JifenYuePresenter {
                     if (!TextUtils.isEmpty(status) && status.equals("000")) {
                         view.JifenYueSuccess(response);
                     } else  {
-                        view.JifenYueFail("获取地址信息失败，请稍后再试");
+                        view.JifenYueFail("获取信息失败，请稍后再试");
                     }
                 } catch (Exception e) {
-                    view.JifenYueFail("获取地址信息失败");
+                    view.JifenYueFail("获取信息失败");
                     e.printStackTrace();
                 }
             }

@@ -52,7 +52,7 @@ public class ChangePwdPresenterImpl implements ChangePwdPresenter {
                         view.ChangePwdFail(ErrorLogUtils.SystemError(status));
                     }
                 } catch (Exception e) {
-                    view.ChangePwdFail("注册失败");
+                    view.ChangePwdFail("修改密码失败");
                     e.printStackTrace();
                 }
             }

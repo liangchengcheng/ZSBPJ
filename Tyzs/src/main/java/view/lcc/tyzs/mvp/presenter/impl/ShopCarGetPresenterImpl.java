@@ -51,7 +51,7 @@ public class ShopCarGetPresenterImpl implements ShopCarGetPresenter {
                         view.ShopCarGetFail(status);
                     }
                 } catch (Exception e) {
-                    view.ShopCarGetFail("获取地址信息失败");
+                    view.ShopCarGetFail("获取信息失败");
                     e.printStackTrace();
                 }
             }

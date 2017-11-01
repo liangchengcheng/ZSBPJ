@@ -51,7 +51,7 @@ public class JifenZhuanHuanPresenterImpl implements JifenZhuanHuanPresenter {
                         view.JifenZhuanRangFail(status);
                     }
                 } catch (Exception e) {
-                    view.JifenZhuanRangFail("获取地址信息失败");
+                    view.JifenZhuanRangFail("积分转换失败");
                     e.printStackTrace();
                 }
             }
