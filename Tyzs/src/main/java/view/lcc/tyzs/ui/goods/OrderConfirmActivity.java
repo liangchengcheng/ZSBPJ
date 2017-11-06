@@ -58,7 +58,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     //提交订单
     private OrderConfirmPresenter orderConfirmPresenter;
     //可用积分
-    private String point;
+    private String point = "0";
 
     //tv_order_sum (总额)
     private TextView tv_order_name, tv_order_phone, tv_order_address, tv_order_sum;
@@ -72,7 +72,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     private EditText et_jisuan;
     //积分
     private TextView tv_jf;
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +107,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         //添加收获地址
         initAddress();
         //计算价格
-        if (orderInfos != null){
+        if (orderInfos != null) {
             initPrince();
         }
         jifenPresenter.jifenYue();
@@ -229,25 +229,29 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
             String resultJson = jsonObject.getString("resultjson");
             JSONObject js = new JSONObject(resultJson);
 
-            String p = js.getString("balance");
-            String[] results = p.split(",");
-            if (results.length == 2) {
-                String[] cz = results[1].split("=");
-                point = cz[1];
+            String balance = js.getString("balance");
+
+            if (TextUtils.isEmpty(balance)) {
+                point = "0";
             } else {
-                String[] xt = results[0].split("=");
-                if (xt[0].contains("系统")) {
-                    point = "0";
+                String[] jifen = balance.split(",");
+                if (jifen.length > 0) {
+                    for (int i = 0; i < jifen.length; i++) {
+                        if (jifen[i].contains("充值")) {
+                            String[] cz = jifen[i].split("=");
+                            point = cz[1];
+                        }
+                    }
                 } else {
-                    point = xt[1];
+                    point = "0";
                 }
             }
 
-            // TODO: 2017/8/7 自己加的
+
             tv_yue.setText(point);
             tv_jf.setText(point);
             if (Double.parseDouble(point) < prince) {
-                DialogUtils.showTip(OrderConfirmActivity.this,"充值积分余额不足，请充值");
+                DialogUtils.showTip(OrderConfirmActivity.this, "充值积分余额不足，请充值");
             }
             //0积分的话就直接就是不可以用积分的状态
             if (point.equals("0")) {
@@ -318,9 +322,9 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void OrderConfirmFail(String msg) {
         closeDialog();
-        if (!TextUtils.isEmpty(msg)){
+        if (!TextUtils.isEmpty(msg)) {
             Frame.getInstance().toastPrompt(msg);
-        }else {
+        } else {
             Frame.getInstance().toastPrompt("提交订单失败，请稍后再试");
         }
 

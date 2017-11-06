@@ -218,8 +218,8 @@ public class ErrorLogUtils {
                     error = "推荐人数不满足使用积分要求";
                     break;
                 case "167":
-                    //error = "积分使用比例未设置";
-                    error = "积分不可使用";
+                    error = "积分使用比例未设置";
+                    //error = "积分不可使用";
                 case "163":
                     error = "VIP会员无法进行转换";
                     break;

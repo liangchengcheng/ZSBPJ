@@ -3,6 +3,7 @@ package view.lcc.tyzs.ui.jifen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -70,32 +71,25 @@ public class JifenMainActivity extends BaseActivity implements JifenYueView, Vie
             String result_json = jsonObject.getString("resultjson");
             JSONObject js = new JSONObject(result_json);
             String balance = js.getString("balance");
-            if (balance.equals("")) {
-                tv_balance.setText("您的余额：0 ");
-            }
-            String[] result = balance.split(",");
-
-            if (result.length == 2) {
-                String[] xt = result[0].split("=");
-                String[] cz = result[1].split("=");
-                balance = xt[1];
-                tv_balance.setText("系统余额:" + xt[1]);
-                tv_balance1.setText("充值余额:" + cz[1]);
-            } else if (result.length == 1) {
-                String[] xt = result[0].split("=");
-                if (xt[0].contains("系统")) {
-                    balance = "0";
-                    tv_balance.setText("系统余额:" + xt[1]);
-                    tv_balance1.setText("充值余额:0");
-                } else {
-                    balance = xt[1];
-                    tv_balance.setText("系统余额:" + 0);
-                    tv_balance1.setText("充值余额:" + balance);
-                }
-            } else {
-                balance = "0";
+            if (TextUtils.isEmpty(balance)) {
                 tv_balance.setText("系统余额:0");
                 tv_balance1.setText("充值余额:0");
+            }else {
+                String[] result = balance.split(",");
+                if (result.length > 0){
+                    for (int i = 0; i < result.length; i++){
+                        if (result[i].contains("系统积分=")){
+                            String[] xt = result[i].split("=");
+                            tv_balance.setText("系统余额:" + xt[1]);
+                        } else if (result[i].contains("充值")){
+                            String[] cz = result[i].split("=");
+                            tv_balance1.setText("充值余额:" + cz[1]);
+                        }
+                    }
+                }else {
+                    tv_balance.setText("系统余额:0");
+                    tv_balance1.setText("充值余额:0");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
