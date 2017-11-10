@@ -3,14 +3,14 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "view.lcc.tyzs"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.3"
+        versionCode 4
+        versionName "1.4.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
