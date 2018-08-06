@@ -3,14 +3,14 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.2'
 
     defaultConfig {
         applicationId "view.lcc.tyzs"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 4
-        versionName "1.4.1"
+        versionCode 5
+        versionName "1.5.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -64,6 +64,5 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile 'com.android.support:palette-v7:25.0.0'
-
 }
 

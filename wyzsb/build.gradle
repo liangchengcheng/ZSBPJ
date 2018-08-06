@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.2'
 
     defaultConfig {
         applicationId "view.lcc.wyzsb"
@@ -57,5 +57,4 @@ dependencies {
     compile project(':SMSSDK')
     //eventbus
     compile 'de.greenrobot:eventbus:2.4.0'
-
 }

@@ -38,11 +38,9 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
     int[] score_top;
     private ColumnChartData columnData_TOP;
 
-
     private View tv_fa1, tv_fa2, tv_fa3, tv_fa4, tv_fa5;
 
     private View rzky;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +72,10 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
                 userInfo.getQixuzhi() <= 40)) {
             tv_fa2.setVisibility(View.VISIBLE);
         }else {
-            rzky.setVisibility(View.VISIBLE);
+
         }
+
+        rzky.setVisibility(View.VISIBLE);
 
         if (userInfo.getYangxuzhi() > 40) {
             if (userInfo.getSex().equals("男")) {

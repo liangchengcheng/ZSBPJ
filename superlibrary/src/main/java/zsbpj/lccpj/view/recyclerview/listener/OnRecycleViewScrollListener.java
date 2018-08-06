@@ -5,10 +5,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 
-import zsbpj.lccpj.view.recyclerview.RecyclerViewPositionHelper;
-import zsbpj.lccpj.view.recyclerview.ScrollDirection;
+
+
+
 
 public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollListener {
 

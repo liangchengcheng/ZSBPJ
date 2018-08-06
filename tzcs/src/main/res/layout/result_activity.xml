@@ -263,7 +263,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:text="瑞芝康源,每次1-2包,早晚各一次，用热开水冲调食用"
+                            android:text="瑞芝灵,每次1-2包,早晚各一次，用热开水冲调食用"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -273,7 +273,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:text="五子汤,每次2-4包,早上一次,用热开水冲调食用"
+                            android:text="五子汤,每次1-2包,早上一次,用热开水冲调食用"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -283,7 +283,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:text="伊人舒,每次2-4包,早上一次,用热开水冲调食用"
+                            android:text="伊人舒,每次1-2包,早上一次,用热开水冲调食用"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -321,7 +321,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="* 瑞芝康源，平补诸虚、调良五脏、扶正固本，在调理体质同时，也可使用，建议每次1-2包，早晚各一次，用开水冲调食用。"
+                            android:text="*具有痰多、肿胀、风湿、代谢类问题或疾病时，可加食五行素食，建议每次1-2包，早晚各一次；以上所有用开水冲调食用的产品，可一起冲调食用。"
                             android:textColor="@color/red"
                             android:textSize="16sp" />
 
@@ -347,18 +347,12 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="* 以上所有用开水冲调食用的产品，可一起冲调食用。"
+                            android:text="* 以上体质调理一般采用最低量，特殊急症加倍用量"
                             android:textColor="@color/red"
                             android:textSize="16sp" />
-
                     </LinearLayout>
-
                 </android.support.v7.widget.CardView>
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

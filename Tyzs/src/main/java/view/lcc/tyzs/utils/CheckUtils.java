@@ -34,7 +34,8 @@ public class CheckUtils {
 	/**
 	 * 鎵嬫満鍙风爜姝ｅ垯琛ㄨ揪寮�^(13[0-9]|15[0-9]|18[0-9])\d{8}$
 	 */
-	public static final String MOBILE = "^(13[0-9]|15[0-9]|18[0-9])\\d{8}$";
+
+	public static final String MOBILE = "^((13[0-9])|(15[^4,\\D])|(14[57])|(17[0,0-9])|(18[0,0-9]))\\d{8}$";
 
 	/**
 	 * Integer姝ｅ垯琛ㄨ揪寮�^-?(([1-9]\d*$)|0)

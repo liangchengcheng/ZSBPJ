@@ -37,6 +37,7 @@ public class TanshiTestResultActivity extends AppCompatActivity {
         shengao = getIntent().getFloatExtra("shengao", 0);
         tizhong = getIntent().getFloatExtra("tizhong", 0);
         score = getIntent().getIntExtra("score", 0);
+
         String result = getState(score) + getSZState();
         tv_tz.setText(result);
         findViewById(R.id.lv_back).setOnClickListener(new View.OnClickListener() {

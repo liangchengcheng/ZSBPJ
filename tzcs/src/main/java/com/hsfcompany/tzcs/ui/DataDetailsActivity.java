@@ -24,6 +24,7 @@ public class DataDetailsActivity extends AppCompatActivity {
     private CollapsingToolbarLayoutState state = CollapsingToolbarLayoutState.INTERNEDIATE;
 
     private View tv_t;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +93,6 @@ public class DataDetailsActivity extends AppCompatActivity {
                     if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
                         if (state == CollapsingToolbarLayoutState.COLLAPSED) {
                             //由折叠变为中间状态时隐藏播放按钮
-
                         }
                         //设置title为INTERNEDIATE
                         //collapsingToolbarLayout.setTitle("INTERNEDIATE");
