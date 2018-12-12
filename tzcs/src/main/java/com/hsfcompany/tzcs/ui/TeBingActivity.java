@@ -22,7 +22,7 @@ import java.util.Date;
  * Date:         |05-13 19:40
  * Description:  |
  */
-public class TeBingActivity extends AppCompatActivity implements View.OnClickListener{
+public class TeBingActivity extends AppCompatActivity implements View.OnClickListener {
     private CheckBox cb_1;
     private CheckBox cb_2;
     private CheckBox cb_3;
@@ -57,40 +57,40 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.pb_next:
-                if (!cb_1.isChecked()&&!cb_2.isChecked()&&!cb_3.isChecked()&&!cb_4.isChecked()){
+                if (!cb_1.isChecked() && !cb_2.isChecked() && !cb_3.isChecked() && !cb_4.isChecked()) {
                     score = 5;
-                }else {
-                    if (cb_1.isChecked()){
+                } else {
+                    if (cb_1.isChecked()) {
                         score += 65;
-                        if (cb_2.isChecked()){
+                        if (cb_2.isChecked()) {
                             score += 12.5;
                         }
-                        if (cb_3.isChecked()){
+                        if (cb_3.isChecked()) {
                             score += 12.5;
                         }
-                        if (cb_4.isChecked()){
+                        if (cb_4.isChecked()) {
                             score += 10;
                         }
-                    }else {
-                        if (cb_2.isChecked()){
+                    } else {
+                        if (cb_2.isChecked()) {
                             score += 65;
-                            if (cb_3.isChecked()){
+                            if (cb_3.isChecked()) {
                                 score += 12.5;
                             }
-                            if (cb_4.isChecked()){
+                            if (cb_4.isChecked()) {
                                 score += 10;
                             }
-                        }else {
-                            if (cb_3.isChecked()){
+                        } else {
+                            if (cb_3.isChecked()) {
                                 score += 65;
-                                if (cb_4.isChecked()){
+                                if (cb_4.isChecked()) {
                                     score += 10;
                                 }
-                            }else {
-                                if (cb_4.isChecked()){
-                                    score +=45 ;
+                            } else {
+                                if (cb_4.isChecked()) {
+                                    score += 45;
                                 }
                             }
                         }
@@ -100,12 +100,12 @@ public class TeBingActivity extends AppCompatActivity implements View.OnClickLis
                 SharePreferenceUtil.setUpdateTime(localtime);
 
                 userInfo.setTebingzhi(score);
-                SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
                 userInfo.setCtime(simpleDateFormat.format(date));
                 DataManager.addUserInfo(userInfo);
-                Intent intent = new Intent(TeBingActivity.this,ResultActivity.class);
-                intent.putExtra("data",userInfo);
+                Intent intent = new Intent(TeBingActivity.this, ResultActivity.class);
+                intent.putExtra("data", userInfo);
                 startActivity(intent);
                 finish();
                 BaseApplication.exit();

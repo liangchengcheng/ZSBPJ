@@ -54,7 +54,7 @@ public class XueYuActivity extends AppCompatActivity implements View.OnClickList
             case R.id.pb_next:
                 if (!cb_1.isChecked()&&!cb_2.isChecked()&&!cb_3.isChecked()&&!cb_4.isChecked()){
                     score = 5;
-                }else {
+                } else {
                     if (cb_1.isChecked()){
                         score += 65;
                         if (cb_2.isChecked()){

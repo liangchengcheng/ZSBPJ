@@ -71,7 +71,7 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
                 userInfo.getShirezhi() <= 40 &&
                 userInfo.getQixuzhi() <= 40)) {
             tv_fa2.setVisibility(View.VISIBLE);
-        }else {
+        } else {
 
         }
 
@@ -155,7 +155,7 @@ public class ResultActivity extends BaseActivity implements View.OnClickListener
     public int getDataColor(int score) {
         if (score > 65) {
             return Color.parseColor("#ed4444");
-        } else if (score > 40 && score <= 65) {
+        } else if (score > 40) {
             return Color.parseColor("#FFAD5B");
         } else {
             return Color.parseColor("#29c741");

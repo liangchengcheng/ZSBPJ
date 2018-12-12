@@ -41,4 +41,5 @@ dependencies {
     compile 'de.greenrobot:greendao:2.0.0'
     compile 'com.zkk.view:ZkkRulerView:1.0.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
+    compile 'com.google.code.gson:gson:2.4'
 }

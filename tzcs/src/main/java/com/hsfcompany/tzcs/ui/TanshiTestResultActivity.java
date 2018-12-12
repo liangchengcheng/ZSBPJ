@@ -52,7 +52,6 @@ public class TanshiTestResultActivity extends AppCompatActivity {
         if (score > 40) {
             cd_tanshi.setVisibility(View.VISIBLE);
         }
-
         if (score > 65) {
             return "您的身体是痰湿体质";
         } else if (score > 40 && score <= 65) {

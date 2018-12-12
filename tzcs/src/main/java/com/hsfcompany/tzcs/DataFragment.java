@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.hsfcompany.tzcs.adapter.DataAdapter;
 import com.hsfcompany.tzcs.base.BaseFragment;
 import com.hsfcompany.tzcs.bean.News;
@@ -42,6 +43,7 @@ public class DataFragment extends BaseFragment implements DataAdapter.OnItemClic
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
         List<News> data = BeanUtil.getNewsData();
+        String s = new Gson().toJson(data);
         adapter.bind(data);
     }
 
